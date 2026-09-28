@@ -1,128 +1,265 @@
 #!/usr/bin/env node
 /**
- * PFRE Website — Production Build Script
- * Minifies CSS+JS, outputs to dist/
+ * PFRE Website — Production Build Script v2.0
+ * Minifies CSS + JS, updates asset references, and outputs to dist/
  *
  * Usage:
- *   node build.js              # minify to dist/
- *   node build.js --check      # just report sizes, don't write files
+ *   node build.js              # Full production build to dist/
+ *   node build.js --check      # Estimate sizes without modifying/writing files
  *
- * Requires: npm install terser clean-css-cli --save-dev
- * Or run once: npx --yes terser --version
+ * Dependencies:
+ *   npm install terser clean-css-cli --save-dev
  */
 
-const fs   = require('fs');
+const fs = require('fs');
 const path = require('path');
 const { execSync } = require('child_process');
 
 const CHECK_ONLY = process.argv.includes('--check');
-const ROOT = __dirname;
+const ROOT = path.resolve(__dirname);
 const DIST = path.join(ROOT, 'dist');
 
-// ── Check deps ──────────────────────────────────────────────────────────────
-function hasBin(name) {
-  try { execSync(`${name} --version`, { stdio: 'ignore' }); return true; }
-  catch { return false; }
-}
-const hasTerser    = hasBin('terser')    || hasBin('npx terser');
-const hasCleanCSS  = hasBin('cleancss') || hasBin('npx cleancss');
-
-if (!hasTerser || !hasCleanCSS) {
-  console.log('\n  Install build tools first:\n');
-  console.log('    npm install terser clean-css-cli --save-dev\n');
-  console.log('  Then re-run: node build.js\n');
-  process.exit(1);
+// ── Binary Resolution Helpers ───────────────────────────────────────────────
+function resolveBin(binName) {
+  const ext = process.platform === 'win32' ? '.cmd' : '';
+  const localBin = path.join(ROOT, 'node_modules', '.bin', `${binName}${ext}`);
+  if (fs.existsSync(localBin)) return `"${localBin}"`;
+  return `npx --no-install ${binName}`;
 }
 
-// ── Utility ─────────────────────────────────────────────────────────────────
-function fmt(bytes) { return (bytes / 1024).toFixed(1) + ' KB'; }
-function pct(a, b)  { return (((b - a) / a) * 100).toFixed(0) + '%'; }
+function hasTool(binName) {
+  const ext = process.platform === 'win32' ? '.cmd' : '';
+  const localBin = path.join(ROOT, 'node_modules', '.bin', `${binName}${ext}`);
+  if (fs.existsSync(localBin)) return true;
+  try {
+    execSync(`${binName} --version`, { stdio: 'ignore' });
+    return true;
+  } catch {
+    try {
+      execSync(`npx --no-install ${binName} --version`, { stdio: 'ignore' });
+      return true;
+    } catch {
+      return false;
+    }
+  }
+}
 
-function minifyCSS(src, dest) {
-  const input = path.join(ROOT, 'css', src);
-  const output = path.join(DIST, 'css', dest);
+// Check build dependencies only when performing an actual build
+if (!CHECK_ONLY) {
+  const hasTerser = hasTool('terser');
+  const hasCleanCSS = hasTool('cleancss');
+
+  if (!hasTerser || !hasCleanCSS) {
+    console.error('\n  [PFRE Build] Missing required minification tools.');
+    console.error('  Please install them via:');
+    console.error('    npm install terser clean-css-cli --save-dev\n');
+    process.exit(1);
+  }
+}
+
+const TERSER_CMD = resolveBin('terser');
+const CLEANCSS_CMD = resolveBin('cleancss');
+
+// ── Formatting Utilities ───────────────────────────────────────────────────
+function fmt(bytes) {
+  return (bytes / 1024).toFixed(1) + ' KB';
+}
+
+function pct(before, after) {
+  if (before === 0) return '0%';
+  const diff = ((before - after) / before) * 100;
+  return `${diff.toFixed(0)}% saved`;
+}
+
+// ── Asset Minification ─────────────────────────────────────────────────────
+function minifyCSS(file) {
+  const input = path.join(ROOT, 'css', file);
+  const destName = file.replace(/\.css$/, '.min.css');
+  const output = path.join(DIST, 'css', destName);
+
+  if (!fs.existsSync(input)) {
+    console.warn(`    ⚠ Skipping missing file: css/${file}`);
+    return null;
+  }
+
   const before = fs.statSync(input).size;
+
   if (!CHECK_ONLY) {
     fs.mkdirSync(path.dirname(output), { recursive: true });
-    execSync(`npx cleancss -o "${output}" "${input}"`);
+    execSync(`${CLEANCSS_CMD} -o "${output}" "${input}"`, { stdio: 'pipe' });
   }
-  const after = CHECK_ONLY ? before * 0.38 : fs.statSync(output).size;
-  return { src, before, after };
+
+  const after = CHECK_ONLY ? Math.round(before * 0.42) : fs.statSync(output).size;
+  return { src: file, dest: destName, before, after };
 }
 
-function minifyJS(src, dest) {
-  const input = path.join(ROOT, 'js', src);
-  const output = path.join(DIST, 'js', dest);
+function minifyJS(file) {
+  const input = path.join(ROOT, 'js', file);
+  const destName = file.replace(/\.js$/, '.min.js');
+  const output = path.join(DIST, 'js', destName);
+
+  if (!fs.existsSync(input)) {
+    console.warn(`    ⚠ Skipping missing file: js/${file}`);
+    return null;
+  }
+
   const before = fs.statSync(input).size;
+
   if (!CHECK_ONLY) {
     fs.mkdirSync(path.dirname(output), { recursive: true });
-    execSync(`npx terser "${input}" --compress --mangle --output "${output}"`);
+    execSync(`${TERSER_CMD} "${input}" --compress --mangle --output "${output}"`, { stdio: 'pipe' });
   }
-  const after = CHECK_ONLY ? before * 0.45 : fs.statSync(output).size;
-  return { src, before, after };
+
+  const after = CHECK_ONLY ? Math.round(before * 0.48) : fs.statSync(output).size;
+  return { src: file, dest: destName, before, after };
 }
 
-// ── Build ────────────────────────────────────────────────────────────────────
+// ── Build Execution ────────────────────────────────────────────────────────
 console.log(`\n  PFRE Production Build ${CHECK_ONLY ? '[CHECK ONLY]' : ''}`);
-console.log('  ' + '─'.repeat(56));
+console.log('  ' + '─'.repeat(58));
 
-let totalBefore = 0, totalAfter = 0;
+if (!CHECK_ONLY) {
+  // Clean dist directory before build
+  if (fs.existsSync(DIST)) {
+    fs.rmSync(DIST, { recursive: true, force: true });
+  }
+  fs.mkdirSync(DIST, { recursive: true });
+}
 
-const cssFiles = ['styles.css','theme.css','mobile.css','overrides.css','utils.css','widgets.css'];
-console.log('\n  CSS:');
+let totalBefore = 0;
+let totalAfter = 0;
+
+// 1. Process CSS
+const cssFiles = [
+  'styles.css',
+  'theme.css',
+  'mobile.css',
+  'overrides.css',
+  'utils.css',
+  'widgets.css'
+];
+
+console.log('\n  Processing CSS:');
+const processedCSS = [];
 for (const f of cssFiles) {
-  const r = minifyCSS(f, f.replace('.css', '.min.css'));
-  totalBefore += r.before; totalAfter += r.after;
-  console.log(`    ${r.src.padEnd(20)} ${fmt(r.before).padStart(8)} → ${fmt(r.after).padStart(8)}  (${pct(r.before, r.after)})`);
+  const r = minifyCSS(f);
+  if (r) {
+    processedCSS.push(r);
+    totalBefore += r.before;
+    totalAfter += r.after;
+    console.log(`    ${r.src.padEnd(20)} ${fmt(r.before).padStart(8)} → ${fmt(r.after).padStart(8)}  (${pct(r.before, r.after)})`);
+  }
 }
 
-// Optionally produce one concatenated bundle too
-if (!CHECK_ONLY) {
-  const allCSS = cssFiles.map(f => fs.readFileSync(path.join(DIST,'css',f.replace('.css','.min.css')),'utf8')).join('\n');
-  fs.writeFileSync(path.join(DIST,'css','pfre.bundle.min.css'), allCSS);
-  console.log(`\n    → Bundle: dist/css/pfre.bundle.min.css`);
+// Generate unified CSS bundle
+if (!CHECK_ONLY && processedCSS.length > 0) {
+  const bundlePath = path.join(DIST, 'css', 'pfre.bundle.min.css');
+  const bundleContent = processedCSS
+    .map(item => fs.readFileSync(path.join(DIST, 'css', item.dest), 'utf8'))
+    .join('\n');
+  fs.writeFileSync(bundlePath, bundleContent, 'utf8');
+  console.log(`\n    → Unified Bundle created: dist/css/pfre.bundle.min.css`);
 }
 
-const jsFiles = ['theme.js','security.js','widgets.js','i18n.js','api.js','config.js','tracker.js','properties-filter.js'];
-console.log('\n  JS:');
+// 2. Process JS (Included app-shell.js)
+const jsFiles = [
+  'theme.js',
+  'security.js',
+  'widgets.js',
+  'i18n.js',
+  'api.js',
+  'config.js',
+  'tracker.js',
+  'properties-filter.js',
+  'app-shell.js'
+];
+
+console.log('\n  Processing JS:');
+const processedJS = [];
 for (const f of jsFiles) {
-  const r = minifyJS(f, f.replace('.js', '.min.js'));
-  totalBefore += r.before; totalAfter += r.after;
-  console.log(`    ${r.src.padEnd(28)} ${fmt(r.before).padStart(8)} → ${fmt(r.after).padStart(8)}  (${pct(r.before, r.after)})`);
+  const r = minifyJS(f);
+  if (r) {
+    processedJS.push(r);
+    totalBefore += r.before;
+    totalAfter += r.after;
+    console.log(`    ${r.src.padEnd(24)} ${fmt(r.before).padStart(8)} → ${fmt(r.after).padStart(8)}  (${pct(r.before, r.after)})`);
+  }
 }
 
-// Copy non-minifiable assets
+// 3. Copy Static Folders & Assets
 if (!CHECK_ONLY) {
-  ['sw.js','manifest.json','robots.txt','sitemap.xml'].forEach(f => {
-    const src = path.join(ROOT, f);
+  console.log('\n  Copying Assets & Static Files:');
+
+  const assetFolders = ['icons', 'images', 'fonts'];
+  assetFolders.forEach(folder => {
+    const src = path.join(ROOT, folder);
+    const dest = path.join(DIST, folder);
     if (fs.existsSync(src)) {
-      fs.copyFileSync(src, path.join(DIST, f));
+      fs.cpSync(src, dest, { recursive: true });
+      console.log(`    ✔ Folder copied: ${folder}/`);
     }
   });
-  fs.cpSync(path.join(ROOT, 'icons'), path.join(DIST, 'icons'), { recursive: true });
-  // Copy all HTML files updating CSS/JS references to .min versions
+
+  const rootFiles = ['manifest.json', 'robots.txt', 'sitemap.xml', 'favicon.ico', 'favicon.png'];
+  rootFiles.forEach(file => {
+    const src = path.join(ROOT, file);
+    if (fs.existsSync(src)) {
+      fs.copyFileSync(src, path.join(DIST, file));
+      console.log(`    ✔ File copied: ${file}`);
+    }
+  });
+
+  // 4. Update HTML references to .min files
   const htmlFiles = fs.readdirSync(ROOT).filter(f => f.endsWith('.html'));
   for (const htmlFile of htmlFiles) {
-    let html = fs.readFileSync(path.join(ROOT, htmlFile), 'utf8');
-    // Swap CSS refs
-    cssFiles.forEach(f => {
-      html = html.replaceAll(`css/${f}`, `css/${f.replace('.css','.min.css')}`);
+    let content = fs.readFileSync(path.join(ROOT, htmlFile), 'utf8');
+
+    processedCSS.forEach(item => {
+      const regex = new RegExp(`css/${item.src.replace('.', '\\.')}`, 'g');
+      content = content.replace(regex, `css/${item.dest}`);
     });
-    // Swap JS refs
-    jsFiles.forEach(f => {
-      html = html.replaceAll(`js/${f}`, `js/${f.replace('.js','.min.js')}`);
+
+    processedJS.forEach(item => {
+      const regex = new RegExp(`js/${item.src.replace('.', '\\.')}`, 'g');
+      content = content.replace(regex, `js/${item.dest}`);
     });
-    fs.writeFileSync(path.join(DIST, htmlFile), html);
+
+    fs.writeFileSync(path.join(DIST, htmlFile), content, 'utf8');
   }
-  console.log(`\n    HTML: ${htmlFiles.length} pages updated with .min references → dist/`);
+  console.log(`    ✔ ${htmlFiles.length} HTML pages rewritten with minified assets.`);
+
+  // 5. Update and Minify Service Worker for production
+  const swSrc = path.join(ROOT, 'sw.js');
+  if (fs.existsSync(swSrc)) {
+    let swContent = fs.readFileSync(swSrc, 'utf8');
+
+    // Sync pre-cache paths with .min variants to prevent 404s in service worker installation
+    processedCSS.forEach(item => {
+      swContent = swContent.replace(new RegExp(`css/${item.src.replace('.', '\\.')}`, 'g'), `css/${item.dest}`);
+    });
+    processedJS.forEach(item => {
+      swContent = swContent.replace(new RegExp(`js/${item.src.replace('.', '\\.')}`, 'g'), `js/${item.dest}`);
+    });
+
+    const swDest = path.join(DIST, 'sw.js');
+    fs.writeFileSync(swDest, swContent, 'utf8');
+
+    try {
+      execSync(`${TERSER_CMD} "${swDest}" --compress --mangle --output "${swDest}"`, { stdio: 'pipe' });
+      console.log('    ✔ sw.js updated with production asset cache list and minified.');
+    } catch (_) {
+      console.log('    ✔ sw.js updated with production asset cache list.');
+    }
+  }
 }
 
-console.log('\n  ' + '─'.repeat(56));
-console.log(`  Total: ${fmt(totalBefore)} → ${fmt(totalAfter)}  (${pct(totalBefore, totalAfter)} saved)`);
+// ── Summary Report ──────────────────────────────────────────────────────────
+console.log('\n  ' + '─'.repeat(58));
+console.log(`  Combined Size: ${fmt(totalBefore)} → ${fmt(totalAfter)} (${pct(totalBefore, totalAfter)})`);
+
 if (!CHECK_ONLY) {
-  console.log(`\n  ✅ dist/ ready for deployment`);
-  console.log(`\n  Upload the CONTENTS of dist/ to your web server root.`);
-  console.log(`  (Not the dist/ directory itself — its contents.)\n`);
+  console.log('\n  ✅ Production deployment ready in dist/');
+  console.log('  Upload the contents of the dist/ directory to your web server.\n');
 } else {
-  console.log(`\n  Run without --check to actually build.\n`);
+  console.log('\n  Size estimate complete. Run "node build.js" to create dist/.\n');
 }
