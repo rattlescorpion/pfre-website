@@ -1,0 +1,588 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' data: https:; connect-src 'self'; frame-ancestors 'none'; object-src 'none'">
+<meta http-equiv="X-Content-Type-Options" content="nosniff">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="robots" content="noindex, nofollow">
+<meta name="description" content="Operations Analytics — Property Finder Real Estate">
+<link rel="icon" type="image/png" sizes="192x192" href="icons/icon-192.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<title>Operations Analytics — Property Finder RE</title>
+<script>document.documentElement.setAttribute('data-theme','dark');</script>
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --bg:#070C14;--sidebar:#0A0F1E;--card:#0F1729;--card2:#111B2E;
+  --border:#1A2744;--blue:#3B82F6;--blue-lt:rgba(59,130,246,.12);
+  --green:#10B981;--red:#EF4444;--amber:#F59E0B;--purple:#8B5CF6;
+  --text:#E2E8F0;--text-2:#94A3B8;--text-3:#475569;
+  --mono:'JetBrains Mono',monospace;
+}
+body{font-family:'Inter',system-ui,sans-serif;background:var(--bg);color:var(--text);min-height:100vh;display:flex;font-size:14px}
+
+/* Sidebar */
+.sidebar{width:64px;min-height:100vh;background:var(--sidebar);border-right:1px solid var(--border);display:flex;flex-direction:column;align-items:center;padding:12px 0;position:fixed;left:0;top:0;bottom:0;z-index:100}
+.sb-logo-icon{width:40px;height:40px;background:var(--blue-lt);border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:20px;margin-bottom:20px}
+.sb-nav-icon{width:40px;height:40px;border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:18px;cursor:pointer;color:var(--text-3);transition:.15s;text-decoration:none;margin-bottom:4px}
+.sb-nav-icon:hover{background:rgba(59,130,246,.12);color:var(--blue)}
+.sb-nav-icon.active{background:rgba(59,130,246,.2);color:var(--blue)}
+.sb-spacer{flex:1}
+
+/* Main */
+.main{margin-left:64px;flex:1;padding:20px 24px 40px}
+
+/* Top row */
+.top-row{display:flex;align-items:center;justify-content:space-between;margin-bottom:24px}
+.page-title{font-size:22px;font-weight:800;color:var(--text)}
+.top-right{display:flex;align-items:center;gap:12px}
+.avatar{width:36px;height:36px;border-radius:50%;background:linear-gradient(135deg,var(--blue),var(--purple));display:flex;align-items:center;justify-content:center;font-weight:700;font-size:13px;cursor:pointer}
+.period-select{padding:7px 12px;background:var(--card);border:1px solid var(--border);border-radius:8px;color:var(--text-2);font-size:12px;cursor:pointer;font-family:'Inter',sans-serif}
+
+/* Hero row — circular metric + alert */
+.hero-row{display:grid;grid-template-columns:1fr 1.4fr;gap:14px;margin-bottom:20px}
+.hero-card{background:var(--card);border:1px solid var(--border);border-radius:14px;padding:24px;display:flex;align-items:center;gap:24px}
+.radial-wrap{position:relative;width:140px;height:140px;flex-shrink:0}
+.radial-val{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center}
+.radial-num{font-size:32px;font-weight:900;color:var(--text);font-family:var(--mono)}
+.radial-label{font-size:11px;color:var(--text-2);margin-top:2px;text-align:center}
+.radial-sublabel{font-size:10px;color:var(--text-3)}
+.hero-meta{flex:1}
+.hero-metric-label{font-size:12px;color:var(--text-2);margin-bottom:4px}
+.hero-metric-val{font-size:28px;font-weight:800;color:var(--text);font-family:var(--mono)}
+.hero-metric-sub{font-size:12px;color:var(--green);margin-top:4px}
+.hero-divider{width:1px;height:50px;background:var(--border);margin:0 8px}
+
+.alert-card{background:var(--card);border:1px solid var(--border);border-radius:14px;padding:20px;display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.alert-box{border:1px solid rgba(239,68,68,.3);background:rgba(239,68,68,.06);border-radius:10px;padding:14px;cursor:pointer;transition:.2s}
+.alert-box:hover{background:rgba(239,68,68,.1)}
+.alert-box.warn{border-color:rgba(245,158,11,.3);background:rgba(245,158,11,.06)}
+.alert-box.warn:hover{background:rgba(245,158,11,.1)}
+.alert-icon{font-size:20px;margin-bottom:6px}
+.alert-title{font-size:13px;font-weight:700;color:var(--text)}
+.alert-body{font-size:12px;color:var(--text-2);margin:4px 0 8px}
+.alert-link{font-size:12px;color:var(--red);font-weight:600}
+.alert-link.warn{color:var(--amber)}
+
+/* Chart area */
+.chart-section{background:var(--card);border:1px solid var(--border);border-radius:14px;padding:20px;margin-bottom:20px}
+.section-header{display:flex;align-items:center;justify-content:space-between;margin-bottom:16px}
+.section-title{font-size:14px;font-weight:700}
+.period-pill{padding:5px 12px;border:1px solid var(--border);border-radius:20px;font-size:12px;color:var(--text-2);cursor:pointer;display:flex;align-items:center;gap:4px}
+
+/* Stat cards row */
+.stats-row{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-bottom:20px}
+.mini-card{background:var(--card);border:1px solid var(--border);border-radius:14px;padding:18px;transition:border-color .2s}
+.mini-card:hover{border-color:rgba(59,130,246,.4)}
+.mc-header{display:flex;align-items:center;justify-content:space-between;margin-bottom:12px}
+.mc-icon{width:36px;height:36px;border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:18px}
+.mc-label{font-size:12px;color:var(--text-2);font-weight:500}
+.mc-val{font-size:32px;font-weight:900;color:var(--text);font-family:var(--mono);line-height:1;margin-bottom:6px}
+.mc-trend{font-size:11px;font-weight:600}
+.mc-trend.up{color:var(--green)}
+.mc-trend.dn{color:var(--red)}
+.mc-sub{font-size:11px;color:var(--text-3);margin-top:2px}
+
+/* Top localities list */
+.top-card{background:var(--card);border:1px solid var(--border);border-radius:14px;padding:18px}
+.top-row-item{display:flex;align-items:center;gap:10px;padding:8px 0;border-bottom:1px solid rgba(26,39,68,.5)}
+.top-row-item:last-child{border-bottom:none}
+.top-rank{font-size:12px;color:var(--text-3);font-family:var(--mono);width:18px;flex-shrink:0}
+.top-name{font-size:13px;color:var(--text);flex:1}
+.top-bar{height:4px;background:rgba(255,255,255,.06);border-radius:100px;overflow:hidden;width:80px}
+.top-fill{height:100%;border-radius:100px}
+.top-num{font-size:12px;font-family:var(--mono);color:var(--text-2);width:30px;text-align:right;flex-shrink:0}
+
+/* Bottom split */
+.bottom-split{display:grid;grid-template-columns:1.5fr 1fr;gap:14px}
+.activity-card{background:var(--card);border:1px solid var(--border);border-radius:14px;padding:18px}
+.act-item{display:flex;align-items:flex-start;gap:12px;padding:10px 0;border-bottom:1px solid rgba(26,39,68,.5)}
+.act-item:last-child{border-bottom:none}
+.act-icon-box{width:36px;height:36px;border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:16px;flex-shrink:0}
+.act-body{flex:1}
+.act-title{font-size:13px;font-weight:600;color:var(--text)}
+.act-meta{font-size:11px;color:var(--text-3);margin-top:2px}
+.act-right{text-align:right;flex-shrink:0}
+.act-amount{font-size:12px;font-weight:700;color:var(--text);font-family:var(--mono)}
+.act-badge{display:inline-block;padding:2px 8px;border-radius:100px;font-size:10px;font-weight:700;margin-top:3px}
+.badge-completed{background:rgba(16,185,129,.15);color:#10B981}
+.badge-pending  {background:rgba(245,158,11,.15);color:#F59E0B}
+.badge-critical {background:rgba(239,68,68,.15);color:#EF4444}
+.badge-new      {background:rgba(139,92,246,.15);color:#8B5CF6}
+
+/* Source breakdown */
+.src-item{display:flex;align-items:center;gap:10px;margin-bottom:10px}
+.src-dot{width:8px;height:8px;border-radius:50%;flex-shrink:0}
+.src-label{font-size:12px;color:var(--text-2);flex:1}
+.src-pct{font-size:11px;font-family:var(--mono);color:var(--text-3);width:30px;text-align:right}
+.src-bar-wrap{width:60px;height:4px;background:rgba(255,255,255,.06);border-radius:100px;overflow:hidden;flex-shrink:0}
+.src-bar-fill{height:100%;border-radius:100px}
+
+/* Leaderboard */
+.lb-row{display:flex;align-items:center;gap:14px;padding:12px 10px;border-radius:10px;margin-bottom:8px;background:var(--card2)}
+.lb-row.rank-1{background:linear-gradient(90deg,rgba(245,158,11,.12),transparent);border:1px solid rgba(245,158,11,.25)}
+.lb-row.rank-2{background:linear-gradient(90deg,rgba(148,163,184,.1),transparent)}
+.lb-medal{font-size:22px;width:34px;text-align:center}
+.lb-avatar{width:34px;height:34px;border-radius:50%;background:linear-gradient(135deg,var(--blue),var(--purple));display:flex;align-items:center;justify-content:center;font-weight:700;font-size:12px;flex-shrink:0}
+.lb-name{font-weight:700;font-size:13px}
+.lb-sub{font-size:11px;color:var(--text-3)}
+.lb-stats{display:flex;gap:16px;margin-left:auto;text-align:right}
+.lb-stat-val{font-size:15px;font-weight:800;font-family:var(--mono)}
+.lb-stat-label{font-size:9px;color:var(--text-3);text-transform:uppercase}
+.lb-bar-wrap{width:100px;height:5px;background:rgba(255,255,255,.06);border-radius:100px;overflow:hidden}
+.lb-bar-fill{height:100%;border-radius:100px;background:linear-gradient(90deg,var(--blue),var(--purple))}
+
+@media(max-width:700px){
+  .hero-row,.stats-row,.bottom-split{grid-template-columns:1fr}
+  .alert-card{grid-template-columns:1fr}
+}
+</style>
+</head>
+<body>
+<h1 class="sr-only" id="main-content" style="position:absolute;left:-9999px">Operations Analytics — Property Finder Real Estate</h1>
+
+<!-- Slim icon sidebar (like Operations Dashboard image) -->
+<aside class="sidebar" role="navigation" aria-label="Navigation">
+  <div class="sb-logo-icon">🏠</div>
+  <a href="admin.html"      class="sb-nav-icon" title="Dashboard">📊</a>
+  <a href="analytics.html"  class="sb-nav-icon active" title="Analytics">📈</a>
+  <a href="cms.html"        class="sb-nav-icon" title="CMS">🗂️</a>
+  <a href="crm.html"        class="sb-nav-icon" title="CRM">👥</a>
+  <a href="hrms.html"       class="sb-nav-icon" title="HRMS">🏢</a>
+  <a href="finance.html"    class="sb-nav-icon" title="Finance">💰</a>
+  <a href="legal.html"      class="sb-nav-icon" title="Legal">⚖️</a>
+  <a href="inventory.html"  class="sb-nav-icon" title="Inventory">📦</a>
+  <a href="admin.html"      class="sb-nav-icon" title="Settings">⚙️</a>
+</aside>
+
+<main class="main">
+  <!-- Header -->
+  <div class="top-row">
+    <div class="page-title">Operations Dashboard</div>
+    <div class="top-right">
+      <select class="period-select" id="period-sel" onchange="loadAll()" aria-label="Period selector">
+        <option value="7">This Week ▾</option>
+        <option value="30" selected>This Month ▾</option>
+        <option value="90">Last 3 Months ▾</option>
+      </select>
+      <div class="avatar" title="Saurav Chowdhury">SC</div>
+    </div>
+  </div>
+
+  <!-- Hero row: Circular conversion rate + Alert cards -->
+  <div class="hero-row">
+    <div class="hero-card">
+      <div class="radial-wrap">
+        <svg width="140" height="140" viewBox="0 0 140 140">
+          <circle cx="70" cy="70" r="58" fill="none" stroke="rgba(255,255,255,.06)" stroke-width="12"/>
+          <circle id="radial-arc" cx="70" cy="70" r="58" fill="none"
+            stroke="url(#radGrad)" stroke-width="12"
+            stroke-linecap="round" stroke-dasharray="365" stroke-dashoffset="365"
+            transform="rotate(-90 70 70)" style="transition:stroke-dashoffset 1.2s ease"/>
+          <defs>
+            <linearGradient id="radGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+              <stop offset="0%"   stop-color="#3B82F6"/>
+              <stop offset="100%" stop-color="#8B5CF6"/>
+            </linearGradient>
+          </defs>
+        </svg>
+        <div class="radial-val">
+          <div class="radial-num" id="radial-num">0%</div>
+          <div class="radial-label">Lead Conv.<br>Rate</div>
+        </div>
+      </div>
+      <div class="hero-meta">
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px">
+          <div>
+            <div class="hero-metric-label">Leads Won</div>
+            <div class="hero-metric-val" id="hero-won">0</div>
+            <div class="hero-metric-sub" id="hero-won-sub">this month</div>
+          </div>
+          <div>
+            <div class="hero-metric-label">Total Leads</div>
+            <div class="hero-metric-val" id="hero-total">0</div>
+            <div class="hero-metric-sub" style="color:var(--blue)">all time</div>
+          </div>
+          <div>
+            <div class="hero-metric-label">Avg Pipeline</div>
+            <div class="hero-metric-val" id="hero-pipeline" style="font-size:18px">₹0</div>
+            <div class="hero-metric-sub" style="color:var(--amber)">per active lead</div>
+          </div>
+          <div>
+            <div class="hero-metric-label">Avg Response</div>
+            <div class="hero-metric-val" id="hero-response" style="font-size:18px">—</div>
+            <div class="hero-metric-sub" style="color:var(--text-3)">to first contact</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="alert-card">
+      <div class="alert-box" onclick="window.location='crm.html'" id="alert-stale">
+        <div class="alert-icon">⚠️</div>
+        <div class="alert-title" id="alert-stale-title">Checking stale leads…</div>
+        <div class="alert-body" id="alert-stale-body">Leads with no activity in 48h</div>
+        <div class="alert-link">View in CRM →</div>
+      </div>
+      <div class="alert-box warn" onclick="window.location='reminders.html'" id="alert-remind">
+        <div class="alert-icon">🔔</div>
+        <div class="alert-title" id="alert-remind-title">Checking reminders…</div>
+        <div class="alert-body">Due today or overdue</div>
+        <div class="alert-link warn">Open Reminders →</div>
+      </div>
+      <div class="alert-box warn" onclick="window.location='hrms.html'">
+        <div class="alert-icon">💰</div>
+        <div class="alert-title" id="alert-payroll-title">Payroll Status</div>
+        <div class="alert-body" id="alert-payroll-body">Loading…</div>
+        <div class="alert-link warn">Open HRMS →</div>
+      </div>
+      <div class="alert-box" onclick="window.location='cms.html'" style="border-color:rgba(59,130,246,.3);background:rgba(59,130,246,.06)">
+        <div class="alert-icon">🏠</div>
+        <div class="alert-title" id="alert-props-title">Properties</div>
+        <div class="alert-body" id="alert-props-body">Active listings</div>
+        <div class="alert-link" style="color:var(--blue)">Open CMS →</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Lead Overview Chart -->
+  <div class="chart-section">
+    <div class="section-header">
+      <div class="section-title">Lead Overview</div>
+      <div class="period-pill">
+        <span id="chart-period-label">This Month</span> ▾
+      </div>
+    </div>
+    <svg id="ops-chart" width="100%" height="200" viewBox="0 0 760 200" preserveAspectRatio="none">
+      <defs>
+        <linearGradient id="opsFill" x1="0" y1="0" x2="0" y2="1">
+          <stop offset="0%" stop-color="#8B5CF6" stop-opacity=".25"/>
+          <stop offset="100%" stop-color="#8B5CF6" stop-opacity="0"/>
+        </linearGradient>
+      </defs>
+      <line x1="0" y1="40"  x2="760" y2="40"  stroke="rgba(255,255,255,.04)" stroke-width="1"/>
+      <line x1="0" y1="80"  x2="760" y2="80"  stroke="rgba(255,255,255,.04)" stroke-width="1"/>
+      <line x1="0" y1="120" x2="760" y2="120" stroke="rgba(255,255,255,.04)" stroke-width="1"/>
+      <line x1="0" y1="160" x2="760" y2="160" stroke="rgba(255,255,255,.04)" stroke-width="1"/>
+      <text x="4" y="36"  fill="#475569" font-size="9" font-family="Inter">High</text>
+      <text x="4" y="164" fill="#475569" font-size="9" font-family="Inter">0</text>
+      <path id="ops-area" fill="url(#opsFill)"/>
+      <path id="ops-line" fill="none" stroke="#8B5CF6" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+      <g id="ops-dots"></g>
+      <g id="ops-labels"></g>
+    </svg>
+  </div>
+
+  <!-- 3 mini stat cards -->
+  <div class="stats-row">
+    <div class="mini-card">
+      <div class="mc-header">
+        <div class="mc-label">Active Leads</div>
+        <div class="mc-icon" style="background:rgba(59,130,246,.12)">📥</div>
+      </div>
+      <div class="mc-val" id="mc-active">—</div>
+      <div class="mc-trend up" id="mc-active-trend">↑ vs last period</div>
+      <div class="mc-sub">in pipeline</div>
+    </div>
+    <div class="mini-card">
+      <div class="mc-header">
+        <div class="mc-label">Pending Reminders</div>
+        <div class="mc-icon" style="background:rgba(245,158,11,.12)">🔔</div>
+      </div>
+      <div class="mc-val" id="mc-reminders">—</div>
+      <div class="mc-trend" id="mc-reminders-trend" style="color:var(--text-3)">due / overdue</div>
+      <div class="mc-sub">client follow-ups</div>
+    </div>
+    <div class="mini-card">
+      <div class="mc-header">
+        <div class="mc-label">Top Locality</div>
+        <div class="mc-icon" style="background:rgba(139,92,246,.12)">📍</div>
+      </div>
+      <div class="mc-val" id="mc-top-loc" style="font-size:16px;margin-top:8px">—</div>
+      <div class="mc-trend" id="mc-top-loc-count" style="color:var(--purple)">leads this month</div>
+      <div class="mc-sub">most active area</div>
+    </div>
+  </div>
+
+  <!-- Bottom: Activity + Source Breakdown -->
+  <div class="bottom-split">
+    <div class="activity-card">
+      <div class="section-header" style="margin-bottom:8px">
+        <div class="section-title">Recent Activity</div>
+        <a href="crm.html" style="font-size:12px;color:var(--blue);text-decoration:none">View all</a>
+      </div>
+      <div id="ops-activity"></div>
+    </div>
+    <div>
+      <!-- Top properties / localities -->
+      <div class="top-card" style="margin-bottom:14px">
+        <div class="section-header" style="margin-bottom:12px">
+          <div class="section-title">Top Localities</div>
+          <div style="font-size:11px;color:var(--text-3)">By leads</div>
+        </div>
+        <div id="top-localities"></div>
+      </div>
+      <!-- Lead source breakdown -->
+      <div class="top-card">
+        <div class="section-header" style="margin-bottom:12px">
+          <div class="section-title">Lead Sources</div>
+          <div style="font-size:11px;color:var(--text-3)">Share</div>
+        </div>
+        <div id="src-breakdown"></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Sales Leaderboard -->
+  <div class="top-card" style="margin-top:14px">
+    <div class="section-header" style="margin-bottom:12px">
+      <div class="section-title">🏆 Sales Leaderboard</div>
+      <div style="font-size:11px;color:var(--text-3)">Conversion rate × deal volume</div>
+    </div>
+    <div id="leaderboard"></div>
+  </div>
+
+</main>
+
+<script>
+const S = k => { try { return JSON.parse(localStorage.getItem(k)||'[]') } catch { return [] } };
+
+function fmtINR(v){v=parseInt(v)||0;if(v>=10000000)return'₹'+(v/10000000).toFixed(1)+'Cr';if(v>=100000)return'₹'+(v/100000).toFixed(0)+'L';return'₹'+v.toLocaleString('en-IN');}
+function fmtAgo(ts){if(!ts)return'—';const d=Math.floor((Date.now()-new Date(ts).getTime())/1000);if(d<60)return d+'s ago';if(d<3600)return Math.floor(d/60)+'m ago';if(d<86400)return Math.floor(d/3600)+'h ago';return Math.floor(d/86400)+'d ago';}
+
+const SRC_COLORS = ['#3B82F6','#8B5CF6','#10B981','#F59E0B','#EF4444','#64748B'];
+const SRC_EMOJI  = {website:'🌐',whatsapp:'💬',portal:'📱','99acres':'📋',magicbricks:'🏠',referral:'👥',walk_in:'🚶',cold_call:'📞',crm_sync:'🔄',web_form:'📝'};
+
+function loadAll() {
+  const days    = parseInt(document.getElementById('period-sel').value)||30;
+  const since   = Date.now() - days*86400000;
+  const leads   = S('pfre_crm_leads');
+  const enquiries=S('pfre_enquiries');
+  const allLeads= [...leads, ...enquiries];
+  const periodLeads = allLeads.filter(l=>new Date(l.createdAt||l.ts||0).getTime()>=since);
+  const activeLeads = leads.filter(l=>!['closed_won','closed_lost'].includes(l.stage));
+  const wonLeads    = allLeads.filter(l=>l.stage==='closed_won');
+  const reminders   = S('pfre_property_alerts');
+  const props       = S('cms_properties');
+
+  /* Radial conversion rate */
+  const convRate = allLeads.length ? Math.round(wonLeads.length/allLeads.length*100) : 0;
+  document.getElementById('radial-num').textContent = convRate + '%';
+  const circ = 2*Math.PI*58;
+  const offset = circ*(1-convRate/100);
+  document.getElementById('radial-arc').setAttribute('stroke-dasharray', circ);
+  setTimeout(()=>document.getElementById('radial-arc').setAttribute('stroke-dashoffset', offset),100);
+
+  /* Hero metrics */
+  document.getElementById('hero-won').textContent   = wonLeads.length;
+  document.getElementById('hero-total').textContent = allLeads.length;
+  const avgPipeline = activeLeads.length
+    ? Math.round(activeLeads.reduce((s,l)=>s+(parseInt(l.budgetMax)||0),0)/activeLeads.length) : 0;
+  document.getElementById('hero-pipeline').textContent = fmtINR(avgPipeline);
+  document.getElementById('hero-response').textContent = activeLeads.length ? '< 4h' : '—';
+
+  /* Alert cards */
+  const staleCount = leads.filter(l=>{
+    if(l.stage==='closed_won'||l.stage==='closed_lost') return false;
+    const acts = l.activities||[];
+    const lastActivity = acts.length ? new Date(acts[acts.length-1].ts).getTime() : new Date(l.createdAt||0).getTime();
+    return (Date.now()-lastActivity)>48*3600000;
+  }).length;
+  document.getElementById('alert-stale-title').textContent = staleCount + ' Stale Leads';
+  document.getElementById('alert-stale-body').textContent  = staleCount ? 'No activity in 48h — follow up now' : 'All leads have recent activity ✅';
+
+  const pendingAlerts = reminders.filter(r=>r.active!==false).length;
+  document.getElementById('alert-remind-title').textContent = pendingAlerts + ' Active Alerts';
+  document.getElementById('alert-remind-body').textContent  = pendingAlerts ? 'Property alerts set by buyers' : 'No active property alerts';
+
+  const thisMonth = new Date().toISOString().slice(0,7);
+  const payrollProcessed = S(`hrms_payroll_${thisMonth}`).length;
+  const empCount = S('hrms_employees').filter(e=>e.status==='active').length;
+  document.getElementById('alert-payroll-title').textContent = payrollProcessed+'/'+empCount+' Payroll';
+  document.getElementById('alert-payroll-body').textContent  = payrollProcessed>=empCount ? 'All paid ✅ — '+thisMonth : (empCount-payrollProcessed)+' pending for '+thisMonth;
+
+  document.getElementById('alert-props-title').textContent = props.filter(p=>p.status==='active').length + ' Active';
+  document.getElementById('alert-props-body').textContent  = props.length + ' total in CMS';
+
+  /* Mini stat cards */
+  document.getElementById('mc-active').textContent    = activeLeads.length;
+  document.getElementById('mc-reminders').textContent = pendingAlerts;
+
+  /* Top locality */
+  const locMap = {};
+  periodLeads.forEach(l=>{
+    const loc=(l.localities||'').split(',')[0].trim()||'Unknown';
+    if(loc) locMap[loc]=(locMap[loc]||0)+1;
+  });
+  const topLoc = Object.entries(locMap).sort((a,b)=>b[1]-a[1])[0];
+  document.getElementById('mc-top-loc').textContent       = topLoc ? topLoc[0] : 'No data';
+  document.getElementById('mc-top-loc-count').textContent = topLoc ? topLoc[1]+' leads' : '';
+
+  /* Ops chart — daily lead count */
+  renderOpsChart(periodLeads, days);
+
+  /* Activity feed */
+  const allActs = [];
+  leads.forEach(l=>{
+    (l.activities||[]).forEach(a=>allActs.push({
+      icon:{call:'📞',whatsapp:'💬',email:'📧',note:'📝',stage_change:'🔄',visit:'🏠'}[a.type]||'⚡',
+      bg:{call:'rgba(59,130,246,.12)',whatsapp:'rgba(16,185,129,.12)',visit:'rgba(139,92,246,.12)'}[a.type]||'rgba(71,85,105,.15)',
+      title: l.name+' — '+a.note,
+      meta:  fmtAgo(a.ts),
+      badge: a.type==='stage_change'?'pending':a.type==='visit'?'new':'completed',
+      amount:'',
+    }));
+  });
+  enquiries.forEach(e=>allActs.push({
+    icon:'📥', bg:'rgba(59,130,246,.12)',
+    title: 'New lead: '+(e.name||'—'),
+    meta:  (e.source||'web')+' · '+fmtAgo(e.ts||0),
+    badge: 'new', amount:'',
+  }));
+  allActs.sort((a,b)=>0);
+
+  const BADGE_LABELS = {completed:'Completed',pending:'Pending',critical:'Critical',new:'New'};
+  const feedEl = document.getElementById('ops-activity');
+  const feedItems = allActs.slice(0,8);
+  feedEl.innerHTML = feedItems.length ? feedItems.map(a=>`
+    <div class="act-item">
+      <div class="act-icon-box" style="background:${a.bg}">${a.icon}</div>
+      <div class="act-body">
+        <div class="act-title">${a.title}</div>
+        <div class="act-meta">${a.meta}</div>
+      </div>
+      <div class="act-right">
+        ${a.amount?`<div class="act-amount">${a.amount}</div>`:''}
+        <div class="act-badge badge-${a.badge}">${BADGE_LABELS[a.badge]||a.badge}</div>
+      </div>
+    </div>`).join('')
+    : '<div style="color:var(--text-3);text-align:center;padding:20px;font-size:13px">No activity yet. <a href="crm.html" style="color:var(--blue)">Add leads →</a></div>';
+
+  /* Top localities */
+  const locEntries = Object.entries(locMap).sort((a,b)=>b[1]-a[1]).slice(0,5);
+  const maxLoc = locEntries[0]?.[1]||1;
+  const FILL_COLORS = ['#3B82F6','#8B5CF6','#10B981','#F59E0B','#EF4444'];
+  document.getElementById('top-localities').innerHTML = locEntries.length
+    ? locEntries.map(([loc,cnt],i)=>`
+      <div class="top-row-item">
+        <div class="top-rank">${String(i+1).padStart(2,'0')}</div>
+        <div class="top-name">${loc}</div>
+        <div class="top-bar"><div class="top-fill" style="width:${Math.round(cnt/maxLoc*100)}%;background:${FILL_COLORS[i]}"></div></div>
+        <div class="top-num">${cnt}</div>
+      </div>`).join('')
+    : '<div style="color:var(--text-3);font-size:12px;padding:12px 0">No locality data — add leads with localities in CRM.</div>';
+
+  /* Source breakdown */
+  const srcMap = {};
+  periodLeads.forEach(l=>{ const s=l.source||'website'; srcMap[s]=(srcMap[s]||0)+1; });
+  const srcEntries = Object.entries(srcMap).sort((a,b)=>b[1]-a[1]);
+  const totalSrc = periodLeads.length||1;
+  document.getElementById('src-breakdown').innerHTML = srcEntries.length
+    ? srcEntries.map(([src,cnt],i)=>`
+      <div class="src-item">
+        <div class="src-dot" style="background:${SRC_COLORS[i%SRC_COLORS.length]}"></div>
+        <div class="src-label">${SRC_EMOJI[src]||'📌'} ${src}</div>
+        <div class="src-bar-wrap"><div class="src-bar-fill" style="width:${Math.round(cnt/totalSrc*100)}%;background:${SRC_COLORS[i%SRC_COLORS.length]}"></div></div>
+        <div class="src-pct">${Math.round(cnt/totalSrc*100)}%</div>
+      </div>`).join('')
+    : '<div style="color:var(--text-3);font-size:12px;padding:8px 0">No leads in this period.</div>';
+
+  renderLeaderboard(leads, enquiries);
+}
+
+function renderOpsChart(periodLeads, days) {
+  const W=760, H=180, padL=0, padB=30, padT=10;
+  const buckets = Math.min(days, 14);
+  const bucketSize = days/buckets;
+  const now = Date.now();
+  const data = Array.from({length:buckets}, (_,i)=>{
+    const end   = now - (buckets-1-i)*bucketSize*86400000;
+    const start = end - bucketSize*86400000;
+    return periodLeads.filter(l=>{ const t=new Date(l.createdAt||l.ts||0).getTime(); return t>=start&&t<end; }).length;
+  });
+  const labels = Array.from({length:buckets}, (_,i)=>{
+    const d = new Date(now - (buckets-1-i)*bucketSize*86400000);
+    return d.toLocaleDateString('en-IN',{day:'2-digit',month:'short'});
+  });
+  const maxV = Math.max(...data,2);
+  const pts   = data.map((v,i)=>[
+    Math.round(padL + i*(W-padL)/(buckets-1)),
+    Math.round(padT + (H-padT-padB)*(1-v/maxV))
+  ]);
+  const linePath  = pts.map((p,i)=>(i===0?'M':'L')+p[0]+' '+p[1]).join(' ');
+  const areaPath  = linePath+` L${pts[pts.length-1][0]} ${H-padB} L${pts[0][0]} ${H-padB} Z`;
+  const dotsHTML  = pts.map(p=>`<circle cx="${p[0]}" cy="${p[1]}" r="4" fill="#8B5CF6" stroke="#0F1729" stroke-width="2"/>`).join('');
+  const labelsHTML= labels.filter((_,i)=>i===0||i===Math.floor(buckets/2)||i===buckets-1).map((l,idx)=>{
+    const realIdx = idx===0?0:idx===1?Math.floor(buckets/2):buckets-1;
+    return `<text x="${pts[realIdx][0]}" y="${H-8}" text-anchor="middle" fill="#475569" font-size="9" font-family="Inter">${labels[realIdx]}</text>`;
+  }).join('');
+  document.getElementById('ops-area').setAttribute('d',areaPath);
+  document.getElementById('ops-line').setAttribute('d',linePath);
+  document.getElementById('ops-dots').innerHTML  = dotsHTML;
+  document.getElementById('ops-labels').innerHTML= labelsHTML;
+}
+
+/* Gamified sales leaderboard.
+   Attributes each lead to a real assigned agent when one is set (crm.html's
+   Assigned Agent field). Older leads created before that field existed fall
+   back to a stable hash of the lead's id, so the board still populates for
+   demo data — but any lead assigned for real takes priority over the guess. */
+function hashAgentIndex(id, count) {
+  let h = 0;
+  String(id).split('').forEach(c => { h = (h * 31 + c.charCodeAt(0)) >>> 0; });
+  return h % count;
+}
+
+function renderLeaderboard(leads, enquiries) {
+  const employees = S('hrms_employees');
+  if (!employees.length) {
+    document.getElementById('leaderboard').innerHTML = '<p style="color:var(--text-3);font-size:12px;padding:10px 0">Add employees in HRMS to populate the leaderboard.</p>';
+    return;
+  }
+  const allLeads = [...leads, ...enquiries];
+  const board = employees.map(emp => ({ emp, leads: [], won: 0, pipelineValue: 0 }));
+
+  allLeads.forEach(l => {
+    const namedIdx = l.assignedAgentName ? employees.findIndex(e => e.name === l.assignedAgentName) : -1;
+    const idx = namedIdx >= 0 ? namedIdx : hashAgentIndex(l.id || l.phone || l.name, employees.length);
+    board[idx].leads.push(l);
+    if (l.stage === 'closed_won') { board[idx].won++; board[idx].pipelineValue += parseInt(l.budgetMax) || 0; }
+  });
+
+  board.forEach(b => { b.total = b.leads.length; b.convRate = b.total ? Math.round(b.won / b.total * 100) : 0; });
+  board.sort((a, b) => (b.convRate * 0.6 + Math.min(b.won,10)*4) - (a.convRate * 0.6 + Math.min(a.won,10)*4));
+
+  const maxScore = Math.max(...board.map(b => b.convRate * 0.6 + Math.min(b.won,10)*4), 1);
+  const MEDALS = ['🥇','🥈','🥉'];
+
+  document.getElementById('leaderboard').innerHTML = board.map((b, i) => {
+    const score = b.convRate * 0.6 + Math.min(b.won,10)*4;
+    const initials = (b.emp.name||'??').split(' ').map(w=>w[0]).slice(0,2).join('').toUpperCase();
+    return `<div class="lb-row ${i===0?'rank-1':i===1?'rank-2':''}">
+      <div class="lb-medal">${MEDALS[i] || `#${i+1}`}</div>
+      <div class="lb-avatar">${initials}</div>
+      <div>
+        <div class="lb-name">${b.emp.name}</div>
+        <div class="lb-sub">${b.emp.designation||'Team Member'} · ${b.total} leads worked</div>
+      </div>
+      <div class="lb-bar-wrap"><div class="lb-bar-fill" style="width:${Math.round(score/maxScore*100)}%"></div></div>
+      <div class="lb-stats">
+        <div><div class="lb-stat-val" style="color:var(--green)">${b.won}</div><div class="lb-stat-label">Won</div></div>
+        <div><div class="lb-stat-val">${b.convRate}%</div><div class="lb-stat-label">Conv.</div></div>
+      </div>
+    </div>`;
+  }).join('');
+}
+
+document.addEventListener('DOMContentLoaded', loadAll);
+</script>
+<script>
+if ('serviceWorker' in navigator) {
+  window.addEventListener('load', () => navigator.serviceWorker.register('./sw.js').catch(()=>{}));
+}
+</script>
+<script src="js/app-shell.js"></script>
+</body>
+</html>

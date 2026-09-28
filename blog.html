@@ -1,0 +1,488 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<link rel="canonical" href="https://www.propertyfinderrealestate.com/blog.html">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' https://cdnjs.cloudflare.com https://challenges.cloudflare.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' data: https:; connect-src 'self' https://api.propertyfinderrealestate.com http://localhost:8000 https://formspree.io; frame-src https://www.google.com https://challenges.cloudflare.com; form-action 'self' https://formspree.io; object-src 'none'; base-uri 'self'; frame-ancestors 'none'">
+<meta http-equiv="X-Content-Type-Options" content="nosniff">
+<meta http-equiv="X-Frame-Options" content="SAMEORIGIN">
+<meta http-equiv="Referrer-Policy" content="strict-origin-when-cross-origin"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <!-- Open Graph -->
+  <meta property="og:type"        content="website">
+  <meta property="og:title"       content="Real Estate Blog Mumbai | Market Insights | Property Finder">
+  <meta property="og:description" content="Latest Mumbai real estate news, market trends, property tips and investment guides.">
+  <meta property="og:url"         content="https://www.propertyfinderrealestate.com/blog.html">
+  <meta property="og:image"       content="https://www.propertyfinderrealestate.com/images/og-banner.jpg">
+  <meta property="og:image:width"  content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:image:type"   content="image/jpeg">
+  <meta property="og:site_name"   content="Property Finder Real Estate">
+  <meta property="og:locale"      content="en_IN">
+  <!-- Twitter Card -->
+  <meta name="twitter:card"        content="summary">
+  <meta name="twitter:title"       content="Real Estate Blog Mumbai | Market Insights | Property Finder">
+  <meta name="twitter:description" content="Latest Mumbai real estate news, market trends, property tips and investment guides.">
+  <meta name="twitter:image"       content="https://www.propertyfinderrealestate.com/icons/icon.svg">
+  <meta name="twitter:site"        content="@PropertyFinderA">
+  <!-- Additional SEO -->
+  <meta name="robots"  content="index, follow, max-snippet:-1, max-image-preview:large">
+  <meta name="author"  content="Property Finder Real Estate">
+  <meta name="geo.region"       content="IN-MH">
+  <meta name="geo.placename"    content="Mumbai">
+  <meta name="geo.position"     content="19.1886;72.8485">
+  <meta name="ICBM"             content="19.1886, 72.8485">
+    <meta name="description" content="Mumbai real estate blog — market insights, investment tips, neighbourhood guides, and property news by Property Finder Real Estate.">
+  <title>Blog — Property Finder Real Estate | Mumbai Real Estate Insights</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;0,900;1,700&family=DM+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/styles.css">
+<link rel="stylesheet" href="css/widgets.css">
+<link rel="stylesheet" href="css/mobile.css">
+<style>
+.blog-layout { display: grid; grid-template-columns: 1fr 320px; gap: 48px; padding: 56px 5%; }
+.blog-main {}
+.blog-sidebar {}
+.featured-post { background: white; border-radius: var(--radius-lg); overflow: hidden; border: 1px solid var(--border); box-shadow: var(--shadow-sm); margin-bottom: 40px; display: grid; grid-template-columns: 1.2fr 1fr; transition: box-shadow .3s; }
+.featured-post:hover { box-shadow: var(--shadow-lg); }
+.featured-post-img { height: 100%; min-height: 280px; display: flex; align-items: center; justify-content: center; font-size: 80px; }
+.featured-post-body { padding: 36px; display: flex; flex-direction: column; justify-content: center; }
+.featured-label { font-size: 11px; font-weight: 700; letter-spacing: 2px; text-transform: uppercase; color: var(--blue); margin-bottom: 10px; }
+.featured-post-body h2 { font-family:'Playfair Display',serif;font-size:26px;font-weight:700;line-height:1.3;margin-bottom:12px; }
+.featured-post-body p { font-size:14px;color:var(--text-muted);line-height:1.75;margin-bottom:20px; }
+.post-meta-row { display:flex;align-items:center;gap:12px;font-size:12px;color:var(--text-muted);margin-bottom:18px; }
+.post-meta-row .cat { color:var(--blue);font-weight:700; }
+.blog-posts-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 24px; }
+.blog-card-sm { background: white; border-radius: var(--radius-lg); overflow: hidden; border: 1px solid var(--border); box-shadow: var(--shadow-sm); transition: all .3s; }
+.blog-card-sm:hover { transform: translateY(-4px); box-shadow: var(--shadow-lg); }
+.blog-card-sm-img { height: 180px; display: flex; align-items: center; justify-content: center; font-size: 54px; overflow: hidden; }
+.blog-card-sm-body { padding: 20px; }
+.blog-card-sm-body .cat { font-size:11px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:var(--blue);margin-bottom:8px; }
+.blog-card-sm-body h3 { font-size:16px;font-weight:700;line-height:1.4;margin-bottom:8px; }
+.blog-card-sm-body p { font-size:13px;color:var(--text-muted);line-height:1.7;margin-bottom:14px; }
+.blog-card-sm-body .meta { display:flex;align-items:center;justify-content:space-between;font-size:12px;color:var(--text-muted); }
+.read-more-link { color:var(--blue);font-weight:700;font-size:13px;display:inline-flex;align-items:center;gap:4px; }
+.read-more-link:hover { gap:8px; }
+
+/* Sidebar */
+.sidebar-widget { background: white; border-radius: var(--radius-lg); border: 1px solid var(--border); padding: 24px; margin-bottom: 28px; }
+.sidebar-widget h4 { font-size:14px;font-weight:700;letter-spacing:0.5px;margin-bottom:18px;padding-bottom:12px;border-bottom:1px solid var(--border); }
+.sidebar-search { display:flex;gap:0; }
+.sidebar-search input { flex:1;padding:10px 14px;border:1.5px solid var(--border);border-right:none;border-radius:9px 0 0 9px;font-size:14px;outline:none; }
+.sidebar-search input:focus { border-color:var(--blue); }
+.sidebar-search button { background:var(--blue);color:white;border:none;padding:10px 16px;border-radius:0 9px 9px 0;cursor:pointer; }
+.category-list { display:flex;flex-direction:column;gap:4px; }
+.category-item { display:flex;align-items:center;justify-content:space-between;padding:9px 12px;border-radius:9px;font-size:14px;color:var(--text-muted);cursor:pointer;transition:all .15s; }
+.category-item:hover { background:var(--blue-light);color:var(--blue); }
+.category-item .count { background:var(--off-white);padding:2px 8px;border-radius:100px;font-size:12px;font-weight:600; }
+.recent-post-item { display:flex;gap:14px;padding:12px 0;border-bottom:1px solid var(--border);cursor:pointer; }
+.recent-post-item:last-child { border-bottom:none;padding-bottom:0; }
+.recent-post-thumb { width:56px;height:56px;border-radius:9px;flex-shrink:0;display:flex;align-items:center;justify-content:center;font-size:24px; }
+.recent-post-info .title { font-size:13px;font-weight:600;line-height:1.4;margin-bottom:3px;color:var(--text); }
+.recent-post-info .date { font-size:11.5px;color:var(--text-muted); }
+.tag-cloud { display:flex;flex-wrap:wrap;gap:8px; }
+.tag-cloud a { background:var(--off-white);border:1px solid var(--border);padding:6px 13px;border-radius:8px;font-size:12.5px;color:var(--text-muted);transition:all .2s; }
+.tag-cloud a:hover { background:var(--blue-light);border-color:var(--blue);color:var(--blue); }
+.newsletter-form { display:flex;flex-direction:column;gap:10px;margin-top:4px; }
+.newsletter-form input { padding:11px 14px;border:1.5px solid var(--border);border-radius:9px;font-size:14px;outline:none; }
+.newsletter-form input:focus { border-color:var(--blue); }
+
+@media(max-width:1100px){ .blog-layout{grid-template-columns:1fr;} .featured-post{grid-template-columns:1fr;} .featured-post-img{min-height:200px;} }
+@media(max-width:768px){ .blog-posts-grid{grid-template-columns:1fr;} }
+</style>
+<script>!function(){var t=localStorage.getItem("pfre_theme")||(window.matchMedia("(prefers-color-scheme:dark)").matches?"dark":"light");document.documentElement.setAttribute("data-theme",t);document.documentElement.classList.add("theme-"+t)}();</script>
+<link rel="manifest" href="manifest.json">
+  <link rel="icon" type="image/png" sizes="192x192" href="icons/icon-192.png">
+<meta name="theme-color" content="#2563EB">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="default">
+  <meta name="apple-mobile-web-app-title" content="Property Finder RE">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="Property Finder Real Estate">
+  <meta property="og:locale" content="en_IN">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:site" content="@PropertyFinderA">
+<link rel="stylesheet" href="css/theme.css">
+<link rel="stylesheet" href="css/overrides.css">
+<link rel="stylesheet" href="css/utils.css">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "RealEstateAgent",
+  "name": "Property Finder Real Estate",
+  "url": "https://www.propertyfinderrealestate.com",
+  "telephone": "+91-93269-90050",
+  "email": "propertyfinderre@gmail.com",
+  "logo": "https://www.propertyfinderrealestate.com/images/logo.png",
+  "image": "https://www.propertyfinderrealestate.com/images/logo.png",
+  "address": {
+    "@type": "PostalAddress",
+    "streetAddress": "Shop No. 9, Deepanjali CHS, Baf-Hira Nagar, Lower Kharodi, Jankalyan Nagar Rd",
+    "addressLocality": "Malad West",
+    "addressRegion": "Maharashtra",
+    "postalCode": "400095",
+    "addressCountry": "IN"
+  },
+  "geo": {
+    "@type": "GeoCoordinates",
+    "latitude": 19.1886,
+    "longitude": 72.8485
+  },
+  "openingHoursSpecification": [
+    {
+      "@type": "OpeningHoursSpecification",
+      "dayOfWeek": [
+        "Monday",
+        "Tuesday",
+        "Wednesday",
+        "Thursday",
+        "Friday",
+        "Saturday"
+      ],
+      "opens": "10:00",
+      "closes": "19:00"
+    }
+  ],
+  "areaServed": [
+    "Malad",
+    "Goregaon",
+    "Andheri",
+    "Borivali",
+    "Kandivali",
+    "Dahisar",
+    "Mira Road"
+  ],
+  "priceRange": "Free consultation"
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Blog",
+  "name": "Mumbai Real Estate Blog — Property Finder Real Estate",
+  "description": "Market insights, investment tips, neighbourhood guides and property news for Mumbai's real estate market.",
+  "url": "https://www.propertyfinderrealestate.com/blog.html",
+  "publisher": {
+    "@type": "RealEstateAgent",
+    "name": "Property Finder Real Estate"
+  }
+}
+</script>
+</head>
+<body>
+<a href="#main-content" class="skip-link">Skip to main content</a>
+
+<!-- NAVBAR -->
+<nav class="navbar" role="navigation" aria-label="Main navigation">
+  <a href="index.html" class="nav-logo" style="display:flex;align-items:center">
+    <img src="images/logo.png" alt="Property Finder Real Estate" class="nav-logo-img" style="height:48px;width:auto;object-fit:contain" loading="eager">
+  </a>
+  <ul class="nav-menu" role="list">
+    <li class="nav-item"><a href="index.html" class="nav-link" data-i18n="nav.home">Home</a></li>
+    <li class="nav-item"><a href="properties.html" class="nav-link">Properties <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M6 9l6 6 6-6"/></svg></a><div class="dropdown"><a href="properties.html"><span class="dd-icon">🏠</span> All Properties</a><a href="projects.html"><span class="dd-icon">🏗️</span> Projects</a><a href="neighbourhoods.html"><span class="dd-icon">📍</span> Neighbourhoods</a></div></li>
+    <li class="nav-item"><a href="services.html" class="nav-link" data-i18n="nav.services">Services</a></li>
+    <li class="nav-item"><a href="about.html" class="nav-link">About <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M6 9l6 6 6-6"/></svg></a><div class="dropdown"><a href="about.html"><span class="dd-icon">🏢</span> About Us</a><a href="team.html"><span class="dd-icon">👥</span> Our Team</a><a href="testimonials.html"><span class="dd-icon">⭐</span> Testimonials</a><a href="faq.html"><span class="dd-icon">❓</span> FAQ</a><a href="careers.html"><span class="dd-icon">💼</span> Careers</a><a href="nri.html"><span class="dd-icon">🌍</span> NRI Corner</a></div></li>
+    <li class="nav-item"><a href="calculators.html" class="nav-link">Tools <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M6 9l6 6 6-6"/></svg></a><div class="dropdown"><a href="calculators.html"><span class="dd-icon">🧮</span> EMI Calculator</a><a href="tds-calculators.html"><span class="dd-icon">📋</span> TDS Calculators</a><a href="converter.html"><span class="dd-icon">📐</span> Measurement Converter</a><a href="insurance.html"><span class="dd-icon">🛡️</span> Property Insurance</a><a href="price-trends.html"><span class="dd-icon">📈</span> Price Trends</a><a href="email-templates.html">Email Templates</a>
+<a href="agreement-registration.html">Registration Tracker</a>
+<a href="reminders.html"><span class="dd-icon">🔔</span> Reminders</a></div></li>
+    <li class="nav-item"><a href="blog.html" class="nav-link active">Blog</a></li>
+    <li class="nav-item"><a href="contact.html" class="nav-link" data-i18n="nav.contact">Contact</a></li>
+  </ul>
+  <div class="nav-actions">
+    <a href="tel:+919326990050" class="nav-phone">📞 +91 93269 90050</a>
+    <a href="post-property.html" class="btn btn-primary btn-sm" class="btn-green-inline">+ Post Property</a>
+    <a href="contact.html" class="btn btn-outline btn-sm">Get In Touch</a>
+    <button class="theme-toggle" id="themeToggle" title="Toggle Light/Dark Mode"><span class="icon-light">☀️</span><span class="icon-dark">🌙</span></button>
+    <button class="hamburger" id="hamburger" aria-label="Toggle navigation" aria-expanded="false" role="button"><span></span><span></span><span></span></button>
+  </div>
+</nav>
+<div class="mobile-menu" id="mobileMenu">
+  <div class="mob-section">Navigation</div>
+  <a href="index.html">🏠 Home</a><a href="properties.html">🏘️ Properties</a><a href="projects.html">🏗️ Projects</a><a href="services.html">⚙️ Services</a><a href="about.html">🏢 About Us</a><a href="team.html">👥 Our Team</a><a href="testimonials.html">⭐ Testimonials</a><a href="home-loan.html">🏦 Home Loan</a><a href="blog.html">📝 Blog</a><a href="contact.html">📞 Contact</a>
+  <a href="tel:+919326990050" class="btn btn-primary mob-cta">📞 Call +91 93269 90050</a>
+</div>
+
+<!-- PAGE HERO -->
+<section id="main-content" class="page-hero">
+  <span class="section-label">Knowledge Hub</span>
+  <h1>Mumbai Real Estate <em>Insights</em></h1>
+  <p>Expert articles, market updates, legal guides, and investment tips — written by our team to help you make smarter property decisions.</p>
+  <nav aria-label="Breadcrumb"><div class="breadcrumb"><a href="index.html">Home</a><span class="breadcrumb-sep" aria-hidden="true">›</span><span>Blog</span></div></nav><!-- /breadcrumb -->
+</section>
+
+<!-- BLOG LAYOUT -->
+<div class="blog-layout">
+  <main class="blog-main">
+
+    <!-- FEATURED POST -->
+    <div class="featured-post reveal">
+      <div class="featured-post-img bg-grad-7">🏙️</div>
+      <div class="featured-post-body">
+        <div class="featured-label">⭐ Featured Article</div>
+        <div class="post-meta-row"><span class="cat">Investment Guide</span><span>·</span><span>May 15, 2025</span><span>·</span><span>8 min read</span></div>
+        <h2>Top 5 Localities to Invest in Western Mumbai in 2025</h2>
+        <p>Mumbai's western suburbs have consistently outperformed other micro-markets in terms of appreciation, rental yield, and infrastructure growth. Here are the 5 localities our experts are most bullish on for 2025...</p>
+        <a href="#" class="btn btn-primary btn-sm">Read Full Article →</a>
+      </div>
+    </div>
+
+    <!-- BLOG POSTS GRID -->
+    <div class="section-head reveal">
+      <div><div class="section-label">Latest Articles</div><h2 class="section-title">Recent <em>Posts</em></h2></div>
+    </div>
+    <div class="blog-posts-grid">
+
+      <div class="blog-card-sm reveal">
+        <div class="blog-card-sm-img bg-grad-3">📋</div>
+        <div class="blog-card-sm-body">
+          <div class="cat">Legal Guide</div>
+          <h3>RERA Maharashtra: What Every Homebuyer Must Know Before Buying</h3>
+          <p>A comprehensive guide to MahaRERA — how it protects homebuyers, what to check before booking a flat, and how to verify a project's registration status online.</p>
+          <div class="meta"><span>April 28, 2025 · 6 min</span><a href="#" class="read-more-link">Read →</a></div>
+        </div>
+      </div>
+
+      <div class="blog-card-sm reveal">
+        <div class="blog-card-sm-img bg-grad-6">🏦</div>
+        <div class="blog-card-sm-body">
+          <div class="cat">Finance</div>
+          <h3>Complete Guide to Home Loans for First-Time Buyers in India</h3>
+          <p>Everything you need to know about home loans — eligibility criteria, required documents, EMI calculation, interest rate comparison, and tips to get approval faster.</p>
+          <div class="meta"><span>April 10, 2025 · 9 min</span><a href="#" class="read-more-link">Read →</a></div>
+        </div>
+      </div>
+
+      <div class="blog-card-sm reveal">
+        <div class="blog-card-sm-img bg-grad-4">🏠</div>
+        <div class="blog-card-sm-body">
+          <div class="cat">Buyer Guide</div>
+          <h3>1 BHK vs 2 BHK: What's the Right Choice for First-Time Buyers?</h3>
+          <p>Torn between a 1 BHK and 2 BHK? This guide breaks down the cost difference, resale potential, lifestyle factors, and financing implications to help you decide.</p>
+          <div class="meta"><span>March 22, 2025 · 5 min</span><a href="#" class="read-more-link">Read →</a></div>
+        </div>
+      </div>
+
+      <div class="blog-card-sm reveal">
+        <div class="blog-card-sm-img bg-grad-2">📈</div>
+        <div class="blog-card-sm-body">
+          <div class="cat">Market Trends</div>
+          <h3>Mumbai Real Estate Market Report 2025: Prices, Trends & Outlook</h3>
+          <p>A data-backed analysis of Mumbai's residential and commercial real estate market in 2025 — covering price appreciation, new launches, demand drivers, and a 12-month forecast.</p>
+          <div class="meta"><span>March 5, 2025 · 11 min</span><a href="#" class="read-more-link">Read →</a></div>
+        </div>
+      </div>
+
+      <div class="blog-card-sm reveal">
+        <div class="blog-card-sm-img bg-grad-9">📍</div>
+        <div class="blog-card-sm-body">
+          <div class="cat">Locality Guide</div>
+          <h3>Why Malad West is Mumbai's Emerging Real Estate Hotspot in 2025</h3>
+          <p>Malad West is no longer just a residential suburb — it's fast becoming a commercial and lifestyle hub. Here's why investors and homebuyers are turning their attention here.</p>
+          <div class="meta"><span>Feb 18, 2025 · 7 min</span><a href="#" class="read-more-link">Read →</a></div>
+        </div>
+      </div>
+
+      <div class="blog-card-sm reveal">
+        <div class="blog-card-sm-img bg-grad-5">🔑</div>
+        <div class="blog-card-sm-body">
+          <div class="cat">Landlord Guide</div>
+          <h3>Mumbai Landlord's Complete Guide: Finding, Screening & Keeping Great Tenants</h3>
+          <p>A practical guide for landlords in Mumbai — from tenant screening and agreement drafting to rent increases, maintenance responsibilities, and legal rights under the Rent Control Act.</p>
+          <div class="meta"><span>Feb 3, 2025 · 8 min</span><a href="#" class="read-more-link">Read →</a></div>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- PAGINATION -->
+    <div class="pagination" style="margin-top:48px">
+      <button class="page-btn">←</button>
+      <button class="page-btn active">1</button>
+      <button class="page-btn">2</button>
+      <button class="page-btn">3</button>
+      <button class="page-btn">→</button>
+    </div>
+  </main>
+
+  <!-- SIDEBAR -->
+  <aside class="blog-sidebar">
+    <div class="sidebar-widget reveal">
+      <h4>🔍 Search Articles</h4>
+      <div class="sidebar-search">
+        <input type="text" placeholder="Search blog…">
+        <button>🔍</button>
+      </div>
+    </div>
+
+    <div class="sidebar-widget reveal">
+      <h4>📁 Categories</h4>
+      <div class="category-list">
+        <div class="category-item">Investment Guide <span class="count">8</span></div>
+        <div class="category-item">Market Trends <span class="count">6</span></div>
+        <div class="category-item">Legal Guide <span class="count">5</span></div>
+        <div class="category-item">Buyer Guide <span class="count">9</span></div>
+        <div class="category-item">Finance <span class="count">7</span></div>
+        <div class="category-item">Locality Guide <span class="count">4</span></div>
+        <div class="category-item">Landlord Guide <span class="count">5</span></div>
+        <div class="category-item">NRI Corner <span class="count">3</span></div>
+      </div>
+    </div>
+
+    <div class="sidebar-widget reveal">
+      <h4>🕒 Recent Posts</h4>
+      <div class="recent-post-item">
+        <div class="recent-post-thumb bg-grad-7">🏙️</div>
+        <div class="recent-post-info"><div class="title">Top 5 Localities to Invest in Western Mumbai 2025</div><div class="date">May 15, 2025</div></div>
+      </div>
+      <div class="recent-post-item">
+        <div class="recent-post-thumb bg-grad-3">📋</div>
+        <div class="recent-post-info"><div class="title">RERA Maharashtra: What Every Homebuyer Must Know</div><div class="date">April 28, 2025</div></div>
+      </div>
+      <div class="recent-post-item">
+        <div class="recent-post-thumb bg-grad-6">🏦</div>
+        <div class="recent-post-info"><div class="title">Complete Guide to Home Loans for First-Time Buyers</div><div class="date">April 10, 2025</div></div>
+      </div>
+      <div class="recent-post-item">
+        <div class="recent-post-thumb bg-grad-2">📈</div>
+        <div class="recent-post-info"><div class="title">Mumbai Real Estate Market Report 2025</div><div class="date">March 5, 2025</div></div>
+      </div>
+    </div>
+
+    <div class="sidebar-widget reveal">
+      <h4>🏷️ Popular Tags</h4>
+      <div class="tag-cloud">
+        <a href="#">Mumbai Property</a><a href="#">Malad West</a><a href="#">RERA</a><a href="#">Home Loan</a><a href="#">2 BHK</a><a href="#">Investment</a><a href="#">Rental</a><a href="#">Borivali</a><a href="#">Goregaon</a><a href="#">Andheri</a><a href="#">NRI</a><a href="#">MHADA</a>
+      </div>
+    </div>
+
+    <div class="sidebar-widget reveal">
+      <h4>📧 Newsletter</h4>
+      <p style="font-size:13px;color:var(--text-muted);margin-bottom:14px">Get the latest Mumbai real estate insights delivered to your inbox. No spam, ever.</p>
+      <div class="newsletter-form">
+        <input type="email" placeholder="Your email address">
+        <button class="btn btn-primary" style="justify-content:center">Subscribe</button>
+      </div>
+    </div>
+
+    <div class="sidebar-widget reveal" style="background:var(--blue);border-color:var(--blue)">
+      <h4 style="color:white;border-color:rgba(255,255,255,0.2)">💬 Talk to an Expert</h4>
+      <p style="font-size:13px;color:rgba(255,255,255,0.8);margin-bottom:16px">Have a property question? Our experts are ready to help — no obligation, completely free.</p>
+      <a href="tel:+919326990050" class="btn btn-white" style="width:100%;justify-content:center;font-size:14px">📞 Call Us Now</a>
+      <a href="https://wa.me/919326990050?utm_source=whatsapp&utm_medium=chat&utm_campaign=blog" target="_blank" rel="noopener noreferrer" style="display:flex;align-items:center;justify-content:center;gap:6px;margin-top:10px;background:#25D366;color:white;padding:10px 16px;border-radius:9px;font-size:14px;font-weight:600">💬 WhatsApp</a>
+    </div>
+  </aside>
+</div>
+
+<!-- CTA -->
+<section class="cta-section">
+  <h2 class="section-title reveal">Have a Property <em>Question?</em></h2>
+  <p class="reveal">Our team brings 7+ years of Mumbai market expertise. Ask us anything — we're here to help.</p>
+  <div class="cta-btns reveal">
+    <a href="contact.html" class="btn btn-white btn-lg">📋 Contact Us</a>
+    <a href="properties.html" class="btn-outline-white btn-lg">🏠 Browse Properties</a>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer class="footer">
+  <div class="footer-grid">
+    <div class="footer-brand">
+      <div class="footer-logo"><svg width="36" height="36" viewBox="0 0 40 40" fill="none"><circle cx="17" cy="17" r="13" stroke="#2563EB" stroke-width="2.8"/><path d="M17 22V18" stroke="#2563EB" stroke-width="2.2" stroke-linecap="round"/><rect x="14" y="18" width="6" height="4" rx="0.5" stroke="#2563EB" stroke-width="2.2"/><path d="M12 18L17 13L22 18" stroke="#2563EB" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/><path d="M27 27L33 33" stroke="#2563EB" stroke-width="2.8" stroke-linecap="round"/></svg><div class="footer-logo-text"><div class="brand">Property Finder Real Estate</div><div class="sub">Mumbai, Maharashtra</div></div></div>
+      <p class="tagline">"Your Search Ends Here."</p>
+      <p>Trusted real estate consultants in Mumbai's western suburbs since 2018.</p>
+      <div class="social-row">
+        <a href="https://www.instagram.com/propertyfinderrealestate" class="social-btn" target="_blank" rel="noopener noreferrer" aria-label="Instagram"><svg width="16" height="16" fill="none" stroke="white" stroke-width="2" viewBox="0 0 24 24"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1112.63 8 4 4 0 0116 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg></a>
+        <a href="https://www.facebook.com/PropertyFinderRealEstate/reviews" class="social-btn" target="_blank" rel="noopener noreferrer" aria-label="Facebook Reviews"><svg width="16" height="16" fill="white" viewBox="0 0 24 24"><path d="M18 2h-3a5 5 0 00-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 011-1h3z"/></svg></a>
+        <a href="https://www.linkedin.com/company/propertyfinderrealestate" class="social-btn" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn"><svg width="16" height="16" fill="white" viewBox="0 0 24 24"><path d="M16 8a6 6 0 016 6v7h-4v-7a2 2 0 00-2-2 2 2 0 00-2 2v7h-4v-7a6 6 0 016-6zM2 9h4v12H2z"/><circle cx="4" cy="4" r="2"/></svg></a>
+        <a href="https://www.youtube.com/@PropertyFinderRealEstate" class="social-btn" target="_blank" rel="noopener noreferrer" aria-label="YouTube"><svg width="16" height="16" viewBox="0 0 24 24" fill="white"><path d="M23.498 6.186a3.016 3.016 0 00-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 00.502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 002.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 002.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/></svg></a>
+        <a href="https://x.com/PropertyFinderA" class="social-btn" target="_blank" rel="noopener noreferrer" aria-label="X / Twitter"><svg width="16" height="16" fill="white" viewBox="0 0 24 24"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg></a>
+        <a href="https://in.pinterest.com/propertyfinderrealestate/" class="social-btn" target="_blank" rel="noopener noreferrer" aria-label="Pinterest"><svg width="16" height="16" viewBox="0 0 24 24" fill="white"><path d="M12 0C5.373 0 0 5.373 0 12c0 5.084 3.163 9.426 7.627 11.174-.105-.949-.2-2.405.042-3.441.218-.937 1.407-5.965 1.407-5.965s-.359-.719-.359-1.782c0-1.668.967-2.914 2.171-2.914 1.023 0 1.518.769 1.518 1.69 0 1.029-.655 2.568-.994 3.995-.283 1.194.599 2.169 1.777 2.169 2.133 0 3.772-2.249 3.772-5.495 0-2.873-2.064-4.882-5.012-4.882-3.414 0-5.418 2.561-5.418 5.207 0 1.031.397 2.138.893 2.738a.36.36 0 01.083.345l-.333 1.36c-.053.22-.174.267-.402.161-1.499-.698-2.436-2.889-2.436-4.649 0-3.785 2.75-7.262 7.929-7.262 4.163 0 7.398 2.967 7.398 6.931 0 4.136-2.607 7.464-6.227 7.464-1.216 0-2.359-.632-2.75-1.378l-.748 2.853c-.271 1.043-1.002 2.35-1.492 3.146C9.57 23.812 10.763 24 12 24c6.627 0 12-5.373 12-12S18.627 0 12 0z"/></svg></a>
+        <a href="https://jsdl.in/RSL-XGK1779888146" class="social-btn" target="_blank" rel="noopener noreferrer" aria-label="JustDial"><svg width="16" height="16" viewBox="0 0 24 24"><rect width="24" height="24" rx="5" fill="#FF6B35"/><text x="12" y="17" font-family="Arial,sans-serif" font-size="10" font-weight="900" text-anchor="middle" fill="white">JD</text></svg></a>
+      </div>
+    </div>
+    <div class="footer-col"><h4>Quick Links</h4><a href="index.html">Home</a><a href="properties.html">Properties</a><a href="projects.html">Projects</a><a href="services.html">Services</a><a href="about.html">About Us</a><a href="blog.html">Blog</a>
+<a href="admin.html">Admin Panel</a><a href="contact.html">Contact</a></div>
+    <div class="footer-col"><h4>Blog Categories</h4><a href="#">Investment Guide</a><a href="#">Market Trends</a><a href="#">Legal Guide</a><a href="#">Buyer Guide</a><a href="#">Finance</a><a href="#">Locality Guide</a></div>
+    <div class="footer-col"><h4>Contact Us</h4>
+      <div class="footer-contact-row"><span class="footer-contact-icon">📍</span><span>Shop No. 9, Ground Floor, Building No. 3, Deepanjali Co-operative Housing Society Limited, Malad West, Mumbai - 400095</span></div>
+      <div class="footer-contact-row"><span class="footer-contact-icon">📞</span><a href="tel:+919326990050">+91 93269 90050</a></div>
+      <div class="footer-contact-row"><span class="footer-contact-icon">✉️</span><a href="mailto:propertyfinderre@gmail.com">propertyfinderre@gmail.com</a></div>
+    </div>
+  </div>
+  <div class="footer-bottom"><span>© 2026 Property Finder Real Estate. All rights reserved.</span><span><a href="#">Privacy Policy</a> &nbsp;·&nbsp; <a href="#">Terms</a></span></div>
+</footer>
+<script src="js/widgets.js"></script>
+<script src="js/i18n.js"></script>
+
+  <!-- ═══ GLOBAL WIDGETS ═══ -->
+  <div id="progressBar"></div>
+  <div id="toastContainer"></div>
+  <button id="backToTop" title="Back to top">&#8593;</button>
+    <div class="cookie-btns">
+      <button class="cookie-accept" id="cookieAccept">Accept</button>
+      <button class="cookie-decline" id="cookieDecline">Decline</button>
+    </div>
+  </div>
+  <div class="floating-actions">
+    <div class="fab-wrap"><span class="fab-label">WhatsApp Us</span><a href="https://wa.me/919326990050?utm_source=whatsapp&utm_medium=chat&utm_campaign=blog" target="_blank" rel="noopener noreferrer" class="fab fab-whatsapp" target="_blank" rel="noopener noreferrer">💬</a></div>
+    <div class="fab-wrap"><span class="fab-label">Call Us</span><a href="tel:+919326990050" class="fab fab-call">📞</a></div>
+    <div class="fab-wrap"><span class="fab-label">AI Assistant</span><button class="fab fab-chat" id="chatToggle">🤖<span class="chat-badge">1</span></button></div>
+  </div>
+  <div id="chatWidget">
+    <div class="chat-header">
+      <div class="chat-avatar">🏠</div>
+      <div class="chat-header-info">
+        <div class="chat-name">PFRE Assistant</div>
+        <div class="chat-status"><span class="chat-status-dot"></span> Online — replies instantly</div>
+      </div>
+      <button class="chat-close" id="chatClose">&#215;</button>
+    </div>
+    <div class="chat-body" id="chatBody"></div>
+    <div class="quick-replies" id="quickReplies"></div>
+    <div class="chat-input-row">
+      <input class="chat-input" id="chatInput" type="text" placeholder="Ask about properties, prices, loans…">
+      <button class="chat-send" id="chatSend">&#10148;</button>
+    </div>
+  </div>
+  <div id="compareBar">
+    <span class="compare-bar-title">🔄 Compare Properties</span>
+    <div class="compare-slots">
+      <div class="compare-slot">+ Add Property</div>
+      <div class="compare-slot">+ Add Property</div>
+      <div class="compare-slot">+ Add Property</div>
+    </div>
+    <div class="compare-actions">
+      <button class="compare-btn primary">Compare Now</button>
+      <button class="compare-btn secondary" onclick="document.getElementById('compareBar').classList.remove('show')">Clear All</button>
+    </div>
+  </div>
+  <div id="lightbox">
+    <div class="lightbox-inner">
+      <button class="lightbox-close" id="lbClose">&#215;</button>
+      <div class="lightbox-img-placeholder" id="lbImage">🏠</div>
+      <button class="lightbox-nav lightbox-prev" id="lbPrev">&#8249;</button>
+      <button class="lightbox-nav lightbox-next" id="lbNext">&#8250;</button>
+      <div class="lightbox-counter" id="lbCounter">1 / 1</div>
+    </div>
+  </div>
+  <div id="pwaInstall">
+    <div class="pwa-icon">🏠</div>
+    <div class="pwa-text"><h4>Install Property Finder App</h4><p>Quick access to Mumbai listings on your phone</p></div>
+    <button class="pwa-install-btn" id="pwaInstallBtn">Install</button>
+    <button class="pwa-dismiss" id="pwaDismiss">&#215;</button>
+  </div>
+  <!-- ═══ END GLOBAL WIDGETS ═══ -->
+
+<script>
+if ('serviceWorker' in navigator) {
+  window.addEventListener('load', () => {
+    navigator.serviceWorker.register('./sw.js').catch(() => {});
+  });
+}
+</script>
+<script src="js/config.js"></script>
+<script src="js/api.js" defer></script>
+<script src="js/security.js"></script>
+<script src="js/tracker.js" defer></script>
+<script src="js/theme.js"></script>
+</body>
+</html>

@@ -1,0 +1,770 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' data: https:; connect-src 'self' https:; frame-ancestors 'none'; object-src 'none'">
+<meta http-equiv="X-Content-Type-Options" content="nosniff">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="robots" content="noindex, nofollow">
+<meta name="description" content="Finance & Accounting — Property Finder Real Estate">
+<link rel="icon" type="image/png" sizes="192x192" href="icons/icon-192.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<title>Finance — Property Finder RE</title>
+<script>document.documentElement.setAttribute('data-theme','dark');</script>
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --bg:#070C14;--sidebar:#0A0F1E;--card:#0F1729;--card2:#111B2E;--border:#1A2744;
+  --blue:#3B82F6;--blue-glow:rgba(59,130,246,.15);--green:#10B981;--red:#EF4444;
+  --amber:#F59E0B;--purple:#8B5CF6;--text:#E2E8F0;--text-2:#94A3B8;--text-3:#475569;
+  --mono:'JetBrains Mono',monospace;
+}
+body{font-family:'Inter',system-ui,sans-serif;background:var(--bg);color:var(--text);min-height:100vh;display:flex;font-size:14px;line-height:1.5}
+
+.sidebar{width:220px;min-height:100vh;background:var(--sidebar);border-right:1px solid var(--border);display:flex;flex-direction:column;position:fixed;left:0;top:0;bottom:0;z-index:100;overflow-y:auto}
+.sb-logo{padding:20px 18px 14px;display:flex;align-items:center;gap:10px;border-bottom:1px solid var(--border)}
+.sb-logo img{height:32px;filter:brightness(0) invert(1)}
+.sb-logo-text{font-size:13px;font-weight:700}
+.sb-logo-sub{font-size:10px;color:var(--blue);font-weight:600;text-transform:uppercase}
+.sb-section{font-size:10px;font-weight:700;letter-spacing:1px;text-transform:uppercase;color:var(--text-3);padding:16px 18px 6px}
+.sb-item{display:flex;align-items:center;gap:10px;padding:9px 18px;color:var(--text-2);font-size:13px;font-weight:500;cursor:pointer;border-left:2px solid transparent;text-decoration:none}
+.sb-item:hover{background:rgba(59,130,246,.06);color:var(--text)}
+.sb-item.active{background:rgba(59,130,246,.12);color:var(--blue);border-left-color:var(--blue);font-weight:600}
+.sb-icon{font-size:16px;width:20px;text-align:center}
+
+.main{margin-left:220px;flex:1;min-height:100vh}
+.content{padding:24px}
+.page-head{display:flex;justify-content:space-between;align-items:center;margin-bottom:20px;flex-wrap:wrap;gap:10px}
+.page-title{font-size:20px;font-weight:800}
+.btn{padding:8px 16px;border-radius:8px;font-size:13px;font-weight:600;cursor:pointer;border:1px solid var(--border);background:var(--card);color:var(--text-2)}
+.btn:hover{border-color:var(--blue);color:var(--blue)}
+.btn-primary{background:var(--blue);border-color:var(--blue);color:#fff}
+.btn-primary:hover{background:#2563eb;color:#fff}
+.btn-sm{padding:5px 11px;font-size:12px}
+
+.tab-row{display:flex;gap:4px;margin-bottom:20px;border-bottom:1px solid var(--border);overflow-x:auto}
+.tab-btn{padding:10px 16px;background:none;border:none;color:var(--text-2);font-size:13px;font-weight:600;cursor:pointer;border-bottom:2px solid transparent;white-space:nowrap}
+.tab-btn.active{color:var(--blue);border-bottom-color:var(--blue)}
+
+.stats-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin-bottom:20px}
+.stat-card{background:var(--card);border:1px solid var(--border);border-radius:12px;padding:16px}
+.stat-label{font-size:11px;color:var(--text-2);margin-bottom:6px}
+.stat-val{font-size:22px;font-weight:800;font-family:var(--mono)}
+
+.panel{background:var(--card);border:1px solid var(--border);border-radius:12px;padding:18px;margin-bottom:16px}
+.panel h3{font-size:14px;margin-bottom:14px;display:flex;justify-content:space-between;align-items:center}
+
+table{width:100%;border-collapse:collapse;font-size:12.5px}
+th{text-align:left;padding:8px 10px;color:var(--text-3);text-transform:uppercase;font-size:10px;border-bottom:1px solid var(--border)}
+td{padding:9px 10px;border-bottom:1px solid rgba(26,39,68,.6)}
+tr:hover td{background:rgba(59,130,246,.04)}
+.badge{padding:2px 8px;border-radius:100px;font-size:10px;font-weight:700}
+.badge-green{background:rgba(16,185,129,.15);color:var(--green)}
+.badge-amber{background:rgba(245,158,11,.15);color:var(--amber)}
+.badge-red{background:rgba(239,68,68,.15);color:var(--red)}
+.badge-gray{background:rgba(71,85,105,.2);color:var(--text-2)}
+
+.form-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.field label{display:block;font-size:11px;color:var(--text-2);margin-bottom:5px;font-weight:600}
+.field input,.field select,.field textarea{width:100%;padding:9px 11px;background:rgba(255,255,255,.04);border:1.5px solid var(--border);border-radius:8px;color:var(--text);font-size:13px;font-family:inherit}
+.field input:focus,.field select:focus{outline:none;border-color:var(--blue)}
+
+.je-line{display:grid;grid-template-columns:2fr 1fr 1fr auto;gap:8px;margin-bottom:8px;align-items:center}
+.je-total-row{display:flex;justify-content:space-between;font-size:13px;font-weight:700;padding-top:10px;border-top:1px solid var(--border);margin-top:10px}
+.je-balanced{color:var(--green)}
+.je-unbalanced{color:var(--red)}
+
+.statement-line{display:flex;justify-content:space-between;padding:6px 0;font-size:13px;border-bottom:1px solid rgba(255,255,255,.04)}
+.statement-total{font-weight:800;border-top:1px solid var(--border);padding-top:8px;margin-top:6px}
+.statement-section-title{font-size:11px;font-weight:700;text-transform:uppercase;color:var(--text-3);margin:14px 0 6px}
+
+.conv-box{display:flex;gap:10px;align-items:flex-end;flex-wrap:wrap}
+.conv-result{font-size:24px;font-weight:800;font-family:var(--mono);margin-top:14px}
+.conv-rate{font-size:11px;color:var(--text-2)}
+
+.overlay{position:fixed;inset:0;background:rgba(0,0,0,.55);z-index:800;display:none;align-items:center;justify-content:center;padding:16px}
+.overlay.open{display:flex}
+.modal{background:var(--card);border:1px solid var(--border);border-radius:14px;padding:22px;max-width:520px;width:100%;max-height:85vh;overflow-y:auto}
+
+@media(max-width:900px){.sidebar{width:54px}.sb-logo-text,.sb-logo-sub,.sb-section,.sb-item span:not(.sb-icon){display:none}.sb-item{padding:11px;justify-content:center}.main{margin-left:54px}.stats-grid{grid-template-columns:1fr 1fr}.form-grid{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+<h1 class="sr-only" style="position:absolute;left:-9999px">Finance — Property Finder Real Estate</h1>
+
+<aside class="sidebar" role="navigation" aria-label="Finance navigation">
+  <div class="sb-logo">
+    <img src="images/logo.png" alt="PFRE">
+    <div><div class="sb-logo-text">Property Finder</div><div class="sb-logo-sub">Finance</div></div>
+  </div>
+  <nav>
+    <div class="sb-section">Overview</div>
+    <a href="admin.html" class="sb-item"><span class="sb-icon">📊</span><span>Dashboard</span></a>
+    <a href="finance.html" class="sb-item active"><span class="sb-icon">💰</span><span>Finance</span></a>
+    <div class="sb-section">Modules</div>
+    <a href="crm.html" class="sb-item"><span class="sb-icon">👥</span><span>CRM</span></a>
+    <a href="hrms.html" class="sb-item"><span class="sb-icon">🏢</span><span>HRMS</span></a>
+    <a href="legal.html" class="sb-item"><span class="sb-icon">⚖️</span><span>Legal</span></a>
+    <a href="inventory.html" class="sb-item"><span class="sb-icon">📦</span><span>Inventory</span></a>
+    <div class="sb-section">System</div>
+    <a href="index.html" class="sb-item"><span class="sb-icon">🌐</span><span>View Website</span></a>
+  </nav>
+</aside>
+
+<main class="main">
+  <div class="content">
+    <div class="page-head">
+      <div class="page-title">💰 Finance</div>
+      <div style="display:flex;gap:8px">
+        <button class="btn" onclick="openModal('je')">+ Journal Entry</button>
+        <button class="btn" onclick="openModal('invoice')">+ Invoice</button>
+        <button class="btn btn-primary" onclick="openModal('expense')">+ Expense</button>
+      </div>
+    </div>
+
+    <div class="stats-grid" id="fin-stats"></div>
+
+    <div class="tab-row">
+      <button class="tab-btn active" data-tab="overview" onclick="showTab('overview',this)">Overview</button>
+      <button class="tab-btn" data-tab="accounts" onclick="showTab('accounts',this)">Chart of Accounts</button>
+      <button class="tab-btn" data-tab="journal" onclick="showTab('journal',this)">Journal Entries</button>
+      <button class="tab-btn" data-tab="invoices" onclick="showTab('invoices',this)">Invoices &amp; Payments</button>
+      <button class="tab-btn" data-tab="trading" onclick="showTab('trading',this)">Purchases &amp; Sales</button>
+      <button class="tab-btn" data-tab="statements" onclick="showTab('statements',this)">Financial Statements</button>
+      <button class="tab-btn" data-tab="currency" onclick="showTab('currency',this)">Currency Converter</button>
+    </div>
+
+    <div id="tab-body"></div>
+  </div>
+</main>
+
+<!-- Journal Entry modal -->
+<div class="overlay" id="modal-je">
+  <div class="modal">
+    <h3 style="margin-bottom:14px;display:flex;justify-content:space-between">New Journal Entry <button onclick="closeModal('je')" style="background:none;border:none;color:var(--text-2);cursor:pointer;font-size:16px">✕</button></h3>
+    <div class="form-grid" style="margin-bottom:12px">
+      <div class="field"><label>Date</label><input type="date" id="je-date"></div>
+      <div class="field"><label>Narration</label><input type="text" id="je-narration" placeholder="e.g. Office rent for the month"></div>
+    </div>
+    <div id="je-lines"></div>
+    <button class="btn btn-sm" onclick="addJeLine()" type="button">+ Add Line</button>
+    <div class="je-total-row"><span>Debit: ₹<span id="je-total-debit">0</span> · Credit: ₹<span id="je-total-credit">0</span></span><span id="je-balance-indicator" class="je-unbalanced">Unbalanced</span></div>
+    <button class="btn btn-primary" style="width:100%;margin-top:14px" onclick="saveJournalEntry()">Post Entry</button>
+  </div>
+</div>
+
+<!-- Invoice modal -->
+<div class="overlay" id="modal-invoice">
+  <div class="modal">
+    <h3 style="margin-bottom:14px;display:flex;justify-content:space-between">New Tax Invoice <button onclick="closeModal('invoice')" style="background:none;border:none;color:var(--text-2);cursor:pointer;font-size:16px">✕</button></h3>
+    <div class="form-grid">
+      <div class="field" style="grid-column:1/-1">
+        <label>Customer — pick from CRM leads <span style="font-weight:400;color:var(--text-2)">(so live mode can convert this to a real customer record)</span></label>
+        <select id="inv-lead-id" onchange="onInvoiceLeadPicked()">
+          <option value="">— Or type a name below for a demo-only invoice —</option>
+        </select>
+      </div>
+      <div class="field"><label>Customer Name</label><input type="text" id="inv-customer" placeholder="Auto-fills when you pick a lead above"></div>
+      <div class="field"><label>Amount (before GST)</label><input type="number" id="inv-amount" placeholder="e.g. 50000"></div>
+      <div class="field"><label>Place of Supply</label><select id="inv-pos"><option>Maharashtra</option><option>Other State</option></select></div>
+      <div class="field"><label>Due Date</label><input type="date" id="inv-due"></div>
+    </div>
+    <p id="inv-conversion-note" style="font-size:11px;color:var(--text-2);margin-top:10px">GST auto-calculated: 9% CGST + 9% SGST if Maharashtra, else 18% IGST.</p>
+    <button class="btn btn-primary" style="width:100%;margin-top:14px" onclick="saveInvoice()">Create Invoice</button>
+  </div>
+</div>
+
+<!-- Expense modal -->
+<div class="overlay" id="modal-expense">
+  <div class="modal">
+    <h3 style="margin-bottom:14px;display:flex;justify-content:space-between">New Expense <button onclick="closeModal('expense')" style="background:none;border:none;color:var(--text-2);cursor:pointer;font-size:16px">✕</button></h3>
+    <div class="form-grid">
+      <div class="field"><label>Description</label><input type="text" id="exp-desc"></div>
+      <div class="field"><label>Amount</label><input type="number" id="exp-amount"></div>
+      <div class="field"><label>Account</label><select id="exp-account"></select></div>
+      <div class="field"><label>Payment Method</label><select id="exp-method"><option value="cash">Cash</option><option value="bank_transfer">Bank Transfer</option><option value="upi">UPI</option></select></div>
+      <div class="field"><label>Date</label><input type="date" id="exp-date"></div>
+    </div>
+    <button class="btn btn-primary" style="width:100%;margin-top:14px" onclick="saveExpense()">Save Expense</button>
+  </div>
+</div>
+
+<script src="js/config.js"></script>
+<script src="js/api.js"></script>
+<script>
+/* ══════════════════════════════════════════════════════
+   Finance module — local demo data layer, mirrors the
+   Laravel accounting API's shape (Account/JournalEntry/
+   Invoice/Expense) so the UI works standalone, and calls
+   the real API when FEATURES.LIVE_FINANCE is on.
+═══════════════════════════════════════════════════════ */
+const LIVE = !!(window.PFRE_CONFIG?.FEATURES?.LIVE_FINANCE && window.PFRE_CONFIG?.API_BASE_URL);
+const FIN = {
+  get(key, fallback) { try { return JSON.parse(localStorage.getItem(key) || 'null') ?? fallback; } catch { return fallback; } },
+  set(key, val) { localStorage.setItem(key, JSON.stringify(val)); },
+};
+
+/* ══════════════════════════════════════════════════════
+   LIVE API LAYER — makes the LIVE_FINANCE flag actually do
+   something (previously declared and never checked). Every
+   render/save function below stays synchronous and untouched;
+   this layer only refreshes the localStorage cache on load
+   and best-effort mirrors writes to the real API afterward,
+   so a shape mismatch or a down server never breaks the page.
+
+   Two real shape gaps, documented rather than silently papered
+   over: (1) journal lines here use an account CODE string;
+   the API's JournalEntry model uses account_id with a loaded
+   `account` relation — resolved via accountIdForCode() below.
+   (2) the Invoice form here collects a free-text customer NAME;
+   the API's Invoice wants a customer_id FK to an existing
+   Customer record, which this simple form doesn't look up —
+   posting a live invoice omits customer_id rather than guessing
+   a match, so the name typed here won't appear on the server
+   record. Fix properly by adding a customer picker if/when this
+   goes live. ══════════════════════════════════════════════ */
+function authHeaders() {
+  let token = null;
+  try { token = JSON.parse(localStorage.getItem('pfre_session') || 'null')?.token; } catch (_) {}
+  return {
+    'Content-Type': 'application/json',
+    'X-PFRE-Key': window.PFRE_CONFIG?.API_KEY || '',
+    ...(token ? { 'Authorization': `Bearer ${token}` } : {}),
+  };
+}
+function unwrapList(payload) {
+  // Laravel apiResource index() responses are paginated ({data:[...],...}); plain
+  // collections (like AccountController::index) are not. Handle both.
+  if (Array.isArray(payload)) return payload;
+  if (Array.isArray(payload?.data)) return payload.data;
+  return [];
+}
+async function apiGet(path) {
+  if (!LIVE) return null;
+  try {
+    const res = await fetch(`${window.PFRE_CONFIG.API_BASE_URL}${path}`, { headers: authHeaders() });
+    if (!res.ok) return null;
+    const json = await res.json();
+    return json.success ? json.data : null;
+  } catch (_) { return null; } // offline / CORS / server down — caller falls back to localStorage
+}
+async function apiPost(path, body) {
+  if (!LIVE) return null;
+  try {
+    const res = await fetch(`${window.PFRE_CONFIG.API_BASE_URL}${path}`, { method: 'POST', headers: authHeaders(), body: JSON.stringify(body) });
+    const json = await res.json().catch(() => null);
+    return (res.ok && json?.success) ? json.data : null;
+  } catch (_) { return null; }
+}
+function accountIdForCode(code) {
+  const acc = getAccounts().find(a => a.code === code);
+  return acc?.id || null; // .id only present after a successful live sync; null is fine, post just gets skipped
+}
+
+async function syncFromLiveApi() {
+  if (!LIVE) return;
+  try {
+    const [accounts, journalRaw, invoicesRaw, expensesRaw] = await Promise.all([
+      apiGet('/accounting/accounts'),
+      apiGet('/accounting/journal-entries'),
+      apiGet('/accounting/invoices'),
+      apiGet('/accounting/expenses'),
+    ]);
+
+    if (accounts) FIN.set('fin_accounts', unwrapList(accounts).map(a => ({ id: a.id, code: a.code, name: a.name, type: a.type, subtype: a.subtype })));
+
+    if (journalRaw) {
+      const entries = unwrapList(journalRaw).map(je => ({
+        id: je.id, entry_number: je.entry_number, date: je.entry_date, narration: je.narration,
+        lines: (je.lines || []).map(l => ({
+          account: l.account?.code || String(l.account_id || ''), // resolve the loaded relation back to a code
+          debit: parseFloat(l.debit) || 0, credit: parseFloat(l.credit) || 0,
+        })),
+      }));
+      FIN.set('fin_journal', entries);
+    }
+
+    if (invoicesRaw) {
+      const invoices = unwrapList(invoicesRaw).map(i => ({
+        id: i.id, invoice_number: i.invoice_number, customer: i.customer?.name || '(from server)',
+        amount: parseFloat(i.amount) || 0, tax: parseFloat(i.tax_amount) || 0, total: parseFloat(i.total_amount) || 0,
+        status: i.status, due: i.due_date,
+      }));
+      FIN.set('fin_invoices', invoices);
+    }
+
+    if (expensesRaw) {
+      const expenses = unwrapList(expensesRaw).map(e => ({
+        id: e.id, description: e.description, amount: parseFloat(e.amount) || 0,
+        account_code: e.account?.code, account_name: e.account?.name, method: e.payment_method, date: e.expense_date,
+      }));
+      FIN.set('fin_expenses', expenses);
+    }
+  } catch (err) {
+    console.warn('Live sync failed, continuing with local data:', err);
+  }
+}
+
+
+const SEED_ACCOUNTS = [
+  {code:'1001',name:'Cash in Hand',type:'asset',subtype:'current_asset'},
+  {code:'1002',name:'Bank Account',type:'asset',subtype:'current_asset'},
+  {code:'1003',name:'Accounts Receivable',type:'asset',subtype:'current_asset'},
+  {code:'1004',name:'Inventory / Stock',type:'asset',subtype:'current_asset'},
+  {code:'2001',name:'Accounts Payable',type:'liability',subtype:'current_liability'},
+  {code:'2002',name:'GST Output Payable',type:'liability',subtype:'current_liability'},
+  {code:'3001',name:"Owner's Capital",type:'equity',subtype:'capital'},
+  {code:'4001',name:'Brokerage Commission Income',type:'income',subtype:'direct_income'},
+  {code:'4002',name:'Sales Revenue',type:'income',subtype:'direct_income'},
+  {code:'5001',name:'Purchases',type:'expense',subtype:'direct_expense'},
+  {code:'5002',name:'Salaries & Wages',type:'expense',subtype:'indirect_expense'},
+  {code:'5003',name:'Rent Expense',type:'expense',subtype:'indirect_expense'},
+  {code:'5004',name:'Conveyance & Fuel',type:'expense',subtype:'indirect_expense'},
+  {code:'5005',name:'Marketing & Advertising',type:'expense',subtype:'indirect_expense'},
+  {code:'5010',name:'Miscellaneous Expense',type:'expense',subtype:'indirect_expense'},
+  {code:'5011',name:'Cost of Goods Sold',type:'expense',subtype:'direct_expense'},
+];
+
+function getAccounts() {
+  let a = FIN.get('fin_accounts', null);
+  if (!a) { a = SEED_ACCOUNTS; FIN.set('fin_accounts', a); }
+  return a;
+}
+function getJournalEntries() { return FIN.get('fin_journal', []); }
+function getInvoices() { return FIN.get('fin_invoices', []); }
+function getExpenses() { return FIN.get('fin_expenses', []); }
+function genNum(prefix, list) { return `${prefix}-${new Date().getFullYear()}-${String(list.length + 1).padStart(4, '0')}`; }
+function fmt(n) { n = Number(n) || 0; return n.toLocaleString('en-IN', { maximumFractionDigits: 0 }); }
+function today() { return new Date().toISOString().slice(0, 10); }
+
+/* ── Ledger math: balance of an account, from posted journal lines ── */
+function accountBalance(code, asOfDate) {
+  const acc = getAccounts().find(a => a.code === code);
+  if (!acc) return 0;
+  const debitNormal = ['asset', 'expense'].includes(acc.type);
+  let debit = 0, credit = 0;
+  getJournalEntries().forEach(je => {
+    if (asOfDate && je.date > asOfDate) return;
+    je.lines.forEach(l => { if (l.account === code) { debit += l.debit; credit += l.credit; } });
+  });
+  return debitNormal ? (debit - credit) : (credit - debit);
+}
+
+/* ── Journal posting (mirrors AccountingService::post — debits must equal credits) ── */
+function postJournalEntry(date, narration, lines) {
+  const totalDebit = lines.reduce((s, l) => s + (l.debit || 0), 0);
+  const totalCredit = lines.reduce((s, l) => s + (l.credit || 0), 0);
+  if (Math.round(totalDebit * 100) !== Math.round(totalCredit * 100)) {
+    throw new Error(`Entry does not balance: debit ₹${fmt(totalDebit)} ≠ credit ₹${fmt(totalCredit)}`);
+  }
+  const list = getJournalEntries();
+  const entry = { id: Date.now(), entry_number: genNum('JE', list), date, narration, lines };
+  list.push(entry);
+  FIN.set('fin_journal', list);
+  return entry;
+}
+
+/* ══════════════════════ RENDER: STATS ══════════════════════ */
+function renderStats() {
+  const cash = accountBalance('1001') + accountBalance('1002');
+  const receivable = accountBalance('1003');
+  const payable = accountBalance('2001');
+  const revenue = getJournalEntries()
+    .flatMap(j => j.lines)
+    .filter(l => ['4001', '4002'].includes(l.account))
+    .reduce((s, l) => s + l.credit, 0);
+
+  document.getElementById('fin-stats').innerHTML = `
+    <div class="stat-card"><div class="stat-label">Cash & Bank</div><div class="stat-val" style="color:var(--green)">₹${fmt(cash)}</div></div>
+    <div class="stat-card"><div class="stat-label">Accounts Receivable</div><div class="stat-val">₹${fmt(receivable)}</div></div>
+    <div class="stat-card"><div class="stat-label">Accounts Payable</div><div class="stat-val" style="color:var(--amber)">₹${fmt(payable)}</div></div>
+    <div class="stat-card"><div class="stat-label">Total Revenue Posted</div><div class="stat-val" style="color:var(--blue)">₹${fmt(revenue)}</div></div>
+  `;
+}
+
+/* ══════════════════════ TABS ══════════════════════ */
+function showTab(tab, btn) {
+  document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+  btn?.classList.add('active');
+  const body = document.getElementById('tab-body');
+  if (tab === 'overview') renderOverview(body);
+  else if (tab === 'accounts') renderAccounts(body);
+  else if (tab === 'journal') renderJournal(body);
+  else if (tab === 'invoices') renderInvoices(body);
+  else if (tab === 'trading') renderTrading(body);
+  else if (tab === 'statements') renderStatements(body);
+  else if (tab === 'currency') renderCurrency(body);
+}
+
+function renderOverview(body) {
+  const je = getJournalEntries().slice(-8).reverse();
+  const inv = getInvoices().slice(-5).reverse();
+  body.innerHTML = `
+    <div style="display:grid;grid-template-columns:1.3fr 1fr;gap:16px">
+      <div class="panel"><h3>Recent Journal Entries</h3>
+        ${je.length ? `<table><thead><tr><th>Entry</th><th>Date</th><th>Narration</th><th>Amount</th></tr></thead><tbody>
+          ${je.map(j => `<tr><td style="font-family:var(--mono)">${j.entry_number}</td><td>${j.date}</td><td>${j.narration}</td><td>₹${fmt(j.lines.reduce((s,l)=>s+l.debit,0))}</td></tr>`).join('')}
+        </tbody></table>` : `<p style="color:var(--text-2);font-size:13px">No journal entries yet. Click "+ Journal Entry" to post one.</p>`}
+      </div>
+      <div class="panel"><h3>Recent Invoices</h3>
+        ${inv.length ? inv.map(i => `<div class="statement-line"><span>${i.invoice_number} — ${i.customer}</span><span>₹${fmt(i.total)}</span></div>`).join('')
+          : `<p style="color:var(--text-2);font-size:13px">No invoices yet.</p>`}
+      </div>
+    </div>`;
+}
+
+function renderAccounts(body) {
+  const groups = { asset: 'Assets', liability: 'Liabilities', equity: 'Equity', income: 'Income', expense: 'Expenses' };
+  body.innerHTML = `<div class="panel"><h3>Chart of Accounts</h3>
+    ${Object.entries(groups).map(([type, label]) => {
+      const rows = getAccounts().filter(a => a.type === type);
+      return `<div class="statement-section-title">${label}</div>
+        <table><tbody>${rows.map(a => `<tr><td style="font-family:var(--mono);width:70px">${a.code}</td><td>${a.name}</td><td style="text-align:right;font-family:var(--mono)">₹${fmt(accountBalance(a.code))}</td></tr>`).join('')}</tbody></table>`;
+    }).join('')}
+  </div>`;
+}
+
+function renderJournal(body) {
+  const entries = getJournalEntries().slice().reverse();
+  body.innerHTML = `<div class="panel"><h3>All Journal Entries <button class="btn btn-sm btn-primary" onclick="openModal('je')">+ New</button></h3>
+    ${entries.length ? `<table><thead><tr><th>Entry #</th><th>Date</th><th>Narration</th><th>Lines</th><th>Amount</th></tr></thead><tbody>
+      ${entries.map(j => `<tr><td style="font-family:var(--mono)">${j.entry_number}</td><td>${j.date}</td><td>${j.narration}</td>
+        <td>${j.lines.map(l => `${l.account} ${l.debit ? 'Dr ₹'+fmt(l.debit) : 'Cr ₹'+fmt(l.credit)}`).join(', ')}</td>
+        <td style="text-align:right">₹${fmt(j.lines.reduce((s,l)=>s+l.debit,0))}</td></tr>`).join('')}
+    </tbody></table>` : `<p style="color:var(--text-2);font-size:13px;padding:20px 0;text-align:center">No entries posted yet.</p>`}
+  </div>`;
+}
+
+function renderInvoices(body) {
+  const invoices = getInvoices().slice().reverse();
+  body.innerHTML = `<div class="panel"><h3>Invoices <button class="btn btn-sm btn-primary" onclick="openModal('invoice')">+ New</button></h3>
+    ${invoices.length ? `<table><thead><tr><th>Invoice #</th><th>Customer</th><th>Amount</th><th>GST</th><th>Total</th><th>Status</th></tr></thead><tbody>
+      ${invoices.map(i => `<tr><td style="font-family:var(--mono)">${i.invoice_number}</td><td>${i.customer}</td><td>₹${fmt(i.amount)}</td><td>₹${fmt(i.tax)}</td><td>₹${fmt(i.total)}</td><td><span class="badge badge-amber">${i.status}</span></td></tr>`).join('')}
+    </tbody></table>` : `<p style="color:var(--text-2);font-size:13px;padding:20px 0;text-align:center">No invoices yet.</p>`}
+  </div>
+  <div class="panel"><h3>Expenses</h3>
+    ${getExpenses().length ? `<table><thead><tr><th>Description</th><th>Account</th><th>Amount</th><th>Date</th></tr></thead><tbody>
+      ${getExpenses().slice().reverse().map(e => `<tr><td>${e.description}</td><td>${e.account_name}</td><td>₹${fmt(e.amount)}</td><td>${e.date}</td></tr>`).join('')}
+    </tbody></table>` : `<p style="color:var(--text-2);font-size:13px">No expenses logged yet.</p>`}
+  </div>`;
+}
+
+function renderTrading(body) {
+  body.innerHTML = `<div class="panel"><h3>Purchases &amp; Sales</h3>
+    <p style="color:var(--text-2);font-size:13px;line-height:1.7">
+      Full Purchase Orders, Sales Orders, and SKU-level Purchase/Sale entry live on the
+      <a href="inventory.html" style="color:var(--blue)">Inventory</a> page, since every line item there
+      ties to a specific SKU and posts stock movement alongside the ledger entry. This tab shows the
+      ledger side: the Purchases (5001) and Sales Revenue (4002) account balances update automatically
+      whenever a purchase or sale is recorded there.
+    </p>
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-top:14px">
+      <div class="stat-card"><div class="stat-label">Purchases (Account 5001)</div><div class="stat-val">₹${fmt(accountBalance('5001'))}</div></div>
+      <div class="stat-card"><div class="stat-label">Sales Revenue (Account 4002)</div><div class="stat-val" style="color:var(--green)">₹${fmt(accountBalance('4002'))}</div></div>
+    </div>
+  </div>`;
+}
+
+/* ══════════════════════ FINANCIAL STATEMENTS ══════════════════════ */
+function renderStatements(body) {
+  body.innerHTML = `
+    <div class="tab-row" style="border-bottom:none;margin-bottom:14px">
+      <button class="tab-btn active" data-stmt="pl" onclick="showStatement('pl',this)">Profit &amp; Loss</button>
+      <button class="tab-btn" data-stmt="bs" onclick="showStatement('bs',this)">Balance Sheet</button>
+      <button class="tab-btn" data-stmt="ta" onclick="showStatement('ta',this)">Trading Account</button>
+    </div>
+    <div id="statement-body" class="panel"></div>`;
+  showStatement('pl', body.querySelector('[data-stmt="pl"]'));
+}
+
+function showStatement(which, btn) {
+  document.querySelectorAll('[data-stmt]').forEach(b => b.classList.remove('active'));
+  btn?.classList.add('active');
+  const out = document.getElementById('statement-body');
+  if (which === 'pl') renderPL(out);
+  else if (which === 'bs') renderBS(out);
+  else renderTA(out);
+}
+
+function renderPL(out) {
+  const accs = getAccounts();
+  const directIncome = accs.filter(a => a.subtype === 'direct_income');
+  const directExpense = accs.filter(a => a.subtype === 'direct_expense');
+  const indirectIncome = accs.filter(a => a.subtype === 'indirect_income');
+  const indirectExpense = accs.filter(a => a.subtype === 'indirect_expense');
+  const sum = list => list.reduce((s, a) => s + accountBalance(a.code), 0);
+  const grossProfit = sum(directIncome) - sum(directExpense);
+  const netProfit = grossProfit + sum(indirectIncome) - sum(indirectExpense);
+
+  out.innerHTML = `<h3>Profit &amp; Loss Statement</h3>
+    <div class="statement-section-title">Direct Income</div>
+    ${directIncome.map(a => `<div class="statement-line"><span>${a.name}</span><span>₹${fmt(accountBalance(a.code))}</span></div>`).join('') || '<p style="color:var(--text-2);font-size:12px">None posted</p>'}
+    <div class="statement-section-title">Direct Expense</div>
+    ${directExpense.map(a => `<div class="statement-line"><span>${a.name}</span><span>₹${fmt(accountBalance(a.code))}</span></div>`).join('') || '<p style="color:var(--text-2);font-size:12px">None posted</p>'}
+    <div class="statement-line statement-total"><span>Gross Profit</span><span style="color:${grossProfit>=0?'var(--green)':'var(--red)'}">₹${fmt(grossProfit)}</span></div>
+    <div class="statement-section-title">Indirect Income</div>
+    ${indirectIncome.map(a => `<div class="statement-line"><span>${a.name}</span><span>₹${fmt(accountBalance(a.code))}</span></div>`).join('') || '<p style="color:var(--text-2);font-size:12px">None posted</p>'}
+    <div class="statement-section-title">Indirect Expense</div>
+    ${indirectExpense.map(a => `<div class="statement-line"><span>${a.name}</span><span>₹${fmt(accountBalance(a.code))}</span></div>`).join('') || '<p style="color:var(--text-2);font-size:12px">None posted</p>'}
+    <div class="statement-line statement-total" style="font-size:16px"><span>Net Profit</span><span style="color:${netProfit>=0?'var(--green)':'var(--red)'}">₹${fmt(netProfit)}</span></div>`;
+}
+
+function renderBS(out) {
+  const accs = getAccounts();
+  const assets = accs.filter(a => a.type === 'asset');
+  const liabilities = accs.filter(a => a.type === 'liability');
+  const equity = accs.filter(a => a.type === 'equity');
+  const totalAssets = assets.reduce((s, a) => s + accountBalance(a.code), 0);
+  const totalLiab = liabilities.reduce((s, a) => s + accountBalance(a.code), 0);
+  // Retained earnings = net profit to date, so the sheet balances without a formal period-close step
+  const retainedEarnings = totalAssets - totalLiab - equity.reduce((s, a) => s + accountBalance(a.code), 0);
+  const totalEquity = equity.reduce((s, a) => s + accountBalance(a.code), 0) + retainedEarnings;
+
+  out.innerHTML = `<h3>Balance Sheet <span style="font-size:11px;color:var(--text-2);font-weight:400">as of ${today()}</span></h3>
+    <div class="statement-section-title">Assets</div>
+    ${assets.map(a => `<div class="statement-line"><span>${a.name}</span><span>₹${fmt(accountBalance(a.code))}</span></div>`).join('')}
+    <div class="statement-line statement-total"><span>Total Assets</span><span>₹${fmt(totalAssets)}</span></div>
+    <div class="statement-section-title">Liabilities</div>
+    ${liabilities.map(a => `<div class="statement-line"><span>${a.name}</span><span>₹${fmt(accountBalance(a.code))}</span></div>`).join('')}
+    <div class="statement-section-title">Equity</div>
+    ${equity.map(a => `<div class="statement-line"><span>${a.name}</span><span>₹${fmt(accountBalance(a.code))}</span></div>`).join('')}
+    <div class="statement-line"><span>Retained Earnings</span><span>₹${fmt(retainedEarnings)}</span></div>
+    <div class="statement-line statement-total"><span>Total Liabilities + Equity</span><span>₹${fmt(totalLiab + totalEquity)}</span></div>
+    <p style="margin-top:10px;font-size:11px;color:${Math.abs(totalAssets-(totalLiab+totalEquity))<1?'var(--green)':'var(--red)'}">
+      ${Math.abs(totalAssets-(totalLiab+totalEquity))<1 ? '✓ Balanced — Assets = Liabilities + Equity' : '⚠ Out of balance — check journal entries'}
+    </p>`;
+}
+
+function renderTA(out) {
+  const purchases = accountBalance('5001');
+  const sales = accountBalance('4002');
+  const closingStock = (FIN.get('inv_skus', []) || []).reduce((s, sku) => s + (sku.current_stock * sku.purchase_rate), 0);
+  const cogs = purchases - closingStock; // opening stock assumed 0 for a fresh ledger
+  const grossProfit = sales - cogs;
+
+  out.innerHTML = `<h3>Trading Account</h3>
+    <div class="statement-line"><span>Opening Stock</span><span>₹0</span></div>
+    <div class="statement-line"><span>Purchases</span><span>₹${fmt(purchases)}</span></div>
+    <div class="statement-line"><span>Closing Stock</span><span>−₹${fmt(closingStock)}</span></div>
+    <div class="statement-line statement-total"><span>Cost of Goods Sold</span><span>₹${fmt(cogs)}</span></div>
+    <div class="statement-line" style="margin-top:10px"><span>Sales</span><span>₹${fmt(sales)}</span></div>
+    <div class="statement-line statement-total" style="font-size:16px"><span>Gross Profit</span><span style="color:${grossProfit>=0?'var(--green)':'var(--red)'}">₹${fmt(grossProfit)}</span></div>
+    <p style="margin-top:10px;font-size:11px;color:var(--text-2)">Stock is drawn live from the Inventory module's SKU list.</p>`;
+}
+
+/* ══════════════════════ CURRENCY CONVERTER ══════════════════════
+   Uses frankfurter.app — free, keyless, ECB reference rates, no
+   signup required. No API key was specified, so I picked the option
+   that needs zero configuration; swap the fetch URL below if you'd
+   rather use a specific paid provider. ══════════════════════ */
+function renderCurrency(body) {
+  body.innerHTML = `<div class="panel" style="max-width:480px">
+    <h3>Currency Converter <span style="font-size:10px;color:var(--text-2);font-weight:400">via frankfurter.app · ECB rates · free, no key</span></h3>
+    <div class="conv-box">
+      <div class="field" style="flex:1"><label>Amount</label><input type="number" id="conv-amount" value="100000"></div>
+      <div class="field"><label>From</label><select id="conv-from"><option>INR</option><option>USD</option><option>EUR</option><option>GBP</option><option>AED</option></select></div>
+      <div class="field"><label>To</label><select id="conv-to"><option selected>USD</option><option>INR</option><option>EUR</option><option>GBP</option><option>AED</option></select></div>
+      <button class="btn btn-primary btn-sm" onclick="convertCurrency()" style="height:38px">Convert</button>
+    </div>
+    <div id="conv-output"></div>
+    <p style="font-size:11px;color:var(--text-2);margin-top:14px">For NRI investors quoting property prices — rates update live from the ECB reference feed (weekdays).</p>
+  </div>`;
+}
+
+async function convertCurrency() {
+  const amount = parseFloat(document.getElementById('conv-amount').value) || 0;
+  const from = document.getElementById('conv-from').value;
+  const to = document.getElementById('conv-to').value;
+  const out = document.getElementById('conv-output');
+  out.innerHTML = `<p style="color:var(--text-2);font-size:13px;margin-top:14px">Converting…</p>`;
+
+  if (from === to) {
+    out.innerHTML = `<div class="conv-result">${amount.toLocaleString()} ${to}</div><div class="conv-rate">Same currency</div>`;
+    return;
+  }
+
+  try {
+    const res = await fetch(`https://api.frankfurter.app/latest?amount=${amount}&from=${from}&to=${to}`);
+    if (!res.ok) throw new Error('Rate service unavailable');
+    const data = await res.json();
+    const converted = data.rates[to];
+    out.innerHTML = `
+      <div class="conv-result">${converted.toLocaleString(undefined,{maximumFractionDigits:2})} ${to}</div>
+      <div class="conv-rate">1 ${from} = ${(converted / amount).toFixed(4)} ${to} · as of ${data.date}</div>`;
+  } catch (e) {
+    out.innerHTML = `<p style="color:var(--red);font-size:12px;margin-top:10px">Couldn't reach the rate service — check your connection and try again.</p>`;
+  }
+}
+
+/* ══════════════════════ MODALS: Journal Entry ══════════════════════ */
+let jeLineCount = 0;
+function addJeLine() {
+  const wrap = document.getElementById('je-lines');
+  const idx = jeLineCount++;
+  const row = document.createElement('div');
+  row.className = 'je-line';
+  row.dataset.idx = idx;
+  row.innerHTML = `
+    <select class="je-account">${getAccounts().map(a => `<option value="${a.code}">${a.code} — ${a.name}</option>`).join('')}</select>
+    <input type="number" class="je-debit" placeholder="Debit" oninput="updateJeTotals()">
+    <input type="number" class="je-credit" placeholder="Credit" oninput="updateJeTotals()">
+    <button type="button" onclick="this.closest('.je-line').remove();updateJeTotals()" style="background:none;border:none;color:var(--red);cursor:pointer">✕</button>`;
+  wrap.appendChild(row);
+}
+function updateJeTotals() {
+  let debit = 0, credit = 0;
+  document.querySelectorAll('.je-line').forEach(row => {
+    debit += parseFloat(row.querySelector('.je-debit').value) || 0;
+    credit += parseFloat(row.querySelector('.je-credit').value) || 0;
+  });
+  document.getElementById('je-total-debit').textContent = fmt(debit);
+  document.getElementById('je-total-credit').textContent = fmt(credit);
+  const ind = document.getElementById('je-balance-indicator');
+  const balanced = Math.round(debit * 100) === Math.round(credit * 100) && debit > 0;
+  ind.textContent = balanced ? '✓ Balanced' : 'Unbalanced';
+  ind.className = balanced ? 'je-balanced' : 'je-unbalanced';
+}
+function saveJournalEntry() {
+  const date = document.getElementById('je-date').value || today();
+  const narration = document.getElementById('je-narration').value.trim();
+  if (!narration) { alert('Enter a narration.'); return; }
+  const lines = [...document.querySelectorAll('.je-line')].map(row => ({
+    account: row.querySelector('.je-account').value,
+    debit: parseFloat(row.querySelector('.je-debit').value) || 0,
+    credit: parseFloat(row.querySelector('.je-credit').value) || 0,
+  })).filter(l => l.debit || l.credit);
+  if (lines.length < 2) { alert('Add at least 2 lines.'); return; }
+  try {
+    postJournalEntry(date, narration, lines);
+    apiPost('/accounting/journal-entries', { entry_date: date, narration, lines }); // best-effort mirror, fire-and-forget
+    closeModal('je');
+    renderStats();
+    showTab('journal', document.querySelector('[data-tab="journal"]'));
+    document.querySelectorAll('.tab-btn').forEach(b=>b.classList.toggle('active', b.dataset.tab==='journal'));
+  } catch (e) { alert(e.message); }
+}
+
+/* ══════════════════════ MODALS: Invoice ══════════════════════ */
+function onInvoiceLeadPicked() {
+  const sel = document.getElementById('inv-lead-id');
+  const opt = sel.options[sel.selectedIndex];
+  document.getElementById('inv-customer').value = opt?.dataset.name || '';
+  document.getElementById('inv-conversion-note').textContent = sel.value && LIVE
+    ? "Will convert this lead to a real Customer record on save (or reuse one if it's already converted)."
+    : sel.value
+      ? 'Picked for reference — connect a live backend (LIVE_FINANCE) to actually convert this lead to a Customer record.'
+      : 'GST auto-calculated: 9% CGST + 9% SGST if Maharashtra, else 18% IGST.';
+}
+
+async function saveInvoice() {
+  const customer = document.getElementById('inv-customer').value.trim();
+  const leadId = document.getElementById('inv-lead-id').value;
+  const amount = parseFloat(document.getElementById('inv-amount').value) || 0;
+  const isMH = document.getElementById('inv-pos').value === 'Maharashtra';
+  if (!customer || !amount) { alert('Enter customer name and amount, or pick a lead above.'); return; }
+
+  const cgst = isMH ? Math.round(amount * 0.09) : 0;
+  const sgst = isMH ? Math.round(amount * 0.09) : 0;
+  const igst = isMH ? 0 : Math.round(amount * 0.18);
+  const tax = cgst + sgst + igst;
+  const total = amount + tax;
+  const dueDate = document.getElementById('inv-due').value;
+
+  // If a lead was picked and we're live, convert it to a real Customer first —
+  // this is what closes the customer_id gap documented in the README: the
+  // form used to only collect a free-text name with nothing to attach it to.
+  let liveCustomerId = null;
+  if (leadId && LIVE) {
+    const converted = await apiPost(`/crm/leads/${leadId}/convert-to-customer`, {});
+    liveCustomerId = converted?.id || null;
+  }
+
+  const invoices = getInvoices();
+  const invoice = { id: Date.now(), invoice_number: genNum('INV', invoices), customer, amount, tax, total, status: 'pending', due: dueDate };
+  invoices.push(invoice);
+  FIN.set('fin_invoices', invoices);
+
+  postJournalEntry(today(), `Tax Invoice ${invoice.invoice_number}`, [
+    { account: '1003', debit: total, credit: 0 },
+    { account: '4001', debit: 0, credit: amount },
+    ...(tax > 0 ? [{ account: '2002', debit: 0, credit: tax }] : []),
+  ]);
+
+  // Best-effort live mirror — now includes a real customer_id whenever a
+  // lead was picked and successfully converted; omitted otherwise (a
+  // demo-only free-text name still has nothing valid to attach to).
+  apiPost('/accounting/invoices', { amount, due_date: dueDate, place_of_supply: document.getElementById('inv-pos').value, ...(liveCustomerId ? { customer_id: liveCustomerId } : {}) });
+
+  closeModal('invoice');
+  renderStats();
+  showTab('invoices', document.querySelector('[data-tab="invoices"]'));
+  document.querySelectorAll('.tab-btn').forEach(b=>b.classList.toggle('active', b.dataset.tab==='invoices'));
+}
+
+/* ══════════════════════ MODALS: Expense ══════════════════════ */
+function saveExpense() {
+  const description = document.getElementById('exp-desc').value.trim();
+  const amount = parseFloat(document.getElementById('exp-amount').value) || 0;
+  const accountCode = document.getElementById('exp-account').value;
+  const method = document.getElementById('exp-method').value;
+  const date = document.getElementById('exp-date').value || today();
+  if (!description || !amount) { alert('Enter description and amount.'); return; }
+
+  const account = getAccounts().find(a => a.code === accountCode);
+  const expenses = getExpenses();
+  expenses.push({ id: Date.now(), description, amount, account_code: accountCode, account_name: account?.name, method, date });
+  FIN.set('fin_expenses', expenses);
+
+  const creditAccount = method === 'cash' ? '1001' : '1002';
+  postJournalEntry(date, `Expense: ${description}`, [
+    { account: accountCode, debit: amount, credit: 0 },
+    { account: creditAccount, debit: 0, credit: amount },
+  ]);
+  // Best-effort live mirror — account_id (not code) is what the API wants;
+  // accountIdForCode only resolves to something real after a successful sync.
+  const liveAccountId = accountIdForCode(accountCode);
+  if (liveAccountId) apiPost('/accounting/expenses', { description, amount, account_id: liveAccountId, payment_method: method, expense_date: date });
+
+  closeModal('expense');
+  renderStats();
+  showTab('invoices', document.querySelector('[data-tab="invoices"]'));
+  document.querySelectorAll('.tab-btn').forEach(b=>b.classList.toggle('active', b.dataset.tab==='invoices'));
+}
+
+/* ══════════════════════ MODAL open/close ══════════════════════ */
+function openModal(which) {
+  document.getElementById(`modal-${which}`).classList.add('open');
+  const t = today();
+  if (which === 'je') {
+    document.getElementById('je-date').value = t;
+    document.getElementById('je-narration').value = '';
+    document.getElementById('je-lines').innerHTML = '';
+    jeLineCount = 0;
+    addJeLine(); addJeLine();
+    updateJeTotals();
+  } else if (which === 'invoice') {
+    document.getElementById('inv-due').value = t;
+    document.getElementById('inv-customer').value = '';
+    document.getElementById('inv-conversion-note').textContent = 'GST auto-calculated: 9% CGST + 9% SGST if Maharashtra, else 18% IGST.';
+    const leads = (() => { try { return JSON.parse(localStorage.getItem('pfre_crm_leads') || '[]'); } catch { return []; } })();
+    const sel = document.getElementById('inv-lead-id');
+    sel.innerHTML = '<option value="">— Or type a name below for a demo-only invoice —</option>'
+      + leads.map(l => `<option value="${l.id}" data-name="${l.name}">${l.name} · ${l.phone}${l.stage === 'closed_won' ? ' ✓ Customer' : ''}</option>`).join('');
+  } else if (which === 'expense') {
+    document.getElementById('exp-date').value = t;
+    document.getElementById('exp-account').innerHTML = getAccounts().filter(a => a.type === 'expense').map(a => `<option value="${a.code}">${a.name}</option>`).join('');
+  }
+}
+function closeModal(which) { document.getElementById(`modal-${which}`).classList.remove('open'); }
+document.addEventListener('keydown', e => { if (e.key === 'Escape') ['je','invoice','expense'].forEach(closeModal); });
+
+document.addEventListener('DOMContentLoaded', async () => {
+  await syncFromLiveApi();
+  renderStats();
+  showTab('overview', document.querySelector('[data-tab="overview"]'));
+});
+</script>
+<script src="js/app-shell.js"></script>
+</body>
+</html>

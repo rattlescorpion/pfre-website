@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' data: https:; connect-src 'self' https:; frame-ancestors 'none'; object-src 'none'">
+<meta http-equiv="X-Content-Type-Options" content="nosniff">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="robots" content="noindex, nofollow">
+<title>Sign In — Property Finder RE</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{--bg:#070C14;--card:#0F1729;--border:#1A2744;--blue:#3B82F6;--text:#E2E8F0;--text-2:#94A3B8;--red:#EF4444;--green:#10B981}
+body{font-family:'Inter',system-ui,sans-serif;background:var(--bg);color:var(--text);min-height:100vh;display:flex;align-items:center;justify-content:center;padding:20px}
+.login-card{background:var(--card);border:1px solid var(--border);border-radius:16px;padding:36px 32px;max-width:380px;width:100%;box-shadow:0 20px 60px rgba(0,0,0,.4)}
+.login-logo{display:flex;align-items:center;gap:10px;margin-bottom:24px}
+.login-logo img{height:38px}
+.login-logo-text{font-size:14px;font-weight:800}
+.login-logo-sub{font-size:10px;color:var(--text-2)}
+h1{font-size:20px;margin-bottom:6px}
+.login-sub{font-size:13px;color:var(--text-2);margin-bottom:24px}
+.field{margin-bottom:16px}
+.field label{display:block;font-size:12px;font-weight:600;color:var(--text-2);margin-bottom:6px}
+.field input{width:100%;padding:11px 14px;background:rgba(255,255,255,.04);border:1.5px solid var(--border);border-radius:9px;color:var(--text);font-size:14px;font-family:inherit}
+.field input:focus{outline:none;border-color:var(--blue)}
+.btn-login{width:100%;padding:12px;background:var(--blue);color:#fff;border:none;border-radius:9px;font-weight:700;font-size:14px;cursor:pointer;margin-top:6px}
+.btn-login:hover{background:#2563eb}
+.btn-login:disabled{opacity:.6;cursor:wait}
+.err-box{background:rgba(239,68,68,.1);border:1px solid rgba(239,68,68,.3);color:#fca5a5;padding:10px 12px;border-radius:8px;font-size:12.5px;margin-bottom:16px;display:none}
+.mode-badge{display:inline-flex;align-items:center;gap:5px;font-size:11px;padding:4px 10px;border-radius:100px;margin-bottom:18px}
+.mode-live{background:rgba(16,185,129,.12);color:var(--green)}
+.mode-demo{background:rgba(245,158,11,.12);color:#F59E0B}
+.demo-creds{margin-top:18px;padding:12px 14px;background:rgba(255,255,255,.03);border:1px dashed var(--border);border-radius:9px;font-size:11.5px;color:var(--text-2)}
+.demo-creds strong{color:var(--text)}
+.demo-fill{color:var(--blue);cursor:pointer;text-decoration:underline;font-size:11px}
+</style>
+</head>
+<body>
+<main class="login-card">
+  <div class="login-logo">
+    <img src="images/logo.png" alt="Property Finder RE" onerror="this.style.display='none'">
+    <div><div class="login-logo-text">Property Finder RE</div><div class="login-logo-sub">Team Sign In</div></div>
+  </div>
+
+  <h1>Welcome back</h1>
+  <p class="login-sub">Sign in to access CRM, HRMS, Finance and more.</p>
+
+  <span class="mode-badge" id="mode-badge">Checking connection…</span>
+
+  <div class="err-box" id="err-box" role="alert"></div>
+
+  <form id="login-form" onsubmit="return false">
+    <div class="field">
+      <label for="email">Email</label>
+      <input type="email" id="email" autocomplete="username" required>
+    </div>
+    <div class="field">
+      <label for="password">Password</label>
+      <input type="password" id="password" autocomplete="current-password" required>
+    </div>
+    <button type="submit" class="btn-login" id="login-btn" onclick="handleLogin()">Sign In</button>
+  </form>
+
+  <div class="demo-creds" id="demo-creds">
+    <strong>Demo mode</strong> — no live backend connected, so this checks against the seeded team
+    directory instead of a real password. Try:<br>
+    <span class="demo-fill" onclick="fillDemo('owner')">Saurav (Owner)</span> ·
+    <span class="demo-fill" onclick="fillDemo('staff')">Abhishek (Staff)</span>
+  </div>
+</main>
+
+<script src="js/config.js"></script>
+<script src="js/api.js"></script>
+<script>
+const LIVE = !!(window.PFRE_CONFIG?.FEATURES?.LIVE_AUTH && window.PFRE_CONFIG?.API_BASE_URL);
+
+/* Demo directory — mirrors the real seeded Laravel users (UserSeeder) for a
+   coherent offline demo. Passwords here are NOT the real backend passwords
+   (those are server-hashed and unknowable client-side) — this only proves
+   the login/session/role-gate UX end-to-end when no live API is connected. */
+const DEMO_USERS = [
+  { email: 'propertyfinderre@gmail.com', password: 'demo123', name: 'Saurav Ganesh Chowdhury', role: 'owner' },
+  { email: 'abhishek.sable@propertyfinderrealestate.com', password: 'demo123', name: 'Abhishek Ganesh Sable', role: 'staff' },
+];
+
+function fillDemo(which) {
+  const u = which === 'owner' ? DEMO_USERS[0] : DEMO_USERS[1];
+  document.getElementById('email').value = u.email;
+  document.getElementById('password').value = u.password;
+}
+
+function showError(msg) {
+  const box = document.getElementById('err-box');
+  box.textContent = msg;
+  box.style.display = 'block';
+}
+
+function createSession(user, token) {
+  const session = {
+    name: user.name, email: user.email, role: user.role,
+    token: token || null, loginAt: Date.now(),
+    expiresAt: Date.now() + 12 * 60 * 60 * 1000, // 12h
+  };
+  localStorage.setItem('pfre_session', JSON.stringify(session));
+  const redirect = new URLSearchParams(location.search).get('redirect');
+  window.location.href = redirect && /^[\w.-]+\.html$/.test(redirect) ? redirect : 'admin.html';
+}
+
+async function handleLogin() {
+  const email = document.getElementById('email').value.trim();
+  const password = document.getElementById('password').value;
+  const btn = document.getElementById('login-btn');
+  document.getElementById('err-box').style.display = 'none';
+
+  if (!email || !password) { showError('Enter both email and password.'); return; }
+
+  btn.disabled = true;
+  btn.textContent = 'Signing in…';
+
+  if (LIVE) {
+    try {
+      const res = await fetch(`${window.PFRE_CONFIG.API_BASE_URL}/auth/login`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json', 'X-PFRE-Key': window.PFRE_CONFIG.API_KEY || '' },
+        body: JSON.stringify({ email, password }),
+      });
+      const data = await res.json();
+      if (res.ok && data.success) {
+        createSession(data.data.user, data.data.token);
+        return;
+      }
+      showError(data.message || 'Invalid email or password.');
+    } catch (e) {
+      showError('Could not reach the server. Check your connection and try again.');
+    }
+  } else {
+    // Demo fallback
+    await new Promise(r => setTimeout(r, 400)); // feels like a real request
+    const match = DEMO_USERS.find(u => u.email.toLowerCase() === email.toLowerCase() && u.password === password);
+    if (match) { createSession(match); return; }
+    showError('No match in the demo directory. Use one of the quick-fill options below, or connect a live backend.');
+  }
+
+  btn.disabled = false;
+  btn.textContent = 'Sign In';
+}
+
+document.getElementById('password').addEventListener('keydown', e => { if (e.key === 'Enter') handleLogin(); });
+
+document.addEventListener('DOMContentLoaded', () => {
+  const badge = document.getElementById('mode-badge');
+  if (LIVE) {
+    badge.textContent = '🟢 Connected to live backend';
+    badge.className = 'mode-badge mode-live';
+    document.getElementById('demo-creds').style.display = 'none';
+  } else {
+    badge.textContent = '🟡 Demo mode — no backend connected';
+    badge.className = 'mode-badge mode-demo';
+  }
+  // Already signed in? skip straight through.
+  try {
+    const s = JSON.parse(localStorage.getItem('pfre_session') || 'null');
+    if (s && s.expiresAt > Date.now()) window.location.href = 'admin.html';
+  } catch (_) {}
+});
+</script>
+</body>
+</html>

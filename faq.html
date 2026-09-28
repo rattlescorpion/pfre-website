@@ -1,0 +1,377 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<link rel="canonical" href="https://www.propertyfinderrealestate.com/faq.html">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' https://cdnjs.cloudflare.com https://challenges.cloudflare.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' data: https:; connect-src 'self' https://api.propertyfinderrealestate.com http://localhost:8000 https://formspree.io; frame-src https://www.google.com https://challenges.cloudflare.com; form-action 'self' https://formspree.io; object-src 'none'; base-uri 'self'; frame-ancestors 'none'">
+<meta http-equiv="X-Content-Type-Options" content="nosniff">
+<meta http-equiv="X-Frame-Options" content="SAMEORIGIN">
+<meta http-equiv="Referrer-Policy" content="strict-origin-when-cross-origin"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <!-- Open Graph -->
+  <meta property="og:type"        content="website">
+  <meta property="og:title"       content="Real Estate FAQ Mumbai | Property Finder Real Estate">
+  <meta property="og:description" content="32 frequently asked questions about buying, selling, renting and investing in Mumbai real estate.">
+  <meta property="og:url"         content="https://www.propertyfinderrealestate.com/faq.html">
+  <meta property="og:image"       content="https://www.propertyfinderrealestate.com/images/og-banner.jpg">
+  <meta property="og:image:width"  content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:image:type"   content="image/jpeg">
+  <meta property="og:site_name"   content="Property Finder Real Estate">
+  <meta property="og:locale"      content="en_IN">
+  <!-- Twitter Card -->
+  <meta name="twitter:card"        content="summary">
+  <meta name="twitter:title"       content="Real Estate FAQ Mumbai | Property Finder Real Estate">
+  <meta name="twitter:description" content="32 frequently asked questions about buying, selling, renting and investing in Mumbai real estate.">
+  <meta name="twitter:image"       content="https://www.propertyfinderrealestate.com/icons/icon.svg">
+  <meta name="twitter:site"        content="@PropertyFinderA">
+  <!-- Additional SEO -->
+  <meta name="robots"  content="index, follow, max-snippet:-1, max-image-preview:large">
+  <meta name="author"  content="Property Finder Real Estate">
+  <meta name="geo.region"       content="IN-MH">
+  <meta name="geo.placename"    content="Mumbai">
+  <meta name="geo.position"     content="19.1886;72.8485">
+  <meta name="ICBM"             content="19.1886, 72.8485">
+  <title>FAQ — Mumbai Real Estate Questions | PFRE</title>
+<meta name="description" content="Answers to frequently asked questions about buying, selling, renting properties in Mumbai. RERA, home loans, stamp duty, property types and more.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;0,900;1,700&family=DM+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/styles.css">
+<link rel="stylesheet" href="css/widgets.css">
+<link rel="stylesheet" href="css/mobile.css">
+<script>!function(){var t=localStorage.getItem("pfre_theme")||(window.matchMedia("(prefers-color-scheme:dark)").matches?"dark":"light");document.documentElement.setAttribute("data-theme",t);document.documentElement.classList.add("theme-"+t)}();</script>
+<!-- FAQ Schema Markup -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {"@type":"Question","name":"What is stamp duty in Mumbai?","acceptedAnswer":{"@type":"Answer","text":"Stamp duty in Maharashtra is 5% for male buyers, 4% for female buyers, and 4.5% for joint ownership. Registration charges are 1% of property value."}},
+    {"@type":"Question","name":"What is RERA and why is it important?","acceptedAnswer":{"@type":"Answer","text":"RERA (Real Estate Regulatory Authority) is a government body that regulates real estate projects. In Maharashtra it is called MahaRERA. Buyers should always verify RERA registration of any under-construction project before booking."}},
+    {"@type":"Question","name":"How much home loan can I get?","acceptedAnswer":{"@type":"Answer","text":"Banks typically offer home loans up to 80% of the property value (Loan-to-Value ratio). Your eligibility depends on income, existing EMIs, credit score, and employer profile. Most banks allow total EMIs up to 40-50% of net monthly income."}}
+  ]
+}
+</script>
+<style>
+.faq-layout { display: grid; grid-template-columns: 280px 1fr; gap: 48px; padding: 64px 5%; }
+.faq-sidebar { position: sticky; top: 100px; align-self: start; }
+.faq-cat-list { display: flex; flex-direction: column; gap: 6px; }
+.faq-cat-btn { padding: 11px 16px; border-radius: 10px; font-size: 14px; font-weight: 600; text-align: left; border: 1.5px solid var(--border); background: white; color: var(--text-muted); cursor: pointer; transition: all .2s; display: flex; align-items: center; gap: 10px; }
+.faq-cat-btn:hover { border-color: var(--blue); color: var(--blue); background: var(--blue-light); }
+.faq-cat-btn.active { background: var(--blue); color: white; border-color: var(--blue); }
+.faq-cat-count { margin-left: auto; background: rgba(255,255,255,0.25); padding: 1px 8px; border-radius: 100px; font-size: 11px; }
+.faq-cat-btn:not(.active) .faq-cat-count { background: var(--off-white); color: var(--text-muted); }
+[data-theme="dark"] .faq-cat-btn { background: #1E293B; border-color: #334155; }
+[data-theme="dark"] .faq-cat-btn:hover { background: rgba(37,99,235,0.15); }
+[data-theme="dark"] .faq-cat-btn:not(.active) .faq-cat-count { background: #0F172A; }
+.faq-search-wrap { margin-bottom: 24px; position: relative; }
+.faq-search { width: 100%; padding: 11px 14px 11px 40px; border: 1.5px solid var(--border); border-radius: 10px; font-size: 14px; outline: none; transition: border-color .2s; background: white; color: var(--text); font-family: 'DM Sans',sans-serif; }
+.faq-search:focus { border-color: var(--blue); }
+.faq-search-icon { position: absolute; left: 13px; top: 50%; transform: translateY(-50%); font-size: 16px; pointer-events: none; }
+[data-theme="dark"] .faq-search { background: #1E293B; border-color: #334155; color: #E2E8F0; }
+.faq-main {}
+.faq-section { margin-bottom: 48px; }
+.faq-section-title { font-family: 'Playfair Display',serif; font-size: 22px; font-weight: 700; margin-bottom: 20px; display: flex; align-items: center; gap: 10px; padding-bottom: 14px; border-bottom: 2px solid var(--blue-light); }
+.faq-item { border: 1.5px solid var(--border); border-radius: 14px; margin-bottom: 12px; overflow: hidden; transition: border-color .2s, box-shadow .2s; background: white; }
+[data-theme="dark"] .faq-item { background: #1E293B; border-color: #334155; }
+.faq-item:hover { border-color: var(--blue-light); box-shadow: var(--shadow-sm); }
+.faq-item.open { border-color: var(--blue); box-shadow: 0 4px 20px rgba(37,99,235,0.1); }
+.faq-q { padding: 18px 20px; display: flex; align-items: center; gap: 14px; cursor: pointer; user-select: none; }
+.faq-q-icon { width: 32px; height: 32px; background: var(--blue-light); border-radius: 8px; display: flex; align-items: center; justify-content: center; font-size: 16px; flex-shrink: 0; }
+.faq-q-text { flex: 1; font-size: 15px; font-weight: 600; color: var(--text); line-height: 1.4; }
+.faq-chevron { font-size: 18px; color: var(--text-muted); transition: transform .3s; flex-shrink: 0; }
+.faq-item.open .faq-chevron { transform: rotate(180deg); color: var(--blue); }
+.faq-item.open .faq-q-icon { background: var(--blue); }
+.faq-a { max-height: 0; overflow: hidden; transition: max-height .35s ease, padding .3s ease; padding: 0 20px; }
+.faq-item.open .faq-a { max-height: 600px; padding: 0 20px 18px; }
+.faq-a-inner { font-size: 14px; color: var(--text-muted); line-height: 1.8; padding-top: 8px; border-top: 1px solid var(--border); }
+.faq-a-inner strong { color: var(--text); }
+.faq-a-inner ul { margin: 10px 0 10px 16px; }
+.faq-a-inner li { margin-bottom: 5px; }
+.faq-a-inner a { color: var(--blue); font-weight: 600; }
+.no-results { text-align: center; padding: 48px 24px; color: var(--text-muted); }
+.no-results .nr-icon { font-size: 48px; margin-bottom: 12px; }
+@media(max-width:900px){ .faq-layout{grid-template-columns:1fr;} .faq-sidebar{position:static;} .faq-cat-list{flex-direction:row;flex-wrap:wrap;} .faq-cat-btn{flex:none;} }
+</style>
+<link rel="manifest" href="manifest.json">
+  <link rel="icon" type="image/png" sizes="192x192" href="icons/icon-192.png">
+<meta name="theme-color" content="#2563EB">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="default">
+  <meta name="apple-mobile-web-app-title" content="Property Finder RE">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="Property Finder Real Estate">
+  <meta property="og:locale" content="en_IN">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:site" content="@PropertyFinderA">
+<link rel="stylesheet" href="css/theme.css">
+<link rel="stylesheet" href="css/overrides.css">
+<link rel="stylesheet" href="css/utils.css">
+</head>
+<body>
+<a href="#main-content" class="skip-link">Skip to main content</a>
+<nav class="navbar" role="navigation" aria-label="Main navigation">
+  <a href="index.html" class="nav-logo" style="display:flex;align-items:center">
+    <img src="images/logo.png" alt="Property Finder Real Estate" class="nav-logo-img" style="height:48px;width:auto;object-fit:contain" loading="eager">
+  </a>
+  <ul class="nav-menu" role="list">
+    <li class="nav-item"><a href="index.html" class="nav-link" data-i18n="nav.home">Home</a></li>
+    <li class="nav-item"><a href="properties.html" class="nav-link">Properties <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M6 9l6 6 6-6"/></svg></a><div class="dropdown"><a href="properties.html"><span class="dd-icon">🏠</span> All Properties</a><a href="projects.html"><span class="dd-icon">🏗️</span> Projects</a><a href="neighbourhoods.html"><span class="dd-icon">📍</span> Neighbourhoods</a></div></li>
+    <li class="nav-item"><a href="services.html" class="nav-link" data-i18n="nav.services">Services</a></li>
+    <li class="nav-item"><a href="about.html" class="nav-link active">About <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M6 9l6 6 6-6"/></svg></a><div class="dropdown"><a href="about.html"><span class="dd-icon">🏢</span> About Us</a><a href="team.html"><span class="dd-icon">👥</span> Our Team</a><a href="testimonials.html"><span class="dd-icon">⭐</span> Testimonials</a><a href="faq.html"><span class="dd-icon">❓</span> FAQ</a><a href="careers.html"><span class="dd-icon">💼</span> Careers</a><a href="nri.html"><span class="dd-icon">🌍</span> NRI Corner</a></div></li>
+    <li class="nav-item"><a href="calculators.html" class="nav-link">Tools <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M6 9l6 6 6-6"/></svg></a><div class="dropdown"><a href="calculators.html"><span class="dd-icon">🧮</span> EMI Calculator</a><a href="tds-calculators.html"><span class="dd-icon">📋</span> TDS Calculators</a><a href="converter.html"><span class="dd-icon">📐</span> Measurement Converter</a><a href="insurance.html"><span class="dd-icon">🛡️</span> Property Insurance</a><a href="price-trends.html"><span class="dd-icon">📈</span> Price Trends</a><a href="email-templates.html">Email Templates</a>
+<a href="agreement-registration.html">Registration Tracker</a>
+<a href="reminders.html"><span class="dd-icon">🔔</span> Reminders</a></div></li>
+    <li class="nav-item"><a href="blog.html" class="nav-link" data-i18n="nav.blog">Blog</a></li>
+    <li class="nav-item"><a href="contact.html" class="nav-link" data-i18n="nav.contact">Contact</a></li>
+  </ul>
+  <div class="nav-actions">
+    <a href="tel:+919326990050" class="nav-phone">📞 +91 93269 90050</a>
+    <a href="post-property.html" class="btn btn-primary btn-sm" class="btn-green-inline">+ Post Property</a>
+    <a href="contact.html" class="btn btn-outline btn-sm">Get In Touch</a>
+    <button class="theme-toggle" id="themeToggle" title="Toggle Light/Dark Mode"><span class="icon-light">☀️</span><span class="icon-dark">🌙</span></button>
+    <button class="hamburger" id="hamburger" aria-label="Toggle navigation" aria-expanded="false" role="button"><span></span><span></span><span></span></button>
+  </div>
+</nav>
+<div class="mobile-menu" id="mobileMenu">
+  <div class="mob-section">Navigation</div>
+  <a href="index.html">🏠 Home</a><a href="properties.html">🏘️ Properties</a><a href="projects.html">🏗️ Projects</a><a href="neighbourhoods.html">📍 Neighbourhoods</a><a href="services.html">⚙️ Services</a><a href="about.html">🏢 About Us</a><a href="calculators.html">🧮 Calculators</a><a href="faq.html">❓ FAQ</a><a href="nri.html">🌍 NRI Corner</a><a href="home-loan.html">🏦 Home Loan</a><a href="blog.html">📝 Blog</a><a href="contact.html">📞 Contact</a>
+  <a href="tel:+919326990050" class="btn btn-primary mob-cta">📞 Call +91 93269 90050</a>
+</div>
+
+<section id="main-content" class="page-hero">
+  <span class="section-label">Got Questions?</span>
+  <h1>Frequently Asked <em>Questions</em></h1>
+  <p>Everything you need to know about buying, selling, renting, and investing in Mumbai real estate — answered by our experts.</p>
+  <nav aria-label="Breadcrumb"><div class="breadcrumb"><a href="index.html">Home</a><span class="breadcrumb-sep" aria-hidden="true">›</span><span>FAQ</span></div></nav><!-- /breadcrumb -->
+</section>
+
+<div class="faq-layout">
+  <!-- SIDEBAR -->
+  <aside class="faq-sidebar">
+    <div class="faq-search-wrap">
+      <span class="faq-search-icon">🔍</span>
+      <input class="faq-search" type="text" placeholder="Search FAQs…" id="faqSearch" oninput="filterFAQs(this.value)">
+    </div>
+    <div class="faq-cat-list">
+      <button class="faq-cat-btn active" onclick="filterCat('all',this)">🏠 All Questions <span class="faq-cat-count">32</span></button>
+      <button class="faq-cat-btn" onclick="filterCat('buying',this)">💰 Buying <span class="faq-cat-count">8</span></button>
+      <button class="faq-cat-btn" onclick="filterCat('renting',this)">🔑 Renting <span class="faq-cat-count">5</span></button>
+      <button class="faq-cat-btn" onclick="filterCat('selling',this)">📈 Selling <span class="faq-cat-count">5</span></button>
+      <button class="faq-cat-btn" onclick="filterCat('legal',this)">⚖️ Legal & RERA <span class="faq-cat-count">6</span></button>
+      <button class="faq-cat-btn" onclick="filterCat('finance',this)">🏦 Finance & Loans <span class="faq-cat-count">5</span></button>
+      <button class="faq-cat-btn" onclick="filterCat('nri',this)">🌍 NRI Buyers <span class="faq-cat-count">3</span></button>
+    </div>
+  </aside>
+
+  <!-- MAIN FAQs -->
+  <main class="faq-main" id="faqMain">
+
+    <div class="faq-section" data-cat="buying">
+      <div class="faq-section-title">💰 Buying a Property</div>
+
+      <div class="faq-item" onclick="toggleFAQ(this)" role="button" tabindex="0" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();toggleFAQ(this)}">
+        <div class="faq-q"><div class="faq-q-icon">💰</div><div class="faq-q-text">What is the process to buy a property in Mumbai?</div><span class="faq-chevron">⌄</span></div>
+        <div class="faq-a"><div class="faq-a-inner">The typical property buying process in Mumbai involves:<ul><li><strong>Step 1:</strong> Property shortlisting and site visits with our agent</li><li><strong>Step 2:</strong> Price negotiation and verbal agreement</li><li><strong>Step 3:</strong> Payment of token amount (1–2% of value) and Letter of Intent</li><li><strong>Step 4:</strong> Legal due diligence — title search, RERA check, encumbrance certificate</li><li><strong>Step 5:</strong> Sale Agreement execution and 10% payment</li><li><strong>Step 6:</strong> Home loan processing (if applicable)</li><li><strong>Step 7:</strong> Stamp duty payment and property registration at Sub-Registrar office</li><li><strong>Step 8:</strong> Possession and mutation of property</li></ul>We handle the entire process end-to-end for our clients.</div></div>
+      </div>
+
+      <div class="faq-item" onclick="toggleFAQ(this)" role="button" tabindex="0" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();toggleFAQ(this)}">
+        <div class="faq-q"><div class="faq-q-icon">📋</div><div class="faq-q-text">What documents do I need to buy a property?</div><span class="faq-chevron">⌄</span></div>
+        <div class="faq-a"><div class="faq-a-inner">As a buyer, you typically need:<ul><li>PAN Card and Aadhaar Card (mandatory)</li><li>Bank statements (last 6 months)</li><li>Income Tax Returns (last 2 years)</li><li>Salary slips / Income proof (last 3 months)</li><li>Passport-size photographs</li><li>Address proof (utility bill, Aadhaar)</li></ul>For the property itself, we verify: Title deed, Encumbrance certificate, Approved building plan, Occupancy Certificate (OC), Completion Certificate (CC), RERA registration, and Society NOC.</div></div>
+      </div>
+
+      <div class="faq-item" onclick="toggleFAQ(this)" role="button" tabindex="0" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();toggleFAQ(this)}">
+        <div class="faq-q"><div class="faq-q-icon">🏗️</div><div class="faq-q-text">What is the difference between Carpet Area, Built-up Area, and Super Built-up Area?</div><span class="faq-chevron">⌄</span></div>
+        <div class="faq-a"><div class="faq-a-inner"><strong>Carpet Area:</strong> The actual usable floor area inside the walls of your flat — where you can literally lay a carpet. This is what RERA mandates builders to quote.<br><br><strong>Built-up Area:</strong> Carpet area + the thickness of walls, balconies, and flower beds. Typically 10–15% more than carpet area.<br><br><strong>Super Built-up Area (SBA):</strong> Built-up area + your proportionate share of common areas (lobby, staircase, lift, amenities). Can be 25–40% more than carpet area.<br><br><strong>Important:</strong> Always compare properties on carpet area basis for an apples-to-apples comparison.</div></div>
+      </div>
+
+      <div class="faq-item" onclick="toggleFAQ(this)" role="button" tabindex="0" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();toggleFAQ(this)}">
+        <div class="faq-q"><div class="faq-q-icon">🏢</div><div class="faq-q-text">What is the difference between MHADA, SRA, Collector, and Private builder properties?</div><span class="faq-chevron">⌄</span></div>
+        <div class="faq-a"><div class="faq-a-inner"><strong>Private Builder:</strong> Built by private developers. Free-sale properties with no resale restrictions. Typically higher cost but better amenities.<br><br><strong>MHADA:</strong> Maharashtra Housing and Area Development Authority. Government-built affordable housing. Available through lottery system. Resale allowed after 5 years.<br><br><strong>SRA (Slum Rehabilitation Authority):</strong> Built for slum dwellers under redevelopment schemes. Free sale component available. Must verify transfer permissions before buying.<br><br><strong>Collector Land:</strong> Built on land leased from the government Collector. Requires NOC from Collector for resale. Cheaper but more paperwork.<br><br>We advise all buyers on the implications of each type before purchase.</div></div>
+      </div>
+
+      <div class="faq-item" onclick="toggleFAQ(this)" role="button" tabindex="0" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();toggleFAQ(this)}">
+        <div class="faq-q"><div class="faq-q-icon">🔑</div><div class="faq-q-text">What is an Occupancy Certificate (OC) and why is it important?</div><span class="faq-chevron">⌄</span></div>
+        <div class="faq-a"><div class="faq-a-inner">An <strong>Occupancy Certificate (OC)</strong> is issued by the local authority (BMC in Mumbai) certifying that a building has been constructed as per approved plans and is safe for occupation.<br><br><strong>Why it matters:</strong><ul><li>Banks refuse home loans for properties without OC</li><li>Without OC, it may be considered an illegal structure</li><li>Selling or renting a flat without OC is legally risky</li><li>BMC can order demolition of buildings without OC</li></ul><strong>Always insist on OC</strong> before finalising any property purchase — we verify this for every deal we handle.</div></div>
+      </div>
+
+      <div class="faq-item" onclick="toggleFAQ(this)" role="button" tabindex="0" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();toggleFAQ(this)}">
+        <div class="faq-q"><div class="faq-q-icon">💎</div><div class="faq-q-text">Is it better to buy a ready-to-move-in property or an under-construction one?</div><span class="faq-chevron">⌄</span></div>
+        <div class="faq-a"><div class="faq-a-inner"><strong>Ready-to-Move (RTMI):</strong><ul><li>✅ No GST (vs 5% GST on under-construction)</li><li>✅ What you see is what you get</li><li>✅ Can move in immediately or rent out</li><li>❌ Higher upfront price</li></ul><strong>Under-Construction:</strong><ul><li>✅ Lower entry price — appreciation potential</li><li>✅ Flexible payment through construction-linked plans</li><li>✅ Brand new with modern amenities</li><li>❌ 5% GST applicable</li><li>❌ Risk of delays — always verify RERA</li><li>❌ You pay EMI + rent during construction</li></ul></div></div>
+      </div>
+    </div>
+
+    <div class="faq-section" data-cat="renting">
+      <div class="faq-section-title">🔑 Renting a Property</div>
+
+      <div class="faq-item" onclick="toggleFAQ(this)" role="button" tabindex="0" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();toggleFAQ(this)}">
+        <div class="faq-q"><div class="faq-q-icon">📄</div><div class="faq-q-text">What is the difference between an 11-month rent agreement and a long-term lease?</div><span class="faq-chevron">⌄</span></div>
+        <div class="faq-a"><div class="faq-a-inner"><strong>11-Month Rent Agreement:</strong> The most common type in Mumbai. Registered as a Leave & Licence agreement. Renewable every 11 months. No stamp duty implications under Maharashtra Rent Control Act. Provides clear exit terms for both parties.<br><br><strong>Long-Term Lease:</strong> Typically 1–5 years. Requires stamp duty payment based on tenure. Offers more stability but less flexibility. Often used for commercial properties.<br><br>We recommend 11-month registered agreements for all residential rentals — they protect both landlord and tenant equally.</div></div>
+      </div>
+
+      <div class="faq-item" onclick="toggleFAQ(this)" role="button" tabindex="0" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();toggleFAQ(this)}">
+        <div class="faq-q"><div class="faq-q-icon">💰</div><div class="faq-q-text">What is the typical security deposit for Mumbai rentals?</div><span class="faq-chevron">⌄</span></div>
+        <div class="faq-a"><div class="faq-a-inner">Security deposits in Mumbai typically range from <strong>2 to 6 months' rent</strong>.<ul><li>Malad/Kandivali/Borivali: 2–3 months</li><li>Andheri/Goregaon: 3–4 months</li><li>Bandra/South Mumbai: 4–6 months</li></ul>The deposit is fully refundable at the end of tenancy (minus any legitimate deductions for damages). We always ensure the deposit terms are clearly documented in the agreement.</div></div>
+      </div>
+
+      <div class="faq-item" onclick="toggleFAQ(this)" role="button" tabindex="0" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();toggleFAQ(this)}">
+        <div class="faq-q"><div class="faq-q-icon">🔧</div><div class="faq-q-text">Who is responsible for maintenance — landlord or tenant?</div><span class="faq-chevron">⌄</span></div>
+        <div class="faq-a"><div class="faq-a-inner">In Mumbai, maintenance responsibilities are typically split:<br><br><strong>Landlord's Responsibility:</strong> Major repairs (plumbing, electrical wiring, structural issues), society maintenance charges, property taxes, painting at the start of tenancy.<br><br><strong>Tenant's Responsibility:</strong> Minor repairs (fan, tap, light fittings), keeping the property clean, paying monthly society maintenance bills, not causing damage to fixtures.<br><br>All responsibilities should be clearly defined in the Leave & Licence agreement to avoid disputes.</div></div>
+      </div>
+    </div>
+
+    <div class="faq-section" data-cat="legal">
+      <div class="faq-section-title">⚖️ Legal & RERA</div>
+
+      <div class="faq-item" onclick="toggleFAQ(this)" role="button" tabindex="0" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();toggleFAQ(this)}">
+        <div class="faq-q"><div class="faq-q-icon">🏛️</div><div class="faq-q-text">What is RERA and why should I check it before buying?</div><span class="faq-chevron">⌄</span></div>
+        <div class="faq-a"><div class="faq-a-inner">RERA (Real Estate Regulatory Authority) was established under the Real Estate (Regulation and Development) Act, 2016. In Maharashtra, it's called <strong>MahaRERA</strong>.<br><br><strong>Why check RERA:</strong><ul><li>Ensures the project is legally approved and registered</li><li>Builder must disclose all project details — layout, timeline, costs</li><li>Your advance payment is protected in an escrow account</li><li>Delays beyond promised date attract compensation</li><li>Disputes can be resolved through RERA tribunal</li></ul>Verify any project at <a href="https://maharera.mahaonline.gov.in" target="_blank" rel="noopener noreferrer">maharera.mahaonline.gov.in</a>. We do this verification for all projects we recommend.</div></div>
+      </div>
+
+      <div class="faq-item" onclick="toggleFAQ(this)" role="button" tabindex="0" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();toggleFAQ(this)}">
+        <div class="faq-q"><div class="faq-q-icon">📋</div><div class="faq-q-text">What is stamp duty in Mumbai and how is it calculated?</div><span class="faq-chevron">⌄</span></div>
+        <div class="faq-a"><div class="faq-a-inner">Stamp duty is a state government tax on property transactions in Maharashtra (2025 rates):<ul><li><strong>Male buyer:</strong> 5% of property value</li><li><strong>Female buyer:</strong> 4% of property value (1% concession)</li><li><strong>Joint (Male + Female):</strong> 4.5%</li><li><strong>Registration charges:</strong> 1% (max ₹30,000 for residential)</li></ul><strong>Example:</strong> ₹1 Crore flat → Male buyer pays ₹5L (stamp duty) + ₹1L (registration) = ₹6L total.<br><br>Use our <a href="calculators.html">Stamp Duty Calculator</a> for quick calculations. Stamp duty is paid online via the <a href="https://gras.mahakosh.gov.in" target="_blank" rel="noopener noreferrer">GRAS portal</a>.</div></div>
+      </div>
+
+      <div class="faq-item" onclick="toggleFAQ(this)" role="button" tabindex="0" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();toggleFAQ(this)}">
+        <div class="faq-q"><div class="faq-q-icon">⚖️</div><div class="faq-q-text">What is a Title Search and why is it important?</div><span class="faq-chevron">⌄</span></div>
+        <div class="faq-a"><div class="faq-a-inner">A <strong>Title Search</strong> (also called Title Verification) is a legal process to verify that the seller has a clear, undisputed legal right to sell the property.<br><br>It involves checking:<ul><li>Chain of ownership documents going back 30+ years</li><li>Encumbrance certificate (no outstanding loans or charges)</li><li>Power of Attorney authenticity (if applicable)</li><li>Court cases or attachments against the property</li><li>Development Agreement and builder's rights</li><li>Society NOC and property tax records</li></ul>We recommend engaging a qualified property lawyer for title search. We facilitate this for all our buyers through our trusted legal network.</div></div>
+      </div>
+    </div>
+
+    <div class="faq-section" data-cat="finance">
+      <div class="faq-section-title">🏦 Finance & Home Loans</div>
+
+      <div class="faq-item" onclick="toggleFAQ(this)" role="button" tabindex="0" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();toggleFAQ(this)}">
+        <div class="faq-q"><div class="faq-q-icon">💳</div><div class="faq-q-text">How much home loan can I get? What is the maximum LTV ratio?</div><span class="faq-chevron">⌄</span></div>
+        <div class="faq-a"><div class="faq-a-inner">Banks in India follow RBI's Loan-to-Value (LTV) guidelines:<ul><li>Property value up to ₹30 Lakhs → LTV up to <strong>90%</strong></li><li>₹30L to ₹75L → LTV up to <strong>80%</strong></li><li>Above ₹75L → LTV up to <strong>75%</strong></li></ul>So for a ₹1 Crore property, the maximum loan is ₹75 Lakhs, and you need at least ₹25 Lakhs as down payment.<br><br><strong>Eligibility:</strong> Banks allow total EMIs (existing + new) of 40–50% of your net monthly income. Use our <a href="calculators.html">Affordability Calculator</a> for a quick estimate.</div></div>
+      </div>
+
+      <div class="faq-item" onclick="toggleFAQ(this)" role="button" tabindex="0" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();toggleFAQ(this)}">
+        <div class="faq-q"><div class="faq-q-icon">📊</div><div class="faq-q-text">What is GST on property purchase in Mumbai?</div><span class="faq-chevron">⌄</span></div>
+        <div class="faq-a"><div class="faq-a-inner"><strong>GST is applicable on under-construction properties only.</strong><ul><li>Affordable housing (value ≤ ₹45L, carpet ≤ 60 sqm): <strong>1% GST</strong></li><li>Other under-construction residential properties: <strong>5% GST</strong></li><li>Commercial properties: <strong>12% GST</strong></li><li>Ready-to-move-in properties (with OC): <strong>No GST</strong></li></ul>GST is calculated on the base sale price (excluding stamp duty and registration). Input Tax Credit (ITC) is not available to homebuyers under the current scheme.</div></div>
+      </div>
+
+      <div class="faq-item" onclick="toggleFAQ(this)" role="button" tabindex="0" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();toggleFAQ(this)}">
+        <div class="faq-q"><div class="faq-q-icon">🏦</div><div class="faq-q-text">What is a Pre-EMI and Full EMI? Which one should I choose?</div><span class="faq-chevron">⌄</span></div>
+        <div class="faq-a"><div class="faq-a-inner"><strong>Pre-EMI:</strong> During construction, you pay only the interest on the disbursed amount. Principal repayment starts after possession. Lower monthly outgo during construction.<br><br><strong>Full EMI:</strong> You start paying complete EMI (principal + interest) from the first disbursement. The loan gets repaid faster and total interest paid is lower.<br><br><strong>Which to choose:</strong> If you're paying rent and EMI together, Pre-EMI eases cash flow. If you can manage both, Full EMI saves significant interest over the loan tenure. We help our clients decide based on their specific financial situation.</div></div>
+      </div>
+    </div>
+
+    <div class="faq-section" data-cat="selling">
+      <div class="faq-section-title">📈 Selling a Property</div>
+
+      <div class="faq-item" onclick="toggleFAQ(this)" role="button" tabindex="0" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();toggleFAQ(this)}">
+        <div class="faq-q"><div class="faq-q-icon">📈</div><div class="faq-q-text">How do I get the best price for my property in Mumbai?</div><span class="faq-chevron">⌄</span></div>
+        <div class="faq-a"><div class="faq-a-inner">To maximise your property sale price:<ul><li><strong>Price Right:</strong> Get a market valuation — overpricing leads to no enquiries, underpricing leaves money on the table. We provide free valuations.</li><li><strong>Presentation:</strong> Clean, well-lit property photos dramatically increase enquiry rates. Consider minor repairs and repainting.</li><li><strong>RERA & Legal Readiness:</strong> Have all documents ready — sale deed, OC, NOC from society, encumbrance certificate. Buyers with financing need these quickly.</li><li><strong>Right Timing:</strong> Oct–March is peak buying season in Mumbai. Festive season (Oct–Nov) sees the most activity.</li><li><strong>Right Channel:</strong> List with us for access to 10+ portals, our verified buyer database, and social media marketing.</li></ul></div></div>
+      </div>
+
+      <div class="faq-item" onclick="toggleFAQ(this)" role="button" tabindex="0" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();toggleFAQ(this)}">
+        <div class="faq-q"><div class="faq-q-icon">💸</div><div class="faq-q-text">What is Capital Gains Tax on selling property?</div><span class="faq-chevron">⌄</span></div>
+        <div class="faq-a"><div class="faq-a-inner"><strong>Short-Term Capital Gains (STCG):</strong> If sold within 24 months of purchase. Taxed at your income tax slab rate.<br><br><strong>Long-Term Capital Gains (LTCG):</strong> If sold after 24 months. Taxed at <strong>12.5% without indexation</strong> (as per Budget 2024 update).<br><br><strong>Tax Exemptions:</strong><ul><li>Section 54: Invest LTCG in another residential property within 2 years (or construct within 3 years)</li><li>Section 54EC: Invest in specified bonds (NHAI, REC) within 6 months — max ₹50L exemption</li></ul>We recommend consulting a Chartered Accountant for tax planning before and after property sale.</div></div>
+      </div>
+    </div>
+
+    <div class="faq-section" data-cat="nri">
+      <div class="faq-section-title">🌍 NRI Property Buyers</div>
+
+      <div class="faq-item" onclick="toggleFAQ(this)" role="button" tabindex="0" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();toggleFAQ(this)}">
+        <div class="faq-q"><div class="faq-q-icon">🌍</div><div class="faq-q-text">Can NRIs buy property in India? What are the restrictions?</div><span class="faq-chevron">⌄</span></div>
+        <div class="faq-a"><div class="faq-a-inner"><strong>Yes, NRIs and PIOs can buy property in India</strong> under FEMA guidelines with some restrictions:<br><br><strong>Allowed:</strong><ul><li>Residential properties (any number)</li><li>Commercial properties (any number)</li></ul><strong>Not Allowed (without RBI approval):</strong><ul><li>Agricultural land</li><li>Plantation property</li><li>Farmhouses</li></ul><strong>Payment:</strong> Must be through banking channels (NRE/NRO/FCNR account). Cash payments are strictly prohibited.<br><br>We have a dedicated NRI desk to guide you through the entire process. Visit our <a href="nri.html">NRI Corner</a> for more details.</div></div>
+      </div>
+
+      <div class="faq-item" onclick="toggleFAQ(this)" role="button" tabindex="0" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();toggleFAQ(this)}">
+        <div class="faq-q"><div class="faq-q-icon">📱</div><div class="faq-q-text">Can I buy Mumbai property without visiting India?</div><span class="faq-chevron">⌄</span></div>
+        <div class="faq-a"><div class="faq-a-inner"><strong>Yes, absolutely!</strong> We facilitate complete remote property purchases for NRI clients:<ul><li><strong>Virtual Tours:</strong> Live video walkthroughs of shortlisted properties on WhatsApp/Zoom</li><li><strong>Power of Attorney:</strong> Grant POA to a trusted relative or our authorised representative in India</li><li><strong>Digital Documentation:</strong> All documents shared securely via WhatsApp/email</li><li><strong>Digital Payment:</strong> Payment via NRE/NRO bank transfer or wire transfer</li><li><strong>E-Registration:</strong> Available in Maharashtra for select transactions</li></ul>We have successfully closed 50+ NRI deals remotely. Contact us for a dedicated NRI consultation.</div></div>
+      </div>
+    </div>
+
+    <div class="no-results" id="noResults" style="display:none">
+      <div class="nr-icon">🔍</div>
+      <h3>No results found</h3>
+      <p>Try different keywords or <a href="contact.html" style="color:var(--blue)">contact our team</a> for a personalised answer.</p>
+    </div>
+  </main>
+</div>
+
+<section class="cta-section">
+  <h2 class="section-title reveal">Still Have <em>Questions?</em></h2>
+  <p class="reveal">Our team of Mumbai real estate experts is available 7 days a week. Get personalised answers to your specific queries.</p>
+  <div class="cta-btns reveal">
+    <a href="tel:+919326990050" class="btn btn-white btn-lg">📞 Call +91 93269 90050</a>
+    <a href="https://wa.me/919326990050?utm_source=whatsapp&utm_medium=chat&utm_campaign=faq" target="_blank" rel="noopener noreferrer" class="btn-outline-white btn-lg">💬 WhatsApp Us</a>
+  </div>
+</section>
+
+<footer class="footer">
+  <div class="footer-grid">
+    <div class="footer-brand">
+      <div class="footer-logo"><svg width="36" height="36" viewBox="0 0 40 40" fill="none"><circle cx="17" cy="17" r="13" stroke="#2563EB" stroke-width="2.8"/><path d="M17 22V18" stroke="#2563EB" stroke-width="2.2" stroke-linecap="round"/><rect x="14" y="18" width="6" height="4" rx="0.5" stroke="#2563EB" stroke-width="2.2"/><path d="M12 18L17 13L22 18" stroke="#2563EB" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/><path d="M27 27L33 33" stroke="#2563EB" stroke-width="2.8" stroke-linecap="round"/></svg><div class="footer-logo-text"><div class="brand">Property Finder Real Estate</div><div class="sub">Mumbai, Maharashtra</div></div></div>
+      <p class="tagline">"Your Search Ends Here."</p>
+      <p>Trusted real estate consultants in Mumbai's western suburbs since 2018.</p>
+      <div class="social-row">
+        <a href="https://www.instagram.com/propertyfinderrealestate" class="social-btn" target="_blank" rel="noopener noreferrer" aria-label="Instagram"><svg width="16" height="16" fill="none" stroke="white" stroke-width="2" viewBox="0 0 24 24"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1112.63 8 4 4 0 0116 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg></a>
+        <a href="https://www.facebook.com/PropertyFinderRealEstate/reviews" class="social-btn" target="_blank" rel="noopener noreferrer" aria-label="Facebook Reviews"><svg width="16" height="16" fill="white" viewBox="0 0 24 24"><path d="M18 2h-3a5 5 0 00-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 011-1h3z"/></svg></a>
+        <a href="https://www.linkedin.com/company/propertyfinderrealestate" class="social-btn" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn"><svg width="16" height="16" fill="white" viewBox="0 0 24 24"><path d="M16 8a6 6 0 016 6v7h-4v-7a2 2 0 00-2-2 2 2 0 00-2 2v7h-4v-7a6 6 0 016-6zM2 9h4v12H2z"/><circle cx="4" cy="4" r="2"/></svg></a>
+        <a href="https://www.youtube.com/@PropertyFinderRealEstate" class="social-btn" target="_blank" rel="noopener noreferrer" aria-label="YouTube"><svg width="16" height="16" viewBox="0 0 24 24" fill="white"><path d="M23.498 6.186a3.016 3.016 0 00-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 00.502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 002.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 002.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/></svg></a>
+        <a href="https://x.com/PropertyFinderA" class="social-btn" target="_blank" rel="noopener noreferrer" aria-label="X / Twitter"><svg width="16" height="16" fill="white" viewBox="0 0 24 24"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg></a>
+        <a href="https://in.pinterest.com/propertyfinderrealestate/" class="social-btn" target="_blank" rel="noopener noreferrer" aria-label="Pinterest"><svg width="16" height="16" viewBox="0 0 24 24" fill="white"><path d="M12 0C5.373 0 0 5.373 0 12c0 5.084 3.163 9.426 7.627 11.174-.105-.949-.2-2.405.042-3.441.218-.937 1.407-5.965 1.407-5.965s-.359-.719-.359-1.782c0-1.668.967-2.914 2.171-2.914 1.023 0 1.518.769 1.518 1.69 0 1.029-.655 2.568-.994 3.995-.283 1.194.599 2.169 1.777 2.169 2.133 0 3.772-2.249 3.772-5.495 0-2.873-2.064-4.882-5.012-4.882-3.414 0-5.418 2.561-5.418 5.207 0 1.031.397 2.138.893 2.738a.36.36 0 01.083.345l-.333 1.36c-.053.22-.174.267-.402.161-1.499-.698-2.436-2.889-2.436-4.649 0-3.785 2.75-7.262 7.929-7.262 4.163 0 7.398 2.967 7.398 6.931 0 4.136-2.607 7.464-6.227 7.464-1.216 0-2.359-.632-2.75-1.378l-.748 2.853c-.271 1.043-1.002 2.35-1.492 3.146C9.57 23.812 10.763 24 12 24c6.627 0 12-5.373 12-12S18.627 0 12 0z"/></svg></a>
+        <a href="https://jsdl.in/RSL-XGK1779888146" class="social-btn" target="_blank" rel="noopener noreferrer" aria-label="JustDial"><svg width="16" height="16" viewBox="0 0 24 24"><rect width="24" height="24" rx="5" fill="#FF6B35"/><text x="12" y="17" font-family="Arial,sans-serif" font-size="10" font-weight="900" text-anchor="middle" fill="white">JD</text></svg></a>
+      </div>
+    </div>
+    <div class="footer-col"><h4>Quick Links</h4><a href="index.html">Home</a><a href="properties.html">Properties</a><a href="services.html">Services</a><a href="calculators.html">Calculators</a><a href="faq.html">FAQ</a><a href="contact.html">Contact</a></div>
+    <div class="footer-col"><h4>FAQ Topics</h4><a href="faq.html">Buying Property</a><a href="faq.html">Renting in Mumbai</a><a href="faq.html">Legal & RERA</a><a href="faq.html">Home Loans</a><a href="faq.html">NRI Buyers</a></div>
+    <div class="footer-col"><h4>Contact Us</h4>
+      <div class="footer-contact-row"><span class="footer-contact-icon">📞</span><a href="tel:+919326990050">+91 93269 90050</a></div>
+      <div class="footer-contact-row"><span class="footer-contact-icon">✉️</span><a href="mailto:propertyfinderre@gmail.com">propertyfinderre@gmail.com</a></div>
+    </div>
+  </div>
+  <div class="footer-bottom"><span>© 2026 Property Finder Real Estate. All rights reserved.</span></div>
+</footer>
+
+<script src="js/widgets.js"></script>
+<script src="js/i18n.js"></script>
+<script>
+function toggleFAQ(item) {
+  const isOpen = item.classList.contains('open');
+  document.querySelectorAll('.faq-item.open').forEach(i => i.classList.remove('open'));
+  if (!isOpen) item.classList.add('open');
+}
+function filterCat(cat, btn) {
+  document.querySelectorAll('.faq-cat-btn').forEach(b => b.classList.remove('active'));
+  btn.classList.add('active');
+  document.querySelectorAll('.faq-section').forEach(s => {
+    s.style.display = (cat === 'all' || s.dataset.cat === cat) ? 'block' : 'none';
+  });
+}
+function filterFAQs(query) {
+  const q = query.toLowerCase().trim();
+  let found = 0;
+  document.querySelectorAll('.faq-item').forEach(item => {
+    const text = item.textContent.toLowerCase();
+    const match = !q || text.includes(q);
+    item.style.display = match ? 'block' : 'none';
+    if (match) found++;
+  });
+  document.querySelectorAll('.faq-section').forEach(sec => {
+    const visible = [...sec.querySelectorAll('.faq-item')].some(i => i.style.display !== 'none');
+    sec.style.display = visible ? 'block' : 'none';
+  });
+  document.getElementById('noResults').style.display = (found === 0 && q) ? 'block' : 'none';
+}
+// Open first item by default
+document.querySelector('.faq-item')?.classList.add('open');
+</script>
+<script>
+if ('serviceWorker' in navigator) {
+  window.addEventListener('load', () => {
+    navigator.serviceWorker.register('./sw.js').catch(() => {});
+  });
+}
+</script>
+<script src="js/config.js"></script>
+<script src="js/api.js" defer></script>
+<script src="js/security.js"></script>
+<script src="js/tracker.js" defer></script>
+<script src="js/theme.js"></script>
+</body>
+</html>

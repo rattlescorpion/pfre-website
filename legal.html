@@ -1,0 +1,704 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' https://cdnjs.cloudflare.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' data: https:; connect-src 'self' https:; frame-ancestors 'none'; object-src 'none'">
+<meta http-equiv="X-Content-Type-Options" content="nosniff">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="robots" content="noindex, nofollow">
+<meta name="description" content="Legal Agreement Center — Property Finder Real Estate">
+<link rel="icon" type="image/png" sizes="192x192" href="icons/icon-192.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<title>Legal Agreement Center — Property Finder RE</title>
+<script>document.documentElement.setAttribute('data-theme','dark');</script>
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --bg:#070C14;--sidebar:#0A0F1E;--card:#0F1729;--card2:#111B2E;--border:#1A2744;
+  --blue:#3B82F6;--green:#10B981;--red:#EF4444;--amber:#F59E0B;--purple:#8B5CF6;
+  --text:#E2E8F0;--text-2:#94A3B8;--text-3:#475569;--mono:'JetBrains Mono',monospace;
+}
+body{font-family:'Inter',system-ui,sans-serif;background:var(--bg);color:var(--text);min-height:100vh;display:flex;font-size:14px;line-height:1.5}
+.sidebar{width:220px;min-height:100vh;background:var(--sidebar);border-right:1px solid var(--border);position:fixed;left:0;top:0;bottom:0;z-index:100;overflow-y:auto}
+.sb-logo{padding:20px 18px 14px;display:flex;align-items:center;gap:10px;border-bottom:1px solid var(--border)}
+.sb-logo img{height:32px;filter:brightness(0) invert(1)}
+.sb-logo-text{font-size:13px;font-weight:700}
+.sb-logo-sub{font-size:10px;color:var(--blue);font-weight:600;text-transform:uppercase}
+.sb-section{font-size:10px;font-weight:700;letter-spacing:1px;text-transform:uppercase;color:var(--text-3);padding:16px 18px 6px}
+.sb-item{display:flex;align-items:center;gap:10px;padding:9px 18px;color:var(--text-2);font-size:13px;font-weight:500;cursor:pointer;border-left:2px solid transparent;text-decoration:none}
+.sb-item:hover{background:rgba(59,130,246,.06);color:var(--text)}
+.sb-item.active{background:rgba(59,130,246,.12);color:var(--blue);border-left-color:var(--blue);font-weight:600}
+.sb-icon{font-size:16px;width:20px;text-align:center}
+.main{margin-left:220px;flex:1;min-height:100vh}
+.content{padding:24px}
+.page-head{display:flex;justify-content:space-between;align-items:center;margin-bottom:20px;flex-wrap:wrap;gap:10px}
+.page-title{font-size:20px;font-weight:800}
+.btn{padding:8px 16px;border-radius:8px;font-size:13px;font-weight:600;cursor:pointer;border:1px solid var(--border);background:var(--card);color:var(--text-2)}
+.btn:hover{border-color:var(--blue);color:var(--blue)}
+.btn-primary{background:var(--blue);border-color:var(--blue);color:#fff}
+.btn-sm{padding:5px 11px;font-size:12px}
+.tab-row{display:flex;gap:4px;margin-bottom:20px;border-bottom:1px solid var(--border);overflow-x:auto}
+.tab-btn{padding:10px 16px;background:none;border:none;color:var(--text-2);font-size:13px;font-weight:600;cursor:pointer;border-bottom:2px solid transparent;white-space:nowrap}
+.tab-btn.active{color:var(--blue);border-bottom-color:var(--blue)}
+.panel{background:var(--card);border:1px solid var(--border);border-radius:12px;padding:18px;margin-bottom:16px}
+.panel h3{font-size:14px;margin-bottom:14px;display:flex;justify-content:space-between;align-items:center}
+table{width:100%;border-collapse:collapse;font-size:12.5px}
+th{text-align:left;padding:8px 10px;color:var(--text-3);text-transform:uppercase;font-size:10px;border-bottom:1px solid var(--border)}
+td{padding:9px 10px;border-bottom:1px solid rgba(26,39,68,.6)}
+tr:hover td{background:rgba(59,130,246,.04)}
+.badge{padding:2px 8px;border-radius:100px;font-size:10px;font-weight:700}
+.badge-green{background:rgba(16,185,129,.15);color:var(--green)}
+.badge-amber{background:rgba(245,158,11,.15);color:var(--amber)}
+.badge-purple{background:rgba(139,92,246,.15);color:var(--purple)}
+.badge-gray{background:rgba(71,85,105,.2);color:var(--text-2)}
+.form-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.field label{display:block;font-size:11px;color:var(--text-2);margin-bottom:5px;font-weight:600}
+.field input,.field select,.field textarea{width:100%;padding:9px 11px;background:rgba(255,255,255,.04);border:1.5px solid var(--border);border-radius:8px;color:var(--text);font-size:13px;font-family:inherit}
+.field input:focus,.field select:focus{outline:none;border-color:var(--blue)}
+.overlay{position:fixed;inset:0;background:rgba(0,0,0,.55);z-index:800;display:none;align-items:center;justify-content:center;padding:16px}
+.overlay.open{display:flex}
+.modal{background:var(--card);border:1px solid var(--border);border-radius:14px;padding:22px;max-width:560px;width:100%;max-height:85vh;overflow-y:auto}
+.disclaimer-box{background:rgba(245,158,11,.08);border:1px solid rgba(245,158,11,.25);border-radius:10px;padding:12px 14px;font-size:11.5px;color:#fbbf24;margin-bottom:14px;line-height:1.6}
+.tree-node{border:1px solid var(--border);border-radius:10px;padding:12px 14px;margin-bottom:8px;background:var(--card2)}
+.tree-node-title{font-size:11px;font-weight:700;color:var(--text-3);text-transform:uppercase;margin-bottom:6px}
+.tree-person{display:inline-flex;align-items:center;gap:6px;background:rgba(59,130,246,.1);border:1px solid rgba(59,130,246,.2);border-radius:100px;padding:4px 12px;margin:3px;font-size:12px}
+.tree-person.deceased{background:rgba(71,85,105,.15);border-color:var(--border);opacity:.7}
+@media(max-width:900px){.sidebar{width:54px}.sb-logo-text,.sb-logo-sub,.sb-section,.sb-item span:not(.sb-icon){display:none}.sb-item{padding:11px;justify-content:center}.main{margin-left:54px}.form-grid{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+<h1 class="sr-only" style="position:absolute;left:-9999px">Legal Agreement Center — Property Finder Real Estate</h1>
+
+<aside class="sidebar" role="navigation" aria-label="Legal navigation">
+  <div class="sb-logo"><img src="images/logo.png" alt="PFRE"><div><div class="sb-logo-text">Property Finder</div><div class="sb-logo-sub">Legal Center</div></div></div>
+  <nav>
+    <div class="sb-section">Overview</div>
+    <a href="admin.html" class="sb-item"><span class="sb-icon">📊</span><span>Dashboard</span></a>
+    <a href="legal.html" class="sb-item active"><span class="sb-icon">⚖️</span><span>Legal Center</span></a>
+    <div class="sb-section">Modules</div>
+    <a href="crm.html" class="sb-item"><span class="sb-icon">👥</span><span>CRM</span></a>
+    <a href="finance.html" class="sb-item"><span class="sb-icon">💰</span><span>Finance</span></a>
+    <a href="hrms.html" class="sb-item"><span class="sb-icon">🏢</span><span>HRMS</span></a>
+    <a href="inventory.html" class="sb-item"><span class="sb-icon">📦</span><span>Inventory</span></a>
+    <div class="sb-section">System</div>
+    <a href="index.html" class="sb-item"><span class="sb-icon">🌐</span><span>View Website</span></a>
+  </nav>
+</aside>
+
+<main class="main">
+  <div class="content">
+    <div class="page-head">
+      <div class="page-title">⚖️ Legal Agreement Center</div>
+      <div style="display:flex;gap:8px">
+        <button class="btn" onclick="openModal('person')">+ Person</button>
+        <button class="btn" onclick="openModal('relation')">+ Relationship</button>
+        <button class="btn btn-primary" onclick="openModal('will')">+ Will</button>
+      </div>
+    </div>
+
+    <div class="tab-row">
+      <button class="tab-btn active" data-tab="persons" onclick="showTab('persons',this)">Persons</button>
+      <button class="tab-btn" data-tab="tree" onclick="showTab('tree',this)">Family Tree</button>
+      <button class="tab-btn" data-tab="wills" onclick="showTab('wills',this)">Wills</button>
+      <button class="tab-btn" data-tab="poa" onclick="showTab('poa',this)">Power of Attorney</button>
+      <button class="tab-btn" data-tab="deeds" onclick="showTab('deeds',this)">Gift &amp; Release Deeds</button>
+    </div>
+
+    <div id="tab-body"></div>
+  </div>
+</main>
+
+<!-- Person modal -->
+<div class="overlay" id="modal-person"><div class="modal">
+  <h3 style="margin-bottom:14px;display:flex;justify-content:space-between">Add Person <button onclick="closeModal('person')" style="background:none;border:none;color:var(--text-2);cursor:pointer;font-size:16px">✕</button></h3>
+  <div class="form-grid">
+    <div class="field"><label>First Name</label><input type="text" id="p-first"></div>
+    <div class="field"><label>Last Name</label><input type="text" id="p-last"></div>
+    <div class="field"><label>Gender</label><select id="p-gender"><option value="male">Male</option><option value="female">Female</option><option value="other">Other</option></select></div>
+    <div class="field"><label>Mobile</label><input type="text" id="p-mobile"></div>
+    <div class="field"><label>Date of Birth</label><input type="date" id="p-dob"></div>
+    <div class="field"><label>Status</label><select id="p-alive"><option value="1">Alive</option><option value="0">Deceased</option></select></div>
+  </div>
+  <button class="btn btn-primary" style="width:100%;margin-top:14px" onclick="savePerson()">Save Person</button>
+</div></div>
+
+<!-- Relationship modal -->
+<div class="overlay" id="modal-relation"><div class="modal">
+  <h3 style="margin-bottom:14px;display:flex;justify-content:space-between">Add Family Relationship <button onclick="closeModal('relation')" style="background:none;border:none;color:var(--text-2);cursor:pointer;font-size:16px">✕</button></h3>
+  <div class="form-grid">
+    <div class="field"><label>Person</label><select id="r-person"></select></div>
+    <div class="field"><label>Related Person</label><select id="r-related"></select></div>
+  </div>
+  <div class="field" style="margin-top:12px"><label>Relationship — the related person IS this TO person</label>
+    <select id="r-type"></select>
+  </div>
+  <button class="btn btn-primary" style="width:100%;margin-top:14px" onclick="saveRelationship()">Save Relationship</button>
+</div></div>
+
+<!-- Will modal -->
+<div class="overlay" id="modal-will"><div class="modal">
+  <h3 style="margin-bottom:14px;display:flex;justify-content:space-between">Draft a Will <button onclick="closeModal('will')" style="background:none;border:none;color:var(--text-2);cursor:pointer;font-size:16px">✕</button></h3>
+  <div class="form-grid">
+    <div class="field"><label>Testator</label><select id="w-testator" onchange="loadWillBeneficiaryOptions()"></select></div>
+    <div class="field"><label>Executor (optional)</label><select id="w-executor"></select></div>
+  </div>
+  <div id="w-beneficiaries" style="margin-top:12px"></div>
+  <button class="btn btn-sm" type="button" onclick="addBeneficiaryRow()">+ Add Beneficiary</button>
+  <p style="font-size:11px;color:var(--text-2);margin-top:8px">Shares must total 100% or less.</p>
+  <button class="btn btn-primary" style="width:100%;margin-top:14px" onclick="saveWill()">Save Will</button>
+</div></div>
+
+<!-- POA modal -->
+<div class="overlay" id="modal-poa"><div class="modal">
+  <h3 style="margin-bottom:14px;display:flex;justify-content:space-between">New Power of Attorney <button onclick="closeModal('poa')" style="background:none;border:none;color:var(--text-2);cursor:pointer;font-size:16px">✕</button></h3>
+  <div class="form-grid">
+    <div class="field"><label>Principal (grants the power)</label><select id="poa-principal"></select></div>
+    <div class="field"><label>Attorney Holder (receives it)</label><select id="poa-attorney"></select></div>
+    <div class="field"><label>Type</label><select id="poa-type"><option>Special</option><option>General</option></select></div>
+    <div class="field"><label>Issued Date</label><input type="date" id="poa-date"></div>
+  </div>
+  <div class="field" style="margin-top:12px"><label>Powers Granted</label><textarea id="poa-powers" rows="2"></textarea></div>
+  <div id="poa-verify" style="font-size:11px;margin-top:8px"></div>
+  <button class="btn btn-primary" style="width:100%;margin-top:14px" onclick="savePoa()">Save POA</button>
+</div></div>
+
+<!-- Deed modal -->
+<div class="overlay" id="modal-deed"><div class="modal">
+  <h3 style="margin-bottom:14px;display:flex;justify-content:space-between"><span id="deed-title">New Gift Deed</span> <button onclick="closeModal('deed')" style="background:none;border:none;color:var(--text-2);cursor:pointer;font-size:16px">✕</button></h3>
+  <input type="hidden" id="deed-kind" value="gift">
+  <div class="form-grid">
+    <div class="field"><label id="deed-from-label">Donor</label><select id="deed-from"></select></div>
+    <div class="field"><label id="deed-to-label">Donee</label><select id="deed-to"></select></div>
+    <div class="field"><label>Property</label>
+      <select id="deed-property-id" onchange="onDeedPropertyPicked()"><option value="">— Select from CMS properties —</option></select>
+      <input type="hidden" id="deed-property">
+    </div>
+    <div class="field"><label>Share %</label><input type="number" id="deed-share" value="100" max="100" min="1"></div>
+  </div>
+  <button class="btn btn-primary" style="width:100%;margin-top:14px" onclick="saveDeed()">Save Deed</button>
+</div></div>
+
+<!-- PDF preview modal -->
+<div class="overlay" id="modal-pdf"><div class="modal" style="max-width:640px">
+  <h3 style="margin-bottom:14px;display:flex;justify-content:space-between">Document Generated <button onclick="closeModal('pdf')" style="background:none;border:none;color:var(--text-2);cursor:pointer;font-size:16px">✕</button></h3>
+  <p style="font-size:13px;color:var(--text-2);margin-bottom:14px">The PDF has been generated with a confidentiality watermark and downloaded to your device.</p>
+  <div id="pdf-summary" style="font-size:12px;color:var(--text-2);background:var(--card2);border-radius:8px;padding:12px"></div>
+</div></div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+<script src="js/config.js"></script>
+<script src="js/api.js"></script>
+<script>
+/* ══════════════════════════════════════════════════════
+   Legal Agreement Center — local demo data layer mirroring
+   the Laravel Persons/FamilyRelationship/Will/POA/GiftDeed/
+   ReleaseDeed API shape. Real PDF generation + watermarking
+   via jsPDF (client-side, no server round-trip needed).
+═══════════════════════════════════════════════════════ */
+const LIVE = !!(window.PFRE_CONFIG?.FEATURES?.LIVE_LEGAL && window.PFRE_CONFIG?.API_BASE_URL);
+const LG = {
+  get(key, fallback) { try { return JSON.parse(localStorage.getItem(key) || 'null') ?? fallback; } catch { return fallback; } },
+  set(key, val) { localStorage.setItem(key, JSON.stringify(val)); },
+};
+
+/* ══════════════════════════════════════════════════════
+   LIVE API LAYER — same fail-safe sync/mirror pattern as
+   finance.html. One shape gap specific to this page: the
+   demo stores relationship_type as a plain string, but the
+   real family_relationships table uses relationship_type_id
+   (FK to relationship_types) — resolved both ways below via
+   a synced name↔id map, so nothing here has to guess.
+═══════════════════════════════════════════════════════ */
+function authHeaders() {
+  let token = null;
+  try { token = JSON.parse(localStorage.getItem('pfre_session') || 'null')?.token; } catch (_) {}
+  return { 'Content-Type': 'application/json', 'X-PFRE-Key': window.PFRE_CONFIG?.API_KEY || '', ...(token ? { 'Authorization': `Bearer ${token}` } : {}) };
+}
+function unwrapList(payload) {
+  if (Array.isArray(payload)) return payload;
+  if (Array.isArray(payload?.data)) return payload.data;
+  return [];
+}
+async function apiGet(path) {
+  if (!LIVE) return null;
+  try {
+    const res = await fetch(`${window.PFRE_CONFIG.API_BASE_URL}${path}`, { headers: authHeaders() });
+    if (!res.ok) return null;
+    const json = await res.json();
+    return json.success ? json.data : null;
+  } catch (_) { return null; }
+}
+async function apiPost(path, body) {
+  if (!LIVE) return null;
+  try {
+    const res = await fetch(`${window.PFRE_CONFIG.API_BASE_URL}${path}`, { method: 'POST', headers: authHeaders(), body: JSON.stringify(body) });
+    const json = await res.json().catch(() => null);
+    return (res.ok && json?.success) ? json.data : null;
+  } catch (_) { return null; }
+}
+function relationshipTypeIdForName(name) {
+  const map = LG.get('lg_relationship_type_map', {});
+  return map[name] || null;
+}
+function relationshipTypeNameForId(id) {
+  const map = LG.get('lg_relationship_type_map', {});
+  return Object.keys(map).find(k => map[k] === id) || null;
+}
+
+async function syncFromLiveApi() {
+  if (!LIVE) return;
+  try {
+    const [personsRaw, typesRaw, relsRaw, willsRaw, poasRaw] = await Promise.all([
+      apiGet('/persons'), apiGet('/relationship-types'), apiGet('/family-relationships'),
+      apiGet('/wills'), apiGet('/poa-documents'),
+    ]);
+
+    if (typesRaw) {
+      const map = {};
+      unwrapList(typesRaw).forEach(t => { map[t.name] = t.id; });
+      LG.set('lg_relationship_type_map', map);
+    }
+
+    if (personsRaw) {
+      LG.set('lg_persons', unwrapList(personsRaw).map(p => ({
+        id: p.id, first_name: p.first_name, last_name: p.last_name, gender: p.gender,
+        mobile: p.mobile, dob: p.date_of_birth, alive: p.is_alive,
+      })));
+    }
+
+    if (relsRaw) {
+      LG.set('lg_relationships', unwrapList(relsRaw).map(r => ({
+        id: r.id, person_id: r.person_id, related_person_id: r.related_person_id,
+        type: r.relationship_type?.name || relationshipTypeNameForId(r.relationship_type_id) || 'Unknown',
+      })));
+    }
+
+    if (willsRaw) {
+      LG.set('lg_wills', unwrapList(willsRaw).map(w => ({
+        id: w.id, number: w.will_number, testator_id: w.testator_id, executor_id: w.executor_id,
+        beneficiaries: (w.beneficiaries || []).map(b => ({ person_id: b.person_id, share: parseFloat(b.share_percentage) || 0 })),
+        status: w.status, drafted: w.drafted_date,
+      })));
+    }
+
+    if (poasRaw) {
+      LG.set('lg_poas', unwrapList(poasRaw).map(p => ({
+        id: p.id, number: p.poa_number, principal_id: p.principal_id, attorney_id: p.attorney_holder_id,
+        type: p.type, powers: p.powers_granted, issued: p.issued_date, status: p.status,
+      })));
+    }
+  } catch (err) {
+    console.warn('Live sync failed, continuing with local data:', err);
+  }
+}
+
+
+const RELATIONSHIP_TYPES = [
+  'Father','Mother','Step Father','Step Mother','Husband','Wife','Son','Daughter',
+  'Step Son','Step Daughter','Brother','Sister','Step Brother','Step Sister',
+  'Father-in-law','Mother-in-law','Son-in-law','Daughter-in-law','Brother-in-law','Sister-in-law',
+  'Grandfather','Grandmother','Grandson','Granddaughter','Uncle','Aunt','Nephew','Niece',
+  'Guardian','Ward','Nominee','Beneficiary','Legal Heir','Executor',
+  'Adoptive Father','Adoptive Mother','Adopted Son','Adopted Daughter',
+];
+
+/* Gender-aware inverse map — mirrors FamilyTreeService::INVERSE_MAP in the Laravel backend. */
+const INVERSE_MAP = {
+  Father:{male:'Son',female:'Daughter',other:'Child'}, Mother:{male:'Son',female:'Daughter',other:'Child'},
+  Son:{male:'Father',female:'Mother',other:'Parent'}, Daughter:{male:'Father',female:'Mother',other:'Parent'},
+  Husband:{male:'Wife',female:'Wife',other:'Spouse'}, Wife:{male:'Husband',female:'Husband',other:'Spouse'},
+  Brother:{male:'Brother',female:'Sister',other:'Sibling'}, Sister:{male:'Brother',female:'Sister',other:'Sibling'},
+  Grandfather:{male:'Grandson',female:'Granddaughter',other:'Grandchild'}, Grandmother:{male:'Grandson',female:'Granddaughter',other:'Grandchild'},
+  Grandson:{male:'Grandfather',female:'Grandmother',other:'Grandparent'}, Granddaughter:{male:'Grandfather',female:'Grandmother',other:'Grandparent'},
+  Uncle:{male:'Nephew',female:'Niece',other:"Sibling's Child"}, Aunt:{male:'Nephew',female:'Niece',other:"Sibling's Child"},
+  Nephew:{male:'Uncle',female:'Aunt',other:"Parent's Sibling"}, Niece:{male:'Uncle',female:'Aunt',other:"Parent's Sibling"},
+  Guardian:{male:'Ward',female:'Ward',other:'Ward'}, Ward:{male:'Guardian',female:'Guardian',other:'Guardian'},
+};
+const CORE_HEIR_TYPES = ['Husband','Wife','Son','Daughter','Father','Mother'];
+
+function getPersons() { return LG.get('lg_persons', []); }
+function getRelationships() { return LG.get('lg_relationships', []); }
+function getWills() { return LG.get('lg_wills', []); }
+function getPoas() { return LG.get('lg_poas', []); }
+function getDeeds() { return LG.get('lg_deeds', []); }
+function personName(id) { const p = getPersons().find(x => x.id == id); return p ? `${p.first_name} ${p.last_name}`.trim() : '—'; }
+function today() { return new Date().toISOString().slice(0, 10); }
+function genNum(prefix, list) { return `${prefix}-${new Date().getFullYear()}-${String(list.length + 1).padStart(4, '0')}`; }
+function currentUserName() {
+  try { const s = JSON.parse(localStorage.getItem('pfre_session') || 'null'); return s?.name || 'PFRE Staff'; } catch { return 'PFRE Staff'; }
+}
+
+/* ══════════════════════ TABS ══════════════════════ */
+function showTab(tab, btn) {
+  document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+  btn?.classList.add('active');
+  const body = document.getElementById('tab-body');
+  if (tab === 'persons') renderPersons(body);
+  else if (tab === 'tree') renderTree(body);
+  else if (tab === 'wills') renderWills(body);
+  else if (tab === 'poa') renderPoa(body);
+  else if (tab === 'deeds') renderDeeds(body);
+}
+
+function renderPersons(body) {
+  const persons = getPersons();
+  body.innerHTML = `<div class="panel"><h3>Persons Directory <button class="btn btn-sm btn-primary" onclick="openModal('person')">+ Add</button></h3>
+    ${persons.length ? `<table><thead><tr><th>Name</th><th>Gender</th><th>DOB</th><th>Mobile</th><th>Status</th><th>Relationships</th></tr></thead><tbody>
+      ${persons.map(p => {
+        const relCount = getRelationships().filter(r => r.person_id == p.id || r.related_person_id == p.id).length;
+        return `<tr><td><strong>${p.first_name} ${p.last_name}</strong></td><td style="text-transform:capitalize">${p.gender||'—'}</td><td>${p.dob||'—'}</td><td>${p.mobile||'—'}</td>
+        <td>${p.alive ? '<span class="badge badge-green">Alive</span>' : '<span class="badge badge-gray">Deceased</span>'}</td>
+        <td>${relCount} recorded ${!p.alive ? `· <a href="#" onclick="showHeirCandidates(${p.id});return false" style="color:var(--amber)">View heir candidates</a>` : ''}</td></tr>`;
+      }).join('')}
+    </tbody></table>` : `<p style="color:var(--text-2);font-size:13px;padding:20px 0;text-align:center">No persons added yet.</p>`}
+  </div>`;
+}
+
+function renderTree(body) {
+  const persons = getPersons();
+  if (!persons.length) { body.innerHTML = `<div class="panel"><p style="color:var(--text-2);font-size:13px;text-align:center;padding:20px">Add persons and relationships first.</p></div>`; return; }
+  body.innerHTML = `<div class="panel"><h3>Family Tree <select id="tree-root" onchange="renderTreeFor(this.value)" style="background:rgba(255,255,255,.06);color:var(--text);border:1px solid var(--border);border-radius:6px;padding:5px 10px"></select></h3><div id="tree-output"></div></div>`;
+  const sel = document.getElementById('tree-root');
+  sel.innerHTML = persons.map(p => `<option value="${p.id}">${p.first_name} ${p.last_name}</option>`).join('');
+  renderTreeFor(persons[0].id);
+}
+
+function renderTreeFor(personId) {
+  const root = getPersons().find(p => p.id == personId);
+  if (!root) return;
+  const rels = getRelationships().filter(r => r.person_id == personId);
+  const groups = { 'Parents': ['Father','Mother','Step Father','Step Mother'], 'Spouse': ['Husband','Wife'], 'Children': ['Son','Daughter','Step Son','Step Daughter'], 'Siblings': ['Brother','Sister'], 'Extended': ['Grandfather','Grandmother','Uncle','Aunt','Nephew','Niece'] };
+
+  document.getElementById('tree-output').innerHTML = Object.entries(groups).map(([label, types]) => {
+    const matches = rels.filter(r => types.includes(r.type));
+    if (!matches.length) return '';
+    return `<div class="tree-node"><div class="tree-node-title">${label}</div>
+      ${matches.map(r => { const p = getPersons().find(x => x.id == r.related_person_id); return `<span class="tree-person ${p && !p.alive ? 'deceased' : ''}">${r.type}: ${personName(r.related_person_id)}</span>`; }).join('')}
+    </div>`;
+  }).join('') || `<p style="color:var(--text-2);font-size:13px">No relationships recorded for ${root.first_name} yet.</p>`;
+}
+
+function showHeirCandidates(personId) {
+  const deceased = getPersons().find(p => p.id == personId);
+  const rels = getRelationships().filter(r => r.person_id == personId && CORE_HEIR_TYPES.includes(r.type));
+  alert(
+    `⚠️ These are relationship-based CANDIDATES for legal review, not a determination of entitlement or share.\n` +
+    `Actual heirship depends on applicable personal law (Hindu/Muslim/Christian/Parsi), heir class, any prior will, ` +
+    `and case facts this system can't know. Confirm with a qualified advocate.\n\n` +
+    `Candidates for ${deceased.first_name} ${deceased.last_name}:\n` +
+    (rels.length ? rels.map(r => `• ${personName(r.related_person_id)} (${r.type})`).join('\n') : '(none recorded)')
+  );
+}
+
+function renderWills(body) {
+  const wills = getWills();
+  body.innerHTML = `<div class="panel"><h3>Wills <button class="btn btn-sm btn-primary" onclick="openModal('will')">+ Draft</button></h3>
+    ${wills.length ? `<table><thead><tr><th>Will #</th><th>Testator</th><th>Beneficiaries</th><th>Status</th><th></th></tr></thead><tbody>
+      ${wills.map(w => `<tr><td style="font-family:var(--mono)">${w.number}</td><td>${personName(w.testator_id)}</td>
+        <td>${w.beneficiaries.map(b => `${personName(b.person_id)} (${b.share}%)`).join(', ')}</td>
+        <td><span class="badge badge-amber">${w.status}</span></td>
+        <td><button class="btn btn-sm" onclick="generateWillPdf(${w.id})">📄 PDF</button></td></tr>`).join('')}
+    </tbody></table>` : `<p style="color:var(--text-2);font-size:13px;padding:20px 0;text-align:center">No wills drafted yet.</p>`}
+  </div>`;
+}
+
+function renderPoa(body) {
+  const poas = getPoas();
+  body.innerHTML = `<div class="panel"><h3>Power of Attorney <button class="btn btn-sm btn-primary" onclick="openModal('poa')">+ New</button></h3>
+    ${poas.length ? `<table><thead><tr><th>POA #</th><th>Principal</th><th>Attorney Holder</th><th>Type</th><th></th></tr></thead><tbody>
+      ${poas.map(p => `<tr><td style="font-family:var(--mono)">${p.number}</td><td>${personName(p.principal_id)}</td><td>${personName(p.attorney_id)}</td><td><span class="badge badge-purple">${p.type}</span></td>
+        <td><button class="btn btn-sm" onclick="generatePoaPdf(${p.id})">📄 PDF</button></td></tr>`).join('')}
+    </tbody></table>` : `<p style="color:var(--text-2);font-size:13px;padding:20px 0;text-align:center">No POA documents yet.</p>`}
+  </div>`;
+}
+
+function renderDeeds(body) {
+  const deeds = getDeeds();
+  body.innerHTML = `<div class="panel"><h3>Gift &amp; Release Deeds
+      <span><button class="btn btn-sm" onclick="openDeedModal('gift')">+ Gift Deed</button> <button class="btn btn-sm btn-primary" onclick="openDeedModal('release')">+ Release Deed</button></span></h3>
+    ${deeds.length ? `<table><thead><tr><th>Deed #</th><th>Type</th><th>From</th><th>To</th><th>Property</th><th>Share</th><th></th></tr></thead><tbody>
+      ${deeds.map(d => `<tr><td style="font-family:var(--mono)">${d.number}</td><td><span class="badge ${d.kind==='gift'?'badge-green':'badge-amber'}">${d.kind}</span></td>
+        <td>${personName(d.from_id)}</td><td>${personName(d.to_id)}</td><td>${d.property}</td><td>${d.share}%</td>
+        <td><button class="btn btn-sm" onclick="generateDeedPdf(${d.id})">📄 PDF</button></td></tr>`).join('')}
+    </tbody></table>` : `<p style="color:var(--text-2);font-size:13px;padding:20px 0;text-align:center">No deeds yet.</p>`}
+  </div>`;
+}
+
+/* ══════════════════════ SAVE HANDLERS ══════════════════════ */
+function savePerson() {
+  const first = document.getElementById('p-first').value.trim();
+  const last = document.getElementById('p-last').value.trim();
+  if (!first) { alert('First name is required.'); return; }
+  const persons = getPersons();
+  persons.push({
+    id: Date.now(), first_name: first, last_name: last,
+    gender: document.getElementById('p-gender').value, mobile: document.getElementById('p-mobile').value.trim(),
+    dob: document.getElementById('p-dob').value, alive: document.getElementById('p-alive').value === '1',
+  });
+  LG.set('lg_persons', persons);
+  apiPost('/persons', { name: `${first} ${last}`.trim(), first_name: first, last_name: last, gender: document.getElementById('p-gender').value, mobile: document.getElementById('p-mobile').value.trim(), date_of_birth: document.getElementById('p-dob').value });
+  closeModal('person');
+  showTab('persons', document.querySelector('[data-tab="persons"]'));
+}
+
+function saveRelationship() {
+  const person_id = document.getElementById('r-person').value;
+  const related_person_id = document.getElementById('r-related').value;
+  const type = document.getElementById('r-type').value;
+  if (person_id === related_person_id) { alert('A person cannot be related to themselves.'); return; }
+  const rels = getRelationships();
+  rels.push({ id: Date.now(), person_id, related_person_id, type });
+  LG.set('lg_relationships', rels);
+  const typeId = relationshipTypeIdForName(type);
+  if (typeId) apiPost('/family-relationships', { person_id, related_person_id, relationship_type_id: typeId });
+  closeModal('relation');
+  showTab('tree', document.querySelector('[data-tab="tree"]'));
+  document.querySelectorAll('.tab-btn').forEach(b=>b.classList.toggle('active', b.dataset.tab==='tree'));
+}
+
+let beneficiaryRowCount = 0;
+function addBeneficiaryRow() {
+  const wrap = document.getElementById('w-beneficiaries');
+  const idx = beneficiaryRowCount++;
+  const row = document.createElement('div');
+  row.className = 'form-grid ben-row';
+  row.style.marginBottom = '8px';
+  row.innerHTML = `
+    <select class="ben-person">${getPersons().map(p => `<option value="${p.id}">${p.first_name} ${p.last_name}</option>`).join('')}</select>
+    <div style="display:flex;gap:6px"><input type="number" class="ben-share" placeholder="Share %" style="flex:1"><button type="button" onclick="this.closest('.ben-row').remove()" style="background:none;border:none;color:var(--red);cursor:pointer">✕</button></div>`;
+  wrap.appendChild(row);
+}
+function loadWillBeneficiaryOptions() { /* placeholder for future testator-scoped filtering */ }
+
+function saveWill() {
+  const testator_id = document.getElementById('w-testator').value;
+  const executor_id = document.getElementById('w-executor').value || null;
+  const beneficiaries = [...document.querySelectorAll('.ben-row')].map(row => ({
+    person_id: row.querySelector('.ben-person').value, share: parseFloat(row.querySelector('.ben-share').value) || 0,
+  })).filter(b => b.share > 0);
+  const total = beneficiaries.reduce((s, b) => s + b.share, 0);
+  if (!beneficiaries.length) { alert('Add at least one beneficiary.'); return; }
+  if (total > 100) { alert(`Shares total ${total}% — cannot exceed 100%.`); return; }
+
+  const wills = getWills();
+  wills.push({ id: Date.now(), number: genNum('WILL', wills), testator_id, executor_id, beneficiaries, status: 'draft', drafted: today() });
+  LG.set('lg_wills', wills);
+  apiPost('/wills', { testator_id, executor_id, drafted_date: today(), beneficiaries: beneficiaries.map(b => ({ person_id: b.person_id, share_percentage: b.share })) });
+  closeModal('will');
+  showTab('wills', document.querySelector('[data-tab="wills"]'));
+  document.querySelectorAll('.tab-btn').forEach(b=>b.classList.toggle('active', b.dataset.tab==='wills'));
+}
+
+function savePoa() {
+  const principal_id = document.getElementById('poa-principal').value;
+  const attorney_id = document.getElementById('poa-attorney').value;
+  if (principal_id === attorney_id) { alert('Principal and attorney holder must be different people.'); return; }
+  const poas = getPoas();
+  poas.push({
+    id: Date.now(), number: genNum('POA', poas), principal_id, attorney_id,
+    type: document.getElementById('poa-type').value, powers: document.getElementById('poa-powers').value.trim(),
+    issued: document.getElementById('poa-date').value || today(), status: 'draft',
+  });
+  LG.set('lg_poas', poas);
+  apiPost('/poa-documents', { principal_id, attorney_holder_id: attorney_id, type: document.getElementById('poa-type').value, powers_granted: document.getElementById('poa-powers').value.trim(), issued_date: document.getElementById('poa-date').value || today() });
+  closeModal('poa');
+  showTab('poa', document.querySelector('[data-tab="poa"]'));
+  document.querySelectorAll('.tab-btn').forEach(b=>b.classList.toggle('active', b.dataset.tab==='poa'));
+}
+
+function checkPoaRelationship() {
+  const principal = document.getElementById('poa-principal').value;
+  const attorney = document.getElementById('poa-attorney').value;
+  const out = document.getElementById('poa-verify');
+  if (!principal || !attorney || principal === attorney) { out.innerHTML = ''; return; }
+  const edge = getRelationships().find(r => r.person_id == principal && r.related_person_id == attorney);
+  if (edge) out.innerHTML = `<span style="color:var(--green)">✓ Recorded relationship: ${personName(attorney)} is ${principal ? edge.type : ''} to ${personName(principal)}</span>`;
+  else out.innerHTML = `<span style="color:var(--amber)">⚠ No family_relationships edge recorded between these two — add one on the Family Tree tab if relevant.</span>`;
+}
+
+function openDeedModal(kind) {
+  document.getElementById('deed-kind').value = kind;
+  document.getElementById('deed-title').textContent = kind === 'gift' ? 'New Gift Deed' : 'New Release Deed';
+  document.getElementById('deed-from-label').textContent = kind === 'gift' ? 'Donor' : 'Releasor';
+  document.getElementById('deed-to-label').textContent = kind === 'gift' ? 'Donee' : 'Releasee';
+  openModal('deed');
+}
+function onDeedPropertyPicked() {
+  const sel = document.getElementById('deed-property-id');
+  document.getElementById('deed-property').value = sel.options[sel.selectedIndex]?.dataset.title || '';
+}
+function saveDeed() {
+  const kind = document.getElementById('deed-kind').value;
+  const from_id = document.getElementById('deed-from').value;
+  const to_id = document.getElementById('deed-to').value;
+  const propertyId = document.getElementById('deed-property-id').value; // real CMS property id, only present if the sync in cms.html succeeded
+  const propertyTitle = document.getElementById('deed-property').value.trim() || '—';
+  if (from_id === to_id) { alert('The two parties must be different people.'); return; }
+  if (!propertyId) { alert('Select a property from the list — this is what makes the deed postable to the live API, not just saved locally.'); return; }
+
+  const deeds = getDeeds();
+  const share = parseFloat(document.getElementById('deed-share').value) || 100;
+  deeds.push({
+    id: Date.now(), number: genNum(kind === 'gift' ? 'GIFT' : 'REL', deeds), kind, from_id, to_id,
+    property: propertyTitle, property_id: propertyId, share, date: today(),
+  });
+  LG.set('lg_deeds', deeds);
+
+  // Live mirror is now possible — the picker guarantees a real property_id
+  // whenever cms.html's live sync populated one (see syncPropertiesFromLiveApi
+  // there). If that sync hasn't run (LIVE_PROPERTIES off, or fetch failed),
+  // the ids here are still the local demo ones and posting is skipped rather
+  // than sent with an id the server won't recognize.
+  const propertyIdIsNumeric = /^\d+$/.test(propertyId);
+  if (propertyIdIsNumeric) {
+    const path = kind === 'gift' ? '/gift-deeds' : '/release-deeds';
+    const payload = kind === 'gift'
+      ? { donor_id: from_id, donee_id: to_id, property_id: propertyId, share_percentage: share, deed_date: today() }
+      : { releasor_id: from_id, releasee_id: to_id, property_id: propertyId, share_percentage: share, deed_date: today() };
+    apiPost(path, payload);
+  }
+  closeModal('deed');
+  showTab('deeds', document.querySelector('[data-tab="deeds"]'));
+  document.querySelectorAll('.tab-btn').forEach(b=>b.classList.toggle('active', b.dataset.tab==='deeds'));
+}
+
+/* ══════════════════════════════════════════════════════
+   REAL PDF GENERATION + WATERMARKING (jsPDF)
+   Every generated document gets a diagonal, semi-transparent
+   watermark stamped with the current user's name and the
+   generation timestamp, on every page — not just styled HTML
+   for browser print (that was the old PdfService approach on
+   the backend; this is genuine binary PDF output).
+═══════════════════════════════════════════════════════ */
+function stampWatermark(doc) {
+  const pageCount = doc.internal.getNumberOfPages();
+  const stamp = `${currentUserName()} · ${new Date().toLocaleString('en-IN')} · CONFIDENTIAL`;
+  for (let i = 1; i <= pageCount; i++) {
+    doc.setPage(i);
+    doc.saveGraphicsState();
+    doc.setGState(new doc.GState({ opacity: 0.12 }));
+    doc.setFontSize(28);
+    doc.setTextColor(59, 130, 246);
+    doc.text('PROPERTY FINDER RE', 105, 150, { angle: 45, align: 'center' });
+    doc.restoreGraphicsState();
+
+    doc.saveGraphicsState();
+    doc.setGState(new doc.GState({ opacity: 0.55 }));
+    doc.setFontSize(7);
+    doc.setTextColor(120, 120, 120);
+    doc.text(stamp, 105, 290, { align: 'center' });
+    doc.restoreGraphicsState();
+  }
+}
+
+function buildBaseDoc(title, subtitle) {
+  const { jsPDF } = window.jspdf;
+  const doc = new jsPDF();
+  doc.setFontSize(16); doc.setTextColor(20, 20, 20);
+  doc.text('Property Finder Real Estate', 20, 20);
+  doc.setFontSize(11); doc.setTextColor(90, 90, 90);
+  doc.text(title, 20, 28);
+  doc.setFontSize(9);
+  doc.text(subtitle, 20, 34);
+  doc.setDrawColor(220, 220, 220);
+  doc.line(20, 38, 190, 38);
+  return doc;
+}
+
+function generateWillPdf(id) {
+  const w = getWills().find(x => x.id === id);
+  if (!w) return;
+  const doc = buildBaseDoc(`Will ${w.number}`, `Drafted ${w.drafted} · Testator: ${personName(w.testator_id)}`);
+  let y = 50;
+  doc.setFontSize(10); doc.setTextColor(20,20,20);
+  doc.text(`Executor: ${w.executor_id ? personName(w.executor_id) : 'Not appointed'}`, 20, y); y += 10;
+  doc.text('Beneficiaries:', 20, y); y += 7;
+  w.beneficiaries.forEach(b => { doc.text(`  •  ${personName(b.person_id)} — ${b.share}%`, 24, y); y += 6; });
+  y += 6;
+  doc.setFontSize(8); doc.setTextColor(140,140,140);
+  doc.text('This is a system-generated draft. Consult a legal professional before execution and registration.', 20, y);
+  stampWatermark(doc);
+  doc.save(`${w.number}.pdf`);
+  showPdfSummary(`Will ${w.number}`, `Testator: ${personName(w.testator_id)} · ${w.beneficiaries.length} beneficiary(ies)`);
+}
+
+function generatePoaPdf(id) {
+  const p = getPoas().find(x => x.id === id);
+  if (!p) return;
+  const doc = buildBaseDoc(`Power of Attorney ${p.number}`, `${p.type} POA · Issued ${p.issued}`);
+  let y = 50;
+  doc.setFontSize(10); doc.setTextColor(20,20,20);
+  doc.text(`Principal: ${personName(p.principal_id)}`, 20, y); y += 7;
+  doc.text(`Attorney Holder: ${personName(p.attorney_id)}`, 20, y); y += 7;
+  doc.text(`Powers Granted: ${p.powers || '(not specified)'}`, 20, y, { maxWidth: 170 }); y += 14;
+  doc.setFontSize(8); doc.setTextColor(140,140,140);
+  doc.text('Draft document. Verify relationship and registration requirements with a legal professional.', 20, y);
+  stampWatermark(doc);
+  doc.save(`${p.number}.pdf`);
+  showPdfSummary(`POA ${p.number}`, `${personName(p.principal_id)} → ${personName(p.attorney_id)}`);
+}
+
+function generateDeedPdf(id) {
+  const d = getDeeds().find(x => x.id === id);
+  if (!d) return;
+  const doc = buildBaseDoc(`${d.kind === 'gift' ? 'Gift' : 'Release'} Deed ${d.number}`, `Dated ${d.date} · Property: ${d.property}`);
+  let y = 50;
+  doc.setFontSize(10); doc.setTextColor(20,20,20);
+  doc.text(`${d.kind === 'gift' ? 'Donor' : 'Releasor'}: ${personName(d.from_id)}`, 20, y); y += 7;
+  doc.text(`${d.kind === 'gift' ? 'Donee' : 'Releasee'}: ${personName(d.to_id)}`, 20, y); y += 7;
+  doc.text(`Share Transferred: ${d.share}%`, 20, y); y += 14;
+  doc.setFontSize(8); doc.setTextColor(140,140,140);
+  doc.text('Draft document. Stamp duty and registration to be completed per local sub-registrar requirements.', 20, y);
+  stampWatermark(doc);
+  doc.save(`${d.number}.pdf`);
+  showPdfSummary(`${d.kind === 'gift' ? 'Gift' : 'Release'} Deed ${d.number}`, `${personName(d.from_id)} → ${personName(d.to_id)} (${d.share}%)`);
+}
+
+function showPdfSummary(title, detail) {
+  document.getElementById('pdf-summary').innerHTML = `<strong>${title}</strong><br>${detail}<br><br><span style="color:var(--amber)">🔒 Watermarked with your name and timestamp on every page.</span>`;
+  document.getElementById('modal-pdf').classList.add('open');
+}
+
+/* ══════════════════════ MODAL open/close ══════════════════════ */
+function openModal(which) {
+  const persons = getPersons();
+  const opts = persons.map(p => `<option value="${p.id}">${p.first_name} ${p.last_name}</option>`).join('');
+  if (which === 'relation') {
+    document.getElementById('r-person').innerHTML = opts;
+    document.getElementById('r-related').innerHTML = opts;
+    document.getElementById('r-type').innerHTML = RELATIONSHIP_TYPES.map(t => `<option>${t}</option>`).join('');
+  } else if (which === 'will') {
+    document.getElementById('w-testator').innerHTML = opts;
+    document.getElementById('w-executor').innerHTML = `<option value="">None</option>` + opts;
+    document.getElementById('w-beneficiaries').innerHTML = '';
+    beneficiaryRowCount = 0;
+    addBeneficiaryRow();
+  } else if (which === 'poa') {
+    document.getElementById('poa-principal').innerHTML = opts;
+    document.getElementById('poa-attorney').innerHTML = opts;
+    document.getElementById('poa-date').value = today();
+    document.getElementById('poa-verify').innerHTML = '';
+    document.getElementById('poa-principal').onchange = checkPoaRelationship;
+    document.getElementById('poa-attorney').onchange = checkPoaRelationship;
+  } else if (which === 'deed') {
+    document.getElementById('deed-from').innerHTML = opts;
+    document.getElementById('deed-to').innerHTML = opts;
+    const properties = (() => { try { return JSON.parse(localStorage.getItem('cms_properties') || '[]'); } catch { return []; } })();
+    document.getElementById('deed-property-id').innerHTML = '<option value="">— Select from CMS properties —</option>'
+      + properties.map(p => `<option value="${p.id}" data-title="${p.title}">${p.title} · ${p.locality}</option>`).join('');
+    document.getElementById('deed-property').value = '';
+  }
+  document.getElementById(`modal-${which}`).classList.add('open');
+}
+function closeModal(which) { document.getElementById(`modal-${which}`).classList.remove('open'); }
+document.addEventListener('keydown', e => { if (e.key === 'Escape') ['person','relation','will','poa','deed','pdf'].forEach(closeModal); });
+
+document.addEventListener('DOMContentLoaded', async () => {
+  await syncFromLiveApi();
+  showTab('persons', document.querySelector('[data-tab="persons"]'));
+});
+</script>
+<script src="js/app-shell.js"></script>
+</body>
+</html>

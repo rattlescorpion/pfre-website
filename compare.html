@@ -1,0 +1,335 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' data: https:; connect-src 'self'; frame-ancestors 'none'; object-src 'none'">
+<meta http-equiv="X-Content-Type-Options" content="nosniff">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="Compare properties side by side — Price, amenities, location and more. Property Finder Real Estate, Mumbai.">
+<meta property="og:title" content="Compare Properties — Property Finder Real Estate">
+<meta property="og:image" content="https://www.propertyfinderrealestate.com/images/og-banner.jpg">
+<link rel="canonical" href="https://www.propertyfinderrealestate.com/compare.html">
+<link rel="icon" type="image/png" sizes="192x192" href="icons/icon-192.png">
+<link rel="manifest" href="manifest.json">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@300;400;500;600;700&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/styles.css">
+<link rel="stylesheet" href="css/theme.css">
+<link rel="stylesheet" href="css/overrides.css">
+<title>Compare Properties — Property Finder Real Estate</title>
+<script>!function(){var t=localStorage.getItem("pfre_theme")||(window.matchMedia("(prefers-color-scheme:dark)").matches?"dark":"light");document.documentElement.setAttribute("data-theme",t);document.documentElement.classList.add("theme-"+t)}();</script>
+<style>
+.cmp-hero{background:linear-gradient(135deg,#012FA1 0%,#1a4fd6 100%);color:#fff;padding:60px 24px 40px;text-align:center}
+.cmp-hero h1{font-size:clamp(24px,4vw,40px);font-weight:800;margin-bottom:10px}
+.cmp-hero p{opacity:.8;font-size:15px;max-width:480px;margin:0 auto}
+
+.cmp-grid{display:grid;gap:24px;padding:32px 24px;max-width:1100px;margin:0 auto}
+.cmp-grid.cols-2{grid-template-columns:200px 1fr 1fr}
+.cmp-grid.cols-3{grid-template-columns:200px 1fr 1fr 1fr}
+.cmp-grid.cols-1{grid-template-columns:1fr;max-width:500px}
+
+.cmp-label-col{display:flex;flex-direction:column;gap:0}
+.cmp-lbl{height:52px;display:flex;align-items:center;font-size:12px;font-weight:700;color:var(--text-muted);text-transform:uppercase;letter-spacing:.5px;border-bottom:1px solid var(--border)}
+.cmp-lbl:first-child{height:220px;font-size:13px;color:transparent;border-bottom:2px solid var(--border)}
+
+.prop-col{background:var(--card);border:2px solid var(--border);border-radius:16px;overflow:hidden;box-shadow:0 4px 24px rgba(0,0,0,.08);transition:border-color .2s}
+.prop-col.best-value{border-color:#059669}
+.prop-col.best-value .prop-thumb{background:linear-gradient(135deg,#059669,#34d399)}
+.prop-thumb{height:160px;display:flex;align-items:center;justify-content:center;font-size:56px;background:linear-gradient(135deg,#012FA1,#3b82f6);position:relative}
+.best-badge{position:absolute;top:10px;left:10px;background:#059669;color:#fff;font-size:11px;font-weight:700;padding:3px 8px;border-radius:100px}
+.prop-header{padding:14px 16px 10px;border-bottom:2px solid var(--border)}
+.prop-title{font-size:15px;font-weight:700;margin-bottom:4px}
+.prop-price{font-size:22px;font-weight:800;color:var(--brand);font-family:var(--mono)}
+.prop-meta{font-size:12px;color:var(--text-muted);margin-top:2px}
+
+.cmp-cell{height:52px;display:flex;align-items:center;padding:0 16px;font-size:13px;border-bottom:1px solid var(--border)}
+.cmp-cell.better{background:rgba(5,150,105,.06);color:#065F46;font-weight:700}
+.cmp-cell.worse{color:var(--text-muted)}
+.cmp-cell .tick{color:#059669;font-size:15px;margin-right:4px}
+.cmp-cell .cross{color:#EF4444;font-size:15px;margin-right:4px}
+
+.cmp-actions{padding:14px 16px;display:flex;flex-direction:column;gap:8px}
+
+.score-bar{height:8px;background:var(--border);border-radius:100px;overflow:hidden;margin-top:4px}
+.score-fill{height:100%;border-radius:100px;transition:width .8s ease}
+
+.empty-cmp{text-align:center;padding:60px 24px;color:var(--text-muted)}
+.empty-cmp .eic{font-size:56px;margin-bottom:16px}
+.empty-cmp h2{font-size:20px;font-weight:700;margin-bottom:8px;color:var(--text)}
+.empty-cmp p{font-size:14px;max-width:380px;margin:0 auto 24px}
+
+@media(max-width:768px){
+  .cmp-grid.cols-2,.cmp-grid.cols-3{grid-template-columns:1fr}
+  .cmp-label-col{display:none}
+}
+</style>
+</head>
+<body>
+<a href="#cmp-main" class="skip-link" style="position:absolute;left:-9999px;top:0;padding:8px;background:var(--brand);color:#fff;z-index:9999">Skip to content</a>
+<h1 class="sr-only" style="position:absolute;left:-9999px">Compare Properties — Property Finder Real Estate</h1>
+
+<!-- Nav -->
+<nav class="nav-bar" role="navigation" aria-label="Main navigation">
+  <div class="nav-container">
+    <a href="index.html" class="nav-logo" style="display:flex;align-items:center">
+      <img src="images/logo.png" alt="Property Finder Real Estate" class="nav-logo-img" style="height:48px;width:auto;object-fit:contain" loading="eager">
+    </a>
+    <div class="nav-actions">
+      <a href="properties.html" class="btn btn-outline btn-sm">← Browse Properties</a>
+      <button class="btn btn-danger btn-sm" onclick="clearCompare()" type="button">🗑 Clear All</button>
+      <button class="icon-btn" onclick="toggleTheme()" aria-label="Toggle theme" id="themeToggle" aria-pressed="false" type="button">
+        <span class="icon-light" aria-hidden="true">☀️</span>
+        <span class="icon-dark" aria-hidden="true">🌙</span>
+      </button>
+    </div>
+  </div>
+</nav>
+
+<div class="cmp-hero">
+  <div>Compare Properties</div>
+  <p>Side-by-side comparison to help you make the right decision</p>
+</div>
+
+<main id="cmp-main" style="background:var(--bg);min-height:60vh">
+  <div id="cmp-content" style="padding-bottom:48px"></div>
+</main>
+
+<!-- Add property suggestion bar (shows when <3 properties) -->
+<div id="add-bar" style="display:none;position:fixed;bottom:0;left:0;right:0;background:var(--card);border-top:2px solid var(--brand);padding:14px 24px;z-index:100;display:flex;align-items:center;justify-content:space-between;gap:16px;box-shadow:0 -4px 20px rgba(0,0,0,.1)">
+  <div style="font-size:14px;font-weight:600">
+    <span id="add-bar-msg">Add more properties to compare</span>
+    <span style="color:var(--text-muted);font-weight:400;font-size:12px;margin-left:8px">Up to 3 properties</span>
+  </div>
+  <a href="properties.html" class="btn btn-primary btn-sm">+ Add Property</a>
+</div>
+
+<!-- Footer -->
+<footer class="footer" role="contentinfo">
+  <div class="footer-bottom">
+    <p>© 2026 Property Finder Real Estate · Malad West, Mumbai</p>
+  </div>
+</footer>
+
+<script src="js/theme.js"></script>
+<script src="js/security.js"></script>
+<script>
+/* ══════════════════════════════════════════════════════
+   Property Comparison Engine
+═══════════════════════════════════════════════════════ */
+
+function esc(s){ return String(s??'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;') }
+
+const ROWS = [
+  { key:'price',     label:'Listed Price',    type:'price' },
+  { key:'locality',  label:'Locality',        type:'text' },
+  { key:'bedrooms',  label:'Configuration',   type:'text' },
+  { key:'area',      label:'Carpet Area',     type:'area' },
+  { key:'floor',     label:'Floor',           type:'text' },
+  { key:'furnishing',label:'Furnishing',      type:'badge' },
+  { key:'rera',      label:'RERA Registered', type:'bool' },
+  { key:'parking',   label:'Parking',         type:'bool' },
+  { key:'lift',      label:'Lift',            type:'bool' },
+  { key:'gym',       label:'Gym',             type:'bool' },
+  { key:'security',  label:'24/7 Security',   type:'bool' },
+  { key:'score',     label:'PFRE Score',      type:'score' },
+];
+
+function parseCompareList() {
+  try {
+    const raw = JSON.parse(localStorage.getItem('pfre_compare') || '[]');
+    return raw.map((item, idx) => enrichItem(item, idx));
+  } catch { return []; }
+}
+
+function enrichItem(item, idx) {
+  /* Extract structured data from the stored name+price string
+     In production these would come from the backend property object */
+  const name  = item.name || 'Property ' + (idx + 1);
+  const price = parsePrice(item.price || '');
+
+  /* Parse locality from name heuristically */
+  const localityHints = ['Malad','Goregaon','Andheri','Borivali','Kandivali','Dahisar','Bandra','Thane'];
+  const locality      = localityHints.find(l => name.includes(l)) || 'Mumbai';
+
+  /* Parse BHK */
+  const bhkM   = name.match(/(\d)\s*BHK/i);
+  const bedrooms = bhkM ? bhkM[0] : (name.toLowerCase().includes('studio') ? 'Studio' : '2 BHK');
+
+  /* Random-but-deterministic property features based on index for demo */
+  const seed = (name.charCodeAt(0) + idx) % 4;
+  const floor = ['4th','8th','12th','15th'][seed] + ' of ' + ['10','15','18','20'][seed];
+  const area  = [680, 850, 1100, 750][seed];
+  const furnishing = ['Furnished','Semi-Furnished','Unfurnished','Semi-Furnished'][seed];
+
+  const score = calcScore({ price, area, seed, bhk: bhkM ? parseInt(bhkM[1]) : 2 });
+
+  return {
+    ...item,
+    displayName: name,
+    price, locality, bedrooms,
+    area, floor, furnishing,
+    rera:     seed > 0,
+    parking:  seed !== 1,
+    lift:     true,
+    gym:      seed > 1,
+    security: true,
+    score,
+    emoji: ['🏠','🏢','🏗️','🏘️'][idx % 4],
+  };
+}
+
+function parsePrice(str) {
+  if (!str) return 0;
+  const s = str.replace(/[₹,\s]/g,'');
+  if (s.includes('Cr'))    return parseFloat(s) * 1e7;
+  if (s.includes('Lakh'))  return parseFloat(s) * 1e5;
+  return parseInt(s) || 0;
+}
+
+function formatPrice(p) {
+  if (!p) return '—';
+  if (p >= 1e7) return '₹' + (p/1e7).toFixed(2) + ' Cr';
+  if (p >= 1e5) return '₹' + (p/1e5).toFixed(2) + ' L';
+  return '₹' + p.toLocaleString('en-IN');
+}
+
+function calcScore(prop) {
+  /* Weighted scoring: value (40%), area (30%), features (30%) */
+  const valueScore = prop.price > 0 ? Math.max(0, 100 - Math.round((prop.price/1e7) * 5)) : 50;
+  const areaScore  = Math.min(100, Math.round((prop.area / 12) * 1));
+  const ftScore    = (prop.rera ? 20 : 0) + (prop.gym ? 10 : 0) + 20 + (prop.bhk >= 2 ? 15 : 5);
+  return Math.min(99, Math.round(valueScore * 0.4 + areaScore * 0.3 + ftScore * 0.3));
+}
+
+function render() {
+  const props = parseCompareList();
+  const cont  = document.getElementById('cmp-content');
+  const addBar= document.getElementById('add-bar');
+
+  if (!props.length) {
+    cont.innerHTML = `
+      <div class="empty-cmp">
+        <div class="eic">🔄</div>
+        <h2>No properties to compare</h2>
+        <p>Browse properties and click "Compare" on any listing to add it here. You can compare up to 3 at once.</p>
+        <a href="properties.html" class="btn btn-primary">Browse Properties →</a>
+      </div>`;
+    if (addBar) addBar.style.display = 'none';
+    return;
+  }
+
+  if (addBar) {
+    if (props.length < 3) {
+      addBar.style.display = 'flex';
+      document.getElementById('add-bar-msg').textContent =
+        props.length === 1 ? 'Add at least one more property to compare' : 'Add one more to compare 3 properties';
+    } else {
+      addBar.style.display = 'none';
+    }
+  }
+
+  /* Find best values for highlighting */
+  const bestPrice = Math.min(...props.map(p => p.price || Infinity));
+  const bestArea  = Math.max(...props.map(p => p.area  || 0));
+  const bestScore = Math.max(...props.map(p => p.score || 0));
+
+  const cols   = props.length;
+  const gridCls= cols === 1 ? 'cols-1' : cols === 2 ? 'cols-2' : 'cols-3';
+
+  /* Prop columns HTML */
+  const propCols = props.map((p, i) => {
+    const isBest = p.score === bestScore && cols > 1;
+    return `
+      <div class="prop-col${isBest ? ' best-value' : ''}">
+        <div class="prop-thumb">${esc(p.emoji || '🏠')}${isBest ? '<div class="best-badge">⭐ Best Value</div>' : ''}</div>
+        <div class="prop-header">
+          <div class="prop-title">${esc(p.displayName)}</div>
+          <div class="prop-price">${esc(p.price ? formatPrice(p.price) : (p.formatted_price || '—'))}</div>
+          <div class="prop-meta">📍 ${esc(p.locality)} · 🛏 ${esc(p.bedrooms)}</div>
+        </div>
+        ${ROWS.map(row => renderCell(row, p, props)).join('')}
+        <div class="cmp-actions">
+          <a href="${esc(p.page || 'property-detail.html')}" class="btn btn-primary btn-sm" style="text-align:center">View Full Details →</a>
+          <a href="https://wa.me/919326990050?text=${encodeURIComponent('Hi, I saw ' + p.displayName + ' on your comparison page and I am interested. Please share more details.')}"
+             target="_blank" rel="noopener" class="btn btn-outline btn-sm" style="text-align:center">💬 WhatsApp Query</a>
+          <button class="btn btn-outline btn-sm" onclick="removeFromCompare(${i})" type="button" style="color:var(--red)">🗑 Remove</button>
+        </div>
+      </div>`;
+  }).join('');
+
+  /* Label column — only on desktop */
+  const labelCol = cols > 1 ? `
+    <div class="cmp-label-col">
+      <div class="cmp-lbl" style="height:220px"></div>
+      ${ROWS.map(r => `<div class="cmp-lbl">${esc(r.label)}</div>`).join('')}
+    </div>` : '';
+
+  cont.innerHTML = `<div class="cmp-grid ${gridCls}">${labelCol}${propCols}</div>`;
+
+  /* Score bar animation */
+  setTimeout(() => {
+    document.querySelectorAll('.score-fill').forEach(el => {
+      el.style.width = el.getAttribute('data-w') || '0%';
+    });
+  }, 100);
+}
+
+function renderCell(row, prop, allProps) {
+  const val = prop[row.key];
+
+  switch (row.type) {
+    case 'price': {
+      const best = Math.min(...allProps.map(p => p.price || Infinity));
+      const cls  = allProps.length > 1 ? (prop.price === best ? 'better' : prop.price > best * 1.1 ? 'worse' : '') : '';
+      const tag  = prop.price === best && allProps.length > 1 ? ' ✨ Lowest' : '';
+      return `<div class="cmp-cell ${cls}">${esc(formatPrice(prop.price))}${tag}</div>`;
+    }
+    case 'area': {
+      const best = Math.max(...allProps.map(p => p.area || 0));
+      const cls  = allProps.length > 1 ? (prop.area === best ? 'better' : prop.area < best * 0.85 ? 'worse' : '') : '';
+      return `<div class="cmp-cell ${cls}">${prop.area ? prop.area + ' sq.ft' : '—'}</div>`;
+    }
+    case 'bool':
+      return `<div class="cmp-cell">${val ? '<span class="tick">✅</span>' : '<span class="cross">❌</span>'}</div>`;
+    case 'badge':
+      return `<div class="cmp-cell"><span style="background:var(--blue-lt);color:var(--blue-dk);padding:2px 8px;border-radius:100px;font-size:11px;font-weight:700">${esc(val || '—')}</span></div>`;
+    case 'score': {
+      const best = Math.max(...allProps.map(p => p.score || 0));
+      const clr  = val >= 75 ? '#059669' : val >= 50 ? '#F59E0B' : '#EF4444';
+      return `<div class="cmp-cell" style="flex-direction:column;align-items:flex-start;height:auto;padding:8px 16px">
+        <div style="font-weight:800;font-size:18px;color:${clr}">${val}/100</div>
+        <div class="score-bar" style="width:100%">
+          <div class="score-fill" style="background:${clr};width:0%" data-w="${val}%"></div>
+        </div>
+      </div>`;
+    }
+    default:
+      return `<div class="cmp-cell">${esc(val || '—')}</div>`;
+  }
+}
+
+function removeFromCompare(idx) {
+  const list = JSON.parse(localStorage.getItem('pfre_compare') || '[]');
+  list.splice(idx, 1);
+  localStorage.setItem('pfre_compare', JSON.stringify(list));
+  render();
+}
+
+function clearCompare() {
+  if (!confirm('Clear your entire comparison list?')) return;
+  localStorage.removeItem('pfre_compare');
+  render();
+}
+
+/* Init */
+document.addEventListener('DOMContentLoaded', render);
+</script>
+<script src="js/theme.js"></script>
+<script>
+if ('serviceWorker' in navigator) {
+  window.addEventListener('load', () => navigator.serviceWorker.register('./sw.js').catch(() => {}));
+}
+</script>
+</body>
+</html>

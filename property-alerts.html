@@ -1,0 +1,404 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' data: https:; connect-src 'self' https://formspree.io; frame-ancestors 'none'; object-src 'none'">
+<meta http-equiv="X-Content-Type-Options" content="nosniff">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="Set property alerts — get notified by email or WhatsApp when matching properties are listed. Property Finder Real Estate, Mumbai.">
+<meta property="og:title" content="Property Alerts — Property Finder Real Estate">
+<meta property="og:image" content="https://www.propertyfinderrealestate.com/images/og-banner.jpg">
+<link rel="canonical" href="https://www.propertyfinderrealestate.com/property-alerts.html">
+<link rel="icon" type="image/png" sizes="192x192" href="icons/icon-192.png">
+<link rel="manifest" href="manifest.json">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/styles.css">
+<link rel="stylesheet" href="css/theme.css">
+<link rel="stylesheet" href="css/overrides.css">
+<title>Property Alerts — Property Finder Real Estate</title>
+<script>!function(){var t=localStorage.getItem("pfre_theme")||(window.matchMedia("(prefers-color-scheme:dark)").matches?"dark":"light");document.documentElement.setAttribute("data-theme",t);document.documentElement.classList.add("theme-"+t)}();</script>
+<style>
+.alerts-hero{background:linear-gradient(135deg,#012FA1,#1d4ed8);color:#fff;padding:56px 24px 40px;text-align:center}
+.alerts-hero h1{font-size:clamp(22px,4vw,36px);font-weight:800;margin-bottom:8px}
+.alerts-hero p{opacity:.8;font-size:15px;max-width:420px;margin:0 auto}
+.alerts-body{max-width:760px;margin:0 auto;padding:32px 24px 60px;display:grid;gap:24px}
+
+/* Alert form card */
+.alert-card{background:var(--card);border:1px solid var(--border);border-radius:16px;padding:24px;box-shadow:0 2px 16px rgba(0,0,0,.07)}
+.alert-card-title{font-size:17px;font-weight:700;margin-bottom:16px;display:flex;align-items:center;gap:8px}
+
+.form-row{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+.form-group{display:flex;flex-direction:column;gap:5px}
+.form-group.full{grid-column:1/-1}
+.lbl{font-size:12px;font-weight:700;color:var(--text-muted);text-transform:uppercase;letter-spacing:.4px}
+.inp,.sel{padding:10px 12px;border:1.5px solid var(--border);border-radius:8px;font-size:13px;background:var(--bg);color:var(--text);font-family:'DM Sans',sans-serif;width:100%;transition:border .2s}
+.inp:focus,.sel:focus{outline:none;border-color:var(--brand);background:var(--card)}
+
+/* Chip selects */
+.chips{display:flex;flex-wrap:wrap;gap:8px;margin-top:4px}
+.chip{padding:6px 14px;border-radius:100px;border:1.5px solid var(--border);font-size:12px;font-weight:600;cursor:pointer;transition:all .18s;user-select:none;background:var(--bg);color:var(--text)}
+.chip.active{background:var(--brand);color:#fff;border-color:var(--brand)}
+
+/* Channel toggles */
+.channel-row{display:flex;gap:12px;flex-wrap:wrap}
+.channel-btn{display:flex;align-items:center;gap:8px;padding:10px 16px;border:1.5px solid var(--border);border-radius:10px;cursor:pointer;transition:all .18s;background:var(--bg);font-size:13px;font-weight:600}
+.channel-btn.active{border-color:var(--brand);background:rgba(1,47,161,.07);color:var(--brand)}
+.channel-btn input{display:none}
+
+/* Saved alerts */
+.saved-alert{background:var(--card);border:1px solid var(--border);border-radius:12px;padding:14px 16px;display:flex;justify-content:space-between;align-items:flex-start;gap:12px;box-shadow:0 1px 8px rgba(0,0,0,.05)}
+.saved-alert .chips-mini{display:flex;flex-wrap:wrap;gap:6px;margin-top:6px}
+.chips-mini .chip{padding:3px 10px;font-size:11px;background:var(--bg)}
+.saved-alert-actions{display:flex;gap:8px;flex-shrink:0}
+.act-btn{padding:6px 12px;border:1px solid var(--border);border-radius:6px;font-size:12px;cursor:pointer;background:transparent;color:var(--text-muted);transition:.18s}
+.act-btn:hover{border-color:var(--brand);color:var(--brand)}
+.act-btn.del:hover{border-color:var(--red);color:var(--red)}
+
+/* Success banner */
+.success-banner{background:rgba(5,150,105,.1);border:1px solid var(--green);border-radius:12px;padding:14px 18px;display:flex;align-items:center;gap:12px;font-size:13px;color:#065F46}
+[data-theme="dark"] .success-banner{background:rgba(5,150,105,.15);color:#34D399}
+
+@media(max-width:600px){.form-row{grid-template-columns:1fr}.channel-row{flex-direction:column}}
+</style>
+</head>
+<body>
+<a href="#alerts-main" class="skip-link" style="position:absolute;left:-9999px;top:0;padding:8px;background:var(--brand);color:#fff;z-index:9999">Skip to content</a>
+<h1 class="sr-only" style="position:absolute;left:-9999px">Property Alerts — Property Finder Real Estate</h1>
+
+<nav class="nav-bar" role="navigation" aria-label="Main navigation">
+  <div class="nav-container">
+    <a href="index.html" class="nav-logo" style="display:flex;align-items:center">
+      <img src="images/logo.png" alt="Property Finder Real Estate" class="nav-logo-img" style="height:48px;width:auto;object-fit:contain" loading="eager">
+    </a>
+    <div class="nav-actions">
+      <a href="properties.html" class="btn btn-outline btn-sm">Browse Properties</a>
+      <button class="icon-btn" onclick="toggleTheme()" aria-label="Toggle theme" id="themeToggle" aria-pressed="false" type="button">
+        <span class="icon-light" aria-hidden="true">☀️</span>
+        <span class="icon-dark" aria-hidden="true">🌙</span>
+      </button>
+    </div>
+  </div>
+</nav>
+
+<div class="alerts-hero">
+  <div>🔔 Property Alerts</div>
+  <h1>Never Miss Your Dream Home</h1>
+  <p>Save your search criteria and get notified the moment a matching property is listed</p>
+</div>
+
+<main id="alerts-main">
+<div class="alerts-body">
+
+  <!-- How it works -->
+  <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:14px;text-align:center">
+    <div class="alert-card" style="padding:20px">
+      <div style="font-size:32px;margin-bottom:8px">🎯</div>
+      <div style="font-weight:700;margin-bottom:4px">Set Your Criteria</div>
+      <div style="font-size:12px;color:var(--text-muted)">Locality, budget, bedrooms, intent</div>
+    </div>
+    <div class="alert-card" style="padding:20px">
+      <div style="font-size:32px;margin-bottom:8px">🔔</div>
+      <div style="font-weight:700;margin-bottom:4px">Get Notified</div>
+      <div style="font-size:12px;color:var(--text-muted)">Email or WhatsApp the moment it's listed</div>
+    </div>
+    <div class="alert-card" style="padding:20px">
+      <div style="font-size:32px;margin-bottom:8px">🏠</div>
+      <div style="font-weight:700;margin-bottom:4px">Visit & Close</div>
+      <div style="font-size:12px;color:var(--text-muted)">Be first to enquire on new listings</div>
+    </div>
+  </div>
+
+  <!-- Success banner (shown after saving) -->
+  <div class="success-banner" id="success-banner" style="display:none" role="alert" aria-live="polite">
+    ✅ <strong>Alert saved!</strong> We'll notify you on WhatsApp and email when a matching property is listed.
+    <a href="properties.html" style="margin-left:auto;color:inherit;font-weight:700;white-space:nowrap">Browse now →</a>
+  </div>
+
+  <!-- Alert creation form -->
+  <div class="alert-card">
+    <div class="alert-card-title">🔔 Create New Alert</div>
+    <div style="display:flex;flex-direction:column;gap:16px">
+
+      <!-- Intent -->
+      <div>
+        <div class="lbl" style="margin-bottom:6px">I want to</div>
+        <div class="chips" id="chips-intent">
+          <label class="chip active"><input type="radio" name="intent" value="buy" hidden checked>Buy</label>
+          <label class="chip"><input type="radio" name="intent" value="rent" hidden>Rent</label>
+          <label class="chip"><input type="radio" name="intent" value="pg" hidden>PG / Co-living</label>
+        </div>
+      </div>
+
+      <!-- Locality multi-select -->
+      <div>
+        <div class="lbl" style="margin-bottom:6px">Locality (choose all that apply)</div>
+        <div class="chips" id="chips-locality">
+          <span class="chip" data-val="Malad West">Malad West</span>
+          <span class="chip" data-val="Malad East">Malad East</span>
+          <span class="chip" data-val="Goregaon West">Goregaon West</span>
+          <span class="chip" data-val="Goregaon East">Goregaon East</span>
+          <span class="chip" data-val="Andheri West">Andheri West</span>
+          <span class="chip" data-val="Borivali West">Borivali West</span>
+          <span class="chip" data-val="Kandivali West">Kandivali West</span>
+          <span class="chip" data-val="Dahisar">Dahisar</span>
+        </div>
+      </div>
+
+      <!-- Bedrooms -->
+      <div>
+        <div class="lbl" style="margin-bottom:6px">Configuration</div>
+        <div class="chips" id="chips-bhk">
+          <span class="chip" data-val="Studio">Studio</span>
+          <span class="chip" data-val="1 BHK">1 BHK</span>
+          <span class="chip" data-val="2 BHK">2 BHK</span>
+          <span class="chip" data-val="3 BHK">3 BHK</span>
+          <span class="chip" data-val="4 BHK+">4 BHK+</span>
+        </div>
+      </div>
+
+      <!-- Budget -->
+      <div class="form-row">
+        <div class="form-group">
+          <label class="lbl" for="budget-min">Min Budget</label>
+          <select class="sel" id="budget-min">
+            <option value="">No minimum</option>
+            <option value="2500000">₹25 Lakh</option>
+            <option value="5000000">₹50 Lakh</option>
+            <option value="7500000">₹75 Lakh</option>
+            <option value="10000000">₹1 Cr</option>
+            <option value="15000000">₹1.5 Cr</option>
+            <option value="20000000">₹2 Cr</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label class="lbl" for="budget-max">Max Budget</label>
+          <select class="sel" id="budget-max">
+            <option value="">No maximum</option>
+            <option value="5000000">₹50 Lakh</option>
+            <option value="7500000">₹75 Lakh</option>
+            <option value="10000000">₹1 Cr</option>
+            <option value="15000000">₹1.5 Cr</option>
+            <option value="20000000">₹2 Cr</option>
+            <option value="30000000">₹3 Cr</option>
+            <option value="50000000">₹5 Cr+</option>
+          </select>
+        </div>
+      </div>
+
+      <!-- Notification channel -->
+      <div>
+        <div class="lbl" style="margin-bottom:8px">Notify me via</div>
+        <div class="channel-row">
+          <label class="channel-btn active" id="ch-wa">
+            <input type="checkbox" value="whatsapp" id="ch-wa-inp" checked onchange="toggleChannel(this,'ch-wa')">
+            💬 WhatsApp
+          </label>
+          <label class="channel-btn" id="ch-email">
+            <input type="checkbox" value="email" id="ch-email-inp" onchange="toggleChannel(this,'ch-email')">
+            📧 Email
+          </label>
+        </div>
+      </div>
+
+      <!-- Contact fields -->
+      <div class="form-row">
+        <div class="form-group">
+          <label class="lbl" for="alert-name">Your Name *</label>
+          <input class="inp" id="alert-name" type="text" placeholder="Full name" autocomplete="name">
+        </div>
+        <div class="form-group">
+          <label class="lbl" for="alert-phone">WhatsApp Number *</label>
+          <input class="inp" id="alert-phone" type="tel" placeholder="+91 XXXXX XXXXX" autocomplete="tel">
+        </div>
+        <div class="form-group full" id="email-group" style="display:none">
+          <label class="lbl" for="alert-email">Email Address</label>
+          <input class="inp" id="alert-email" type="email" placeholder="you@example.com" autocomplete="email">
+        </div>
+      </div>
+
+      <!-- Frequency -->
+      <div class="form-group">
+        <label class="lbl" for="alert-freq">Alert Frequency</label>
+        <select class="sel" id="alert-freq">
+          <option value="instant">Instant (as soon as listed)</option>
+          <option value="daily">Daily digest</option>
+          <option value="weekly">Weekly summary</option>
+        </select>
+      </div>
+
+      <button class="btn btn-primary" onclick="saveAlert()" type="button" style="align-self:flex-start;padding:12px 28px">
+        🔔 Set Alert
+      </button>
+    </div>
+  </div>
+
+  <!-- My Alerts -->
+  <div class="alert-card">
+    <div class="alert-card-title">📋 My Saved Alerts <span id="alerts-count" style="background:var(--brand);color:#fff;font-size:11px;padding:2px 8px;border-radius:100px;margin-left:4px">0</span></div>
+    <div id="saved-alerts-list">
+      <div style="text-align:center;padding:24px;color:var(--text-muted);font-size:13px">No alerts saved yet. Create one above.</div>
+    </div>
+  </div>
+
+  <!-- CTA: Talk to Saurav -->
+  <div style="background:linear-gradient(135deg,#012FA1,#1d4ed8);border-radius:16px;padding:28px;text-align:center;color:#fff">
+    <div style="font-size:28px;margin-bottom:10px">📞</div>
+    <div style="font-size:18px;font-weight:700;margin-bottom:6px">Prefer a personal search?</div>
+    <p style="opacity:.8;font-size:14px;margin-bottom:16px">Saurav personally curates properties matching your exact needs — a service no algorithm can replicate.</p>
+    <a href="https://wa.me/919326990050?text=Hi%20Saurav,%20I%20am%20looking%20for%20a%20property%20and%20would%20like%20your%20help%20with%20a%20personalised%20search."
+       class="btn" style="background:#fff;color:#012FA1;font-weight:700" target="_blank" rel="noopener">
+      💬 WhatsApp Saurav Now
+    </a>
+  </div>
+
+</div>
+</main>
+
+<footer class="footer" role="contentinfo">
+  <div class="footer-bottom"><p>© 2026 Property Finder Real Estate · Malad West, Mumbai · <a href="privacy-policy.html">Privacy</a></p></div>
+</footer>
+
+<script src="js/theme.js"></script>
+<script src="js/security.js"></script>
+<script src="js/config.js"></script>
+<script>
+const S = {
+  get: (k, d=[]) => { try { return JSON.parse(localStorage.getItem(k)) ?? d } catch { return d } },
+  set: (k, v) => { try { localStorage.setItem(k, JSON.stringify(v)) } catch {} },
+  id:  () => 'al_' + Date.now() + '_' + Math.random().toString(36).slice(2,6),
+};
+
+/* ── Chip multi-select ── */
+document.querySelectorAll('#chips-locality .chip, #chips-bhk .chip').forEach(chip => {
+  chip.addEventListener('click', () => chip.classList.toggle('active'));
+});
+
+/* ── Intent radio chips ── */
+document.querySelectorAll('#chips-intent .chip').forEach(chip => {
+  chip.addEventListener('click', () => {
+    document.querySelectorAll('#chips-intent .chip').forEach(c => c.classList.remove('active'));
+    chip.classList.add('active');
+  });
+});
+
+function toggleChannel(inp, id) {
+  document.getElementById(id).classList.toggle('active', inp.checked);
+  if (id === 'ch-email') {
+    document.getElementById('email-group').style.display = inp.checked ? '' : 'none';
+  }
+}
+
+function saveAlert() {
+  const name  = document.getElementById('alert-name').value.trim();
+  const phone = document.getElementById('alert-phone').value.trim();
+  if (!name)  { showToastLocal('Please enter your name', 'error'); return; }
+  if (!phone) { showToastLocal('Please enter your WhatsApp number', 'error'); return; }
+
+  const localities = [...document.querySelectorAll('#chips-locality .chip.active')].map(c => c.dataset.val);
+  const bhk        = [...document.querySelectorAll('#chips-bhk .chip.active')].map(c => c.dataset.val);
+  const intent     = document.querySelector('#chips-intent .chip.active input')?.value || 'buy';
+
+  if (!localities.length) { showToastLocal('Please select at least one locality', 'error'); return; }
+
+  const alert = {
+    id:         S.id(),
+    name, phone,
+    email:      document.getElementById('alert-email').value.trim(),
+    intent,
+    localities,
+    bhk,
+    budget_min: document.getElementById('budget-min').value,
+    budget_max: document.getElementById('budget-max').value,
+    channels:   ['whatsapp', document.getElementById('ch-email-inp').checked ? 'email' : null].filter(Boolean),
+    frequency:  document.getElementById('alert-freq').value,
+    created:    new Date().toISOString(),
+    active:     true,
+  };
+
+  const alerts = S.get('pfre_property_alerts', []);
+  alerts.push(alert);
+  S.set('pfre_property_alerts', alerts);
+
+  /* POST to backend (fire-and-forget) */
+  const cfg = window.PFRE_CONFIG || {};
+  if (cfg.API_BASE_URL && cfg.FEATURES?.LIVE_PROPERTIES) {
+    fetch(cfg.API_BASE_URL + '/property-alerts', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json', 'X-PFRE-Key': cfg.WEBSITE_API_KEY || '' },
+      body: JSON.stringify(alert),
+    }).catch(() => {});
+  }
+
+  document.getElementById('success-banner').style.display = 'flex';
+  renderSavedAlerts();
+  setTimeout(() => document.getElementById('success-banner').style.display = 'none', 6000);
+}
+
+function renderSavedAlerts() {
+  const alerts  = S.get('pfre_property_alerts', []);
+  const list    = document.getElementById('saved-alerts-list');
+  const counter = document.getElementById('alerts-count');
+  counter.textContent = alerts.length;
+
+  if (!alerts.length) {
+    list.innerHTML = '<div style="text-align:center;padding:24px;color:var(--text-muted);font-size:13px">No alerts saved yet. Create one above.</div>';
+    return;
+  }
+
+  list.innerHTML = alerts.map(a => `
+    <div class="saved-alert" style="margin-bottom:10px">
+      <div style="flex:1">
+        <div style="font-weight:700;font-size:14px">${esc(a.name)} · 📞 ${esc(a.phone)}</div>
+        <div style="font-size:12px;color:var(--text-muted);margin-top:2px">
+          ${esc(a.intent === 'buy' ? '🏠 Buy' : a.intent === 'rent' ? '🔑 Rent' : '🛏 PG')} ·
+          ${esc(a.frequency === 'instant' ? '⚡ Instant' : a.frequency === 'daily' ? '📅 Daily' : '📆 Weekly')} ·
+          ${a.channels.map(c => c === 'whatsapp' ? '💬 WA' : '📧 Email').join(' + ')}
+        </div>
+        <div class="chips-mini">
+          ${a.localities.map(l => `<span class="chip active" style="font-size:11px;padding:2px 8px;border-radius:100px">${esc(l)}</span>`).join('')}
+          ${a.bhk.map(b => `<span class="chip" style="font-size:11px;padding:2px 8px;border-radius:100px">${esc(b)}</span>`).join('')}
+          ${a.budget_max ? `<span class="chip" style="font-size:11px;padding:2px 8px;border-radius:100px">≤${formatBudget(a.budget_max)}</span>` : ''}
+        </div>
+      </div>
+      <div class="saved-alert-actions">
+        <button class="act-btn" onclick="toggleAlert('${a.id}')" type="button" title="${a.active ? 'Pause' : 'Resume'}">${a.active ? '⏸' : '▶️'}</button>
+        <button class="act-btn del" onclick="deleteAlert('${a.id}')" type="button" title="Delete">🗑</button>
+      </div>
+    </div>`).join('');
+}
+
+function toggleAlert(id) {
+  const alerts = S.get('pfre_property_alerts', []);
+  const al = alerts.find(a => a.id === id);
+  if (al) { al.active = !al.active; S.set('pfre_property_alerts', alerts); renderSavedAlerts(); }
+}
+
+function deleteAlert(id) {
+  if (!confirm('Delete this alert?')) return;
+  const alerts = S.get('pfre_property_alerts', []).filter(a => a.id !== id);
+  S.set('pfre_property_alerts', alerts);
+  renderSavedAlerts();
+}
+
+function formatBudget(v) {
+  v = parseInt(v);
+  return v >= 1e7 ? '₹' + (v/1e7).toFixed(0) + ' Cr' : '₹' + (v/1e5).toFixed(0) + ' L';
+}
+
+function esc(s) { return String(s??'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;') }
+
+function showToastLocal(msg, type='info') {
+  if (typeof showToast === 'function') { showToast(msg, type); return; }
+  alert(msg);
+}
+
+document.addEventListener('DOMContentLoaded', renderSavedAlerts);
+</script>
+<script>
+if ('serviceWorker' in navigator) {
+  window.addEventListener('load', () => navigator.serviceWorker.register('./sw.js').catch(() => {}));
+}
+</script>
+</body>
+</html>

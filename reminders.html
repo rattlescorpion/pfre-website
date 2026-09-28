@@ -1,0 +1,865 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<link rel="canonical" href="https://www.propertyfinderrealestate.com/reminders.html">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' https://cdnjs.cloudflare.com https://challenges.cloudflare.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' data: https:; connect-src 'self' https://api.propertyfinderrealestate.com http://localhost:8000 https://formspree.io; frame-src https://www.google.com https://challenges.cloudflare.com; form-action 'self' https://formspree.io; object-src 'none'; base-uri 'self'; frame-ancestors 'none'">
+<meta http-equiv="X-Content-Type-Options" content="nosniff">
+<meta http-equiv="X-Frame-Options" content="SAMEORIGIN">
+<meta http-equiv="Referrer-Policy" content="strict-origin-when-cross-origin"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <!-- Open Graph -->
+  <meta property="og:type"        content="website">
+  <meta property="og:title"       content="Property Reminders | Birthday, Anniversary, Agreement Alerts">
+  <meta property="og:description" content="Set reminders for client birthdays, anniversaries, agreement expiry with WhatsApp alerts.">
+  <meta property="og:url"         content="https://www.propertyfinderrealestate.com/reminders.html">
+  <meta property="og:image"       content="https://www.propertyfinderrealestate.com/images/og-banner.jpg">
+  <meta property="og:image:width"  content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:image:type"   content="image/jpeg">
+  <meta property="og:site_name"   content="Property Finder Real Estate">
+  <meta property="og:locale"      content="en_IN">
+  <!-- Twitter Card -->
+  <meta name="twitter:card"        content="summary">
+  <meta name="twitter:title"       content="Property Reminders | Birthday, Anniversary, Agreement Alerts">
+  <meta name="twitter:description" content="Set reminders for client birthdays, anniversaries, agreement expiry with WhatsApp alerts.">
+  <meta name="twitter:image"       content="https://www.propertyfinderrealestate.com/icons/icon.svg">
+  <meta name="twitter:site"        content="@PropertyFinderA">
+  <!-- Additional SEO -->
+  <meta name="robots"  content="index, follow, max-snippet:-1, max-image-preview:large">
+  <meta name="author"  content="Property Finder Real Estate">
+  <meta name="geo.region"       content="IN-MH">
+  <meta name="geo.placename"    content="Mumbai">
+  <meta name="geo.position"     content="19.1886;72.8485">
+  <meta name="ICBM"             content="19.1886, 72.8485">
+  <title>Reminders — Birthday & Agreement Alerts | PFRE</title>
+<meta name="description" content="Manage birthday, marriage anniversary, death anniversary, and agreement expiry reminders. Auto WhatsApp, email & SMS alerts for your clients.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;0,900;1,700&family=DM+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/styles.css">
+<link rel="stylesheet" href="css/widgets.css">
+<link rel="stylesheet" href="css/mobile.css">
+<link rel="manifest" href="manifest.json"><link rel="icon" type="image/png" sizes="192x192" href="icons/icon-192.png">
+<meta name="theme-color" content="#2563EB">
+<script>var t=localStorage.getItem("pfre_theme")||(window.matchMedia("(prefers-color-scheme: dark)").matches?"dark":"light");document.documentElement.setAttribute("data-theme",t);
+function getTemplateUrl(r) {
+  const typeMap = {
+    birthday:'birthday', anniversary:'marriage', death:'death',
+    ll:'ll_expiry', rent:'rent_expiry', pg:'pg_expiry', lease:'lease_expiry'
+  };
+  const tmplKey = typeMap[r.type] || 'birthday';
+  const params = new URLSearchParams({
+    name: r.name || '',
+    phone: r.phone || '',
+    property: r.property || r.address || '',
+    type: tmplKey
+  });
+  return 'email-templates.html?' + params.toString();
+}
+</script>
+<style>
+/* Dashboard Summary Cards */
+.reminder-dashboard { display:grid; grid-template-columns:repeat(5,1fr); gap:16px; margin-bottom:40px; }
+.dash-card { background:white; border-radius:14px; padding:20px; border:1.5px solid var(--border); text-align:center; cursor:pointer; transition:all .25s; }
+[data-theme="dark"] .dash-card { background:#1E293B; border-color:#334155; }
+.dash-card:hover,.dash-card.active { border-color:var(--blue); box-shadow:0 8px 24px rgba(37,99,235,.15); transform:translateY(-2px); }
+.dash-card.urgent { border-color:#EF4444; background:#FEF2F2; }
+[data-theme="dark"] .dash-card.urgent { background:rgba(239,68,68,.1); border-color:#EF4444; }
+.dash-card.today { border-color:#F59E0B; background:#FFFBEB; }
+[data-theme="dark"] .dash-card.today { background:rgba(245,158,11,.1); border-color:#F59E0B; }
+.dash-num { font-family:'Playfair Display',serif; font-size:32px; font-weight:900; line-height:1; }
+.dash-num.red { color:#EF4444; }
+.dash-num.amber { color:#F59E0B; }
+.dash-num.blue { color:var(--blue); }
+.dash-num.green { color:#10B981; }
+.dash-num.gray { color:var(--text-muted); }
+.dash-label { font-size:12px; color:var(--text-muted); margin-top:6px; font-weight:600; text-transform:uppercase; letter-spacing:0.5px; }
+
+/* Filters bar */
+.reminder-bar { display:flex; align-items:center; gap:12px; margin-bottom:28px; flex-wrap:wrap; }
+.rem-filter-tabs { display:flex; gap:4px; background:var(--off-white); padding:4px; border-radius:10px; }
+.rem-tab { padding:7px 16px; border:none; background:transparent; border-radius:8px; font-size:13px; font-weight:600; color:var(--text-muted); cursor:pointer; transition:all .2s; white-space:nowrap; }
+.rem-tab.active { background:white; color:var(--blue); box-shadow:var(--shadow-sm); }
+[data-theme="dark"] .rem-filter-tabs { background:#0F172A; }
+[data-theme="dark"] .rem-tab.active { background:#1E293B; }
+.rem-search { flex:1; padding:9px 14px; border:1.5px solid var(--border); border-radius:9px; font-size:14px; outline:none; min-width:160px; background:var(--white); color:var(--text); font-family:'DM Sans',sans-serif; }
+[data-theme="dark"] .rem-search { background:#1E293B; border-color:#334155; color:#E2E8F0; }
+.rem-search:focus { border-color:var(--blue); }
+
+/* Reminder Cards */
+.reminder-list { display:flex; flex-direction:column; gap:14px; }
+.reminder-card { background:white; border-radius:14px; padding:18px 22px; border:1.5px solid var(--border); display:grid; grid-template-columns:auto 1fr auto; gap:16px; align-items:center; transition:all .25s; }
+[data-theme="dark"] .reminder-card { background:#1E293B; border-color:#334155; }
+.reminder-card:hover { border-color:var(--blue-light); box-shadow:var(--shadow-md); }
+.reminder-card.urgent { border-left:4px solid #EF4444; }
+.reminder-card.today-card { border-left:4px solid #F59E0B; background:linear-gradient(135deg,#FFFBEB,white); }
+[data-theme="dark"] .reminder-card.today-card { background:linear-gradient(135deg,rgba(245,158,11,.05),#1E293B); }
+.reminder-card.done-card { opacity:.55; }
+.rem-type-badge { width:44px; height:44px; border-radius:12px; display:flex; align-items:center; justify-content:center; font-size:22px; flex-shrink:0; }
+.rem-info .rem-name { font-size:16px; font-weight:700; margin-bottom:3px; }
+.rem-info .rem-sub { font-size:13px; color:var(--text-muted); display:flex; align-items:center; gap:10px; flex-wrap:wrap; }
+.rem-info .rem-sub span { display:inline-flex; align-items:center; gap:4px; }
+.rem-countdown { text-align:right; }
+.rem-days-left { font-family:'Playfair Display',serif; font-size:24px; font-weight:900; line-height:1; }
+.rem-days-left.red { color:#EF4444; }
+.rem-days-left.amber { color:#F59E0B; }
+.rem-days-left.green { color:#10B981; }
+.rem-days-label { font-size:11px; color:var(--text-muted); margin-top:2px; text-transform:uppercase; letter-spacing:.5px; }
+.rem-actions { display:flex; gap:8px; margin-top:12px; grid-column:1/-1; flex-wrap:wrap; }
+.rem-btn { padding:7px 14px; border-radius:8px; font-size:12px; font-weight:700; cursor:pointer; border:none; transition:all .2s; display:inline-flex; align-items:center; gap:5px; font-family:'DM Sans',sans-serif; }
+.rem-btn.wa { background:#25D366; color:white; }
+.rem-btn.wa:hover { background:#1da851; }
+.rem-btn.email { background:var(--blue); color:white; }
+.rem-btn.email:hover { background:var(--blue-dark); }
+.rem-btn.sms { background:#6B7280; color:white; }
+.rem-btn.sms:hover { background:#4B5563; }
+.rem-btn.edit { background:var(--off-white); color:var(--text); border:1.5px solid var(--border); }
+[data-theme="dark"] .rem-btn.edit { background:#0F172A; border-color:#334155; color:#E2E8F0; }
+.rem-btn.del { background:#FEF2F2; color:#EF4444; border:1.5px solid #FECACA; }
+.rem-btn.done-btn { background:#D1FAE5; color:#065F46; border:1.5px solid #A7F3D0; }
+.rem-today-tag { background:#F59E0B; color:white; padding:2px 10px; border-radius:100px; font-size:11px; font-weight:700; }
+.rem-overdue-tag { background:#EF4444; color:white; padding:2px 10px; border-radius:100px; font-size:11px; font-weight:700; }
+
+/* Modal */
+.modal-overlay { position:fixed; inset:0; background:rgba(0,0,0,.5); z-index:3000; display:none; align-items:center; justify-content:center; padding:20px; }
+.modal-overlay.open { display:flex; }
+.modal-box { background:white; border-radius:20px; padding:36px; width:100%; max-width:560px; max-height:90vh; overflow-y:auto; box-shadow:0 32px 80px rgba(0,0,0,.25); }
+[data-theme="dark"] .modal-box { background:#1E293B; }
+.modal-box h3 { font-family:'Playfair Display',serif; font-size:24px; font-weight:700; margin-bottom:20px; }
+.modal-head { display:flex; justify-content:space-between; align-items:center; margin-bottom:24px; }
+.modal-close { background:none; border:none; font-size:24px; cursor:pointer; color:var(--text-muted); }
+.modal-close:hover { color:var(--text); }
+.m-field { margin-bottom:16px; }
+.m-field label { display:block; font-size:13px; font-weight:600; color:var(--text-muted); margin-bottom:6px; text-transform:uppercase; letter-spacing:.5px; }
+.m-input { width:100%; padding:11px 14px; border:1.5px solid var(--border); border-radius:9px; font-size:14px; color:var(--text); background:var(--white); outline:none; transition:border-color .2s; font-family:'DM Sans',sans-serif; }
+.m-input:focus { border-color:var(--blue); }
+[data-theme="dark"] .m-input { background:#0F172A; border-color:#334155; color:#E2E8F0; }
+.m-row { display:grid; grid-template-columns:1fr 1fr; gap:14px; }
+.type-grid { display:grid; grid-template-columns:repeat(4,1fr); gap:8px; margin-bottom:8px; }
+.type-btn { padding:10px 8px; border:2px solid var(--border); border-radius:10px; text-align:center; cursor:pointer; font-size:12px; font-weight:600; transition:all .2s; background:white; }
+[data-theme="dark"] .type-btn { background:#0F172A; border-color:#334155; color:#E2E8F0; }
+.type-btn.active,.type-btn:hover { border-color:var(--blue); background:var(--blue-light); color:var(--blue); }
+.type-btn .t-icon { font-size:20px; display:block; margin-bottom:4px; }
+.m-save-btn { width:100%; padding:14px; background:var(--blue); color:white; border:none; border-radius:10px; font-size:15px; font-weight:700; cursor:pointer; margin-top:8px; font-family:'DM Sans',sans-serif; }
+.m-save-btn:hover { background:var(--blue-dark); }
+
+/* Message Preview */
+.msg-preview { background:var(--off-white); border-radius:12px; padding:16px; margin-top:12px; font-size:13px; line-height:1.7; color:var(--text-muted); white-space:pre-wrap; border:1.5px solid var(--border); }
+[data-theme="dark"] .msg-preview { background:#0F172A; border-color:#334155; }
+
+/* Empty state */
+.empty-state { text-align:center; padding:64px 24px; }
+.empty-icon { font-size:64px; margin-bottom:16px; }
+.empty-state h3 { font-size:20px; font-weight:700; margin-bottom:8px; }
+.empty-state p { font-size:14px; color:var(--text-muted); }
+
+/* Notification bar */
+.notif-bar { background:linear-gradient(135deg,#F59E0B,#FBBF24); color:white; padding:14px 5%; display:flex; align-items:center; gap:14px; flex-wrap:wrap; }
+.notif-bar p { flex:1; font-size:14px; font-weight:600; }
+.notif-actions { display:flex; gap:10px; }
+.notif-btn { padding:8px 16px; border-radius:8px; font-size:13px; font-weight:700; cursor:pointer; border:none; font-family:'DM Sans',sans-serif; }
+.notif-btn.primary { background:white; color:#92400E; }
+.notif-btn.secondary { background:rgba(255,255,255,.2); color:white; }
+
+@media(max-width:900px){ .reminder-dashboard{grid-template-columns:repeat(3,1fr);} .reminder-card{grid-template-columns:auto 1fr; grid-template-rows:auto auto;} .rem-countdown{grid-column:2; grid-row:1; text-align:right;} }
+@media(max-width:600px){ .reminder-dashboard{grid-template-columns:repeat(2,1fr);} .type-grid{grid-template-columns:repeat(3,1fr);} .m-row{grid-template-columns:1fr;} .reminder-card{grid-template-columns:1fr;} }
+</style>
+<link rel="stylesheet" href="css/theme.css">
+<link rel="stylesheet" href="css/overrides.css">
+<link rel="stylesheet" href="css/utils.css">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "RealEstateAgent",
+  "name": "Property Finder Real Estate",
+  "url": "https://www.propertyfinderrealestate.com",
+  "telephone": "+91-93269-90050",
+  "email": "propertyfinderre@gmail.com",
+  "logo": "https://www.propertyfinderrealestate.com/images/logo.png",
+  "image": "https://www.propertyfinderrealestate.com/images/logo.png",
+  "address": {
+    "@type": "PostalAddress",
+    "streetAddress": "Shop No. 9, Deepanjali CHS, Baf-Hira Nagar, Lower Kharodi, Jankalyan Nagar Rd",
+    "addressLocality": "Malad West",
+    "addressRegion": "Maharashtra",
+    "postalCode": "400095",
+    "addressCountry": "IN"
+  },
+  "geo": {
+    "@type": "GeoCoordinates",
+    "latitude": 19.1886,
+    "longitude": 72.8485
+  },
+  "openingHoursSpecification": [
+    {
+      "@type": "OpeningHoursSpecification",
+      "dayOfWeek": [
+        "Monday",
+        "Tuesday",
+        "Wednesday",
+        "Thursday",
+        "Friday",
+        "Saturday"
+      ],
+      "opens": "10:00",
+      "closes": "19:00"
+    }
+  ],
+  "areaServed": [
+    "Malad",
+    "Goregaon",
+    "Andheri",
+    "Borivali",
+    "Kandivali",
+    "Dahisar",
+    "Mira Road"
+  ],
+  "priceRange": "Free consultation"
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "WebApplication",
+  "name": "Property Reminders — Birthday, Anniversary & Agreement Alerts",
+  "description": "Set birthday, anniversary and agreement renewal reminders for your property clients in Mumbai.",
+  "url": "https://www.propertyfinderrealestate.com/reminders.html",
+  "applicationCategory": "BusinessApplication",
+  "operatingSystem": "Web"
+}
+</script>
+</head>
+<body>
+<a href="#main-content" class="skip-link">Skip to main content</a>
+<nav class="navbar" role="navigation" aria-label="Main navigation">
+  <a href="index.html" class="nav-logo" style="display:flex;align-items:center">
+    <img src="images/logo.png" alt="Property Finder Real Estate" class="nav-logo-img" style="height:48px;width:auto;object-fit:contain" loading="eager">
+  </a>
+  <ul class="nav-menu" role="list">
+    <li class="nav-item"><a href="index.html" class="nav-link" data-i18n="nav.home">Home</a></li>
+    <li class="nav-item"><a href="properties.html" class="nav-link">Properties <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M6 9l6 6 6-6"/></svg></a><div class="dropdown"><a href="properties.html"><span class="dd-icon">🏠</span> All Properties</a><a href="projects.html"><span class="dd-icon">🏗️</span> Projects</a><a href="neighbourhoods.html"><span class="dd-icon">📍</span> Neighbourhoods</a></div></li>
+    <li class="nav-item"><a href="services.html" class="nav-link" data-i18n="nav.services">Services</a></li>
+    <li class="nav-item"><a href="about.html" class="nav-link">About <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M6 9l6 6 6-6"/></svg></a><div class="dropdown"><a href="about.html"><span class="dd-icon">🏢</span> About Us</a><a href="team.html"><span class="dd-icon">👥</span> Our Team</a><a href="testimonials.html"><span class="dd-icon">⭐</span> Testimonials</a><a href="faq.html"><span class="dd-icon">❓</span> FAQ</a><a href="careers.html"><span class="dd-icon">💼</span> Careers</a><a href="nri.html"><span class="dd-icon">🌍</span> NRI Corner</a></div></li>
+    <li class="nav-item"><a href="calculators.html" class="nav-link active">Tools <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M6 9l6 6 6-6"/></svg></a><div class="dropdown"><a href="calculators.html"><span class="dd-icon">🧮</span> Calculators</a><a href="tds-calculators.html"><span class="dd-icon">📋</span> TDS Calculators</a><a href="converter.html"><span class="dd-icon">📐</span> Measurement Converter</a><a href="insurance.html"><span class="dd-icon">🛡️</span> Property Insurance</a><a href="email-templates.html">Email Templates</a>
+<a href="agreement-registration.html">Registration Tracker</a>
+<a href="reminders.html"><span class="dd-icon">🔔</span> Reminders</a><a href="price-trends.html"><span class="dd-icon">📈</span> Price Trends</a></div></li>
+    <li class="nav-item"><a href="blog.html" class="nav-link" data-i18n="nav.blog">Blog</a></li>
+    <li class="nav-item"><a href="contact.html" class="nav-link" data-i18n="nav.contact">Contact</a></li>
+  </ul>
+  <div class="nav-actions">
+    <a href="tel:+919326990050" class="nav-phone">📞 +91 93269 90050</a>
+    <a href="post-property.html" class="btn btn-primary btn-sm">+ Post Property</a>
+    <button class="theme-toggle" id="themeToggle"><span class="icon-light">☀️</span><span class="icon-dark">🌙</span></button>
+    <button class="hamburger" id="hamburger" aria-label="Toggle navigation" aria-expanded="false" role="button"><span></span><span></span><span></span></button>
+  </div>
+</nav>
+<div class="mobile-menu" id="mobileMenu">
+  <a href="index.html">🏠 Home</a><a href="properties.html">🏘️ Properties</a><a href="services.html">⚙️ Services</a><a href="calculators.html">🧮 Calculators</a><a href="tds-calculators.html">📋 TDS Calculators</a><a href="converter.html">📐 Converter</a><a href="insurance.html">🛡️ Insurance</a><a href="email-templates.html">Email Templates</a>
+<a href="agreement-registration.html">Registration Tracker</a>
+<a href="reminders.html">🔔 Reminders</a><a href="price-trends.html">📈 Price Trends</a><a href="faq.html">❓ FAQ</a><a href="nri.html">🌍 NRI</a><a href="home-loan.html">🏦 Home Loan</a><a href="blog.html">📝 Blog</a><a href="post-property.html">➕ Post Property</a><a href="contact.html">📞 Contact</a>
+  <a href="tel:+919326990050" class="btn btn-primary mob-cta">📞 Call Now</a>
+</div>
+
+<!-- Today's reminder alert bar (shown dynamically) -->
+<div id="todayBar" style="display:none" class="notif-bar">
+  <span style="font-size:24px">🔔</span>
+  <p id="todayBarMsg">You have reminders due today!</p>
+  <div class="notif-actions">
+    <button class="notif-btn primary" onclick="document.getElementById('tab-today')?.click()">View Now</button>
+    <button class="notif-btn secondary" onclick="document.getElementById('todayBar').style.display='none'">Dismiss</button>
+  </div>
+</div>
+
+<section id="main-content" class="page-hero">
+  <span class="section-label">Client Relationship Manager</span>
+  <h1>Smart <em>Reminders</em> System</h1>
+  <p>Never miss a birthday, anniversary, or agreement expiry. Auto-send personalised WhatsApp, Email & SMS greetings to your clients.</p>
+  <nav aria-label="Breadcrumb"><div class="breadcrumb"><a href="index.html">Home</a><span class="breadcrumb-sep" aria-hidden="true">›</span><span>Reminders</span></div></nav><!-- /breadcrumb -->
+</section>
+
+<section style="padding:48px 5% 80px">
+  <!-- DASHBOARD -->
+  <div class="reminder-dashboard" id="dashCards">
+    <div class="dash-card today" onclick="filterReminders('today')" role="button" tabindex="0" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();filterReminders('today')}">
+      <div class="dash-num amber" id="dToday">0</div>
+      <div class="dash-label">Due Today</div>
+    </div>
+    <div class="dash-card urgent" onclick="filterReminders('week')" role="button" tabindex="0" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();filterReminders('week')}">
+      <div class="dash-num red" id="dWeek">0</div>
+      <div class="dash-label">This Week</div>
+    </div>
+    <div class="dash-card" onclick="filterReminders('month')" role="button" tabindex="0" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();filterReminders('month')}">
+      <div class="dash-num blue" id="dMonth">0</div>
+      <div class="dash-label">This Month</div>
+    </div>
+    <div class="dash-card" onclick="filterReminders('all')" role="button" tabindex="0" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();filterReminders('all')}">
+      <div class="dash-num green" id="dAll">0</div>
+      <div class="dash-label">Total Active</div>
+    </div>
+    <div class="dash-card" onclick="openAddModal()" role="button" tabindex="0" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();openAddModal()}">
+      <div class="dash-num blue">+</div>
+      <div class="dash-label">Add New</div>
+    </div>
+  </div>
+
+  <!-- FILTER BAR -->
+  <div class="reminder-bar">
+    <div class="rem-filter-tabs">
+      <button class="rem-tab active" id="tab-all"    onclick="filterReminders('all',this)">All</button>
+      <button class="rem-tab" id="tab-today"  onclick="filterReminders('today',this)">Today 🎉</button>
+      <button class="rem-tab" id="tab-week"   onclick="filterReminders('week',this)">This Week</button>
+      <button class="rem-tab" id="tab-month"  onclick="filterReminders('month',this)">This Month</button>
+      <button class="rem-tab" id="tab-birthday" onclick="filterReminders('birthday',this)">Birthdays</button>
+      <button class="rem-tab" id="tab-anniv"  onclick="filterReminders('marriage_anniversary',this)">Anniversaries</button>
+      <button class="rem-tab" id="tab-agr"    onclick="filterReminders('agreement',this)">Agreements</button>
+    </div>
+    <input class="rem-search" type="text" placeholder="🔍 Search by name, phone…" id="remSearch" oninput="renderReminders()">
+    <button class="btn btn-primary btn-sm" onclick="openAddModal()">+ Add Reminder</button>
+    <button class="btn btn-outline btn-sm" onclick="sendAllToday()">📤 Send Today's Greetings</button>
+    <button class="btn btn-outline btn-sm" onclick="exportReminders()">📥 Export</button>
+  </div>
+
+  <!-- LIST -->
+  <div class="reminder-list" id="reminderList">
+    <div class="empty-state">
+      <div class="empty-icon">🔔</div>
+      <h3>No reminders yet</h3>
+      <p>Add your first reminder to get started — birthday, anniversary, or agreement expiry.</p>
+      <button class="btn btn-primary" style="margin-top:16px" onclick="openAddModal()">+ Add First Reminder</button>
+    </div>
+  </div>
+</section>
+
+<!-- ADD/EDIT MODAL -->
+<div class="modal-overlay" id="reminderModal">
+  <div class="modal-box">
+    <div class="modal-head">
+      <h3 id="modalTitle">Add New Reminder</h3>
+      <button class="modal-close" onclick="closeModal()">×</button>
+    </div>
+
+    <div class="m-field">
+      <label>Reminder Type</label>
+      <div class="type-grid" id="typeGrid">
+        <div class="type-btn active" data-type="birthday" onclick="selectType('birthday',this)" role="button" tabindex="0" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();selectType('birthday',this)}"><span class="t-icon">🎂</span>Birthday</div>
+        <div class="type-btn" data-type="marriage_anniversary" onclick="selectType('marriage_anniversary',this)" role="button" tabindex="0" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();selectType('marriage_anniversary',this)}"><span class="t-icon">💍</span>Marriage Anniv.</div>
+        <div class="type-btn" data-type="death_anniversary" onclick="selectType('death_anniversary',this)" role="button" tabindex="0" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();selectType('death_anniversary',this)}"><span class="t-icon">🕯️</span>Death Anniv.</div>
+        <div class="type-btn" data-type="ll_agreement" onclick="selectType('ll_agreement',this)" role="button" tabindex="0" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();selectType('ll_agreement',this)}"><span class="t-icon">📄</span>L&L Agreement</div>
+        <div class="type-btn" data-type="rent_agreement" onclick="selectType('rent_agreement',this)" role="button" tabindex="0" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();selectType('rent_agreement',this)}"><span class="t-icon">🔑</span>Rent Agreement</div>
+        <div class="type-btn" data-type="pg_agreement" onclick="selectType('pg_agreement',this)" role="button" tabindex="0" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();selectType('pg_agreement',this)}"><span class="t-icon">🏠</span>PG Agreement</div>
+        <div class="type-btn" data-type="lease_agreement" onclick="selectType('lease_agreement',this)" role="button" tabindex="0" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();selectType('lease_agreement',this)}"><span class="t-icon">📋</span>Lease Agreement</div>
+        <div class="type-btn" data-type="custom" onclick="selectType('custom',this)" role="button" tabindex="0" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();selectType('custom',this)}"><span class="t-icon">⭐</span>Custom</div>
+      </div>
+    </div>
+
+    <div class="m-row">
+      <div class="m-field">
+        <label>Full Name *</label>
+        <input class="m-input" type="text" id="mName" autocomplete="name" placeholder="Rahul Sharma">
+      </div>
+      <div class="m-field">
+        <label>Mobile / WhatsApp *</label>
+        <input class="m-input" type="tel" id="mPhone" autocomplete="tel" placeholder="+91 98765 43210">
+      </div>
+    </div>
+    <div class="m-row">
+      <div class="m-field">
+        <label>Email Address</label>
+        <input class="m-input" type="email" id="mEmail" autocomplete="email" placeholder="rahul@example.com">
+      </div>
+      <div class="m-field">
+        <label>Property / Reference</label>
+        <input class="m-input" type="text" id="mProperty" placeholder="e.g. 3BHK Malad West">
+      </div>
+    </div>
+
+    <!-- Date fields (change based on type) -->
+    <div id="dateSection">
+      <div class="m-field">
+        <label id="dateLabel">Date of Birth / Event Date *</label>
+        <input class="m-input" type="date" id="mDate">
+      </div>
+    </div>
+
+    <!-- Agreement fields (shown only for agreement types) -->
+    <div id="agreementSection" style="display:none">
+      <div class="m-row">
+        <div class="m-field">
+          <label>Agreement Start Date *</label>
+          <input class="m-input" type="date" id="mStartDate" oninput="calcExpiry()">
+        </div>
+        <div class="m-field">
+          <label>Duration</label>
+          <div style="display:flex;gap:8px">
+            <input class="m-input" type="number" id="mDuration" value="11" min="1" oninput="calcExpiry()" style="width:70px">
+            <select class="m-input" id="mDurUnit" onchange="calcExpiry()" style="flex:1">
+              <option value="months">Months</option>
+              <option value="years">Years</option>
+              <option value="days">Days</option>
+            </select>
+          </div>
+        </div>
+      </div>
+      <div class="m-field">
+        <label>Calculated Expiry Date</label>
+        <input class="m-input" type="date" id="mExpiry" readonly style="background:var(--blue-light);color:var(--blue);font-weight:700">
+      </div>
+    </div>
+
+    <div class="m-row">
+      <div class="m-field">
+        <label>Remind (days before)</label>
+        <select class="m-input" id="mAdvance">
+          <option value="0">On the day</option>
+          <option value="1">1 day before</option>
+          <option value="3">3 days before</option>
+          <option value="7" selected>7 days before</option>
+          <option value="14">14 days before</option>
+          <option value="30">30 days before</option>
+          <option value="60">60 days before</option>
+          <option value="90">90 days before</option>
+        </select>
+      </div>
+      <div class="m-field">
+        <label>Auto-send Message?</label>
+        <select class="m-input" id="mAutoSend">
+          <option value="prompt">Prompt me to send</option>
+          <option value="wa">Auto WhatsApp (manual click)</option>
+          <option value="email">Auto Email (manual click)</option>
+        </select>
+      </div>
+    </div>
+
+    <div class="m-field">
+      <label>Custom Note</label>
+      <textarea class="m-input" id="mNote" rows="2" placeholder="Any specific details or notes…"></textarea>
+    </div>
+
+    <div class="m-field">
+      <label>Message Preview</label>
+      <div class="msg-preview" id="msgPreview">Select a type and enter a name to see the auto-generated message.</div>
+    </div>
+
+    <input type="hidden" id="mEditId">
+    <button class="m-save-btn" onclick="saveReminder()">💾 Save Reminder</button>
+  </div>
+</div>
+
+<!-- SEND MESSAGE MODAL -->
+<div class="modal-overlay" id="sendModal">
+  <div class="modal-box">
+    <div class="modal-head">
+      <h3 id="sendModalTitle">Send Greeting</h3>
+      <button class="modal-close" onclick="document.getElementById('sendModal').classList.remove('open')">×</button>
+    </div>
+    <div class="msg-preview" id="sendMsgPreview" style="margin-bottom:20px"></div>
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px">
+      <a class="rem-btn wa" id="sendWABtn" href="#" target="_blank" rel="noopener noreferrer" style="justify-content:center;text-decoration:none;font-size:14px;padding:13px">💬 Send via WhatsApp</a>
+      <a class="rem-btn email" id="sendEmailBtn" href="#" style="justify-content:center;text-decoration:none;font-size:14px;padding:13px">✉️ Send via Email</a>
+      <button class="rem-btn sms" onclick="copySMS()" style="justify-content:center;font-size:14px;padding:13px">📱 Copy SMS Text</button>
+      <button class="rem-btn edit" onclick="document.getElementById('sendModal').classList.remove('open')" style="justify-content:center;font-size:14px;padding:13px">✖ Close</button>
+    </div>
+  </div>
+</div>
+
+<footer class="footer">
+  <div class="footer-grid">
+    <div class="footer-brand">
+      <div class="footer-logo"><svg width="36" height="36" viewBox="0 0 40 40" fill="none"><circle cx="17" cy="17" r="13" stroke="#2563EB" stroke-width="2.8"/><path d="M17 22V18" stroke="#2563EB" stroke-width="2.2" stroke-linecap="round"/><rect x="14" y="18" width="6" height="4" rx="0.5" stroke="#2563EB" stroke-width="2.2"/><path d="M12 18L17 13L22 18" stroke="#2563EB" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/><path d="M27 27L33 33" stroke="#2563EB" stroke-width="2.8" stroke-linecap="round"/></svg><div class="footer-logo-text"><div class="brand">Property Finder Real Estate</div><div class="sub">Mumbai, Maharashtra</div></div></div>
+      <p class="tagline">"Your Search Ends Here."</p>
+      <div class="social-row">
+        <a href="https://www.instagram.com/propertyfinderrealestate" class="social-btn" target="_blank" rel="noopener noreferrer" aria-label="Instagram"><svg width="16" height="16" fill="none" stroke="white" stroke-width="2" viewBox="0 0 24 24"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1112.63 8 4 4 0 0116 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg></a>
+        <a href="https://www.facebook.com/PropertyFinderRealEstate/reviews" class="social-btn" target="_blank" rel="noopener noreferrer" aria-label="Facebook Reviews"><svg width="16" height="16" fill="white" viewBox="0 0 24 24"><path d="M18 2h-3a5 5 0 00-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 011-1h3z"/></svg></a>
+        <a href="https://www.linkedin.com/company/propertyfinderrealestate" class="social-btn" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn"><svg width="16" height="16" fill="white" viewBox="0 0 24 24"><path d="M16 8a6 6 0 016 6v7h-4v-7a2 2 0 00-2-2 2 2 0 00-2 2v7h-4v-7a6 6 0 016-6zM2 9h4v12H2z"/><circle cx="4" cy="4" r="2"/></svg></a>
+        <a href="https://www.youtube.com/@PropertyFinderRealEstate" class="social-btn" target="_blank" rel="noopener noreferrer" aria-label="YouTube"><svg width="16" height="16" viewBox="0 0 24 24" fill="white"><path d="M23.498 6.186a3.016 3.016 0 00-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 00.502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 002.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 002.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/></svg></a>
+        <a href="https://x.com/PropertyFinderA" class="social-btn" target="_blank" rel="noopener noreferrer" aria-label="X / Twitter"><svg width="16" height="16" fill="white" viewBox="0 0 24 24"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg></a>
+        <a href="https://in.pinterest.com/propertyfinderrealestate/" class="social-btn" target="_blank" rel="noopener noreferrer" aria-label="Pinterest"><svg width="16" height="16" viewBox="0 0 24 24" fill="white"><path d="M12 0C5.373 0 0 5.373 0 12c0 5.084 3.163 9.426 7.627 11.174-.105-.949-.2-2.405.042-3.441.218-.937 1.407-5.965 1.407-5.965s-.359-.719-.359-1.782c0-1.668.967-2.914 2.171-2.914 1.023 0 1.518.769 1.518 1.69 0 1.029-.655 2.568-.994 3.995-.283 1.194.599 2.169 1.777 2.169 2.133 0 3.772-2.249 3.772-5.495 0-2.873-2.064-4.882-5.012-4.882-3.414 0-5.418 2.561-5.418 5.207 0 1.031.397 2.138.893 2.738a.36.36 0 01.083.345l-.333 1.36c-.053.22-.174.267-.402.161-1.499-.698-2.436-2.889-2.436-4.649 0-3.785 2.75-7.262 7.929-7.262 4.163 0 7.398 2.967 7.398 6.931 0 4.136-2.607 7.464-6.227 7.464-1.216 0-2.359-.632-2.75-1.378l-.748 2.853c-.271 1.043-1.002 2.35-1.492 3.146C9.57 23.812 10.763 24 12 24c6.627 0 12-5.373 12-12S18.627 0 12 0z"/></svg></a>
+        <a href="https://jsdl.in/RSL-XGK1779888146" class="social-btn" target="_blank" rel="noopener noreferrer" aria-label="JustDial"><svg width="16" height="16" viewBox="0 0 24 24"><rect width="24" height="24" rx="5" fill="#FF6B35"/><text x="12" y="17" font-family="Arial,sans-serif" font-size="10" font-weight="900" text-anchor="middle" fill="white">JD</text></svg></a>
+      </div>
+    </div>
+    <div class="footer-col"><h4>Quick Links</h4><a href="index.html">Home</a><a href="properties.html">Properties</a><a href="post-property.html">Post Property</a><a href="services.html">Services</a><a href="email-templates.html">Email Templates</a>
+<a href="agreement-registration.html">Registration Tracker</a>
+<a href="reminders.html">Reminders</a><a href="contact.html">Contact</a></div>
+    <div class="footer-col"><h4>Tools</h4><a href="calculators.html">Calculators</a><a href="tds-calculators.html">TDS Calculators</a><a href="converter.html">Measurement Converter</a><a href="insurance.html">Property Insurance</a><a href="price-trends.html">Price Trends</a></div>
+    <div class="footer-col"><h4>Contact</h4>
+      <div class="footer-contact-row"><span>📞</span><a href="tel:+919326990050">+91 93269 90050</a></div>
+      <div class="footer-contact-row"><span>✉️</span><a href="mailto:propertyfinderre@gmail.com">propertyfinderre@gmail.com</a></div>
+    </div>
+  </div>
+  <div class="footer-bottom"><span>© 2026 Property Finder Real Estate. All rights reserved.</span></div>
+</footer>
+<script src="js/widgets.js"></script>
+<script src="js/i18n.js"></script>
+<script>
+// ═══ REMINDER SYSTEM ═══
+const TYPE_META = {
+  birthday:            { icon:'🎂', label:'Birthday',           color:'#3B82F6', bg:'#DBEAFE' },
+  marriage_anniversary:{ icon:'💍', label:'Marriage Anniversary',color:'#EC4899', bg:'#FCE7F3' },
+  death_anniversary:   { icon:'🕯️', label:'Death Anniversary',  color:'#6B7280', bg:'#F3F4F6' },
+  ll_agreement:        { icon:'📄', label:'L&L Agreement',       color:'#8B5CF6', bg:'#EDE9FE' },
+  rent_agreement:      { icon:'🔑', label:'Rent Agreement',      color:'#F59E0B', bg:'#FEF3C7' },
+  pg_agreement:        { icon:'🏠', label:'PG Agreement',        color:'#10B981', bg:'#D1FAE5' },
+  lease_agreement:     { icon:'📋', label:'Lease Agreement',     color:'#EF4444', bg:'#FEE2E2' },
+  custom:              { icon:'⭐', label:'Custom',              color:'#F59E0B', bg:'#FEF3C7' }
+};
+
+const STORAGE_KEY = 'pfre_reminders';
+let reminders = JSON.parse(localStorage.getItem(STORAGE_KEY) || '[]');
+let currentFilter = 'all';
+let selectedType = 'birthday';
+
+// ── Helpers ──
+function saveToStorage() { localStorage.setItem(STORAGE_KEY, JSON.stringify(reminders)); }
+function uuid() { return Date.now().toString(36) + Math.random().toString(36).substr(2); }
+function today() { return new Date().toISOString().split('T')[0]; }
+function formatDate(d) { if(!d) return ''; const dt = new Date(d+'T00:00:00'); return dt.toLocaleDateString('en-IN', {day:'2-digit',month:'short',year:'numeric'}); }
+
+function getDaysLeft(r) {
+  const now = new Date(); now.setHours(0,0,0,0);
+  let targetDate;
+  if (['birthday','marriage_anniversary','death_anniversary','custom'].includes(r.type) && r.date) {
+    const d = new Date(r.date+'T00:00:00');
+    targetDate = new Date(now.getFullYear(), d.getMonth(), d.getDate());
+    if (targetDate < now) targetDate.setFullYear(now.getFullYear()+1);
+    targetDate.setDate(targetDate.getDate() - (parseInt(r.advance)||0));
+  } else if (r.expiry) {
+    targetDate = new Date(r.expiry+'T00:00:00');
+    targetDate.setDate(targetDate.getDate() - (parseInt(r.advance)||0));
+  } else return 999;
+  return Math.round((targetDate - now) / 86400000);
+}
+
+function getEventDate(r) {
+  if (['birthday','marriage_anniversary','death_anniversary','custom'].includes(r.type) && r.date) {
+    const now = new Date(); const d = new Date(r.date+'T00:00:00');
+    let ev = new Date(now.getFullYear(), d.getMonth(), d.getDate());
+    if (ev < now) ev.setFullYear(now.getFullYear()+1);
+    return ev.toISOString().split('T')[0];
+  }
+  return r.expiry || '';
+}
+
+function buildMessage(r) {
+  const name = r.name || 'Client';
+  const prop = r.property ? ` for property "${r.property}"` : '';
+  const expDate = r.expiry ? formatDate(r.expiry) : '';
+  const msgs = {
+    birthday: `🎂 *Happy Birthday, ${name}!*\n\nWishing you a wonderful birthday filled with joy and happiness! 🎉🎈\n\nWarm regards,\n*Property Finder Real Estate*\n📞 +91 93269 90050\n🌐 propertyfinderrealestate.com`,
+    marriage_anniversary: `💍 *Happy Wedding Anniversary, ${name}!*\n\nWishing you and your partner a beautiful anniversary! May your bond grow stronger with every passing year. 💕\n\nWarm regards,\n*Property Finder Real Estate*\n📞 +91 93269 90050`,
+    death_anniversary: `🕯️ Dear ${name},\n\nOn this solemn occasion, we remember and honour your loved one. May their soul rest in eternal peace. Our thoughts and prayers are with you and your family. 🙏\n\n— *Property Finder Real Estate*`,
+    ll_agreement: `📄 Dear ${name},\n\nThis is a gentle reminder that your *Leave & Licence Agreement*${prop} is expiring on *${expDate}*.\n\nPlease contact us at your earliest convenience to renew the agreement and avoid any legal complications.\n\n📞 +91 93269 90050\n*Property Finder Real Estate*`,
+    rent_agreement: `🔑 Dear ${name},\n\nYour *Rent Agreement*${prop} is due to expire on *${expDate}*.\n\nKindly reach out to us to initiate the renewal process well in advance.\n\n📞 +91 93269 90050\n*Property Finder Real Estate*`,
+    pg_agreement: `🏠 Dear ${name},\n\nThis is a reminder that your *Paying Guest Agreement*${prop} is expiring on *${expDate}*.\n\nPlease contact us to discuss renewal or alternative arrangements.\n\n📞 +91 93269 90050\n*Property Finder Real Estate*`,
+    lease_agreement: `📋 Dear ${name},\n\nYour *Lease Agreement*${prop} expires on *${expDate}*. Please connect with us at the earliest to begin the renewal process.\n\n📞 +91 93269 90050\n*Property Finder Real Estate*`,
+    custom: r.note || `Dear ${name},\n\nThis is a reminder from Property Finder Real Estate.\n\n📞 +91 93269 90050`
+  };
+  return msgs[r.type] || msgs.custom;
+}
+
+// ── Dashboard counts ──
+function updateDashboard() {
+  const active = reminders.filter(r => !r.done);
+  document.getElementById('dToday').textContent = active.filter(r => getDaysLeft(r) === 0).length;
+  document.getElementById('dWeek').textContent  = active.filter(r => { const d=getDaysLeft(r); return d>=0&&d<=7; }).length;
+  document.getElementById('dMonth').textContent = active.filter(r => { const d=getDaysLeft(r); return d>=0&&d<=30; }).length;
+  document.getElementById('dAll').textContent   = active.length;
+  
+  const todayCount = active.filter(r => getDaysLeft(r) === 0).length;
+  const bar = document.getElementById('todayBar');
+  if (todayCount > 0) {
+    bar.style.display = 'flex';
+    document.getElementById('todayBarMsg').textContent = `🎉 You have ${todayCount} reminder${todayCount>1?'s':''} due today! Send your greetings now.`;
+  }
+}
+
+// ── Render ──
+function renderReminders() {
+  const list = document.getElementById('reminderList');
+  const search = document.getElementById('remSearch').value.toLowerCase();
+  let filtered = reminders.filter(r => {
+    const matchSearch = !search || r.name?.toLowerCase().includes(search) || r.phone?.includes(search) || r.property?.toLowerCase().includes(search);
+    if (!matchSearch) return false;
+    if (currentFilter === 'today')   return getDaysLeft(r) === 0;
+    if (currentFilter === 'week')    return getDaysLeft(r) >= 0 && getDaysLeft(r) <= 7;
+    if (currentFilter === 'month')   return getDaysLeft(r) >= 0 && getDaysLeft(r) <= 30;
+    if (currentFilter === 'birthday') return r.type === 'birthday';
+    if (currentFilter === 'marriage_anniversary') return r.type === 'marriage_anniversary';
+    if (currentFilter === 'agreement') return r.type.includes('agreement');
+    return true;
+  });
+  filtered.sort((a,b) => getDaysLeft(a) - getDaysLeft(b));
+  
+  if (!filtered.length) {
+    list.innerHTML = `<div class="empty-state"><div class="empty-icon">🔔</div><h3>No reminders found</h3><p>Try a different filter or add a new reminder.</p><button class="btn btn-primary" style="margin-top:16px" onclick="openAddModal()">+ Add Reminder</button></div>`;
+    return;
+  }
+  
+  list.innerHTML = filtered.map(r => {
+    const meta = TYPE_META[r.type] || TYPE_META.custom;
+    const days = getDaysLeft(r);
+    const evDate = getEventDate(r);
+    const isToday = days === 0;
+    const isOverdue = days < 0;
+    const cls = isToday ? 'today-card' : (days >= 0 && days <= 7 ? 'urgent' : '') + (r.done ? ' done-card' : '');
+    const daysColor = isOverdue ? 'red' : isToday ? 'amber' : days <= 7 ? 'red' : days <= 30 ? 'amber' : 'green';
+    const daysText = isOverdue ? Math.abs(days) : days;
+    const daysLabel = isToday ? '🎉 TODAY!' : isOverdue ? 'days overdue' : 'days left';
+    return `
+    <div class="reminder-card ${cls}" id="rc-${r.id}">
+      <div class="rem-type-badge" style="background:${meta.bg};">${meta.icon}</div>
+      <div class="rem-info">
+        <div class="rem-name">${r.name || 'Unknown'} ${isToday?'<span class="rem-today-tag">TODAY!</span>':''} ${isOverdue?'<span class="rem-overdue-tag">OVERDUE</span>':''}</div>
+        <div class="rem-sub">
+          <span>🏷️ ${meta.label}</span>
+          ${r.phone?`<span>📞 ${r.phone}</span>`:''}
+          ${evDate?`<span>📅 ${formatDate(evDate)}</span>`:''}
+          ${r.property?`<span>🏠 ${r.property}</span>`:''}
+          ${r.expiry?`<span>⏰ Expires ${formatDate(r.expiry)}</span>`:''}
+        </div>
+        <div class="rem-actions">
+          <button class="rem-btn wa" onclick="openSendModal('${r.id}')">💬 WhatsApp</button>
+          <button class="rem-btn email" onclick="openSendModal('${r.id}','email')">✉️ Email</button>
+          <button class="rem-btn sms" onclick="openSendModal('${r.id}','sms')">📱 SMS</button>
+          <button class="rem-btn edit" onclick="openEditModal('${r.id}')">✏️ Edit</button>
+          <button class="rem-btn ${r.done?'edit':'done-btn'}" onclick="toggleDone('${r.id}')">${r.done?'↩ Undo':'✅ Done'}</button>
+          <button class="rem-btn del" onclick="deleteReminder('${r.id}')">🗑️ Delete</button>
+        </div>
+      </div>
+      <div class="rem-countdown">
+        <div class="rem-days-left ${daysColor}">${isToday?'🎉':daysText}</div>
+        <div class="rem-days-label">${daysLabel}</div>
+      </div>
+    </div>`;
+  }).join('');
+  updateDashboard();
+}
+
+function filterReminders(f, btn) {
+  currentFilter = f;
+  document.querySelectorAll('.rem-tab').forEach(b => b.classList.remove('active'));
+  if (btn) btn.classList.add('active');
+  renderReminders();
+}
+
+// ── Type Selection ──
+function selectType(type, btn) {
+  selectedType = type;
+  document.querySelectorAll('.type-btn').forEach(b => b.classList.remove('active'));
+  btn.classList.add('active');
+  const isAgreement = type.includes('agreement');
+  document.getElementById('agreementSection').style.display = isAgreement ? 'block' : 'none';
+  document.getElementById('dateSection').style.display = isAgreement ? 'none' : 'block';
+  const labels = { birthday:'Date of Birth *', marriage_anniversary:'Wedding Date *', death_anniversary:'Date of Passing *', custom:'Event Date *' };
+  document.getElementById('dateLabel').textContent = labels[type] || 'Date *';
+  updateMsgPreview();
+}
+
+function calcExpiry() {
+  const start = document.getElementById('mStartDate').value;
+  const dur = parseInt(document.getElementById('mDuration').value) || 11;
+  const unit = document.getElementById('mDurUnit').value;
+  if (!start) return;
+  const d = new Date(start);
+  if (unit === 'months') d.setMonth(d.getMonth() + dur);
+  else if (unit === 'years') d.setFullYear(d.getFullYear() + dur);
+  else d.setDate(d.getDate() + dur);
+  document.getElementById('mExpiry').value = d.toISOString().split('T')[0];
+  updateMsgPreview();
+}
+
+function updateMsgPreview() {
+  const mock = {
+    type: selectedType, name: document.getElementById('mName')?.value || 'Client',
+    property: document.getElementById('mProperty')?.value || '',
+    expiry: document.getElementById('mExpiry')?.value || '',
+    note: document.getElementById('mNote')?.value || ''
+  };
+  const prev = document.getElementById('msgPreview');
+  if (prev) prev.textContent = buildMessage(mock);
+}
+
+// ── Save ──
+function saveReminder() {
+  const name  = document.getElementById('mName').value.trim();
+  const phone = document.getElementById('mPhone').value.trim();
+  const date  = document.getElementById('mDate').value;
+  const start = document.getElementById('mStartDate').value;
+  const expiry = document.getElementById('mExpiry').value;
+  const isAgreement = selectedType.includes('agreement');
+  if (!name) { alert('Please enter a name.'); return; }
+  if (!phone) { alert('Please enter a phone number.'); return; }
+  if (!isAgreement && !date) { alert('Please enter a date.'); return; }
+  if (isAgreement && !start) { alert('Please enter the agreement start date.'); return; }
+
+  const editId = document.getElementById('mEditId').value;
+  const r = {
+    id: editId || uuid(),
+    type: selectedType,
+    name, phone,
+    email:    document.getElementById('mEmail').value.trim(),
+    property: document.getElementById('mProperty').value.trim(),
+    date:     isAgreement ? '' : date,
+    startDate: isAgreement ? start : '',
+    duration: isAgreement ? parseInt(document.getElementById('mDuration').value)||11 : 0,
+    durUnit:  isAgreement ? document.getElementById('mDurUnit').value : 'months',
+    expiry:   isAgreement ? expiry : '',
+    advance:  parseInt(document.getElementById('mAdvance').value)||7,
+    autoSend: document.getElementById('mAutoSend').value,
+    note:     document.getElementById('mNote').value.trim(),
+    done:     false,
+    createdAt: new Date().toISOString()
+  };
+
+  if (editId) {
+    const idx = reminders.findIndex(x => x.id === editId);
+    if (idx > -1) reminders[idx] = { ...reminders[idx], ...r, done: reminders[idx].done };
+  } else {
+    reminders.unshift(r);
+  }
+  saveToStorage();
+  closeModal();
+  renderReminders();
+  if (typeof showToast === 'function') showToast('✅ Reminder saved successfully!', 'success');
+}
+
+function openAddModal() {
+  document.getElementById('mEditId').value = '';
+  document.getElementById('modalTitle').textContent = 'Add New Reminder';
+  document.getElementById('mName').value = '';
+  document.getElementById('mPhone').value = '';
+  document.getElementById('mEmail').value = '';
+  document.getElementById('mProperty').value = '';
+  document.getElementById('mDate').value = '';
+  document.getElementById('mStartDate').value = '';
+  document.getElementById('mDuration').value = '11';
+  document.getElementById('mDurUnit').value = 'months';
+  document.getElementById('mExpiry').value = '';
+  document.getElementById('mAdvance').value = '7';
+  document.getElementById('mNote').value = '';
+  selectType('birthday', document.querySelector('.type-btn[data-type="birthday"]'));
+  document.getElementById('reminderModal').classList.add('open');
+}
+
+function openEditModal(id) {
+  const r = reminders.find(x => x.id === id);
+  if (!r) return;
+  document.getElementById('mEditId').value = r.id;
+  document.getElementById('modalTitle').textContent = 'Edit Reminder';
+  document.getElementById('mName').value = r.name || '';
+  document.getElementById('mPhone').value = r.phone || '';
+  document.getElementById('mEmail').value = r.email || '';
+  document.getElementById('mProperty').value = r.property || '';
+  document.getElementById('mDate').value = r.date || '';
+  document.getElementById('mStartDate').value = r.startDate || '';
+  document.getElementById('mDuration').value = r.duration || 11;
+  document.getElementById('mDurUnit').value = r.durUnit || 'months';
+  document.getElementById('mExpiry').value = r.expiry || '';
+  document.getElementById('mAdvance').value = r.advance || 7;
+  document.getElementById('mNote').value = r.note || '';
+  const btn = document.querySelector(`.type-btn[data-type="${r.type}"]`);
+  if (btn) selectType(r.type, btn);
+  document.getElementById('reminderModal').classList.add('open');
+}
+
+function closeModal() {
+  document.getElementById('reminderModal').classList.remove('open');
+}
+
+function openSendModal(id, channel) {
+  const r = reminders.find(x => x.id === id);
+  if (!r) return;
+  const msg = buildMessage(r);
+  const encoded = encodeURIComponent(msg);
+  const phone = (r.phone || '').replace(/\D/g,'');
+  document.getElementById('sendModalTitle').textContent = `Send to ${r.name}`;
+  document.getElementById('sendMsgPreview').textContent = msg;
+  document.getElementById('sendWABtn').href = `https://wa.me/${phone}?text=${encoded}`;
+  document.getElementById('sendEmailBtn').href = `mailto:${r.email||''}?subject=From Property Finder Real Estate&body=${encodeURIComponent(msg.replace(/\*/g,''))}`;
+  document.getElementById('sendModal').classList.add('open');
+  // Auto-mark done if sent
+  if (channel === 'wa') document.getElementById('sendWABtn').click();
+  if (channel === 'email') document.getElementById('sendEmailBtn').click();
+  if (channel === 'sms') copySMS();
+}
+
+function copySMS() {
+  const msg = document.getElementById('sendMsgPreview').textContent || '';
+  navigator.clipboard.writeText(msg.replace(/\*/g,'')).then(() => {
+    if (typeof showToast === 'function') showToast('📱 SMS text copied to clipboard!', 'success');
+  });
+}
+
+function sendAllToday() {
+  const todayItems = reminders.filter(r => !r.done && getDaysLeft(r) === 0);
+  if (!todayItems.length) { if (typeof showToast === 'function') showToast('No reminders due today!', ''); return; }
+  todayItems.forEach((r, i) => {
+    setTimeout(() => {
+      const msg = buildMessage(r);
+      const phone = (r.phone||'').replace(/\D/g,'');
+      window.open(`https://wa.me/${phone}?text=${encodeURIComponent(msg)}`, '_blank');
+    }, i * 1000);
+  });
+  if (typeof showToast === 'function') showToast(`💬 Opening WhatsApp for ${todayItems.length} reminder(s)...`, 'success');
+}
+
+function toggleDone(id) {
+  const r = reminders.find(x => x.id === id);
+  if (r) { r.done = !r.done; saveToStorage(); renderReminders(); }
+}
+
+function deleteReminder(id) {
+  if (!confirm('Delete this reminder?')) return;
+  reminders = reminders.filter(x => x.id !== id);
+  saveToStorage(); renderReminders();
+  if (typeof showToast === 'function') showToast('Reminder deleted', '');
+}
+
+function exportReminders() {
+  const rows = [['Name','Type','Phone','Email','Date/Expiry','Days Left','Notes']];
+  reminders.forEach(r => rows.push([r.name,TYPE_META[r.type]?.label||r.type,r.phone,r.email,r.date||r.expiry,getDaysLeft(r),r.note]));
+  const csv = rows.map(r => r.map(c => `"${(c||'').toString().replace(/"/g,'""')}"`).join(',')).join('\n');
+  const a = document.createElement('a');
+  a.href = 'data:text/csv;charset=utf-8,' + encodeURIComponent(csv);
+  a.download = 'pfre-reminders-' + today() + '.csv';
+  a.click();
+}
+
+// Request notification permission
+if ('Notification' in window && Notification.permission === 'default') {
+  setTimeout(() => Notification.requestPermission(), 3000);
+}
+
+// Live preview
+['mName','mProperty','mNote','mExpiry'].forEach(id => {
+  document.getElementById(id)?.addEventListener('input', updateMsgPreview);
+});
+
+// Add sample reminders if empty
+if (reminders.length === 0) {
+  const today2 = new Date();
+  const tomorrow = new Date(); tomorrow.setDate(today2.getDate()+1);
+  const nextWeek = new Date(); nextWeek.setDate(today2.getDate()+5);
+  const sampleExpiry = new Date(); sampleExpiry.setDate(today2.getDate()+15);
+  reminders = [
+    { id:uuid(), type:'birthday', name:'Rahul Sharma', phone:'+919876543210', email:'rahul@example.com', date:`${today2.getMonth()>0?today2.getFullYear():today2.getFullYear()}-${String(today2.getMonth()+1).padStart(2,'0')}-${String(today2.getDate()).padStart(2,'0')}`, advance:0, done:false, createdAt:new Date().toISOString(), property:'3BHK Malad West', note:'' },
+    { id:uuid(), type:'marriage_anniversary', name:'Priya & Amit Desai', phone:'+919876543211', email:'priya@example.com', date:`1998-${String(nextWeek.getMonth()+1).padStart(2,'0')}-${String(nextWeek.getDate()).padStart(2,'0')}`, advance:0, done:false, createdAt:new Date().toISOString(), property:'', note:'' },
+    { id:uuid(), type:'ll_agreement', name:'Sneha Patil', phone:'+919876543212', email:'', startDate:'2025-01-15', duration:11, durUnit:'months', expiry:sampleExpiry.toISOString().split('T')[0], advance:30, done:false, createdAt:new Date().toISOString(), property:'2BHK Borivali West', note:'Shop No 5, Ground Floor' }
+  ];
+  saveToStorage();
+}
+
+renderReminders();
+</script>
+<script src="js/config.js"></script>
+<script src="js/api.js" defer></script>
+<script src="js/security.js"></script>
+<script src="js/tracker.js" defer></script>
+<script src="js/theme.js"></script>
+<script>
+if ("serviceWorker" in navigator) {
+  window.addEventListener("load", () => {
+    navigator.serviceWorker.register("./sw.js").catch(() => {});
+  });
+}
+</script>
+</body>
+</html>

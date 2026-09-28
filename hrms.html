@@ -1,0 +1,1330 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' data: https:; connect-src 'self'; frame-ancestors 'none'; object-src 'none'">
+<meta http-equiv="X-Content-Type-Options" content="nosniff">
+<meta http-equiv="X-Frame-Options" content="SAMEORIGIN">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="robots" content="noindex, nofollow">
+<meta name="description" content="HRMS — Property Finder Real Estate. Manage employees, attendance, leaves, payroll, and performance.">
+<meta property="og:image" content="https://www.propertyfinderrealestate.com/images/og-banner.jpg">
+<link rel="icon" type="image/png" sizes="192x192" href="icons/icon-192.png">
+<link rel="manifest" href="manifest.json">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@300;400;500;600;700&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<title>HRMS — Property Finder Real Estate</title>
+<script>!function(){var t=localStorage.getItem("pfre_theme")||(window.matchMedia("(prefers-color-scheme:dark)").matches?"dark":"light");document.documentElement.setAttribute("data-theme",t);document.documentElement.classList.add("theme-"+t)}();</script>
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --brand:#012FA1;--brand-dark:#001E73;
+  --green:#059669;--green-lt:#D1FAE5;--green-dk:#065F46;
+  --amber:#F59E0B;--amber-lt:#FEF3C7;--amber-dk:#92400E;
+  --red:#EF4444;--red-lt:#FEE2E2;--red-dk:#991B1B;
+  --blue-lt:#DBEAFE;--blue-dk:#1D4ED8;
+  --purple:#8B5CF6;
+  --bg:#F0F2F8;--sidebar:#0D1B4B;--card:#FFFFFF;
+  --text:#111827;--text-muted:#6B7280;--border:#E5E7EB;
+  --radius:10px;--shadow:0 2px 12px rgba(0,0,0,.08);
+  --font:'DM Sans',system-ui,sans-serif;--mono:'DM Mono',monospace;
+}
+[data-theme="dark"]{--bg:#0B1023;--card:#131B35;--text:#E2E8F0;--text-muted:#94A3B8;--border:#1E2D55;}
+body{font-family:var(--font);background:var(--bg);color:var(--text);min-height:100vh;display:flex;font-size:14px}
+
+/* Sidebar */
+.sidebar{width:230px;min-height:100vh;background:var(--sidebar);display:flex;flex-direction:column;position:fixed;left:0;top:0;bottom:0;z-index:100;overflow-y:auto}
+.sb-logo{padding:18px 16px 12px;border-bottom:1px solid rgba(255,255,255,.08)}
+.sb-logo img{height:42px;width:auto;object-fit:contain;filter:brightness(0) invert(1)}
+.sb-tag{display:inline-block;background:var(--green);color:#fff;font-size:9px;font-weight:700;letter-spacing:1.2px;text-transform:uppercase;padding:2px 7px;border-radius:4px;margin-top:5px}
+.sb-nav{flex:1;padding:10px 0}
+.sb-section{font-size:9px;font-weight:700;letter-spacing:1.4px;text-transform:uppercase;color:rgba(255,255,255,.35);padding:10px 16px 4px}
+.sb-item{display:flex;align-items:center;gap:10px;padding:9px 16px;color:rgba(255,255,255,.65);font-size:13px;font-weight:500;cursor:pointer;transition:.18s;border-left:3px solid transparent;user-select:none}
+.sb-item:hover{background:rgba(255,255,255,.07);color:#fff}
+.sb-item.active{background:rgba(5,150,105,.25);color:#fff;border-left-color:#34D399}
+.sb-item .si{font-size:17px;width:22px;text-align:center;flex-shrink:0}
+.sb-item .badge{margin-left:auto;background:var(--red);color:#fff;font-size:10px;font-weight:700;padding:1px 6px;border-radius:100px}
+.sb-footer{padding:14px 16px;border-top:1px solid rgba(255,255,255,.08)}
+.sb-user{display:flex;align-items:center;gap:10px;color:rgba(255,255,255,.7);font-size:12px}
+.sb-avatar{width:32px;height:32px;border-radius:50%;background:var(--green);display:flex;align-items:center;justify-content:center;color:#fff;font-weight:700;font-size:13px;flex-shrink:0}
+
+/* Main */
+.main{margin-left:230px;flex:1;min-height:100vh}
+.topbar{position:sticky;top:0;z-index:50;background:var(--card);border-bottom:1px solid var(--border);padding:0 24px;height:56px;display:flex;align-items:center;justify-content:space-between;gap:16px;box-shadow:0 1px 8px rgba(0,0,0,.05)}
+.topbar-title{font-size:16px;font-weight:700}
+.topbar-actions{display:flex;align-items:center;gap:10px}
+.btn{padding:7px 16px;border-radius:8px;font-size:13px;font-weight:600;cursor:pointer;border:none;transition:.18s;font-family:var(--font)}
+.btn-primary{background:var(--green);color:#fff}.btn-primary:hover{background:var(--green-dk)}
+.btn-outline{background:transparent;color:var(--text);border:1.5px solid var(--border)}.btn-outline:hover{border-color:var(--green);color:var(--green)}
+.btn-danger{background:var(--red);color:#fff}.btn-danger:hover{opacity:.85}
+.btn-sm{padding:5px 12px;font-size:12px}
+
+/* Panel */
+.panel{display:none;padding:22px 24px}
+.panel.active{display:block}
+
+/* Stats */
+.stats-row{display:grid;grid-template-columns:repeat(5,1fr);gap:14px;margin-bottom:22px}
+.stat-card{background:var(--card);border-radius:var(--radius);padding:16px;border:1px solid var(--border);box-shadow:var(--shadow);display:flex;align-items:flex-start;gap:12px}
+.stat-icon{font-size:24px;flex-shrink:0}
+.stat-label{font-size:11px;color:var(--text-muted);margin-bottom:2px}
+.stat-val{font-size:24px;font-weight:800;font-family:var(--mono);line-height:1}
+.stat-sub{font-size:11px;margin-top:3px;color:var(--green)}
+
+/* Section */
+.sec-hdr{display:flex;align-items:center;justify-content:space-between;margin-bottom:14px;padding-bottom:10px;border-bottom:1px solid var(--border)}
+.sec-title{font-size:15px;font-weight:700}
+.sec-actions{display:flex;gap:8px;align-items:center}
+
+/* Table */
+.tbl-wrap{background:var(--card);border-radius:var(--radius);border:1px solid var(--border);overflow:hidden;box-shadow:var(--shadow)}
+.tbl{width:100%;border-collapse:collapse;font-size:13px}
+.tbl thead{background:var(--bg)}
+.tbl th{padding:10px 14px;text-align:left;font-weight:700;font-size:11px;letter-spacing:.5px;text-transform:uppercase;color:var(--text-muted);border-bottom:1px solid var(--border)}
+.tbl td{padding:11px 14px;border-bottom:1px solid var(--border);vertical-align:middle}
+.tbl tr:last-child td{border-bottom:none}
+.tbl tr:hover td{background:rgba(5,150,105,.03)}
+
+/* Badge */
+.badge{display:inline-block;padding:2px 8px;border-radius:100px;font-size:11px;font-weight:700;white-space:nowrap}
+.badge-green{background:var(--green-lt);color:var(--green-dk)}
+.badge-red{background:var(--red-lt);color:var(--red-dk)}
+.badge-amber{background:var(--amber-lt);color:var(--amber-dk)}
+.badge-blue{background:var(--blue-lt);color:var(--blue-dk)}
+.badge-gray{background:var(--bg);color:var(--text-muted)}
+
+/* Avatar */
+.emp-avatar{width:34px;height:34px;border-radius:50%;background:var(--green);color:#fff;display:flex;align-items:center;justify-content:center;font-size:13px;font-weight:700;flex-shrink:0}
+
+/* Cards grid */
+.emp-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:14px}
+.emp-card{background:var(--card);border:1px solid var(--border);border-radius:var(--radius);padding:16px;box-shadow:var(--shadow);transition:border-color .18s}
+.emp-card:hover{border-color:var(--green)}
+
+/* Action btn */
+.act-btn{background:transparent;border:1px solid var(--border);color:var(--text-muted);padding:4px 10px;border-radius:6px;font-size:12px;cursor:pointer;transition:.18s}
+.act-btn:hover{border-color:var(--green);color:var(--green)}
+.act-btn.del:hover{border-color:var(--red);color:var(--red)}
+
+/* Modal */
+.modal-overlay{position:fixed;inset:0;background:rgba(0,0,0,.55);z-index:500;display:flex;align-items:center;justify-content:center;padding:16px}
+.modal{background:var(--card);border-radius:14px;width:100%;max-width:600px;padding:26px;box-shadow:0 24px 60px rgba(0,0,0,.25);max-height:90vh;overflow-y:auto}
+.modal-hdr{display:flex;align-items:center;justify-content:space-between;margin-bottom:18px}
+.modal-title{font-size:17px;font-weight:700}
+.modal-close{background:transparent;border:none;font-size:22px;cursor:pointer;color:var(--text-muted)}
+.modal-footer{display:flex;justify-content:flex-end;gap:10px;margin-top:18px;padding-top:14px;border-top:1px solid var(--border)}
+.form-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.form-group{display:flex;flex-direction:column;gap:4px}
+.form-group.full{grid-column:1/-1}
+.lbl{font-size:12px;font-weight:600;color:var(--text-muted)}
+.inp,.sel,.txta{padding:9px 12px;border:1.5px solid var(--border);border-radius:8px;font-size:13px;background:var(--bg);color:var(--text);font-family:var(--font);width:100%;transition:border .18s}
+.inp:focus,.sel:focus,.txta:focus{outline:none;border-color:var(--green);background:var(--card)}
+.txta{resize:vertical;min-height:72px}
+
+/* Leave calendar */
+.leave-month{display:grid;grid-template-columns:repeat(7,1fr);gap:4px;margin-top:10px}
+.leave-day{height:36px;border-radius:6px;display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:600;border:1px solid var(--border);background:var(--card);cursor:pointer;transition:.18s}
+.leave-day:hover{border-color:var(--green)}
+.leave-day.today{background:var(--green);color:#fff;border-color:var(--green)}
+.leave-day.approved{background:var(--green-lt);color:var(--green-dk);border-color:var(--green)}
+.leave-day.pending{background:var(--amber-lt);color:var(--amber-dk);border-color:var(--amber)}
+.leave-day.holiday{background:var(--blue-lt);color:var(--blue-dk)}
+.leave-day.weekend{color:var(--text-muted)}
+.leave-day.other-month{opacity:.3}
+
+/* Attendance status dots */
+.att-dot{width:10px;height:10px;border-radius:50%;display:inline-block;margin-right:4px}
+.att-present{background:var(--green)}
+.att-absent{background:var(--red)}
+.att-late{background:var(--amber)}
+.att-holiday{background:var(--purple)}
+.att-leave{background:#64748B}
+
+/* Payslip card */
+.payslip-card{background:var(--card);border:1px solid var(--border);border-radius:var(--radius);padding:20px;margin-bottom:14px;box-shadow:var(--shadow)}
+.payslip-header{display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:14px;padding-bottom:12px;border-bottom:1px solid var(--border)}
+.payslip-row{display:flex;justify-content:space-between;padding:5px 0;font-size:13px}
+.payslip-row.total{font-weight:700;font-size:15px;border-top:2px solid var(--border);margin-top:8px;padding-top:10px}
+.payslip-row.deduction{color:var(--red-dk)}
+.payslip-row.net{color:var(--green-dk);font-size:17px}
+
+/* Performance */
+.kpi-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-bottom:18px}
+.kpi-card{background:var(--card);border:1px solid var(--border);border-radius:var(--radius);padding:16px;text-align:center;box-shadow:var(--shadow)}
+.kpi-val{font-size:28px;font-weight:800;font-family:var(--mono);color:var(--green)}
+.kpi-label{font-size:12px;color:var(--text-muted);margin-top:4px}
+.progress-bar{height:8px;background:var(--border);border-radius:100px;overflow:hidden;margin-top:6px}
+.progress-fill{height:100%;background:var(--green);border-radius:100px;transition:width .6s ease}
+
+/* Toast */
+.toast-container{position:fixed;bottom:24px;right:24px;z-index:9999;display:flex;flex-direction:column;gap:8px}
+.toast{padding:12px 18px;border-radius:10px;font-size:13px;font-weight:600;box-shadow:0 4px 20px rgba(0,0,0,.15);animation:toastIn .25s ease;max-width:360px}
+.toast-success{background:#065F46;color:#fff}.toast-error{background:#991B1B;color:#fff}.toast-info{background:var(--brand);color:#fff}
+@keyframes toastIn{from{transform:translateY(16px);opacity:0}to{transform:translateY(0);opacity:1}}
+
+/* Responsive */
+@media(max-width:900px){
+  .sidebar{width:50px}.sb-item span:not(.si){display:none}.sb-section,.sb-tag,.sb-user .u-info{display:none}
+  .main{margin-left:50px}.stats-row{grid-template-columns:1fr 1fr}
+  .form-grid{grid-template-columns:1fr}
+}
+@media(max-width:600px){
+  .sidebar{display:none}.main{margin-left:0}
+  .stats-row{grid-template-columns:1fr}.kpi-grid{grid-template-columns:1fr}
+}
+</style>
+</head>
+<body>
+<h1 class="sr-only" style="position:absolute;left:-9999px">HRMS — Property Finder Real Estate</h1>
+<a href="#hrms-main" style="position:absolute;left:-9999px;top:0;padding:8px;background:var(--green);color:#fff;z-index:9999">Skip to content</a>
+
+<!-- SIDEBAR -->
+<aside class="sidebar" role="navigation" aria-label="HRMS Navigation">
+  <div class="sb-logo">
+    <img src="images/logo.png" alt="Property Finder Real Estate">
+    <div class="sb-tag">HR Manager</div>
+  </div>
+  <nav class="sb-nav">
+    <div class="sb-section">Overview</div>
+    <div class="sb-item active" data-tab="dashboard"  onclick="showTab('dashboard',this)"  tabindex="0" role="button"><span class="si">📊</span><span>Dashboard</span></div>
+
+    <div class="sb-section">People</div>
+    <div class="sb-item" data-tab="employees"  onclick="showTab('employees',this)"  tabindex="0" role="button"><span class="si">👤</span><span>Employees</span></div>
+    <div class="sb-item" data-tab="attendance" onclick="showTab('attendance',this)" tabindex="0" role="button"><span class="si">🕐</span><span>Attendance</span><span class="badge" id="att-badge">0</span></div>
+    <div class="sb-item" data-tab="leaves"     onclick="showTab('leaves',this)"     tabindex="0" role="button"><span class="si">🏖️</span><span>Leave</span><span class="badge" id="leave-badge">0</span></div>
+
+    <div class="sb-section">Finance</div>
+    <div class="sb-item" data-tab="payroll"    onclick="showTab('payroll',this)"    tabindex="0" role="button"><span class="si">💰</span><span>Payroll</span></div>
+    <div class="sb-item" data-tab="performance"onclick="showTab('performance',this)"tabindex="0" role="button"><span class="si">📈</span><span>Performance</span></div>
+
+    <div class="sb-section">Settings</div>
+    <div class="sb-item" data-tab="policies"   onclick="showTab('policies',this)"   tabindex="0" role="button"><span class="si">📋</span><span>Policies</span></div>
+  </nav>
+  <div class="sb-footer">
+    <a href="admin.html" style="text-decoration:none;color:rgba(255,255,255,.4);font-size:11px;display:block;margin-bottom:6px">← Back to Admin</a>
+    <a href="finance.html" style="text-decoration:none;color:rgba(255,255,255,.4);font-size:11px;display:block;margin-bottom:8px">💰 Finance</a>
+    <div class="sb-user">
+      <div class="sb-avatar">SC</div>
+      <div class="u-info"><div style="font-weight:600;color:#fff;font-size:12px">Saurav Chowdhury</div><div style="font-size:10px">Owner · HR Admin</div></div>
+    </div>
+  </div>
+</aside>
+
+<!-- MAIN -->
+<main class="main" id="hrms-main">
+  <!-- Topbar -->
+  <div class="topbar">
+    <div class="topbar-title" id="topbar-title">📊 HRMS Dashboard</div>
+    <div class="topbar-actions">
+      <button class="btn btn-primary" id="topbar-add-btn" onclick="hrmsAddNew()" type="button">+ Add Employee</button>
+      <button class="btn btn-outline" onclick="hrmsExport()" type="button">⬇ Export</button>
+      <button class="btn btn-outline" onclick="toggleTheme()" type="button" aria-label="Toggle theme">☀️</button>
+    </div>
+  </div>
+
+  <!-- ══ DASHBOARD ══ -->
+  <section class="panel active" id="panel-dashboard">
+    <div class="stats-row" id="dash-stats">
+      <div class="stat-card"><div class="stat-icon">👥</div><div><div class="stat-label">Total Employees</div><div class="stat-val" id="ds-total">0</div><div class="stat-sub">Active staff</div></div></div>
+      <div class="stat-card"><div class="stat-icon">✅</div><div><div class="stat-label">Present Today</div><div class="stat-val" id="ds-present">0</div><div class="stat-sub" id="ds-present-pct">0% attendance</div></div></div>
+      <div class="stat-card"><div class="stat-icon">🏖️</div><div><div class="stat-label">On Leave</div><div class="stat-val" id="ds-leave">0</div><div class="stat-sub">Pending approvals: <span id="ds-pending">0</span></div></div></div>
+      <div class="stat-card"><div class="stat-icon">💰</div><div><div class="stat-label">This Month Payroll</div><div class="stat-val" id="ds-payroll">₹0</div><div class="stat-sub">Gross disbursement</div></div></div>
+      <div class="stat-card"><div class="stat-icon">📈</div><div><div class="stat-label">Deals This Month</div><div class="stat-val" id="ds-deals">0</div><div class="stat-sub">Across all staff</div></div></div>
+    </div>
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:18px">
+      <div class="tbl-wrap">
+        <div style="padding:14px 16px;border-bottom:1px solid var(--border);font-weight:700;font-size:14px;display:flex;justify-content:space-between;align-items:center">
+          Today's Attendance<a href="#" onclick="showTab('attendance',null)" style="font-size:12px;color:var(--green)">View all →</a>
+        </div>
+        <div id="dash-att"></div>
+      </div>
+      <div class="tbl-wrap">
+        <div style="padding:14px 16px;border-bottom:1px solid var(--border);font-weight:700;font-size:14px;display:flex;justify-content:space-between;align-items:center">
+          Pending Leave Requests<a href="#" onclick="showTab('leaves',null)" style="font-size:12px;color:var(--green)">View all →</a>
+        </div>
+        <div id="dash-leaves"></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ══ EMPLOYEES ══ -->
+  <section class="panel" id="panel-employees">
+    <div class="sec-hdr">
+      <div><div class="sec-title">👤 Employees</div><div style="font-size:12px;color:var(--text-muted);margin-top:2px">Manage employee profiles and details</div></div>
+      <div class="sec-actions">
+        <input type="text" class="inp" placeholder="Search…" oninput="filterEmployees(this.value)" style="width:180px">
+        <select class="sel" onchange="filterEmpDept(this.value)" style="width:140px">
+          <option value="">All Departments</option>
+          <option>Sales</option><option>Operations</option><option>Finance</option><option>Management</option>
+        </select>
+      </div>
+    </div>
+    <div class="emp-grid" id="emp-grid"></div>
+  </section>
+
+  <!-- ══ ATTENDANCE ══ -->
+  <section class="panel" id="panel-attendance">
+    <div class="sec-hdr">
+      <div><div class="sec-title">🕐 Attendance</div><div style="font-size:12px;color:var(--text-muted);margin-top:2px">Daily attendance tracking for all staff</div></div>
+      <div class="sec-actions">
+        <input type="date" class="inp" id="att-date" style="width:160px" onchange="renderAttendance()">
+        <button class="btn btn-primary btn-sm" onclick="markBulkAttendance()" type="button">✅ Mark All Present</button>
+      </div>
+    </div>
+    <div class="tbl-wrap">
+      <table class="tbl" id="att-table">
+        <thead><tr><th>Employee</th><th>Dept</th><th>Check-In</th><th>Check-Out</th><th>Hours</th><th>Status</th><th>Remarks</th><th>Action</th></tr></thead>
+        <tbody id="att-tbody"></tbody>
+      </table>
+    </div>
+    <div style="margin-top:18px">
+      <div class="sec-title" style="margin-bottom:10px;font-size:14px">Monthly Summary — <span id="att-month-label"></span></div>
+      <div id="att-monthly-grid" style="display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:10px"></div>
+    </div>
+  </section>
+
+  <!-- ══ LEAVES ══ -->
+  <section class="panel" id="panel-leaves">
+    <div class="sec-hdr">
+      <div><div class="sec-title">🏖️ Leave Management</div><div style="font-size:12px;color:var(--text-muted);margin-top:2px">Approve, reject and track all leave requests</div></div>
+      <div class="sec-actions">
+        <select class="sel" onchange="filterLeaves(this.value)" style="width:160px">
+          <option value="">All Status</option>
+          <option value="pending">Pending</option>
+          <option value="approved">Approved</option>
+          <option value="rejected">Rejected</option>
+        </select>
+        <button class="btn btn-primary btn-sm" onclick="openLeaveModal()" type="button">+ Apply Leave</button>
+      </div>
+    </div>
+    <div class="tbl-wrap">
+      <table class="tbl">
+        <thead><tr><th>Employee</th><th>Type</th><th>From</th><th>To</th><th>Days</th><th>Reason</th><th>Applied</th><th>Status</th><th>Action</th></tr></thead>
+        <tbody id="leave-tbody"></tbody>
+      </table>
+    </div>
+    <div style="margin-top:18px">
+      <div class="sec-title" style="margin-bottom:10px;font-size:14px">Leave Balance Summary</div>
+      <div id="leave-balance-grid" style="display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:12px"></div>
+    </div>
+  </section>
+
+  <!-- ══ PAYROLL ══ -->
+  <section class="panel" id="panel-payroll">
+    <div class="sec-hdr">
+      <div><div class="sec-title">💰 Payroll</div><div style="font-size:12px;color:var(--text-muted);margin-top:2px">Monthly salary processing and payslip generation</div></div>
+      <div class="sec-actions">
+        <select class="sel" id="payroll-month" onchange="renderPayroll()" style="width:160px"></select>
+        <button class="btn btn-primary btn-sm" onclick="processPayroll()" type="button">▶ Process Payroll</button>
+      </div>
+    </div>
+    <div id="payroll-list"></div>
+  </section>
+
+  <!-- ══ PERFORMANCE ══ -->
+  <section class="panel" id="panel-performance">
+    <div class="sec-hdr">
+      <div><div class="sec-title">📈 Performance</div><div style="font-size:12px;color:var(--text-muted);margin-top:2px">Deal tracking, targets and KPI review</div></div>
+      <div class="sec-actions">
+        <select class="sel" id="perf-month" style="width:160px" onchange="renderPerformance()"></select>
+      </div>
+    </div>
+    <div id="perf-content"></div>
+  </section>
+
+  <!-- ══ POLICIES ══ -->
+  <section class="panel" id="panel-policies">
+    <div class="sec-hdr"><div class="sec-title">📋 HR Policies</div></div>
+    <div style="display:grid;gap:12px;max-width:680px">
+      <div class="tbl-wrap" style="padding:18px">
+        <div style="font-weight:700;font-size:14px;margin-bottom:10px">🏖️ Leave Policy</div>
+        <div style="font-size:13px;line-height:1.8;color:var(--text-muted)">
+          <div>• <strong>Casual Leave (CL):</strong> 12 days / year</div>
+          <div>• <strong>Sick Leave (SL):</strong> 8 days / year</div>
+          <div>• <strong>Earned Leave (EL):</strong> 15 days / year (accrued at 1.25 days/month)</div>
+          <div>• <strong>Public Holidays:</strong> As per Maharashtra State Government</div>
+          <div>• <strong>Maternity Leave:</strong> 26 weeks (as per Maternity Benefit Act)</div>
+          <div>• <strong>Carry Forward:</strong> Max 15 EL days can be carried to next year</div>
+        </div>
+      </div>
+      <div class="tbl-wrap" style="padding:18px">
+        <div style="font-weight:700;font-size:14px;margin-bottom:10px">💰 Compensation Policy</div>
+        <div style="font-size:13px;line-height:1.8;color:var(--text-muted)">
+          <div>• Salary paid on or before 7th of each month</div>
+          <div>• Incentives: 0.25% of deal value for sales consultant, 0.5% for senior</div>
+          <div>• PF: 12% of Basic Salary (employer + employee contribution)</div>
+          <div>• TDS deducted at source as per applicable slab rate</div>
+          <div>• Annual increment cycle: April each year</div>
+        </div>
+      </div>
+      <div class="tbl-wrap" style="padding:18px">
+        <div style="font-weight:700;font-size:14px;margin-bottom:10px">🕐 Working Hours</div>
+        <div style="font-size:13px;line-height:1.8;color:var(--text-muted)">
+          <div>• Mon–Sat: 10:00 AM – 7:00 PM (9 hours including 1 hr lunch)</div>
+          <div>• Sunday: Off (or compensation on request)</div>
+          <div>• Late arrival grace: 15 minutes</div>
+          <div>• Half day: Leave after 1:00 PM or arrive after 2:00 PM</div>
+        </div>
+      </div>
+      <div class="tbl-wrap" style="padding:18px">
+        <div style="font-weight:700;font-size:14px;margin-bottom:10px">📄 Document Checklist (at joining)</div>
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:6px;font-size:13px;color:var(--text-muted)">
+          <div>☐ Aadhaar Card (original + copy)</div>
+          <div>☐ PAN Card</div>
+          <div>☐ Previous employment letter</div>
+          <div>☐ Last 3-month salary slips</div>
+          <div>☐ Educational certificates</div>
+          <div>☐ 6 passport-size photos</div>
+          <div>☐ Bank account details</div>
+          <div>☐ RERA registration certificate</div>
+        </div>
+      </div>
+    </div>
+  </section>
+</main>
+
+<!-- MODALS -->
+<div class="modal-overlay" id="hrms-modal" style="display:none" role="dialog" aria-modal="true">
+  <div class="modal">
+    <div class="modal-hdr">
+      <div class="modal-title" id="modal-title">Add Employee</div>
+      <button class="modal-close" onclick="closeModal()" type="button">✕</button>
+    </div>
+    <div id="modal-body"></div>
+    <div class="modal-footer">
+      <button class="btn btn-outline" onclick="closeModal()" type="button">Cancel</button>
+      <button class="btn btn-primary" id="modal-save" onclick="saveModal()" type="button">Save</button>
+    </div>
+  </div>
+</div>
+
+<div class="toast-container" id="toasts" aria-live="polite"></div>
+
+<script src="js/theme.js"></script>
+<script src="js/security.js"></script>
+<script>
+/* ══════════════════════════════════════════════════════
+   PFRE HRMS — Human Resource Management System
+   localStorage persistence, API-ready structure
+═══════════════════════════════════════════════════════ */
+
+/* ── Storage ── */
+const S = {
+  get: (k, d=[]) => { try { return JSON.parse(localStorage.getItem(k)) ?? d } catch { return d } },
+  set: (k, v)    => { try { localStorage.setItem(k, JSON.stringify(v)) } catch {} },
+  id:  ()        => 'hr_' + Date.now() + '_' + Math.random().toString(36).slice(2,6),
+};
+
+const esc = s => String(s??'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
+const fmt = v => '₹' + Math.round(v).toLocaleString('en-IN');
+const fmtDate = d => { if(!d) return '—'; const dt=new Date(d); return isNaN(dt)?String(d).slice(0,10):dt.toLocaleDateString('en-IN',{day:'2-digit',month:'short',year:'numeric'}); };
+
+/* Toast */
+function toast(msg, type='info') {
+  const el = document.createElement('div');
+  el.className = `toast toast-${type}`;
+  el.textContent = msg;
+  document.getElementById('toasts').appendChild(el);
+  setTimeout(() => el.remove(), 3500);
+}
+
+/* ── Default seed data ── */
+const SEED_EMPLOYEES = [
+  { id:'emp001', name:'Saurav Ganesh Chowdhury', emp_id:'PF-001', dept:'Management', designation:'Owner & Lead Consultant',
+    phone:'+91 93269 90050', email:'propertyfinderre@gmail.com', doj:'2018-04-01',
+    basic:60000, hra:24000, conveyance:2000, other_allowance:5000,
+    pf_opt:true, rera_id:'A51900035432', status:'active', avatar:'SC' },
+  { id:'emp002', name:'Abhishek Ganesh Sable', emp_id:'PF-002', dept:'Sales', designation:'Property Consultant',
+    phone:'', email:'', doj:'2026-05-16',
+    basic:25000, hra:10000, conveyance:1600, other_allowance:2000,
+    pf_opt:true, rera_id:'', status:'active', avatar:'AS' },
+];
+
+function getEmployees() {
+  const stored = S.get('hrms_employees', null);
+  if (!stored) { S.set('hrms_employees', SEED_EMPLOYEES); return SEED_EMPLOYEES; }
+  return stored;
+}
+
+/* ── Real historical attendance + salary-advance ledger (Abhishek Ganesh Sable, PF-002) ──
+   Sourced from the owner's manual WhatsApp/notebook log, 16 May – 15 Aug 2026.
+   Applied once via a version-guarded patch so it seeds correctly whether
+   localStorage is empty (fresh install) or already has employee data. */
+const HISTORICAL_ATTENDANCE = [
+  { date:'2026-05-20', status:'half-day' },
+  { date:'2026-05-21', status:'absent' },
+  { date:'2026-05-27', status:'absent' },
+  { date:'2026-06-11', status:'absent' },
+  { date:'2026-06-20', status:'absent' },
+  { date:'2026-06-23', status:'half-day' },
+  { date:'2026-07-04', status:'absent' },
+  { date:'2026-07-08', status:'absent' },
+  { date:'2026-07-09', status:'absent' },
+  { date:'2026-07-22', status:'absent' },
+  { date:'2026-07-28', status:'absent' },
+  { date:'2026-07-31', status:'absent' },
+  { date:'2026-08-01', status:'absent' },
+  { date:'2026-08-10', status:'absent' },
+  { date:'2026-08-11', status:'absent' },
+  { date:'2026-08-12', status:'absent' },
+  { date:'2026-08-13', status:'absent' },
+  { date:'2026-08-14', status:'absent' },
+  { date:'2026-08-15', status:'holiday' },
+];
+
+const HISTORICAL_ADVANCES = [
+  { date:'2026-06-08', amount:2000, method:'Navi',     note:'Salary advance' },
+  { date:'2026-07-07', amount:1000, method:'Navi',     note:'Salary advance' },
+  { date:'2026-07-08', amount:1000, method:'Navi',     note:'Salary advance' },
+  { date:'2026-07-17', amount:0,    method:'Petrol',   note:'Fuel — amount not recorded in source log' },
+  { date:'2026-07-21', amount:379,  method:'INDMoney', note:'Airtel recharge' },
+  { date:'2026-07-26', amount:500,  method:'Cash',     note:'Cash advance' },
+  { date:'2026-08-07', amount:500,  method:'Cash',     note:'Cash advance' },
+];
+
+function getAdvances() {
+  return S.get('hrms_advances', []);
+}
+
+function addAdvance(empId, date, amount, method, note) {
+  const list = getAdvances();
+  list.push({ id: S.id(), emp_id: empId, date, amount: Number(amount)||0, method, note, logged_on: today });
+  S.set('hrms_advances', list);
+}
+
+function advancesForMonth(empId, month) {
+  return getAdvances().filter(a => a.emp_id === empId && a.date.slice(0,7) === month);
+}
+
+function seedHistoricalData() {
+  if (S.get('hrms_seed_v2_applied', false)) return;
+
+  const empId = 'emp002'; // Abhishek Ganesh Sable, PF-002
+
+  // Seed attendance — one record per date, non-destructive (only fills gaps)
+  HISTORICAL_ATTENDANCE.forEach(({ date, status }) => {
+    const recs = S.get(`hrms_att_${date}`, []);
+    let r = recs.find(a => a.emp_id === empId);
+    if (!r) { r = { emp_id: empId, status, checkin:'', checkout:'', remarks:'' }; recs.push(r); }
+    else if (r.status === 'not-marked') { r.status = status; }
+    S.set(`hrms_att_${date}`, recs);
+  });
+
+  // Seed advances — skip if already present (avoid duplicates on repeat loads)
+  const existing = getAdvances();
+  HISTORICAL_ADVANCES.forEach(h => {
+    const dup = existing.find(a => a.emp_id === empId && a.date === h.date && a.amount === h.amount && a.method === h.method);
+    if (!dup) addAdvance(empId, h.date, h.amount, h.method, h.note);
+  });
+
+  S.set('hrms_seed_v2_applied', true);
+}
+seedHistoricalData();
+
+const today = new Date().toISOString().slice(0,10);
+const thisMonth = new Date().toISOString().slice(0,7);
+
+/* ══════════════════════════════════════════════════════
+   TAB ROUTING
+═══════════════════════════════════════════════════════ */
+const TAB_META = {
+  dashboard:   { title:'📊 HRMS Dashboard',      add:'',                   addFn:null },
+  employees:   { title:'👤 Employees',            add:'+ Add Employee',      addFn:'openEmployeeModal' },
+  attendance:  { title:'🕐 Attendance',           add:'+ Mark Attendance',   addFn:'openAttModal' },
+  leaves:      { title:'🏖️ Leave Management',    add:'+ Apply Leave',       addFn:'openLeaveModal' },
+  payroll:     { title:'💰 Payroll',              add:'▶ Process Payroll',   addFn:'processPayroll' },
+  performance: { title:'📈 Performance',          add:'+ Log Deal',          addFn:'openDealModal' },
+  policies:    { title:'📋 HR Policies',          add:'',                   addFn:null },
+};
+let currentTab = 'dashboard';
+
+function showTab(tab, el) {
+  currentTab = tab;
+  document.querySelectorAll('.panel').forEach(p => p.classList.remove('active'));
+  document.getElementById('panel-'+tab)?.classList.add('active');
+  document.querySelectorAll('.sb-item').forEach(i => i.classList.remove('active'));
+  if (el) el.classList.add('active');
+  else document.querySelector(`[data-tab="${tab}"]`)?.classList.add('active');
+  const m = TAB_META[tab] || {};
+  document.getElementById('topbar-title').textContent = m.title || tab;
+  const btn = document.getElementById('topbar-add-btn');
+  btn.textContent = m.add || '';
+  btn.style.display = m.add ? '' : 'none';
+  renderTab(tab);
+}
+
+function hrmsAddNew() {
+  const m = TAB_META[currentTab];
+  if (m?.addFn && window[m.addFn]) window[m.addFn]();
+}
+
+function renderTab(tab) {
+  switch(tab) {
+    case 'dashboard':   renderDashboard();   break;
+    case 'employees':   renderEmployees();   break;
+    case 'attendance':  renderAttendance();  break;
+    case 'leaves':      renderLeaves();      break;
+    case 'payroll':     renderPayroll();     break;
+    case 'performance': renderPerformance(); break;
+  }
+}
+
+/* ══════════════════════════════════════════════════════
+   DASHBOARD
+═══════════════════════════════════════════════════════ */
+function renderDashboard() {
+  const emps     = getEmployees().filter(e => e.status === 'active');
+  const attToday = S.get(`hrms_att_${today}`, []);
+  const present  = attToday.filter(a => a.status === 'present' || a.status === 'late').length;
+  const leaves   = S.get('hrms_leaves', []);
+  const pending  = leaves.filter(l => l.status === 'pending').length;
+  const onLeave  = leaves.filter(l => l.status === 'approved' && l.from <= today && l.to >= today).length;
+  const deals    = S.get(`hrms_deals_${thisMonth}`, []);
+  const payroll  = emps.reduce((s, e) => s + calcGross(e), 0);
+
+  document.getElementById('ds-total').textContent      = emps.length;
+  document.getElementById('ds-present').textContent    = present;
+  document.getElementById('ds-present-pct').textContent= `${emps.length ? Math.round(present/emps.length*100) : 0}% attendance`;
+  document.getElementById('ds-leave').textContent      = onLeave;
+  document.getElementById('ds-pending').textContent    = pending;
+  document.getElementById('ds-payroll').textContent    = fmt(payroll);
+  document.getElementById('ds-deals').textContent      = deals.length;
+  document.getElementById('leave-badge').textContent   = pending;
+  document.getElementById('leave-badge').style.display = pending ? '' : 'none';
+  document.getElementById('att-badge').textContent     = emps.length - present;
+  document.getElementById('att-badge').style.display   = (emps.length - present) > 0 ? '' : 'none';
+
+  // Today's attendance
+  const attDiv = document.getElementById('dash-att');
+  attDiv.innerHTML = emps.map(e => {
+    const rec = attToday.find(a => a.emp_id === e.id);
+    const st  = rec?.status || 'not-marked';
+    return `<div style="padding:10px 16px;border-bottom:1px solid var(--border);display:flex;justify-content:space-between;align-items:center">
+      <div style="display:flex;align-items:center;gap:10px">
+        <div class="emp-avatar" style="width:30px;height:30px;font-size:11px">${esc(e.avatar||'?')}</div>
+        <div><div style="font-weight:600;font-size:13px">${esc(e.name)}</div>
+        <div style="font-size:11px;color:var(--text-muted)">${esc(e.designation)}</div></div>
+      </div>
+      <span class="badge ${st==='present'?'badge-green':st==='late'?'badge-amber':st==='absent'?'badge-red':'badge-gray'}">${st}</span>
+    </div>`;
+  }).join('') || '<div style="padding:24px;text-align:center;color:var(--text-muted);font-size:13px">No attendance marked yet today</div>';
+
+  // Pending leaves
+  const leaveDiv = document.getElementById('dash-leaves');
+  const pendingLeaves = leaves.filter(l => l.status === 'pending');
+  leaveDiv.innerHTML = pendingLeaves.length ? pendingLeaves.map(l => `
+    <div style="padding:10px 16px;border-bottom:1px solid var(--border);display:flex;justify-content:space-between;align-items:center">
+      <div>
+        <div style="font-weight:600;font-size:13px">${esc(l.emp_name)}</div>
+        <div style="font-size:11px;color:var(--text-muted)">${esc(l.type)} · ${fmtDate(l.from)} – ${fmtDate(l.to)} (${l.days} days)</div>
+      </div>
+      <div style="display:flex;gap:6px">
+        <button class="act-btn" onclick="approveLeave('${l.id}')" type="button" style="color:var(--green-dk)">✅</button>
+        <button class="act-btn del" onclick="rejectLeave('${l.id}')" type="button">❌</button>
+      </div>
+    </div>`).join('')
+  : '<div style="padding:24px;text-align:center;color:var(--text-muted);font-size:13px">No pending requests</div>';
+}
+
+/* ══════════════════════════════════════════════════════
+   EMPLOYEES
+═══════════════════════════════════════════════════════ */
+function renderEmployees(filter='', dept='') {
+  let emps = getEmployees();
+  if (filter) emps = emps.filter(e => e.name.toLowerCase().includes(filter.toLowerCase()) || e.emp_id.includes(filter));
+  if (dept)   emps = emps.filter(e => e.dept === dept);
+  const grid = document.getElementById('emp-grid');
+  if (!emps.length) { grid.innerHTML='<div style="padding:40px;text-align:center;color:var(--text-muted)">No employees found.</div>'; return; }
+  grid.innerHTML = emps.map(e => `
+    <div class="emp-card">
+      <div style="display:flex;align-items:center;gap:12px;margin-bottom:12px">
+        <div class="emp-avatar" style="width:46px;height:46px;font-size:16px">${esc(e.avatar||e.name.slice(0,2).toUpperCase())}</div>
+        <div>
+          <div style="font-weight:700;font-size:14px">${esc(e.name)}</div>
+          <div style="font-size:12px;color:var(--green);font-weight:600">${esc(e.designation)}</div>
+          <div style="font-size:11px;color:var(--text-muted)">${esc(e.emp_id)} · ${esc(e.dept)}</div>
+        </div>
+      </div>
+      <div style="font-size:12px;color:var(--text-muted);display:flex;flex-direction:column;gap:3px;margin-bottom:10px">
+        ${e.phone?`<div>📞 ${esc(e.phone)}</div>`:''}
+        ${e.email?`<div>📧 ${esc(e.email)}</div>`:''}
+        <div>📅 Joined: ${fmtDate(e.doj)}</div>
+        <div>💰 Gross: ${fmt(calcGross(e))}/mo</div>
+        ${e.rera_id?`<div>🏠 RERA: ${esc(e.rera_id)}</div>`:''}
+      </div>
+      <div style="display:flex;align-items:center;justify-content:space-between">
+        <span class="badge ${e.status==='active'?'badge-green':'badge-red'}">${e.status}</span>
+        <div style="display:flex;gap:6px">
+          <button class="act-btn btn-sm" onclick="editEmployee('${e.id}')" type="button">✏️ Edit</button>
+          <button class="act-btn btn-sm del" onclick="toggleEmpStatus('${e.id}')" type="button">${e.status==='active'?'🚫 Deactivate':'✅ Activate'}</button>
+        </div>
+      </div>
+    </div>`).join('');
+}
+
+function filterEmployees(v) { renderEmployees(v); }
+function filterEmpDept(v)   { renderEmployees('', v); }
+function calcGross(e) { return (e.basic||0) + (e.hra||0) + (e.conveyance||0) + (e.other_allowance||0); }
+
+function toggleEmpStatus(id) {
+  const emps = getEmployees();
+  const e = emps.find(e => e.id === id);
+  if (!e) return;
+  const newStatus = e.status === 'active' ? 'inactive' : 'active';
+  if (!confirm(`${newStatus==='inactive'?'Deactivate':'Activate'} ${e.name}?`)) return;
+  e.status = newStatus;
+  S.set('hrms_employees', emps);
+  renderEmployees();
+  toast(`${e.name} ${newStatus}`, 'info');
+}
+
+/* ══════════════════════════════════════════════════════
+   ATTENDANCE
+═══════════════════════════════════════════════════════ */
+function renderAttendance() {
+  const dateEl = document.getElementById('att-date');
+  if (!dateEl.value) dateEl.value = today;
+  const date  = dateEl.value;
+  const emps  = getEmployees().filter(e => e.status === 'active');
+  const recs  = S.get(`hrms_att_${date}`, []);
+
+  document.getElementById('att-month-label').textContent = new Date(date).toLocaleDateString('en-IN',{month:'long',year:'numeric'});
+
+  const tbody = document.getElementById('att-tbody');
+  tbody.innerHTML = emps.map(e => {
+    const r = recs.find(a => a.emp_id === e.id) || { status:'not-marked', checkin:'', checkout:'', remarks:'' };
+    return `<tr>
+      <td><div style="display:flex;align-items:center;gap:8px">
+        <div class="emp-avatar" style="width:30px;height:30px;font-size:11px">${esc(e.avatar||'?')}</div>
+        <div><div style="font-weight:600">${esc(e.name)}</div><div style="font-size:11px;color:var(--text-muted)">${esc(e.emp_id)}</div></div>
+      </div></td>
+      <td style="color:var(--text-muted)">${esc(e.dept)}</td>
+      <td><input type="time" class="inp" style="width:120px;padding:5px 8px" value="${esc(r.checkin)}"
+          onchange="updateAtt('${e.id}','${date}','checkin',this.value)"></td>
+      <td><input type="time" class="inp" style="width:120px;padding:5px 8px" value="${esc(r.checkout)}"
+          onchange="updateAtt('${e.id}','${date}','checkout',this.value)"></td>
+      <td style="font-family:var(--mono)">${calcHours(r.checkin, r.checkout)}</td>
+      <td>
+        <select class="sel" style="width:130px;padding:5px 8px" onchange="updateAtt('${e.id}','${date}','status',this.value)">
+          ${['not-marked','present','absent','late','half-day','holiday','on-leave'].map(s =>
+            `<option value="${s}" ${r.status===s?'selected':''}>${s}</option>`).join('')}
+        </select>
+      </td>
+      <td><input type="text" class="inp" style="width:130px;padding:5px 8px" placeholder="Remarks" value="${esc(r.remarks||'')}"
+          onchange="updateAtt('${e.id}','${date}','remarks',this.value)"></td>
+      <td>
+        <button class="act-btn btn-sm" onclick="markPresent('${e.id}','${date}')" type="button" title="Mark Present">✅</button>
+      </td>
+    </tr>`;
+  }).join('');
+
+  // Monthly summary per employee
+  const year  = date.slice(0,4), month = date.slice(5,7);
+  const grid  = document.getElementById('att-monthly-grid');
+  grid.innerHTML = emps.map(e => {
+    const days = Array.from({length:new Date(year,month,0).getDate()}, (_,i) => {
+      const d = `${year}-${month}-${String(i+1).padStart(2,'0')}`;
+      const r = (S.get(`hrms_att_${d}`,[]) || []).find(a => a.emp_id === e.id);
+      return r?.status || 'not-marked';
+    });
+    const present  = days.filter(s => s === 'present' || s === 'late').length;
+    const absent   = days.filter(s => s === 'absent').length;
+    const leaves   = days.filter(s => s === 'on-leave').length;
+    return `<div class="tbl-wrap" style="padding:12px">
+      <div style="font-weight:700;font-size:13px;margin-bottom:6px">${esc(e.name)}</div>
+      <div style="display:flex;gap:10px;font-size:12px">
+        <span><span class="att-dot att-present"></span>P: ${present}</span>
+        <span><span class="att-dot att-absent"></span>A: ${absent}</span>
+        <span><span class="att-dot att-leave"></span>L: ${leaves}</span>
+      </div>
+    </div>`;
+  }).join('');
+}
+
+function updateAtt(empId, date, field, val) {
+  const recs = S.get(`hrms_att_${date}`, []);
+  let r = recs.find(a => a.emp_id === empId);
+  if (!r) { r = { emp_id:empId, status:'not-marked', checkin:'', checkout:'', remarks:'' }; recs.push(r); }
+  r[field] = val;
+  if (field === 'checkin' || field === 'checkout') {
+    const h = calcHours(r.checkin, r.checkout);
+    if (h !== '—' && r.status === 'not-marked') r.status = 'present';
+  }
+  S.set(`hrms_att_${date}`, recs);
+}
+
+function markPresent(empId, date) {
+  const now = new Date();
+  const t   = `${String(now.getHours()).padStart(2,'0')}:${String(now.getMinutes()).padStart(2,'0')}`;
+  updateAtt(empId, date, 'checkin', t);
+  updateAtt(empId, date, 'status', 'present');
+  renderAttendance();
+  toast('Marked present ✅', 'success');
+}
+
+function markBulkAttendance() {
+  const date = document.getElementById('att-date').value || today;
+  const emps = getEmployees().filter(e => e.status === 'active');
+  const now  = new Date();
+  const t    = `${String(now.getHours()).padStart(2,'0')}:${String(now.getMinutes()).padStart(2,'0')}`;
+  const recs = S.get(`hrms_att_${date}`, []);
+  emps.forEach(e => {
+    let r = recs.find(a => a.emp_id === e.id);
+    if (!r) { r = { emp_id:e.id, status:'present', checkin:t, checkout:'', remarks:'' }; recs.push(r); }
+    else if (r.status === 'not-marked') { r.status = 'present'; r.checkin = r.checkin || t; }
+  });
+  S.set(`hrms_att_${date}`, recs);
+  renderAttendance();
+  toast(`All ${emps.length} employees marked present ✅`, 'success');
+}
+
+function calcHours(ci, co) {
+  if (!ci || !co) return '—';
+  const [ch,cm] = ci.split(':').map(Number);
+  const [oh,om] = co.split(':').map(Number);
+  const mins = (oh*60+om) - (ch*60+cm);
+  if (mins <= 0) return '—';
+  return `${Math.floor(mins/60)}h ${mins%60}m`;
+}
+
+/* ══════════════════════════════════════════════════════
+   LEAVES
+═══════════════════════════════════════════════════════ */
+function renderLeaves(filterStatus='') {
+  let leaves = S.get('hrms_leaves', []);
+  if (filterStatus) leaves = leaves.filter(l => l.status === filterStatus);
+  const tbody = document.getElementById('leave-tbody');
+
+  tbody.innerHTML = leaves.length ? leaves.slice().reverse().map(l => `
+    <tr>
+      <td><strong>${esc(l.emp_name)}</strong></td>
+      <td><span class="badge badge-blue">${esc(l.type)}</span></td>
+      <td>${fmtDate(l.from)}</td>
+      <td>${fmtDate(l.to)}</td>
+      <td style="font-family:var(--mono);text-align:center">${l.days}</td>
+      <td style="max-width:160px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;color:var(--text-muted)">${esc(l.reason||'—')}</td>
+      <td style="color:var(--text-muted)">${fmtDate(l.applied)}</td>
+      <td><span class="badge ${l.status==='approved'?'badge-green':l.status==='pending'?'badge-amber':'badge-red'}">${l.status}</span></td>
+      <td style="display:flex;gap:4px">
+        ${l.status==='pending'?`
+          <button class="act-btn btn-sm" onclick="approveLeave('${l.id}')" type="button" style="color:var(--green-dk)">✅</button>
+          <button class="act-btn btn-sm del" onclick="rejectLeave('${l.id}')" type="button">❌</button>
+        `:''}</td>
+    </tr>`).join('')
+  : '<tr><td colspan="9" style="text-align:center;padding:24px;color:var(--text-muted)">No leave records found.</td></tr>';
+
+  // Leave balance
+  const emps = getEmployees().filter(e => e.status === 'active');
+  const allLeaves = S.get('hrms_leaves', []);
+  const balGrid = document.getElementById('leave-balance-grid');
+  balGrid.innerHTML = emps.map(e => {
+    const taken = allLeaves.filter(l => l.emp_id === e.id && l.status === 'approved');
+    const cl = taken.filter(l => l.type === 'Casual Leave').reduce((s,l) => s + l.days, 0);
+    const sl = taken.filter(l => l.type === 'Sick Leave').reduce((s,l) => s + l.days, 0);
+    const el = taken.filter(l => l.type === 'Earned Leave').reduce((s,l) => s + l.days, 0);
+    return `<div class="tbl-wrap" style="padding:14px">
+      <div style="font-weight:700;font-size:13px;margin-bottom:8px">${esc(e.name)}</div>
+      <div style="display:flex;flex-direction:column;gap:4px;font-size:12px">
+        ${[['Casual', cl, 12],['Sick', sl, 8],['Earned', el, 15]].map(([t,used,max]) => `
+          <div style="display:flex;align-items:center;gap:8px">
+            <span style="width:50px;color:var(--text-muted)">${t}</span>
+            <div class="progress-bar" style="flex:1">
+              <div class="progress-fill" style="width:${Math.min(100,used/max*100)}%;background:${used>=max?'var(--red)':'var(--green)'}"></div>
+            </div>
+            <span style="font-family:var(--mono);font-size:11px;color:var(--text-muted)">${used}/${max}</span>
+          </div>`).join('')}
+      </div>
+    </div>`;
+  }).join('');
+}
+
+function filterLeaves(status) { renderLeaves(status); }
+
+function openLeaveModal() {
+  const emps = getEmployees().filter(e => e.status === 'active');
+  document.getElementById('modal-title').textContent = '🏖️ Apply for Leave';
+  document.getElementById('modal-body').innerHTML = `
+    <div class="form-grid">
+      <div class="form-group full">
+        <label class="lbl">Employee</label>
+        <select class="sel" id="lv-emp">
+          ${emps.map(e => `<option value="${e.id}" data-name="${esc(e.name)}">${esc(e.name)}</option>`).join('')}
+        </select>
+      </div>
+      <div class="form-group">
+        <label class="lbl">Leave Type</label>
+        <select class="sel" id="lv-type">
+          <option>Casual Leave</option><option>Sick Leave</option><option>Earned Leave</option><option>Compensatory Off</option><option>Unpaid Leave</option>
+        </select>
+      </div>
+      <div class="form-group"><label class="lbl">From Date</label><input type="date" class="inp" id="lv-from" value="${today}"></div>
+      <div class="form-group"><label class="lbl">To Date</label><input type="date" class="inp" id="lv-to" value="${today}"></div>
+      <div class="form-group full"><label class="lbl">Reason</label><textarea class="txta" id="lv-reason" placeholder="Brief reason for leave…"></textarea></div>
+    </div>`;
+  document.getElementById('modal-save').onclick = saveLeave;
+  document.getElementById('hrms-modal').style.display = 'flex';
+}
+
+function saveLeave() {
+  const empEl = document.getElementById('lv-emp');
+  const empId = empEl.value;
+  const empName = empEl.selectedOptions[0]?.getAttribute('data-name') || '';
+  const from  = document.getElementById('lv-from').value;
+  const to    = document.getElementById('lv-to').value;
+  if (!from || !to || to < from) { toast('Invalid dates', 'error'); return; }
+  const days  = Math.ceil((new Date(to) - new Date(from)) / 86400000) + 1;
+  const leaves = S.get('hrms_leaves', []);
+  leaves.push({ id:S.id(), emp_id:empId, emp_name:empName,
+    type:document.getElementById('lv-type').value,
+    from, to, days, reason:document.getElementById('lv-reason').value,
+    applied:today, status:'pending' });
+  S.set('hrms_leaves', leaves);
+  closeModal();
+  renderLeaves();
+  toast('Leave request submitted ✅', 'success');
+}
+
+function approveLeave(id) {
+  const leaves = S.get('hrms_leaves', []);
+  const l = leaves.find(l => l.id === id);
+  if (l) { l.status = 'approved'; S.set('hrms_leaves', leaves); renderLeaves(); renderDashboard(); toast('Leave approved ✅', 'success'); }
+}
+
+function rejectLeave(id) {
+  const leaves = S.get('hrms_leaves', []);
+  const l = leaves.find(l => l.id === id);
+  if (l) { l.status = 'rejected'; S.set('hrms_leaves', leaves); renderLeaves(); renderDashboard(); toast('Leave rejected', 'info'); }
+}
+
+/* ══════════════════════════════════════════════════════
+   PAYROLL
+═══════════════════════════════════════════════════════ */
+function initMonthSelect(selId) {
+  const sel = document.getElementById(selId);
+  if (!sel || sel.options.length) return;
+  for (let i = 0; i < 12; i++) {
+    const d = new Date(); d.setMonth(d.getMonth() - i);
+    const val = d.toISOString().slice(0,7);
+    const lbl = d.toLocaleDateString('en-IN',{month:'long',year:'numeric'});
+    const opt = document.createElement('option');
+    opt.value = val; opt.textContent = lbl;
+    if (i === 0) opt.selected = true;
+    sel.appendChild(opt);
+  }
+}
+
+function renderPayroll() {
+  initMonthSelect('payroll-month');
+  const month = document.getElementById('payroll-month')?.value || thisMonth;
+  const emps  = getEmployees().filter(e => e.status === 'active');
+  const list  = document.getElementById('payroll-list');
+  const processed = S.get(`hrms_payroll_${month}`, []);
+
+  list.innerHTML = emps.map(e => {
+    const rec      = processed.find(p => p.emp_id === e.id);
+    const gross    = calcGross(e);
+    const pf       = e.pf_opt ? Math.round(e.basic * 0.12) : 0;
+    const tds      = gross > 50000 ? Math.round((gross - 50000) * 0.05) : 0;
+    const advances = advancesForMonth(e.id, month);
+    const advTotal = advances.reduce((s,a) => s + a.amount, 0);
+    const net      = gross - pf - tds - advTotal;
+    const mLabel   = new Date(month + '-01').toLocaleDateString('en-IN',{month:'long',year:'numeric'});
+    return `<div class="payslip-card">
+      <div class="payslip-header">
+        <div>
+          <div style="display:flex;align-items:center;gap:10px">
+            <div class="emp-avatar" style="width:40px;height:40px">${esc(e.avatar||'?')}</div>
+            <div>
+              <div style="font-weight:700;font-size:15px">${esc(e.name)}</div>
+              <div style="font-size:12px;color:var(--text-muted)">${esc(e.designation)} · ${esc(e.emp_id)}</div>
+            </div>
+          </div>
+        </div>
+        <div style="text-align:right">
+          <div style="font-size:13px;color:var(--text-muted)">Pay Period: ${mLabel}</div>
+          ${rec ? `<span class="badge badge-green">Processed</span>` : `<span class="badge badge-amber">Pending</span>`}
+        </div>
+      </div>
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:14px">
+        <div>
+          <div style="font-size:11px;font-weight:700;color:var(--text-muted);text-transform:uppercase;margin-bottom:6px">Earnings</div>
+          <div class="payslip-row"><span>Basic Salary</span><span>${fmt(e.basic)}</span></div>
+          <div class="payslip-row"><span>HRA</span><span>${fmt(e.hra)}</span></div>
+          <div class="payslip-row"><span>Conveyance</span><span>${fmt(e.conveyance)}</span></div>
+          <div class="payslip-row"><span>Other Allowance</span><span>${fmt(e.other_allowance)}</span></div>
+          <div class="payslip-row total"><span>Gross</span><span>${fmt(gross)}</span></div>
+        </div>
+        <div>
+          <div style="font-size:11px;font-weight:700;color:var(--text-muted);text-transform:uppercase;margin-bottom:6px">Deductions</div>
+          ${pf ? `<div class="payslip-row deduction"><span>PF (12% of Basic)</span><span>-${fmt(pf)}</span></div>` : ''}
+          ${tds ? `<div class="payslip-row deduction"><span>TDS</span><span>-${fmt(tds)}</span></div>` : ''}
+          ${advTotal ? `<div class="payslip-row deduction"><span>Advances (${mLabel})</span><span>-${fmt(advTotal)}</span></div>` : ''}
+          ${!pf && !tds && !advTotal ? `<div class="payslip-row" style="color:var(--text-muted)"><span>No deductions</span><span>₹0</span></div>` : ''}
+          <div class="payslip-row total net"><span>Net Pay</span><span>${fmt(net)}</span></div>
+        </div>
+      </div>
+      ${advances.length ? `
+      <div style="margin-top:10px;padding-top:10px;border-top:1px dashed var(--border)">
+        <div style="font-size:11px;font-weight:700;color:var(--text-muted);text-transform:uppercase;margin-bottom:6px">Advances Logged This Month</div>
+        ${advances.map(a => `<div class="payslip-row" style="font-size:12px">
+          <span>${fmtDate(a.date)} — ${esc(a.method)}${a.note ? ' · '+esc(a.note) : ''}</span>
+          <span>${a.amount ? fmt(a.amount) : '<span style="color:var(--text-muted)">unrecorded</span>'}</span>
+        </div>`).join('')}
+      </div>` : ''}
+      <div style="display:flex;justify-content:flex-end;gap:8px;margin-top:12px;flex-wrap:wrap">
+        <button class="btn btn-outline btn-sm" onclick="quickAddAdvance('${e.id}')" type="button">➕ Log Advance</button>
+        <button class="btn btn-outline btn-sm" onclick="printPayslip('${esc(e.name)}','${mLabel}','${fmt(net)}',${pf},${tds},${advTotal},${gross})" type="button">🖨️ Print</button>
+        <button class="btn btn-outline btn-sm" onclick="downloadPayslip('${esc(e.name)}','${mLabel}','${fmt(net)}','${e.id}')" type="button">⬇ Download</button>
+        ${!rec ? `<button class="btn btn-primary btn-sm" onclick="markPayrollDone('${e.id}','${month}',${net})" type="button">✅ Mark Paid</button>` : `<span style="font-size:12px;color:var(--green-dk);font-weight:600">Paid on ${fmtDate(rec.paid_on)}</span>`}
+      </div>
+    </div>`;
+  }).join('');
+}
+
+function quickAddAdvance(empId) {
+  const amount = prompt('Advance amount (₹):', '');
+  if (amount === null) return;
+  const method = prompt('Payment method (e.g. Cash, Navi, INDMoney, UPI):', 'Cash');
+  if (method === null) return;
+  const note   = prompt('Note (optional):', '') || '';
+  const date   = document.getElementById('payroll-month')?.value
+                   ? document.getElementById('payroll-month').value + '-' + String(new Date().getDate()).padStart(2,'0')
+                   : today;
+  addAdvance(empId, date, amount, method, note);
+  renderPayroll();
+  toast('Advance logged ✅', 'success');
+}
+
+function processPayroll() {
+  initMonthSelect('payroll-month');
+  const month = document.getElementById('payroll-month')?.value || thisMonth;
+  const emps  = getEmployees().filter(e => e.status === 'active');
+  const processed = S.get(`hrms_payroll_${month}`, []);
+  let count = 0;
+  emps.forEach(e => {
+    if (!processed.find(p => p.emp_id === e.id)) {
+      processed.push({ emp_id:e.id, net:calcGross(e), paid_on:today, month });
+      count++;
+    }
+  });
+  S.set(`hrms_payroll_${month}`, processed);
+  renderPayroll();
+  toast(`Payroll processed for ${count} employees ✅`, 'success');
+}
+
+function markPayrollDone(empId, month, net) {
+  const rec = S.get(`hrms_payroll_${month}`, []);
+  rec.push({ emp_id:empId, net, paid_on:today, month });
+  S.set(`hrms_payroll_${month}`, rec);
+  renderPayroll();
+  toast('Marked as paid ✅', 'success');
+}
+
+function printPayslip(name, month, net, pf=0, tds=0, advances=0, gross=0) {
+  /* Generate a styled payslip and open print dialog */
+  const w = window.open('','_blank','width=760,height=650');
+  w.document.write(`<!DOCTYPE html><html><head><title>Payslip — ${name} — ${month}</title>
+  <style>
+    *{margin:0;padding:0;box-sizing:border-box}
+    body{font-family:'Segoe UI',sans-serif;color:#111;padding:0}
+    .slip{max-width:680px;margin:0 auto;border:1.5px solid #e5e7eb;border-radius:12px;overflow:hidden}
+    .slip-header{background:#012FA1;color:#fff;padding:20px 24px;display:flex;justify-content:space-between;align-items:center}
+    .slip-logo{font-size:16px;font-weight:800}
+    .slip-tag{font-size:11px;opacity:.75;margin-top:2px}
+    .slip-period{text-align:right;font-size:12px;opacity:.8}
+    .slip-emp{padding:16px 24px;background:#f8f9fa;border-bottom:1px solid #e5e7eb;display:flex;gap:20px;flex-wrap:wrap}
+    .slip-emp-item{flex:1;min-width:180px}
+    .slip-emp-label{font-size:10px;text-transform:uppercase;letter-spacing:.6px;color:#6b7280;margin-bottom:2px}
+    .slip-emp-val{font-size:14px;font-weight:700}
+    .slip-body{padding:20px 24px}
+    table{width:100%;border-collapse:collapse;font-size:13px;margin-bottom:16px}
+    th{text-align:left;padding:8px 12px;background:#f3f4f6;font-size:11px;text-transform:uppercase;letter-spacing:.5px;color:#6b7280;font-weight:700}
+    td{padding:9px 12px;border-bottom:1px solid #f3f4f6}
+    .total-row td{font-weight:700;background:#f8f9fa;font-size:14px}
+    .net-row td{font-weight:800;font-size:16px;color:#012FA1;background:#eff6ff;padding:12px}
+    .slip-footer{padding:14px 24px;background:#f8f9fa;border-top:1px solid #e5e7eb;font-size:11px;color:#9ca3af;display:flex;justify-content:space-between}
+    @media print{body{padding:0}.slip{border:none;border-radius:0}}
+  </style></head>
+  <body onload="window.print()">
+  <div class="slip">
+    <div class="slip-header">
+      <div><div class="slip-logo">Property Finder Real Estate</div><div class="slip-tag">Salary Payslip — Confidential</div></div>
+      <div class="slip-period">Pay Period<br><strong style="font-size:15px">${month}</strong></div>
+    </div>
+    <div class="slip-emp">
+      <div class="slip-emp-item"><div class="slip-emp-label">Employee Name</div><div class="slip-emp-val">${name}</div></div>
+      <div class="slip-emp-item"><div class="slip-emp-label">Location</div><div class="slip-emp-val">Malad West, Mumbai</div></div>
+      <div class="slip-emp-item"><div class="slip-emp-label">Generated On</div><div class="slip-emp-val">${new Date().toLocaleDateString('en-IN',{day:'2-digit',month:'short',year:'numeric'})}</div></div>
+    </div>
+    <div class="slip-body">
+      <table>
+        <thead><tr><th>Component</th><th style="text-align:right">Amount (₹)</th></tr></thead>
+        <tbody>
+          <tr class="total-row"><td>Gross Earnings</td><td style="text-align:right">₹${gross.toLocaleString('en-IN')}</td></tr>
+          ${pf ? `<tr><td>Provident Fund (Employee)</td><td style="text-align:right">-₹${pf.toLocaleString('en-IN')}</td></tr>` : ''}
+          ${tds ? `<tr><td>TDS</td><td style="text-align:right">-₹${tds.toLocaleString('en-IN')}</td></tr>` : ''}
+          ${advances ? `<tr><td>Advances Paid This Month</td><td style="text-align:right">-₹${advances.toLocaleString('en-IN')}</td></tr>` : ''}
+          <tr class="net-row"><td>Net Pay</td><td style="text-align:right">${net}</td></tr>
+        </tbody>
+      </table>
+      <p style="font-size:11px;color:#9ca3af;margin-top:8px">This is a system-generated payslip. No signature required.</p>
+    </div>
+    <div class="slip-footer">
+      <span>Property Finder Real Estate · Shop No. 9, Malad West, Mumbai - 400095</span>
+      <span>+91 93269 90050</span>
+    </div>
+  </div>
+</body></html>`);
+  w.document.close();
+}
+
+function downloadPayslip(name, month, net, empId) {
+  /* Download payslip as an HTML file (can be opened in browser or printed to PDF) */
+  const content = `<!DOCTYPE html><html><head><title>Payslip_${name.replace(/ /g,'_')}_${month}.html</title></head><body>
+    <h2>Property Finder Real Estate — Payslip</h2>
+    <p>Employee: ${name} | Month: ${month} | Net Pay: ${net}</p>
+    <p>Generated: ${new Date().toLocaleString('en-IN')}</p>
+  </body></html>`;
+  const blob = new Blob([content], { type: 'text/html;charset=utf-8' });
+  const a    = document.createElement('a');
+  a.href     = URL.createObjectURL(blob);
+  a.download = `Payslip_${name.replace(/ /g,'_')}_${month}.html`;
+  document.body.appendChild(a);
+  a.click();
+  a.remove();
+  URL.revokeObjectURL(a.href);
+  toast('Payslip downloaded ✅', 'success');
+}
+
+/* ══════════════════════════════════════════════════════
+   PERFORMANCE
+═══════════════════════════════════════════════════════ */
+function renderPerformance() {
+  initMonthSelect('perf-month');
+  const month = document.getElementById('perf-month')?.value || thisMonth;
+  const emps  = getEmployees().filter(e => e.status === 'active');
+  const deals = S.get(`hrms_deals_${month}`, []);
+  const cont  = document.getElementById('perf-content');
+
+  const mLabel = new Date(month+'-01').toLocaleDateString('en-IN',{month:'long',year:'numeric'});
+  cont.innerHTML = `
+    <div class="kpi-grid" style="margin-bottom:18px">
+      <div class="kpi-card"><div class="kpi-val">${deals.length}</div><div class="kpi-label">Total Deals (${mLabel})</div></div>
+      <div class="kpi-card"><div class="kpi-val">${fmt(deals.reduce((s,d)=>s+d.value,0))}</div><div class="kpi-label">Total Deal Value</div></div>
+      <div class="kpi-card"><div class="kpi-val">${fmt(deals.reduce((s,d)=>s+d.incentive,0))}</div><div class="kpi-label">Total Incentives Earned</div></div>
+    </div>
+    <div class="sec-hdr">
+      <div class="sec-title" style="font-size:14px">Individual Performance — ${mLabel}</div>
+      <button class="btn btn-primary btn-sm" onclick="openDealModal()" type="button">+ Log Deal</button>
+    </div>
+    <div style="display:grid;gap:14px">
+      ${emps.map(e => {
+        const empDeals = deals.filter(d => d.emp_id === e.id);
+        const target   = e.deal_target || 2;
+        const pct      = Math.min(100, Math.round(empDeals.length / target * 100));
+        return `<div class="tbl-wrap" style="padding:16px">
+          <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:12px">
+            <div style="display:flex;align-items:center;gap:10px">
+              <div class="emp-avatar">${esc(e.avatar||'?')}</div>
+              <div><div style="font-weight:700">${esc(e.name)}</div><div style="font-size:12px;color:var(--text-muted)">${esc(e.designation)}</div></div>
+            </div>
+            <div style="text-align:right">
+              <div style="font-size:22px;font-weight:800;color:var(--green)">${empDeals.length}</div>
+              <div style="font-size:11px;color:var(--text-muted)">deals / ${target} target</div>
+            </div>
+          </div>
+          <div class="progress-bar" style="margin-bottom:8px">
+            <div class="progress-fill" style="width:${pct}%;background:${pct>=100?'var(--green)':pct>=50?'var(--amber)':'var(--red)'}"></div>
+          </div>
+          <div style="display:flex;justify-content:space-between;font-size:12px;color:var(--text-muted)">
+            <span>Value: ${fmt(empDeals.reduce((s,d)=>s+d.value,0))}</span>
+            <span>Incentive: ${fmt(empDeals.reduce((s,d)=>s+d.incentive,0))}</span>
+            <span>${pct}% of target</span>
+          </div>
+          ${empDeals.length ? `
+          <div style="margin-top:10px;border-top:1px solid var(--border);padding-top:8px">
+            ${empDeals.map(d=>`<div style="font-size:12px;display:flex;justify-content:space-between;padding:3px 0">
+              <span>${esc(d.property||'Property')} · ${esc(d.client)}</span>
+              <span style="color:var(--green)">${fmt(d.value)}</span>
+            </div>`).join('')}
+          </div>` : ''}
+        </div>`;
+      }).join('')}
+    </div>`;
+}
+
+function openDealModal() {
+  const emps = getEmployees().filter(e => e.status === 'active');
+  initMonthSelect('perf-month');
+  document.getElementById('modal-title').textContent = '📈 Log New Deal';
+  document.getElementById('modal-body').innerHTML = `
+    <div class="form-grid">
+      <div class="form-group full">
+        <label class="lbl">Employee</label>
+        <select class="sel" id="dl-emp">${emps.map(e=>`<option value="${e.id}">${esc(e.name)}</option>`).join('')}</select>
+      </div>
+      <div class="form-group"><label class="lbl">Client Name</label><input class="inp" id="dl-client" placeholder="Client name"></div>
+      <div class="form-group"><label class="lbl">Property</label><input class="inp" id="dl-prop" placeholder="Property / locality"></div>
+      <div class="form-group"><label class="lbl">Deal Type</label>
+        <select class="sel" id="dl-type"><option>Sale</option><option>Rental</option><option>Lease</option><option>Re-Sale</option></select>
+      </div>
+      <div class="form-group"><label class="lbl">Deal Value (₹)</label><input type="number" class="inp" id="dl-value" placeholder="e.g. 8500000"></div>
+      <div class="form-group"><label class="lbl">Date</label><input type="date" class="inp" id="dl-date" value="${today}"></div>
+      <div class="form-group full"><label class="lbl">Notes</label><textarea class="txta" id="dl-notes" placeholder="Deal notes…"></textarea></div>
+    </div>`;
+  document.getElementById('modal-save').onclick = saveDeal;
+  document.getElementById('hrms-modal').style.display = 'flex';
+}
+
+function saveDeal() {
+  const empId = document.getElementById('dl-emp').value;
+  const value = parseFloat(document.getElementById('dl-value').value) || 0;
+  const date  = document.getElementById('dl-date').value || today;
+  const month = date.slice(0,7);
+  const emp   = getEmployees().find(e => e.id === empId);
+  const rate  = emp?.designation?.toLowerCase().includes('senior') ? 0.005 : 0.0025;
+  const deals = S.get(`hrms_deals_${month}`, []);
+  deals.push({ id:S.id(), emp_id:empId, emp_name:emp?.name||'',
+    client:document.getElementById('dl-client').value,
+    property:document.getElementById('dl-prop').value,
+    type:document.getElementById('dl-type').value,
+    value, incentive:Math.round(value*rate),
+    date, notes:document.getElementById('dl-notes').value });
+  S.set(`hrms_deals_${month}`, deals);
+  closeModal();
+  renderPerformance();
+  toast('Deal logged ✅', 'success');
+}
+
+/* ══════════════════════════════════════════════════════
+   EMPLOYEE MODAL (Add / Edit)
+═══════════════════════════════════════════════════════ */
+let editingEmpId = null;
+
+function openEmployeeModal(id=null) {
+  editingEmpId = id;
+  const e = id ? getEmployees().find(x=>x.id===id) : null;
+  document.getElementById('modal-title').textContent = e ? '✏️ Edit Employee' : '👤 Add Employee';
+  document.getElementById('modal-body').innerHTML = `
+    <div class="form-grid">
+      <div class="form-group full"><label class="lbl">Full Name *</label><input class="inp" id="ef-name" value="${esc(e?.name||'')}"></div>
+      <div class="form-group"><label class="lbl">Employee ID</label><input class="inp" id="ef-empid" value="${esc(e?.emp_id||'PF-00'+((getEmployees().length||0)+1))}"></div>
+      <div class="form-group"><label class="lbl">Department</label>
+        <select class="sel" id="ef-dept">
+          ${['Management','Sales','Operations','Finance'].map(d=>`<option ${e?.dept===d?'selected':''}>${d}</option>`).join('')}
+        </select>
+      </div>
+      <div class="form-group full"><label class="lbl">Designation</label><input class="inp" id="ef-desig" value="${esc(e?.designation||'')}"></div>
+      <div class="form-group"><label class="lbl">Phone</label><input class="inp" id="ef-phone" value="${esc(e?.phone||'')}"></div>
+      <div class="form-group"><label class="lbl">Email</label><input class="inp" id="ef-email" value="${esc(e?.email||'')}"></div>
+      <div class="form-group"><label class="lbl">Date of Joining</label><input type="date" class="inp" id="ef-doj" value="${e?.doj||today}"></div>
+      <div class="form-group"><label class="lbl">RERA ID</label><input class="inp" id="ef-rera" value="${esc(e?.rera_id||'')}"></div>
+      <div class="form-group"><label class="lbl">Basic Salary (₹)</label><input type="number" class="inp" id="ef-basic" value="${e?.basic||0}"></div>
+      <div class="form-group"><label class="lbl">HRA (₹)</label><input type="number" class="inp" id="ef-hra" value="${e?.hra||0}"></div>
+      <div class="form-group"><label class="lbl">Conveyance (₹)</label><input type="number" class="inp" id="ef-conv" value="${e?.conveyance||0}"></div>
+      <div class="form-group"><label class="lbl">Other Allowance (₹)</label><input type="number" class="inp" id="ef-other" value="${e?.other_allowance||0}"></div>
+      <div class="form-group"><label class="lbl">Monthly Deal Target</label><input type="number" class="inp" id="ef-target" value="${e?.deal_target||2}"></div>
+      <div class="form-group"><label class="lbl">Avatar Initials</label><input class="inp" id="ef-avatar" placeholder="e.g. AS" maxlength="3" value="${esc(e?.avatar||'')}"></div>
+      <div class="form-group full">
+        <label style="display:flex;align-items:center;gap:8px;cursor:pointer;font-size:13px">
+          <input type="checkbox" id="ef-pf" ${e?.pf_opt!==false?'checked':''} style="width:16px;height:16px;accent-color:var(--green)">
+          <span>Opt-in for PF (Provident Fund)</span>
+        </label>
+      </div>
+    </div>`;
+  document.getElementById('modal-save').onclick = saveEmployee;
+  document.getElementById('hrms-modal').style.display = 'flex';
+  document.getElementById('ef-name').focus();
+}
+
+function editEmployee(id) { openEmployeeModal(id); }
+
+function saveEmployee() {
+  const name = document.getElementById('ef-name').value.trim();
+  if (!name) { toast('Name is required', 'error'); return; }
+  const emps = getEmployees();
+  const data = {
+    name, emp_id:document.getElementById('ef-empid').value,
+    dept:document.getElementById('ef-dept').value,
+    designation:document.getElementById('ef-desig').value,
+    phone:document.getElementById('ef-phone').value,
+    email:document.getElementById('ef-email').value,
+    doj:document.getElementById('ef-doj').value,
+    rera_id:document.getElementById('ef-rera').value,
+    basic:parseFloat(document.getElementById('ef-basic').value)||0,
+    hra:parseFloat(document.getElementById('ef-hra').value)||0,
+    conveyance:parseFloat(document.getElementById('ef-conv').value)||0,
+    other_allowance:parseFloat(document.getElementById('ef-other').value)||0,
+    deal_target:parseInt(document.getElementById('ef-target').value)||2,
+    avatar:document.getElementById('ef-avatar').value || name.slice(0,2).toUpperCase(),
+    pf_opt:document.getElementById('ef-pf').checked,
+    status:'active',
+  };
+  if (editingEmpId) {
+    const idx = emps.findIndex(e => e.id === editingEmpId);
+    if (idx>=0) emps[idx] = { ...emps[idx], ...data };
+  } else {
+    data.id = S.id();
+    emps.push(data);
+  }
+  S.set('hrms_employees', emps);
+  closeModal();
+  renderEmployees();
+  toast(editingEmpId ? 'Employee updated ✅' : 'Employee added ✅', 'success');
+}
+
+/* ══════════════════════════════════════════════════════
+   MODAL + UTILS
+═══════════════════════════════════════════════════════ */
+function closeModal() { document.getElementById('hrms-modal').style.display='none'; editingEmpId=null; }
+
+function hrmsExport() {
+  const exports = {
+    employees:   ['hrms_employees',  'hrms_employees.csv'],
+    attendance:  [`hrms_att_${today}`, `hrms_att_${today}.csv`],
+    leaves:      ['hrms_leaves',     'hrms_leaves.csv'],
+    payroll:     [`hrms_payroll_${thisMonth}`, `hrms_payroll_${thisMonth}.csv`],
+    performance: [`hrms_deals_${thisMonth}`,   `hrms_deals_${thisMonth}.csv`],
+  };
+  const map = exports[currentTab];
+  if (!map) { toast('No export for this section', 'error'); return; }
+  const data = S.get(map[0],[]);
+  if (!data.length) { toast('Nothing to export', 'error'); return; }
+  const hdrs = Object.keys(data[0]);
+  const rows = data.map(r => hdrs.map(h => String(r[h]??'')));
+  const csv  = [hdrs,...rows].map(r => r.map(v=>'"'+String(v).replace(/"/g,'""')+'"').join(',')).join('\r\n');
+  const a = document.createElement('a');
+  a.href = URL.createObjectURL(new Blob([csv],{type:'text/csv'}));
+  a.download = map[1]; document.body.appendChild(a); a.click(); a.remove();
+  toast(`Exported ${data.length} rows`, 'success');
+}
+
+function toggleTheme() {
+  const next = document.documentElement.getAttribute('data-theme')==='dark'?'light':'dark';
+  document.documentElement.setAttribute('data-theme',next);
+  try{localStorage.setItem('pfre_theme',next)}catch{}
+}
+
+
+/* saveModal — stub called by the static HTML button before a modal opens.
+   Each modal overrides the onclick dynamically, so this is a safety fallback. */
+function saveModal() {
+  /* no-op: real handlers are set by openEmployeeModal/openLeaveModal/openDealModal */
+}
+/* ── Init ── */
+document.addEventListener('DOMContentLoaded', () => {
+  initMonthSelect('payroll-month');
+  initMonthSelect('perf-month');
+  showTab('dashboard', document.querySelector('[data-tab="dashboard"]'));
+});
+document.addEventListener('keydown', e => { if(e.key==='Escape') closeModal(); });
+</script>
+<script>
+if ('serviceWorker' in navigator) {
+  window.addEventListener('load', () => navigator.serviceWorker.register('./sw.js').catch(()=>{}));
+}
+</script>
+<script src="js/app-shell.js"></script>
+</body>
+</html>

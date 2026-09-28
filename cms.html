@@ -1,0 +1,1299 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' https://cdnjs.cloudflare.com https://challenges.cloudflare.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' data: https:; connect-src 'self' https://api.propertyfinderrealestate.com http://localhost:8000 https://formspree.io; frame-src https://www.google.com https://challenges.cloudflare.com; form-action 'self'; object-src 'none'; base-uri 'self'; frame-ancestors 'none'">
+<meta http-equiv="X-Content-Type-Options" content="nosniff">
+<meta http-equiv="X-Frame-Options" content="SAMEORIGIN">
+<meta http-equiv="Referrer-Policy" content="strict-origin-when-cross-origin">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="robots" content="noindex, nofollow">
+<meta name="description" content="CMS — Property Finder Real Estate. Manage properties, leads, blog, testimonials, FAQ and team from one interface.">
+<meta property="og:type"        content="website">
+<meta property="og:title"       content="CMS — Property Finder Real Estate">
+<meta property="og:description" content="Content Management System for Property Finder Real Estate, Mumbai.">
+<meta property="og:image"       content="https://www.propertyfinderrealestate.com/images/og-banner.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height"content="630">
+<meta property="og:url"         content="https://www.propertyfinderrealestate.com/cms.html">
+<meta name="twitter:card"       content="summary_large_image">
+<link rel="canonical" href="https://www.propertyfinderrealestate.com/cms.html">
+<link rel="icon" type="image/png" sizes="192x192" href="icons/icon-192.png">
+<link rel="manifest" href="manifest.json">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@300;400;500;600;700&family=DM+Mono:wght@400;500&family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
+<title>CMS — Property Finder Real Estate</title>
+<script>!function(){var t=localStorage.getItem("pfre_theme")||(window.matchMedia("(prefers-color-scheme:dark)").matches?"dark":"light");document.documentElement.setAttribute("data-theme",t);document.documentElement.classList.add("theme-"+t)}();</script>
+<style>
+/* ── Reset & Variables ── */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0 }
+:root {
+  --brand: #012FA1;
+  --brand-dark: #001E73;
+  --amber: #F59E0B;
+  --green: #10B981;
+  --red: #EF4444;
+  --bg: #F0F2F8;
+  --sidebar-bg: #0D1B4B;
+  --card: #FFFFFF;
+  --text: #111827;
+  --text-muted: #6B7280;
+  --border: #E5E7EB;
+  --radius: 10px;
+  --shadow: 0 2px 12px rgba(0,0,0,.08);
+  --transition: .18s ease;
+  --font: 'DM Sans', system-ui, sans-serif;
+  --mono: 'DM Mono', monospace;
+}
+[data-theme="dark"] {
+  --bg: #0B1023;
+  --card: #131B35;
+  --text: #E2E8F0;
+  --text-muted: #94A3B8;
+  --border: #1E2D55;
+}
+body { font-family: var(--font); background: var(--bg); color: var(--text); min-height:100vh; display:flex; font-size:14px; line-height:1.6 }
+
+/* ── Sidebar ── */
+.cms-sidebar {
+  width: 240px; min-height: 100vh; background: var(--sidebar-bg);
+  display: flex; flex-direction: column; position: fixed; left:0; top:0; bottom:0;
+  z-index: 100; overflow-y: auto;
+}
+.cms-sidebar-logo {
+  padding: 20px 18px 14px;
+  border-bottom: 1px solid rgba(255,255,255,.08);
+}
+.cms-sidebar-logo img { height: 42px; filter: brightness(0) invert(1); }
+.cms-sidebar-logo .cms-tag {
+  display: inline-block; background: var(--brand); color: #fff;
+  font-size: 9px; font-weight: 700; letter-spacing: 1.2px; text-transform: uppercase;
+  padding: 2px 7px; border-radius: 4px; margin-top: 6px;
+}
+.cms-nav { flex: 1; padding: 12px 0 }
+.cms-nav-group { margin-bottom: 4px }
+.cms-nav-label {
+  font-size: 9px; font-weight: 700; letter-spacing: 1.4px; text-transform: uppercase;
+  color: rgba(255,255,255,.35); padding: 10px 18px 4px;
+}
+.cms-nav-item {
+  display: flex; align-items: center; gap: 10px;
+  padding: 9px 18px; color: rgba(255,255,255,.65); font-size: 13px; font-weight: 500;
+  cursor: pointer; transition: all var(--transition); border-left: 3px solid transparent;
+  text-decoration: none; user-select: none;
+}
+.cms-nav-item:hover { background: rgba(255,255,255,.07); color: #fff }
+.cms-nav-item.active {
+  background: rgba(1,47,161,.4); color: #fff;
+  border-left-color: var(--amber);
+}
+.cms-nav-item .nav-icon { font-size: 17px; width: 22px; text-align: center; flex-shrink: 0 }
+.cms-nav-item .nav-badge {
+  margin-left: auto; background: var(--red); color: #fff;
+  font-size: 10px; font-weight: 700; padding: 1px 6px; border-radius: 100px;
+}
+.cms-sidebar-footer { padding: 14px 18px; border-top: 1px solid rgba(255,255,255,.08) }
+.cms-user { display: flex; align-items: center; gap: 10px; color: rgba(255,255,255,.7); font-size: 12px }
+.cms-user-avatar {
+  width: 32px; height: 32px; border-radius: 50%; background: var(--brand);
+  display: flex; align-items: center; justify-content: center; color: #fff; font-weight: 700; font-size: 13px;
+}
+
+/* ── Main Content ── */
+.cms-main { margin-left: 240px; flex: 1; min-height: 100vh; }
+
+/* ── Top bar ── */
+.cms-topbar {
+  position: sticky; top: 0; z-index: 50;
+  background: var(--card); border-bottom: 1px solid var(--border);
+  padding: 0 28px; height: 56px;
+  display: flex; align-items: center; justify-content: space-between; gap: 16px;
+  box-shadow: 0 1px 8px rgba(0,0,0,.05);
+}
+.cms-topbar-title { font-size: 16px; font-weight: 700 }
+.cms-topbar-actions { display: flex; align-items: center; gap: 12px }
+.cms-topbar-actions .topbar-btn {
+  padding: 7px 16px; border-radius: 8px; font-size: 13px; font-weight: 600;
+  cursor: pointer; border: none; transition: all var(--transition);
+}
+.topbar-btn-primary { background: var(--brand); color: #fff }
+.topbar-btn-primary:hover { background: var(--brand-dark) }
+.topbar-btn-outline { background: transparent; color: var(--text); border: 1.5px solid var(--border) }
+.topbar-btn-outline:hover { border-color: var(--brand); color: var(--brand) }
+
+/* ── Panel / tab system ── */
+.cms-panel { display: none; padding: 24px 28px }
+.cms-panel.active { display: block }
+
+/* ── Stat cards ── */
+.stats-grid { display: grid; grid-template-columns: repeat(4,1fr); gap: 16px; margin-bottom: 24px }
+.stat-card {
+  background: var(--card); border-radius: var(--radius); padding: 20px;
+  border: 1px solid var(--border); display: flex; align-items: flex-start; gap: 14px;
+  box-shadow: var(--shadow);
+}
+.stat-icon { font-size: 26px; flex-shrink: 0 }
+.stat-label { font-size: 12px; color: var(--text-muted); margin-bottom: 2px }
+.stat-value { font-size: 26px; font-weight: 800; font-family: var(--mono); line-height: 1 }
+.stat-delta { font-size: 11px; margin-top: 4px; color: var(--green) }
+
+/* ── Section headers ── */
+.section-header {
+  display: flex; align-items: center; justify-content: space-between;
+  margin-bottom: 16px; padding-bottom: 12px; border-bottom: 1px solid var(--border);
+}
+.section-title { font-size: 16px; font-weight: 700 }
+.section-actions { display: flex; gap: 8px }
+
+/* ── Table ── */
+.cms-table-wrap { background: var(--card); border-radius: var(--radius); border: 1px solid var(--border); overflow: hidden; box-shadow: var(--shadow) }
+.cms-table { width: 100%; border-collapse: collapse; font-size: 13px }
+.cms-table thead { background: var(--bg) }
+.cms-table th { padding: 10px 14px; text-align: left; font-weight: 700; font-size: 11px; letter-spacing: .5px; text-transform: uppercase; color: var(--text-muted); border-bottom: 1px solid var(--border) }
+.cms-table td { padding: 11px 14px; border-bottom: 1px solid var(--border); vertical-align: middle }
+.cms-table tr:last-child td { border-bottom: none }
+.cms-table tr:hover td { background: rgba(1,47,161,.03) }
+.cms-badge {
+  display: inline-block; padding: 2px 8px; border-radius: 100px;
+  font-size: 11px; font-weight: 700; white-space: nowrap;
+}
+.badge-green  { background: #D1FAE5; color: #065F46 }
+.badge-blue   { background: #DBEAFE; color: #1D4ED8 }
+.badge-amber  { background: #FEF3C7; color: #92400E }
+.badge-red    { background: #FEE2E2; color: #991B1B }
+.badge-gray   { background: var(--bg); color: var(--text-muted) }
+.table-action-btn {
+  background: transparent; border: 1px solid var(--border); color: var(--text-muted);
+  padding: 4px 10px; border-radius: 6px; font-size: 12px; cursor: pointer;
+  transition: all var(--transition);
+}
+.table-action-btn:hover { border-color: var(--brand); color: var(--brand) }
+.table-action-btn.del:hover { border-color: var(--red); color: var(--red) }
+
+/* ── Form controls ── */
+.cms-form-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 14px }
+.cms-form-group { display: flex; flex-direction: column; gap: 5px }
+.cms-label { font-size: 12px; font-weight: 600; color: var(--text-muted) }
+.cms-input, .cms-select, .cms-textarea {
+  padding: 9px 12px; border: 1.5px solid var(--border); border-radius: 8px;
+  font-size: 13px; background: var(--bg); color: var(--text); font-family: var(--font);
+  transition: border var(--transition); width: 100%;
+}
+.cms-input:focus, .cms-select:focus, .cms-textarea:focus {
+  outline: none; border-color: var(--brand); background: var(--card);
+}
+.cms-textarea { resize: vertical; min-height: 80px }
+.cms-form-full { grid-column: 1 / -1 }
+
+/* ── Modal ── */
+.cms-modal-overlay {
+  position: fixed; inset: 0; background: rgba(0,0,0,.55); z-index: 500;
+  display: flex; align-items: center; justify-content: center; padding: 16px;
+}
+.cms-modal {
+  background: var(--card); border-radius: 14px; width: 100%; max-width: 580px;
+  padding: 28px; box-shadow: 0 24px 60px rgba(0,0,0,.25); max-height: 90vh; overflow-y: auto;
+}
+.cms-modal-header {
+  display: flex; align-items: center; justify-content: space-between;
+  margin-bottom: 20px;
+}
+.cms-modal-title { font-size: 17px; font-weight: 700 }
+.cms-modal-close {
+  background: transparent; border: none; font-size: 22px; cursor: pointer;
+  color: var(--text-muted); line-height: 1;
+}
+.cms-modal-footer { display: flex; justify-content: flex-end; gap: 10px; margin-top: 20px; padding-top: 16px; border-top: 1px solid var(--border) }
+
+/* ── Empty state ── */
+.cms-empty { padding: 40px; text-align: center; color: var(--text-muted) }
+.cms-empty .empty-icon { font-size: 40px; margin-bottom: 10px }
+.cms-empty p { font-size: 13px }
+
+/* ── Toast ── */
+.cms-toast-container { position: fixed; bottom: 24px; right: 24px; z-index: 9999; display: flex; flex-direction: column; gap: 8px }
+.cms-toast {
+  padding: 12px 18px; border-radius: 10px; font-size: 13px; font-weight: 600;
+  box-shadow: 0 4px 20px rgba(0,0,0,.15); animation: toastIn .25s ease;
+  max-width: 360px;
+}
+.toast-success { background: #065F46; color: #fff }
+.toast-error   { background: #991B1B; color: #fff }
+.toast-info    { background: var(--brand); color: #fff }
+@keyframes toastIn { from { transform: translateY(16px); opacity: 0 } to { transform: translateY(0); opacity: 1 } }
+
+/* ── Leads inbox ── */
+.lead-card {
+  background: var(--card); border: 1px solid var(--border); border-radius: var(--radius);
+  padding: 16px; margin-bottom: 12px; box-shadow: var(--shadow);
+  display: grid; grid-template-columns: 1fr auto; gap: 10px;
+}
+.lead-name { font-size: 15px; font-weight: 700; margin-bottom: 2px }
+.lead-meta { font-size: 12px; color: var(--text-muted) }
+.lead-actions { display: flex; flex-direction: column; gap: 6px; align-items: flex-end }
+
+/* ── Property cards ── */
+.prop-grid { display: grid; grid-template-columns: repeat(auto-fill,minmax(260px,1fr)); gap: 16px }
+.prop-cms-card {
+  background: var(--card); border: 1px solid var(--border); border-radius: var(--radius);
+  padding: 16px; box-shadow: var(--shadow); transition: border-color var(--transition);
+}
+.prop-cms-card:hover { border-color: var(--brand) }
+.prop-thumb { height: 80px; border-radius: 8px; background: linear-gradient(135deg,#012FA1,#1a56db); display:flex;align-items:center;justify-content:center;font-size:32px;margin-bottom:10px }
+.prop-cms-title { font-size: 14px; font-weight: 700; margin-bottom: 4px }
+.prop-cms-meta { font-size: 12px; color: var(--text-muted) }
+.prop-cms-price { font-size: 16px; font-weight: 800; color: var(--brand); margin-top: 6px }
+
+/* ── Rich text editor placeholder ── */
+.rich-editor {
+  border: 1.5px solid var(--border); border-radius: 8px; overflow: hidden;
+}
+.rich-toolbar {
+  background: var(--bg); padding: 6px 10px; display: flex; gap: 4px; flex-wrap: wrap;
+  border-bottom: 1px solid var(--border);
+}
+.rich-toolbar button {
+  padding: 3px 8px; border: 1px solid var(--border); background: var(--card);
+  border-radius: 4px; font-size: 12px; cursor: pointer; font-weight: 600;
+}
+.rich-toolbar button:hover { border-color: var(--brand) }
+.rich-content {
+  min-height: 160px; padding: 12px; outline: none; font-size: 13px;
+  background: var(--card); color: var(--text);
+}
+
+/* ── Responsive ── */
+@media (max-width: 900px) {
+  .cms-sidebar { width: 54px }
+  .cms-sidebar .nav-label-text, .cms-sidebar .cms-nav-label,
+  .cms-sidebar .cms-sidebar-logo span, .cms-user .user-info,
+  .cms-nav-item .nav-badge { display: none }
+  .cms-nav-item { padding: 11px; justify-content: center }
+  .cms-nav-item .nav-icon { width: auto }
+  .cms-main { margin-left: 54px }
+  .stats-grid { grid-template-columns: 1fr 1fr }
+  .cms-form-grid { grid-template-columns: 1fr }
+}
+@media (max-width: 600px) {
+  .cms-main { margin-left: 0 }
+  .cms-sidebar { display: none }
+  .cms-topbar { padding: 0 16px }
+  .cms-panel { padding: 16px }
+}
+</style>
+</head>
+<body>
+<h1 class="sr-only">CMS — Property Finder Real Estate Content Manager</h1>
+<a href="#cms-main" class="skip-link" style="position:absolute;left:-9999px;top:0;padding:8px 16px;background:var(--brand);color:#fff;z-index:9999;border-radius:0 0 8px 0">Skip to content</a>
+
+<!-- ══ SIDEBAR ══ -->
+<aside class="cms-sidebar" role="navigation" aria-label="CMS Navigation">
+  <div class="cms-sidebar-logo">
+    <img src="images/logo.png" alt="Property Finder Real Estate" style="height:44px;object-fit:contain;max-width:180px">
+    <div class="cms-tag">Content Manager</div>
+  </div>
+
+  <nav class="cms-nav">
+    <div class="cms-nav-label">Overview</div>
+    <div class="cms-nav-item active" data-tab="dashboard" onclick="showTab('dashboard',this)" role="button" tabindex="0" onkeydown="if(event.key==='Enter')showTab('dashboard',this)">
+      <span class="nav-icon">📊</span><span class="nav-label-text">Dashboard</span>
+    </div>
+
+    <div class="cms-nav-label">Content</div>
+    <div class="cms-nav-item" data-tab="properties" onclick="showTab('properties',this)" role="button" tabindex="0" onkeydown="if(event.key==='Enter')showTab('properties',this)">
+      <span class="nav-icon">🏠</span><span class="nav-label-text">Properties</span>
+    </div>
+    <div class="cms-nav-item" data-tab="blog" onclick="showTab('blog',this)" role="button" tabindex="0" onkeydown="if(event.key==='Enter')showTab('blog',this)">
+      <span class="nav-icon">📝</span><span class="nav-label-text">Blog</span>
+    </div>
+    <div class="cms-nav-item" data-tab="testimonials" onclick="showTab('testimonials',this)" role="button" tabindex="0" onkeydown="if(event.key==='Enter')showTab('testimonials',this)">
+      <span class="nav-icon">⭐</span><span class="nav-label-text">Testimonials</span>
+    </div>
+    <div class="cms-nav-item" data-tab="faq" onclick="showTab('faq',this)" role="button" tabindex="0" onkeydown="if(event.key==='Enter')showTab('faq',this)">
+      <span class="nav-icon">❓</span><span class="nav-label-text">FAQ</span>
+    </div>
+    <div class="cms-nav-item" data-tab="team" onclick="showTab('team',this)" role="button" tabindex="0" onkeydown="if(event.key==='Enter')showTab('team',this)">
+      <span class="nav-icon">👥</span><span class="nav-label-text">Team</span>
+    </div>
+
+    <div class="cms-nav-label">Leads</div>
+    <div class="cms-nav-item" data-tab="leads" onclick="showTab('leads',this)" role="button" tabindex="0" onkeydown="if(event.key==='Enter')showTab('leads',this)">
+      <span class="nav-icon">📥</span><span class="nav-label-text">Lead Inbox</span>
+      <span class="nav-badge" id="lead-count-badge">0</span>
+    </div>
+    <div class="cms-nav-item" data-tab="listings" onclick="showTab('listings',this)" role="button" tabindex="0" onkeydown="if(event.key==='Enter')showTab('listings',this)">
+      <span class="nav-icon">📋</span><span class="nav-label-text">Listings</span>
+    </div>
+
+    <div class="cms-nav-label">System</div>
+    <div class="cms-nav-item" data-tab="media" onclick="showTab('media',this)" role="button" tabindex="0" onkeydown="if(event.key==='Enter')showTab('media',this)">
+      <span class="nav-icon">🖼️</span><span class="nav-label-text">Media</span>
+    </div>
+    <div class="cms-nav-item" data-tab="settings" onclick="showTab('settings',this)" role="button" tabindex="0" onkeydown="if(event.key==='Enter')showTab('settings',this)">
+      <span class="nav-icon">⚙️</span><span class="nav-label-text">Settings</span>
+    </div>
+  </nav>
+
+  <div class="cms-sidebar-footer">
+    <a href="admin.html" style="text-decoration:none;color:rgba(255,255,255,.5);font-size:12px;display:block;margin-bottom:8px">← Back to Admin</a>
+    <div class="cms-user">
+      <div class="cms-user-avatar">SC</div>
+      <div class="user-info">
+        <div style="font-weight:600;color:#fff;font-size:12px">Saurav Chowdhury</div>
+        <div style="font-size:11px">Owner</div>
+      </div>
+    </div>
+  </div>
+</aside>
+
+<!-- ══ MAIN ══ -->
+<main class="cms-main" id="main-content">
+
+  <!-- Top bar -->
+  <div class="cms-topbar">
+    <div class="cms-topbar-title" id="topbar-title">📊 Dashboard</div>
+    <div class="cms-topbar-actions">
+      <button class="topbar-btn topbar-btn-outline" onclick="cmsExport()" type="button">⬇ Export</button>
+      <button class="topbar-btn topbar-btn-primary" id="topbar-add-btn" onclick="cmsAddNew()" type="button">+ New Property</button>
+      <button class="topbar-btn topbar-btn-outline" onclick="toggleTheme()" type="button" id="themeToggle" aria-label="Toggle theme" aria-pressed="false">
+        <span class="icon-light" aria-hidden="true">☀️</span><span class="icon-dark" aria-hidden="true">🌙</span>
+      </button>
+    </div>
+  </div>
+
+  <!-- ══ DASHBOARD ══ -->
+  <section class="cms-panel active" id="panel-dashboard">
+    <div class="stats-grid" id="dash-stats">
+      <div class="stat-card"><div class="stat-icon">🏠</div><div><div class="stat-label">Total Properties</div><div class="stat-value" id="ds-props">0</div><div class="stat-delta">All listings</div></div></div>
+      <div class="stat-card"><div class="stat-icon">📥</div><div><div class="stat-label">New Leads</div><div class="stat-value" id="ds-leads">0</div><div class="stat-delta">Unread enquiries</div></div></div>
+      <div class="stat-card"><div class="stat-icon">📝</div><div><div class="stat-label">Blog Posts</div><div class="stat-value" id="ds-blogs">0</div><div class="stat-delta">Published articles</div></div></div>
+      <div class="stat-card"><div class="stat-icon">⭐</div><div><div class="stat-label">Testimonials</div><div class="stat-value" id="ds-testi">0</div><div class="stat-delta">Pending review</div></div></div>
+    </div>
+
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:20px">
+      <!-- Recent leads -->
+      <div class="cms-table-wrap">
+        <div style="padding:14px 16px;border-bottom:1px solid var(--border);font-weight:700;font-size:14px;display:flex;justify-content:space-between;align-items:center">
+          Recent Leads
+          <a href="#" onclick="showTab('leads',null)" style="font-size:12px;color:var(--brand)">View all →</a>
+        </div>
+        <div id="dash-recent-leads" style="padding:8px 0">
+          <div class="cms-empty"><div class="empty-icon">📭</div><p>No leads yet</p></div>
+        </div>
+      </div>
+      <!-- Quick actions -->
+      <div class="cms-table-wrap">
+        <div style="padding:14px 16px;border-bottom:1px solid var(--border);font-weight:700;font-size:14px">Quick Actions</div>
+        <div style="padding:14px;display:grid;grid-template-columns:1fr 1fr;gap:10px">
+          <button class="topbar-btn topbar-btn-primary" onclick="showTab('properties',null);cmsAddNew()" type="button" style="padding:14px 10px;font-size:13px;border-radius:10px">🏠 Add Property</button>
+          <button class="topbar-btn topbar-btn-outline" onclick="showTab('blog',null);cmsAddNew()" type="button" style="padding:14px 10px;font-size:13px;border-radius:10px">📝 New Post</button>
+          <button class="topbar-btn topbar-btn-outline" onclick="showTab('faq',null);cmsAddNew()" type="button" style="padding:14px 10px;font-size:13px;border-radius:10px">❓ Add FAQ</button>
+          <button class="topbar-btn topbar-btn-outline" onclick="showTab('team',null);cmsAddNew()" type="button" style="padding:14px 10px;font-size:13px;border-radius:10px">👤 Add Team</button>
+          <a href="crm.html" class="topbar-btn topbar-btn-outline" style="padding:14px 10px;font-size:13px;border-radius:10px;text-align:center;text-decoration:none;display:block">👥 Open CRM</a>
+          <a href="analytics.html" class="topbar-btn topbar-btn-outline" style="padding:14px 10px;font-size:13px;border-radius:10px;text-align:center;text-decoration:none;display:block">📊 Analytics</a>
+        </div>
+        <div style="padding:14px 16px;border-top:1px solid var(--border)">
+          <div style="font-size:11px;color:var(--text-muted);margin-bottom:8px;font-weight:700;text-transform:uppercase;letter-spacing:.5px">Website Status</div>
+          <div style="display:flex;flex-direction:column;gap:6px;font-size:12px">
+            <div style="display:flex;justify-content:space-between"><span>Formspree Lead Capture</span><span id="ws-formspree" style="color:var(--text-muted)">—</span></div>
+            <div style="display:flex;justify-content:space-between"><span>Live Properties</span><span id="ws-live-props" style="color:var(--text-muted)">—</span></div>
+            <div style="display:flex;justify-content:space-between"><span>Turnstile CAPTCHA</span><span id="ws-turnstile" style="color:var(--text-muted)">—</span></div>
+            <div style="display:flex;justify-content:space-between"><span>Service Worker</span><span style="color:var(--green)">✅ Active</span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ══ PROPERTIES ══ -->
+  <section class="cms-panel" id="panel-properties">
+    <div class="section-header">
+      <div><div class="section-title">🏠 Properties</div><div style="font-size:12px;color:var(--text-muted);margin-top:2px">Manage your property listings</div></div>
+      <div class="section-actions">
+        <input type="text" class="cms-input" placeholder="Search properties…" oninput="filterTable('prop',this.value)" style="width:200px">
+        <select class="cms-select" onchange="filterTable('prop-status',this.value)" style="width:130px">
+          <option value="">All Status</option>
+          <option value="active">Active</option>
+          <option value="sold">Sold</option>
+          <option value="rented">Rented</option>
+          <option value="draft">Draft</option>
+        </select>
+      </div>
+    </div>
+    <div class="cms-table-wrap">
+      <table class="cms-table" id="props-table">
+        <thead><tr>
+          <th>Property</th><th>Type</th><th>Locality</th>
+          <th>Price</th><th>Intent</th><th>Status</th><th>Added</th><th>Actions</th>
+        </tr></thead>
+        <tbody id="props-tbody"></tbody>
+      </table>
+    </div>
+  </section>
+
+  <!-- ══ BLOG ══ -->
+  <section class="cms-panel" id="panel-blog">
+    <div class="section-header">
+      <div><div class="section-title">📝 Blog Posts</div><div style="font-size:12px;color:var(--text-muted);margin-top:2px">Create and manage articles</div></div>
+    </div>
+    <div class="cms-table-wrap">
+      <table class="cms-table" id="blog-table">
+        <thead><tr>
+          <th>Title</th><th>Category</th><th>Status</th><th>Created</th><th>Actions</th>
+        </tr></thead>
+        <tbody id="blog-tbody"></tbody>
+      </table>
+    </div>
+  </section>
+
+  <!-- ══ TESTIMONIALS ══ -->
+  <section class="cms-panel" id="panel-testimonials">
+    <div class="section-header">
+      <div><div class="section-title">⭐ Testimonials</div><div style="font-size:12px;color:var(--text-muted);margin-top:2px">Approve and manage client reviews</div></div>
+    </div>
+    <div class="cms-table-wrap">
+      <table class="cms-table" id="testi-table">
+        <thead><tr>
+          <th>Client</th><th>Rating</th><th>Review (excerpt)</th><th>Status</th><th>Date</th><th>Actions</th>
+        </tr></thead>
+        <tbody id="testi-tbody"></tbody>
+      </table>
+    </div>
+  </section>
+
+  <!-- ══ FAQ ══ -->
+  <section class="cms-panel" id="panel-faq">
+    <div class="section-header">
+      <div><div class="section-title">❓ FAQ</div><div style="font-size:12px;color:var(--text-muted);margin-top:2px">Manage frequently asked questions</div></div>
+    </div>
+    <div class="cms-table-wrap">
+      <table class="cms-table" id="faq-table">
+        <thead><tr><th>#</th><th>Question</th><th>Category</th><th>Published</th><th>Actions</th></tr></thead>
+        <tbody id="faq-tbody"></tbody>
+      </table>
+    </div>
+  </section>
+
+  <!-- ══ TEAM ══ -->
+  <section class="cms-panel" id="panel-team">
+    <div class="section-header">
+      <div><div class="section-title">👥 Team</div><div style="font-size:12px;color:var(--text-muted);margin-top:2px">Manage team member profiles</div></div>
+    </div>
+    <div class="prop-grid" id="team-grid"></div>
+  </section>
+
+  <!-- ══ LEAD INBOX ══ -->
+  <section class="cms-panel" id="panel-leads">
+    <div class="section-header">
+      <div><div class="section-title">📥 Lead Inbox</div><div style="font-size:12px;color:var(--text-muted);margin-top:2px">All form submissions from the website</div></div>
+      <div class="section-actions">
+        <button class="topbar-btn topbar-btn-outline" onclick="clearLeads()" type="button">🗑 Clear All</button>
+        <button class="topbar-btn topbar-btn-primary" onclick="exportLeads()" type="button">⬇ Export CSV</button>
+      </div>
+    </div>
+    <div id="leads-list"></div>
+  </section>
+
+  <!-- ══ PROPERTY LISTINGS (submitted by owners) ══ -->
+  <section class="cms-panel" id="panel-listings">
+    <div class="section-header">
+      <div><div class="section-title">📋 Owner Submissions</div><div style="font-size:12px;color:var(--text-muted);margin-top:2px">Properties submitted via Post Property form</div></div>
+      <div class="section-actions">
+        <button class="topbar-btn topbar-btn-outline" onclick="exportListings()" type="button">⬇ Export CSV</button>
+      </div>
+    </div>
+    <div class="cms-table-wrap">
+      <table class="cms-table">
+        <thead><tr><th>Owner</th><th>Phone</th><th>Building</th><th>Locality</th><th>Price</th><th>Intent</th><th>RERA</th><th>Date</th><th>Actions</th></tr></thead>
+        <tbody id="listings-tbody"></tbody>
+      </table>
+    </div>
+  </section>
+
+  <!-- ══ MEDIA ══ -->
+  <section class="cms-panel" id="panel-media">
+    <div class="section-header">
+      <div><div class="section-title">🖼️ Media Library</div></div>
+    </div>
+    <div style="background:var(--card);border-radius:var(--radius);border:2px dashed var(--border);padding:60px;text-align:center">
+      <div style="font-size:40px;margin-bottom:12px">🖼️</div>
+      <div style="font-size:16px;font-weight:700;margin-bottom:8px">Media uploads coming soon</div>
+      <p style="color:var(--text-muted);font-size:13px;max-width:380px;margin:0 auto">Image hosting will be available after the backend is deployed. Upload images to your server's <code style="background:var(--bg);padding:1px 5px;border-radius:4px">public/images/</code> directory for now.</p>
+    </div>
+  </section>
+
+  <!-- ══ SETTINGS ══ -->
+  <section class="cms-panel" id="panel-settings">
+    <div class="section-title" style="margin-bottom:20px">⚙️ Site Settings</div>
+    <div style="display:grid;gap:20px;max-width:680px">
+      <!-- Formspree -->
+      <div class="cms-table-wrap" style="padding:20px">
+        <div style="font-weight:700;margin-bottom:14px;font-size:15px">📧 Lead Capture (Formspree)</div>
+        <div class="cms-form-grid">
+          <div class="cms-form-group cms-form-full">
+            <label class="cms-label">Formspree Form ID</label>
+            <div style="display:flex;gap:8px">
+              <input class="cms-input" id="cfg-formspree" type="text" placeholder="e.g. xpwrgkqz">
+              <button class="topbar-btn topbar-btn-primary" onclick="saveSetting('formspree')" type="button">Save</button>
+            </div>
+            <div style="font-size:11px;color:var(--text-muted);margin-top:4px">Get your free ID at formspree.io → New Form. All 5 lead forms will email propertyfinderre@gmail.com.</div>
+          </div>
+        </div>
+      </div>
+      <!-- Turnstile -->
+      <div class="cms-table-wrap" style="padding:20px">
+        <div style="font-weight:700;margin-bottom:14px;font-size:15px">🛡️ CAPTCHA (Cloudflare Turnstile)</div>
+        <div class="cms-form-grid">
+          <div class="cms-form-group cms-form-full">
+            <label class="cms-label">Site Key</label>
+            <div style="display:flex;gap:8px">
+              <input class="cms-input" id="cfg-sitekey" type="text" placeholder="1x00000000000000000000AA (test key)">
+              <button class="topbar-btn topbar-btn-primary" onclick="saveSetting('turnstile')" type="button">Save</button>
+            </div>
+            <div style="font-size:11px;color:var(--text-muted);margin-top:4px">Get a real key at dash.cloudflare.com/turnstile. The current test key always passes — replace before launch.</div>
+          </div>
+        </div>
+      </div>
+      <!-- Feature flags -->
+      <div class="cms-table-wrap" style="padding:20px">
+        <div style="font-weight:700;margin-bottom:14px;font-size:15px">🚩 Feature Flags</div>
+        <div style="display:flex;flex-direction:column;gap:10px">
+          <label style="display:flex;align-items:center;justify-content:space-between;font-size:13px">
+            <div><strong>Lead Capture</strong><div style="font-size:11px;color:var(--text-muted)">Send form submissions to backend</div></div>
+            <input type="checkbox" id="ff-leads" checked onchange="saveFlag('LEAD_CAPTURE',this.checked)" style="width:18px;height:18px;accent-color:var(--brand)">
+          </label>
+          <label style="display:flex;align-items:center;justify-content:space-between;font-size:13px">
+            <div><strong>Live Properties</strong><div style="font-size:11px;color:var(--text-muted)">Load listings from backend API</div></div>
+            <input type="checkbox" id="ff-props" onchange="saveFlag('LIVE_PROPERTIES',this.checked)" style="width:18px;height:18px;accent-color:var(--brand)">
+          </label>
+          <label style="display:flex;align-items:center;justify-content:space-between;font-size:13px">
+            <div><strong>Live Blog</strong><div style="font-size:11px;color:var(--text-muted)">Load posts from backend API</div></div>
+            <input type="checkbox" id="ff-blog" onchange="saveFlag('LIVE_BLOG',this.checked)" style="width:18px;height:18px;accent-color:var(--brand)">
+          </label>
+          <label style="display:flex;align-items:center;justify-content:space-between;font-size:13px">
+            <div><strong>Live Testimonials</strong><div style="font-size:11px;color:var(--text-muted)">Load reviews from backend API</div></div>
+            <input type="checkbox" id="ff-testi" onchange="saveFlag('LIVE_TESTIMONIALS',this.checked)" style="width:18px;height:18px;accent-color:var(--brand)">
+          </label>
+          <label style="display:flex;align-items:center;justify-content:space-between;font-size:13px">
+            <div><strong>CRM Sync</strong><div style="font-size:11px;color:var(--text-muted)">Sync CRM data with backend (requires auth)</div></div>
+            <input type="checkbox" id="ff-crm" onchange="saveFlag('CRM_SYNC',this.checked)" style="width:18px;height:18px;accent-color:var(--brand)">
+          </label>
+        </div>
+      </div>
+    </div>
+  </section>
+</main>
+
+<!-- ══ MODAL (shared) ══ -->
+<div class="cms-modal-overlay" id="cms-modal" style="display:none" role="dialog" aria-modal="true">
+  <div class="cms-modal">
+    <div class="cms-modal-header">
+      <div class="cms-modal-title" id="modal-title">Add Item</div>
+      <button class="cms-modal-close" onclick="closeModal()" aria-label="Close modal" type="button">✕</button>
+    </div>
+    <div id="modal-body"></div>
+    <div class="cms-modal-footer">
+      <button class="topbar-btn topbar-btn-outline" onclick="closeModal()" type="button">Cancel</button>
+      <button class="topbar-btn topbar-btn-primary" id="modal-save-btn" onclick="saveModal()" type="button">Save</button>
+    </div>
+  </div>
+</div>
+
+<!-- Toast container -->
+<div class="cms-toast-container" id="cms-toasts" aria-live="polite"></div>
+
+<script src="js/theme.js"></script>
+<script src="js/security.js"></script>
+<script src="js/config.js"></script>
+<script>
+/* ══════════════════════════════════════════════════════
+   PFRE CMS — Content Management System
+   localStorage-based, API-ready
+   ══════════════════════════════════════════════════════ */
+
+/* ── Storage helpers ── */
+const store = {
+  get: (k, def=[]) => { try { return JSON.parse(localStorage.getItem(k)) ?? def } catch { return def } },
+  set: (k, v)      => { try { localStorage.setItem(k, JSON.stringify(v)) } catch {} },
+  genId: ()        => 'pfre_' + Date.now() + '_' + Math.random().toString(36).slice(2,7),
+};
+
+/* ══════════════════════════════════════════════════════
+   LIVE PROPERTIES SYNC — the LIVE_PROPERTIES toggle in
+   Settings existed with zero fetch call anywhere checking
+   it; cms_properties was always DEFAULT_PROPS regardless
+   of the flag. Found while wiring a property picker into
+   legal.html's deed forms — a picked property needs a real
+   backend id for a Gift/Release Deed to post live at all.
+
+   READ-ONLY for now: cms.html's Add/Edit forms go through a
+   shared generic save path used by blog posts, testimonials,
+   and FAQs too (see the `store_key` config pattern below) —
+   wiring live writes into that shared path risks breaking
+   the other content types, so that's left as a separate,
+   more careful piece of work rather than rushed here.
+═══════════════════════════════════════════════════════ */
+function fmtPriceINR(n) {
+  n = Number(n) || 0;
+  if (n >= 10000000) return `₹${(n / 10000000).toFixed(2).replace(/\.?0+$/, '')} Cr`;
+  if (n >= 100000) return `₹${(n / 100000).toFixed(0)} Lakh`;
+  return `₹${n.toLocaleString('en-IN')}`;
+}
+async function syncPropertiesFromLiveApi() {
+  const live = !!(window.PFRE_CONFIG?.FEATURES?.LIVE_PROPERTIES && window.PFRE_CONFIG?.API_BASE_URL);
+  if (!live) return;
+  try {
+    const res = await fetch(`${window.PFRE_CONFIG.API_BASE_URL}/properties`, {
+      headers: { 'X-PFRE-Key': window.PFRE_CONFIG?.API_KEY || '' },
+    });
+    if (!res.ok) return;
+    const json = await res.json();
+    const list = Array.isArray(json.data) ? json.data : (json.data?.data || []);
+    if (!list.length) return; // empty is ambiguous (new install vs fetch issue) — don't overwrite local demo data with nothing
+
+    store.set('cms_properties', list.map(p => ({
+      id: p.id, title: p.title, locality: p.locality, type: p.property_type,
+      bedrooms: p.bedrooms ? `${p.bedrooms} BHK` : '—', price: fmtPriceINR(p.price),
+      intent: p.intent, status: p.status, rera: p.rera_number || '', added: p.created_at?.slice(0, 10) || '',
+    })));
+  } catch (err) {
+    console.warn('Live property sync failed, continuing with local data:', err);
+  }
+}
+
+/* ── Toast ── */
+function toast(msg, type='info') {
+  const el = document.createElement('div');
+  el.className = `cms-toast toast-${type}`;
+  el.textContent = msg;
+  document.getElementById('cms-toasts').appendChild(el);
+  setTimeout(() => el.remove(), 3500);
+}
+window.showToast = toast;
+
+/* ── Tab routing ── */
+const TAB_META = {
+  dashboard:    { title:'📊 Dashboard',       add:'',              icon:'📊' },
+  properties:   { title:'🏠 Properties',       add:'+ New Property',icon:'🏠' },
+  blog:         { title:'📝 Blog Posts',       add:'+ New Post',    icon:'📝' },
+  testimonials: { title:'⭐ Testimonials',     add:'+ Add Review',  icon:'⭐' },
+  faq:          { title:'❓ FAQ',              add:'+ New Question',icon:'❓' },
+  team:         { title:'👥 Team',             add:'+ Add Member',  icon:'👥' },
+  leads:        { title:'📥 Lead Inbox',       add:'',              icon:'📥' },
+  listings:     { title:'📋 Owner Submissions',add:'',              icon:'📋' },
+  media:        { title:'🖼️ Media Library',   add:'',              icon:'🖼️' },
+  settings:     { title:'⚙️ Settings',        add:'',              icon:'⚙️' },
+};
+
+let currentTab = 'dashboard';
+
+function showTab(tab, clickedEl) {
+  currentTab = tab;
+  document.querySelectorAll('.cms-panel').forEach(p => p.classList.remove('active'));
+  document.getElementById('panel-' + tab)?.classList.add('active');
+  document.querySelectorAll('.cms-nav-item').forEach(el => el.classList.remove('active'));
+  if (clickedEl) clickedEl.classList.add('active');
+  else document.querySelector(`[data-tab="${tab}"]`)?.classList.add('active');
+  const meta = TAB_META[tab] || {};
+  document.getElementById('topbar-title').textContent = meta.title || tab;
+  const addBtn = document.getElementById('topbar-add-btn');
+  addBtn.textContent = meta.add || '';
+  addBtn.style.display = meta.add ? '' : 'none';
+  renderTab(tab);
+}
+
+/* ── Render per tab ── */
+function renderTab(tab) {
+  switch(tab) {
+    case 'dashboard':    renderDashboard();    break;
+    case 'properties':   renderProperties();   break;
+    case 'blog':         renderBlog();         break;
+    case 'testimonials': renderTestimonials(); break;
+    case 'faq':          renderFAQ();          break;
+    case 'team':         renderTeam();         break;
+    case 'leads':        renderLeads();        break;
+    case 'listings':     renderListings();     break;
+    case 'settings':     renderSettings();     break;
+  }
+}
+
+/* ── Dashboard ── */
+function renderDashboard() {
+  const props = store.get('cms_properties');
+  const leads = store.get('pfre_enquiries');
+  const blogs = store.get('cms_blog');
+  const testis = store.get('pfre_testimonials', []).filter(t => t.status === 'pending');
+  document.getElementById('ds-props').textContent  = props.length;
+  document.getElementById('ds-leads').textContent  = leads.length;
+  document.getElementById('ds-blogs').textContent  = blogs.length;
+  document.getElementById('ds-testi').textContent  = testis.length;
+  document.getElementById('lead-count-badge').textContent = leads.length;
+  document.getElementById('lead-count-badge').style.display = leads.length ? '' : 'none';
+
+  // Website status
+  const cfg = window.PFRE_CONFIG || {};
+  const fsOk = cfg.FORMSPREE_ID && cfg.FORMSPREE_ID !== 'YOUR_FORMSPREE_ID';
+  document.getElementById('ws-formspree').innerHTML = fsOk
+    ? '<span style="color:var(--green)">✅ ' + cfg.FORMSPREE_ID + '</span>'
+    : '<span style="color:var(--red)">❌ Not configured</span>';
+  document.getElementById('ws-live-props').innerHTML = cfg.FEATURES?.LIVE_PROPERTIES
+    ? '<span style="color:var(--green)">✅ Live</span>'
+    : '<span style="color:var(--amber)">⚠️ Demo data</span>';
+  const tsOk = cfg.TURNSTILE_SITEKEY && cfg.TURNSTILE_SITEKEY !== '1x00000000000000000000AA';
+  document.getElementById('ws-turnstile').innerHTML = tsOk
+    ? '<span style="color:var(--green)">✅ Active</span>'
+    : '<span style="color:var(--amber)">⚠️ Test key</span>';
+
+  // Recent leads
+  const container = document.getElementById('dash-recent-leads');
+  if (!leads.length) {
+    container.innerHTML = '<div class="cms-empty"><div class="empty-icon">📭</div><p>No leads yet</p></div>';
+    return;
+  }
+  container.innerHTML = leads.slice(-5).reverse().map(l => `
+    <div style="padding:10px 16px;border-bottom:1px solid var(--border);display:flex;justify-content:space-between;align-items:center">
+      <div><div style="font-weight:600;font-size:13px">${esc(l.name || '—')}</div>
+      <div style="font-size:11px;color:var(--text-muted)">${esc(l.phone||'')} · ${fmtDate(l.ts)}</div></div>
+      <a href="tel:${esc(l.phone||'')}" class="table-action-btn">📞 Call</a>
+    </div>`).join('');
+}
+
+/* ── Properties ── */
+const DEFAULT_PROPS = [
+  { id:'p001', title:'Skyline Heights 3 BHK', locality:'Malad West', type:'Flat', bedrooms:'3 BHK', price:'₹1.85 Cr', intent:'sell', status:'active', rera:'P51800036765', added:'2026-01-10' },
+  { id:'p002', title:'Siddhi Sai Complex 2 BHK', locality:'Goregaon West', type:'Flat', bedrooms:'2 BHK', price:'₹98 Lakh', intent:'rent', status:'active', rera:'', added:'2026-02-05' },
+  { id:'p003', title:'Commercial Office Space', locality:'Andheri West', type:'Office', bedrooms:'—', price:'₹2.20 Cr', intent:'sell', status:'draft', rera:'', added:'2026-03-12' },
+];
+
+function renderProperties() {
+  const props = store.get('cms_properties', DEFAULT_PROPS);
+  if (!store.get('cms_properties', null)) store.set('cms_properties', DEFAULT_PROPS);
+  const tbody = document.getElementById('props-tbody');
+  if (!props.length) { tbody.innerHTML = '<tr><td colspan="8"><div class="cms-empty"><div class="empty-icon">🏠</div><p>No properties. Click "+ New Property" to add.</p></div></td></tr>'; return; }
+  tbody.innerHTML = props.map(p => `
+    <tr>
+      <td><strong>${esc(p.title)}</strong></td>
+      <td>${esc(p.type||'Flat')}</td>
+      <td>${esc(p.locality)}</td>
+      <td style="font-weight:700;color:var(--brand)">${esc(p.price)}</td>
+      <td><span class="cms-badge ${p.intent==='sell'?'badge-blue':'badge-amber'}">${p.intent}</span></td>
+      <td><span class="cms-badge ${p.status==='active'?'badge-green':p.status==='draft'?'badge-gray':'badge-red'}">${p.status}</span></td>
+      <td style="color:var(--text-muted)">${fmtDate(p.added)}</td>
+      <td style="display:flex;gap:4px">
+        <button class="table-action-btn" onclick="editItem('property','${p.id}')" type="button">✏️</button>
+        <button class="table-action-btn del" onclick="deleteItem('property','${p.id}')" type="button">🗑</button>
+      </td>
+    </tr>`).join('');
+}
+
+/* ── Blog ── */
+const DEFAULT_BLOGS = [
+  { id:'b001', title:'Mumbai Real Estate Market Trends 2026', category:'Market News', status:'published', created:'2026-01-15', excerpt:'The Mumbai property market has shown resilient growth in 2026...' },
+  { id:'b002', title:'How to Buy Your First Home in Malad West', category:'Buyer Guide', status:'published', created:'2026-02-20', excerpt:'Buying your first home is an exciting milestone...' },
+  { id:'b003', title:'5 Things NRI Buyers Must Know About FEMA', category:'NRI Corner', status:'draft', created:'2026-03-10', excerpt:'Non-resident Indians planning to invest in Indian real estate...' },
+];
+
+function renderBlog() {
+  const blogs = store.get('cms_blog', DEFAULT_BLOGS);
+  if (!store.get('cms_blog', null)) store.set('cms_blog', DEFAULT_BLOGS);
+  const tbody = document.getElementById('blog-tbody');
+  if (!blogs.length) { tbody.innerHTML = '<tr><td colspan="5"><div class="cms-empty"><div class="empty-icon">📝</div><p>No posts. Click "+ New Post" to create.</p></div></td></tr>'; return; }
+  tbody.innerHTML = blogs.map(b => `
+    <tr>
+      <td><strong>${esc(b.title)}</strong><div style="font-size:11px;color:var(--text-muted)">${esc(b.excerpt?.slice(0,60) || '')}…</div></td>
+      <td><span class="cms-badge badge-blue">${esc(b.category)}</span></td>
+      <td><span class="cms-badge ${b.status==='published'?'badge-green':'badge-gray'}">${b.status}</span></td>
+      <td style="color:var(--text-muted)">${fmtDate(b.created)}</td>
+      <td style="display:flex;gap:4px">
+        <button class="table-action-btn" onclick="editItem('blog','${b.id}')" type="button">✏️</button>
+        <button class="table-action-btn del" onclick="deleteItem('blog','${b.id}')" type="button">🗑</button>
+      </td>
+    </tr>`).join('');
+}
+
+/* ── Testimonials ── */
+const DEFAULT_TESTIS = [
+  { id:'t001', name:'Rahul Sharma', rating:5, text:'Excellent service! Saurav helped us find our dream home in Malad within 2 weeks.', status:'approved', date:'2026-01-18' },
+  { id:'t002', name:'Priya & Amit Mehta', rating:5, text:'Very professional and transparent. Got best price for our flat in Goregaon.', status:'approved', date:'2026-02-22' },
+  { id:'t003', name:'Ananya Kapoor', rating:4, text:'Good service. The team was responsive and found us a great 2BHK rental.', status:'pending', date:'2026-03-05' },
+];
+
+function renderTestimonials() {
+  const testis = store.get('pfre_testimonials', DEFAULT_TESTIS);
+  if (!store.get('pfre_testimonials', null)) store.set('pfre_testimonials', DEFAULT_TESTIS);
+  const tbody = document.getElementById('testi-tbody');
+  if (!testis.length) { tbody.innerHTML = '<tr><td colspan="6"><div class="cms-empty"><div class="empty-icon">⭐</div><p>No testimonials submitted yet.</p></div></td></tr>'; return; }
+  tbody.innerHTML = testis.map(t => `
+    <tr>
+      <td><strong>${esc(t.name)}</strong></td>
+      <td>${'⭐'.repeat(t.rating||5)}</td>
+      <td style="max-width:240px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;color:var(--text-muted)">${esc(t.text?.slice(0,80)||'')}…</td>
+      <td><span class="cms-badge ${t.status==='approved'?'badge-green':t.status==='pending'?'badge-amber':'badge-red'}">${t.status}</span></td>
+      <td style="color:var(--text-muted)">${fmtDate(t.date)}</td>
+      <td style="display:flex;gap:4px">
+        ${t.status!=='approved'?`<button class="table-action-btn" style="color:var(--green)" onclick="approveTestimonial('${t.id}')" type="button">✅</button>`:''}
+        <button class="table-action-btn del" onclick="deleteItem('testimonial','${t.id}')" type="button">🗑</button>
+      </td>
+    </tr>`).join('');
+}
+
+function approveTestimonial(id) {
+  const list = store.get('pfre_testimonials', []);
+  const item = list.find(t => t.id === id);
+  if (item) { item.status = 'approved'; store.set('pfre_testimonials', list); renderTestimonials(); toast('Testimonial approved ✅', 'success'); }
+}
+
+/* ── FAQ ── */
+const DEFAULT_FAQ = [
+  { id:'fq01', q:'What documents are required to buy a property in Mumbai?', category:'Buying', published:true },
+  { id:'fq02', q:'How long does property registration take in Maharashtra?', category:'Legal', published:true },
+  { id:'fq03', q:'What is the stamp duty rate for women buyers in Maharashtra?', category:'Finance', published:true },
+  { id:'fq04', q:'Can NRIs buy residential property in India?', category:'NRI', published:true },
+];
+
+function renderFAQ() {
+  const faqs = store.get('cms_faq', DEFAULT_FAQ);
+  if (!store.get('cms_faq', null)) store.set('cms_faq', DEFAULT_FAQ);
+  const tbody = document.getElementById('faq-tbody');
+  if (!faqs.length) { tbody.innerHTML = '<tr><td colspan="5"><div class="cms-empty"><div class="empty-icon">❓</div><p>No FAQ items. Click "+ New Question" to add.</p></div></td></tr>'; return; }
+  tbody.innerHTML = faqs.map((f, i) => `
+    <tr>
+      <td style="color:var(--text-muted);font-family:var(--mono)">${String(i+1).padStart(2,'0')}</td>
+      <td><strong>${esc(f.q)}</strong></td>
+      <td><span class="cms-badge badge-blue">${esc(f.category)}</span></td>
+      <td><span class="cms-badge ${f.published?'badge-green':'badge-gray'}">${f.published?'Published':'Draft'}</span></td>
+      <td style="display:flex;gap:4px">
+        <button class="table-action-btn" onclick="editItem('faq','${f.id}')" type="button">✏️</button>
+        <button class="table-action-btn del" onclick="deleteItem('faq','${f.id}')" type="button">🗑</button>
+      </td>
+    </tr>`).join('');
+}
+
+/* ── Team ── */
+const DEFAULT_TEAM = [
+  { id:'tm01', name:'Saurav Ganesh Chowdhury', role:'Owner & Lead Consultant', phone:'+91 93269 90050', email:'propertyfinderre@gmail.com', specialty:'Residential & Commercial', experience:'7+ years', avatar:'SC' },
+  { id:'tm02', name:'Abhishek Sable', role:'Property Consultant', phone:'', email:'', specialty:'Residential Rentals', experience:'3+ years', avatar:'AS' },
+];
+
+function renderTeam() {
+  const team = store.get('cms_team', DEFAULT_TEAM);
+  if (!store.get('cms_team', null)) store.set('cms_team', DEFAULT_TEAM);
+  const grid = document.getElementById('team-grid');
+  grid.innerHTML = team.map(m => `
+    <div class="prop-cms-card">
+      <div style="display:flex;align-items:center;gap:12px;margin-bottom:12px">
+        <div style="width:48px;height:48px;border-radius:50%;background:var(--brand);color:#fff;display:flex;align-items:center;justify-content:center;font-weight:700;font-size:16px;flex-shrink:0">${esc(m.avatar||m.name.slice(0,2).toUpperCase())}</div>
+        <div>
+          <div class="prop-cms-title">${esc(m.name)}</div>
+          <div style="font-size:12px;color:var(--brand);font-weight:600">${esc(m.role)}</div>
+        </div>
+      </div>
+      <div style="font-size:12px;color:var(--text-muted);display:flex;flex-direction:column;gap:3px">
+        ${m.phone?`<div>📞 ${esc(m.phone)}</div>`:''}
+        ${m.email?`<div>📧 ${esc(m.email)}</div>`:''}
+        <div>🏠 ${esc(m.specialty)} · ${esc(m.experience)}</div>
+      </div>
+      <div style="display:flex;gap:6px;margin-top:12px;justify-content:flex-end">
+        <button class="table-action-btn" onclick="editItem('team','${m.id}')" type="button">✏️ Edit</button>
+        <button class="table-action-btn del" onclick="deleteItem('team','${m.id}')" type="button">🗑</button>
+      </div>
+    </div>`).join('');
+}
+
+/* ── Leads Inbox ── */
+function renderLeads() {
+  const leads = store.get('pfre_enquiries', []);
+  const container = document.getElementById('leads-list');
+  if (!leads.length) {
+    container.innerHTML = '<div class="cms-empty" style="padding:60px"><div class="empty-icon">📭</div><p>No leads yet. When someone submits a contact form, their details appear here.</p></div>';
+    return;
+  }
+  container.innerHTML = leads.slice().reverse().map((l, i) => `
+    <div class="lead-card">
+      <div>
+        <div class="lead-name">${esc(l.name || '—')}</div>
+        <div class="lead-meta">
+          📞 ${esc(l.phone||'—')} &nbsp;·&nbsp;
+          ${l.email?`📧 ${esc(l.email)} &nbsp;·&nbsp;`:''}
+          ${l.purpose||l.intent?`🏷️ ${esc(l.purpose||l.intent)} &nbsp;·&nbsp;`:''}
+          ${l.locality?`📍 ${esc(l.locality)} &nbsp;·&nbsp;`:''}
+          🕐 ${fmtDate(l.ts)}
+        </div>
+        ${l.message?`<div style="margin-top:6px;font-size:12px;color:var(--text-muted);max-width:600px">"${esc(l.message.slice(0,120))}${l.message.length>120?'…':''}"</div>`:''}
+        ${l.source?`<div style="margin-top:4px"><span class="cms-badge badge-blue">${esc(l.source)}</span></div>`:''}
+      </div>
+      <div class="lead-actions">
+        ${l.phone?`<a href="tel:${esc(l.phone)}" class="table-action-btn">📞 Call</a>`:''}
+        ${l.phone?`<a href="https://wa.me/${esc(l.phone.replace(/\D/g,''))}" target="_blank" rel="noopener" class="table-action-btn">💬 WhatsApp</a>`:''}
+        <button class="table-action-btn del" onclick="deleteLead(${leads.length-1-i})" type="button">🗑</button>
+      </div>
+    </div>`).join('');
+}
+
+function deleteLead(idx) {
+  if (!confirm('Delete this lead?')) return;
+  const leads = store.get('pfre_enquiries', []);
+  leads.splice(leads.length - 1 - idx, 1);
+  store.set('pfre_enquiries', leads);
+  renderLeads();
+  toast('Lead deleted', 'info');
+}
+
+function clearLeads() {
+  if (!confirm('Clear ALL leads? This cannot be undone.')) return;
+  store.set('pfre_enquiries', []);
+  renderLeads();
+  toast('All leads cleared', 'info');
+}
+
+function exportLeads() {
+  const leads = store.get('pfre_enquiries', []);
+  if (!leads.length) { toast('No leads to export', 'error'); return; }
+  const headers = ['Name','Phone','Email','Purpose','Locality','Budget','Message','Source','Date'];
+  const rows = leads.map(l => [l.name||'',l.phone||'',l.email||'',l.purpose||l.intent||'',l.locality||'',l.budget||'',l.message||'',l.source||'',fmtDate(l.ts)]);
+  downloadCSV('pfre_leads.csv', [headers, ...rows]);
+  toast(`Exported ${leads.length} leads`, 'success');
+}
+
+/* ── Owner Listings ── */
+function renderListings() {
+  const listings = store.get('pfre_listings', []);
+  const tbody = document.getElementById('listings-tbody');
+  if (!listings.length) { tbody.innerHTML = '<tr><td colspan="9"><div class="cms-empty"><div class="empty-icon">📋</div><p>No property submissions yet.</p></div></td></tr>'; return; }
+  tbody.innerHTML = listings.slice().reverse().map((l,i) => `
+    <tr>
+      <td><strong>${esc(l.name||'—')}</strong></td>
+      <td>${esc(l.phone||'—')}</td>
+      <td>${esc(l.primary_building_name||l.building_name||'—')}</td>
+      <td>${esc(l.locality||'—')}</td>
+      <td style="font-weight:700;color:var(--brand)">${l.price?'₹'+Number(l.price).toLocaleString('en-IN'):'—'}</td>
+      <td><span class="cms-badge ${l.intent==='sell'?'badge-blue':'badge-amber'}">${esc(l.intent||'—')}</span></td>
+      <td style="font-family:var(--mono);font-size:11px">${esc(l.rera_number||'—')}</td>
+      <td style="color:var(--text-muted)">${fmtDate(l.ts)}</td>
+      <td>
+        <button class="table-action-btn del" onclick="deleteListing(${i})" type="button">🗑</button>
+      </td>
+    </tr>`).join('');
+}
+
+function deleteListing(idx) {
+  const listings = store.get('pfre_listings', []);
+  listings.splice(listings.length - 1 - idx, 1);
+  store.set('pfre_listings', listings);
+  renderListings();
+  toast('Listing removed', 'info');
+}
+
+function exportListings() {
+  const listings = store.get('pfre_listings', []);
+  if (!listings.length) { toast('No listings to export', 'error'); return; }
+  const headers = ['Owner','Phone','Building','Locality','Price','Intent','RERA','Date'];
+  const rows = listings.map(l => [l.name||'',l.phone||'',l.primary_building_name||l.building_name||'',l.locality||'',l.price||'',l.intent||'',l.rera_number||'',fmtDate(l.ts)]);
+  downloadCSV('pfre_listings.csv', [headers, ...rows]);
+  toast(`Exported ${listings.length} submissions`, 'success');
+}
+
+/* ── Settings ── */
+function renderSettings() {
+  const cfg = window.PFRE_CONFIG || {};
+  const fsEl = document.getElementById('cfg-formspree');
+  if (fsEl && cfg.FORMSPREE_ID && cfg.FORMSPREE_ID !== 'YOUR_FORMSPREE_ID') fsEl.value = cfg.FORMSPREE_ID;
+  const tsEl = document.getElementById('cfg-sitekey');
+  if (tsEl) tsEl.value = cfg.TURNSTILE_SITEKEY || '';
+  // Feature flag checkboxes
+  const ff = cfg.FEATURES || {};
+  const setChk = (id, val) => { const el = document.getElementById(id); if(el) el.checked = !!val; };
+  setChk('ff-leads', ff.LEAD_CAPTURE);
+  setChk('ff-props', ff.LIVE_PROPERTIES);
+  setChk('ff-blog',  ff.LIVE_BLOG);
+  setChk('ff-testi', ff.LIVE_TESTIMONIALS);
+  setChk('ff-crm',   ff.CRM_SYNC);
+}
+
+function saveSetting(type) {
+  if (type === 'formspree') {
+    const val = document.getElementById('cfg-formspree')?.value?.trim();
+    if (!val) { toast('Please enter a Formspree ID', 'error'); return; }
+    toast(`Formspree ID saved to config. Update js/config.js → FORMSPREE_ID: '${val}'`, 'success');
+    /* Can't write to files from browser — show instruction */
+    prompt('Copy this line to js/config.js:', `FORMSPREE_ID: '${val}',`);
+  }
+  if (type === 'turnstile') {
+    const val = document.getElementById('cfg-sitekey')?.value?.trim();
+    if (!val) { toast('Please enter a sitekey', 'error'); return; }
+    toast('Turnstile key saved. Update js/config.js → TURNSTILE_SITEKEY.', 'success');
+    prompt('Copy this line to js/config.js:', `TURNSTILE_SITEKEY: '${val}',`);
+  }
+}
+
+function saveFlag(key, value) {
+  toast(`${key} set to ${value}. Update js/config.js → FEATURES.${key}: ${value}.`, 'info');
+}
+
+/* ── Add / Edit / Delete modal ── */
+const MODAL_FORMS = {
+  property: {
+    title: 'Property',
+    fields: [
+      { id:'title',    label:'Title',         type:'text',   full:true,  placeholder:'e.g. Skyline Heights 3 BHK' },
+      { id:'locality', label:'Locality',      type:'text',   placeholder:'e.g. Malad West' },
+      { id:'type',     label:'Type',          type:'select', options:['Flat','House','Plot','Commercial','Office','Shop'] },
+      { id:'bedrooms', label:'Bedrooms',      type:'select', options:['Studio','1 BHK','2 BHK','3 BHK','4 BHK','5 BHK+','—'] },
+      { id:'price',    label:'Price',         type:'text',   placeholder:'e.g. ₹1.85 Cr' },
+      { id:'intent',   label:'Intent',        type:'select', options:['sell','rent','pg'] },
+      { id:'status',   label:'Status',        type:'select', options:['active','draft','sold','rented'] },
+      { id:'rera',     label:'RERA Number',   type:'text',   placeholder:'Optional' },
+      { id:'desc',     label:'Description',   type:'textarea', full:true, placeholder:'Property highlights, amenities, location details…' },
+    ],
+    store_key: 'cms_properties',
+    live_endpoint: '/properties',
+    live_feature: 'LIVE_PROPERTIES',
+    transform: (data) => ({
+      title: data.title, locality: data.locality,
+      property_type: (data.type || 'flat').toLowerCase(),
+      bedrooms: data.bedrooms,
+      price: parsePriceToInt(data.price),
+      intent: data.intent, status: data.status,
+      rera_number: data.rera, description: data.desc,
+    }),
+  },
+  blog: {
+    title: 'Blog Post',
+    fields: [
+      { id:'title',    label:'Title',         type:'text',     full:true, placeholder:'Post title' },
+      { id:'category', label:'Category',      type:'select',   options:['Market News','Buyer Guide','Seller Tips','NRI Corner','Finance','Legal','Neighbourhood'] },
+      { id:'status',   label:'Status',        type:'select',   options:['draft','published'] },
+      { id:'excerpt',  label:'Excerpt',       type:'textarea', full:true, placeholder:'2-3 sentence summary for the blog listing page' },
+      { id:'content',  label:'Content',       type:'textarea', full:true, placeholder:'Full article content (HTML supported)' },
+    ],
+    store_key: 'cms_blog',
+    live_endpoint: '/admin/blog',
+    live_feature: 'LIVE_BLOG',
+    transform: (data) => ({ title: data.title, category: data.category, status: data.status, excerpt: data.excerpt, content: data.content }),
+  },
+  faq: {
+    title: 'FAQ Item',
+    fields: [
+      { id:'q',        label:'Question',      type:'text',     full:true, placeholder:'What is…' },
+      { id:'a',        label:'Answer',        type:'textarea', full:true, placeholder:'Detailed answer' },
+      { id:'category', label:'Category',      type:'select',   options:['General','Buying','Renting','Selling','Legal','Finance','NRI'] },
+      { id:'published',label:'Published',     type:'select',   options:['true','false'] },
+    ],
+    store_key: 'cms_faq',
+  },
+  team: {
+    title: 'Team Member',
+    fields: [
+      { id:'name',       label:'Full Name',     type:'text', placeholder:'Saurav Ganesh Chowdhury' },
+      { id:'role',       label:'Role',          type:'text', placeholder:'Owner & Lead Consultant' },
+      { id:'phone',      label:'Phone',         type:'text', placeholder:'+91 XXXXX XXXXX' },
+      { id:'email',      label:'Email',         type:'text', placeholder:'email@example.com' },
+      { id:'specialty',  label:'Speciality',    type:'text', placeholder:'e.g. Residential & Commercial' },
+      { id:'experience', label:'Experience',    type:'text', placeholder:'e.g. 7+ years' },
+      { id:'avatar',     label:'Avatar (initials)', type:'text', placeholder:'e.g. SC' },
+    ],
+    store_key: 'cms_team',
+  },
+  testimonial: {
+    title: 'Testimonial',
+    fields: [
+      { id:'name',   label:'Client Name',  type:'text',     full:true },
+      { id:'rating', label:'Rating',       type:'select',   options:['5','4','3','2','1'] },
+      { id:'text',   label:'Review',       type:'textarea', full:true },
+      { id:'status', label:'Status',       type:'select',   options:['approved','pending','rejected'] },
+    ],
+    store_key: 'pfre_testimonials',
+  },
+};
+
+let modalContext = null;
+
+function cmsAddNew() {
+  const typeMap = { properties:'property', blog:'blog', faq:'faq', team:'team', testimonials:'testimonial' };
+  const type = typeMap[currentTab];
+  if (!type) return;
+  openModal(type, null);
+}
+
+function editItem(type, id) {
+  const cfg = MODAL_FORMS[type];
+  if (!cfg) return;
+  const items = store.get(cfg.store_key, []);
+  const item = items.find(i => i.id === id);
+  if (item) openModal(type, item);
+}
+
+function openModal(type, existingItem) {
+  const cfg = MODAL_FORMS[type];
+  if (!cfg) return;
+  modalContext = { type, id: existingItem?.id || null };
+  document.getElementById('modal-title').textContent = (existingItem ? 'Edit ' : 'Add ') + cfg.title;
+  document.getElementById('modal-body').innerHTML = `
+    <div class="cms-form-grid">
+      ${cfg.fields.map(f => `
+        <div class="cms-form-group${f.full?' cms-form-full':''}">
+          <label class="cms-label" for="mf-${f.id}">${f.label}</label>
+          ${f.type === 'select'
+            ? `<select class="cms-select" id="mf-${f.id}">
+                ${f.options.map(o => `<option value="${esc(o)}"${existingItem?.[f.id]==o?' selected':''}>${esc(o)}</option>`).join('')}
+               </select>`
+            : f.type === 'textarea'
+            ? `<textarea class="cms-textarea" id="mf-${f.id}" placeholder="${esc(f.placeholder||'')}">${esc(existingItem?.[f.id]||'')}</textarea>`
+            : `<input class="cms-input" id="mf-${f.id}" type="text" placeholder="${esc(f.placeholder||'')}" value="${esc(existingItem?.[f.id]||'')}">`
+          }
+        </div>`).join('')}
+    </div>`;
+  document.getElementById('cms-modal').style.display = 'flex';
+  document.getElementById('mf-' + cfg.fields[0].id)?.focus();
+}
+
+function closeModal() { document.getElementById('cms-modal').style.display = 'none'; modalContext = null; }
+
+/* Parses the CMS's formatted price text ("₹1.85 Cr", "₹98 Lakh") into a raw
+   integer, since PropertyController::store() requires 'price' => integer.
+   Returns null (rather than 0) when unparseable, so a live-mirror attempt
+   with a bad price is skipped instead of silently posting ₹0. */
+function parsePriceToInt(text) {
+  if (!text) return null;
+  const m = String(text).replace(/[₹,\s]/g, '').match(/^([\d.]+)(cr|crore|l|lakh|k)?$/i);
+  if (!m) return null;
+  const n = parseFloat(m[1]);
+  const unit = (m[2] || '').toLowerCase();
+  if (unit.startsWith('cr')) return Math.round(n * 10000000);
+  if (unit.startsWith('l')) return Math.round(n * 100000);
+  if (unit === 'k') return Math.round(n * 1000);
+  return Math.round(n);
+}
+
+/* Live mirror — best-effort, fire-and-forget, never blocks or reverses the
+   local save above. Only properties and blog have real write endpoints on
+   the backend (confirmed by checking the actual routes rather than
+   assuming); FAQ, team, and testimonials have none, so they're left alone
+   entirely rather than posting to something that doesn't exist. Editing an
+   existing item only mirrors if its id looks like a real backend id (a
+   plain number) rather than this page's local store.genId() (a string
+   starting with 'pfre_') — the two schemes never overlap, so that
+   reliably tells a synced item apart from a locally-created one. */
+async function mirrorToLiveApi(cfg, data, isUpdate) {
+  if (!cfg.live_endpoint || !window.PFRE_CONFIG?.FEATURES?.[cfg.live_feature] || !window.PFRE_CONFIG?.API_BASE_URL) return;
+  const payload = cfg.transform ? cfg.transform(data) : data;
+  const isRealId = isUpdate && /^\d+$/.test(String(data.id));
+  const url = `${window.PFRE_CONFIG.API_BASE_URL}${cfg.live_endpoint}${isRealId ? '/' + data.id : ''}`;
+  try {
+    await fetch(url, {
+      method: isRealId ? 'PUT' : 'POST',
+      headers: { 'Content-Type': 'application/json', 'X-PFRE-Key': window.PFRE_CONFIG?.API_KEY || '' },
+      body: JSON.stringify(payload),
+    });
+  } catch (err) {
+    console.warn('Live mirror failed, local save is unaffected:', err);
+  }
+}
+
+function saveModal() {
+  if (!modalContext) return;
+  const { type, id } = modalContext;
+  const cfg = MODAL_FORMS[type];
+  if (!cfg) return;
+  const data = {};
+  for (const f of cfg.fields) {
+    const el = document.getElementById('mf-' + f.id);
+    if (el) data[f.id] = el.value?.trim();
+  }
+  const items = store.get(cfg.store_key, []);
+  if (id) {
+    const idx = items.findIndex(i => i.id === id);
+    if (idx >= 0) items[idx] = { ...items[idx], ...data };
+  } else {
+    data.id = store.genId();
+    data.added = data.created = data.date = new Date().toISOString().slice(0,10);
+    items.push(data);
+  }
+  store.set(cfg.store_key, items);
+  mirrorToLiveApi(cfg, data, !!id); // additive only — local save above already succeeded either way
+  closeModal();
+  renderTab(currentTab);
+  toast(`${cfg.title} ${id ? 'updated' : 'added'} ✅`, 'success');
+}
+
+function deleteItem(type, id) {
+  const cfg = MODAL_FORMS[type];
+  if (!cfg) return;
+  if (!confirm(`Delete this ${cfg.title}? This cannot be undone.`)) return;
+  const items = store.get(cfg.store_key, []).filter(i => i.id !== id);
+  store.set(cfg.store_key, items);
+  renderTab(currentTab);
+  toast(`${cfg.title} deleted`, 'info');
+}
+
+/* ── Export ── */
+function cmsExport() {
+  const exportMap = {
+    properties:   ['cms_properties',   'pfre_properties.csv'],
+    blog:         ['cms_blog',         'pfre_blog.csv'],
+    faq:          ['cms_faq',          'pfre_faq.csv'],
+    team:         ['cms_team',         'pfre_team.csv'],
+    leads:        ['pfre_enquiries',   'pfre_leads.csv'],
+    listings:     ['pfre_listings',    'pfre_listings.csv'],
+    testimonials: ['pfre_testimonials','pfre_testimonials.csv'],
+  };
+  const map = exportMap[currentTab];
+  if (!map) { toast('No export for this section', 'error'); return; }
+  const data = store.get(map[0], []);
+  if (!data.length) { toast('Nothing to export', 'error'); return; }
+  const headers = Object.keys(data[0]);
+  const rows = data.map(row => headers.map(h => String(row[h]??'')));
+  downloadCSV(map[1], [headers, ...rows]);
+  toast(`Exported ${data.length} rows`, 'success');
+}
+
+function filterTable(type, query) { /* simple client-side filter */ renderTab(currentTab); }
+
+/* ── Utilities ── */
+function esc(s) {
+  return String(s??'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
+}
+function fmtDate(d) {
+  if (!d) return '—';
+  const dt = new Date(d);
+  if (isNaN(dt)) return String(d).slice(0,10);
+  return dt.toLocaleDateString('en-IN', { day:'2-digit', month:'short', year:'numeric' });
+}
+function downloadCSV(filename, rows) {
+  const csv = rows.map(r => r.map(v => '"'+String(v).replace(/"/g,'""')+'"').join(',')).join('\r\n');
+  const blob = new Blob([csv], { type:'text/csv;charset=utf-8;' });
+  const a = document.createElement('a');
+  a.href = URL.createObjectURL(blob);
+  a.download = filename;
+  document.body.appendChild(a);
+  a.click();
+  a.remove();
+}
+function toggleTheme() {
+  const root = document.documentElement;
+  const next = root.getAttribute('data-theme') === 'dark' ? 'light' : 'dark';
+  root.setAttribute('data-theme', next);
+  try { localStorage.setItem('pfre_theme', next); } catch {}
+}
+
+/* ── Init ── */
+document.addEventListener('DOMContentLoaded', async () => {
+  await syncPropertiesFromLiveApi();
+  showTab('dashboard', document.querySelector('[data-tab="dashboard"]'));
+});
+
+document.addEventListener('keydown', e => {
+  if (e.key === 'Escape') closeModal();
+});
+</script>
+
+<script>
+if ('serviceWorker' in navigator) {
+  window.addEventListener('load', () => {
+    navigator.serviceWorker.register('./sw.js').catch(() => {});
+  });
+}
+</script>
+</body>
+</html>

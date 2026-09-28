@@ -1,0 +1,498 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<link rel="canonical" href="https://www.propertyfinderrealestate.com/services.html">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' https://cdnjs.cloudflare.com https://challenges.cloudflare.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' data: https:; connect-src 'self' https://api.propertyfinderrealestate.com http://localhost:8000 https://formspree.io; frame-src https://www.google.com https://challenges.cloudflare.com; form-action 'self' https://formspree.io; object-src 'none'; base-uri 'self'; frame-ancestors 'none'">
+<meta http-equiv="X-Content-Type-Options" content="nosniff">
+<meta http-equiv="X-Frame-Options" content="SAMEORIGIN">
+<meta http-equiv="Referrer-Policy" content="strict-origin-when-cross-origin"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <!-- Open Graph -->
+  <meta property="og:type"        content="website">
+  <meta property="og:title"       content="Real Estate Services Mumbai | Property Finder Real Estate">
+  <meta property="og:description" content="Residential sales, rentals, commercial, home loans, NRI services, insurance and legal documentation.">
+  <meta property="og:url"         content="https://www.propertyfinderrealestate.com/services.html">
+  <meta property="og:image"       content="https://www.propertyfinderrealestate.com/images/og-banner.jpg">
+  <meta property="og:image:width"  content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:image:type"   content="image/jpeg">
+  <meta property="og:site_name"   content="Property Finder Real Estate">
+  <meta property="og:locale"      content="en_IN">
+  <!-- Twitter Card -->
+  <meta name="twitter:card"        content="summary">
+  <meta name="twitter:title"       content="Real Estate Services Mumbai | Property Finder Real Estate">
+  <meta name="twitter:description" content="Residential sales, rentals, commercial, home loans, NRI services, insurance and legal documentation.">
+  <meta name="twitter:image"       content="https://www.propertyfinderrealestate.com/icons/icon.svg">
+  <meta name="twitter:site"        content="@PropertyFinderA">
+  <!-- Additional SEO -->
+  <meta name="robots"  content="index, follow, max-snippet:-1, max-image-preview:large">
+  <meta name="author"  content="Property Finder Real Estate">
+  <meta name="geo.region"       content="IN-MH">
+  <meta name="geo.placename"    content="Mumbai">
+  <meta name="geo.position"     content="19.1886;72.8485">
+  <meta name="ICBM"             content="19.1886, 72.8485">
+    <meta name="description" content="Real estate services in Mumbai — residential sales & rentals, commercial, home loans, NRI services, insurance and legal documentation.">
+  <title>Services — Property Finder Real Estate | Mumbai</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;0,900;1,700&family=DM+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/styles.css">
+<link rel="stylesheet" href="css/widgets.css">
+<link rel="stylesheet" href="css/mobile.css">
+<style>
+.svc-detail-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 28px; }
+.svc-detail-card { background: white; border-radius: var(--radius-lg); padding: 36px; border: 1.5px solid var(--border); transition: all .3s; display: flex; gap: 22px; }
+.svc-detail-card:hover { border-color: var(--blue-light); box-shadow: 0 12px 40px rgba(37,99,235,0.1); transform: translateY(-3px); }
+.svc-icon-lg { width: 64px; height: 64px; background: var(--blue-light); border-radius: 16px; display: flex; align-items: center; justify-content: center; flex-shrink: 0; color: var(--blue); font-size: 28px; }
+.svc-content h3 { font-size: 19px; font-weight: 700; margin-bottom: 8px; }
+.svc-content p { font-size: 14px; color: var(--text-muted); line-height: 1.75; margin-bottom: 14px; }
+.svc-features { display: flex; flex-direction: column; gap: 6px; }
+.svc-feature { display: flex; align-items: center; gap: 8px; font-size: 13px; color: var(--text-muted); }
+.svc-feature::before { content: '✓'; color: var(--green); font-weight: 700; flex-shrink: 0; }
+.process-steps { display: grid; grid-template-columns: repeat(4, 1fr); gap: 0; position: relative; margin-top: 56px; }
+.process-steps::before { content:''; position:absolute; top:28px; left:12.5%; right:12.5%; height:2px; background:var(--blue-light); z-index:0; }
+.process-step { text-align: center; padding: 0 16px; position: relative; z-index: 1; }
+.step-num { width: 56px; height: 56px; background: var(--blue); color: white; border-radius: 50%; font-family: 'Playfair Display', serif; font-size: 22px; font-weight: 700; display: flex; align-items: center; justify-content: center; margin: 0 auto 18px; border: 4px solid white; box-shadow: 0 4px 14px rgba(37,99,235,0.3); }
+.process-step h4 { font-size: 15px; font-weight: 700; margin-bottom: 8px; }
+.process-step p { font-size: 13px; color: var(--text-muted); line-height: 1.65; }
+.bank-logos { display: flex; flex-wrap: wrap; gap: 14px; margin-top: 32px; }
+.bank-tag { background: var(--off-white); border: 1.5px solid var(--border); padding: 10px 20px; border-radius: 10px; font-size: 13px; font-weight: 600; color: var(--text); }
+@media(max-width:900px){ .svc-detail-grid{grid-template-columns:1fr;} .process-steps{grid-template-columns:1fr 1fr;} .process-steps::before{display:none;} }
+@media(max-width:600px){ .svc-detail-card{flex-direction:column;} .process-steps{grid-template-columns:1fr;} }
+</style>
+<script>!function(){var t=localStorage.getItem("pfre_theme")||(window.matchMedia("(prefers-color-scheme:dark)").matches?"dark":"light");document.documentElement.setAttribute("data-theme",t);document.documentElement.classList.add("theme-"+t)}();</script>
+<link rel="manifest" href="manifest.json">
+  <link rel="icon" type="image/png" sizes="192x192" href="icons/icon-192.png">
+<meta name="theme-color" content="#2563EB">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="default">
+  <meta name="apple-mobile-web-app-title" content="Property Finder RE">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="Property Finder Real Estate">
+  <meta property="og:locale" content="en_IN">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:site" content="@PropertyFinderA">
+<link rel="stylesheet" href="css/theme.css">
+<link rel="stylesheet" href="css/overrides.css">
+<link rel="stylesheet" href="css/utils.css">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "RealEstateAgent",
+  "name": "Property Finder Real Estate",
+  "url": "https://www.propertyfinderrealestate.com",
+  "telephone": "+91-93269-90050",
+  "email": "propertyfinderre@gmail.com",
+  "logo": "https://www.propertyfinderrealestate.com/images/logo.png",
+  "image": "https://www.propertyfinderrealestate.com/images/logo.png",
+  "address": {
+    "@type": "PostalAddress",
+    "streetAddress": "Shop No. 9, Deepanjali CHS, Baf-Hira Nagar, Lower Kharodi, Jankalyan Nagar Rd",
+    "addressLocality": "Malad West",
+    "addressRegion": "Maharashtra",
+    "postalCode": "400095",
+    "addressCountry": "IN"
+  },
+  "geo": {
+    "@type": "GeoCoordinates",
+    "latitude": 19.1886,
+    "longitude": 72.8485
+  },
+  "openingHoursSpecification": [
+    {
+      "@type": "OpeningHoursSpecification",
+      "dayOfWeek": [
+        "Monday",
+        "Tuesday",
+        "Wednesday",
+        "Thursday",
+        "Friday",
+        "Saturday"
+      ],
+      "opens": "10:00",
+      "closes": "19:00"
+    }
+  ],
+  "areaServed": [
+    "Malad",
+    "Goregaon",
+    "Andheri",
+    "Borivali",
+    "Kandivali",
+    "Dahisar",
+    "Mira Road"
+  ],
+  "priceRange": "Free consultation"
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Service",
+  "serviceType": "Real Estate Services",
+  "provider": {
+    "@type": "RealEstateAgent",
+    "name": "Property Finder Real Estate"
+  },
+  "areaServed": "Mumbai, Maharashtra",
+  "hasOfferCatalog": {
+    "@type": "OfferCatalog",
+    "name": "Real Estate Services",
+    "itemListElement": [
+      {
+        "@type": "Offer",
+        "itemOffered": {
+          "@type": "Service",
+          "name": "Residential Property Sales"
+        }
+      },
+      {
+        "@type": "Offer",
+        "itemOffered": {
+          "@type": "Service",
+          "name": "Residential Rentals"
+        }
+      },
+      {
+        "@type": "Offer",
+        "itemOffered": {
+          "@type": "Service",
+          "name": "Commercial Leasing"
+        }
+      },
+      {
+        "@type": "Offer",
+        "itemOffered": {
+          "@type": "Service",
+          "name": "Home Loan Assistance"
+        }
+      },
+      {
+        "@type": "Offer",
+        "itemOffered": {
+          "@type": "Service",
+          "name": "Property Insurance"
+        }
+      },
+      {
+        "@type": "Offer",
+        "itemOffered": {
+          "@type": "Service",
+          "name": "NRI Services"
+        }
+      }
+    ]
+  }
+}
+</script>
+</head>
+<body>
+<a href="#main-content" class="skip-link">Skip to main content</a>
+
+<!-- NAVBAR -->
+<nav class="navbar" role="navigation" aria-label="Main navigation">
+  <a href="index.html" class="nav-logo" style="display:flex;align-items:center">
+    <img src="images/logo.png" alt="Property Finder Real Estate" class="nav-logo-img" style="height:48px;width:auto;object-fit:contain" loading="eager">
+  </a>
+  <ul class="nav-menu" role="list">
+    <li class="nav-item"><a href="index.html" class="nav-link" data-i18n="nav.home">Home</a></li>
+    <li class="nav-item"><a href="properties.html" class="nav-link">Properties <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M6 9l6 6 6-6"/></svg></a><div class="dropdown"><a href="properties.html"><span class="dd-icon">🏠</span> All Properties</a><a href="projects.html"><span class="dd-icon">🏗️</span> Projects</a><a href="neighbourhoods.html"><span class="dd-icon">📍</span> Neighbourhoods</a></div></li>
+    <li class="nav-item"><a href="services.html" class="nav-link active">Services</a></li>
+    <li class="nav-item"><a href="about.html" class="nav-link">About <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M6 9l6 6 6-6"/></svg></a><div class="dropdown"><a href="about.html"><span class="dd-icon">🏢</span> About Us</a><a href="team.html"><span class="dd-icon">👥</span> Our Team</a><a href="testimonials.html"><span class="dd-icon">⭐</span> Testimonials</a><a href="faq.html"><span class="dd-icon">❓</span> FAQ</a><a href="careers.html"><span class="dd-icon">💼</span> Careers</a><a href="nri.html"><span class="dd-icon">🌍</span> NRI Corner</a></div></li>
+    <li class="nav-item"><a href="calculators.html" class="nav-link">Tools <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M6 9l6 6 6-6"/></svg></a><div class="dropdown"><a href="calculators.html"><span class="dd-icon">🧮</span> EMI Calculator</a><a href="tds-calculators.html"><span class="dd-icon">📋</span> TDS Calculators</a><a href="converter.html"><span class="dd-icon">📐</span> Measurement Converter</a><a href="insurance.html"><span class="dd-icon">🛡️</span> Property Insurance</a><a href="price-trends.html"><span class="dd-icon">📈</span> Price Trends</a><a href="email-templates.html">Email Templates</a>
+<a href="agreement-registration.html">Registration Tracker</a>
+<a href="reminders.html"><span class="dd-icon">🔔</span> Reminders</a></div></li>
+    <li class="nav-item"><a href="blog.html" class="nav-link" data-i18n="nav.blog">Blog</a></li>
+    <li class="nav-item"><a href="contact.html" class="nav-link" data-i18n="nav.contact">Contact</a></li>
+  </ul>
+  <div class="nav-actions">
+    <a href="tel:+919326990050" class="nav-phone">📞 +91 93269 90050</a>
+    <a href="post-property.html" class="btn btn-primary btn-sm" class="btn-green-inline">+ Post Property</a>
+    <a href="contact.html" class="btn btn-outline btn-sm">Get In Touch</a>
+    <button class="theme-toggle" id="themeToggle" title="Toggle Light/Dark Mode"><span class="icon-light">☀️</span><span class="icon-dark">🌙</span></button>
+    <button class="hamburger" id="hamburger" aria-label="Toggle navigation" aria-expanded="false" role="button"><span></span><span></span><span></span></button>
+  </div>
+</nav>
+<div class="mobile-menu" id="mobileMenu">
+  <div class="mob-section">Navigation</div>
+  <a href="index.html">🏠 Home</a><a href="properties.html">🏘️ Properties</a><a href="projects.html">🏗️ Projects</a><a href="services.html">⚙️ Services</a><a href="about.html">🏢 About Us</a><a href="team.html">👥 Our Team</a><a href="testimonials.html">⭐ Testimonials</a><a href="home-loan.html">🏦 Home Loan</a><a href="blog.html">📝 Blog</a><a href="contact.html">📞 Contact</a>
+  <a href="tel:+919326990050" class="btn btn-primary mob-cta">📞 Call +91 93269 90050</a>
+</div>
+
+<!-- PAGE HERO -->
+<section id="main-content" class="page-hero">
+  <span class="section-label">What We Offer</span>
+  <h1>Complete Real Estate <em>Services</em></h1>
+  <p>From finding your first home to managing a commercial portfolio — we offer end-to-end real estate solutions across Mumbai.</p>
+  <nav aria-label="Breadcrumb"><div class="breadcrumb"><a href="index.html">Home</a><span class="breadcrumb-sep" aria-hidden="true">›</span><span>Services</span></div></nav><!-- /breadcrumb -->
+</section>
+
+<!-- SERVICES GRID -->
+<section class="section">
+  <div class="section-head reveal">
+    <div><div class="section-label">Our Services</div><h2 class="section-title">Everything You Need, <em>Under One Roof</em></h2></div>
+  </div>
+  <div class="svc-detail-grid">
+    <div class="svc-detail-card reveal">
+      <div class="svc-icon-lg">🏠</div>
+      <div class="svc-content">
+        <h3>Residential Sales</h3>
+        <p>Buy or sell apartments, row houses, bungalows, and independent houses across Mumbai with full guidance from site visits to stamp duty and registration.</p>
+        <div class="svc-features">
+          <div class="svc-feature">Property search & shortlisting</div>
+          <div class="svc-feature">Site visits & comparative analysis</div>
+          <div class="svc-feature">Negotiation & price advisory</div>
+          <div class="svc-feature">Sale deed & registration support</div>
+        </div>
+      </div>
+    </div>
+    <div class="svc-detail-card reveal">
+      <div class="svc-icon-lg">🔑</div>
+      <div class="svc-content">
+        <h3>Rental & Leasing</h3>
+        <p>Find the perfect rental home or lease your property quickly. We screen tenants, draft rent agreements, and ensure a smooth move-in for both landlords and tenants.</p>
+        <div class="svc-features">
+          <div class="svc-feature">Tenant sourcing & background checks</div>
+          <div class="svc-feature">Rent agreement drafting (11-month / long-term)</div>
+          <div class="svc-feature">Security deposit management</div>
+          <div class="svc-feature">Move-in coordination</div>
+        </div>
+      </div>
+    </div>
+    <div class="svc-detail-card reveal">
+      <div class="svc-icon-lg">🏢</div>
+      <div class="svc-content">
+        <h3>Commercial Leasing & Sales</h3>
+        <p>We specialise in sourcing and leasing premium office spaces, retail shops, showrooms, and warehouses for businesses of all sizes across Mumbai.</p>
+        <div class="svc-features">
+          <div class="svc-feature">Office space sourcing</div>
+          <div class="svc-feature">Retail & showroom leasing</div>
+          <div class="svc-feature">Warehouse & industrial spaces</div>
+          <div class="svc-feature">Commercial sale & investment advisory</div>
+        </div>
+      </div>
+    </div>
+    <div class="svc-detail-card reveal">
+      <div class="svc-icon-lg">🛡️</div>
+      <div class="svc-content">
+        <h3>Property Management</h3>
+        <p>Complete end-to-end property management for landlords — we handle tenants, rent collection, maintenance, and legal compliance so you don't have to.</p>
+        <div class="svc-features">
+          <div class="svc-feature">Monthly rent collection & disbursement</div>
+          <div class="svc-feature">Maintenance coordination</div>
+          <div class="svc-feature">Tenant grievance handling</div>
+          <div class="svc-feature">Annual property audit</div>
+        </div>
+      </div>
+    </div>
+    <div class="svc-detail-card reveal">
+      <div class="svc-icon-lg">💰</div>
+      <div class="svc-content">
+        <h3>Home Loans & Finance Assistance</h3>
+        <p>Tie-ups with 15+ leading banks and NBFCs. We assist homebuyers with loan applications, eligibility assessment, EMI planning, and balance transfers.</p>
+        <div class="svc-features">
+          <div class="svc-feature">Loan eligibility & pre-approval</div>
+          <div class="svc-feature">Documentation & submission support</div>
+          <div class="svc-feature">Best rate negotiation across banks</div>
+          <div class="svc-feature">Home loan balance transfer advisory</div>
+        </div>
+      </div>
+    </div>
+    <div class="svc-detail-card reveal">
+      <div class="svc-icon-lg">📊</div>
+      <div class="svc-content">
+        <h3>Property Valuation</h3>
+        <p>Accurate, data-driven property valuations based on live market data, recent comparable sales, and our 7+ years of Mumbai market experience.</p>
+        <div class="svc-features">
+          <div class="svc-feature">Residential & commercial valuation</div>
+          <div class="svc-feature">Market comparison analysis (CMA)</div>
+          <div class="svc-feature">Investment potential assessment</div>
+          <div class="svc-feature">Valuation certificate on request</div>
+        </div>
+      </div>
+    </div>
+    <div class="svc-detail-card reveal">
+      <div class="svc-icon-lg">📄</div>
+      <div class="svc-content">
+        <h3>Legal & Documentation</h3>
+        <p>We navigate the complex legal landscape of Mumbai real estate — from title verification and RERA checks to agreement drafting and property registration.</p>
+        <div class="svc-features">
+          <div class="svc-feature">Title search & verification</div>
+          <div class="svc-feature">RERA status checks</div>
+          <div class="svc-feature">Sale agreement & POA drafting</div>
+          <div class="svc-feature">Stamp duty & registration guidance</div>
+        </div>
+      </div>
+    </div>
+    <div class="svc-detail-card reveal">
+      <div class="svc-icon-lg">🗺️</div>
+      <div class="svc-content">
+        <h3>Investment Advisory</h3>
+        <p>Expert real estate investment guidance for individuals and portfolio investors — from identifying high-ROI properties to tax planning and exit strategies.</p>
+        <div class="svc-features">
+          <div class="svc-feature">High-yield property identification</div>
+          <div class="svc-feature">Pre-launch & new launch advisory</div>
+          <div class="svc-feature">NRI investment guidance</div>
+          <div class="svc-feature">Portfolio management for investors</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- HOW WE WORK -->
+<section class="section section-alt">
+  <div style="text-align:center" class="reveal">
+    <div class="section-label">Our Process</div>
+    <h2 class="section-title">How We <em>Work</em></h2>
+    <p class="section-sub" style="margin-inline:auto">A simple, transparent 4-step process designed to make your real estate journey smooth and stress-free.</p>
+  </div>
+  <div class="process-steps">
+    <div class="process-step reveal">
+      <div class="step-num">1</div>
+      <h4>Share Requirements</h4>
+      <p>Tell us what you're looking for — budget, location, property type, and timeline. In person, by call, or WhatsApp.</p>
+    </div>
+    <div class="process-step reveal">
+      <div class="step-num">2</div>
+      <h4>Property Shortlisting</h4>
+      <p>We curate a personalised list of properties matching your criteria from our verified database of 2,400+ listings.</p>
+    </div>
+    <div class="process-step reveal">
+      <div class="step-num">3</div>
+      <h4>Site Visits & Negotiation</h4>
+      <p>We arrange property visits at your convenience and negotiate the best price and terms on your behalf.</p>
+    </div>
+    <div class="process-step reveal">
+      <div class="step-num">4</div>
+      <h4>Deal Closure & Registration</h4>
+      <p>We handle all paperwork, legal verification, loan processing, and property registration to completion.</p>
+    </div>
+  </div>
+</section>
+
+<!-- BANK PARTNERS -->
+<section class="section">
+  <div class="reveal" style="text-align:center">
+    <div class="section-label">Finance Partners</div>
+    <h2 class="section-title">Home Loan <em>Bank Partners</em></h2>
+    <p class="section-sub" style="margin-inline:auto">We have tie-ups with 15+ leading banks and NBFCs to get you the best home loan rates in Mumbai.</p>
+    <div class="bank-logos" style="justify-content:center">
+      <span class="bank-tag">🏦 SBI</span><span class="bank-tag">🏦 HDFC Bank</span><span class="bank-tag">🏦 ICICI Bank</span><span class="bank-tag">🏦 Axis Bank</span><span class="bank-tag">🏦 Bank of Baroda</span><span class="bank-tag">🏦 PNB Housing</span><span class="bank-tag">🏦 LIC Housing</span><span class="bank-tag">🏦 Kotak Mahindra</span><span class="bank-tag">🏦 Yes Bank</span><span class="bank-tag">🏦 Union Bank</span><span class="bank-tag">🏦 Bajaj Finserv</span><span class="bank-tag">🏦 Tata Capital</span>
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<section class="cta-section">
+  <h2 class="section-title reveal">Need a Specific <em>Service?</em></h2>
+  <p class="reveal">Our team is ready to assist. Reach out and we'll tailor a solution to your exact needs — no obligation, no pressure.</p>
+  <div class="cta-btns reveal">
+    <a href="contact.html" class="btn btn-white btn-lg">📋 Get Free Consultation</a>
+    <a href="tel:+919326990050" class="btn-outline-white btn-lg">📞 Call Now</a>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer class="footer">
+  <div class="footer-grid">
+    <div class="footer-brand">
+      <div class="footer-logo"><svg width="36" height="36" viewBox="0 0 40 40" fill="none"><circle cx="17" cy="17" r="13" stroke="#2563EB" stroke-width="2.8"/><path d="M17 22V18" stroke="#2563EB" stroke-width="2.2" stroke-linecap="round"/><rect x="14" y="18" width="6" height="4" rx="0.5" stroke="#2563EB" stroke-width="2.2"/><path d="M12 18L17 13L22 18" stroke="#2563EB" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/><path d="M27 27L33 33" stroke="#2563EB" stroke-width="2.8" stroke-linecap="round"/></svg><div class="footer-logo-text"><div class="brand">Property Finder Real Estate</div><div class="sub">Mumbai, Maharashtra</div></div></div>
+      <p class="tagline">"Your Search Ends Here."</p>
+      <p>Trusted real estate consultants in Mumbai's western suburbs since 2018.</p>
+      <div class="social-row">
+        <a href="https://www.instagram.com/propertyfinderrealestate" class="social-btn" target="_blank" rel="noopener noreferrer" aria-label="Instagram"><svg width="16" height="16" fill="none" stroke="white" stroke-width="2" viewBox="0 0 24 24"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1112.63 8 4 4 0 0116 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg></a>
+        <a href="https://www.facebook.com/PropertyFinderRealEstate/reviews" class="social-btn" target="_blank" rel="noopener noreferrer" aria-label="Facebook Reviews"><svg width="16" height="16" fill="white" viewBox="0 0 24 24"><path d="M18 2h-3a5 5 0 00-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 011-1h3z"/></svg></a>
+        <a href="https://www.linkedin.com/company/propertyfinderrealestate" class="social-btn" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn"><svg width="16" height="16" fill="white" viewBox="0 0 24 24"><path d="M16 8a6 6 0 016 6v7h-4v-7a2 2 0 00-2-2 2 2 0 00-2 2v7h-4v-7a6 6 0 016-6zM2 9h4v12H2z"/><circle cx="4" cy="4" r="2"/></svg></a>
+        <a href="https://www.youtube.com/@PropertyFinderRealEstate" class="social-btn" target="_blank" rel="noopener noreferrer" aria-label="YouTube"><svg width="16" height="16" viewBox="0 0 24 24" fill="white"><path d="M23.498 6.186a3.016 3.016 0 00-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 00.502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 002.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 002.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/></svg></a>
+        <a href="https://x.com/PropertyFinderA" class="social-btn" target="_blank" rel="noopener noreferrer" aria-label="X / Twitter"><svg width="16" height="16" fill="white" viewBox="0 0 24 24"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg></a>
+        <a href="https://in.pinterest.com/propertyfinderrealestate/" class="social-btn" target="_blank" rel="noopener noreferrer" aria-label="Pinterest"><svg width="16" height="16" viewBox="0 0 24 24" fill="white"><path d="M12 0C5.373 0 0 5.373 0 12c0 5.084 3.163 9.426 7.627 11.174-.105-.949-.2-2.405.042-3.441.218-.937 1.407-5.965 1.407-5.965s-.359-.719-.359-1.782c0-1.668.967-2.914 2.171-2.914 1.023 0 1.518.769 1.518 1.69 0 1.029-.655 2.568-.994 3.995-.283 1.194.599 2.169 1.777 2.169 2.133 0 3.772-2.249 3.772-5.495 0-2.873-2.064-4.882-5.012-4.882-3.414 0-5.418 2.561-5.418 5.207 0 1.031.397 2.138.893 2.738a.36.36 0 01.083.345l-.333 1.36c-.053.22-.174.267-.402.161-1.499-.698-2.436-2.889-2.436-4.649 0-3.785 2.75-7.262 7.929-7.262 4.163 0 7.398 2.967 7.398 6.931 0 4.136-2.607 7.464-6.227 7.464-1.216 0-2.359-.632-2.75-1.378l-.748 2.853c-.271 1.043-1.002 2.35-1.492 3.146C9.57 23.812 10.763 24 12 24c6.627 0 12-5.373 12-12S18.627 0 12 0z"/></svg></a>
+        <a href="https://jsdl.in/RSL-XGK1779888146" class="social-btn" target="_blank" rel="noopener noreferrer" aria-label="JustDial"><svg width="16" height="16" viewBox="0 0 24 24"><rect width="24" height="24" rx="5" fill="#FF6B35"/><text x="12" y="17" font-family="Arial,sans-serif" font-size="10" font-weight="900" text-anchor="middle" fill="white">JD</text></svg></a>
+      </div>
+    </div>
+    <div class="footer-col"><h4>Quick Links</h4><a href="index.html">Home</a><a href="properties.html">Properties</a><a href="projects.html">Projects</a><a href="services.html">Services</a><a href="about.html">About Us</a><a href="blog.html">Blog</a>
+<a href="admin.html">Admin Panel</a><a href="contact.html">Contact</a></div>
+    <div class="footer-col"><h4>Our Services</h4><a href="services.html">Residential Sales</a><a href="services.html">Rental & Leasing</a><a href="services.html">Commercial Leasing</a><a href="services.html">Property Management</a><a href="services.html">Home Loans</a><a href="services.html">Legal & Documentation</a></div>
+    <div class="footer-col"><h4>Contact Us</h4>
+      <div class="footer-contact-row"><span class="footer-contact-icon">📍</span><span>Shop No. 9, Ground Floor, Building No. 3, Deepanjali Co-operative Housing Society Limited, Malad West, Mumbai - 400095</span></div>
+      <div class="footer-contact-row"><span class="footer-contact-icon">📞</span><a href="tel:+919326990050">+91 93269 90050</a></div>
+      <div class="footer-contact-row"><span class="footer-contact-icon">✉️</span><a href="mailto:propertyfinderre@gmail.com">propertyfinderre@gmail.com</a></div>
+    </div>
+  </div>
+  <div class="footer-bottom"><span>© 2026 Property Finder Real Estate. All rights reserved.</span><span><a href="#">Privacy Policy</a> &nbsp;·&nbsp; <a href="#">Terms</a></span></div>
+</footer>
+<script src="js/widgets.js"></script>
+<script src="js/i18n.js"></script>
+
+  <!-- ═══ GLOBAL WIDGETS ═══ -->
+  <div id="progressBar"></div>
+  <div id="toastContainer"></div>
+  <button id="backToTop" title="Back to top">&#8593;</button>
+    <div class="cookie-btns">
+      <button class="cookie-accept" id="cookieAccept">Accept</button>
+      <button class="cookie-decline" id="cookieDecline">Decline</button>
+    </div>
+  </div>
+  <div class="floating-actions">
+    <div class="fab-wrap"><span class="fab-label">WhatsApp Us</span><a href="https://wa.me/919326990050?utm_source=whatsapp&utm_medium=chat&utm_campaign=services" target="_blank" rel="noopener noreferrer" class="fab fab-whatsapp" target="_blank" rel="noopener noreferrer">💬</a></div>
+    <div class="fab-wrap"><span class="fab-label">Call Us</span><a href="tel:+919326990050" class="fab fab-call">📞</a></div>
+    <div class="fab-wrap"><span class="fab-label">AI Assistant</span><button class="fab fab-chat" id="chatToggle">🤖<span class="chat-badge">1</span></button></div>
+  </div>
+  <div id="chatWidget">
+    <div class="chat-header">
+      <div class="chat-avatar">🏠</div>
+      <div class="chat-header-info">
+        <div class="chat-name">PFRE Assistant</div>
+        <div class="chat-status"><span class="chat-status-dot"></span> Online — replies instantly</div>
+      </div>
+      <button class="chat-close" id="chatClose">&#215;</button>
+    </div>
+    <div class="chat-body" id="chatBody"></div>
+    <div class="quick-replies" id="quickReplies"></div>
+    <div class="chat-input-row">
+      <input class="chat-input" id="chatInput" type="text" placeholder="Ask about properties, prices, loans…">
+      <button class="chat-send" id="chatSend">&#10148;</button>
+    </div>
+  </div>
+  <div id="compareBar">
+    <span class="compare-bar-title">🔄 Compare Properties</span>
+    <div class="compare-slots">
+      <div class="compare-slot">+ Add Property</div>
+      <div class="compare-slot">+ Add Property</div>
+      <div class="compare-slot">+ Add Property</div>
+    </div>
+    <div class="compare-actions">
+      <button class="compare-btn primary">Compare Now</button>
+      <button class="compare-btn secondary" onclick="document.getElementById('compareBar').classList.remove('show')">Clear All</button>
+    </div>
+  </div>
+  <div id="lightbox">
+    <div class="lightbox-inner">
+      <button class="lightbox-close" id="lbClose">&#215;</button>
+      <div class="lightbox-img-placeholder" id="lbImage">🏠</div>
+      <button class="lightbox-nav lightbox-prev" id="lbPrev">&#8249;</button>
+      <button class="lightbox-nav lightbox-next" id="lbNext">&#8250;</button>
+      <div class="lightbox-counter" id="lbCounter">1 / 1</div>
+    </div>
+  </div>
+  <div id="pwaInstall">
+    <div class="pwa-icon">🏠</div>
+    <div class="pwa-text"><h4>Install Property Finder App</h4><p>Quick access to Mumbai listings on your phone</p></div>
+    <button class="pwa-install-btn" id="pwaInstallBtn">Install</button>
+    <button class="pwa-dismiss" id="pwaDismiss">&#215;</button>
+  </div>
+  <!-- ═══ END GLOBAL WIDGETS ═══ -->
+
+<script>
+if ('serviceWorker' in navigator) {
+  window.addEventListener('load', () => {
+    navigator.serviceWorker.register('./sw.js').catch(() => {});
+  });
+}
+</script>
+<script src="js/config.js"></script>
+<script src="js/api.js" defer></script>
+<script src="js/security.js"></script>
+<script src="js/tracker.js" defer></script>
+<script src="js/theme.js"></script>
+</body>
+</html>
