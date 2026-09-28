@@ -1,99 +1,140 @@
 /* =====================================================
-   PFRE THEME MANAGER v3.0 — Standalone
-   Usage: include as FIRST script in <head>
-   Works independently of widgets.js
+   PROPERTY FINDER RE — Theme Engine v3.1 (Unified)
+   Zero-FOUC · Dark/Light Modes · OS Sync · Cross-Tab Sync
+   Works standalone in <head> or at end of <body>
    ===================================================== */
-(function() {
+(() => {
   'use strict';
 
-  var STORE_KEY = 'pfre_theme';
-  var root = document.documentElement;
+  const STORAGE_KEY = 'pfre_theme';
+  const root = document.documentElement;
 
-  /* ── 1. Apply theme immediately (before paint) ── */
-  function applyTheme(t) {
-    root.setAttribute('data-theme', t);
+  /* ── 1. Safe Storage Utilities ── */
+  function getSystemPreference() {
+    return window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches
+      ? 'dark'
+      : 'light';
+  }
+
+  function getSavedTheme() {
+    try {
+      return localStorage.getItem(STORAGE_KEY);
+    } catch (_) {
+      return null;
+    }
+  }
+
+  function saveTheme(theme) {
+    try {
+      localStorage.setItem(STORAGE_KEY, theme);
+    } catch (_) {}
+  }
+
+  /* ── 2. Core Theme Applier (Immediate: Prevents FOUC) ── */
+  function applyTheme(theme) {
+    const validTheme = theme === 'dark' ? 'dark' : 'light';
+    root.setAttribute('data-theme', validTheme);
     root.classList.remove('theme-light', 'theme-dark');
-    root.classList.add('theme-' + t);
+    root.classList.add(`theme-${validTheme}`);
+
+    // Update browser address bar meta color
+    const meta = document.querySelector('meta[name="theme-color"]');
+    if (meta) {
+      meta.setAttribute('content', validTheme === 'dark' ? '#0F172A' : '#2563EB');
+    }
+
+    updateUIElements(validTheme);
   }
 
-  var stored   = localStorage.getItem(STORE_KEY);
-  var preferred = (window.matchMedia && window.matchMedia('(prefers-color-scheme:dark)').matches) ? 'dark' : 'light';
-  var theme = stored || preferred;
-  applyTheme(theme);
+  /* ── 3. Update Toggle Buttons & Icons ── */
+  function updateUIElements(theme) {
+    const isDark = theme === 'dark';
+    const buttons = document.querySelectorAll('#themeToggle, .theme-toggle');
 
-  /* ── 2. Update all toggle buttons ── */
-  function updateToggles(t) {
-    document.querySelectorAll('#themeToggle, .theme-toggle').forEach(function(btn) {
-      var light = btn.querySelector('.icon-light');
-      var dark  = btn.querySelector('.icon-dark');
-      if (light && dark) {
-        light.style.display = (t === 'dark') ? 'none' : '';
-        dark.style.display  = (t === 'dark') ? '' : 'none';
-      } else if (btn.tagName !== 'A') {
-        btn.textContent = (t === 'dark') ? '🌙' : '☀️';
+    buttons.forEach((btn) => {
+      const iconLight = btn.querySelector('.icon-light');
+      const iconDark  = btn.querySelector('.icon-dark');
+
+      if (iconLight && iconDark) {
+        iconLight.style.display = isDark ? 'none' : 'inline-block';
+        iconDark.style.display  = isDark ? 'inline-block' : 'none';
+      } else if (btn.tagName !== 'A' && !btn.children.length) {
+        btn.textContent = isDark ? '🌙' : '☀️';
       }
-      btn.setAttribute('aria-pressed', String(t === 'dark'));
-      btn.title = (t === 'dark') ? 'Switch to Light Mode' : 'Switch to Dark Mode';
-      btn.setAttribute('aria-label', btn.title);
+
+      btn.setAttribute('aria-pressed', String(isDark));
+      const label = isDark ? 'Switch to light mode' : 'Switch to dark mode';
+      btn.title = label;
+      btn.setAttribute('aria-label', label);
     });
-    /* Update meta theme-color */
-    var meta = document.querySelector('meta[name="theme-color"]');
-    if (meta) meta.content = (t === 'dark') ? '#0F172A' : '#2563EB';
   }
 
-  /* ── 3. Toggle function ── */
+  /* ── 4. Toggle Handler ── */
   function toggleTheme() {
-    var cur = root.getAttribute('data-theme') || 'light';
-    var nxt = (cur === 'dark') ? 'light' : 'dark';
-    applyTheme(nxt);
-    try { localStorage.setItem(STORE_KEY, nxt); } catch(e) {}
-    updateToggles(nxt);
+    const current = root.getAttribute('data-theme') || 'light';
+    const next = current === 'dark' ? 'light' : 'dark';
+    saveTheme(next);
+    applyTheme(next);
   }
 
-  /* ── 4. Attach to toggle buttons after DOM ready ── */
-  function attachToggles() {
-    document.querySelectorAll('#themeToggle, .theme-toggle').forEach(function(btn) {
-      if (btn._pfre_attached) return;
-      btn._pfre_attached = true;
-      btn.addEventListener('click', toggleTheme);
-      btn.addEventListener('keydown', function(e) {
-        if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); toggleTheme(); }
+  /* ── 5. Attach Event Listeners ── */
+  function attachListeners() {
+    document.querySelectorAll('#themeToggle, .theme-toggle').forEach((btn) => {
+      if (btn._pfreThemeAttached) return;
+      btn._pfreThemeAttached = true;
+
+      btn.addEventListener('click', (e) => {
+        e.preventDefault();
+        toggleTheme();
+      });
+
+      btn.addEventListener('keydown', (e) => {
+        if (e.key === 'Enter' || e.key === ' ') {
+          e.preventDefault();
+          toggleTheme();
+        }
       });
     });
-    updateToggles(root.getAttribute('data-theme') || 'light');
+
+    updateUIElements(root.getAttribute('data-theme') || 'light');
   }
 
+  /* ── 6. Initial Theme Boot (Executes Synchronously) ── */
+  const activeTheme = getSavedTheme() || getSystemPreference();
+  applyTheme(activeTheme);
+
+  /* ── 7. DOM-Ready Hook for UI Binding ── */
   if (document.readyState === 'loading') {
-    document.addEventListener('DOMContentLoaded', attachToggles);
+    document.addEventListener('DOMContentLoaded', attachListeners);
   } else {
-    attachToggles();
+    attachListeners();
   }
 
-  /* ── 5. Watch OS preference changes ── */
+  /* ── 8. OS Color-Scheme Change Watcher ── */
   if (window.matchMedia) {
-    window.matchMedia('(prefers-color-scheme:dark)').addEventListener('change', function(e) {
-      /* Only auto-switch if user hasn't manually selected */
-      if (!localStorage.getItem(STORE_KEY)) {
-        var nxt = e.matches ? 'dark' : 'light';
-        applyTheme(nxt);
-        updateToggles(nxt);
+    window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', (e) => {
+      // Auto-switch only if the user hasn't explicitly set a preference
+      if (!getSavedTheme()) {
+        applyTheme(e.matches ? 'dark' : 'light');
       }
     });
   }
 
-  /* ── 6. Expose globally ── */
-  window.PFRETheme = { toggle: toggleTheme, apply: applyTheme, get: function() { return root.getAttribute('data-theme'); } };
+  /* ── 9. Cross-Tab Storage Sync ── */
+  window.addEventListener('storage', (e) => {
+    if (e.key === STORAGE_KEY && e.newValue) {
+      applyTheme(e.newValue);
+    }
+  });
 
+  /* ── 10. Global Interface ── */
+  window.PFRETheme = {
+    get: () => root.getAttribute('data-theme') || 'light',
+    set: (theme) => {
+      saveTheme(theme);
+      applyTheme(theme);
+    },
+    apply: applyTheme,
+    toggle: toggleTheme,
+  };
 })();
-
-/* Cross-tab theme sync — when one tab changes theme, all others follow */
-window.addEventListener('storage', function(e) {
-  if (e.key === 'pfre_theme' && e.newValue) {
-    const root = document.documentElement;
-    root.setAttribute('data-theme', e.newValue);
-    root.classList.remove('theme-light', 'theme-dark');
-    root.classList.add('theme-' + e.newValue);
-    const btn = document.getElementById('themeToggle');
-    if (btn) btn.setAttribute('aria-pressed', e.newValue === 'dark' ? 'true' : 'false');
-  }
-});
