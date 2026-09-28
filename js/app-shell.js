@@ -10,24 +10,47 @@
 
   /* ── Page registry: drives breadcrumbs + voice nav + Alt-key shortcuts ── */
   const MODULES = {
-    'admin.html':      { label: 'Dashboard',  section: 'Overview', alt: 'd', voice: ['dashboard', 'admin', 'home', 'overview'] },
-    'crm.html':        { label: 'CRM',        section: 'Sales',    alt: 'c', voice: ['crm', 'leads', 'pipeline', 'sales'] },
-    'hrms.html':       { label: 'HRMS',       section: 'People',   alt: 'h', voice: ['hrms', 'hr', 'employees', 'payroll', 'people'] },
-    'analytics.html':  { label: 'Analytics',  section: 'Insights', alt: 'a', voice: ['analytics', 'reports', 'insights', 'stats'] },
-    'properties.html': { label: 'Properties', section: 'Listings', alt: 'p', voice: ['properties', 'listings', 'inventory listings'] },
-    'cms.html':        { label: 'CMS',        section: 'Content',  alt: 'm', voice: ['cms', 'content', 'blog'] },
-    'reminders.html':  { label: 'Reminders',  section: 'Tasks',    alt: 'r', voice: ['reminders', 'tasks', 'followups', 'follow ups'] },
-    'compare.html':    { label: 'Compare',    section: 'Listings', voice: ['compare', 'comparison'] },
-    'card.html':       { label: 'My Card',    section: 'Account',  voice: ['card', 'profile'] },
-    'finance.html':    { label: 'Finance',    section: 'ERP',      alt: 'f', voice: ['finance', 'accounting', 'money', 'erp finance'] },
-    'legal.html':      { label: 'Legal',      section: 'ERP',      alt: 'l', voice: ['legal', 'agreements', 'wills', 'legal center'] },
-    'inventory.html':  { label: 'Inventory',  section: 'ERP',      alt: 'i', voice: ['inventory', 'stock', 'assets', 'rems'] },
+    'admin.html':      { label: 'Dashboard',        section: 'Overview',  alt: 'd', voice: ['dashboard', 'admin', 'home', 'overview'] },
+    'crm.html':        { label: 'CRM',              section: 'Sales',     alt: 'c', voice: ['crm', 'leads', 'pipeline', 'sales'] },
+    'hrms.html':       { label: 'HRMS',             section: 'People',    alt: 'h', voice: ['hrms', 'hr', 'employees', 'payroll', 'people'] },
+    'analytics.html':  { label: 'Analytics',        section: 'Insights',  alt: 'a', voice: ['analytics', 'reports', 'insights', 'stats'] },
+    'properties.html': { label: 'Properties',       section: 'Listings',  alt: 'p', voice: ['properties', 'listings', 'inventory listings'] },
+    'cms.html':        { label: 'CMS',              section: 'Content',   alt: 'm', voice: ['cms', 'content', 'blog'] },
+    'reminders.html':  { label: 'Reminders',        section: 'Tasks',     alt: 'r', voice: ['reminders', 'tasks', 'followups', 'follow ups'] },
+    'compare.html':    { label: 'Compare',          section: 'Listings',  voice: ['compare', 'comparison'] },
+    'card.html':       { label: 'My Card',          section: 'Account',   voice: ['card', 'profile'] },
+    'finance.html':    { label: 'Finance',          section: 'ERP',       alt: 'f', voice: ['finance', 'accounting', 'money', 'erp finance'] },
+    'legal.html':      { label: 'Legal',            section: 'ERP',       alt: 'l', voice: ['legal', 'agreements', 'wills', 'legal center'] },
+    'inventory.html':  { label: 'Inventory',        section: 'ERP',       alt: 'i', voice: ['inventory', 'stock', 'assets', 'rems'] },
     'schedule.html':   { label: "Today's Schedule", section: 'Workspace', alt: 's', voice: ['schedule', 'today', 'visits', 'appointments'] },
   };
-  const CURRENT_FILE = (location.pathname.split('/').pop() || 'index.html');
-  const CURRENT = MODULES[CURRENT_FILE] || { label: 'Home', section: '' };
 
-  /* ── Shared CSS, injected once ── */
+  let cleanPath = location.pathname.split('/').pop() || 'admin.html';
+  if (!cleanPath.includes('.')) cleanPath += '.html';
+  const CURRENT_FILE = cleanPath;
+  const CURRENT = MODULES[CURRENT_FILE] || { label: 'Admin', section: 'System' };
+
+  /* ── DOM-ready helper for safe head/async script execution ── */
+  function onReady(fn) {
+    if (document.readyState === 'loading') {
+      document.addEventListener('DOMContentLoaded', fn);
+    } else {
+      fn();
+    }
+  }
+
+  /* ── HTML Entity Escaping (Prevents Stored XSS) ── */
+  function escapeHtml(str) {
+    if (str == null) return '';
+    return String(str)
+      .replace(/&/g, '&amp;')
+      .replace(/</g, '&lt;')
+      .replace(/>/g, '&gt;')
+      .replace(/"/g, '&quot;')
+      .replace(/'/g, '&#39;');
+  }
+
+  /* ── Shared CSS, injected into <head> ── */
   const style = document.createElement('style');
   style.textContent = `
     #pfre-shell-breadcrumb{display:flex;align-items:center;gap:6px;padding:8px 24px;font-size:12px;
@@ -45,8 +68,8 @@
     .pfre-shell-fab:hover{transform:scale(1.08)}
     .pfre-shell-fab.listening{background:#EF4444;animation:pfre-pulse 1.2s infinite}
     @keyframes pfre-pulse{0%,100%{box-shadow:0 0 0 0 rgba(239,68,68,.5)}50%{box-shadow:0 0 0 10px rgba(239,68,68,0)}}
-    .pfre-shell-fab-label{position:fixed;bottom:0;right:0;background:#111;color:#fff;font-size:11px;padding:4px 8px;
-      border-radius:6px;opacity:0;pointer-events:none;transition:opacity .15s;white-space:nowrap}
+    .pfre-shell-fab-label{background:#111;color:#fff;font-size:11px;padding:5px 10px;
+      border-radius:8px;opacity:0;pointer-events:none;transition:opacity .2s;white-space:nowrap}
 
     .pfre-shell-overlay{position:fixed;inset:0;background:rgba(0,0,0,.55);z-index:1000;display:none;
       align-items:center;justify-content:center;padding:20px}
@@ -72,175 +95,243 @@
       max-width:380px;text-align:center;border:1px solid var(--border,#1A2744)}
     .pfre-idle-box .count{font-size:32px;font-weight:800;color:#EF4444;margin:10px 0}
     .pfre-idle-actions{display:flex;gap:10px;margin-top:16px}
-    .pfre-idle-actions button{flex:1;padding:10px;border-radius:8px;border:none;cursor:pointer;font-weight:600;font-size:13px}
+    .pfre-idle-actions button,.pfre-idle-actions a{flex:1;padding:10px;border-radius:8px;border:none;cursor:pointer;font-weight:600;font-size:13px;text-align:center}
     .pfre-idle-stay{background:var(--blue,#3B82F6);color:#fff}
     .pfre-idle-out{background:rgba(255,255,255,.08);color:var(--text,#E2E8F0)}
   `;
   document.head.appendChild(style);
 
   /* ══════════════════════════════════════════════
+     MODAL OVERLAY BUILDER (Safe Event Delegation)
+  ═══════════════════════════════════════════════ */
+  function buildOverlay(id, panelHtml) {
+    let overlay = document.getElementById(id);
+    if (!overlay) {
+      overlay = document.createElement('div');
+      overlay.id = id;
+      overlay.className = 'pfre-shell-overlay';
+      overlay.innerHTML = `<div class="pfre-shell-panel">${panelHtml}</div>`;
+      overlay.addEventListener('click', (e) => {
+        if (e.target === overlay || e.target.closest('.close-x')) {
+          overlay.classList.remove('open');
+        }
+      });
+      document.body.appendChild(overlay);
+    }
+    return overlay;
+  }
+
+  /* ══════════════════════════════════════════════
      1. BREADCRUMB NAVIGATION
   ═══════════════════════════════════════════════ */
   function renderBreadcrumb() {
+    if (document.getElementById('pfre-shell-breadcrumb')) return;
     const bar = document.createElement('div');
     bar.id = 'pfre-shell-breadcrumb';
     bar.setAttribute('role', 'navigation');
     bar.setAttribute('aria-label', 'Breadcrumb');
     bar.innerHTML = `
       <a href="admin.html">🏠 Home</a>
-      ${CURRENT.section ? `<span class="sep">/</span><span>${CURRENT.section}</span>` : ''}
-      <span class="sep">/</span><span class="current">${CURRENT.label}</span>
+      ${CURRENT.section ? `<span class="sep">/</span><span>${escapeHtml(CURRENT.section)}</span>` : ''}
+      <span class="sep">/</span><span class="current">${escapeHtml(CURRENT.label)}</span>
     `;
     document.body.insertBefore(bar, document.body.firstChild);
   }
 
   /* ══════════════════════════════════════════════
-     2. KEYBOARD SHORTCUTS MODAL (Shift + /)
+     2. KEYBOARD SHORTCUTS MODAL
   ═══════════════════════════════════════════════ */
   const SHORTCUTS = [
-    { keys: 'Shift + /', desc: 'Show this shortcuts panel' },
-    { keys: 'Esc',       desc: 'Close any open modal or panel' },
+    { keys: 'Shift + /', desc: 'Show keyboard shortcuts panel' },
+    { keys: 'Esc',       desc: 'Close active modal / panel' },
     { keys: 'Alt + D',   desc: 'Go to Dashboard' },
     { keys: 'Alt + C',   desc: 'Go to CRM' },
     { keys: 'Alt + H',   desc: 'Go to HRMS' },
     { keys: 'Alt + A',   desc: 'Go to Analytics' },
     { keys: 'Alt + P',   desc: 'Go to Properties' },
+    { keys: 'Alt + M',   desc: 'Go to CMS' },
     { keys: 'Alt + R',   desc: 'Go to Reminders' },
+    { keys: 'Alt + F',   desc: 'Go to Finance' },
+    { keys: 'Alt + L',   desc: 'Go to Legal Center' },
+    { keys: 'Alt + I',   desc: 'Go to Inventory' },
+    { keys: 'Alt + S',   desc: 'Go to Today\'s Schedule' },
   ];
 
-  function buildOverlay(id, panelHtml) {
-    const overlay = document.createElement('div');
-    overlay.id = id;
-    overlay.className = 'pfre-shell-overlay';
-    overlay.innerHTML = `<div class="pfre-shell-panel">${panelHtml}</div>`;
-    overlay.addEventListener('click', e => { if (e.target === overlay) overlay.classList.remove('open'); });
-    document.body.appendChild(overlay);
-    return overlay;
+  function initShortcutsModal() {
+    buildOverlay('pfre-shortcuts-modal', `
+      <h3>⌨️ Keyboard Shortcuts <button class="close-x" aria-label="Close">✕</button></h3>
+      ${SHORTCUTS.map(s => `
+        <div class="pfre-shell-shortcut-row">
+          <span>${escapeHtml(s.desc)}</span>
+          <span class="pfre-shell-kbd">${escapeHtml(s.keys)}</span>
+        </div>
+      `).join('')}
+      <p style="margin-top:14px;font-size:11px;color:var(--text-muted,#94A3B8)">Press <span class="pfre-shell-kbd">Shift + /</span> to toggle this panel.</p>
+    `);
   }
-
-  const shortcutsOverlay = buildOverlay('pfre-shortcuts-modal', `
-    <h3>⌨️ Keyboard Shortcuts <button class="close-x" onclick="document.getElementById('pfre-shortcuts-modal').classList.remove('open')">✕</button></h3>
-    ${SHORTCUTS.map(s => `<div class="pfre-shell-shortcut-row"><span>${s.desc}</span><span class="pfre-shell-kbd">${s.keys}</span></div>`).join('')}
-    <p style="margin-top:14px;font-size:11px;color:var(--text-muted,#94A3B8)">Press <span class="pfre-shell-kbd">Shift + /</span> anywhere to reopen this panel.</p>
-  `);
 
   /* ══════════════════════════════════════════════
      3. AUTO-LOGOUT WARNING (30 min inactivity)
   ═══════════════════════════════════════════════ */
   const IDLE_LIMIT_MS = 30 * 60 * 1000;
-  const WARN_BEFORE_MS = 60 * 1000; // show the warning 60s before auto-logout fires
+  const WARN_BEFORE_MS = 60 * 1000;
   let idleTimer, warnTimer, countdownInterval;
+  let idleOverlay = null;
 
-  const idleOverlay = document.createElement('div');
-  idleOverlay.className = 'pfre-idle-warning';
-  idleOverlay.innerHTML = `
-    <div class="pfre-idle-box">
-      <div style="font-size:32px">⏱️</div>
-      <h3 style="margin:8px 0 0">You've been idle</h3>
-      <p style="font-size:13px;color:var(--text-muted,#94A3B8);margin-top:6px">For your security, you'll be signed out in</p>
-      <div class="count" id="pfre-idle-count">60</div>
-      <div class="pfre-idle-actions">
-        <button class="pfre-idle-stay" id="pfre-idle-stay-btn">Stay Signed In</button>
-        <button class="pfre-idle-out" id="pfre-idle-out-btn">Log Out Now</button>
-      </div>
-    </div>`;
-  document.body.appendChild(idleOverlay);
+  function initIdleWarningDOM() {
+    if (document.getElementById('pfre-idle-overlay')) return;
+    idleOverlay = document.createElement('div');
+    idleOverlay.id = 'pfre-idle-overlay';
+    idleOverlay.className = 'pfre-idle-warning';
+    idleOverlay.innerHTML = `
+      <div class="pfre-idle-box">
+        <div style="font-size:32px">⏱️</div>
+        <h3 style="margin:8px 0 0">You've been idle</h3>
+        <p style="font-size:13px;color:var(--text-muted,#94A3B8);margin-top:6px">For your security, you'll be signed out in</p>
+        <div class="count" id="pfre-idle-count">60</div>
+        <div class="pfre-idle-actions">
+          <button class="pfre-idle-stay" id="pfre-idle-stay-btn">Stay Signed In</button>
+          <button class="pfre-idle-out" id="pfre-idle-out-btn">Log Out Now</button>
+        </div>
+      </div>`;
+    document.body.appendChild(idleOverlay);
+
+    document.getElementById('pfre-idle-stay-btn').addEventListener('click', resetIdleTimer);
+    document.getElementById('pfre-idle-out-btn').addEventListener('click', performLogout);
+  }
 
   function showIdleWarning() {
+    if (!idleOverlay) return;
+    clearInterval(countdownInterval);
     idleOverlay.classList.add('open');
+
     let remaining = Math.floor(WARN_BEFORE_MS / 1000);
-    document.getElementById('pfre-idle-count').textContent = remaining;
+    const countEl = document.getElementById('pfre-idle-count');
+    if (countEl) countEl.textContent = remaining;
+
     countdownInterval = setInterval(() => {
       remaining -= 1;
-      const el = document.getElementById('pfre-idle-count');
-      if (el) el.textContent = Math.max(0, remaining);
-      if (remaining <= 0) { clearInterval(countdownInterval); performLogout(); }
+      if (countEl) countEl.textContent = Math.max(0, remaining);
+      if (remaining <= 0) {
+        clearInterval(countdownInterval);
+        performLogout();
+      }
     }, 1000);
   }
 
   function performLogout() {
     clearInterval(countdownInterval);
-    idleOverlay.classList.remove('open');
-    // Demo-scope note: this app doesn't have a connected auth/session backend on the
-    // frontend yet (the Laravel API's RBAC is separate — see security note in code review),
-    // so "logging out" here clears local session-ish flags and returns to the public site
-    // rather than hitting a real /logout endpoint.
+    if (idleOverlay) idleOverlay.classList.remove('open');
+
     try {
-      Object.keys(localStorage).filter(k => k.startsWith('pfre_session')).forEach(k => localStorage.removeItem(k));
+      localStorage.removeItem('pfre_session');
+      localStorage.removeItem('pfre_omni_token');
+      Object.keys(localStorage)
+        .filter(k => k.startsWith('pfre_session'))
+        .forEach(k => localStorage.removeItem(k));
     } catch (_) {}
+
     window.location.href = 'index.html';
+  }
+
+  let lastActivity = Date.now();
+  function handleUserActivity() {
+    const now = Date.now();
+    // Throttle idle timer reset to run at most once every 5 seconds
+    if (now - lastActivity < 5000) return;
+    lastActivity = now;
+
+    // Do not dismiss automatically on slight jitter if the warning modal is already visible
+    if (idleOverlay && idleOverlay.classList.contains('open')) return;
+    resetIdleTimer();
   }
 
   function resetIdleTimer() {
     clearTimeout(idleTimer);
     clearTimeout(warnTimer);
     clearInterval(countdownInterval);
-    idleOverlay.classList.remove('open');
+    if (idleOverlay) idleOverlay.classList.remove('open');
+
     warnTimer = setTimeout(showIdleWarning, IDLE_LIMIT_MS - WARN_BEFORE_MS);
     idleTimer = setTimeout(performLogout, IDLE_LIMIT_MS);
   }
 
-  document.addEventListener('DOMContentLoaded', () => {
-    document.getElementById('pfre-idle-stay-btn').addEventListener('click', resetIdleTimer);
-    document.getElementById('pfre-idle-out-btn').addEventListener('click', performLogout);
-  });
   ['mousemove', 'keydown', 'click', 'scroll', 'touchstart'].forEach(evt =>
-    document.addEventListener(evt, resetIdleTimer, { passive: true })
+    document.addEventListener(evt, handleUserActivity, { passive: true })
   );
 
   /* ══════════════════════════════════════════════
-     4. ACTIVITY LOG TIMELINE (aggregated across modules)
+     4. ACTIVITY LOG TIMELINE
   ═══════════════════════════════════════════════ */
   function collectActivity() {
     const items = [];
-    const safeGet = k => { try { return JSON.parse(localStorage.getItem(k) || '[]'); } catch (_) { return []; } };
+    const safeGet = (k) => {
+      try { return JSON.parse(localStorage.getItem(k) || '[]'); } catch (_) { return []; }
+    };
 
-    // CRM: lead-level activity trail (call/whatsapp/note/visit/stage_change)
     safeGet('pfre_crm_leads').forEach(lead => {
       (lead.activities || []).forEach(a => items.push({
-        module: 'CRM', ts: a.ts, text: `${lead.name || 'Lead'} — ${a.note || a.type}`,
+        module: 'CRM',
+        ts: a.ts,
+        text: `${lead.name || 'Lead'} — ${a.note || a.type || 'Action'}`,
       }));
     });
-    // CRM: standalone activity log tab, if present
+
     safeGet('pfre_crm_activities').forEach(a => items.push({
-      module: 'CRM', ts: a.ts || a.created_at, text: a.note || a.text || a.type || 'Activity',
+      module: 'CRM',
+      ts: a.ts || a.created_at,
+      text: a.note || a.text || a.type || 'Activity',
     }));
-    // Web enquiries landing in the CRM
+
     safeGet('pfre_enquiries').forEach(e => items.push({
-      module: 'Website', ts: e.ts, text: `New enquiry: ${e.name || '—'} (${e.source || 'web'})`,
+      module: 'Website',
+      ts: e.ts,
+      text: `New enquiry: ${e.name || 'Anonymous'} (${e.source || 'web'})`,
     }));
-    // HRMS: employee advances double as a lightweight audit trail
+
     safeGet('hrms_advances').forEach(a => items.push({
-      module: 'HRMS', ts: a.logged_on ? `${a.logged_on}T00:00:00` : a.date, text: `Advance logged: ₹${a.amount} (${a.method})`,
+      module: 'HRMS',
+      ts: a.logged_on ? `${a.logged_on}T00:00:00` : a.date,
+      text: `Advance logged: ₹${a.amount} (${a.method})`,
     }));
 
-    return items.filter(i => i.ts).sort((a, b) => new Date(b.ts) - new Date(a.ts)).slice(0, 30);
+    return items
+      .filter(i => i.ts && !isNaN(new Date(i.ts).getTime()))
+      .sort((a, b) => new Date(b.ts) - new Date(a.ts))
+      .slice(0, 30);
   }
-
-  const activityOverlay = buildOverlay('pfre-activity-modal', `
-    <h3>📋 Activity Log <button class="close-x" onclick="document.getElementById('pfre-activity-modal').classList.remove('open')">✕</button></h3>
-    <div id="pfre-activity-list"></div>
-  `);
 
   function openActivityLog() {
     const items = collectActivity();
+    buildOverlay('pfre-activity-modal', `
+      <h3>📋 Activity Log <button class="close-x" aria-label="Close">✕</button></h3>
+      <div id="pfre-activity-list"></div>
+    `);
+
     const list = document.getElementById('pfre-activity-list');
-    list.innerHTML = items.length ? items.map(i => `
-      <div class="pfre-shell-timeline-item">
-        <div class="pfre-shell-timeline-dot"></div>
-        <div><span class="pfre-shell-timeline-mod">${i.module}</span>${i.text}
-          <div style="color:var(--text-muted,#94A3B8);font-size:11px;margin-top:2px">${new Date(i.ts).toLocaleString('en-IN')}</div>
-        </div>
-      </div>`).join('')
-      : `<p style="color:var(--text-muted,#94A3B8);font-size:13px;text-align:center;padding:20px 0">No recent activity recorded yet.</p>`;
-    activityOverlay.classList.add('open');
+    if (list) {
+      list.innerHTML = items.length ? items.map(i => `
+        <div class="pfre-shell-timeline-item">
+          <div class="pfre-shell-timeline-dot"></div>
+          <div>
+            <span class="pfre-shell-timeline-mod">${escapeHtml(i.module)}</span>${escapeHtml(i.text)}
+            <div style="color:var(--text-muted,#94A3B8);font-size:11px;margin-top:2px">
+              ${new Date(i.ts).toLocaleString('en-IN')}
+            </div>
+          </div>
+        </div>`).join('')
+        : `<p style="color:var(--text-muted,#94A3B8);font-size:13px;text-align:center;padding:20px 0">No recent activity recorded yet.</p>`;
+    }
+
+    document.getElementById('pfre-activity-modal')?.classList.add('open');
   }
 
   /* ══════════════════════════════════════════════
      5. VOICE NAVIGATION (Web Speech API)
   ═══════════════════════════════════════════════ */
   const SpeechRecognitionImpl = window.SpeechRecognition || window.webkitSpeechRecognition;
-  let recognizer = null, listening = false;
+  let recognizer = null;
+  let isListening = false;
 
   function matchVoiceCommand(transcript) {
     const t = transcript.toLowerCase();
@@ -251,111 +342,125 @@
   }
 
   function initVoiceNav() {
-    if (!SpeechRecognitionImpl) return; // graceful no-op on unsupported browsers (e.g. Firefox)
+    if (!SpeechRecognitionImpl) return;
 
-    recognizer = new SpeechRecognitionImpl();
-    recognizer.continuous = false;
-    recognizer.interimResults = false;
-    recognizer.lang = 'en-IN';
+    try {
+      recognizer = new SpeechRecognitionImpl();
+      recognizer.continuous = false;
+      recognizer.interimResults = false;
+      recognizer.lang = 'en-IN';
 
-    recognizer.onresult = (e) => {
-      const said = e.results[0][0].transcript;
-      const targetFile = matchVoiceCommand(said);
-      showVoiceFeedback(said, targetFile);
-      if (targetFile && targetFile !== CURRENT_FILE) {
-        setTimeout(() => { window.location.href = targetFile; }, 700);
-      }
-    };
-    recognizer.onerror = () => stopListening();
-    recognizer.onend = () => stopListening();
+      recognizer.onresult = (e) => {
+        const said = e.results[0]?.[0]?.transcript || '';
+        const targetFile = matchVoiceCommand(said);
+        showVoiceFeedback(said, targetFile);
+
+        if (targetFile) {
+          if (targetFile !== CURRENT_FILE) {
+            setTimeout(() => { window.location.href = targetFile; }, 700);
+          } else {
+            showVoiceFeedback(said, null, `Already on ${MODULES[targetFile].label}`);
+          }
+        }
+      };
+
+      recognizer.onerror = () => stopListening();
+      recognizer.onend = () => stopListening();
+    } catch (_) {
+      recognizer = null;
+    }
   }
 
-  function showVoiceFeedback(heard, matched) {
+  function showVoiceFeedback(heard, matched, customMsg) {
     const label = document.getElementById('pfre-voice-label');
     if (!label) return;
-    label.textContent = matched ? `Going to ${MODULES[matched].label}…` : `Didn't recognize "${heard}"`;
+    label.textContent = customMsg || (matched ? `Going to ${MODULES[matched].label}…` : `Didn't recognize "${heard}"`);
     label.style.opacity = '1';
     setTimeout(() => { label.style.opacity = '0'; }, 2200);
   }
 
   function startListening() {
-    if (!recognizer) return;
-    listening = true;
-    document.getElementById('pfre-voice-fab')?.classList.add('listening');
-    try { recognizer.start(); } catch (_) {}
+    if (!recognizer || isListening) return;
+    try {
+      recognizer.start();
+      isListening = true;
+      document.getElementById('pfre-voice-fab')?.classList.add('listening');
+    } catch (_) {
+      stopListening();
+    }
   }
+
   function stopListening() {
-    listening = false;
+    isListening = false;
     document.getElementById('pfre-voice-fab')?.classList.remove('listening');
+    if (recognizer) {
+      try { recognizer.stop(); } catch (_) {}
+    }
   }
-  function toggleListening() { listening ? recognizer.stop() : startListening(); }
+
+  function toggleListening() {
+    if (isListening) stopListening();
+    else startListening();
+  }
 
   /* ══════════════════════════════════════════════
-     Floating action buttons (voice / activity / shortcuts)
+     FAB ROW INJECTION
   ═══════════════════════════════════════════════ */
   function injectFabRow() {
+    if (document.querySelector('.pfre-shell-fab-row')) return;
     const row = document.createElement('div');
     row.className = 'pfre-shell-fab-row';
     row.innerHTML = `
-      <span id="pfre-voice-label" style="background:#111;color:#fff;font-size:11px;padding:5px 10px;border-radius:8px;opacity:0;transition:opacity .2s;white-space:nowrap"></span>
-      ${SpeechRecognitionImpl ? `<button class="pfre-shell-fab" id="pfre-voice-fab" title="Voice navigation — try 'Go to Finance'" onclick="window.__pfreShell.toggleListening()">🎙️</button>` : ''}
-      <button class="pfre-shell-fab" title="Activity log" onclick="window.__pfreShell.openActivityLog()">📋</button>
-      <button class="pfre-shell-fab" title="Keyboard shortcuts (Shift + /)" onclick="document.getElementById('pfre-shortcuts-modal').classList.add('open')">⌨️</button>
+      <span id="pfre-voice-label" class="pfre-shell-fab-label"></span>
+      ${SpeechRecognitionImpl ? `<button class="pfre-shell-fab" id="pfre-voice-fab" title="Voice navigation — try 'Go to Finance'" aria-label="Voice Navigation">🎙️</button>` : ''}
+      <button class="pfre-shell-fab" id="pfre-activity-fab" title="Activity log" aria-label="Activity Log">📋</button>
+      <button class="pfre-shell-fab" id="pfre-shortcuts-fab" title="Keyboard shortcuts (Shift + /)" aria-label="Keyboard Shortcuts">⌨️</button>
     `;
     document.body.appendChild(row);
+
+    document.getElementById('pfre-voice-fab')?.addEventListener('click', toggleListening);
+    document.getElementById('pfre-activity-fab')?.addEventListener('click', openActivityLog);
+    document.getElementById('pfre-shortcuts-fab')?.addEventListener('click', () => {
+      document.getElementById('pfre-shortcuts-modal')?.classList.toggle('open');
+    });
   }
 
   /* ══════════════════════════════════════════════
-     Global key listener — Shift+/, Esc, Alt+letter nav
+     GLOBAL SHORTCUT LISTENER
   ═══════════════════════════════════════════════ */
   document.addEventListener('keydown', (e) => {
-    if (e.shiftKey && e.key === '?') {
-      e.preventDefault();
-      shortcutsOverlay.classList.toggle('open');
-      return;
-    }
+    // Prevent shortcut firing while user is typing in forms/inputs
+    const activeEl = document.activeElement;
+    const isTyping = activeEl && (
+      ['INPUT', 'TEXTAREA', 'SELECT'].includes(activeEl.tagName) ||
+      activeEl.isContentEditable
+    );
+
     if (e.key === 'Escape') {
       document.querySelectorAll('.pfre-shell-overlay.open').forEach(o => o.classList.remove('open'));
       return;
     }
+
+    if (isTyping) return;
+
+    if (e.shiftKey && (e.key === '?' || e.key === '/')) {
+      e.preventDefault();
+      document.getElementById('pfre-shortcuts-modal')?.classList.toggle('open');
+      return;
+    }
+
     if (e.altKey && !e.ctrlKey && !e.metaKey) {
-      const target = Object.entries(MODULES).find(([, info]) => info.alt === e.key.toLowerCase());
-      if (target) { e.preventDefault(); window.location.href = target[0]; }
+      const pressed = e.key.toLowerCase();
+      const target = Object.entries(MODULES).find(([, info]) => info.alt === pressed);
+      if (target) {
+        e.preventDefault();
+        window.location.href = target[0];
+      }
     }
   });
 
-  /* Expose the minimal surface the inline onclick handlers above need. */
-  window.__pfreShell = { toggleListening, openActivityLog };
-
-  document.addEventListener('DOMContentLoaded', () => {
-    renderBreadcrumb();
-    injectFabRow();
-    initVoiceNav();
-    resetIdleTimer();
-    enforceRoleGate();
-    injectQuickHelp();
-  });
-
   /* ══════════════════════════════════════════════
-     6. ROLE-BASED PAGE GATE — DEMO SCOPE ONLY, READ THIS:
-     This frontend has no connected login/session backend, so there is no
-     real identity to check here — only a role picked from a dropdown and
-     stored in localStorage, which anyone can edit in devtools. This block
-     exists to demonstrate and test the intended UX (what a restricted user
-     sees), NOT as an access-control boundary. The Laravel backend built
-     earlier in this project (RolePermissionMiddleware + Policy classes per
-     model) is where real enforcement lives — every restricted endpoint
-     there checks the authenticated user's role server-side, which this
-     client-side check cannot substitute for.
-
-     UPDATE: login.html now exists and, when LIVE_AUTH is on, authenticates
-     for real against POST /api/v1/auth/login and stores the server's
-     returned role in pfre_session. When a real session is present this
-     block uses THAT role — the dropdown below only appears as a fallback
-     when nobody is logged in, purely for previewing the UI. A real session
-     is still just a JSON blob in localStorage from this frontend's point
-     of view (the actual enforcement is the Laravel API rejecting requests
-     without a valid token) — so treat this as UX polish, not the boundary.
+     6. ROLE-BASED ACCESS GATE (Client-side UX)
   ═══════════════════════════════════════════════ */
   const ROLES = ['owner', 'admin', 'staff', 'viewer'];
   const RESTRICTED_PAGES = {
@@ -368,39 +473,47 @@
     try {
       const s = JSON.parse(localStorage.getItem('pfre_session') || 'null');
       return (s && s.expiresAt > Date.now()) ? s : null;
-    } catch (_) { return null; }
+    } catch (_) {
+      return null;
+    }
   }
 
   function currentRole() {
     const session = getSession();
-    return session ? session.role : (localStorage.getItem('pfre_demo_role') || 'staff');
+    return session?.role || localStorage.getItem('pfre_demo_role') || 'staff';
   }
 
   function injectRoleSwitcher() {
     const bar = document.getElementById('pfre-shell-breadcrumb');
     if (!bar) return;
+
+    // Remove existing container to prevent duplication on multiple calls
+    document.getElementById('pfre-role-wrap')?.remove();
+
     const session = getSession();
     const wrap = document.createElement('span');
+    wrap.id = 'pfre-role-wrap';
     wrap.style.cssText = 'margin-left:auto;display:flex;align-items:center;gap:6px;font-size:11px';
 
     if (session) {
       wrap.innerHTML = `
-        <span>👤 ${session.name} <span style="opacity:.6">(${session.role})</span></span>
+        <span>👤 ${escapeHtml(session.name || 'User')} <span style="opacity:.6">(${escapeHtml(session.role)})</span></span>
         <button id="pfre-logout-btn" style="background:rgba(239,68,68,.15);color:#EF4444;border:1px solid rgba(239,68,68,.3);border-radius:6px;padding:2px 8px;font-size:11px;cursor:pointer">Log out</button>`;
       bar.appendChild(wrap);
-      document.getElementById('pfre-logout-btn').addEventListener('click', () => {
-        localStorage.removeItem('pfre_session');
-        window.location.href = 'login.html';
+
+      document.getElementById('pfre-logout-btn')?.addEventListener('click', () => {
+        performLogout();
       });
     } else {
       wrap.innerHTML = `
-        <span title="Not signed in — demo role preview only. Sign in for a real session.">🎭 Previewing as</span>
+        <span title="Not signed in — preview role only">🎭 Previewing as</span>
         <select id="pfre-role-select" style="background:rgba(255,255,255,.06);color:inherit;border:1px solid var(--border,#1A2744);border-radius:6px;padding:2px 6px;font-size:11px">
           ${ROLES.map(r => `<option value="${r}" ${r === currentRole() ? 'selected' : ''}>${r}</option>`).join('')}
         </select>
-        <a href="login.html" style="color:var(--blue,#3B82F6);font-size:11px">Sign in →</a>`;
+        <a href="login.html" style="color:var(--blue,#3B82F6);font-size:11px;text-decoration:none">Sign in →</a>`;
       bar.appendChild(wrap);
-      document.getElementById('pfre-role-select').addEventListener('change', (e) => {
+
+      document.getElementById('pfre-role-select')?.addEventListener('change', (e) => {
         localStorage.setItem('pfre_demo_role', e.target.value);
         enforceRoleGate();
       });
@@ -412,6 +525,7 @@
     const rule = RESTRICTED_PAGES[CURRENT_FILE];
     const existing = document.getElementById('pfre-role-blocked');
     if (existing) existing.remove();
+
     if (!rule || rule.allow.includes(currentRole())) return;
 
     const blocker = document.createElement('div');
@@ -423,7 +537,7 @@
         <div style="font-size:32px">🔒</div>
         <h3 style="margin:8px 0 0">Access Restricted</h3>
         <p style="font-size:13px;color:var(--text-muted,#94A3B8);margin-top:6px">
-          ${rule.label} is limited to: ${rule.allow.join(', ')}. You're viewing as <strong>${currentRole()}</strong>.
+          ${escapeHtml(rule.label)} is limited to: ${rule.allow.join(', ')}. You're viewing as <strong>${escapeHtml(currentRole())}</strong>.
         </p>
         <div class="pfre-idle-actions">
           <a href="admin.html" class="pfre-idle-stay" style="text-decoration:none;padding:10px;border-radius:8px;flex:1;display:block">← Back to Dashboard</a>
@@ -433,21 +547,17 @@
   }
 
   /* ══════════════════════════════════════════════
-     7. QUICK HELP PANEL — context-aware tips per page.
-     These are curated, pre-written tips keyed by page (and where noted, by
-     active tab) — NOT a live AI call. Labeling this as real-time AI-generated
-     help without an actual model behind it would be misleading, so it's
-     framed plainly as contextual help.
+     7. QUICK HELP PANEL
   ═══════════════════════════════════════════════ */
   const HELP_TIPS = {
     'admin.html':     ['Click any KPI card to jump to that module.', 'Use "Customize" (top right) to reorder or hide dashboard sections.', 'The sparkline on each card shows the last 8 data points.'],
-    'schedule.html':  ['This mirrors the same visit data as CRM\'s Visits tab — nothing new to enter here.', 'Consultant load uses each lead\'s real Assigned Agent when set in CRM, falling back to a guess only for older unassigned leads.'],
-    'crm.html':       ['Drag lead cards between pipeline columns to update their stage.', 'Click the 🎙️ icon in the activity timeline to dictate a note instead of typing.', 'Score badges (🔥/🌡️/❄️) update automatically from budget, stage, and recency.'],
-    'hrms.html':      ['Use "➕ Log Advance" on a payslip to record a mid-month payment — it auto-deducts from that month\'s net pay.', 'Mark attendance in bulk from the Attendance tab grid.'],
-    'analytics.html': ['Switch the period selector to compare weekly vs monthly trends.', 'The leaderboard ranks by a blend of conversion rate and deal volume — hover a badge to see why.'],
-    'finance.html':   ['Journal entries must balance — the form won\'t submit until debits equal credits.', 'P&L and Balance Sheet are computed live from posted journal entries, never hand-typed.', 'Use the currency converter for quick NRI-investor quotes.'],
-    'legal.html':     ['Build the family tree before drafting a Will — beneficiaries are picked from recorded relationships.', 'Heir suggestions are candidates for a lawyer to review, not a legal determination — see the disclaimer on that panel.', 'Every generated PDF carries a watermark with your name and the generation time.'],
-    'inventory.html': ['Print a SKU\'s QR code and stick it on the physical asset — scanning it later opens that item directly.', 'Items at or below their reorder level are flagged in the Low Stock tab.'],
+    'schedule.html':  ['This mirrors visit data from CRM\'s Visits tab.', 'Consultant load uses each lead\'s real Assigned Agent when set in CRM.'],
+    'crm.html':       ['Drag lead cards between pipeline columns to update their stage.', 'Click the 🎙️ icon in the activity timeline to dictate a note.', 'Score badges (🔥/🌡️/❄️) update automatically from budget, stage, and recency.'],
+    'hrms.html':      ['Use "➕ Log Advance" on a payslip to record a mid-month payment.', 'Mark attendance in bulk from the Attendance tab grid.'],
+    'analytics.html': ['Switch the period selector to compare weekly vs monthly trends.', 'The leaderboard ranks by a blend of conversion rate and deal volume.'],
+    'finance.html':   ['Journal entries must balance — debits must equal credits.', 'P&L and Balance Sheet are computed live from posted journal entries.', 'Use the currency converter for quick NRI-investor quotes.'],
+    'legal.html':     ['Build the family tree before drafting a Will.', 'Heir suggestions are candidates for lawyer review, not final legal determinations.', 'Generated PDFs carry a verification watermark.'],
+    'inventory.html': ['Print a SKU\'s QR code to attach to the physical asset.', 'Items at or below reorder level are flagged in the Low Stock tab.'],
   };
 
   function injectQuickHelp() {
@@ -455,18 +565,43 @@
     if (!tips || !tips.length) return;
 
     const row = document.querySelector('.pfre-shell-fab-row');
-    if (!row) return;
+    if (!row || document.getElementById('pfre-help-fab')) return;
+
     const btn = document.createElement('button');
     btn.className = 'pfre-shell-fab';
+    btn.id = 'pfre-help-fab';
     btn.title = 'Quick help for this page';
+    btn.setAttribute('aria-label', 'Help Tips');
     btn.textContent = '💡';
-    btn.onclick = () => document.getElementById('pfre-help-modal').classList.toggle('open');
+    btn.addEventListener('click', () => {
+      document.getElementById('pfre-help-modal')?.classList.toggle('open');
+    });
     row.insertBefore(btn, row.firstChild);
 
     buildOverlay('pfre-help-modal', `
-      <h3>💡 Quick Help <button class="close-x" onclick="document.getElementById('pfre-help-modal').classList.remove('open')">✕</button></h3>
-      <p style="font-size:11px;color:var(--text-muted,#94A3B8);margin-bottom:12px">Contextual tips for ${CURRENT.label} — not AI-generated, just curated pointers.</p>
-      ${tips.map(t => `<div class="pfre-shell-shortcut-row" style="display:block"><span>💡 ${t}</span></div>`).join('')}
+      <h3>💡 Quick Help <button class="close-x" aria-label="Close">✕</button></h3>
+      <p style="font-size:11px;color:var(--text-muted,#94A3B8);margin-bottom:12px">Contextual tips for ${escapeHtml(CURRENT.label)}.</p>
+      ${tips.map(t => `<div class="pfre-shell-shortcut-row" style="display:block"><span>💡 ${escapeHtml(t)}</span></div>`).join('')}
     `);
   }
+
+  /* ── Public API exposure ── */
+  window.__pfreShell = {
+    toggleListening,
+    openActivityLog,
+    resetIdleTimer,
+    performLogout
+  };
+
+  /* ── Boot Sequence ── */
+  onReady(() => {
+    renderBreadcrumb();
+    injectFabRow();
+    initShortcutsModal();
+    initIdleWarningDOM();
+    initVoiceNav();
+    resetIdleTimer();
+    enforceRoleGate();
+    injectQuickHelp();
+  });
 })();
