@@ -1,158 +1,212 @@
 /* =====================================================
-   PROPERTY FINDER RE — Client-Side Property Filter
+   PROPERTY FINDER RE — Client-Side Property Filter v2.0
    Reads data-* attributes from .prop-card elements
-   and filters/sorts them based on sidebar inputs
+   and filters/sorts them based on sidebar & search inputs
    ===================================================== */
 (() => {
   'use strict';
 
-  /* ── Run after DOM ready ── */
-  function initFilter() {
-    const sidebar   = document.querySelector('.sidebar');
-    const mainCol   = document.querySelector('.main-col');
-    if (!mainCol) return;
+  let isSorting = false;
+  let observer = null;
 
-    /* ── Read URL params on page load ── */
-    const params = new URLSearchParams(window.location.search);
-    if (params.get('q'))    presetSearch(params.get('q'));
-    if (params.get('type')) presetType(params.get('type'));
-    if (params.get('bhk'))  presetBHK(params.get('bhk'));
-
-    /* ── Attach event listeners ── */
-    /* Filter tabs (Buy / Rent / Commercial) */
-    document.querySelectorAll('.filter-tab').forEach(tab => {
-      tab.addEventListener('click', () => { applyFilters(); });
-    });
-
-    /* Sidebar checkboxes */
-    if (sidebar) {
-      sidebar.querySelectorAll('input[type="checkbox"]').forEach(cb => {
-        cb.addEventListener('change', applyFilters);
-      });
-      /* Apply / Reset buttons */
-      sidebar.querySelectorAll('.apply-btn').forEach(btn => {
-        if (btn.textContent.trim().toLowerCase().includes('reset')) {
-          btn.addEventListener('click', resetFilters);
-        } else {
-          btn.addEventListener('click', applyFilters);
-        }
-      });
-      /* Price range inputs */
-      sidebar.querySelectorAll('.range-input').forEach(inp => {
-        inp.addEventListener('input', debounce(applyFilters, 400));
-      });
+  /* ── DOM Ready Utility ── */
+  function onReady(fn) {
+    if (document.readyState === 'loading') {
+      document.addEventListener('DOMContentLoaded', fn);
+    } else {
+      fn();
     }
-
-    /* Sort dropdown */
-    const sortSelect = mainCol.querySelector('select');
-    sortSelect?.addEventListener('change', applyFilters);
-
-    /* Search input (inline on properties page) */
-    const searchInp = document.querySelector('.search-input-wrap input');
-    if (searchInp) {
-      searchInp.addEventListener('input', debounce(applyFilters, 300));
-    }
-
-    /* Initial render */
-    applyFilters();
   }
 
-  /* ── Simple debounce ── */
+  /* ── Debounce Utility ── */
   function debounce(fn, ms) {
     let timer;
-    return (...args) => { clearTimeout(timer); timer = setTimeout(() => fn(...args), ms); };
+    return (...args) => {
+      clearTimeout(timer);
+      timer = setTimeout(() => fn(...args), ms);
+    };
   }
 
-  /* ── Preset helpers from URL params ── */
-  function presetSearch(q) {
-    const inp = document.querySelector('.search-input-wrap input');
-    if (inp) inp.value = q;
+  /* ── Clean String Helpers ── */
+  function normalizeText(str) {
+    return (str || '').toLowerCase().trim();
   }
-  function presetType(type) {
-    const tab = document.querySelector(`.filter-tab[data-type="${type}"]`);
-    if (tab) tab.click();
-    /* Also map buy/rent/commercial */
-    const map = { buy: 'Buy', rent: 'Rent', commercial: 'Commercial' };
-    if (map[type]) {
-      document.querySelectorAll('.filter-tab').forEach(t => {
-        if (t.textContent.trim() === map[type]) t.click();
-      });
-    }
+
+  function cleanNumber(str) {
+    if (!str) return 0;
+    const num = parseFloat(String(str).replace(/,/g, '').replace(/[^0-9.]/g, ''));
+    return isNaN(num) ? 0 : num;
   }
-  function presetBHK(bhk) {
-    const label = `${bhk} BHK`;
-    document.querySelectorAll('.filter-check input[type=checkbox]').forEach(cb => {
-      const lbl = cb.closest('.filter-check')?.textContent?.trim();
-      if (lbl && lbl.includes(bhk)) { cb.checked = true; }
+
+  /* ══════════════════════════════════════════════
+     1. CARD ENRICHMENT ENGINE
+  ═══════════════════════════════════════════════ */
+  function enrichCards() {
+    const cards = document.querySelectorAll('.prop-card');
+
+    cards.forEach(card => {
+      if (card.dataset.enriched === 'true') return;
+      card.dataset.enriched = 'true';
+
+      const fullText = normalizeText(card.textContent);
+      const name = normalizeText(card.querySelector('.prop-name')?.textContent);
+
+      /* Intent (buy / rent / commercial) */
+      const badgeTxt = normalizeText(card.querySelector('.badge')?.textContent);
+      if (badgeTxt.includes('rent') || fullText.includes('/ month') || fullText.includes('/mo')) {
+        card.dataset.intent = 'rent';
+      } else if (badgeTxt.includes('commercial') || fullText.includes('office') || fullText.includes('shop')) {
+        card.dataset.intent = 'commercial';
+      } else {
+        card.dataset.intent = 'buy';
+      }
+
+      /* BHK Configuration */
+      const bhkMatch = (name + ' ' + fullText).match(/(\d+)\s*(bhk|bed|beds)/i);
+      if (bhkMatch) {
+        card.dataset.bhk = bhkMatch[1];
+      } else {
+        card.dataset.bhk = '';
+      }
+
+      /* Property & Building Type */
+      let propType = 'flat';
+      if (fullText.includes('row house')) propType = 'row house';
+      else if (fullText.includes('bungalow') || fullText.includes('villa')) propType = 'bungalow';
+      else if (fullText.includes('plot') || fullText.includes('land')) propType = 'plot';
+      else if (fullText.includes('commercial') || fullText.includes('office') || fullText.includes('showroom')) propType = 'commercial';
+      card.dataset.proptype = propType;
+
+      let building = 'private';
+      if (fullText.includes('mhada')) building = 'mhada';
+      else if (fullText.includes('sra')) building = 'sra';
+      else if (fullText.includes('collector')) building = 'collector';
+      card.dataset.building = building;
+
+      card.dataset.use = (propType === 'commercial' || card.dataset.intent === 'commercial') ? 'commercial' : 'residential';
+
+      /* Price Normalization */
+      const priceEl = card.querySelector('.prop-price');
+      if (priceEl) {
+        const rawPrice = priceEl.textContent;
+        const val = cleanNumber(rawPrice);
+
+        if (rawPrice.includes('Cr')) {
+          card.dataset.price = String(Math.round(val * 10000000));
+        } else if (rawPrice.includes('L')) {
+          card.dataset.price = String(Math.round(val * 100000));
+        } else if (rawPrice.includes('/ month') || rawPrice.includes('/mo') || rawPrice.includes('month')) {
+          card.dataset.price = String(val); // Keep rent as exact monthly value
+          card.dataset.isRent = 'true';
+        } else {
+          card.dataset.price = String(val);
+        }
+      } else {
+        card.dataset.price = '0';
+      }
+
+      /* Built-up / Carpet Area */
+      const areaMatch = card.textContent.match(/([\d,]+)\s*(?:sq\.?\s*ft|sqft)/i);
+      if (areaMatch) {
+        card.dataset.area = String(cleanNumber(areaMatch[1]));
+      } else {
+        card.dataset.area = '0';
+      }
     });
   }
 
-  /* ── Main filter function ── */
+  /* ══════════════════════════════════════════════
+     2. FILTER & SORT LOGIC
+  ═══════════════════════════════════════════════ */
+  function getScopedChecked(sidebar, filterType) {
+    if (!sidebar) return [];
+    const selectors = [
+      `[data-filter="${filterType}"] input[type="checkbox"]:checked`,
+      `input[type="checkbox"][data-filter="${filterType}"]:checked`,
+      `.filter-group[data-filter="${filterType}"] input[type="checkbox"]:checked`
+    ];
+    const inputs = [...sidebar.querySelectorAll(selectors.join(','))];
+
+    return inputs.map(cb => {
+      const val = cb.dataset.value || cb.value || cb.closest('label')?.textContent || '';
+      return normalizeText(val);
+    }).filter(Boolean);
+  }
+
   function applyFilters() {
-    const cards  = document.querySelectorAll('.prop-card');
-    const grid   = cards[0]?.closest('.prop-grid-4, .prop-grid');
+    const cards = document.querySelectorAll('.prop-card');
+    const grid = cards[0]?.closest('.prop-grid-4, .prop-grid, .properties-grid');
     if (!grid || !cards.length) return;
 
-    /* Active tab intent */
-    const activeTab = document.querySelector('.filter-tab.active')?.textContent?.trim()?.toLowerCase() || 'all';
-
-    /* Sidebar state */
     const sidebar = document.querySelector('.sidebar');
-    const checkedTypes    = getChecked(sidebar, '[data-filter="type"]');
-    const checkedBHK      = getChecked(sidebar, '[data-filter="bhk"]');
-    const checkedBuilding = getChecked(sidebar, '[data-filter="building"]');
-    const checkedUse      = getChecked(sidebar, '[data-filter="use"]');
+    const activeTabEl = document.querySelector('.filter-tab.active, .search-tab.active');
+    const activeTab = normalizeText(activeTabEl?.dataset.type || activeTabEl?.textContent || 'all');
 
-    /* Price range */
-    const minPrice = parseFloat(sidebar?.querySelector('.range-input:first-of-type')?.value) || 0;
-    const maxPrice = parseFloat(sidebar?.querySelector('.range-input:last-of-type')?.value)  || Infinity;
+    const checkedTypes    = getScopedChecked(sidebar, 'type');
+    const checkedBHK      = getScopedChecked(sidebar, 'bhk');
+    const checkedBuilding = getScopedChecked(sidebar, 'building');
+    const checkedUse      = getScopedChecked(sidebar, 'use');
 
-    /* Search query */
-    const query = (document.querySelector('.search-input-wrap input')?.value || '').toLowerCase().trim();
+    const minPriceInput = sidebar?.querySelector('.range-input:first-of-type, [data-filter-min="price"], #minPrice');
+    const maxPriceInput = sidebar?.querySelector('.range-input:last-of-type, [data-filter-max="price"], #maxPrice');
+    const minPrice = cleanNumber(minPriceInput?.value) || 0;
+    const maxPrice = cleanNumber(maxPriceInput?.value) || Infinity;
 
-    /* Sort */
-    const sortVal = document.querySelector('.main-col select')?.value || 'Newest First';
+    const searchInp = document.querySelector('.search-input-wrap input, #propertySearchInput, .prop-search-input');
+    const query = normalizeText(searchInp?.value);
+
+    const sortSelect = document.querySelector('.main-col select, .sort-select, #sortProperties');
+    const sortVal = sortSelect?.value || 'newest';
 
     let visible = 0;
-    const cardArray = [...cards];
+    const cardArray = Array.from(cards);
 
-    /* Filter */
     cardArray.forEach(card => {
-      const intent   = (card.dataset.intent   || '').toLowerCase();  /* buy|rent|commercial */
-      const bhk      = (card.dataset.bhk      || '').toLowerCase();
-      const propType = (card.dataset.proptype || '').toLowerCase();
-      const building = (card.dataset.building || '').toLowerCase();
-      const use      = (card.dataset.use      || '').toLowerCase();
-      const price    = parseFloat(card.dataset.price || '0');
-      const name     = card.querySelector('.prop-name')?.textContent?.toLowerCase() || '';
-      const loc      = card.querySelector('.prop-loc')?.textContent?.toLowerCase()  || '';
+      const intent   = normalizeText(card.dataset.intent);
+      const bhk      = normalizeText(card.dataset.bhk);
+      const propType = normalizeText(card.dataset.proptype);
+      const building = normalizeText(card.dataset.building);
+      const use      = normalizeText(card.dataset.use);
+      const price    = cleanNumber(card.dataset.price);
+      const name     = normalizeText(card.querySelector('.prop-name')?.textContent);
+      const loc      = normalizeText(card.querySelector('.prop-loc')?.textContent);
 
       let show = true;
 
-      /* Tab filter */
-      if (activeTab !== 'all') {
-        if (activeTab === 'buy'        && intent !== 'buy')        show = false;
-        if (activeTab === 'rent'       && intent !== 'rent')       show = false;
-        if (activeTab === 'commercial' && intent !== 'commercial') show = false;
+      /* Intent tab filter */
+      if (activeTab && activeTab !== 'all') {
+        if (activeTab.includes('buy') && intent !== 'buy') show = false;
+        else if (activeTab.includes('rent') && intent !== 'rent') show = false;
+        else if (activeTab.includes('commercial') && intent !== 'commercial' && use !== 'commercial') show = false;
       }
 
-      /* Sidebar type filter */
-      if (show && checkedTypes.length && !checkedTypes.some(t => propType.includes(t))) show = false;
+      /* Property Type checkbox filter */
+      if (show && checkedTypes.length) {
+        if (!checkedTypes.some(t => propType.includes(t) || t.includes(propType))) show = false;
+      }
 
-      /* BHK filter */
-      if (show && checkedBHK.length && !checkedBHK.some(b => bhk.includes(b))) show = false;
+      /* BHK checkbox filter */
+      if (show && checkedBHK.length) {
+        if (!checkedBHK.some(b => b.includes(bhk) || bhk === b.replace(/[^0-9]/g, ''))) show = false;
+      }
 
-      /* Building type */
-      if (show && checkedBuilding.length && !checkedBuilding.some(b => building.includes(b))) show = false;
+      /* Building Type checkbox filter */
+      if (show && checkedBuilding.length) {
+        if (!checkedBuilding.some(b => building.includes(b))) show = false;
+      }
 
-      /* Property use */
-      if (show && checkedUse.length && !checkedUse.some(u => use.includes(u))) show = false;
+      /* Property Use checkbox filter */
+      if (show && checkedUse.length) {
+        if (!checkedUse.some(u => use.includes(u))) show = false;
+      }
 
-      /* Price range */
-      if (show && price > 0 && minPrice > 0 && price < minPrice) show = false;
-      if (show && price > 0 && maxPrice < Infinity && price > maxPrice) show = false;
+      /* Numeric Price filter */
+      if (show && price > 0) {
+        if (minPrice > 0 && price < minPrice) show = false;
+        if (maxPrice < Infinity && price > maxPrice) show = false;
+      }
 
-      /* Search query */
+      /* Inline Search Query (Name or Locality) */
       if (show && query) {
         show = name.includes(query) || loc.includes(query);
       }
@@ -161,132 +215,195 @@
       if (show) visible++;
     });
 
-    /* Sort visible cards */
+    /* Sort visible listings */
     const visibleCards = cardArray.filter(c => c.style.display !== 'none');
     sortCards(visibleCards, sortVal, grid);
 
-    /* Update count */
-    const countEl = document.querySelector('.results-count strong, .filter-results-count strong');
-    if (countEl) countEl.textContent = visible;
-    const countEl2 = document.querySelector('.filter-results-count');
-    if (countEl2) countEl2.textContent = `Showing ${visible} properties`;
+    /* Update Count Displays */
+    const countStrong = document.querySelector('.results-count strong, .filter-results-count strong');
+    if (countStrong) countStrong.textContent = visible;
 
-    /* Show no-results if empty */
+    const countContainer = document.querySelector('.filter-results-count');
+    if (countContainer && !countStrong) {
+      countContainer.textContent = `Showing ${visible} properties`;
+    }
+
+    /* Empty state display */
     let noRes = document.getElementById('noResults');
     if (!noRes) {
       noRes = document.createElement('div');
       noRes.id = 'noResults';
       noRes.className = 'empty-state';
-      noRes.innerHTML = '<div class="empty-icon" style="font-size:48px">🔍</div><h3>No properties match your filters</h3><p>Try adjusting your search criteria or <a href="contact.html" style="color:var(--blue)">contact us</a> with your exact requirements.</p>';
+      noRes.innerHTML = `
+        <div class="empty-icon" style="font-size:48px;text-align:center;margin-bottom:12px">🔍</div>
+        <h3 style="text-align:center;margin-bottom:6px">No properties match your filters</h3>
+        <p style="text-align:center;color:var(--text-muted,#64748b)">Try adjusting your search criteria or <a href="contact.html" style="color:var(--blue,#2563eb)">contact us</a> for custom assistance.</p>
+      `;
       grid.parentNode.insertBefore(noRes, grid.nextSibling);
     }
     noRes.style.display = visible === 0 ? 'block' : 'none';
     grid.style.display  = visible === 0 ? 'none'  : '';
   }
 
-  /* ── Sort helper ── */
+  /* ── Sort Helper with Loop Guard ── */
   function sortCards(cards, sortVal, grid) {
+    if (!cards.length) return;
+    const s = normalizeText(sortVal);
+
     const sorted = [...cards].sort((a, b) => {
-      const pA = parseFloat(a.dataset.price || '0');
-      const pB = parseFloat(b.dataset.price || '0');
-      if (sortVal.includes('Low to High')) return pA - pB;
-      if (sortVal.includes('High to Low')) return pB - pA;
-      if (sortVal.includes('Largest')) {
-        const aA = parseFloat(a.dataset.area || '0');
-        const bA = parseFloat(b.dataset.area || '0');
-        return bA - aA;
-      }
-      return 0; /* Newest = original order */
+      const pA = cleanNumber(a.dataset.price);
+      const pB = cleanNumber(b.dataset.price);
+      const aA = cleanNumber(a.dataset.area);
+      const bA = cleanNumber(b.dataset.area);
+
+      if (s.includes('low to high') || s.includes('asc')) return pA - pB;
+      if (s.includes('high to low') || s.includes('desc')) return pB - pA;
+      if (s.includes('largest') || s.includes('area')) return bA - aA;
+      return 0; // Default order
     });
-    sorted.forEach(card => grid.appendChild(card));
+
+    isSorting = true;
+    const fragment = document.createDocumentFragment();
+    sorted.forEach(card => fragment.appendChild(card));
+    grid.appendChild(fragment);
+    isSorting = false;
   }
 
-  /* ── Get checked values from sidebar ── */
-  function getChecked(parent, selector) {
-    if (!parent) return [];
-    return [...parent.querySelectorAll(`${selector}:checked, input[type=checkbox]:checked`)]
-      .map(cb => (cb.dataset.value || cb.closest('.filter-check')?.textContent?.trim()?.toLowerCase() || ''))
-      .filter(Boolean);
-  }
-
-  /* ── Reset filters ── */
+  /* ══════════════════════════════════════════════
+     3. PRESETS & STATE MANAGEMENT
+  ═══════════════════════════════════════════════ */
   function resetFilters() {
-    document.querySelectorAll('.sidebar input[type=checkbox]').forEach(cb => {
-      cb.checked = cb.dataset.default === 'true';
-    });
-    document.querySelectorAll('.sidebar .range-input').forEach(inp => { inp.value = ''; });
-    /* Reset to first tab */
-    const firstTab = document.querySelector('.filter-tab');
-    if (firstTab) {
-      document.querySelectorAll('.filter-tab').forEach(t => t.classList.remove('active'));
-      firstTab.classList.add('active');
+    const sidebar = document.querySelector('.sidebar');
+    if (sidebar) {
+      sidebar.querySelectorAll('input[type="checkbox"]').forEach(cb => {
+        cb.checked = cb.dataset.default === 'true';
+      });
+      sidebar.querySelectorAll('.range-input, input[type="number"]').forEach(inp => {
+        inp.value = '';
+      });
     }
+
+    const searchInp = document.querySelector('.search-input-wrap input, #propertySearchInput');
+    if (searchInp) searchInp.value = '';
+
+    const sortSelect = document.querySelector('.main-col select, .sort-select');
+    if (sortSelect) sortSelect.selectedIndex = 0;
+
+    const tabs = document.querySelectorAll('.filter-tab, .search-tab');
+    if (tabs.length) {
+      tabs.forEach(t => t.classList.remove('active'));
+      tabs[0].classList.add('active');
+    }
+
     applyFilters();
   }
 
-  /* ── Add data attributes to existing property cards ── */
-  function enrichCards() {
-    document.querySelectorAll('.prop-card').forEach(card => {
-      if (card.dataset.enriched) return;
-      card.dataset.enriched = 'true';
+  function applyUrlParams() {
+    const params = new URLSearchParams(window.location.search);
+    const q    = params.get('q');
+    const type = params.get('type');
+    const bhk  = params.get('bhk');
 
-      /* Intent from badge text */
-      const badge = card.querySelector('.badge');
-      const badgeTxt = badge?.textContent?.trim()?.toLowerCase() || '';
-      if (badgeTxt.includes('sale') || badgeTxt.includes('launch'))
-        card.dataset.intent = 'buy';
-      else if (badgeTxt.includes('rent'))
-        card.dataset.intent = 'rent';
-      else if (badgeTxt.includes('commercial'))
-        card.dataset.intent = 'commercial';
-      else card.dataset.intent = 'buy';
+    if (q) {
+      const inp = document.querySelector('.search-input-wrap input, #propertySearchInput');
+      if (inp) inp.value = q;
+    }
 
-      /* BHK from badge or meta */
-      const bhkBadge = card.querySelector('.badge-gray');
-      const bhkTxt = bhkBadge?.textContent || '';
-      card.dataset.bhk = bhkTxt.toLowerCase().replace(' bhk','');
-
-      /* Property type */
-      const metaItems = card.querySelectorAll('.prop-meta-item');
-      metaItems.forEach(item => {
-        const txt = item.textContent.toLowerCase();
-        if (txt.includes('mhada'))    card.dataset.building = 'mhada';
-        else if (txt.includes('sra')) card.dataset.building = 'sra';
-        else if (txt.includes('collector')) card.dataset.building = 'collector';
-        else card.dataset.building = card.dataset.building || 'private';
-
-        if (txt.includes('flat') || txt.includes('apartment'))  card.dataset.proptype = 'flat';
-        if (txt.includes('row house'))  card.dataset.proptype = 'row house';
-        if (txt.includes('bungalow'))   card.dataset.proptype = 'bungalow';
-        if (txt.includes('plot'))       card.dataset.proptype = 'plot';
-        if (txt.includes('commercial')) { card.dataset.proptype = 'commercial'; card.dataset.use = 'commercial'; }
+    if (type) {
+      const cleanType = normalizeText(type);
+      document.querySelectorAll('.filter-tab, .search-tab').forEach(tab => {
+        const tabType = normalizeText(tab.dataset.type || tab.textContent);
+        if (tabType.includes(cleanType) || cleanType.includes(tabType)) {
+          document.querySelectorAll('.filter-tab, .search-tab').forEach(t => t.classList.remove('active'));
+          tab.classList.add('active');
+        }
       });
-      card.dataset.use = card.dataset.use || 'residential';
+    }
 
-      /* Price — parse from display text */
-      const priceEl = card.querySelector('.prop-price');
-      if (priceEl) {
-        const raw = priceEl.textContent;
-        const num = parseFloat(raw.replace(/[^0-9.]/g, ''));
-        if (raw.includes('Cr')) card.dataset.price = (num * 10000000).toString();
-        else if (raw.includes('L')) card.dataset.price = (num * 100000).toString();
-        else if (raw.includes(',')) card.dataset.price = num.toString();
-        else card.dataset.price = (num * 12).toString(); /* monthly rent → annual */
-      }
-
-      /* Area */
-      const areaMatch = card.textContent.match(/(\d[,\d]*)\s*sq\.ft/);
-      if (areaMatch) card.dataset.area = areaMatch[1].replace(',','');
-    });
+    if (bhk) {
+      const targetBHK = bhk.replace(/[^0-9]/g, '');
+      document.querySelectorAll('.sidebar input[type="checkbox"]').forEach(cb => {
+        const label = normalizeText(cb.closest('label')?.textContent || cb.value);
+        if (label.includes(`${targetBHK} bhk`) || label.startsWith(targetBHK)) {
+          cb.checked = true;
+        }
+      });
+    }
   }
 
-  /* ── Init ── */
-  enrichCards();
-  initFilter();
+  /* ══════════════════════════════════════════════
+     4. INITIALIZATION & EVENT BINDINGS
+  ═══════════════════════════════════════════════ */
+  function initFilter() {
+    const mainCol = document.querySelector('.main-col, .properties-content');
+    const grid = document.querySelector('.prop-grid-4, .prop-grid, .properties-grid');
+    if (!mainCol && !grid) return;
 
-  /* Re-enrich if cards added dynamically */
-  const observer = new MutationObserver(() => { enrichCards(); applyFilters(); });
-  const grid = document.querySelector('.prop-grid-4, .prop-grid');
-  if (grid) observer.observe(grid, { childList: true });
+    enrichCards();
+    applyUrlParams();
 
+    /* Tab Switch Event */
+    document.querySelectorAll('.filter-tab, .search-tab').forEach(tab => {
+      tab.addEventListener('click', (e) => {
+        e.preventDefault();
+        document.querySelectorAll('.filter-tab, .search-tab').forEach(t => t.classList.remove('active'));
+        tab.classList.add('active');
+        applyFilters();
+      });
+    });
+
+    /* Sidebar Checkbox & Range Input Events */
+    const sidebar = document.querySelector('.sidebar');
+    if (sidebar) {
+      sidebar.querySelectorAll('input[type="checkbox"]').forEach(cb => {
+        cb.addEventListener('change', applyFilters);
+      });
+
+      sidebar.querySelectorAll('.apply-btn, .btn-apply').forEach(btn => {
+        btn.addEventListener('click', (e) => {
+          e.preventDefault();
+          if (normalizeText(btn.textContent).includes('reset')) {
+            resetFilters();
+          } else {
+            applyFilters();
+          }
+        });
+      });
+
+      sidebar.querySelectorAll('.range-input, input[type="number"]').forEach(inp => {
+        inp.addEventListener('input', debounce(applyFilters, 300));
+      });
+    }
+
+    /* Sort Dropdown Event */
+    const sortSelect = document.querySelector('.main-col select, .sort-select');
+    sortSelect?.addEventListener('change', applyFilters);
+
+    /* Search Input Event */
+    const searchInp = document.querySelector('.search-input-wrap input, #propertySearchInput');
+    if (searchInp) {
+      searchInp.addEventListener('input', debounce(applyFilters, 250));
+    }
+
+    /* Safe MutationObserver Setup */
+    if (grid && !observer) {
+      observer = new MutationObserver(() => {
+        if (isSorting) return; // Prevent infinite re-sort loop
+        enrichCards();
+        applyFilters();
+      });
+      observer.observe(grid, { childList: true });
+    }
+
+    applyFilters();
+  }
+
+  /* ── Export API & Initialize on Safe Ready State ── */
+  window.PFREPropertyFilter = {
+    apply: applyFilters,
+    reset: resetFilters,
+    refresh: () => { enrichCards(); applyFilters(); }
+  };
+
+  onReady(initFilter);
 })();
