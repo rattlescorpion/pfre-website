@@ -1,24 +1,20 @@
 /* =====================================================
-   PROPERTY FINDER RE — API Client v1.0
+   PROPERTY FINDER RE — API Client v1.1 (Rectified)
    Full integration with PFRE Omni Platform
    GitHub: rattlescorpion/pfre-omni
-   =====================================================
-   Usage:
-     const api = window.PFREApi;
-     await api.leads.create({ name, phone, ... });
-     const props = await api.properties.list({ intent:'buy' });
    ===================================================== */
 
 window.PFREApi = (() => {
   'use strict';
 
-  const CFG = () => window.PFRE_CONFIG || {};
-  const BASE = () => CFG().API_BASE_URL || '';
+  const CFG  = () => window.PFRE_CONFIG || {};
+  const BASE = () => (CFG().API_BASE_URL || '').replace(/\/+$/, '');
   const KEY  = () => CFG().API_KEY || '';
   const FEAT = () => CFG().FEATURES || {};
 
   /* ── Offline queue for failed requests ── */
   const QUEUE_KEY = 'pfre_api_queue';
+
   function enqueue(item) {
     try {
       const q = JSON.parse(localStorage.getItem(QUEUE_KEY) || '[]');
@@ -39,15 +35,17 @@ window.PFREApi = (() => {
   async function request(method, endpoint, data = null, requiresAuth = false) {
     const controller = new AbortController();
     const timeout = setTimeout(() => controller.abort(), CFG().TIMEOUT || 12000);
+    const cleanEndpoint = endpoint.startsWith('/') ? endpoint : `/${endpoint}`;
 
     try {
       const headers = {
-        'Content-Type':       'application/json',
-        'Accept':             'application/json',
-        'X-Website-API-Key':  KEY(),
-        'X-Website-Version':  CFG().API_VERSION || 'v1',
-        'X-Website-Origin':   window.location.hostname,
+        'Content-Type':      'application/json',
+        'Accept':            'application/json',
+        'X-Website-API-Key': KEY(),
+        'X-Website-Version': CFG().API_VERSION || 'v1',
+        'X-Website-Origin':  window.location.hostname,
       };
+
       if (requiresAuth && Auth.getToken()) {
         headers['Authorization'] = `Bearer ${Auth.getToken()}`;
       }
@@ -55,24 +53,39 @@ window.PFREApi = (() => {
       const opts = { method, headers, signal: controller.signal };
       if (data && method !== 'GET') opts.body = JSON.stringify(data);
 
-      const url = `${BASE()}${endpoint}`;
+      const url = `${BASE()}${cleanEndpoint}`;
       const res = await fetch(url, opts);
       clearTimeout(timeout);
 
-      if (res.status === 401) { Auth.clearToken(); throw new Error('Unauthorised'); }
-      if (!res.ok) {
-        const err = await res.json().catch(() => ({ message: `HTTP ${res.status}` }));
-        throw new Error(err.message || `Request failed: ${res.status}`);
+      if (res.status === 401) {
+        Auth.clearToken();
+        throw new Error('Unauthorised');
       }
 
-      return await res.json();
+      if (!res.ok) {
+        const err = await res.json().catch(() => ({ message: `HTTP ${res.status}` }));
+        const error = new Error(err.message || `Request failed: ${res.status}`);
+        error.status = res.status;
+        error.data = err;
+        throw error;
+      }
+
+      /* Handle 204 No Content or empty bodies safely */
+      if (res.status === 204 || res.headers.get('content-length') === '0') {
+        return null;
+      }
+
+      const text = await res.text();
+      return text ? JSON.parse(text) : null;
 
     } catch (err) {
       clearTimeout(timeout);
-      /* Queue for retry if offline */
-      if (!navigator.onLine && data && method !== 'GET') {
-        enqueue({ method, endpoint, data });
-        console.warn('[PFRE API] Queued for retry (offline):', endpoint);
+
+      /* Queue non-GET requests only when connection fails or is offline */
+      const isNetworkError = !navigator.onLine || err.name === 'AbortError' || err.message === 'Failed to fetch';
+      if (isNetworkError && data && method !== 'GET') {
+        enqueue({ method, endpoint: cleanEndpoint, data, requiresAuth });
+        console.warn('[PFRE API] Queued for retry (network offline):', cleanEndpoint);
       }
       throw err;
     }
@@ -86,7 +99,7 @@ window.PFREApi = (() => {
       const remaining = [];
       for (const item of q) {
         try {
-          await request(item.method, item.endpoint, item.data);
+          await request(item.method, item.endpoint, item.data, !!item.requiresAuth);
         } catch {
           if (item.retries < 3) {
             remaining.push({ ...item, retries: item.retries + 1 });
@@ -97,12 +110,20 @@ window.PFREApi = (() => {
     } catch {}
   });
 
+  /* ── Helper: Clean query strings ── */
+  function buildQuery(params) {
+    const q = new URLSearchParams();
+    Object.entries(params).forEach(([k, v]) => {
+      if (v !== '' && v !== null && v !== undefined) q.append(k, v);
+    });
+    const str = q.toString();
+    return str ? `?${str}` : '';
+  }
+
   /* ══════════════════════════════════════════
      LEAD MANAGEMENT
   ══════════════════════════════════════════ */
   const leads = {
-
-    /** Create lead from contact/enquiry form → PF-LEAD-YYYY-NNNN */
     async create(data) {
       const payload = {
         name:         data.name?.trim(),
@@ -111,8 +132,8 @@ window.PFREApi = (() => {
         source:       data.source || 'website',
         intent:       data.intent || 'buy',
         config:       data.config || null,
-        budget_min:   data.budgetMin ? parseInt(data.budgetMin) : null,
-        budget_max:   data.budgetMax ? parseInt(data.budgetMax) : null,
+        budget_min:   Number.isInteger(parseInt(data.budgetMin)) ? parseInt(data.budgetMin) : null,
+        budget_max:   Number.isInteger(parseInt(data.budgetMax)) ? parseInt(data.budgetMax) : null,
         localities:   data.localities || null,
         message:      data.message || data.notes || null,
         property_id:  data.propertyId || null,
@@ -125,26 +146,17 @@ window.PFREApi = (() => {
       return request('POST', '/leads', payload);
     },
 
-    /** Quick property enquiry (from listing card / property detail) */
     async enquire(propertyId, data) {
       return leads.create({ ...data, propertyId, source: 'property_enquiry' });
     },
 
-    /** Post property (owner wants to list) → creates seller/rent/PG lead.
-        Forwards the whole payload through rather than re-mapping a fixed
-        list of field names — post-property.html's submitListing() already
-        builds `data` with snake_case keys taken directly from each form
-        field's name= attribute (carpet_area, primary_building_name,
-        building_type, etc.), matching what PropertyController validates.
-        A hand-maintained fixed list here is exactly what silently dropped
-        most of this form's fields in an earlier version of this method. */
     async postProperty(data) {
       return request('POST', '/properties/submit', {
         ...data,
-        owner_name:    data.name,
-        owner_phone:   data.phone,
-        owner_email:   data.email,
-        property_type: data.propType,
+        owner_name:    data.owner_name || data.name,
+        owner_phone:   data.owner_phone || data.phone,
+        owner_email:   data.owner_email || data.email,
+        property_type: data.property_type || data.propType,
         source:        'post_property_page',
       });
     },
@@ -154,44 +166,38 @@ window.PFREApi = (() => {
      PROPERTY LISTINGS
   ══════════════════════════════════════════ */
   const properties = {
-
-    /** Fetch property listings with filters */
     async list(params = {}) {
       if (!FEAT().LIVE_PROPERTIES) return { data: [], meta: { total: 0, fallback: true } };
-      const q = new URLSearchParams({
-        intent:    params.intent    || '',
-        config:    params.config    || '',
-        locality:  params.locality  || '',
-        min_price: params.minPrice  || '',
-        max_price: params.maxPrice  || '',
-        building:  params.building  || '',
-        sort:      params.sort      || 'newest',
-        per_page:  params.perPage   || 12,
-        page:      params.page      || 1,
-        q:         params.q         || '',
-      }).toString();
-      return request('GET', `/properties?${q}`);
+      const q = buildQuery({
+        intent:    params.intent,
+        config:    params.config,
+        locality:  params.locality,
+        min_price: params.minPrice,
+        max_price: params.maxPrice,
+        building:  params.building,
+        sort:      params.sort || 'newest',
+        per_page:  params.perPage || 12,
+        page:      params.page || 1,
+        q:         params.q,
+      });
+      return request('GET', `/properties${q}`);
     },
 
-    /** Get property detail by ID or slug */
     async get(idOrSlug) {
       if (!FEAT().LIVE_PROPERTIES) return null;
-      return request('GET', `/properties/${idOrSlug}`);
+      return request('GET', `/properties/${encodeURIComponent(idOrSlug)}`);
     },
 
-    /** Get featured properties for homepage */
     async featured(limit = 6) {
       if (!FEAT().LIVE_PROPERTIES) return { data: [] };
-      return request('GET', `/properties/featured?limit=${limit}`);
+      return request('GET', `/properties/featured?limit=${parseInt(limit)}`);
     },
 
-    /** Get similar properties */
     async similar(propertyId, limit = 3) {
       if (!FEAT().LIVE_PROPERTIES) return { data: [] };
-      return request('GET', `/properties/${propertyId}/similar?limit=${limit}`);
+      return request('GET', `/properties/${encodeURIComponent(propertyId)}/similar?limit=${parseInt(limit)}`);
     },
 
-    /** Search suggestions */
     async suggest(query) {
       if (!FEAT().LIVE_PROPERTIES || query.length < 2) return { data: [] };
       return request('GET', `/properties/suggest?q=${encodeURIComponent(query)}`);
@@ -199,19 +205,18 @@ window.PFREApi = (() => {
   };
 
   /* ══════════════════════════════════════════
-     CONTENT (Blog, Testimonials, Price Data)
+     CONTENT
   ══════════════════════════════════════════ */
   const content = {
-
     async blogPosts(params = {}) {
       if (!FEAT().LIVE_BLOG) return { data: [] };
-      const q = new URLSearchParams({ page: params.page||1, per_page: params.perPage||6, category: params.category||'' }).toString();
-      return request('GET', `/blog?${q}`);
+      const q = buildQuery({ page: params.page || 1, per_page: params.perPage || 6, category: params.category });
+      return request('GET', `/blog${q}`);
     },
 
     async testimonials(limit = 9) {
       if (!FEAT().LIVE_TESTIMONIALS) return { data: [] };
-      return request('GET', `/testimonials?limit=${limit}&status=approved`);
+      return request('GET', `/testimonials?limit=${parseInt(limit)}&status=approved`);
     },
 
     async submitTestimonial(data) {
@@ -238,16 +243,16 @@ window.PFREApi = (() => {
   const loans = {
     async applyRequest(data) {
       return request('POST', '/loan-applications', {
-        name:        data.name,
-        phone:       data.phone,
-        email:       data.email,
-        income:      parseInt(data.income),
-        loan_amount: parseInt(data.loanAmount),
-        tenure:      parseInt(data.tenure),
-        property_value: parseInt(data.propertyValue),
-        employment:  data.employment || 'salaried',
-        existing_emis: parseInt(data.existingEmis || 0),
-        page_url:    window.location.href,
+        name:           data.name?.trim(),
+        phone:          data.phone?.trim(),
+        email:          data.email?.trim() || null,
+        income:         Number(data.income) || 0,
+        loan_amount:    Number(data.loanAmount) || 0,
+        tenure:         Number(data.tenure) || 0,
+        property_value: Number(data.propertyValue) || 0,
+        employment:     data.employment || 'salaried',
+        existing_emis:  Number(data.existingEmis) || 0,
+        page_url:       window.location.href,
       });
     },
   };
@@ -256,24 +261,22 @@ window.PFREApi = (() => {
      ANALYTICS
   ══════════════════════════════════════════ */
   const analytics = {
-    /** Track page view */
-    async trackView(data) {
+    async trackView(data = {}) {
       if (!FEAT().ANALYTICS) return;
       try {
         return await request('POST', '/analytics/pageview', {
-          page:      data.page || window.location.pathname,
-          title:     document.title,
-          referrer:  document.referrer || null,
-          ip:        data.ip || null,
-          location:  data.location || null,
-          device:    data.device || null,
-          session_id:data.sessionId || null,
-          utm:       data.utm || null,
+          page:       data.page || window.location.pathname,
+          title:      document.title,
+          referrer:   document.referrer || null,
+          ip:         data.ip || null,
+          location:   data.location || null,
+          device:     data.device || null,
+          session_id: data.sessionId || null,
+          utm:        data.utm || null,
         });
-      } catch { /* Never break page for analytics */ }
+      } catch {}
     },
 
-    /** Track custom event */
     async trackEvent(category, action, label = '', value = 0) {
       if (!FEAT().ANALYTICS) return;
       try {
@@ -298,19 +301,17 @@ window.PFREApi = (() => {
   };
 
   /* ══════════════════════════════════════════
-     CRM (Authenticated — requires login)
+     CRM (Authenticated)
   ══════════════════════════════════════════ */
   const crm = {
-
-    /** Login to Omni Platform */
     async login(email, password) {
       const res = await request('POST', '/auth/login', { email, password, source: 'website' });
-      if (res.token) Auth.setToken(res.token);
+      if (res?.token) Auth.setToken(res.token);
       return res;
     },
 
     async logout() {
-      try { await request('POST', '/auth/logout', null, true); } catch {}
+      try { await request('POST', '/auth/logout', {}, true); } catch {}
       Auth.clearToken();
     },
 
@@ -318,27 +319,24 @@ window.PFREApi = (() => {
       return request('GET', '/auth/me', null, true);
     },
 
-    /** Get all leads (paginated) */
     async getLeads(params = {}) {
-      const q = new URLSearchParams({
-        stage:    params.stage    || '',
-        source:   params.source   || '',
-        search:   params.search   || '',
-        sort:     params.sort     || 'latest',
-        per_page: params.perPage  || 25,
-        page:     params.page     || 1,
-      }).toString();
-      return request('GET', `/crm/leads?${q}`, null, true);
+      const q = buildQuery({
+        stage:    params.stage,
+        source:   params.source,
+        search:   params.search,
+        sort:     params.sort || 'latest',
+        per_page: params.perPage || 25,
+        page:     params.page || 1,
+      });
+      return request('GET', `/crm/leads${q}`, null, true);
     },
 
-    /** Update lead stage */
     async updateLead(id, data) {
-      return request('PATCH', `/crm/leads/${id}`, data, true);
+      return request('PATCH', `/crm/leads/${encodeURIComponent(id)}`, data, true);
     },
 
-    /** Log activity against a lead */
     async logActivity(leadId, data) {
-      return request('POST', `/crm/leads/${leadId}/activities`, {
+      return request('POST', `/crm/leads/${encodeURIComponent(leadId)}/activities`, {
         type:        data.type,
         notes:       data.notes,
         outcome:     data.outcome,
@@ -347,17 +345,14 @@ window.PFREApi = (() => {
       }, true);
     },
 
-    /** Get today's follow-ups */
     async getTodayFollowups() {
       return request('GET', '/crm/followups/today', null, true);
     },
 
-    /** Get pipeline stats */
     async getPipelineStats() {
       return request('GET', '/crm/stats/pipeline', null, true);
     },
 
-    /** Sync local CRM leads to backend */
     async syncLocalLeads(localLeads) {
       if (!FEAT().CRM_SYNC || !Auth.isLoggedIn()) return { synced: 0 };
       return request('POST', '/crm/sync', { leads: localLeads }, true);
@@ -365,7 +360,7 @@ window.PFREApi = (() => {
   };
 
   /* ══════════════════════════════════════════
-     REMINDERS (sync with Omni Platform)
+     REMINDERS
   ══════════════════════════════════════════ */
   const reminders = {
     async list() {
@@ -375,10 +370,10 @@ window.PFREApi = (() => {
       return request('POST', '/reminders', data, true);
     },
     async update(id, data) {
-      return request('PATCH', `/reminders/${id}`, data, true);
+      return request('PATCH', `/reminders/${encodeURIComponent(id)}`, data, true);
     },
     async delete(id) {
-      return request('DELETE', `/reminders/${id}`, null, true);
+      return request('DELETE', `/reminders/${encodeURIComponent(id)}`, null, true);
     },
     async getToday() {
       return request('GET', '/reminders/today', null, true);
@@ -401,50 +396,59 @@ window.PFREApi = (() => {
 
   /* ══════════════════════════════════════════
      HELPER: Smart form submission
-     Tries API first, falls back to localStorage
   ══════════════════════════════════════════ */
   async function smartSubmit(formType, data, onSuccess, onError) {
     const toastFn = window.showToast || (() => {});
 
     try {
       let result;
-      if (formType === 'contact')     result = await leads.create({ ...data, source: 'contact_form' });
-      if (formType === 'enquiry')     result = await leads.enquire(data.propertyId, data);
-      if (formType === 'post_prop')   result = await leads.postProperty(data);
-      if (formType === 'loan')        result = await loans.applyRequest(data);
-      if (formType === 'testimonial') result = await content.submitTestimonial(data);
-      if (formType === 'newsletter')  result = await newsletter.subscribe(data.email, data.name);
+      switch (formType) {
+        case 'contact':     result = await leads.create({ ...data, source: 'contact_form' }); break;
+        case 'enquiry':     result = await leads.enquire(data.propertyId, data); break;
+        case 'post_prop':   result = await leads.postProperty(data); break;
+        case 'loan':        result = await loans.applyRequest(data); break;
+        case 'testimonial': result = await content.submitTestimonial(data); break;
+        case 'newsletter':  result = await newsletter.subscribe(data.email, data.name); break;
+        default: throw new Error(`Unknown form submission type: ${formType}`);
+      }
 
-      /* Also save to localStorage as backup */
+      /* Store record backup */
       try {
         const key = `pfre_${formType}_submissions`;
         const saved = JSON.parse(localStorage.getItem(key) || '[]');
         saved.unshift({ ...data, ts: new Date().toISOString(), synced: true, ref: result?.data?.reference });
-        localStorage.setItem(key, JSON.stringify(saved.slice(0,20)));
+        localStorage.setItem(key, JSON.stringify(saved.slice(0, 20)));
       } catch {}
 
       toastFn(`✅ Submitted successfully! Reference: ${result?.data?.reference || 'Received'}`, 'success');
-      if (onSuccess) onSuccess(result);
+      if (typeof onSuccess === 'function') onSuccess(result);
       return result;
 
     } catch (err) {
-      console.warn('[PFRE API] Falling back to localStorage:', err.message);
+      const isOfflineOrNetwork = !navigator.onLine || err.name === 'AbortError' || err.message === 'Failed to fetch';
 
-      /* Fallback: save to localStorage */
-      try {
-        const key = `pfre_${formType}_submissions`;
-        const saved = JSON.parse(localStorage.getItem(key) || '[]');
-        saved.unshift({ ...data, ts: new Date().toISOString(), synced: false, error: err.message });
-        localStorage.setItem(key, JSON.stringify(saved.slice(0,20)));
-      } catch {}
+      if (isOfflineOrNetwork) {
+        console.warn('[PFRE API] Offline/network failure. Storing locally:', err.message);
+        try {
+          const key = `pfre_${formType}_submissions`;
+          const saved = JSON.parse(localStorage.getItem(key) || '[]');
+          saved.unshift({ ...data, ts: new Date().toISOString(), synced: false, error: err.message });
+          localStorage.setItem(key, JSON.stringify(saved.slice(0, 20)));
+        } catch {}
 
-      /* Still show success to user (data is saved locally for manual sync) */
-      toastFn('✅ Request received! We will contact you within 2 hours.', 'success');
-      if (onSuccess) onSuccess({ fallback: true });
+        toastFn('✅ Connection offline. Request saved and will sync automatically!', 'info');
+        if (typeof onSuccess === 'function') onSuccess({ fallback: true });
+        return { fallback: true };
+      }
+
+      /* Validation / 4xx / 5xx server rejection */
+      console.error('[PFRE API] Submission error:', err.message);
+      toastFn(`❌ Submission failed: ${err.message}`, 'error');
+      if (typeof onError === 'function') onError(err);
+      throw err;
     }
   }
 
-  /* Public API */
   return {
     leads, properties, content, loans, analytics,
     newsletter, crm, reminders, health,
@@ -453,35 +457,50 @@ window.PFREApi = (() => {
     request,
     isConfigured: () => BASE().length > 0 && KEY() !== 'pfre_ws_key_2026_change_me',
   };
-
 })();
 
-/* ── Auto-configure contact forms ── */
+/* ── DOM Bindings ── */
 document.addEventListener('DOMContentLoaded', () => {
-  /* Patch contact form if PFREApi is available */
   const contactForm = document.querySelector('#contactForm');
   if (contactForm && window.PFREApi) {
-    const submitBtn = contactForm.querySelector('button[type=submit], .submit-btn');
-    if (submitBtn && !submitBtn.dataset.apiPatched) {
-      submitBtn.dataset.apiPatched = 'true';
-      submitBtn.addEventListener('click', async (e) => {
-        e.preventDefault();
-        const name  = contactForm.querySelector('input[type=text]')?.value?.trim();
-        const phone = contactForm.querySelector('input[type=tel]')?.value?.trim();
-        const email = contactForm.querySelector('input[type=email]')?.value?.trim();
-        const msg   = contactForm.querySelector('textarea')?.value?.trim();
-        if (!name || !phone) return;
+    contactForm.addEventListener('submit', async (e) => {
+      e.preventDefault();
+
+      const nameInput  = contactForm.querySelector('[name="name"], input[type="text"]');
+      const phoneInput = contactForm.querySelector('[name="phone"], input[type="tel"]');
+      const emailInput = contactForm.querySelector('[name="email"], input[type="email"]');
+      const msgInput   = contactForm.querySelector('[name="message"], textarea');
+      const submitBtn  = contactForm.querySelector('button[type="submit"], .submit-btn');
+
+      const name  = nameInput?.value.trim();
+      const phone = phoneInput?.value.trim();
+      const email = emailInput?.value.trim();
+      const msg   = msgInput?.value.trim();
+
+      if (!name || !phone) return;
+
+      const originalBtnText = submitBtn ? submitBtn.textContent : '';
+      if (submitBtn) {
         submitBtn.disabled = true;
         submitBtn.textContent = '⏳ Sending…';
+      }
+
+      try {
         await window.PFREApi.smartSubmit('contact', { name, phone, email, message: msg });
-        submitBtn.disabled = false;
-        submitBtn.textContent = '📤 Send Enquiry';
-      });
-    }
+        contactForm.reset();
+      } catch (err) {
+        // Error handling handled by smartSubmit toast
+      } finally {
+        if (submitBtn) {
+          submitBtn.disabled = false;
+          submitBtn.textContent = originalBtnText;
+        }
+      }
+    });
   }
 
-  /* Health check on load (silent) */
-  if (window.PFREApi && window.PFRE_CONFIG?.FEATURES?.ANALYTICS) {
+  /* Silent backend ping when configured */
+  if (window.PFREApi?.isConfigured()) {
     window.PFREApi.health.ping().catch(() => {});
   }
 });
