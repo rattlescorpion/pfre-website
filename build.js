@@ -1,6 +1,6 @@
 #!/usr/bin/env node
 /**
- * PFRE Website — Production Build Script v2.0
+ * Property Finder Real Estate Website — Production Build Script v2.0
  * Minifies CSS + JS, updates asset references, and outputs to dist/
  *
  * Usage:
