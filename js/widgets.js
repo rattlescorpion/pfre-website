@@ -1,35 +1,22 @@
-
 /* =====================================================
-   PROPERTY FINDER RE — Optimized Global JS v3.1
-   Production-Ready · Code-Review Applied
-   All widgets consolidated · No shared.js needed
-
-   NOTE: Theme management lives exclusively in js/theme.js
-   (loaded standalone, first script in <head>). Do not
-   re-add theme logic here — a duplicate PFRETheme IIFE
-   and a second inline toggle handler previously caused
-   THREE competing click listeners on #themeToggle, which
-   made the toggle flicker / require multiple clicks to
-   take visible effect. Removed in v3.1.
+   PROPERTY FINDER RE — Unified Interactive Widgets v3.2
+   Chat Assistant · Toast Engine · Compare Bar · Lightbox
+   Calculators · PWA Prompt · Cookie Manager · Scroll UI
    ===================================================== */
 (() => {
   'use strict';
 
-  /* ─── UTILITIES ─── */
+  /* ── 1. DOM & UTILITY HELPERS ── */
   const qs  = (sel, ctx = document) => ctx.querySelector(sel);
   const qsa = (sel, ctx = document) => [...ctx.querySelectorAll(sel)];
 
-  /* Safe localStorage wrapper — handles private browsing */
   const store = {
-    get(k)    { try { return localStorage.getItem(k); }        catch { return null; } },
-    set(k, v) { try { localStorage.setItem(k, v); }            catch { /* noop */ } },
-    getJSON(k){ try { return JSON.parse(localStorage.getItem(k) || 'null'); } catch { return null; } },
-    setJSON(k,v){ try { localStorage.setItem(k, JSON.stringify(v)); } catch { /* noop */ } }
+    get(k)     { try { return localStorage.getItem(k); } catch { return null; } },
+    set(k, v)  { try { localStorage.setItem(k, v); } catch { /* noop */ } },
+    getJSON(k) { try { return JSON.parse(localStorage.getItem(k) || 'null'); } catch { return null; } },
+    setJSON(k, v) { try { localStorage.setItem(k, JSON.stringify(v)); } catch { /* noop */ } }
   };
 
-  /* HTML-escape any value before interpolating it into innerHTML.
-     Prefers window.safeHTML (security.js) when present, falls back
-     to a local DOM-based escape so this never hard-depends on load order. */
   const esc = (val) => {
     const str = String(val ?? '');
     if (typeof window.safeHTML === 'function') return window.safeHTML(str);
@@ -38,447 +25,685 @@
     return d.innerHTML;
   };
 
-  /* Throttle — prevent scroll handler CPU overload */
   const throttle = (fn, ms = 100) => {
     let t = 0;
-    return (...a) => { const n = Date.now(); if (n - t >= ms) { t = n; fn(...a); } };
+    return (...a) => {
+      const n = Date.now();
+      if (n - t >= ms) {
+        t = n;
+        fn(...a);
+      }
+    };
   };
 
-  /* Prefers-reduced-motion check */
-  const noMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const noMotion = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
-  /* Theme toggle handling lives in js/theme.js — intentionally not duplicated here */
-
-  /* ─── MOBILE HAMBURGER ─── */
-  const ham = qs('#hamburger');
-  const mob = qs('#mobileMenu');
-  if (ham && mob) {
-    ham.setAttribute('aria-label', 'Toggle navigation');
-    ham.setAttribute('aria-expanded', 'false');
-    ham.setAttribute('role', 'button');
-    ham.addEventListener('click', () => {
-      const open = mob.classList.toggle('open');
-      ham.setAttribute('aria-expanded', String(open));
-      document.body.style.overflow = open ? 'hidden' : '';
-      const spans = qsa('span', ham);
-      if (spans.length >= 3) {
-        spans[0].style.transform = open ? 'rotate(45deg) translate(5px,5px)' : '';
-        spans[1].style.opacity   = open ? '0' : '1';
-        spans[2].style.transform = open ? 'rotate(-45deg) translate(5px,-5px)' : '';
-      }
-    });
-    /* Close on link click */
-    qsa('a', mob).forEach(a => a.addEventListener('click', () => {
-      mob.classList.remove('open');
-      ham.setAttribute('aria-expanded', 'false');
-      document.body.style.overflow = '';
-    }));
-    /* Close on Escape key */
-    document.addEventListener('keydown', e => {
-      if (e.key === 'Escape' && mob.classList.contains('open')) {
-        mob.classList.remove('open');
-        ham.setAttribute('aria-expanded', 'false');
-        document.body.style.overflow = '';
-      }
-    });
-  }
-
-  /* ─── PAGE PROGRESS BAR ─── */
-  const progressBar = qs('#progressBar');
-  if (progressBar) {
-    const updateBar = throttle(() => {
-      const h = document.documentElement.scrollHeight - window.innerHeight;
-      progressBar.style.width = h > 0 ? Math.min((window.scrollY / h) * 100, 100) + '%' : '0%';
-    }, 16);
-    window.addEventListener('scroll', updateBar, { passive: true });
-  }
-
-  /* ─── BACK TO TOP ─── */
-  const btt = qs('#backToTop');
-  if (btt) {
-    btt.setAttribute('aria-label', 'Back to top');
-    const toggleBTT = throttle(() => btt.classList.toggle('visible', window.scrollY > 400), 100);
-    window.addEventListener('scroll', toggleBTT, { passive: true });
-    btt.addEventListener('click', () => window.scrollTo({ top: 0, behavior: 'smooth' }));
-  }
-
-  /* ─── SCROLL REVEAL ─── */
-  const revEls = qsa('.reveal');
-  if (revEls.length) {
-    if (noMotion) {
-      revEls.forEach(el => el.classList.add('revealed'));
-    } else {
-      const obs = new IntersectionObserver((entries) => {
-        entries.forEach((e, i) => {
-          if (e.isIntersecting) {
-            setTimeout(() => e.target.classList.add('revealed'), i * 75);
-            obs.unobserve(e.target);
-          }
-        });
-      }, { threshold: 0.08 });
-      revEls.forEach(el => obs.observe(el));
-    }
-  }
-
-  /* ─── TOAST NOTIFICATIONS ─── */
-  window.showToast = (msg, type = '', dur = 3500) => {
+  /* ══════════════════════════════════════════════
+     2. UNIFIED TOAST ENGINE (window.showToast)
+  ═══════════════════════════════════════════════ */
+  window.showToast = (msg, type = 'info', dur = 3500) => {
     let box = qs('#toastContainer');
     if (!box) {
       box = document.createElement('div');
       box.id = 'toastContainer';
-      box.style.cssText = 'position:fixed;top:90px;right:20px;z-index:1100;display:flex;flex-direction:column;gap:10px;pointer-events:none';
+      box.style.cssText = 'position:fixed;top:90px;right:20px;z-index:9999;display:flex;flex-direction:column;gap:10px;pointer-events:none;';
       document.body.appendChild(box);
     }
-    const icons = { success: '✅', error: '❌', '': 'ℹ️' };
+
+    const icons = { success: '✅', error: '❌', info: 'ℹ️', warning: '⚠️' };
+    const normalizedType = type === '' ? 'info' : type;
+
     const t = document.createElement('div');
-    t.className = `toast ${type}`;
-    t.innerHTML = `<span class="toast-icon">${icons[type] || 'ℹ️'}</span><span class="toast-msg">${esc(msg)}</span><button class="toast-close" aria-label="Close">×</button>`;
-    t.style.cssText = 'background:white;border-left:4px solid #2563EB;border-radius:10px;padding:14px 18px;box-shadow:0 8px 28px rgba(0,0,0,.12);font-size:14px;color:#111827;max-width:300px;display:flex;align-items:flex-start;gap:10px;pointer-events:auto;animation:toastIn .35s ease';
-    if (type === 'success') t.style.borderLeftColor = '#10B981';
-    if (type === 'error') t.style.borderLeftColor = '#EF4444';
+    t.className = `pfre-toast toast ${normalizedType}`;
+    t.style.cssText = 'background:#ffffff;border-left:4px solid #2563EB;border-radius:10px;padding:12px 18px;box-shadow:0 8px 24px rgba(0,0,0,.15);font-size:14px;color:#0F172A;max-width:320px;display:flex;align-items:flex-start;gap:10px;pointer-events:auto;animation:toastIn .3s ease;transition:all .3s ease;';
+
+    if (normalizedType === 'success') t.style.borderLeftColor = '#10B981';
+    if (normalizedType === 'error')   t.style.borderLeftColor = '#EF4444';
+    if (normalizedType === 'warning') t.style.borderLeftColor = '#F59E0B';
+
+    t.innerHTML = `
+      <span class="toast-icon">${icons[normalizedType] || 'ℹ️'}</span>
+      <span class="toast-msg" style="flex:1;line-height:1.4">${esc(msg)}</span>
+      <button class="toast-close" aria-label="Close" style="background:none;border:none;cursor:pointer;font-size:18px;color:#94A3B8;padding:0;line-height:1">&times;</button>
+    `;
+
     box.appendChild(t);
-    t.querySelector('.toast-close').addEventListener('click', () => t.remove());
-    setTimeout(() => { t.style.opacity = '0'; t.style.transform = 'translateX(20px)'; t.style.transition = 'all .3s'; setTimeout(() => t.remove(), 300); }, dur);
+
+    const close = () => {
+      t.style.opacity = '0';
+      t.style.transform = 'translateX(20px)';
+      setTimeout(() => t.remove(), 300);
+    };
+
+    t.querySelector('.toast-close').addEventListener('click', close);
+    setTimeout(close, dur);
   };
 
-  /* ─── FAVOURITE TOGGLE ─── */
-  qsa('.prop-fav').forEach(btn => {
-    btn.setAttribute('aria-label', 'Add to wishlist');
-    btn.addEventListener('click', e => {
+  /* ══════════════════════════════════════════════
+     3. SCROLL PROGRESS BAR & BACK TO TOP
+  ═══════════════════════════════════════════════ */
+  function initScrollWidgets() {
+    const bar = qs('#progressBar');
+    const btt = qs('#backToTop');
+    const stickyBar = qs('#stickyEnquiry');
+
+    const onScroll = throttle(() => {
+      const scrollY = window.scrollY || document.documentElement.scrollTop;
+      const h = document.documentElement.scrollHeight - window.innerHeight;
+
+      if (bar) {
+        bar.style.width = h > 0 ? Math.min((scrollY / h) * 100, 100) + '%' : '0%';
+      }
+      if (btt) {
+        btt.classList.toggle('visible', scrollY > 380);
+      }
+      if (stickyBar) {
+        stickyBar.classList.toggle('show', scrollY > 600);
+      }
+    }, 20);
+
+    window.addEventListener('scroll', onScroll, { passive: true });
+
+    if (btt) {
+      btt.setAttribute('aria-label', 'Back to top');
+      btt.addEventListener('click', () => window.scrollTo({ top: 0, behavior: 'smooth' }));
+    }
+  }
+
+  /* ══════════════════════════════════════════════
+     4. MOBILE NAVIGATION & HAMBURGER
+  ═══════════════════════════════════════════════ */
+  function initMobileMenu() {
+    const ham = qs('#hamburger');
+    const mob = qs('#mobileMenu');
+    if (!ham || !mob) return;
+
+    ham.setAttribute('aria-label', 'Toggle navigation');
+    ham.setAttribute('aria-expanded', 'false');
+    ham.setAttribute('role', 'button');
+
+    const toggle = (forceClose = false) => {
+      const open = forceClose ? false : !mob.classList.contains('open');
+      ham.classList.toggle('active', open);
+      mob.classList.toggle('open', open);
+      ham.setAttribute('aria-expanded', String(open));
+      document.body.style.overflow = open ? 'hidden' : '';
+
+      const spans = qsa('span', ham);
+      if (spans.length >= 3) {
+        spans[0].style.transform = open ? 'rotate(45deg) translate(5px, 5px)' : '';
+        spans[1].style.opacity   = open ? '0' : '1';
+        spans[2].style.transform = open ? 'rotate(-45deg) translate(5px, -5px)' : '';
+      }
+    };
+
+    ham.addEventListener('click', (e) => {
       e.stopPropagation();
-      const active = btn.dataset.active === 'true';
-      btn.dataset.active = !active;
-      btn.textContent = active ? '🤍' : '❤️';
-      btn.setAttribute('aria-pressed', String(!active));
-      showToast(active ? '🤍 Removed from wishlist' : '❤️ Added to wishlist!', active ? '' : 'success');
+      toggle();
     });
-  });
 
-  /* ─── FILTER & SEARCH TABS ─── */
-  qsa('.filter-tab').forEach(tab => {
-    tab.addEventListener('click', () => {
-      const parent = tab.closest('.filter-tabs');
-      if (!parent) return;
-      qsa('.filter-tab', parent).forEach(t => { t.classList.remove('active'); t.setAttribute('aria-selected','false'); });
-      tab.classList.add('active'); tab.setAttribute('aria-selected','true');
+    qsa('a', mob).forEach(link => {
+      link.addEventListener('click', () => toggle(true));
     });
-  });
-  qsa('.search-tab').forEach(tab => {
-    tab.addEventListener('click', () => {
-      qsa('.search-tab').forEach(t => t.classList.remove('active'));
-      tab.classList.add('active');
-    });
-  });
 
-  /* ─── COMPARISON BAR ─── */
-  let compareList = store.getJSON('pfre_compare') || [];
-  window.addToCompare = (name, price) => {
-    if (compareList.length >= 3) { showToast('⚠️ Max 3 properties', 'error'); return; }
-    if (compareList.find(p => p.name === name)) { showToast('Already in comparison', ''); return; }
-    compareList.push({ name, price });
-    store.setJSON('pfre_compare', compareList);
-    updateCompareBar(); showToast(`✅ "${name}" added to comparison`, 'success');
-  };
-  window.removeFromCompare = idx => {
-    compareList.splice(idx, 1); store.setJSON('pfre_compare', compareList); updateCompareBar();
-  };
-  function updateCompareBar() {
-    const bar = qs('#compareBar'); if (!bar) return;
-    bar.classList.toggle('show', compareList.length > 0);
-    qsa('.compare-slot', bar).forEach((slot, i) => {
-      if (compareList[i]) {
-        slot.classList.add('filled');
-        slot.innerHTML = `<span>${esc(compareList[i].name)}</span><button class="remove-slot" onclick="removeFromCompare(${i})" aria-label="Remove">×</button>`;
-      } else { slot.classList.remove('filled'); slot.innerHTML = '+ Add Property'; }
+    document.addEventListener('click', (e) => {
+      if (mob.classList.contains('open') && !mob.contains(e.target) && !ham.contains(e.target)) {
+        toggle(true);
+      }
+    });
+
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape' && mob.classList.contains('open')) {
+        toggle(true);
+      }
     });
   }
-  updateCompareBar();
-  /* Clear compare bar */
-  qs('#compareBar .compare-btn.secondary')?.addEventListener('click', () => {
-    compareList = []; store.setJSON('pfre_compare', []); updateCompareBar();
-  });
 
-  /* ─── LIGHTBOX ─── */
+  /* ══════════════════════════════════════════════
+     5. SCROLL REVEAL OBSERVER
+  ═══════════════════════════════════════════════ */
+  function initScrollReveal() {
+    const revEls = qsa('.reveal');
+    if (!revEls.length) return;
+
+    if (noMotion) {
+      revEls.forEach(el => el.classList.add('revealed'));
+      return;
+    }
+
+    const obs = new IntersectionObserver((entries) => {
+      entries.forEach((e, i) => {
+        if (e.isIntersecting) {
+          setTimeout(() => e.target.classList.add('revealed'), i * 60);
+          obs.unobserve(e.target);
+        }
+      });
+    }, { threshold: 0.08 });
+
+    revEls.forEach(el => obs.observe(el));
+  }
+
+  /* ══════════════════════════════════════════════
+     6. FAVORITE TOGGLE (WISHLIST)
+  ═══════════════════════════════════════════════ */
+  function initWishlist() {
+    qsa('.prop-fav').forEach(btn => {
+      btn.setAttribute('aria-label', 'Add to wishlist');
+      btn.addEventListener('click', (e) => {
+        e.stopPropagation();
+        e.preventDefault();
+        const active = btn.dataset.active === 'true';
+        btn.dataset.active = String(!active);
+        btn.textContent = active ? '🤍' : '❤️';
+        btn.setAttribute('aria-pressed', String(!active));
+        window.showToast(active ? '🤍 Removed from wishlist' : '❤️ Saved to wishlist!', active ? 'info' : 'success');
+      });
+    });
+  }
+
+  /* ══════════════════════════════════════════════
+     7. PROPERTY COMPARISON BAR (DUAL-API SUPPORT)
+  ═══════════════════════════════════════════════ */
+  let compareList = store.getJSON('pfre_compare') || [];
+
+  function updateCompareUI() {
+    const bar = qs('#compareBar');
+    if (!bar) return;
+
+    bar.classList.toggle('show', compareList.length > 0);
+    const slots = qsa('.compare-slot', bar);
+
+    slots.forEach((slot, i) => {
+      const item = compareList[i];
+      if (item) {
+        slot.classList.add('filled');
+        slot.innerHTML = `
+          <span style="overflow:hidden;text-overflow:ellipsis;white-space:nowrap">${esc(item.name || 'Property')}</span>
+          <button class="remove-slot" onclick="window.removeFromCompare(${i})" aria-label="Remove" style="background:none;border:none;cursor:pointer;margin-left:6px;font-size:16px;color:#EF4444">&times;</button>
+        `;
+      } else {
+        slot.classList.remove('filled');
+        slot.innerHTML = '+ Add Property';
+      }
+    });
+  }
+
+  window.addToCompare = (nameOrObj, price = '') => {
+    if (compareList.length >= 3) {
+      window.showToast('⚠️ Maximum 3 properties can be compared.', 'warning');
+      return;
+    }
+
+    const item = typeof nameOrObj === 'object' && nameOrObj !== null
+      ? { id: nameOrObj.id || String(Date.now()), name: nameOrObj.name || 'Property', price: nameOrObj.price || '' }
+      : { id: String(Date.now()), name: String(nameOrObj), price: String(price) };
+
+    if (compareList.some(p => p.name === item.name || (item.id && p.id === item.id))) {
+      window.showToast('Already added to comparison.', 'info');
+      return;
+    }
+
+    compareList.push(item);
+    store.setJSON('pfre_compare', compareList);
+    updateCompareUI();
+    window.showToast(`✅ "${item.name}" added to comparison`, 'success');
+  };
+
+  window.removeFromCompare = (idxOrId) => {
+    if (typeof idxOrId === 'number') {
+      compareList.splice(idxOrId, 1);
+    } else {
+      compareList = compareList.filter(p => p.id !== idxOrId);
+    }
+    store.setJSON('pfre_compare', compareList);
+    updateCompareUI();
+  };
+
+  window.clearCompare = () => {
+    compareList = [];
+    store.setJSON('pfre_compare', []);
+    updateCompareUI();
+  };
+
+  window.PFRECompare = {
+    items: compareList,
+    add: (prop) => window.addToCompare(prop),
+    remove: (id) => window.removeFromCompare(id),
+    clear: () => window.clearCompare(),
+    render: updateCompareUI
+  };
+
+  function initCompareEvents() {
+    updateCompareUI();
+    qs('#compareBar .compare-btn.secondary')?.addEventListener('click', window.clearCompare);
+    qs('#compareBar .compare-btn.primary')?.addEventListener('click', () => {
+      window.location.href = 'compare.html';
+    });
+  }
+
+  /* ══════════════════════════════════════════════
+     8. IMAGE LIGHTBOX
+  ═══════════════════════════════════════════════ */
   let lbImgs = [], lbIdx = 0;
+
+  function renderLightbox() {
+    const imgEl = qs('#lbImage');
+    const ctrEl = qs('#lbCounter');
+    if (!lbImgs.length) return;
+
+    if (imgEl) {
+      const src = lbImgs[lbIdx];
+      if (src && (src.startsWith('http') || src.startsWith('images/') || src.endsWith('.jpg') || src.endsWith('.png'))) {
+        imgEl.innerHTML = `<img src="${esc(src)}" alt="Property view" style="max-width:100%;max-height:80vh;border-radius:12px;object-fit:contain">`;
+      } else {
+        imgEl.textContent = src || '🏠';
+      }
+    }
+    if (ctrEl) ctrEl.textContent = `${lbIdx + 1} / ${lbImgs.length}`;
+  }
+
   window.openLightbox = (imgs, idx = 0) => {
-    lbImgs = imgs; lbIdx = idx;
-    const lb = qs('#lightbox'); if (!lb) return;
-    lb.classList.add('open'); renderLightbox();
+    lbImgs = Array.isArray(imgs) ? imgs : [imgs];
+    lbIdx = Math.max(0, Math.min(idx, lbImgs.length - 1));
+    const lb = qs('#lightbox');
+    if (!lb) return;
+
+    lb.classList.add('open');
+    renderLightbox();
     document.body.style.overflow = 'hidden';
     lb.setAttribute('aria-hidden', 'false');
   };
+
   window.closeLightbox = () => {
-    const lb = qs('#lightbox'); if (!lb) return;
-    lb.classList.remove('open'); document.body.style.overflow = '';
+    const lb = qs('#lightbox');
+    if (!lb) return;
+    lb.classList.remove('open');
+    document.body.style.overflow = '';
     lb.setAttribute('aria-hidden', 'true');
   };
-  function renderLightbox() {
-    const img = qs('#lbImage'), ctr = qs('#lbCounter');
-    if (img) img.textContent = lbImgs[lbIdx] || '🏠';
-    if (ctr) ctr.textContent = `${lbIdx + 1} / ${lbImgs.length}`;
-  }
-  qs('#lbPrev')?.addEventListener('click', () => { lbIdx = (lbIdx - 1 + lbImgs.length) % lbImgs.length; renderLightbox(); });
-  qs('#lbNext')?.addEventListener('click', () => { lbIdx = (lbIdx + 1) % lbImgs.length; renderLightbox(); });
-  qs('#lbClose')?.addEventListener('click', closeLightbox);
-  qs('#lightbox')?.addEventListener('click', e => { if (e.target.id === 'lightbox') closeLightbox(); });
-  document.addEventListener('keydown', e => {
-    const lb = qs('#lightbox');
-    if (!lb?.classList.contains('open')) return;
-    if (e.key === 'Escape') closeLightbox();
-    if (e.key === 'ArrowLeft') { lbIdx = (lbIdx - 1 + lbImgs.length) % lbImgs.length; renderLightbox(); }
-    if (e.key === 'ArrowRight') { lbIdx = (lbIdx + 1) % lbImgs.length; renderLightbox(); }
-  });
 
-  /* ─── STICKY ENQUIRY BAR ─── */
-  const stickyBar = qs('#stickyEnquiry');
-  if (stickyBar) {
-    const toggleSticky = throttle(() => stickyBar.classList.toggle('show', window.scrollY > 600), 100);
-    window.addEventListener('scroll', toggleSticky, { passive: true });
-  }
-
-  /* ─── SEARCH SUGGESTIONS ─── */
-  const SUGGESTIONS = ['Malad West','Malad East','Goregaon West','Goregaon East','Andheri West','Andheri East','Borivali West','Borivali East','Kandivali','Dahisar','Mira Road','Bandra','2 BHK Flat','3 BHK Apartment','Commercial Office','Plot / Land','Row House'];
-  qsa('.search-input-wrap input').forEach(inp => {
-    const wrap = inp.closest('.search-input-wrap');
-    if (!wrap) return;
-    let sugBox = document.createElement('div');
-    sugBox.className = 'search-suggestions';
-    wrap.style.position = 'relative';
-    wrap.appendChild(sugBox);
-    inp.setAttribute('autocomplete', 'off');
-    inp.addEventListener('input', () => {
-      const q = inp.value.toLowerCase().trim();
-      if (!q) { sugBox.classList.remove('open'); return; }
-      const hits = SUGGESTIONS.filter(s => s.toLowerCase().includes(q)).slice(0, 6);
-      if (!hits.length) { sugBox.classList.remove('open'); return; }
-      sugBox.innerHTML = hits.map(s => `<div class="suggestion-item" role="option" tabindex="0"><span class="sug-icon">📍</span><span>${esc(s)}</span></div>`).join('');
-      sugBox.querySelectorAll('.suggestion-item').forEach(el => {
-        el.addEventListener('click', () => { inp.value = el.querySelector('span:last-child').textContent; sugBox.classList.remove('open'); });
-        el.addEventListener('keydown', e => { if (e.key === 'Enter') el.click(); });
-      });
-      sugBox.classList.add('open');
+  function initLightboxEvents() {
+    qs('#lbPrev')?.addEventListener('click', () => {
+      lbIdx = (lbIdx - 1 + lbImgs.length) % lbImgs.length;
+      renderLightbox();
     });
-    document.addEventListener('click', e => { if (!wrap.contains(e.target)) sugBox.classList.remove('open'); });
-  });
+    qs('#lbNext')?.addEventListener('click', () => {
+      lbIdx = (lbIdx + 1) % lbImgs.length;
+      renderLightbox();
+    });
+    qs('#lbClose')?.addEventListener('click', window.closeLightbox);
 
-  /* ─── PWA INSTALL PROMPT ─── */
-  let deferredPrompt;
-  window.addEventListener('beforeinstallprompt', e => {
-    e.preventDefault(); deferredPrompt = e;
-    setTimeout(() => qs('#pwaInstall')?.classList.add('show'), 5000);
-  });
-  qs('#pwaInstallBtn')?.addEventListener('click', async () => {
-    qs('#pwaInstall')?.classList.remove('show');
-    if (deferredPrompt) {
-      deferredPrompt.prompt();
-      const { outcome } = await deferredPrompt.userChoice;
-      deferredPrompt = null;
-      if (outcome === 'accepted') showToast('🎉 App installed!', 'success');
+    qs('#lightbox')?.addEventListener('click', (e) => {
+      if (e.target.id === 'lightbox') window.closeLightbox();
+    });
+
+    document.addEventListener('keydown', (e) => {
+      const lb = qs('#lightbox');
+      if (!lb?.classList.contains('open')) return;
+      if (e.key === 'Escape') window.closeLightbox();
+      if (e.key === 'ArrowLeft') {
+        lbIdx = (lbIdx - 1 + lbImgs.length) % lbImgs.length;
+        renderLightbox();
+      }
+      if (e.key === 'ArrowRight') {
+        lbIdx = (lbIdx + 1) % lbImgs.length;
+        renderLightbox();
+      }
+    });
+  }
+
+  /* ══════════════════════════════════════════════
+     9. SEARCH SUGGESTIONS
+  ═══════════════════════════════════════════════ */
+  const SUGGESTIONS = [
+    'Malad West', 'Malad East', 'Goregaon West', 'Goregaon East',
+    'Andheri West', 'Andheri East', 'Borivali West', 'Borivali East',
+    'Kandivali', 'Dahisar', 'Mira Road', 'Bandra',
+    '1 BHK Flat', '2 BHK Flat', '3 BHK Apartment',
+    'Commercial Office', 'Plot / Land', 'Row House'
+  ];
+
+  function initSearchSuggestions() {
+    qsa('.search-input-wrap input').forEach(inp => {
+      const wrap = inp.closest('.search-input-wrap');
+      if (!wrap || wrap.querySelector('.search-suggestions')) return;
+
+      const sugBox = document.createElement('div');
+      sugBox.className = 'search-suggestions';
+      wrap.style.position = 'relative';
+      wrap.appendChild(sugBox);
+      inp.setAttribute('autocomplete', 'off');
+
+      inp.addEventListener('input', () => {
+        const q = inp.value.toLowerCase().trim();
+        if (!q) {
+          sugBox.classList.remove('open');
+          return;
+        }
+
+        const hits = SUGGESTIONS.filter(s => s.toLowerCase().includes(q)).slice(0, 6);
+        if (!hits.length) {
+          sugBox.classList.remove('open');
+          return;
+        }
+
+        sugBox.innerHTML = hits.map(s => `
+          <div class="suggestion-item" role="option" tabindex="0" style="padding:8px 12px;cursor:pointer;display:flex;align-items:center;gap:8px">
+            <span class="sug-icon">📍</span><span>${esc(s)}</span>
+          </div>
+        `).join('');
+
+        sugBox.querySelectorAll('.suggestion-item').forEach(el => {
+          const selectItem = () => {
+            inp.value = el.querySelector('span:last-child').textContent;
+            sugBox.classList.remove('open');
+            inp.dispatchEvent(new Event('input', { bubbles: true }));
+          };
+          el.addEventListener('click', selectItem);
+          el.addEventListener('keydown', (e) => {
+            if (e.key === 'Enter') selectItem();
+          });
+        });
+
+        sugBox.classList.add('open');
+      });
+
+      document.addEventListener('click', (e) => {
+        if (!wrap.contains(e.target)) sugBox.classList.remove('open');
+      });
+    });
+  }
+
+  /* ══════════════════════════════════════════════
+     10. PWA INSTALL PROMPT
+  ═══════════════════════════════════════════════ */
+  function initPWA() {
+    let deferredPrompt = null;
+    const banner = qs('#pwaInstall');
+    const installBtn = qs('#pwaInstallBtn');
+    const dismissBtn = qs('#pwaDismiss');
+
+    window.addEventListener('beforeinstallprompt', (e) => {
+      e.preventDefault();
+      deferredPrompt = e;
+      if (banner && !store.get('pfre_pwa_dismissed')) {
+        setTimeout(() => banner.classList.add('show'), 3500);
+      }
+    });
+
+    if (installBtn) {
+      installBtn.addEventListener('click', async () => {
+        banner?.classList.remove('show');
+        if (deferredPrompt) {
+          deferredPrompt.prompt();
+          const { outcome } = await deferredPrompt.userChoice;
+          deferredPrompt = null;
+          if (outcome === 'accepted') window.showToast('🎉 App installation started!', 'success');
+        }
+      });
     }
-  });
-  qs('#pwaDismiss')?.addEventListener('click', () => qs('#pwaInstall')?.classList.remove('show'));
 
-  /* ─── AI CHATBOT ─── */
-  const chatWidget = qs('#chatWidget');
-  const chatToggle = qs('#chatToggle');
-  const chatClose  = qs('#chatClose');
-  const chatSend   = qs('#chatSend');
-  const chatInput  = qs('#chatInput');
-  const chatBody   = qs('#chatBody');
-  const quickReplies = qs('#quickReplies');
+    if (dismissBtn) {
+      dismissBtn.addEventListener('click', () => {
+        banner?.classList.remove('show');
+        store.set('pfre_pwa_dismissed', 'true');
+      });
+    }
+  }
 
+  /* ══════════════════════════════════════════════
+     11. AI CHAT ASSISTANT
+  ═══════════════════════════════════════════════ */
   const KB = {
-    greeting:     { p:['hi','hello','hey','namaste','hii'],           r:"Namaste! 👋 Welcome to **Property Finder Real Estate** — Mumbai's trusted consultants since 2018.\n\nHow can I help you today?" },
-    buy:          { p:['buy','purchase','want flat','looking to buy'], r:"We have **2,400+ verified properties** for sale across Mumbai.\n\n📍 Areas: Malad West, Goregaon, Andheri, Borivali, Kandivali\n💰 Budget: ₹40L – ₹10Cr+\n\nWhich area and BHK configuration are you looking for?" },
-    rent:         { p:['rent','rental','on rent','tenant'],            r:"We have excellent rental options! 🔑\n\n• 1 BHK: ₹12,000–₹30,000/mo\n• 2 BHK: ₹25,000–₹55,000/mo\n• 3 BHK: ₹45,000–₹90,000/mo\n\nWhich area and budget?" },
-    sell:         { p:['sell','selling','list my property'],           r:"We help sell your property at the **best market price**! 📈\n\n✅ Free valuation\n✅ Professional photography\n✅ 10+ portal listing\n✅ Verified buyer network\n\nCall us at **+91 93269 90050**" },
-    loan:         { p:['loan','home loan','emi','finance'],            r:"We offer **free home loan assistance** with 15+ bank tie-ups! 🏦\n\n• Rates from 8.5% p.a.\n• Up to 80% LTV\n• Quick approval in 3–7 days\n\nCheck our [EMI Calculator](/calculators.html)" },
-    rera:         { p:['rera','maharera','legal','registration'],      r:"RERA guidance included in all our services! ⚖️\n\nWe verify all MahaRERA registrations before recommending any project. Stamp duty: 5% (Male), 4% (Female)." },
-    price:        { p:['price','rate','cost','how much','valuation'], r:"**Mumbai Price Guide 2025:**\n\n• Malad West: ₹15K–₹22K/sq.ft\n• Goregaon: ₹16K–₹26K/sq.ft\n• Andheri: ₹18K–₹35K/sq.ft\n• Borivali: ₹13K–₹20K/sq.ft\n\nNeed a free valuation?" },
-    contact:      { p:['contact','call','phone','address','office'],   r:"**Our Contact Details:**\n\n📍 Shop No. 9, Ground Floor, Building No. 3, Deepanjali CHS, Malad West, Mumbai 400095\n📞 +91 93269 90050\n✉️ propertyfinderre@gmail.com\n\n🕐 Mon–Sat: 10AM–7PM" },
-    nri:          { p:['nri','abroad','dubai','usa','uk'],             r:"We have a **dedicated NRI desk**! 🌍\n\n✅ Virtual property tours\n✅ POA assistance\n✅ FEMA-compliant transactions\n✅ NRI home loans\n\nVisit our [NRI Corner](/nri.html)" },
-    thanks:       { p:['thank','thanks','great','perfect','helpful'],  r:"You're most welcome! 😊\n\nFeel free to ask anything else. We're here 7 days a week!\n\n📞 **+91 93269 90050**" },
-    services:     { p:['service','what do you','what can you'],        r:"**Our Complete Services:**\n\n🏠 Residential Sales & Purchase\n🔑 Rental & Leasing\n🏢 Commercial Properties\n🛡️ Property Management\n💰 Home Loan Assistance\n📊 Property Valuation\n📄 Legal & Documentation\n🗺️ Investment Advisory" },
-    insurance:    { p:['insurance','insure','protect'],                r:"We offer **Property Insurance** assistance! 🛡️\n\n• Home Structure Insurance\n• Contents Insurance\n• Tenant Insurance\n• Commercial Insurance\n\nGet a free quote at [Insurance](/insurance.html)" },
-    tds:          { p:['tds','tax','194','deduct'],                    r:"We have **TDS Calculators** for all property transactions! 📋\n\n• Section 194-IA (Resident Seller)\n• Section 195 (NRI Seller)\n• Section 194-IB (Individual Rent)\n• Section 194-I (Business Rent)\n\nVisit [TDS Calculators](/tds-calculators.html)" }
+    greeting: {
+      p: ['hi', 'hello', 'hey', 'namaste', 'hii', 'start'],
+      r: "Namaste! 👋 Welcome to **Property Finder Real Estate** — Mumbai's trusted consultants since 2018.\n\nHow can I help you today?"
+    },
+    buy: {
+      p: ['buy', 'purchase', 'want flat', 'looking to buy', 'sale'],
+      r: "We have **2,400+ verified properties** for sale across Mumbai.\n\n📍 Areas: Malad West, Goregaon, Andheri, Borivali, Kandivali\n💰 Budget: ₹40L – ₹10Cr+\n\nWhich area and configuration (1, 2, or 3 BHK) are you looking for?"
+    },
+    rent: {
+      p: ['rent', 'rental', 'on rent', 'tenant', 'lease'],
+      r: "We have verified rental listings with police verification support! 🔑\n\n• 1 BHK: ₹15,000–₹30,000/mo\n• 2 BHK: ₹30,000–₹60,000/mo\n• 3 BHK: ₹55,000–₹1,20,000/mo\n\nWhich locality would you prefer?"
+    },
+    sell: {
+      p: ['sell', 'selling', 'list my property', 'post property'],
+      r: "We help owners sell faster at **fair market value**! 📈\n\n✅ Free Property Valuation\n✅ Professional Photography\n✅ Portal Distribution\n✅ End-to-end Legal Support\n\nCall our desk at **+91 93269 90050**"
+    },
+    loan: {
+      p: ['loan', 'home loan', 'emi', 'finance', 'interest'],
+      r: "We provide **Home Loan Assistance** across 15+ partner banks! 🏦\n\n• Competitive interest rates\n• Up to 80-85% LTV\n• Quick sanction in 3–5 working days\n\nUse our Tools > EMI Calculator for quick planning."
+    },
+    rera: {
+      p: ['rera', 'maharera', 'legal', 'registration', 'stamp duty'],
+      r: "Transparency first! ⚖️ Every project we recommend is verified on MahaRERA.\n\nStamp duty guidelines in Maharashtra: 5% for male buyers, 4% for female buyers, plus 1% registration fee."
+    },
+    contact: {
+      p: ['contact', 'call', 'phone', 'address', 'office', 'number'],
+      r: "📍 **Office:** Shop No. 9, Ground Floor, Building No. 3, Deepanjali CHS, Malad West, Mumbai 400095\n📞 **Phone:** +91 93269 90050\n✉️ **Email:** propertyfinderre@gmail.com\n\nOffice hours: 10:00 AM – 7:00 PM (Monday – Saturday)"
+    }
   };
 
-  function fmt(t) { return t.replace(/\*\*(.*?)\*\*/g,'<strong>$1</strong>').replace(/\n/g,'<br>'); }
-  function addMsg(txt, from='bot') {
-    if (!chatBody) return;
-    const now = new Date().toLocaleTimeString([],{hour:'2-digit',minute:'2-digit'});
-    const d = document.createElement('div');
-    d.className = `chat-msg ${from}`;
-    d.innerHTML = `<div class="chat-bubble">${from==='bot'?fmt(txt):esc(txt)}</div><div class="chat-time">${now}</div>`;
-    chatBody.appendChild(d); chatBody.scrollTop = chatBody.scrollHeight;
-  }
-  function showTyping() {
-    const t = document.createElement('div'); t.id='typingIndicator'; t.className='chat-msg bot';
-    t.innerHTML='<div class="chat-typing"><span></span><span></span><span></span></div>';
-    chatBody.appendChild(t); chatBody.scrollTop = chatBody.scrollHeight;
-  }
-  function getReply(inp) {
-    const q = inp.toLowerCase().replace(/[^\w\s]/g,'');
-    for (const k in KB) if (KB[k].p.some(p => q.includes(p))) return KB[k].r;
-    return "I'm here to help! 😊 Ask me about:\n\n• **Properties** to buy or rent in Mumbai\n• **Home loans** and finance\n• **Legal / RERA** guidance\n• **Contacting** our team\n\n📞 **+91 93269 90050**";
-  }
-  function handleChat(txt) {
-    if (!txt.trim()) return;
-    addMsg(txt,'user'); if (chatInput) chatInput.value = '';
-    if (quickReplies) quickReplies.innerHTML = '';
-    showTyping();
-    setTimeout(() => { qs('#typingIndicator')?.remove(); addMsg(getReply(txt),'bot'); setQR(['🏠 Buy Property','🔑 Rent','📞 Contact Us','💰 Home Loan']); }, 650);
-  }
-  function setQR(replies) {
-    if (!quickReplies) return;
-    quickReplies.innerHTML = replies.map(r=>`<button class="qr-btn">${esc(r)}</button>`).join('');
-    qsa('.qr-btn',quickReplies).forEach(b => b.addEventListener('click',()=>handleChat(b.textContent)));
-  }
-  if (chatToggle && chatWidget) {
-    chatToggle.setAttribute('aria-label','Open chat assistant');
+  function initChatWidget() {
+    const chatWidget = qs('#chatWidget');
+    const chatToggle = qs('#chatToggle');
+    const chatClose  = qs('#chatClose');
+    const chatSend   = qs('#chatSend');
+    const chatInput  = qs('#chatInput');
+    const chatBody   = qs('#chatBody');
+    const quickReplies = qs('#quickReplies');
+
+    if (!chatWidget || !chatToggle) return;
+
+    function formatText(t) {
+      return esc(t)
+        .replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>')
+        .replace(/\n/g, '<br>');
+    }
+
+    function addMessage(text, sender = 'bot') {
+      if (!chatBody) return;
+      const now = new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
+      const wrap = document.createElement('div');
+      wrap.className = `chat-msg ${sender === 'bot' ? 'chat-msg-bot' : 'chat-msg-user'}`;
+      wrap.innerHTML = `
+        <div class="chat-bubble" style="padding:10px 14px;border-radius:12px;max-width:85%;line-height:1.45;font-size:13.5px;${sender === 'bot' ? 'background:#F1F5F9;color:#0F172A;' : 'background:#2563EB;color:#fff;margin-left:auto;'}">
+          ${sender === 'bot' ? formatText(text) : esc(text)}
+        </div>
+        <div class="chat-time" style="font-size:10px;color:#94A3B8;margin-top:3px;${sender === 'user' ? 'text-align:right' : ''}">${now}</div>
+      `;
+      chatBody.appendChild(wrap);
+      chatBody.scrollTop = chatBody.scrollHeight;
+    }
+
+    function setQuickReplies(replies) {
+      if (!quickReplies) return;
+      quickReplies.innerHTML = replies.map(r => `
+        <button class="quick-reply-btn" style="padding:6px 12px;border:1px solid #CBD5E1;border-radius:100px;background:#fff;font-size:12px;cursor:pointer;margin:3px">${esc(r)}</button>
+      `).join('');
+
+      qsa('.quick-reply-btn', quickReplies).forEach(btn => {
+        btn.addEventListener('click', () => handleUserInput(btn.textContent.trim()));
+      });
+    }
+
+    function handleUserInput(inputTxt) {
+      if (!inputTxt.trim()) return;
+      addMessage(inputTxt, 'user');
+      if (chatInput) chatInput.value = '';
+      if (quickReplies) quickReplies.innerHTML = '';
+
+      const query = inputTxt.toLowerCase().replace(/[^\w\s]/g, '');
+      let botResponse = "I'm here to help! Feel free to ask about property buying, renting, home loans, or contact our Malad West desk at +91 93269 90050.";
+
+      for (const k in KB) {
+        if (KB[k].p.some(term => query.includes(term))) {
+          botResponse = KB[k].r;
+          break;
+        }
+      }
+
+      setTimeout(() => {
+        addMessage(botResponse, 'bot');
+        setQuickReplies(['🏠 Buy Property', '🔑 Rent 2 BHK', '💰 Home Loan', '📞 Contact Agent']);
+      }, 450);
+    }
+
     chatToggle.addEventListener('click', () => {
       const open = chatWidget.classList.toggle('open');
       chatWidget.setAttribute('aria-hidden', String(!open));
       if (open && chatBody && chatBody.children.length === 0) {
-        setTimeout(() => {
-          addMsg(KB.greeting.r,'bot');
-          setQR(['🏠 Buy Property','🔑 Rent Property','🏢 Commercial','💰 Home Loan','📞 Contact Us']);
-          qs('.chat-badge',chatToggle)?.remove();
-        }, 300);
+        addMessage(KB.greeting.r, 'bot');
+        setQuickReplies(['🏠 Buy Property', '🔑 Rent 2 BHK', '💰 Home Loan', '📞 Contact Desk']);
+        qs('.chat-badge', chatToggle)?.remove();
       }
     });
-    chatClose?.addEventListener('click', () => { chatWidget.classList.remove('open'); chatWidget.setAttribute('aria-hidden','true'); });
-    chatSend?.addEventListener('click', () => handleChat(chatInput?.value?.trim() || ''));
-    chatInput?.addEventListener('keydown', e => { if (e.key==='Enter' && !e.shiftKey) { e.preventDefault(); handleChat(chatInput.value.trim()); }});
+
+    chatClose?.addEventListener('click', () => {
+      chatWidget.classList.remove('open');
+      chatWidget.setAttribute('aria-hidden', 'true');
+    });
+
+    chatSend?.addEventListener('click', () => {
+      handleUserInput(chatInput?.value || '');
+    });
+
+    chatInput?.addEventListener('keydown', (e) => {
+      if (e.key === 'Enter') {
+        e.preventDefault();
+        handleUserInput(chatInput.value);
+      }
+    });
   }
 
-  /* ─── CALC TABS ─── */
-  qsa('.calc-tab').forEach(tab => {
-    tab.addEventListener('click', () => {
-      const parent = tab.closest('.calc-widget');
-      if (!parent) return;
-      qsa('.calc-tab',parent).forEach(t => t.classList.remove('active'));
-      qsa('.calc-panel',parent).forEach(p => p.classList.remove('active'));
-      tab.classList.add('active');
-      const panel = qs('#' + tab.dataset.panel, parent);
-      if (panel) panel.classList.add('active');
-    });
-  });
+  /* ══════════════════════════════════════════════
+     12. CALCULATORS (SYNTAX-RECTIFIED)
+  ═══════════════════════════════════════════════ */
+  const fmtINR = (val) => '₹' + Math.round(val).toLocaleString('en-IN');
 
-  /* ─── EMI CALCULATOR ─── */
   window.calcEMI = () => {
-    const p = parseFloat(qs('#emiPrincipal')?.value)||0;
-    const r = parseFloat(qs('#emiRate')?.value)/12/100||0;
-    const n = parseFloat(qs('#emiTenure')?.value)*12||0;
-    if (!p||!r||!n) return;
-    const emi = p*r*Math.pow(1+r,n)/(Math.pow(1+r,n)-1);
-    const total = emi*n;
-    const fmtINR = v => '₹'+Math.round(v).toLocaleString('en-IN');
+    const p = parseFloat(qs('#emiPrincipal')?.value) || 0;
+    const r = (parseFloat(qs('#emiRate')?.value) / 12) / 100 || 0;
+    const n = (parseFloat(qs('#emiTenure')?.value) * 12) || 0;
+    if (!p || !r || !n) return;
+
+    const emi = (p * r * Math.pow(1 + r, n)) / (Math.pow(1 + r, n) - 1);
+    const total = emi * n;
+
     if (qs('#emiResult'))   qs('#emiResult').textContent   = fmtINR(emi);
-    if (qs('#emiTotal'))    qs('#emiTotal').textContent     = fmtINR(total);
-    if (qs('#emiInterest')) qs('#emiInterest').textContent  = fmtINR(total-p);
+    if (qs('#emiTotal'))    qs('#emiTotal').textContent    = fmtINR(total);
+    if (qs('#emiInterest')) qs('#emiInterest').textContent = fmtINR(total - p);
   };
 
-  /* ─── STAMP DUTY CALCULATOR ─── */
   window.calcStamp = () => {
-    const val = parseFloat(qs('#sdValue')?.value)||0;
-    const g = qs('#sdGender')?.value||'male';
-    const rate = g==='female'?0.04:g==='joint'?0.045:0.05;
-    const stamp=val*rate, reg=val*0.01;
-    const f = v => '₹'+Math.round(v).toLocaleString('en-IN');
-    if (qs('#sdStamp')) qs('#sdStamp').textContent = f(stamp);
-    if (qs('#sdReg'))   qs('#sdReg').textContent   = f(reg);
-    if (qs('#sdTotal')) qs('#sdTotal').textContent  = f(stamp+reg);
+    const val = parseFloat(qs('#sdValue')?.value) || 0;
+    const g   = qs('#sdGender')?.value || 'male';
+    const rate = g === 'female' ? 0.04 : g === 'joint' ? 0.045 : 0.05;
+    const stamp = val * rate;
+    const reg   = val * 0.01;
+
+    if (qs('#sdStamp')) qs('#sdStamp').textContent = fmtINR(stamp);
+    if (qs('#sdReg'))   qs('#sdReg').textContent   = fmtINR(reg);
+    if (qs('#sdTotal')) qs('#sdTotal').textContent = fmtINR(stamp + reg);
   };
 
-  /* ─── AFFORDABILITY CALCULATOR ─── */
   window.calcAfford = () => {
-    const income=parseFloat(qs('#afIncome')?.value)||0;
-    const exist =parseFloat(qs('#afExisting')?.value)||0;
-    const rate  =parseFloat(qs('#afRate')?.value)/12/100||0;
-    const n     =parseFloat(qs('#afTenure')?.value)*12||0;
-    const maxEMI=income*0.4-exist; if(maxEMI<=0||!rate||!n) return;
-    const loan=maxEMI*(Math.pow(1+rate,n)-1)/(rate*Math.pow(1+rate,n));
-    const f = v => '₹'+Math.round(v).toLocaleString('en-IN');
-    if (qs('#afLoan')) qs('#afLoan').textContent = f(loan);
-    if (qs('#afProp')) qs('#afProp').textContent = f(loan/0.8);
-    if (qs('#afEMI'))  qs('#afEMI').textContent  = f(maxEMI);
+    const income = parseFloat(qs('#afIncome')?.value) || 0;
+    const exist  = parseFloat(qs('#afExisting')?.value) || 0;
+    const rate   = (parseFloat(qs('#afRate')?.value) / 12) / 100 || 0;
+    const n      = (parseFloat(qs('#afTenure')?.value) * 12) || 0;
+
+    const maxEMI = (income * 0.45) - exist;
+    if (maxEMI <= 0 || !rate || !n) return;
+
+    const loan = maxEMI * (Math.pow(1 + rate, n) - 1) / (rate * Math.pow(1 + rate, n));
+    if (qs('#afLoan')) qs('#afLoan').textContent = fmtINR(loan);
+    if (qs('#afProp')) qs('#afProp').textContent = fmtINR(loan / 0.8);
+    if (qs('#afEMI'))  qs('#afEMI').textContent  = fmtINR(maxEMI);
   };
 
-  /* ─── RENTAL YIELD CALCULATOR ─── */
   window.calcYield = () => {
-    const val=parseFloat(qs('#ryPropVal')?.value)||0;
-    const mo =parseFloat(qs('#ryMonthly')?.value)||0;
-    if(!val||!mo) return;
-    const annual=mo*12, gross=(annual/val)*100;
-    if (qs('#ryGross'))  qs('#ryGross').textContent  = gross.toFixed(2)+'%';
-    if (qs('#ryNet'))    qs('#ryNet').textContent    = (gross-0.5).toFixed(2)+'%';
-    if (qs('#ryAnnual')) qs('#ryAnnual').textContent = '₹'+Math.round(annual).toLocaleString('en-IN');
+    const val = parseFloat(qs('#ryPropVal')?.value) || 0;
+    const mo  = parseFloat(qs('#ryMonthly')?.value) || 0;
+    if (!val || !mo) return;
+
+    const annual = mo * 12;
+    const gross  = (annual / val) * 100;
+    if (qs('#ryGross'))  qs('#ryGross').textContent  = gross.toFixed(2) + '%';
+    if (qs('#ryNet'))    qs('#ryNet').textContent    = (gross - 0.5).toFixed(2) + '%';
+    if (qs('#ryAnnual')) qs('#ryAnnual').textContent = fmtINR(annual);
   };
 
-  /* ─── ENHANCED COOKIE CONSENT ─── */
-  (() => {
+  function initCalculatorTabs() {
+    qsa('.calc-tab').forEach(tab => {
+      tab.addEventListener('click', () => {
+        const parent = tab.closest('.calc-widget');
+        if (!parent) return;
+        qsa('.calc-tab', parent).forEach(t => t.classList.remove('active'));
+        qsa('.calc-panel', parent).forEach(p => p.classList.remove('active'));
+        tab.classList.add('active');
+        const panel = qs('#' + tab.dataset.panel, parent);
+        if (panel) panel.classList.add('active');
+      });
+    });
+
+    // Auto-calculate on input
+    ['#emiPrincipal', '#emiRate', '#emiTenure'].forEach(id => {
+      qs(id)?.addEventListener('input', window.calcEMI);
+    });
+    ['#sdValue', '#sdGender'].forEach(id => {
+      qs(id)?.addEventListener('input', window.calcStamp);
+    });
+  }
+
+  /* ══════════════════════════════════════════════
+     13. UNIFIED COOKIE CONSENT
+  ═══════════════════════════════════════════════ */
+  function initCookieSystem() {
     const CKEY = 'pfre_cookie_prefs';
+    const banner = qs('#cookieBanner');
     const saved = store.getJSON(CKEY);
 
-    function injectCookieUI() {
-      if (qs('#cookieModal')) return;
-      const modal = document.createElement('div');
-      modal.id = 'cookieModal';
-      modal.setAttribute('role','dialog');
-      modal.setAttribute('aria-modal','true');
-      modal.setAttribute('aria-label','Cookie Preferences');
-      modal.innerHTML = `<div class="cookie-modal-box">
-        <div class="cookie-modal-head">
-          <div><h3>🍪 Cookie Preferences</h3>
-          <p>We use cookies to enhance your experience, analyse traffic, and personalise property recommendations. Choose your preferences below.</p></div>
-          <button class="cookie-modal-close" aria-label="Close cookie settings" onclick="closeCookieModal()">×</button>
-        </div>
-        <div class="cookie-categories">
-          <div class="cookie-cat"><div class="cookie-cat-info"><h4>Necessary <span class="cookie-required-tag">ALWAYS ON</span></h4><p>Essential functionality — theme, sessions, security. Cannot be disabled.</p></div><label class="cookie-toggle"><input type="checkbox" id="cNec" checked disabled><span class="cookie-slider"></span></label></div>
-          <div class="cookie-cat"><div class="cookie-cat-info"><h4>📊 Analytics</h4><p>Help us understand how you use the site — pages visited, time spent (Google Analytics).</p></div><label class="cookie-toggle"><input type="checkbox" id="cAna"><span class="cookie-slider"></span></label></div>
-          <div class="cookie-cat"><div class="cookie-cat-info"><h4>📣 Marketing</h4><p>Show you relevant property ads on Google, Facebook after your visit (Meta Pixel, Google Ads).</p></div><label class="cookie-toggle"><input type="checkbox" id="cMkt"><span class="cookie-slider"></span></label></div>
-          <div class="cookie-cat"><div class="cookie-cat-info"><h4>⚙️ Functional</h4><p>Saved searches, recently viewed properties, chatbot history, map preferences.</p></div><label class="cookie-toggle"><input type="checkbox" id="cFun" checked><span class="cookie-slider"></span></label></div>
-        </div>
-        <div class="cookie-modal-btns">
-          <button class="cookie-modal-btn accept-all" onclick="acceptAllCookies()">✅ Accept All</button>
-          <button class="cookie-modal-btn save" onclick="savePreferences()">💾 Save Preferences</button>
-          <button class="cookie-modal-btn reject" onclick="rejectAllCookies()">❌ Reject Non-Essential</button>
-        </div>
-        <p class="cookie-policy-link">Read our <a href="privacy-policy.html">Privacy Policy</a> · <a href="#" onclick="openCookieModal();return false">Manage Cookies</a></p>
-      </div>`;
-      document.body.appendChild(modal);
+    if (saved) return; // Consent already registered
 
-      const pill = document.createElement('button');
-      pill.id='cookiePill'; pill.className='cookie-pill'; pill.setAttribute('aria-label','Cookie settings');
-      pill.innerHTML='🍪 Cookie Settings'; pill.onclick=openCookieModal;
-      document.body.appendChild(pill);
+    if (banner) {
+      banner.classList.add('show');
+      qs('#cookieAccept', banner)?.addEventListener('click', () => {
+        store.setJSON(CKEY, { necessary: true, analytics: true, functional: true, ts: Date.now() });
+        banner.classList.remove('show');
+        window.showToast('Preferences saved.', 'success');
+      });
 
-      if (saved) {
-        qs('#cAna').checked = !!saved.analytics;
-        qs('#cMkt').checked = !!saved.marketing;
-        qs('#cFun').checked = !!saved.functional;
-        pill.classList.add('show');
-      }
+      qs('#cookieDecline', banner)?.addEventListener('click', () => {
+        store.setJSON(CKEY, { necessary: true, analytics: false, functional: false, ts: Date.now() });
+        banner.classList.remove('show');
+      });
     }
+  }
 
-    window.openCookieModal = () => { injectCookieUI(); qs('#cookieModal')?.classList.add('open'); document.body.style.overflow='hidden'; };
-    window.closeCookieModal = () => { qs('#cookieModal')?.classList.remove('open'); document.body.style.overflow=''; qs('#cookiePill')?.classList.add('show'); };
-    window.acceptAllCookies = () => { saveCookies(true,true,true); closeCookieModal(); showToast('🍪 All cookies accepted!','success'); };
-    window.rejectAllCookies = () => { saveCookies(false,false,false); closeCookieModal(); showToast('🚫 Non-essential cookies rejected.',''); };
-    window.savePreferences  = () => { saveCookies(qs('#cAna')?.checked||false,qs('#cMkt')?.checked||false,qs('#cFun')?.checked||false); closeCookieModal(); showToast('✅ Preferences saved!','success'); };
-
-    function saveCookies(ana, mkt, fun) {
-      store.setJSON(CKEY,{analytics:ana,marketing:mkt,functional:fun,ts:Date.now()});
-      store.set('pfre_cookie','set');
-      /* Hide old simple banner */
-      qs('#cookieBanner')?.classList.remove('show');
+  /* ══════════════════════════════════════════════
+     14. BOOTSTRAP INITIALIZATION
+  ═══════════════════════════════════════════════ */
+  const onReady = (fn) => {
+    if (document.readyState === 'loading') {
+      document.addEventListener('DOMContentLoaded', fn);
+    } else {
+      fn();
     }
+  };
 
-    injectCookieUI();
-    if (!store.get(CKEY)) {
-      setTimeout(() => openCookieModal(), 2200);
-    }
-  })();
-
-})(); /* end IIFE */
+  onReady(() => {
+    initScrollWidgets();
+    initMobileMenu();
+    initScrollReveal();
+    initWishlist();
+    initCompareEvents();
+    initLightboxEvents();
+    initSearchSuggestions();
+    initPWA();
+    initChatWidget();
+    initCalculatorTabs();
+    initCookieSystem();
+  });
+})();
