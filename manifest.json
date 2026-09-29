@@ -1,33 +1,15 @@
 {
-  "name": "Property Finder Real Estate",
-  "short_name": "PropertyFinder",
-  "description": "Mumbai's trusted real estate consultants. Browse properties, calculate EMI, and connect with agents.",
-  "start_url": "./index.html",
-  "scope": "./",
+  "name": "Property Finder Real Estate Mumbai",
+  "short_name": "Property Finder RE",
+  "description": "Mumbai's trusted real estate agency in Malad West. Buy, sell, and rent residential and commercial properties.",
+  "start_url": "/index.html",
+  "scope": "/",
   "display": "standalone",
-  "background_color": "#F0F2F5",
-  "theme_color": "#2563EB",
   "orientation": "portrait-primary",
-  "lang": "en-IN",
+  "background_color": "#0F1729",
+  "theme_color": "#2563EB",
+  "categories": ["business", "real estate", "utilities"],
   "icons": [
-    {
-      "src": "icons/icon.svg",
-      "sizes": "any",
-      "type": "image/svg+xml",
-      "purpose": "any"
-    },
-    {
-      "src": "icons/icon-maskable.svg",
-      "sizes": "any",
-      "type": "image/svg+xml",
-      "purpose": "maskable"
-    },
-    {
-      "src": "icons/favicon.svg",
-      "sizes": "any",
-      "type": "image/svg+xml",
-      "purpose": "any"
-    },
     {
       "src": "icons/icon-192.png",
       "sizes": "192x192",
@@ -45,39 +27,12 @@
       "sizes": "512x512",
       "type": "image/png",
       "purpose": "maskable"
+    },
+    {
+      "src": "icons/favicon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any"
     }
-  ],
-  "screenshots": [],
-  "shortcuts": [
-    {
-      "name": "Browse Properties",
-      "short_name": "Properties",
-      "url": "./properties.html",
-      "description": "Browse all Mumbai properties"
-    },
-    {
-      "name": "EMI Calculator",
-      "short_name": "Calculator",
-      "url": "./calculators.html",
-      "description": "Calculate your home loan EMI"
-    },
-    {
-      "name": "Contact Us",
-      "short_name": "Contact",
-      "url": "./contact.html",
-      "description": "Get in touch with our team"
-    },
-    {
-      "name": "Post Property",
-      "short_name": "Post",
-      "url": "./post-property.html",
-      "description": "List your property for free"
-    }
-  ],
-  "categories": [
-    "business",
-    "finance",
-    "lifestyle"
-  ],
-  "prefer_related_applications": false
+  ]
 }
