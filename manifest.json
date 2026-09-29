@@ -1,6 +1,6 @@
 {
-  "name": "Property Finder Real Estate Mumbai",
-  "short_name": "Property Finder RE",
+  "name": "Property Finder Real Estate",
+  "short_name": "PFRE",
   "description": "Mumbai's trusted real estate agency in Malad West. Buy, sell, and rent residential and commercial properties.",
   "start_url": "/index.html",
   "scope": "/",
