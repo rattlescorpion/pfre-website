@@ -1,14 +1,22 @@
 {
   "name": "Property Finder Real Estate",
   "short_name": "PFRE",
-  "description": "Mumbai's trusted real estate agency in Malad West. Buy, sell, and rent residential and commercial properties.",
+  "description": "Mumbai's trusted real estate agency in Malad West. Buy, sell, or rent residential and commercial properties across Mumbai[span_0](start_span)[span_0](end_span).",
+  "id": "/",
   "start_url": "/index.html",
   "scope": "/",
   "display": "standalone",
   "orientation": "portrait-primary",
   "background_color": "#0F1729",
   "theme_color": "#2563EB",
-  "categories": ["business", "real estate", "utilities"],
+  "lang": "en-IN",
+  "dir": "ltr",
+  "categories": [
+    "business",
+    "real estate",
+    "utilities",
+    "lifestyle"
+  ],
   "icons": [
     {
       "src": "icons/icon-192.png",
@@ -29,10 +37,73 @@
       "purpose": "maskable"
     },
     {
+      "src": "icons/icon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any"
+    },
+    {
+      "src": "icons/icon-maskable.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "maskable"
+    },
+    {
       "src": "icons/favicon.svg",
       "sizes": "any",
       "type": "image/svg+xml",
       "purpose": "any"
     }
-  ]
+  ],
+  "shortcuts": [
+    {
+      "name": "Browse Properties",
+      "short_name": "Properties",
+      "description": "Explore residential and commercial properties across Mumbai[span_1](start_span)[span_1](end_span)",
+      "url": "/properties.html",
+      "icons": [
+        {
+          "src": "icons/icon-192.png",
+          "sizes": "192x192"
+        }
+      ]
+    },
+    {
+      "name": "Post Property",
+      "short_name": "List Property",
+      "description": "Post your property for sale or rent with Property Finder RE[span_2](start_span)[span_2](end_span)",
+      "url": "/post-property.html",
+      "icons": [
+        {
+          "src": "icons/icon-192.png",
+          "sizes": "192x192"
+        }
+      ]
+    },
+    {
+      "name": "EMI Calculator",
+      "short_name": "Calculator",
+      "description": "Calculate loan EMI, stamp duty, and affordability[span_3](start_span)[span_3](end_span)",
+      "url": "/calculators.html",
+      "icons": [
+        {
+          "src": "icons/icon-192.png",
+          "sizes": "192x192"
+        }
+      ]
+    },
+    {
+      "name": "Contact Desk",
+      "short_name": "Contact",
+      "description": "Call or chat with Property Finder RE consultants in Malad West[span_4](start_span)[span_4](end_span)",
+      "url": "/contact.html",
+      "icons": [
+        {
+          "src": "icons/icon-192.png",
+          "sizes": "192x192"
+        }
+      ]
+    }
+  ],
+  "prefer_related_applications": false
 }
