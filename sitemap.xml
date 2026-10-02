@@ -7,7 +7,7 @@
   <!-- Homepage -->
   <url>
     <loc>https://www.propertyfinderrealestate.com/</loc>
-    <lastmod>2026-07-05</lastmod>
+    <lastmod>2026-10-01</lastmod>
     <changefreq>daily</changefreq>
     <priority>1.0</priority>
   </url>
@@ -15,7 +15,7 @@
   <!-- Core Property Listings & Projects -->
   <url>
     <loc>https://www.propertyfinderrealestate.com/properties.html</loc>
-    <lastmod>2026-07-05</lastmod>
+    <lastmod>2026-10-01</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.9</priority>
   </url>
@@ -27,7 +27,7 @@
   </url>
   <url>
     <loc>https://www.propertyfinderrealestate.com/property-detail.html</loc>
-    <lastmod>2026-07-05</lastmod>
+    <lastmod>2026-10-01</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
@@ -53,9 +53,9 @@
   <!-- High-Value Lead Capture & Inquiries -->
   <url>
     <loc>https://www.propertyfinderrealestate.com/contact.html</loc>
-    <lastmod>2026-07-05</lastmod>
+    <lastmod>2026-10-01</lastmod>
     <changefreq>monthly</changefreq>
-    <priority>0.9</priority>
+    <priority>0.8</priority>
   </url>
   <url>
     <loc>https://www.propertyfinderrealestate.com/post-property.html</loc>
@@ -67,7 +67,7 @@
   <!-- Services & Specialty Solutions -->
   <url>
     <loc>https://www.propertyfinderrealestate.com/services.html</loc>
-    <lastmod>2026-07-05</lastmod>
+    <lastmod>2026-10-01</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
@@ -93,15 +93,15 @@
   <!-- Interactive Financial Tools & Calculators -->
   <url>
     <loc>https://www.propertyfinderrealestate.com/calculators.html</loc>
-    <lastmod>2026-07-05</lastmod>
+    <lastmod>2026-10-01</lastmod>
     <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
+    <priority>0.6</priority>
   </url>
   <url>
     <loc>https://www.propertyfinderrealestate.com/tds-calculators.html</loc>
-    <lastmod>2026-07-05</lastmod>
+    <lastmod>2026-10-01</lastmod>
     <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
+    <priority>0.6</priority>
   </url>
   <url>
     <loc>https://www.propertyfinderrealestate.com/converter.html</loc>
@@ -119,9 +119,9 @@
   <!-- Content, Knowledge Hub & Community -->
   <url>
     <loc>https://www.propertyfinderrealestate.com/blog.html</loc>
-    <lastmod>2026-07-05</lastmod>
+    <lastmod>2026-10-01</lastmod>
     <changefreq>weekly</changefreq>
-    <priority>0.8</priority>
+    <priority>0.7</priority>
   </url>
   <url>
     <loc>https://www.propertyfinderrealestate.com/faq.html</loc>
@@ -145,7 +145,7 @@
   <!-- Company Profile & Legal -->
   <url>
     <loc>https://www.propertyfinderrealestate.com/about.html</loc>
-    <lastmod>2026-07-05</lastmod>
+    <lastmod>2026-10-01</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
@@ -162,8 +162,14 @@
     <priority>0.7</priority>
   </url>
   <url>
+    <loc>https://www.propertyfinderrealestate.com/terms.html</loc>
+    <lastmod>2026-10-01</lastmod>
+    <changefreq>yearly</changefreq>
+    <priority>0.3</priority>
+  </url>
+  <url>
     <loc>https://www.propertyfinderrealestate.com/privacy-policy.html</loc>
-    <lastmod>2026-07-05</lastmod>
+    <lastmod>2026-10-01</lastmod>
     <changefreq>yearly</changefreq>
     <priority>0.3</priority>
   </url>
