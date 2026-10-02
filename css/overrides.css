@@ -377,3 +377,100 @@ a:focus:not(:focus-visible) {
     height: 36px;
   }
 }
+
+/* =====================================================
+   HOTFIX: Lightbox & Cookie Banner Collision Fix
+   ===================================================== */
+
+/* ── Force Lightbox Hidden by Default ── */
+#lightbox {
+  position: fixed !important;
+  inset: 0 !important;
+  background: rgba(0, 0, 0, 0.94) !important;
+  z-index: 2500 !important;
+  display: none !important;
+  align-items: center;
+  justify-content: center;
+}
+#lightbox.open {
+  display: flex !important;
+}
+
+/* ── Cookie Banner Floating & Styling Fix ── */
+#cookieBanner {
+  position: fixed;
+  bottom: 16px;
+  left: 16px;
+  right: 16px;
+  max-width: 480px;
+  background: var(--card-bg, #FFFFFF);
+  border: 1px solid var(--border, #E2E8F0);
+  border-radius: 16px;
+  padding: 16px 20px;
+  box-shadow: 0 16px 48px rgba(0, 0, 0, 0.18);
+  z-index: 1200;
+  display: none;
+  flex-direction: column;
+  gap: 12px;
+}
+#cookieBanner.show {
+  display: flex;
+}
+.cookie-text {
+  font-size: 13.5px;
+  line-height: 1.5;
+  color: var(--text-muted, #64748B);
+  margin: 0;
+}
+.cookie-btns {
+  display: flex;
+  gap: 10px;
+  width: 100%;
+}
+.cookie-accept {
+  flex: 1;
+  background: var(--blue, #2563EB) !important;
+  color: #FFFFFF !important;
+  border: none !important;
+  padding: 10px 16px;
+  border-radius: 10px;
+  font-size: 14px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: background 0.2s ease;
+}
+.cookie-accept:hover {
+  background: var(--blue-dark, #1D4ED8) !important;
+}
+.cookie-decline {
+  flex: 1;
+  background: transparent !important;
+  color: var(--text-muted, #64748B) !important;
+  border: 1.5px solid var(--border, #E2E8F0) !important;
+  padding: 10px 16px;
+  border-radius: 10px;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+/* ── Prevent Mobile Collision Between Cookie Banner and FABs ── */
+@media (max-width: 768px) {
+  #cookieBanner {
+    left: 12px;
+    right: 12px;
+    bottom: 12px;
+    max-width: none;
+    z-index: 1300;
+  }
+  
+  /* Lift FABs above the cookie banner when active */
+  body:has(#cookieBanner.show) .floating-actions {
+    bottom: 160px;
+    transition: bottom 0.3s ease;
+  }
+  body:has(#cookieBanner.show) #backToTop {
+    bottom: 215px;
+    transition: bottom 0.3s ease;
+  }
+}
