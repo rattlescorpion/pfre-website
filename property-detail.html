@@ -3,10 +3,10 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Skyline Heights — 3 BHK Malad West | Property Finder Real Estate</title>
-  <meta name="description" content="3 BHK apartment for sale in Malad West, Mumbai. 1,240 sq.ft carpet area, 2 bathrooms, modular kitchen, reserved car parking. ₹1.85 Crore onwards. Contact Property Finder Real Estate.">
+  <title id="metaTitle">Skyline Heights — 3 BHK Flat in Malad West | Property Finder Real Estate</title>
+  <meta name="description" id="metaDesc" content="3 BHK apartment for sale in Malad West, Mumbai. 1,240 sq.ft carpet area, 2 bathrooms, modular kitchen, reserved car parking. ₹1.85 Crore onwards. Contact Property Finder Real Estate.">
   <meta name="author" content="Property Finder Real Estate">
-  <link rel="canonical" href="https://www.propertyfinderrealestate.com/property-detail.html">
+  <link rel="canonical" id="canonicalUrl" href="https://www.propertyfinderrealestate.com/property-detail.html">
 
   <!-- Security & CSP -->
   <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' https://cdnjs.cloudflare.com https://challenges.cloudflare.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' data: https:; connect-src 'self' https://api.propertyfinderrealestate.com http://localhost:8000 https://formspree.io; frame-src https://www.google.com https://www.openstreetmap.org https://challenges.cloudflare.com; form-action 'self' https://formspree.io; object-src 'none'; base-uri 'self'">
@@ -17,8 +17,8 @@
   <meta property="og:type" content="website">
   <meta property="og:site_name" content="Property Finder Real Estate">
   <meta property="og:locale" content="en_IN">
-  <meta property="og:title" content="Skyline Heights — 3 BHK For Sale in Malad West | PFRE">
-  <meta property="og:description" content="1,240 sq.ft 3 BHK apartment in Lower Kharodi, Malad West, Mumbai. ₹1.85 Cr onwards. View floor plans, photos, and book a site visit.">
+  <meta property="og:title" id="ogTitle" content="Skyline Heights — 3 BHK For Sale in Malad West | PFRE">
+  <meta property="og:description" id="ogDesc" content="1,240 sq.ft 3 BHK apartment in Lower Kharodi, Malad West, Mumbai. ₹1.85 Cr onwards. View floor plans, photos, and book a site visit.">
   <meta property="og:url" content="https://www.propertyfinderrealestate.com/property-detail.html">
   <meta property="og:image" content="https://www.propertyfinderrealestate.com/images/og-banner.jpg">
   <meta property="og:image:width" content="1200">
@@ -28,8 +28,8 @@
   <!-- Twitter Card -->
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:site" content="@PropertyFinderA">
-  <meta name="twitter:title" content="Skyline Heights — 3 BHK For Sale in Malad West | PFRE">
-  <meta name="twitter:description" content="1,240 sq.ft 3 BHK apartment in Lower Kharodi, Malad West, Mumbai. ₹1.85 Cr onwards. Verified listing.">
+  <meta name="twitter:title" id="twitterTitle" content="Skyline Heights — 3 BHK For Sale in Malad West | PFRE">
+  <meta name="twitter:description" id="twitterDesc" content="1,240 sq.ft 3 BHK apartment in Lower Kharodi, Malad West, Mumbai. ₹1.85 Cr onwards. Verified listing.">
   <meta name="twitter:image" content="https://www.propertyfinderrealestate.com/images/og-banner.jpg">
 
   <!-- SEO & Geolocation -->
@@ -65,102 +65,99 @@
   <link rel="stylesheet" href="css/utils.css">
 
   <style>
-    .detail-layout { display: grid; grid-template-columns: 1fr 360px; gap: 36px; padding: 32px 5% 80px; }
-    
+    .detail-layout { display: grid; grid-template-columns: 1fr 380px; gap: 36px; padding: 24px 5% 80px; max-width: 1260px; margin: 0 auto; }
+
     /* Gallery */
-    .gallery-main { border-radius: 16px; overflow: hidden; height: 420px; background: var(--off-white); display: flex; align-items: center; justify-content: center; font-size: 120px; cursor: pointer; position: relative; border: 1.5px solid var(--border); transition: border-color .2s; }
+    .gallery-main { border-radius: 16px; overflow: hidden; height: 420px; background: var(--off-white); display: flex; align-items: center; justify-content: center; font-size: 110px; cursor: pointer; position: relative; border: 1.5px solid var(--border); transition: border-color .2s; }
+    .gallery-main img { width: 100%; height: 100%; object-fit: cover; }
     .gallery-main:hover::after { content: '🔍 View Photos'; position: absolute; inset: 0; background: rgba(0,0,0,0.45); display: flex; align-items: center; justify-content: center; color: white; font-size: 16px; font-weight: 700; font-family: 'DM Sans', sans-serif; }
     .gallery-thumbs { display: grid; grid-template-columns: repeat(4, 1fr); gap: 10px; margin-top: 12px; }
-    .gallery-thumb { height: 90px; border-radius: 10px; overflow: hidden; background: var(--off-white); display: flex; align-items: center; justify-content: center; font-size: 32px; cursor: pointer; border: 2px solid transparent; transition: all .2s; }
+    .gallery-thumb { height: 90px; border-radius: 10px; overflow: hidden; background: var(--off-white); display: flex; align-items: center; justify-content: center; font-size: 32px; cursor: pointer; border: 2px solid transparent; transition: all .2s; position: relative; }
+    .gallery-thumb img { width: 100%; height: 100%; object-fit: cover; }
     .gallery-thumb:hover, .gallery-thumb.active { border-color: var(--blue); }
-    .gallery-thumb:last-child { position: relative; }
     .gallery-more { position: absolute; inset: 0; background: rgba(0,0,0,0.55); display: flex; align-items: center; justify-content: center; color: white; font-size: 14px; font-weight: 700; border-radius: 8px; cursor: pointer; }
 
     /* Property Header */
     .prop-detail-header { margin-top: 28px; }
-    .prop-detail-title { font-family: 'Playfair Display', serif; font-size: 30px; font-weight: 900; margin-bottom: 8px; line-height: 1.2; color: var(--text); }
-    .prop-detail-price { font-family: 'Playfair Display', serif; font-size: 32px; font-weight: 900; color: var(--blue); }
+    .prop-detail-title { font-family: 'Playfair Display', serif; font-size: clamp(24px, 3.5vw, 34px); font-weight: 900; margin-bottom: 8px; line-height: 1.2; color: var(--text); }
+    .prop-detail-price { font-family: 'Playfair Display', serif; font-size: clamp(28px, 4vw, 36px); font-weight: 900; color: var(--blue); }
     .prop-detail-price small { font-family: 'DM Sans', sans-serif; font-size: 14px; font-weight: 400; color: var(--text-muted); }
-    .prop-detail-location { display: flex; align-items: center; gap: 6px; font-size: 14.5px; color: var(--text-muted); margin: 8px 0 16px; }
+    .prop-detail-location { display: flex; align-items: center; gap: 6px; font-size: 14.5px; color: var(--text-muted); margin: 8px 0 16px; line-height: 1.5; }
     .prop-detail-tags { display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 24px; }
-    
-    .prop-specs { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; padding: 20px; background: var(--off-white); border-radius: 14px; margin-bottom: 28px; border: 1px solid var(--border); }
+
+    .prop-specs { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; padding: 20px; background: var(--bg-secondary); border-radius: 14px; margin-bottom: 28px; border: 1px solid var(--border); }
     .spec-item { text-align: center; }
     .spec-val { font-size: 20px; font-weight: 900; color: var(--text); font-family: 'Playfair Display', serif; line-height: 1.1; }
     .spec-lbl { font-size: 11px; color: var(--text-muted); margin-top: 4px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.5px; }
 
     /* Tabs */
-    .detail-tabs { display: flex; gap: 4px; border-bottom: 2px solid var(--border); margin-bottom: 28px; overflow-x: auto; }
+    .detail-tabs { display: flex; gap: 4px; border-bottom: 2px solid var(--border); margin-bottom: 28px; overflow-x: auto; scrollbar-width: none; }
+    .detail-tabs::-webkit-scrollbar { display: none; }
     .detail-tab { padding: 10px 18px; font-size: 14px; font-weight: 600; color: var(--text-muted); border: none; background: none; cursor: pointer; white-space: nowrap; border-bottom: 2px solid transparent; margin-bottom: -2px; transition: all .2s; }
     .detail-tab.active, .detail-tab:hover { color: var(--blue); border-bottom-color: var(--blue); }
     .tab-panel { display: none; }
-    .tab-panel.active { display: block; }
-    
+    .tab-panel.active { display: block; animation: fadeIn .25s ease; }
+
     .detail-section-title { font-size: 17px; font-weight: 700; margin-bottom: 14px; display: flex; align-items: center; gap: 8px; color: var(--text); }
     .amenities-list { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; }
-    .amenity-item { display: flex; align-items: center; gap: 8px; padding: 10px 14px; background: var(--off-white); border-radius: 9px; font-size: 13.5px; font-weight: 500; color: var(--text); border: 1px solid var(--border); }
-    .amenity-item .a-icon { font-size: 18px; }
-    
+    .amenity-item { display: flex; align-items: center; gap: 8px; padding: 10px 14px; background: var(--bg-secondary); border-radius: 9px; font-size: 13.5px; font-weight: 500; color: var(--text); border: 1px solid var(--border); }
+
     .prop-table { width: 100%; font-size: 14px; border-collapse: collapse; }
     .prop-table tr { border-bottom: 1px solid var(--border); }
     .prop-table tr:last-child { border-bottom: none; }
     .prop-table td { padding: 12px 8px; }
     .prop-table td:first-child { color: var(--text-muted); font-weight: 500; width: 45%; }
     .prop-table td:last-child { font-weight: 600; color: var(--text); }
-    
-    .floor-plan-placeholder { background: var(--off-white); border-radius: 14px; padding: 40px 20px; display: flex; align-items: center; justify-content: center; flex-direction: column; gap: 12px; color: var(--text-muted); border: 1.5px solid var(--border); }
+
+    .floor-plan-placeholder { background: var(--bg-secondary); border-radius: 14px; padding: 40px 20px; display: flex; align-items: center; justify-content: center; flex-direction: column; gap: 12px; color: var(--text-muted); border: 1.5px solid var(--border); }
     .floor-plan-placeholder .fp-icon { font-size: 56px; }
 
     /* Sidebar Form */
-    .enquiry-card { background: var(--card, white); border-radius: 18px; padding: 24px; border: 1.5px solid var(--border); box-shadow: var(--shadow-md, 0 10px 30px rgba(0,0,0,0.06)); position: sticky; top: 92px; }
-    .enquiry-card h3 { font-size: 17px; font-weight: 700; margin-bottom: 4px; color: var(--text); }
-    .enquiry-card .enq-price { font-family: 'Playfair Display', serif; font-size: 24px; font-weight: 900; color: var(--blue); margin-bottom: 20px; }
+    .enquiry-card { background: var(--card, white); border-radius: 18px; padding: 26px; border: 1.5px solid var(--border); box-shadow: var(--shadow-md, 0 10px 30px rgba(0,0,0,0.06)); position: sticky; top: 92px; }
+    .enquiry-card h3 { font-size: 18px; font-weight: 700; margin-bottom: 4px; color: var(--text); }
+    .enquiry-card .enq-price { font-family: 'Playfair Display', serif; font-size: 26px; font-weight: 900; color: var(--blue); margin-bottom: 18px; }
     .enq-input { width: 100%; padding: 11px 14px; border: 1.5px solid var(--border); border-radius: 9px; font-size: 14px; outline: none; margin-bottom: 12px; transition: border-color .2s; background: var(--card, white); color: var(--text); font-family: 'DM Sans', sans-serif; }
     .enq-input:focus { border-color: var(--blue); }
     .enq-btn { width: 100%; padding: 13px; background: var(--blue); color: white; border: none; border-radius: 9px; font-size: 15px; font-weight: 700; cursor: pointer; transition: all .2s; font-family: 'DM Sans', sans-serif; }
     .enq-btn:hover { background: var(--blue-dark); }
-    .enq-divider { text-align: center; font-size: 13px; color: var(--text-muted); margin: 14px 0; }
+    .enq-divider { text-align: center; font-size: 12.5px; color: var(--text-muted); margin: 14px 0; }
     .enq-row { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
-    .enq-alt-btn { padding: 11px; border-radius: 9px; font-size: 13px; font-weight: 700; cursor: pointer; border: none; transition: all .2s; font-family: 'DM Sans', sans-serif; text-decoration: none; text-align: center; display: flex; align-items: center; justify-content: center; }
+    .enq-alt-btn { padding: 11px; border-radius: 9px; font-size: 13px; font-weight: 700; cursor: pointer; border: none; transition: all .2s; font-family: 'DM Sans', sans-serif; text-decoration: none; text-align: center; display: flex; align-items: center; justify-content: center; gap: 4px; }
     .enq-alt-btn.wa { background: #25D366; color: white; }
     .enq-alt-btn.wa:hover { background: #1da851; }
-    .enq-alt-btn.call { background: var(--off-white); color: var(--text); border: 1.5px solid var(--border); }
-    
+    .enq-alt-btn.call { background: var(--bg-secondary); color: var(--text); border: 1.5px solid var(--border); }
+
     .agent-row { display: flex; align-items: center; gap: 12px; padding: 16px 0; border-top: 1px solid var(--border); margin-top: 16px; }
     .agent-avatar { width: 44px; height: 44px; background: linear-gradient(135deg, var(--blue), #60A5FA); border-radius: 50%; display: flex; align-items: center; justify-content: center; color: white; font-size: 18px; flex-shrink: 0; }
     .agent-name { font-size: 14px; font-weight: 700; color: var(--text); }
     .agent-role { font-size: 12px; color: var(--text-muted); }
-    
+
     .emi-mini { background: var(--blue-light, rgba(37,99,235,0.1)); border-radius: 12px; padding: 16px; margin-top: 16px; border: 1px solid rgba(37,99,235,0.2); }
     .emi-mini h4 { font-size: 12px; font-weight: 700; color: var(--blue); text-transform: uppercase; letter-spacing: 1px; margin-bottom: 6px; }
     .emi-mini .emi-val { font-family: 'Playfair Display', serif; font-size: 22px; font-weight: 900; color: var(--blue); }
-    .emi-mini .emi-sub { font-size: 11px; color: var(--text-muted); margin-top: 3px; }
+    .emi-mini .emi-sub { font-size: 11.5px; color: var(--text-muted); margin-top: 3px; }
 
-    /* Map embedded container */
-    .map-box { border-radius: 14px; overflow: hidden; height: 320px; border: 1.5px solid var(--border); background: var(--off-white); position: relative; margin-top: 16px; }
+    .map-box { border-radius: 14px; overflow: hidden; height: 320px; border: 1.5px solid var(--border); background: var(--bg-secondary); position: relative; margin-top: 16px; }
     .map-box iframe { width: 100%; height: 100%; border: none; }
 
-    /* Sticky Bar */
-    #stickyEnquiry.show { display: flex !important; }
-
-    /* Similar Properties */
     .similar-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; }
 
     @media (max-width: 1100px) {
       .detail-layout { grid-template-columns: 1fr; }
-      .detail-sidebar .enquiry-card { position: static; }
+      .detail-sidebar .enquiry-card { position: static; margin-top: 20px; }
       .similar-grid { grid-template-columns: 1fr 1fr; }
     }
     @media (max-width: 600px) {
       .prop-specs { grid-template-columns: repeat(2, 1fr); }
-      .amenities-list { grid-template-columns: 1fr 1fr; }
+      .amenities-list { grid-template-columns: 1fr; }
       .similar-grid { grid-template-columns: 1fr; }
       .gallery-thumbs { grid-template-columns: repeat(2, 1fr); }
+      .gallery-main { height: 260px; font-size: 70px; }
     }
   </style>
 
   <!-- Structured Data: RealEstateListing -->
-  <script type="application/ld+json">
+  <script type="application/ld+json" id="listingSchema">
   {
     "@context": "https://schema.org",
     "@type": "RealEstateListing",
@@ -176,25 +173,12 @@
     },
     "address": {
       "@type": "PostalAddress",
-      "streetAddress": "Lower Kharodi, Jankalyan Nagar Road",
+      "streetAddress": "Shop No. 9, Ground Floor, Building No. 3, Deepanjali Co-operative Housing Society Limited, Baf-Hira Nagar, Lower Kharodi, Jankalyan Nagar Road",
       "addressLocality": "Malad West",
       "addressRegion": "Maharashtra",
       "postalCode": "400095",
       "addressCountry": "IN"
     }
-  }
-  </script>
-
-  <!-- Structured Data: BreadcrumbList -->
-  <script type="application/ld+json">
-  {
-    "@context": "https://schema.org",
-    "@type": "BreadcrumbList",
-    "itemListElement": [
-      { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://www.propertyfinderrealestate.com/" },
-      { "@type": "ListItem", "position": 2, "name": "Properties", "item": "https://www.propertyfinderrealestate.com/properties.html" },
-      { "@type": "ListItem", "position": 3, "name": "Skyline Heights — 3 BHK" }
-    ]
   }
   </script>
 </head>
@@ -236,8 +220,6 @@
         <a href="converter.html"><span class="dd-icon">📐</span> Measurement Converter</a>
         <a href="insurance.html"><span class="dd-icon">🛡️</span> Property Insurance</a>
         <a href="price-trends.html"><span class="dd-icon">📈</span> Price Trends</a>
-        <a href="email-templates.html">Email Templates</a>
-        <a href="agreement-registration.html">Registration Tracker</a>
         <a href="reminders.html"><span class="dd-icon">🔔</span> Reminders</a>
       </div>
     </li>
@@ -245,7 +227,7 @@
     <li class="nav-item"><a href="contact.html" class="nav-link" data-i18n="nav.contact">Contact</a></li>
   </ul>
   <div class="nav-actions">
-    <a href="tel:+919326990050" class="nav-phone">📞 +91 93269 90050</a>
+    <a href="tel:+919326990050" class="nav-phone">📞 +919326990050</a>
     <a href="post-property.html" class="btn btn-primary btn-sm btn-green-inline">+ Post Property</a>
     <a href="contact.html" class="btn btn-outline btn-sm">Get In Touch</a>
     <button class="theme-toggle" id="themeToggle" type="button" aria-label="Toggle light or dark theme" title="Toggle Light/Dark Mode"><span class="icon-light">☀️</span><span class="icon-dark" style="display:none">🌙</span></button>
@@ -263,20 +245,17 @@
   <a href="about.html">🏢 About Us</a>
   <a href="team.html">👥 Our Team</a>
   <a href="testimonials.html">⭐ Testimonials</a>
-  <a href="home-loan.html">🏦 Home Loan</a>
-  <a href="blog.html">📝 Blog</a>
   <a href="contact.html">📞 Contact</a>
-  <a href="tel:+919326990050" class="btn btn-primary mob-cta">📞 Call +91 93269 90050</a>
+  <a href="tel:+919326990050" class="btn btn-primary mob-cta">📞 Call +919326990050</a>
 </div>
 
 <!-- BREADCRUMB -->
-<div style="padding: 20px 5% 0;">
+<div style="padding: 104px 5% 0; max-width: 1260px; margin: 0 auto;">
   <nav aria-label="Breadcrumb">
     <div class="breadcrumb" style="justify-content: flex-start;">
       <a href="index.html">Home</a><span class="breadcrumb-sep" aria-hidden="true">›</span>
       <a href="properties.html">Properties</a><span class="breadcrumb-sep" aria-hidden="true">›</span>
-      <a href="properties.html?locality=malad+west">Malad West</a><span class="breadcrumb-sep" aria-hidden="true">›</span>
-      <span>Skyline Heights — 3 BHK</span>
+      <span id="breadcrumbCurrent">Skyline Heights — 3 BHK</span>
     </div>
   </nav>
 </div>
@@ -286,36 +265,38 @@
   <!-- LEFT: Gallery & Listing Details -->
   <div>
     <!-- Interactive Photo Gallery -->
-    <div class="gallery-main bg-grad-1" id="mainGalleryImg" onclick="openPropertyLightbox(0)" role="button" tabindex="0" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();openPropertyLightbox(0);}" aria-label="View larger property photo">🏠</div>
-    <div class="gallery-thumbs">
-      <div class="gallery-thumb bg-grad-1 active" onclick="selectThumb(this, '🏠', 0)" role="button" tabindex="0" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();selectThumb(this, '🏠', 0);}" aria-label="Living room photo">🏠</div>
-      <div class="gallery-thumb bg-grad-2" onclick="selectThumb(this, '🛋️', 1)" role="button" tabindex="0" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();selectThumb(this, '🛋️', 1);}" aria-label="Lounge photo">🛋️</div>
-      <div class="gallery-thumb bg-grad-3" onclick="selectThumb(this, '🍳', 2)" role="button" tabindex="0" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();selectThumb(this, '🍳', 2);}" aria-label="Kitchen photo">🍳</div>
-      <div class="gallery-thumb bg-grad-4" onclick="selectThumb(this, '🛏️', 3)" role="button" tabindex="0" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();selectThumb(this, '🛏️️', 3);}" aria-label="Bedroom photo">🛏️
+    <div class="gallery-main bg-grad-1" id="mainGalleryImg" onclick="openPropertyLightbox(0)" role="button" tabindex="0" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();openPropertyLightbox(0);}" aria-label="View larger property photo">
+      <span id="galleryMainPlaceholder">🏠</span>
+    </div>
+    <div class="gallery-thumbs" id="galleryThumbsContainer">
+      <div class="gallery-thumb bg-grad-1 active" onclick="selectThumb(this, 0)" role="button" tabindex="0" aria-label="Photo 1">🏠</div>
+      <div class="gallery-thumb bg-grad-2" onclick="selectThumb(this, 1)" role="button" tabindex="0" aria-label="Photo 2">🛋️</div>
+      <div class="gallery-thumb bg-grad-3" onclick="selectThumb(this, 2)" role="button" tabindex="0" aria-label="Photo 3">🍳</div>
+      <div class="gallery-thumb bg-grad-4" onclick="selectThumb(this, 3)" role="button" tabindex="0" aria-label="Photo 4">🛏️
         <div class="gallery-more" onclick="event.stopPropagation(); openPropertyLightbox(0);">+3 More</div>
       </div>
     </div>
 
     <!-- Property Header Info -->
     <div class="prop-detail-header">
-      <div class="prop-detail-tags">
+      <div class="prop-detail-tags" id="propDetailBadges">
         <span class="badge badge-blue">For Sale</span>
         <span class="badge badge-gray">3 BHK</span>
         <span class="badge badge-gray">Private Builder</span>
         <span class="badge badge-green">Verified ✓</span>
         <span class="badge badge-gold">Featured</span>
       </div>
-      <h1 class="prop-detail-title">Skyline Heights Residency — 3 BHK Apartment</h1>
-      <div class="prop-detail-location">📍 Lower Kharodi, Malad West, Mumbai — 400095</div>
-      <div class="prop-detail-price">₹1.85 Cr <small>onwards (₹14,919 / sq.ft)</small></div>
+      <h1 class="prop-detail-title" id="propTitle">Skyline Heights Residency — 3 BHK Apartment</h1>
+      <div class="prop-detail-location" id="propLocation">📍 Lower Kharodi, Malad West, Mumbai — 400095</div>
+      <div class="prop-detail-price" id="propPrice">₹1.85 Cr <small id="propPriceSub">onwards (₹14,919 / sq.ft)</small></div>
     </div>
 
     <!-- Core Specs Grid -->
     <div class="prop-specs">
-      <div class="spec-item"><div class="spec-val">3</div><div class="spec-lbl">Bedrooms</div></div>
-      <div class="spec-item"><div class="spec-val">2</div><div class="spec-lbl">Bathrooms</div></div>
-      <div class="spec-item"><div class="spec-val">1,240</div><div class="spec-lbl">Carpet (sq.ft)</div></div>
-      <div class="spec-item"><div class="spec-val">7th</div><div class="spec-lbl">Floor of 15</div></div>
+      <div class="spec-item"><div class="spec-val" id="specBeds">3</div><div class="spec-lbl">Bedrooms</div></div>
+      <div class="spec-item"><div class="spec-val" id="specBaths">2</div><div class="spec-lbl">Bathrooms</div></div>
+      <div class="spec-item"><div class="spec-val" id="specCarpet">1,240</div><div class="spec-lbl">Carpet (sq.ft)</div></div>
+      <div class="spec-item"><div class="spec-val" id="specFloor">7th / 15</div><div class="spec-lbl">Floor Level</div></div>
     </div>
 
     <!-- Navigation Tabs -->
@@ -331,18 +312,20 @@
     <!-- OVERVIEW TAB -->
     <div class="tab-panel active" id="tab-overview">
       <div class="detail-section-title">🏠 About This Property</div>
-      <p style="font-size:15px;color:var(--text-muted);line-height:1.85;margin-bottom:20px">Welcome to Skyline Heights Residency — a premium 3 BHK apartment in the heart of Malad West's most active residential corridor. This thoughtfully designed flat offers the ideal balance of natural cross-ventilation, abundant daylight, and modern city living.</p>
-      <p style="font-size:15px;color:var(--text-muted);line-height:1.85;margin-bottom:20px">Situated on the 7th floor of an established 15-storey private cooperative housing society, the apartment features an expansive living-dining hall, a modular kitchen fitted with premium Hettich fixtures, 3 quiet bedrooms, and 2 fully tiled modern bathrooms with branded sanitaryware.</p>
-      <p style="font-size:15px;color:var(--text-muted);line-height:1.85;margin-bottom:28px">Residents enjoy 24/7 security with CCTV surveillance, 1 reserved covered car parking slot, dual high-speed elevators, and a children's play area. With Malad Railway Station just 8 minutes away and Link Road within 5 minutes, connectivity across Mumbai is seamless.</p>
+      <div id="overviewDescription">
+        <p style="font-size:15px;color:var(--text-muted);line-height:1.85;margin-bottom:18px">Welcome to Skyline Heights Residency — a premium residential apartment in the heart of Malad West's most active residential corridor. This thoughtfully designed flat offers the ideal balance of natural cross-ventilation, abundant daylight, and modern city living.</p>
+        <p style="font-size:15px;color:var(--text-muted);line-height:1.85;margin-bottom:18px">Situated on an established floor of a high-rise private cooperative housing society, the apartment features an expansive living-dining hall, a modular kitchen fitted with branded fixtures, quiet bedrooms, and fully tiled bathrooms.</p>
+        <p style="font-size:15px;color:var(--text-muted);line-height:1.85;margin-bottom:28px">Residents enjoy 24/7 security with CCTV surveillance, reserved covered car parking, high-speed elevators, and society amenities. With Malad Railway Station, S.V. Road, and Metro Line 2A nearby, connectivity across Mumbai is seamless.</p>
+      </div>
 
       <div class="detail-section-title">✨ Key Highlights</div>
-      <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:28px">
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:28px" id="highlightsList">
         <div style="display:flex;align-items:center;gap:8px;font-size:14px;color:var(--text-muted)">✅ Ready to Move In (Clear OC)</div>
-        <div style="display:flex;align-items:center;gap:8px;font-size:14px;color:var(--text-muted)">✅ 1 Reserved Covered Car Parking</div>
+        <div style="display:flex;align-items:center;gap:8px;font-size:14px;color:var(--text-muted)">✅ Reserved Covered Car Parking</div>
         <div style="display:flex;align-items:center;gap:8px;font-size:14px;color:var(--text-muted)">✅ Fully Modular Kitchen with Piped Gas</div>
         <div style="display:flex;align-items:center;gap:8px;font-size:14px;color:var(--text-muted)">✅ Premium Vitrified Tile Flooring</div>
         <div style="display:flex;align-items:center;gap:8px;font-size:14px;color:var(--text-muted)">✅ Gated Society with 24/7 Security &amp; CCTV</div>
-        <div style="display:flex;align-items:center;gap:8px;font-size:14px;color:var(--text-muted)">✅ Vastu Compliant East-Facing Entry</div>
+        <div style="display:flex;align-items:center;gap:8px;font-size:14px;color:var(--text-muted)">✅ Vastu Compliant Facing</div>
         <div style="display:flex;align-items:center;gap:8px;font-size:14px;color:var(--text-muted)">✅ 100% Clear Title — Freehold Land</div>
         <div style="display:flex;align-items:center;gap:8px;font-size:14px;color:var(--text-muted)">✅ Approved by SBI, HDFC &amp; Major Banks</div>
       </div>
@@ -351,8 +334,8 @@
       <div class="amenities-list" style="margin-bottom:12px">
         <div class="amenity-item"><span class="a-icon">🚂</span> Malad Railway Station — 8 min</div>
         <div class="amenity-item"><span class="a-icon">🚇</span> Metro Line 2A Station — 5 min</div>
-        <div class="amenity-item"><span class="a-icon">🛍️</span> Inorbit Mall &amp; Infinity — 10 min</div>
-        <div class="amenity-item"><span class="a-icon">🏥</span> Zenith &amp; Criticare Hospital — 7 min</div>
+        <div class="amenity-item"><span class="a-icon">🛍️</span> Inorbit &amp; Infinity Mall — 10 min</div>
+        <div class="amenity-item"><span class="a-icon">🏥</span> Criticare &amp; Zenith Hospital — 7 min</div>
         <div class="amenity-item"><span class="a-icon">🏫</span> Ryan International School — 6 min</div>
         <div class="amenity-item"><span class="a-icon">💼</span> Mindspace Commercial Hub — 10 min</div>
       </div>
@@ -361,12 +344,12 @@
     <!-- AMENITIES TAB -->
     <div class="tab-panel" id="tab-amenities">
       <div class="detail-section-title">🏊 Society &amp; Complex Amenities</div>
-      <div class="amenities-list">
+      <div class="amenities-list" id="societyAmenitiesList">
         <div class="amenity-item"><span class="a-icon">🏋️</span> Fitness Gymnasium</div>
         <div class="amenity-item"><span class="a-icon">🏊</span> Swimming Pool</div>
         <div class="amenity-item"><span class="a-icon">🧒</span> Children's Play Area</div>
         <div class="amenity-item"><span class="a-icon">🅿️</span> Covered Podium Parking</div>
-        <div class="amenity-item"><span class="a-icon">🛗</span> 2 High-Speed Lifts</div>
+        <div class="amenity-item"><span class="a-icon">🛗</span> High-Speed Lifts</div>
         <div class="amenity-item"><span class="a-icon">🔒</span> Intercom + CCTV Security</div>
         <div class="amenity-item"><span class="a-icon">💧</span> 24-Hour Municipal Water</div>
         <div class="amenity-item"><span class="a-icon">⚡</span> Generator Power Backup</div>
@@ -375,39 +358,23 @@
         <div class="amenity-item"><span class="a-icon">🎯</span> Clubhouse &amp; Indoor Games</div>
         <div class="amenity-item"><span class="a-icon">📦</span> Security Entry Desk</div>
       </div>
-
-      <div class="detail-section-title" style="margin-top:28px">🏠 Internal Flat Specifications</div>
-      <div class="amenities-list">
-        <div class="amenity-item"><span class="a-icon">🪟</span> Soundproof UPVC French Windows</div>
-        <div class="amenity-item"><span class="a-icon">🚪</span> Teak Wood Finished Flush Doors</div>
-        <div class="amenity-item"><span class="a-icon">🍳</span> Granite Counter Modular Kitchen</div>
-        <div class="amenity-item"><span class="a-icon">🚿</span> Jaquar Sanitaryware &amp; Fittings</div>
-        <div class="amenity-item"><span class="a-icon">🔲</span> Anti-Skid Bathroom Flooring</div>
-        <div class="amenity-item"><span class="a-icon">🎨</span> Concealed Copper Wiring (Polycab)</div>
-      </div>
     </div>
 
     <!-- DETAILS TAB -->
     <div class="tab-panel" id="tab-details">
       <div class="detail-section-title">📋 Technical Property Details</div>
       <table class="prop-table">
-        <tbody>
-          <tr><td>Property Type</td><td>Residential Flat / Apartment</td></tr>
-          <tr><td>Configuration</td><td>3 BHK (3 Beds, 2 Baths, Living Hall, Modular Kitchen)</td></tr>
-          <tr><td>Carpet Area</td><td>1,240 sq.ft (RERA Certified)</td></tr>
-          <tr><td>Built-up Area</td><td>1,420 sq.ft</td></tr>
-          <tr><td>Super Built-up Area</td><td>1,680 sq.ft</td></tr>
-          <tr><td>Floor Number</td><td>7th Floor of 15 Floors</td></tr>
-          <tr><td>Facing Direction</td><td>East (Morning Sunlight)</td></tr>
-          <tr><td>Possession Status</td><td>Ready to Move In (Immediate)</td></tr>
-          <tr><td>Building Type</td><td>Private Builder Cooperative Society</td></tr>
-          <tr><td>Furnishing</td><td>Semi-Furnished (Kitchen Cabinets, Wardrobes)</td></tr>
-          <tr><td>Car Parking</td><td>1 Covered Reserved Slot</td></tr>
-          <tr><td>Total Units in Wing</td><td>60 Apartments</td></tr>
-          <tr><td>Society Maintenance</td><td>₹4,500 / month</td></tr>
+        <tbody id="techDetailsBody">
+          <tr><td>Property Type</td><td id="techPropType">Residential Flat / Apartment</td></tr>
+          <tr><td>Configuration</td><td id="techConfig">3 BHK (3 Beds, 2 Baths, Living Hall, Kitchen)</td></tr>
+          <tr><td>Carpet Area</td><td id="techCarpet">1,240 sq.ft (RERA Certified)</td></tr>
+          <tr><td>Facing Direction</td><td id="techFacing">East (Morning Sunlight)</td></tr>
+          <tr><td>Possession Status</td><td id="techPossession">Ready to Move In (Immediate)</td></tr>
+          <tr><td>Car Parking</td><td id="techParking">1 Covered Reserved Slot</td></tr>
           <tr><td>Ownership</td><td>Freehold / Resale Registered</td></tr>
           <tr><td>Occupancy Certificate (OC)</td><td>Granted &amp; Available ✅</td></tr>
-          <tr><td>Listing ID</td><td>PFRE-MAL-2025-0042</td></tr>
+          <tr><td>MahaRERA ID</td><td id="techRera">P51800019234</td></tr>
+          <tr><td>Listing Reference</td><td id="techListingId">PFRE-MAL-2025-0042</td></tr>
         </tbody>
       </table>
     </div>
@@ -418,26 +385,8 @@
       <div class="floor-plan-placeholder">
         <div class="fp-icon">🗺️</div>
         <h4 style="font-size:16px;font-weight:700;color:var(--text)">Detailed Dimensions Available</h4>
-        <p style="font-size:14px;color:var(--text-muted);text-align:center;max-width:320px;line-height:1.5">Request the CAD / PDF layout plan directly from our team on WhatsApp.</p>
-        <a href="https://wa.me/919326990050?text=Please%20share%20the%20floor%20plan%20for%20Skyline%20Heights%203%20BHK%20Malad%20West%20(PFRE-MAL-2025-0042)" target="_blank" rel="noopener noreferrer" class="btn btn-primary" style="margin-top:8px">💬 Request Floor Plan on WhatsApp</a>
-      </div>
-
-      <div style="margin-top:20px;background:var(--off-white);border-radius:12px;padding:20px;border:1px solid var(--border)">
-        <div style="font-size:14px;font-weight:700;margin-bottom:12px;color:var(--text)">📐 Carpet Area Breakdown</div>
-        <div style="display:grid;grid-template-columns:repeat(3, 1fr);gap:14px">
-          <div style="background:var(--card, white);padding:14px;border-radius:10px;text-align:center;border:1px solid var(--border)">
-            <div style="font-size:20px;font-weight:900;color:var(--blue);font-family:'Playfair Display',serif">310</div>
-            <div style="font-size:12px;color:var(--text-muted)">sq.ft Living &amp; Dining</div>
-          </div>
-          <div style="background:var(--card, white);padding:14px;border-radius:10px;text-align:center;border:1px solid var(--border)">
-            <div style="font-size:20px;font-weight:900;color:var(--blue);font-family:'Playfair Display',serif">390</div>
-            <div style="font-size:12px;color:var(--text-muted)">sq.ft 3 Bedrooms Total</div>
-          </div>
-          <div style="background:var(--card, white);padding:14px;border-radius:10px;text-align:center;border:1px solid var(--border)">
-            <div style="font-size:20px;font-weight:900;color:var(--blue);font-family:'Playfair Display',serif">140</div>
-            <div style="font-size:12px;color:var(--text-muted)">sq.ft Kitchen &amp; Utility</div>
-          </div>
-        </div>
+        <p style="font-size:14px;color:var(--text-muted);text-align:center;max-width:340px;line-height:1.5">Request the official CAD / PDF layout plan directly from our Malad West desk on WhatsApp.</p>
+        <a id="floorplanWaBtn" href="https://wa.me/919326990050?text=Please%20share%20the%20floor%20plan%20for%20Skyline%20Heights%203%20BHK%20Malad%20West" target="_blank" rel="noopener noreferrer" class="btn btn-primary" style="margin-top:8px">💬 Request Floor Plan on WhatsApp</a>
       </div>
     </div>
 
@@ -449,39 +398,26 @@
       </div>
       <div style="display:flex;gap:10px;margin-top:12px;flex-wrap:wrap">
         <a href="https://maps.google.com/?q=19.1886,72.8485" target="_blank" rel="noopener noreferrer" class="btn btn-outline btn-sm">📍 Open in Google Maps</a>
-        <a href="https://www.openstreetmap.org/?mlat=19.1860&mlon=72.8486" target="_blank" rel="noopener noreferrer" class="btn btn-outline btn-sm">🗺️ OpenStreetMap</a>
         <a href="https://maps.google.com/?q=19.1886,72.8485&dirflg=d" target="_blank" rel="noopener noreferrer" class="btn btn-outline btn-sm">🧭 Get Driving Directions</a>
-      </div>
-
-      <div style="margin-top:28px">
-        <div style="font-size:15px;font-weight:700;margin-bottom:14px;color:var(--text)">🚌 Transit Times to Key Hubs</div>
-        <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px">
-          <div style="display:flex;justify-content:space-between;padding:12px 14px;background:var(--off-white);border-radius:9px;font-size:13.5px;border:1px solid var(--border)"><span>🚂 Malad Railway Station</span><strong>8 min / 2.2 km</strong></div>
-          <div style="display:flex;justify-content:space-between;padding:12px 14px;background:var(--off-white);border-radius:9px;font-size:13.5px;border:1px solid var(--border)"><span>🚇 Metro Line 2A Station</span><strong>5 min / 1.1 km</strong></div>
-          <div style="display:flex;justify-content:space-between;padding:12px 14px;background:var(--off-white);border-radius:9px;font-size:13.5px;border:1px solid var(--border)"><span>✈️ Chhatrapati Shivaji Airport</span><strong>35 min / 18 km</strong></div>
-          <div style="display:flex;justify-content:space-between;padding:12px 14px;background:var(--off-white);border-radius:9px;font-size:13.5px;border:1px solid var(--border)"><span>🏢 BKC Financial Center</span><strong>45 min / 22 km</strong></div>
-          <div style="display:flex;justify-content:space-between;padding:12px 14px;background:var(--off-white);border-radius:9px;font-size:13.5px;border:1px solid var(--border)"><span>🛍️ Inorbit Mall Malad</span><strong>10 min / 3.5 km</strong></div>
-          <div style="display:flex;justify-content:space-between;padding:12px 14px;background:var(--off-white);border-radius:9px;font-size:13.5px;border:1px solid var(--border)"><span>🏥 Kokilaben Ambani Hospital</span><strong>20 min / 8 km</strong></div>
-        </div>
       </div>
     </div>
 
     <!-- EMI CALCULATOR TAB -->
     <div class="tab-panel" id="tab-emi">
       <div class="detail-section-title">🏦 Loan EMI Breakdown</div>
-      <div style="background:var(--off-white);border-radius:14px;padding:24px;border:1px solid var(--border)">
-        <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:16px;margin-bottom:16px">
+      <div style="background:var(--bg-secondary);border-radius:14px;padding:24px;border:1px solid var(--border)">
+        <div style="display:grid;grid-template-columns:repeat(auto-fit, minmax(180px, 1fr));gap:16px;margin-bottom:16px">
           <div>
             <label style="display:block;font-size:12px;font-weight:700;color:var(--text-muted);margin-bottom:6px;text-transform:uppercase">Property Cost (₹)</label>
             <input class="enq-input" type="number" id="dtPropVal" value="18500000" oninput="calcDetailEMI()">
           </div>
           <div>
             <label style="display:block;font-size:12px;font-weight:700;color:var(--text-muted);margin-bottom:6px;text-transform:uppercase">Down Payment (₹)</label>
-            <input class="enq-input" type="number" id="dtDown" value="4625000" oninput="calcDetailEMI()">
+            <input class="enq-input" type="number" id="dtDown" value="3700000" oninput="calcDetailEMI()">
           </div>
           <div>
             <label style="display:block;font-size:12px;font-weight:700;color:var(--text-muted);margin-bottom:6px;text-transform:uppercase">Loan Amount (₹)</label>
-            <input class="enq-input" type="number" id="dtLoan" value="13875000" readonly style="background:var(--blue-light, rgba(37,99,235,0.1));color:var(--blue);font-weight:700">
+            <input class="enq-input" type="number" id="dtLoan" value="14800000" readonly style="background:var(--blue-light, rgba(37,99,235,0.1));color:var(--blue);font-weight:700">
           </div>
         </div>
 
@@ -496,23 +432,23 @@
           </div>
         </div>
 
-        <div style="background:linear-gradient(135deg,#1D4ED8,#3B82F6);border-radius:12px;padding:22px;color:white;display:grid;grid-template-columns:1fr 1fr 1fr;gap:16px;text-align:center">
+        <div style="background:linear-gradient(135deg,#1D4ED8,#3B82F6);border-radius:12px;padding:22px;color:white;display:grid;grid-template-columns:repeat(auto-fit, minmax(140px, 1fr));gap:16px;text-align:center">
           <div>
-            <div style="font-size:11px;opacity:.8;margin-bottom:4px;text-transform:uppercase;letter-spacing:1px">Monthly EMI</div>
-            <div style="font-family:'Playfair Display',serif;font-size:26px;font-weight:900" id="dtEMI">₹1,20,432</div>
+            <div style="font-size:11px;opacity:.85;margin-bottom:4px;text-transform:uppercase;letter-spacing:1px">Monthly EMI</div>
+            <div style="font-family:'Playfair Display',serif;font-size:26px;font-weight:900" id="dtEMI">₹1,28,476</div>
           </div>
           <div>
-            <div style="font-size:11px;opacity:.8;margin-bottom:4px;text-transform:uppercase;letter-spacing:1px">Total Repayment</div>
-            <div style="font-family:'Playfair Display',serif;font-size:20px;font-weight:700" id="dtTotal">₹2.89 Cr</div>
+            <div style="font-size:11px;opacity:.85;margin-bottom:4px;text-transform:uppercase;letter-spacing:1px">Total Repayment</div>
+            <div style="font-family:'Playfair Display',serif;font-size:20px;font-weight:700" id="dtTotal">₹3.08 Cr</div>
           </div>
           <div>
-            <div style="font-size:11px;opacity:.8;margin-bottom:4px;text-transform:uppercase;letter-spacing:1px">Interest Component</div>
-            <div style="font-family:'Playfair Display',serif;font-size:20px;font-weight:700" id="dtInterest">₹1.50 Cr</div>
+            <div style="font-size:11px;opacity:.85;margin-bottom:4px;text-transform:uppercase;letter-spacing:1px">Total Interest</div>
+            <div style="font-family:'Playfair Display',serif;font-size:20px;font-weight:700" id="dtInterest">₹1.60 Cr</div>
           </div>
         </div>
 
         <div style="margin-top:16px;text-align:center">
-          <a href="calculators.html" style="font-size:13.5px;color:var(--blue);font-weight:600;text-decoration:none">🧮 Open Advanced EMI &amp; Amortization Calculator →</a>
+          <a href="calculators.html" style="font-size:13.5px;color:var(--blue);font-weight:600;text-decoration:none">🧮 Open Advanced Home Loan EMI &amp; Amortization Calculator →</a>
         </div>
       </div>
     </div>
@@ -522,11 +458,11 @@
   <aside class="detail-sidebar">
     <div class="enquiry-card">
       <h3>Book a Site Visit</h3>
-      <div class="enq-price">₹1.85 Cr <small style="font-family:'DM Sans',sans-serif;font-size:13px;font-weight:400;color:var(--text-muted)">onwards</small></div>
+      <div class="enq-price" id="sidebarPrice">₹1.85 Cr <small style="font-family:'DM Sans',sans-serif;font-size:13px;font-weight:400;color:var(--text-muted)">onwards</small></div>
 
       <form id="propertyEnquiryForm" onsubmit="event.preventDefault(); submitEnquiry();">
         <input class="enq-input" id="enq-name" type="text" placeholder="Your Full Name *" required autocomplete="name">
-        <input class="enq-input" id="enq-phone" type="tel" placeholder="Phone / WhatsApp Number *" required autocomplete="tel">
+        <input class="enq-input" id="enq-phone" type="tel" placeholder="Phone Number *" required autocomplete="tel">
         <input class="enq-input" id="enq-email" type="email" placeholder="Email Address" autocomplete="email">
         <select class="enq-input" id="enq-purpose" aria-label="Inquiry Purpose">
           <option value="Schedule Site Visit">Schedule Site Visit</option>
@@ -534,9 +470,9 @@
           <option value="Floor Plan / Video Tour">Request Floor Plan / Video Tour</option>
           <option value="Home Loan Assistance">Home Loan Assistance</option>
         </select>
-        <textarea class="enq-input" id="enq-message" rows="3" placeholder="Tell us your convenient time for a site visit…"></textarea>
+        <textarea class="enq-input" id="enq-message" rows="3" placeholder="Preferred date or timing for site visit…"></textarea>
 
-        <!-- Turnstile CAPTCHA -->
+        <!-- Cloudflare Turnstile -->
         <div class="cf-turnstile" data-sitekey="1x00000000000000000000AA" id="ts-widget" data-theme="auto" style="margin-bottom:14px"></div>
 
         <button class="enq-btn" id="enqSubmitBtn" type="submit">📤 Request Callback</button>
@@ -545,28 +481,32 @@
       <div class="enq-divider">— or contact directly —</div>
 
       <div class="enq-row">
-        <a href="https://wa.me/919326990050?text=I%20am%20interested%20in%20Skyline%20Heights%203%20BHK%20Malad%20West%20(PFRE-MAL-2025-0042)" target="_blank" rel="noopener noreferrer" class="enq-alt-btn wa">💬 WhatsApp</a>
-        <a href="tel:+919326990050" class="enq-alt-btn call">📞 Call Now</a>
+        <a id="sideWaBtn" href="https://wa.me/919326990050?text=I%20am%20interested%20in%20inspecting%20Skyline%20Heights%203%20BHK%20Malad%20West" target="_blank" rel="noopener noreferrer" class="enq-alt-btn wa">💬 WhatsApp</a>
+        <a id="sideCallBtn" href="tel:+919326990050" class="enq-alt-btn call">📞 Call Now</a>
       </div>
 
       <div class="agent-row">
         <div class="agent-avatar">👨‍💼</div>
         <div>
-          <div class="agent-name">Mr. Saurav Chowdhury</div>
-          <div class="agent-role">Principal Consultant · PFRE</div>
+          <div class="agent-name">Property Finder Real Estate</div>
+          <div class="agent-role">Principal Consultant Desk</div>
         </div>
         <a href="tel:+919326990050" style="margin-left:auto;font-size:13px;color:var(--blue);font-weight:700;text-decoration:none">Call</a>
       </div>
 
       <div class="emi-mini">
         <h4>💰 Estimated Monthly EMI</h4>
-        <div class="emi-val">₹1,20,432 / mo</div>
-        <div class="emi-sub">Calculated for ₹1.39 Cr loan · 8.5% · 20 yrs</div>
+        <div class="emi-val" id="miniEmiVal">₹1,28,476 / mo</div>
+        <div class="emi-sub" id="miniEmiSub">8.5% p.a. · 20 Yrs Tenure</div>
       </div>
 
       <div style="margin-top:16px;display:flex;gap:10px">
         <button class="btn btn-outline btn-sm" type="button" style="flex:1;justify-content:center" onclick="addCurrentToCompare()">🔄 Compare</button>
         <button class="btn btn-outline btn-sm" type="button" style="flex:1;justify-content:center" id="favBtn" onclick="toggleFav()">🤍 Wishlist</button>
+      </div>
+
+      <div style="margin-top:20px;padding-top:16px;border-top:1px solid var(--border);font-size:12px;color:var(--text-muted);line-height:1.6">
+        <strong>Office:</strong> Shop No. 9, Ground Floor, Building No. 3, Deepanjali Co-operative Housing Society Limited, Baf-Hira Nagar, Lower Kharodi, Jankalyan Nagar Road, Malad West, Mumbai, Maharashtra, 400095, India
       </div>
     </div>
   </aside>
@@ -576,8 +516,8 @@
 <section class="section section-alt">
   <div class="section-head reveal">
     <div>
-      <div class="section-label">You May Also Like</div>
-      <h2 class="section-title">Similar <em>Properties in Malad &amp; Goregaon</em></h2>
+      <div class="section-label">Explore More</div>
+      <h2 class="section-title">Similar <em>Properties in Mumbai</em></h2>
     </div>
     <a href="properties.html" class="view-all">View All Properties →</a>
   </div>
@@ -589,59 +529,59 @@
         <button class="prop-fav" type="button" aria-label="Save to wishlist">🤍</button>
       </div>
       <div class="prop-body">
-        <div class="prop-price">₹1.65 Cr</div>
-        <div class="prop-name">Crystal Towers — 3 BHK</div>
-        <div class="prop-loc">📍 Malad West, Mumbai</div>
+        <div class="prop-price">₹1.45 Cr</div>
+        <div class="prop-name">Marina Enclave — 2 BHK</div>
+        <div class="prop-loc">📍 Jankalyan Nagar, Malad West</div>
+        <div class="prop-meta">
+          <div class="prop-meta-item">🛏 <strong>2</strong> Beds</div>
+          <div class="prop-meta-item">🛁 <strong>2</strong> Baths</div>
+          <div class="prop-meta-item">📐 <strong>685</strong> sq.ft</div>
+        </div>
+      </div>
+    </div>
+    <div class="prop-card reveal">
+      <div class="prop-img bg-grad-3">
+        <div class="prop-placeholder" role="img" aria-label="Property illustration">🏠</div>
+        <div class="prop-badges"><span class="badge badge-green">For Rent</span></div>
+        <button class="prop-fav" type="button" aria-label="Save to wishlist">🤍</button>
+      </div>
+      <div class="prop-body">
+        <div class="prop-price">₹85,000 <small>/ mo</small></div>
+        <div class="prop-name">Oberoi Woods — 3 BHK</div>
+        <div class="prop-loc">📍 Oberoi Garden City, Goregaon East</div>
         <div class="prop-meta">
           <div class="prop-meta-item">🛏 <strong>3</strong> Beds</div>
-          <div class="prop-meta-item">🛁 <strong>2</strong> Baths</div>
-          <div class="prop-meta-item">📐 <strong>1,180</strong> sq.ft</div>
+          <div class="prop-meta-item">🛁 <strong>3</strong> Baths</div>
+          <div class="prop-meta-item">📐 <strong>1,150</strong> sq.ft</div>
         </div>
       </div>
     </div>
     <div class="prop-card reveal">
       <div class="prop-img bg-grad-4">
-        <div class="prop-placeholder" role="img" aria-label="Property illustration">🏠</div>
-        <div class="prop-badges"><span class="badge badge-blue">For Sale</span></div>
+        <div class="prop-placeholder" role="img" aria-label="Property illustration">🏬</div>
+        <div class="prop-badges"><span class="badge badge-blue">Commercial</span></div>
         <button class="prop-fav" type="button" aria-label="Save to wishlist">🤍</button>
       </div>
       <div class="prop-body">
-        <div class="prop-price">₹2.10 Cr</div>
-        <div class="prop-name">Emerald Heights — 3 BHK</div>
-        <div class="prop-loc">📍 Malad West, Mumbai</div>
+        <div class="prop-price">₹1.75 Cr</div>
+        <div class="prop-name">Retail Commercial Shop</div>
+        <div class="prop-loc">📍 New Link Road, Malad West</div>
         <div class="prop-meta">
-          <div class="prop-meta-item">🛏 <strong>3</strong> Beds</div>
-          <div class="prop-meta-item">🛁 <strong>2</strong> Baths</div>
-          <div class="prop-meta-item">📐 <strong>1,340</strong> sq.ft</div>
-        </div>
-      </div>
-    </div>
-    <div class="prop-card reveal">
-      <div class="prop-img bg-grad-9">
-        <div class="prop-placeholder" role="img" aria-label="Property illustration">🏗️</div>
-        <div class="prop-badges"><span class="badge badge-gold">New Launch</span></div>
-        <button class="prop-fav" type="button" aria-label="Save to wishlist">🤍</button>
-      </div>
-      <div class="prop-body">
-        <div class="prop-price">₹1.95 Cr <small>onwards</small></div>
-        <div class="prop-name">Paradise Residency — 3 BHK</div>
-        <div class="prop-loc">📍 Goregaon West, Mumbai</div>
-        <div class="prop-meta">
-          <div class="prop-meta-item">🛏 <strong>3</strong> Beds</div>
-          <div class="prop-meta-item">🛁 <strong>2</strong> Baths</div>
-          <div class="prop-meta-item">📐 <strong>1,260</strong> sq.ft</div>
+          <div class="prop-meta-item">📐 <strong>410</strong> sq.ft</div>
+          <div class="prop-meta-item">🏢 Ground Floor</div>
+          <div class="prop-meta-item">🅿️ Frontage</div>
         </div>
       </div>
     </div>
   </div>
 </section>
 
-<!-- STICKY ENQUIRY BAR -->
+<!-- STICKY ENQUIRY BAR (MOBILE) -->
 <div id="stickyEnquiry">
-  <div class="sticky-prop-name">Skyline Heights — 3 BHK, Malad West</div>
-  <div class="sticky-prop-price">₹1.85 Cr</div>
+  <div class="sticky-prop-name" id="stickyPropTitle">Skyline Heights — 3 BHK</div>
+  <div class="sticky-prop-price" id="stickyPropPrice">₹1.85 Cr</div>
   <div class="sticky-actions">
-    <a href="https://wa.me/919326990050?text=I%20am%20interested%20in%20Skyline%20Heights%203%20BHK%20(PFRE-MAL-2025-0042)" target="_blank" rel="noopener noreferrer" class="btn btn-primary btn-sm">💬 WhatsApp</a>
+    <a id="stickyWaBtn" href="https://wa.me/919326990050?text=I%20am%20interested%20in%20inspecting%20this%20property" target="_blank" rel="noopener noreferrer" class="btn btn-primary btn-sm">💬 WhatsApp</a>
     <a href="tel:+919326990050" class="btn btn-outline btn-sm">📞 Call</a>
     <button class="btn btn-outline btn-sm" type="button" onclick="window.scrollTo({top: 0, behavior: 'smooth'}); document.getElementById('enq-name')?.focus();">📤 Enquire</button>
   </div>
@@ -657,24 +597,14 @@
       </div>
       <p class="tagline">"Your Search Ends Here."</p>
       <p>Trusted real estate consultants in Mumbai's western suburbs since 2018.</p>
-      <div class="social-row">
-        <a href="https://www.instagram.com/propertyfinderrealestate" class="social-btn" target="_blank" rel="noopener noreferrer" aria-label="Instagram"><svg width="16" height="16" fill="none" stroke="white" stroke-width="2" viewBox="0 0 24 24"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1112.63 8 4 4 0 0116 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg></a>
-        <a href="https://www.facebook.com/PropertyFinderRealEstate/reviews" class="social-btn" target="_blank" rel="noopener noreferrer" aria-label="Facebook Reviews"><svg width="16" height="16" fill="white" viewBox="0 0 24 24"><path d="M18 2h-3a5 5 0 00-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 011-1h3z"/></svg></a>
-        <a href="https://www.linkedin.com/company/propertyfinderrealestate" class="social-btn" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn"><svg width="16" height="16" fill="white" viewBox="0 0 24 24"><path d="M16 8a6 6 0 016 6v7h-4v-7a2 2 0 00-2-2 2 2 0 00-2 2v7h-4v-7a6 6 0 016-6zM2 9h4v12H2z"/><circle cx="4" cy="4" r="2"/></svg></a>
-        <a href="https://www.youtube.com/@PropertyFinderRealEstate" class="social-btn" target="_blank" rel="noopener noreferrer" aria-label="YouTube"><svg width="16" height="16" viewBox="0 0 24 24" fill="white"><path d="M23.498 6.186a3.016 3.016 0 00-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 00.502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 002.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 002.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/></svg></a>
-        <a href="https://x.com/PropertyFinderA" class="social-btn" target="_blank" rel="noopener noreferrer" aria-label="X / Twitter"><svg width="16" height="16" fill="white" viewBox="0 0 24 24"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg></a>
-        <a href="https://in.pinterest.com/propertyfinderrealestate/" class="social-btn" target="_blank" rel="noopener noreferrer" aria-label="Pinterest"><svg width="16" height="16" viewBox="0 0 24 24" fill="white"><path d="M12 0C5.373 0 0 5.373 0 12c0 5.084 3.163 9.426 7.627 11.174-.105-.949-.2-2.405.042-3.441.218-.937 1.407-5.965 1.407-5.965s-.359-.719-.359-1.782c0-1.668.967-2.914 2.171-2.914 1.023 0 1.518.769 1.518 1.69 0 1.029-.655 2.568-.994 3.995-.283 1.194.599 2.169 1.777 2.169 2.133 0 3.772-2.249 3.772-5.495 0-2.873-2.064-4.882-5.012-4.882-3.414 0-5.418 2.561-5.418 5.207 0 1.031.397 2.138.893 2.738a.36.36 0 01.083.345l-.333 1.36c-.053.22-.174.267-.402.161-1.499-.698-2.436-2.889-2.436-4.649 0-3.785 2.75-7.262 7.929-7.262 4.163 0 7.398 2.967 7.398 6.931 0 4.136-2.607 7.464-6.227 7.464-1.216 0-2.359-.632-2.75-1.378l-.748 2.853c-.271 1.043-1.002 2.35-1.492 3.146C9.57 23.812 10.763 24 12 24c6.627 0 12-5.373 12-12S18.627 0 12 0z"/></svg></a>
-        <a href="https://jsdl.in/RSL-XGK1779888146" class="social-btn" target="_blank" rel="noopener noreferrer" aria-label="JustDial"><svg width="16" height="16" viewBox="0 0 24 24"><rect width="24" height="24" rx="5" fill="#FF6B35"/><text x="12" y="17" font-family="Arial,sans-serif" font-size="10" font-weight="900" text-anchor="middle" fill="white">JD</text></svg></a>
-      </div>
     </div>
     <div class="footer-col">
-      <h4>Quick Links</h4>
-      <a href="index.html">Home</a>
-      <a href="properties.html">Properties</a>
-      <a href="projects.html">Projects</a>
-      <a href="services.html">Services</a>
-      <a href="about.html">About Us</a>
-      <a href="contact.html">Contact</a>
+      <h4>Top Areas</h4>
+      <a href="/properties/flats-in-malad-west">Flats in Malad West</a>
+      <a href="/properties/flats-in-kandivali-west">Flats in Kandivali West</a>
+      <a href="/properties/flats-in-borivali-west">Flats in Borivali West</a>
+      <a href="/properties/flats-in-goregaon-east">Flats in Goregaon East</a>
+      <a href="/properties/commercial-office-andheri">Office in Andheri</a>
     </div>
     <div class="footer-col">
       <h4>Calculators</h4>
@@ -682,31 +612,31 @@
       <a href="tds-calculators.html">TDS Calculator</a>
       <a href="converter.html">Area Converter</a>
       <a href="price-trends.html">Price Trends</a>
-      <a href="faq.html">FAQ</a>
     </div>
     <div class="footer-col">
       <h4>Contact Us</h4>
-      <div class="footer-contact-row"><span>📞</span><a href="tel:+919326990050">+91 93269 90050</a></div>
+      <div class="footer-contact-row"><span>📍</span><span>Shop No. 9, Ground Floor, Building No. 3, Deepanjali Co-operative Housing Society Limited, Baf-Hira Nagar, Lower Kharodi, Jankalyan Nagar Road, Malad West, Mumbai, Maharashtra, 400095, India</span></div>
+      <div class="footer-contact-row"><span>📞</span><a href="tel:+919326990050">+919326990050</a></div>
       <div class="footer-contact-row"><span>✉️</span><a href="mailto:propertyfinderre@gmail.com">propertyfinderre@gmail.com</a></div>
-      <div class="footer-contact-row"><span>📍</span><span>Lower Kharodi, Malad West, Mumbai - 400095</span></div>
     </div>
   </div>
   <div class="footer-bottom">
     <span>© 2026 Property Finder Real Estate. All rights reserved.</span>
+    <span><a href="privacy-policy.html">Privacy Policy</a> &nbsp;·&nbsp; <a href="terms.html">Terms of Service</a></span>
   </div>
 </footer>
 
-<!-- ═══ GLOBAL WIDGETS ═══ -->
+<!-- ═══ GLOBAL WIDGETS (Hidden by default to prevent leakage) ═══ -->
 <div id="progressBar"></div>
 <div id="toastContainer"></div>
-<button id="backToTop" title="Back to top" aria-label="Back to top">&#8593;</button>
+<button id="backToTop" type="button" title="Back to top" aria-label="Back to top">&#8593;</button>
 
 <!-- Cookie Consent Banner -->
-<div class="cookie-banner" id="cookieBanner">
-  <p class="cookie-text">We use cookies to enhance your browsing experience, deliver personalized listings, and analyze site traffic.</p>
+<div class="cookie-banner" id="cookieBanner" style="display: none;">
+  <p class="cookie-text">We use cookies to improve your browsing experience and provide personalized services.</p>
   <div class="cookie-btns">
-    <button class="cookie-accept" id="cookieAccept">Accept</button>
-    <button class="cookie-decline" id="cookieDecline">Decline</button>
+    <button class="cookie-accept" id="cookieAccept" type="button">Accept</button>
+    <button class="cookie-decline" id="cookieDecline" type="button">Decline</button>
   </div>
 </div>
 
@@ -714,7 +644,7 @@
 <div class="floating-actions">
   <div class="fab-wrap">
     <span class="fab-label">WhatsApp Us</span>
-    <a href="https://wa.me/919326990050?text=I%20am%20interested%20in%20Skyline%20Heights%203%20BHK%20Malad%20West%20(PFRE-MAL-2025-0042)" target="_blank" rel="noopener noreferrer" class="fab fab-whatsapp" aria-label="WhatsApp">💬</a>
+    <a id="fabWaBtn" href="https://wa.me/919326990050" target="_blank" rel="noopener noreferrer" class="fab fab-whatsapp" aria-label="WhatsApp">💬</a>
   </div>
   <div class="fab-wrap">
     <span class="fab-label">Call Us</span>
@@ -722,30 +652,30 @@
   </div>
   <div class="fab-wrap">
     <span class="fab-label">AI Assistant</span>
-    <button class="fab fab-chat" id="chatToggle" aria-label="Open AI Assistant">🤖<span class="chat-badge">1</span></button>
+    <button class="fab fab-chat" id="chatToggle" type="button" aria-label="Open AI Assistant">🤖<span class="chat-badge">1</span></button>
   </div>
 </div>
 
 <!-- Chat Widget -->
-<div id="chatWidget" aria-hidden="true">
+<div id="chatWidget" aria-hidden="true" style="display: none;">
   <div class="chat-header">
     <div class="chat-avatar">🏠</div>
     <div class="chat-header-info">
       <div class="chat-name">PFRE Assistant</div>
       <div class="chat-status"><span class="chat-status-dot"></span> Online — replies instantly</div>
     </div>
-    <button class="chat-close" id="chatClose" aria-label="Close Chat">&times;</button>
+    <button class="chat-close" id="chatClose" type="button" aria-label="Close Chat">&times;</button>
   </div>
   <div class="chat-body" id="chatBody"></div>
   <div class="quick-replies" id="quickReplies"></div>
   <div class="chat-input-row">
     <input class="chat-input" id="chatInput" type="text" placeholder="Ask about properties, prices, loans…" aria-label="Chat input">
-    <button class="chat-send" id="chatSend" aria-label="Send Message">&#10148;</button>
+    <button class="chat-send" id="chatSend" type="button" aria-label="Send Message">&#10148;</button>
   </div>
 </div>
 
 <!-- Comparison Bar -->
-<div id="compareBar">
+<div id="compareBar" style="display: none;">
   <span class="compare-bar-title">🔄 Compare Properties</span>
   <div class="compare-slots">
     <div class="compare-slot">+ Add Property</div>
@@ -753,35 +683,44 @@
     <div class="compare-slot">+ Add Property</div>
   </div>
   <div class="compare-actions">
-    <button class="compare-btn primary">Compare Now</button>
-    <button class="compare-btn secondary" onclick="document.getElementById('compareBar').classList.remove('show')">Clear All</button>
+    <button class="compare-btn primary" type="button">Compare Now</button>
+    <button class="compare-btn secondary" type="button" onclick="document.getElementById('compareBar').classList.remove('show');">Clear All</button>
   </div>
 </div>
 
 <!-- Lightbox Modal -->
-<div id="lightbox" aria-hidden="true">
+<div id="lightbox" aria-hidden="true" style="display: none;">
   <div class="lightbox-inner">
-    <button class="lightbox-close" id="lbClose" aria-label="Close Lightbox">&times;</button>
+    <button class="lightbox-close" id="lbClose" type="button" aria-label="Close Lightbox">&times;</button>
     <div class="lightbox-img-placeholder" id="lbImage">🏠</div>
-    <button class="lightbox-nav lightbox-prev" id="lbPrev" aria-label="Previous Image">&#8249;</button>
-    <button class="lightbox-nav lightbox-next" id="lbNext" aria-label="Next Image">&#8250;</button>
+    <button class="lightbox-nav lightbox-prev" id="lbPrev" type="button" aria-label="Previous Image">&#8249;</button>
+    <button class="lightbox-nav lightbox-next" id="lbNext" type="button" aria-label="Next Image">&#8250;</button>
     <div class="lightbox-counter" id="lbCounter">1 / 1</div>
   </div>
 </div>
 
 <!-- PWA Install Banner -->
-<div id="pwaInstall">
+<div id="pwaInstall" style="display: none;">
   <div class="pwa-icon">🏠</div>
   <div class="pwa-text">
     <h4>Install Property Finder App</h4>
     <p>Quick access to Mumbai listings on your phone</p>
   </div>
-  <button class="pwa-install-btn" id="pwaInstallBtn">Install</button>
-  <button class="pwa-dismiss" id="pwaDismiss" aria-label="Dismiss">&times;</button>
+  <button class="pwa-install-btn" id="pwaInstallBtn" type="button">Install</button>
+  <button class="pwa-dismiss" id="pwaDismiss" type="button" aria-label="Dismiss">&times;</button>
 </div>
 <!-- ═══ END GLOBAL WIDGETS ═══ -->
 
 <script>
+let currentPropertyData = {
+  id: "PFRE-MAL-2025-0042",
+  title: "Skyline Heights Residency — 3 BHK Apartment",
+  price: 18500000,
+  priceDisplay: "₹1.85 Cr",
+  address: "Lower Kharodi, Malad West, Mumbai — 400095",
+  images: []
+};
+
 // Tab Switcher
 function openTab(id, btn) {
   document.querySelectorAll('.tab-panel').forEach(p => p.classList.remove('active'));
@@ -792,19 +731,20 @@ function openTab(id, btn) {
 }
 
 // Gallery Thumb Selection
-function selectThumb(el, icon, index) {
+function selectThumb(el, index) {
   document.querySelectorAll('.gallery-thumb').forEach(t => t.classList.remove('active'));
   el.classList.add('active');
   const main = document.getElementById('mainGalleryImg');
-  if (main) {
-    main.textContent = icon;
+  if (main && currentPropertyData.images && currentPropertyData.images[index]) {
+    main.innerHTML = `<img src="${currentPropertyData.images[index]}" alt="Property View" style="width:100%;height:100%;object-fit:cover;">`;
     main.onclick = () => openPropertyLightbox(index);
   }
 }
 
-// Open Lightbox using standard widgets.js
+// Open Lightbox
 function openPropertyLightbox(startIndex) {
-  const images = ['🏠 Living Room', '🛋️ Lounge', '🍳 Modular Kitchen', '🛏️ Master Bedroom', '🚿 Modern Bathroom', '🏙️ City View'];
+  const defaultImages = ['🏠 Living Room', '🛋️ Lounge', '🍳 Modular Kitchen', '🛏️ Master Bedroom', '🚿 Bathroom', '🏙️ View'];
+  const images = (currentPropertyData.images && currentPropertyData.images.length > 0) ? currentPropertyData.images : defaultImages;
   if (typeof window.openLightbox === 'function') {
     window.openLightbox(images, startIndex);
   }
@@ -824,7 +764,7 @@ function toggleFav() {
 // Compare Integration
 function addCurrentToCompare() {
   if (typeof window.addToCompare === 'function') {
-    window.addToCompare('Skyline Heights 3 BHK', '₹1.85 Cr');
+    window.addToCompare(currentPropertyData.title, currentPropertyData.priceDisplay);
   }
 }
 
@@ -847,16 +787,25 @@ function calcDetailEMI() {
   const emiEl = document.getElementById('dtEMI');
   const totalEl = document.getElementById('dtTotal');
   const intEl = document.getElementById('dtInterest');
+  const miniEmiEl = document.getElementById('miniEmiVal');
 
-  if (emiEl) emiEl.textContent = '₹' + Math.round(emi).toLocaleString('en-IN');
+  const formattedEmi = '₹' + Math.round(emi).toLocaleString('en-IN');
+  if (emiEl) emiEl.textContent = formattedEmi;
+  if (miniEmiEl) miniEmiEl.textContent = formattedEmi + ' / mo';
   if (totalEl) totalEl.textContent = '₹' + (total / 10000000).toFixed(2) + ' Cr';
   if (intEl) intEl.textContent = '₹' + ((total - loan) / 10000000).toFixed(2) + ' Cr';
 }
 
 // Enquiry Submission
 async function submitEnquiry() {
-  if (window.PFRESecurity?.verifyTurnstile && !window.PFRESecurity.verifyTurnstile('#ts-widget')) return;
-  else if (window.turnstileOK && !window.turnstileOK('.cf-turnstile')) return;
+  if (window.PFRESecurity?.verifyTurnstile && !window.PFRESecurity.verifyTurnstile('#ts-widget')) {
+    if (typeof window.showToast === 'function') window.showToast('Please complete the verification.', 'error');
+    return;
+  }
+  if (window.turnstileOK && !window.turnstileOK('.cf-turnstile')) {
+    if (typeof window.showToast === 'function') window.showToast('Please complete the verification.', 'error');
+    return;
+  }
 
   const name = document.getElementById('enq-name')?.value?.trim();
   const phone = document.getElementById('enq-phone')?.value?.trim();
@@ -883,8 +832,8 @@ async function submitEnquiry() {
     email,
     purpose,
     message,
-    property: 'Skyline Heights — 3 BHK (PFRE-MAL-2025-0042)',
-    propertyId: 'PFRE-MAL-2025-0042',
+    property: `${currentPropertyData.title} (${currentPropertyData.id})`,
+    propertyId: currentPropertyData.id,
     page: 'property-detail',
     source: 'property_detail_page',
     ts: new Date().toISOString()
@@ -925,16 +874,122 @@ async function submitEnquiry() {
   }, 400);
 }
 
-// Service Worker Registration
-if ('serviceWorker' in navigator) {
-  window.addEventListener('load', () => {
-    navigator.serviceWorker.register('./sw.js').catch(() => {});
-  });
+// Dynamic Hydration Engine
+async function hydratePropertyDetail() {
+  const params = new URLSearchParams(window.location.search);
+  const propertyId = params.get('id');
+  if (!propertyId) {
+    calcDetailEMI();
+    return;
+  }
+
+  try {
+    const res = await fetch('/data/properties.json');
+    if (!res.ok) return;
+    const properties = await res.json();
+    const prop = properties.find(p => p.id === propertyId);
+    if (!prop) return;
+
+    currentPropertyData = prop;
+
+    // Head / SEO updates
+    document.title = `${prop.title} | Property Finder Real Estate`;
+    const metaDescEl = document.getElementById('metaDesc');
+    if (metaDescEl) metaDescEl.content = `${prop.title} for ${prop.intent === 'buy' ? 'sale' : 'rent'} in ${prop.locality}, Mumbai. ${prop.carpetArea} sq.ft. Price: ${prop.priceDisplay}.`;
+
+    // Breadcrumb
+    const bcCurrent = document.getElementById('breadcrumbCurrent');
+    if (bcCurrent) bcCurrent.textContent = prop.title;
+
+    // Header Info
+    const propTitle = document.getElementById('propTitle');
+    const propLocation = document.getElementById('propLocation');
+    const propPrice = document.getElementById('propPrice');
+    const sidebarPrice = document.getElementById('sidebarPrice');
+    const stickyPropTitle = document.getElementById('stickyPropTitle');
+    const stickyPropPrice = document.getElementById('stickyPropPrice');
+
+    if (propTitle) propTitle.textContent = prop.title;
+    if (propLocation) propLocation.textContent = `📍 ${prop.address}`;
+    if (propPrice) propPrice.innerHTML = `${prop.priceDisplay} <small>${prop.intent === 'rent' ? '/ month' : 'onwards'}</small>`;
+    if (sidebarPrice) sidebarPrice.innerHTML = `${prop.priceDisplay} <small style="font-family:'DM Sans',sans-serif;font-size:13px;font-weight:400;color:var(--text-muted)">${prop.intent === 'rent' ? '/ month' : 'onwards'}</small>`;
+    if (stickyPropTitle) stickyPropTitle.textContent = prop.title;
+    if (stickyPropPrice) stickyPropPrice.textContent = prop.priceDisplay;
+
+    // Badges
+    const badgeContainer = document.getElementById('propDetailBadges');
+    if (badgeContainer) {
+      badgeContainer.innerHTML = `
+        <span class="badge ${prop.intent === 'buy' ? 'badge-blue' : (prop.intent === 'rent' ? 'badge-green' : 'badge-gold')}">${prop.intent === 'buy' ? 'For Sale' : (prop.intent === 'rent' ? 'For Rent' : 'Commercial')}</span>
+        ${prop.bhk ? `<span class="badge badge-gray">${prop.bhk} BHK</span>` : ''}
+        <span class="badge badge-green">Verified ✓</span>
+        ${prop.reraId ? `<span class="badge badge-blue">RERA: ${prop.reraId}</span>` : ''}
+      `;
+    }
+
+    // Core Specs
+    if (document.getElementById('specBeds')) document.getElementById('specBeds').textContent = prop.bhk ? prop.bhk : '—';
+    if (document.getElementById('specBaths')) document.getElementById('specBaths').textContent = prop.bathrooms ? prop.bathrooms : '—';
+    if (document.getElementById('specCarpet')) document.getElementById('specCarpet').textContent = prop.carpetArea ? prop.carpetArea.toLocaleString('en-IN') : '—';
+    if (document.getElementById('specFloor')) document.getElementById('specFloor').textContent = prop.floor ? prop.floor : '—';
+
+    // Technical Table
+    if (document.getElementById('techPropType')) document.getElementById('techPropType').textContent = prop.propType ? prop.propType.toUpperCase() : 'Residential';
+    if (document.getElementById('techConfig')) document.getElementById('techConfig').textContent = prop.bhk ? `${prop.bhk} BHK` : 'Commercial Unit';
+    if (document.getElementById('techCarpet')) document.getElementById('techCarpet').textContent = `${prop.carpetArea} sq.ft`;
+    if (document.getElementById('techFacing')) document.getElementById('techFacing').textContent = prop.facing || 'East';
+    if (document.getElementById('techParking')) document.getElementById('techParking').textContent = prop.parking ? `${prop.parking} Reserved Slot` : 'Street Parking';
+    if (document.getElementById('techRera')) document.getElementById('techRera').textContent = prop.reraId || 'Verified';
+    if (document.getElementById('techListingId')) document.getElementById('techListingId').textContent = prop.id;
+
+    // Amenities List
+    const amenList = document.getElementById('societyAmenitiesList');
+    if (amenList && prop.amenities && prop.amenities.length > 0) {
+      amenList.innerHTML = prop.amenities.map(a => `
+        <div class="amenity-item"><span class="a-icon">✓</span> ${a}</div>
+      `).join('');
+    }
+
+    // Gallery images
+    if (prop.images && prop.images.length > 0) {
+      const mainImg = document.getElementById('mainGalleryImg');
+      if (mainImg) {
+        mainImg.innerHTML = `<img src="${prop.images[0]}" alt="${prop.title}" style="width:100%;height:100%;object-fit:cover;">`;
+      }
+      const thumbsContainer = document.getElementById('galleryThumbsContainer');
+      if (thumbsContainer) {
+        thumbsContainer.innerHTML = prop.images.map((img, i) => `
+          <div class="gallery-thumb ${i === 0 ? 'active' : ''}" onclick="selectThumb(this, ${i})">
+            <img src="${img}" alt="Thumbnail ${i + 1}">
+          </div>
+        `).join('');
+      }
+    }
+
+    // Direct WhatsApp Buttons
+    const waMsg = encodeURIComponent(`Hello Property Finder Real Estate, I am interested in inspecting "${prop.title}" (${prop.id}) listed at ${prop.priceDisplay}. Please arrange a visit.`);
+    const waUrl = `https://wa.me/919326990050?text=${waMsg}`;
+    if (document.getElementById('sideWaBtn')) document.getElementById('sideWaBtn').href = waUrl;
+    if (document.getElementById('stickyWaBtn')) document.getElementById('stickyWaBtn').href = waUrl;
+    if (document.getElementById('floorplanWaBtn')) document.getElementById('floorplanWaBtn').href = waUrl;
+    if (document.getElementById('fabWaBtn')) document.getElementById('fabWaBtn').href = waUrl;
+
+    // Sync EMI values
+    const dtPropVal = document.getElementById('dtPropVal');
+    const dtDown = document.getElementById('dtDown');
+    if (dtPropVal) dtPropVal.value = prop.price;
+    if (dtDown) dtDown.value = Math.round(prop.price * 0.2);
+    calcDetailEMI();
+
+  } catch (err) {
+    console.error('Error hydrating property details:', err);
+    calcDetailEMI();
+  }
 }
 
+// Init
 window.addEventListener('DOMContentLoaded', () => {
-  calcDetailEMI();
-  document.getElementById('dtDown')?.addEventListener('input', calcDetailEMI);
+  hydratePropertyDetail();
 });
 </script>
 
