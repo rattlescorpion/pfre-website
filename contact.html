@@ -69,7 +69,7 @@
     .contact-form-card { background: var(--card, white); border-radius: 24px; padding: 44px; box-shadow: var(--shadow-lg, 0 20px 50px rgba(0,0,0,0.06)); border: 1px solid var(--border); }
     .contact-form-card h2 { font-family: 'Playfair Display', serif; font-size: 30px; font-weight: 700; margin-bottom: 8px; color: var(--text); }
     .contact-form-card p { color: var(--text-muted); font-size: 15px; margin-bottom: 32px; }
-    
+
     .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
     .form-group { margin-bottom: 20px; }
     .form-label { display: block; font-size: 13.5px; font-weight: 600; margin-bottom: 6px; color: var(--text); }
@@ -119,8 +119,8 @@
     .form-success h3 { font-size: 24px; font-weight: 700; margin-bottom: 10px; color: var(--text); }
     .form-success p { font-size: 15px; color: var(--text-muted); line-height: 1.6; max-width: 440px; margin: 0 auto; }
 
-    @media(max-width:1000px){ .contact-grid { grid-template-columns: 1fr; gap: 40px; } .social-links-grid { grid-template-columns: repeat(2, 1fr); } }
-    @media(max-width:600px){ .social-links-grid { grid-template-columns: 1fr; } .form-row { grid-template-columns: 1fr; } .contact-form-card { padding: 32px 20px; } }
+    @media (max-width: 1000px) { .contact-grid { grid-template-columns: 1fr; gap: 40px; } .social-links-grid { grid-template-columns: repeat(2, 1fr); } }
+    @media (max-width: 600px) { .social-links-grid { grid-template-columns: 1fr; } .form-row { grid-template-columns: 1fr; } .contact-form-card { padding: 32px 20px; } }
   </style>
 
   <!-- Schema Structured Data -->
@@ -183,7 +183,7 @@
 
 <!-- NAVBAR -->
 <nav class="navbar" role="navigation" aria-label="Main navigation">
-  <a href="index.html" class="nav-logo" style="display:flex;align-items:center">
+  <a href="index.html" class="nav-logo">
     <img src="images/logo.png" alt="Property Finder Real Estate" class="nav-logo-img" style="height:48px;width:auto;object-fit:contain" loading="eager">
   </a>
   <ul class="nav-menu" role="list">
@@ -226,9 +226,33 @@
   </ul>
   <div class="nav-actions">
     <a href="tel:+919326990050" class="nav-phone">📞 +91 93269 90050</a>
-    <a href="https://wa.me/919326990050?utm_source=whatsapp&utm_medium=chat&utm_campaign=contact" target="_blank" rel="noopener noreferrer" class="btn btn-primary btn-sm">💬 WhatsApp</a>
-    <button class="theme-toggle" id="themeToggle" type="button" aria-label="Toggle light or dark theme" title="Toggle Light/Dark Mode"><span class="icon-light">☀️</span><span class="icon-dark" style="display:none">🌙</span></button>
-    <button class="hamburger" id="hamburger" aria-label="Toggle navigation" aria-expanded="false" role="button"><span></span><span></span><span></span></button>
+    <a href="post-property.html" class="btn btn-primary btn-sm btn-green-inline">+ Post Property</a>
+
+    <!-- Theme Toggle -->
+    <button class="theme-toggle" id="themeToggle" type="button" aria-label="Toggle light or dark theme" title="Toggle Light/Dark Mode">
+      <span class="icon-light">☀️</span><span class="icon-dark">🌙</span>
+    </button>
+
+    <!-- Language Selector Dropdown -->
+    <div class="lang-dropdown" id="langDropdown">
+      <button class="lang-trigger" id="langTrigger" type="button" aria-label="Select Language" title="Change Language">
+        <span class="lo-flag">🇮🇳</span> <span class="lang-name">EN</span>
+      </button>
+      <div class="lang-menu" id="langMenu">
+        <div class="lang-menu-header">Select Language</div>
+        <div class="lang-menu-scroll">
+          <div class="lang-option active" data-lang="en"><span class="lo-flag">🇬🇧</span> <span class="lo-native">English</span> <span class="lo-english">English</span></div>
+          <div class="lang-option" data-lang="hi"><span class="lo-flag">🇮🇳</span> <span class="lo-native">हिन्दी</span> <span class="lo-english">Hindi</span></div>
+          <div class="lang-option" data-lang="mr"><span class="lo-flag">🇮🇳</span> <span class="lo-native">मराठी</span> <span class="lo-english">Marathi</span></div>
+          <div class="lang-option" data-lang="gu"><span class="lo-flag">🇮🇳</span> <span class="lo-native">ગુજરાતી</span> <span class="lo-english">Gujarati</span></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Mobile Hamburger Toggle -->
+    <button class="hamburger" id="hamburger" type="button" aria-label="Toggle navigation" aria-expanded="false">
+      <span></span><span></span><span></span>
+    </button>
   </div>
 </nav>
 
@@ -248,258 +272,260 @@
   <a href="tel:+919326990050" class="btn btn-primary mob-cta">📞 Call +91 93269 90050</a>
 </div>
 
-<!-- PAGE HERO -->
-<section id="main-content" class="page-hero">
-  <span class="section-label">Get In Touch</span>
-  <h1>We'd Love to <em>Hear From You</em></h1>
-  <p>Whether you're buying, selling, renting, or seeking investment advice — our senior Mumbai consultants are here to help. Reach out anytime.</p>
-  <nav aria-label="Breadcrumb">
-    <div class="breadcrumb">
-      <a href="index.html">Home</a><span class="breadcrumb-sep" aria-hidden="true">›</span><span>Contact Us</span>
-    </div>
-  </nav>
-</section>
-
-<!-- QUICK CONTACT BAR -->
-<div style="background:var(--blue);padding:18px 5%;display:flex;align-items:center;justify-content:center;gap:32px;flex-wrap:wrap">
-  <a href="tel:+919326990050" style="display:flex;align-items:center;gap:10px;color:white;font-size:15px;font-weight:600;text-decoration:none">📞 +91 93269 90050</a>
-  <span style="color:rgba(255,255,255,0.3)">|</span>
-  <a href="https://wa.me/919326990050?utm_source=whatsapp&utm_medium=chat&utm_campaign=contact" target="_blank" rel="noopener noreferrer" style="display:flex;align-items:center;gap:10px;color:white;font-size:15px;font-weight:600;text-decoration:none">💬 WhatsApp: +91 93269 90050</a>
-  <span style="color:rgba(255,255,255,0.3)">|</span>
-  <a href="mailto:propertyfinderre@gmail.com" style="display:flex;align-items:center;gap:10px;color:white;font-size:15px;font-weight:600;text-decoration:none">✉️ propertyfinderre@gmail.com</a>
-</div>
-
-<!-- CONTACT GRID -->
-<div class="contact-grid">
-
-  <!-- CONTACT FORM -->
-  <div class="contact-form-card reveal">
-    <h2>Send Us a <em style="font-style:italic;color:var(--blue)">Message</em></h2>
-    <p>Fill in your requirements below and our team will get back to you within 2 hours during business hours.</p>
-
-    <form id="contactForm" onsubmit="event.preventDefault(); submitContact();">
-      <div class="form-row">
-        <div class="form-group">
-          <label class="form-label" for="cf-name">Full Name *</label>
-          <input class="form-control" id="cf-name" name="name" type="text" placeholder="Rahul Sharma" required autocomplete="name">
-        </div>
-        <div class="form-group">
-          <label class="form-label" for="cf-phone">Phone Number *</label>
-          <input class="form-control" id="cf-phone" name="phone" type="tel" placeholder="+91 98765 43210" required autocomplete="tel">
-        </div>
+<!-- MAIN CONTENT -->
+<main id="main-content">
+  <!-- PAGE HERO -->
+  <section class="page-hero">
+    <span class="section-label">Get In Touch</span>
+    <h1>We'd Love to <em>Hear From You</em></h1>
+    <p>Whether you're buying, selling, renting, or seeking investment advice — our senior Mumbai consultants are here to help. Reach out anytime.</p>
+    <nav aria-label="Breadcrumb">
+      <div class="breadcrumb">
+        <a href="index.html">Home</a><span class="breadcrumb-sep" aria-hidden="true">›</span><span>Contact Us</span>
       </div>
+    </nav>
+  </section>
 
-      <div class="form-group">
-        <label class="form-label" for="cf-email">Email Address</label>
-        <input class="form-control" id="cf-email" name="email" type="email" placeholder="rahul@example.com" autocomplete="email">
-      </div>
-
-      <div class="form-row">
-        <div class="form-group">
-          <label class="form-label" for="cf-purpose">I'm Looking To *</label>
-          <select class="form-control" id="cf-purpose" name="purpose">
-            <option value="">Select purpose</option>
-            <option value="Buy a Property">Buy a Property</option>
-            <option value="Rent a Property">Rent a Property</option>
-            <option value="Sell My Property">Sell My Property</option>
-            <option value="Lease a Commercial Space">Lease a Commercial Space</option>
-            <option value="Property Management">Property Management</option>
-            <option value="Home Loan Assistance">Home Loan Assistance</option>
-            <option value="Property Valuation">Property Valuation</option>
-            <option value="Investment Advisory">Investment Advisory</option>
-            <option value="Other">Other</option>
-          </select>
-        </div>
-        <div class="form-group">
-          <label class="form-label" for="cf-budget">Budget Range</label>
-          <select class="form-control" id="cf-budget" name="budget">
-            <option value="">Select budget</option>
-            <option value="Under ₹50 Lakhs">Under ₹50 Lakhs</option>
-            <option value="₹50L – ₹1 Crore">₹50L – ₹1 Crore</option>
-            <option value="₹1Cr – ₹2 Crore">₹1Cr – ₹2 Crore</option>
-            <option value="₹2Cr – ₹5 Crore">₹2Cr – ₹5 Crore</option>
-            <option value="₹5 Crore+">₹5 Crore+</option>
-          </select>
-        </div>
-      </div>
-
-      <div class="form-row">
-        <div class="form-group">
-          <label class="form-label" for="cf-locality">Preferred Locality</label>
-          <input class="form-control" id="cf-locality" name="locality" type="text" placeholder="e.g. Malad West, Goregaon, Andheri…">
-        </div>
-        <div class="form-group">
-          <label class="form-label" for="cf-proptype">Property Type</label>
-          <select class="form-control" id="cf-proptype" name="property_type">
-            <option value="">Select type</option>
-            <option value="1 BHK Flat">1 BHK Flat</option>
-            <option value="2 BHK Flat">2 BHK Flat</option>
-            <option value="3 BHK Flat">3 BHK Flat</option>
-            <option value="4+ BHK Flat">4+ BHK Flat</option>
-            <option value="Row House">Row House</option>
-            <option value="Bungalow">Bungalow</option>
-            <option value="Plot / Land">Plot / Land</option>
-            <option value="Commercial Office">Commercial Office</option>
-            <option value="Retail Shop">Retail Shop</option>
-            <option value="Warehouse">Warehouse</option>
-          </select>
-        </div>
-      </div>
-
-      <div class="form-group">
-        <label class="form-label" for="cf-message">Message / Additional Requirements</label>
-        <textarea class="form-control" id="cf-message" name="message" placeholder="Tell us more about what you're looking for — preferred floor, parking, possession date, or specific amenities…"></textarea>
-      </div>
-
-      <div class="alert-blue" style="margin-bottom:20px;padding:12px 16px;border-radius:10px;background:rgba(37,99,235,0.08);color:var(--blue);font-size:13px;line-height:1.5">
-        ✅ <strong>100% Free &amp; No Obligation.</strong> Your details remain private and are never shared with unsolicited third parties.
-      </div>
-
-      <!-- Turnstile Captcha Protection -->
-      <div class="cf-turnstile" data-sitekey="1x00000000000000000000AA" id="ts-widget" data-theme="auto" style="margin-bottom:16px"></div>
-
-      <button class="btn btn-primary" id="cf-submit-btn" type="submit" style="width:100%;justify-content:center;font-size:16px;padding:15px">
-        📤 Send Enquiry
-      </button>
-
-      <div style="display:flex;gap:12px;margin-top:14px">
-        <a href="https://wa.me/919326990050?utm_source=whatsapp&utm_medium=chat&utm_campaign=contact" target="_blank" rel="noopener noreferrer" style="flex:1;background:#25D366;color:white;padding:13px;border-radius:10px;font-size:14px;font-weight:600;text-align:center;text-decoration:none;display:flex;align-items:center;justify-content:center;gap:6px">💬 WhatsApp Us</a>
-        <a href="tel:+919326990050" style="flex:1;background:var(--off-white);color:var(--text);border:1.5px solid var(--border);padding:13px;border-radius:10px;font-size:14px;font-weight:600;text-align:center;text-decoration:none;display:flex;align-items:center;justify-content:center;gap:6px">📞 Call Directly</a>
-      </div>
-    </form>
-
-    <div class="form-success" id="formSuccess">
-      <div class="check">✅</div>
-      <h3>Enquiry Sent Successfully!</h3>
-      <p>Thank you! We have received your requirements and will reach out to you within 2 hours. For immediate assistance, feel free to call our desk on <strong>+91 93269 90050</strong>.</p>
-    </div>
+  <!-- QUICK CONTACT BAR -->
+  <div style="background:var(--blue);padding:18px 5%;display:flex;align-items:center;justify-content:center;gap:32px;flex-wrap:wrap">
+    <a href="tel:+919326990050" style="display:flex;align-items:center;gap:10px;color:white;font-size:15px;font-weight:600;text-decoration:none">📞 +91 93269 90050</a>
+    <span style="color:rgba(255,255,255,0.3)">|</span>
+    <a href="https://wa.me/919326990050?utm_source=whatsapp&utm_medium=chat&utm_campaign=contact" target="_blank" rel="noopener noreferrer" style="display:flex;align-items:center;gap:10px;color:white;font-size:15px;font-weight:600;text-decoration:none">💬 WhatsApp: +91 93269 90050</a>
+    <span style="color:rgba(255,255,255,0.3)">|</span>
+    <a href="mailto:propertyfinderre@gmail.com" style="display:flex;align-items:center;gap:10px;color:white;font-size:15px;font-weight:600;text-decoration:none">✉️ propertyfinderre@gmail.com</a>
   </div>
 
-  <!-- CONTACT INFO -->
-  <div class="contact-info-col reveal">
-    <div class="section-label">Our Details</div>
-    <h2 class="contact-info-heading">Find Us, <em>Contact Us</em></h2>
-    <p class="contact-info-sub">We are based in Malad West, Mumbai, and assist homebuyers, landlords, and corporate clients across the western suburbs.</p>
+  <!-- CONTACT GRID -->
+  <div class="contact-grid">
+    <!-- CONTACT FORM -->
+    <div class="contact-form-card reveal">
+      <h2>Send Us a <em style="font-style:italic;color:var(--blue)">Message</em></h2>
+      <p>Fill in your requirements below and our team will get back to you within 2 hours during business hours.</p>
 
-    <div class="info-cards">
-      <div class="info-card">
-        <div class="info-icon">📍</div>
-        <div>
-          <h4>Office Address</h4>
-          <p>Shop No. 9, Ground Floor, Building No. 3,<br>Deepanjali Co-operative Housing Society Limited,<br>Baf-Hira Nagar, Lower Kharodi,<br>Jankalyan Nagar Road, Malad West,<br>Mumbai — 400095, Maharashtra, India</p>
-          <a href="https://maps.google.com/?q=19.1886,72.8485" target="_blank" rel="noopener noreferrer" style="display:inline-flex;align-items:center;gap:5px;font-size:13px;font-weight:700;color:var(--blue);margin-top:8px">🗺️ Get Directions</a>
+      <form id="contactForm" onsubmit="event.preventDefault(); submitContact();">
+        <div class="form-row">
+          <div class="form-group">
+            <label class="form-label" for="cf-name">Full Name *</label>
+            <input class="form-control" id="cf-name" name="name" type="text" placeholder="Rahul Sharma" required autocomplete="name">
+          </div>
+          <div class="form-group">
+            <label class="form-label" for="cf-phone">Phone Number *</label>
+            <input class="form-control" id="cf-phone" name="phone" type="tel" placeholder="+91 98765 43210" required autocomplete="tel">
+          </div>
         </div>
-      </div>
 
-      <div class="info-card">
-        <div class="info-icon">📞</div>
-        <div>
-          <h4>Phone &amp; WhatsApp</h4>
-          <a href="tel:+919326990050">+91 93269 90050</a><br>
-          <a href="https://wa.me/919326990050?utm_source=whatsapp&utm_medium=chat&utm_campaign=contact" target="_blank" rel="noopener noreferrer" style="color:var(--green, #10B981)">💬 WhatsApp: +91 93269 90050</a>
+        <div class="form-group">
+          <label class="form-label" for="cf-email">Email Address</label>
+          <input class="form-control" id="cf-email" name="email" type="email" placeholder="rahul@example.com" autocomplete="email">
         </div>
-      </div>
 
-      <div class="info-card">
-        <div class="info-icon">✉️</div>
-        <div>
-          <h4>Email Address</h4>
-          <a href="mailto:propertyfinderre@gmail.com">propertyfinderre@gmail.com</a>
-          <p style="font-size:13px;color:var(--text-muted);margin-top:4px">We reply within 2 hours on business days.</p>
+        <div class="form-row">
+          <div class="form-group">
+            <label class="form-label" for="cf-purpose">I'm Looking To *</label>
+            <select class="form-control" id="cf-purpose" name="purpose">
+              <option value="">Select purpose</option>
+              <option value="Buy a Property">Buy a Property</option>
+              <option value="Rent a Property">Rent a Property</option>
+              <option value="Sell My Property">Sell My Property</option>
+              <option value="Lease a Commercial Space">Lease a Commercial Space</option>
+              <option value="Property Management">Property Management</option>
+              <option value="Home Loan Assistance">Home Loan Assistance</option>
+              <option value="Property Valuation">Property Valuation</option>
+              <option value="Investment Advisory">Investment Advisory</option>
+              <option value="Other">Other</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label class="form-label" for="cf-budget">Budget Range</label>
+            <select class="form-control" id="cf-budget" name="budget">
+              <option value="">Select budget</option>
+              <option value="Under ₹50 Lakhs">Under ₹50 Lakhs</option>
+              <option value="₹50L – ₹1 Crore">₹50L – ₹1 Crore</option>
+              <option value="₹1Cr – ₹2 Crore">₹1Cr – ₹2 Crore</option>
+              <option value="₹2Cr – ₹5 Crore">₹2Cr – ₹5 Crore</option>
+              <option value="₹5 Crore+">₹5 Crore+</option>
+            </select>
+          </div>
         </div>
-      </div>
 
-      <div class="info-card">
-        <div class="info-icon">🌐</div>
-        <div>
-          <h4>Official Portal</h4>
-          <a href="https://www.propertyfinderrealestate.com" target="_blank" rel="noopener noreferrer">www.propertyfinderrealestate.com</a>
+        <div class="form-row">
+          <div class="form-group">
+            <label class="form-label" for="cf-locality">Preferred Locality</label>
+            <input class="form-control" id="cf-locality" name="locality" type="text" placeholder="e.g. Malad West, Goregaon, Andheri…">
+          </div>
+          <div class="form-group">
+            <label class="form-label" for="cf-proptype">Property Type</label>
+            <select class="form-control" id="cf-proptype" name="property_type">
+              <option value="">Select type</option>
+              <option value="1 BHK Flat">1 BHK Flat</option>
+              <option value="2 BHK Flat">2 BHK Flat</option>
+              <option value="3 BHK Flat">3 BHK Flat</option>
+              <option value="4+ BHK Flat">4+ BHK Flat</option>
+              <option value="Row House">Row House</option>
+              <option value="Bungalow">Bungalow</option>
+              <option value="Plot / Land">Plot / Land</option>
+              <option value="Commercial Office">Commercial Office</option>
+              <option value="Retail Shop">Retail Shop</option>
+              <option value="Warehouse">Warehouse</option>
+            </select>
+          </div>
         </div>
-      </div>
 
-      <div class="info-card">
-        <div class="info-icon">🕐</div>
-        <div style="width:100%">
-          <h4>Office Hours</h4>
-          <div class="hours-grid">
-            <div class="hours-row today"><span class="day">Monday – Saturday</span><span class="time">10:00 AM – 7:00 PM ✅ Open</span></div>
-            <div class="hours-row"><span class="day">Sunday</span><span class="time">11:00 AM – 5:00 PM</span></div>
-            <div class="hours-row"><span class="day">Public Holidays</span><span class="time">By Appointment</span></div>
+        <div class="form-group">
+          <label class="form-label" for="cf-message">Message / Additional Requirements</label>
+          <textarea class="form-control" id="cf-message" name="message" placeholder="Tell us more about what you're looking for — preferred floor, parking, possession date, or specific amenities…"></textarea>
+        </div>
+
+        <div class="alert-blue" style="margin-bottom:20px;padding:12px 16px;border-radius:10px;background:rgba(37,99,235,0.08);color:var(--blue);font-size:13px;line-height:1.5">
+          ✅ <strong>100% Free &amp; No Obligation.</strong> Your details remain private and are never shared with unsolicited third parties.
+        </div>
+
+        <!-- Cloudflare Turnstile Captcha Protection -->
+        <div class="cf-turnstile" data-sitekey="1x00000000000000000000AA" id="ts-widget" data-theme="auto" style="margin-bottom:16px"></div>
+
+        <button class="btn btn-primary" id="cf-submit-btn" type="submit" style="width:100%;justify-content:center;font-size:16px;padding:15px">
+          📤 Send Enquiry
+        </button>
+
+        <div style="display:flex;gap:12px;margin-top:14px">
+          <a href="https://wa.me/919326990050?utm_source=whatsapp&utm_medium=chat&utm_campaign=contact" target="_blank" rel="noopener noreferrer" style="flex:1;background:#25D366;color:white;padding:13px;border-radius:10px;font-size:14px;font-weight:600;text-align:center;text-decoration:none;display:flex;align-items:center;justify-content:center;gap:6px">💬 WhatsApp Us</a>
+          <a href="tel:+919326990050" style="flex:1;background:var(--off-white);color:var(--text);border:1.5px solid var(--border);padding:13px;border-radius:10px;font-size:14px;font-weight:600;text-align:center;text-decoration:none;display:flex;align-items:center;justify-content:center;gap:6px">📞 Call Directly</a>
+        </div>
+      </form>
+
+      <div class="form-success" id="formSuccess">
+        <div class="check">✅</div>
+        <h3>Enquiry Sent Successfully!</h3>
+        <p>Thank you! We have received your requirements and will reach out to you within 2 hours. For immediate assistance, feel free to call our desk on <strong>+91 93269 90050</strong>.</p>
+      </div>
+    </div>
+
+    <!-- CONTACT INFO -->
+    <div class="contact-info-col reveal">
+      <div class="section-label">Our Details</div>
+      <h2 class="contact-info-heading">Find Us, <em>Contact Us</em></h2>
+      <p class="contact-info-sub">We are based in Malad West, Mumbai, and assist homebuyers, landlords, and corporate clients across the western suburbs.</p>
+
+      <div class="info-cards">
+        <div class="info-card">
+          <div class="info-icon">📍</div>
+          <div>
+            <h4>Office Address</h4>
+            <p>Shop No. 9, Ground Floor, Building No. 3,<br>Deepanjali Co-operative Housing Society Limited,<br>Baf-Hira Nagar, Lower Kharodi,<br>Jankalyan Nagar Road, Malad West,<br>Mumbai — 400095, Maharashtra, India</p>
+            <a href="https://maps.google.com/?q=19.1886,72.8485" target="_blank" rel="noopener noreferrer" style="display:inline-flex;align-items:center;gap:5px;font-size:13px;font-weight:700;color:var(--blue);margin-top:8px">🗺️ Get Directions</a>
+          </div>
+        </div>
+
+        <div class="info-card">
+          <div class="info-icon">📞</div>
+          <div>
+            <h4>Phone &amp; WhatsApp</h4>
+            <a href="tel:+919326990050">+91 93269 90050</a><br>
+            <a href="https://wa.me/919326990050?utm_source=whatsapp&utm_medium=chat&utm_campaign=contact" target="_blank" rel="noopener noreferrer" style="color:var(--green, #10B981)">💬 WhatsApp: +91 93269 90050</a>
+          </div>
+        </div>
+
+        <div class="info-card">
+          <div class="info-icon">✉️</div>
+          <div>
+            <h4>Email Address</h4>
+            <a href="mailto:propertyfinderre@gmail.com">propertyfinderre@gmail.com</a>
+            <p style="font-size:13px;color:var(--text-muted);margin-top:4px">We reply within 2 hours on business days.</p>
+          </div>
+        </div>
+
+        <div class="info-card">
+          <div class="info-icon">🌐</div>
+          <div>
+            <h4>Official Portal</h4>
+            <a href="https://www.propertyfinderrealestate.com" target="_blank" rel="noopener noreferrer">www.propertyfinderrealestate.com</a>
+          </div>
+        </div>
+
+        <div class="info-card">
+          <div class="info-icon">🕐</div>
+          <div style="width:100%">
+            <h4>Office Hours</h4>
+            <div class="hours-grid">
+              <div class="hours-row today"><span class="day">Monday – Saturday</span><span class="time">10:00 AM – 7:00 PM ✅ Open</span></div>
+              <div class="hours-row"><span class="day">Sunday</span><span class="time">11:00 AM – 5:00 PM</span></div>
+              <div class="hours-row"><span class="day">Public Holidays</span><span class="time">By Appointment</span></div>
+            </div>
           </div>
         </div>
       </div>
     </div>
   </div>
-</div>
 
-<!-- MAP -->
-<div class="map-section">
-  <div class="section-head reveal" style="margin-bottom:20px">
-    <div><div class="section-label">Find Us</div><h2 class="section-title">Our <em>Location</em></h2></div>
-  </div>
-  <div class="map-container reveal">
-    <div class="map-overlay-card">
-      <h4>🏢 Property Finder Real Estate</h4>
-      <p>Shop No. 9, Ground Floor, Building No. 3, Deepanjali CHS, Lower Kharodi, Malad West, Mumbai - 400095</p>
-      <a href="https://maps.google.com/?q=19.1886,72.8485" target="_blank" rel="noopener noreferrer">🗺️ Open in Google Maps</a>
+  <!-- MAP -->
+  <div class="map-section">
+    <div class="section-head reveal" style="margin-bottom:20px">
+      <div><div class="section-label">Find Us</div><h2 class="section-title">Our <em>Location</em></h2></div>
     </div>
-    <iframe
-      src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3767.8290!2d72.8397!3d19.1964!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3be7b6337591b9d7%3A0x3a1e6a0e5e5d0c0b!2sMalad%20West%2C%20Mumbai%2C%20Maharashtra!5e0!3m2!1sen!2sin!4v1620000000000!5m2!1sen!2sin"
-      allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade" title="Property Finder Real Estate Location">
-    </iframe>
+    <div class="map-container reveal">
+      <div class="map-overlay-card">
+        <h4>🏢 Property Finder Real Estate</h4>
+        <p>Shop No. 9, Ground Floor, Building No. 3, Deepanjali CHS, Lower Kharodi, Malad West, Mumbai - 400095</p>
+        <a href="https://maps.google.com/?q=19.1886,72.8485" target="_blank" rel="noopener noreferrer">🗺️ Open in Google Maps</a>
+      </div>
+      <iframe
+        src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3767.8290!2d72.8397!3d19.1964!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3be7b6337591b9d7%3A0x3a1e6a0e5e5d0c0b!2sMalad%20West%2C%20Mumbai%2C%20Maharashtra!5e0!3m2!1sen!2sin!4v1620000000000!5m2!1sen!2sin"
+        allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade" title="Property Finder Real Estate Location">
+      </iframe>
+    </div>
   </div>
-</div>
 
-<!-- SOCIAL MEDIA -->
-<div class="social-section">
-  <div style="text-align:center" class="reveal">
-    <div class="section-label">Follow Us</div>
-    <h2 class="section-title">Connect With Us on <em>Social Media</em></h2>
-    <p class="section-sub" style="margin-inline:auto">Follow our official channels for the latest Mumbai property listings, investment market insights, and legal advice.</p>
+  <!-- SOCIAL MEDIA -->
+  <div class="social-section">
+    <div style="text-align:center" class="reveal">
+      <div class="section-label">Follow Us</div>
+      <h2 class="section-title">Connect With Us on <em>Social Media</em></h2>
+      <p class="section-sub" style="margin-inline:auto">Follow our official channels for the latest Mumbai property listings, investment market insights, and legal advice.</p>
+    </div>
+    <div class="social-links-grid">
+      <a href="https://www.instagram.com/propertyfinderrealestate" target="_blank" rel="noopener noreferrer" class="social-link-card reveal">
+        <div class="icon"><svg width="22" height="22" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1112.63 8 4 4 0 0116 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg></div>
+        <h4>Instagram</h4>
+        <p>@propertyfinderrealestate</p>
+      </a>
+      <a href="https://www.facebook.com/PropertyFinderRealEstate/reviews" target="_blank" rel="noopener noreferrer" class="social-link-card reveal">
+        <div class="icon"><svg width="22" height="22" fill="currentColor" viewBox="0 0 24 24"><path d="M18 2h-3a5 5 0 00-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 011-1h3z"/></svg></div>
+        <h4>Facebook</h4>
+        <p>PropertyFinderRealEstate</p>
+      </a>
+      <a href="https://www.linkedin.com/company/propertyfinderrealestate" target="_blank" rel="noopener noreferrer" class="social-link-card reveal">
+        <div class="icon"><svg width="22" height="22" fill="currentColor" viewBox="0 0 24 24"><path d="M16 8a6 6 0 016 6v7h-4v-7a2 2 0 00-2-2 2 2 0 00-2 2v7h-4v-7a6 6 0 016-6zM2 9h4v12H2z"/><circle cx="4" cy="4" r="2"/></svg></div>
+        <h4>LinkedIn</h4>
+        <p>propertyfinderrealestate</p>
+      </a>
+      <a href="https://www.youtube.com/@PropertyFinderRealEstate" target="_blank" rel="noopener noreferrer" class="social-link-card reveal">
+        <div class="icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor"><path d="M23.498 6.186a3.016 3.016 0 00-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 00.502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 002.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 002.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/></svg></div>
+        <h4>YouTube</h4>
+        <p>@PropertyFinderRealEstate</p>
+      </a>
+      <a href="https://x.com/PropertyFinderA" target="_blank" rel="noopener noreferrer" class="social-link-card reveal">
+        <div class="icon"><svg width="22" height="22" fill="currentColor" viewBox="0 0 24 24"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg></div>
+        <h4>X (Twitter)</h4>
+        <p>@PropertyFinderA</p>
+      </a>
+      <a href="https://in.pinterest.com/propertyfinderrealestate/" target="_blank" rel="noopener noreferrer" class="social-link-card reveal">
+        <div class="icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.373 0 0 5.373 0 12c0 5.084 3.163 9.426 7.627 11.174-.105-.949-.2-2.405.042-3.441.218-.937 1.407-5.965 1.407-5.965s-.359-.719-.359-1.782c0-1.668.967-2.914 2.171-2.914 1.023 0 1.518.769 1.518 1.69 0 1.029-.655 2.568-.994 3.995-.283 1.194.599 2.169 1.777 2.169 2.133 0 3.772-2.249 3.772-5.495 0-2.873-2.064-4.882-5.012-4.882-3.414 0-5.418 2.561-5.418 5.207 0 1.031.397 2.138.893 2.738a.36.36 0 01.083.345l-.333 1.36c-.053.22-.174.267-.402.161-1.499-.698-2.436-2.889-2.436-4.649 0-3.785 2.75-7.262 7.929-7.262 4.163 0 7.398 2.967 7.398 6.931 0 4.136-2.607 7.464-6.227 7.464-1.216 0-2.359-.632-2.75-1.378l-.748 2.853c-.271 1.043-1.002 2.35-1.492 3.146C9.57 23.812 10.763 24 12 24c6.627 0 12-5.373 12-12S18.627 0 12 0z"/></svg></div>
+        <h4>Pinterest</h4>
+        <p>propertyfinderrealestate</p>
+      </a>
+      <a href="https://www.propertyfinderrealestate.com" target="_blank" rel="noopener noreferrer" class="social-link-card reveal">
+        <div class="icon">🌐</div>
+        <h4>Website</h4>
+        <p>propertyfinderrealestate.com</p>
+      </a>
+      <a href="mailto:propertyfinderre@gmail.com" class="social-link-card reveal">
+        <div class="icon">✉️</div>
+        <h4>Email</h4>
+        <p>propertyfinderre@gmail.com</p>
+      </a>
+    </div>
   </div>
-  <div class="social-links-grid">
-    <a href="https://www.instagram.com/propertyfinderrealestate" target="_blank" rel="noopener noreferrer" class="social-link-card reveal">
-      <div class="icon"><svg width="22" height="22" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1112.63 8 4 4 0 0116 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg></div>
-      <h4>Instagram</h4>
-      <p>@propertyfinderrealestate</p>
-    </a>
-    <a href="https://www.facebook.com/PropertyFinderRealEstate/reviews" target="_blank" rel="noopener noreferrer" class="social-link-card reveal">
-      <div class="icon"><svg width="22" height="22" fill="currentColor" viewBox="0 0 24 24"><path d="M18 2h-3a5 5 0 00-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 011-1h3z"/></svg></div>
-      <h4>Facebook</h4>
-      <p>PropertyFinderRealEstate</p>
-    </a>
-    <a href="https://www.linkedin.com/company/propertyfinderrealestate" target="_blank" rel="noopener noreferrer" class="social-link-card reveal">
-      <div class="icon"><svg width="22" height="22" fill="currentColor" viewBox="0 0 24 24"><path d="M16 8a6 6 0 016 6v7h-4v-7a2 2 0 00-2-2 2 2 0 00-2 2v7h-4v-7a6 6 0 016-6zM2 9h4v12H2z"/><circle cx="4" cy="4" r="2"/></svg></div>
-      <h4>LinkedIn</h4>
-      <p>propertyfinderrealestate</p>
-    </a>
-    <a href="https://www.youtube.com/@PropertyFinderRealEstate" target="_blank" rel="noopener noreferrer" class="social-link-card reveal">
-      <div class="icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor"><path d="M23.498 6.186a3.016 3.016 0 00-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 00.502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 002.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 002.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/></svg></div>
-      <h4>YouTube</h4>
-      <p>@PropertyFinderRealEstate</p>
-    </a>
-    <a href="https://x.com/PropertyFinderA" target="_blank" rel="noopener noreferrer" class="social-link-card reveal">
-      <div class="icon"><svg width="22" height="22" fill="currentColor" viewBox="0 0 24 24"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg></div>
-      <h4>X (Twitter)</h4>
-      <p>@PropertyFinderA</p>
-    </a>
-    <a href="https://in.pinterest.com/propertyfinderrealestate/" target="_blank" rel="noopener noreferrer" class="social-link-card reveal">
-      <div class="icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.373 0 0 5.373 0 12c0 5.084 3.163 9.426 7.627 11.174-.105-.949-.2-2.405.042-3.441.218-.937 1.407-5.965 1.407-5.965s-.359-.719-.359-1.782c0-1.668.967-2.914 2.171-2.914 1.023 0 1.518.769 1.518 1.69 0 1.029-.655 2.568-.994 3.995-.283 1.194.599 2.169 1.777 2.169 2.133 0 3.772-2.249 3.772-5.495 0-2.873-2.064-4.882-5.012-4.882-3.414 0-5.418 2.561-5.418 5.207 0 1.031.397 2.138.893 2.738a.36.36 0 01.083.345l-.333 1.36c-.053.22-.174.267-.402.161-1.499-.698-2.436-2.889-2.436-4.649 0-3.785 2.75-7.262 7.929-7.262 4.163 0 7.398 2.967 7.398 6.931 0 4.136-2.607 7.464-6.227 7.464-1.216 0-2.359-.632-2.75-1.378l-.748 2.853c-.271 1.043-1.002 2.35-1.492 3.146C9.57 23.812 10.763 24 12 24c6.627 0 12-5.373 12-12S18.627 0 12 0z"/></svg></div>
-      <h4>Pinterest</h4>
-      <p>propertyfinderrealestate</p>
-    </a>
-    <a href="https://www.propertyfinderrealestate.com" target="_blank" rel="noopener noreferrer" class="social-link-card reveal">
-      <div class="icon">🌐</div>
-      <h4>Website</h4>
-      <p>propertyfinderrealestate.com</p>
-    </a>
-    <a href="mailto:propertyfinderre@gmail.com" class="social-link-card reveal">
-      <div class="icon">✉️</div>
-      <h4>Email</h4>
-      <p>propertyfinderre@gmail.com</p>
-    </a>
-  </div>
-</div>
+</main>
 
 <!-- FOOTER -->
 <footer class="footer">
@@ -555,21 +581,21 @@
   </div>
 </footer>
 
-<!-- ═══ GLOBAL WIDGETS ═══ -->
+<!-- ═══ GLOBAL WIDGETS (Hidden by default to prevent leakage) ═══ -->
 <div id="progressBar"></div>
 <div id="toastContainer"></div>
-<button id="backToTop" title="Back to top" aria-label="Back to top">&#8593;</button>
+<button id="backToTop" type="button" title="Back to top" aria-label="Back to top">&#8593;</button>
 
 <!-- Cookie Consent Banner -->
-<div class="cookie-banner" id="cookieBanner">
+<div class="cookie-banner" id="cookieBanner" style="display: none;">
   <p class="cookie-text">We use cookies to enhance your browsing experience, deliver personalized listings, and analyze site traffic.</p>
   <div class="cookie-btns">
-    <button class="cookie-accept" id="cookieAccept">Accept</button>
-    <button class="cookie-decline" id="cookieDecline">Decline</button>
+    <button class="cookie-accept" id="cookieAccept" type="button">Accept</button>
+    <button class="cookie-decline" id="cookieDecline" type="button">Decline</button>
   </div>
 </div>
 
-<!-- Floating Actions -->
+<!-- Floating Action Buttons -->
 <div class="floating-actions">
   <div class="fab-wrap">
     <span class="fab-label">WhatsApp Us</span>
@@ -581,30 +607,30 @@
   </div>
   <div class="fab-wrap">
     <span class="fab-label">AI Assistant</span>
-    <button class="fab fab-chat" id="chatToggle" aria-label="Open AI Assistant">🤖<span class="chat-badge">1</span></button>
+    <button class="fab fab-chat" id="chatToggle" type="button" aria-label="Open AI Assistant">🤖<span class="chat-badge">1</span></button>
   </div>
 </div>
 
 <!-- AI Chat Assistant -->
-<div id="chatWidget" aria-hidden="true">
+<div id="chatWidget" aria-hidden="true" style="display: none;">
   <div class="chat-header">
     <div class="chat-avatar">🏠</div>
     <div class="chat-header-info">
       <div class="chat-name">PFRE Assistant</div>
       <div class="chat-status"><span class="chat-status-dot"></span> Online — replies instantly</div>
     </div>
-    <button class="chat-close" id="chatClose" aria-label="Close Chat">&times;</button>
+    <button class="chat-close" id="chatClose" type="button" aria-label="Close Chat">&times;</button>
   </div>
   <div class="chat-body" id="chatBody"></div>
   <div class="quick-replies" id="quickReplies"></div>
   <div class="chat-input-row">
     <input class="chat-input" id="chatInput" type="text" placeholder="Ask about properties, prices, loans…" aria-label="Chat input">
-    <button class="chat-send" id="chatSend" aria-label="Send Message">&#10148;</button>
+    <button class="chat-send" id="chatSend" type="button" aria-label="Send Message">&#10148;</button>
   </div>
 </div>
 
-<!-- Comparison Bar -->
-<div id="compareBar">
+<!-- Comparison Drawer -->
+<div id="compareBar" style="display: none;">
   <span class="compare-bar-title">🔄 Compare Properties</span>
   <div class="compare-slots">
     <div class="compare-slot">+ Add Property</div>
@@ -612,31 +638,31 @@
     <div class="compare-slot">+ Add Property</div>
   </div>
   <div class="compare-actions">
-    <button class="compare-btn primary">Compare Now</button>
-    <button class="compare-btn secondary" onclick="document.getElementById('compareBar').classList.remove('show')">Clear All</button>
+    <button class="compare-btn primary" type="button">Compare Now</button>
+    <button class="compare-btn secondary" type="button" onclick="document.getElementById('compareBar').classList.remove('show');">Clear All</button>
   </div>
 </div>
 
 <!-- Lightbox Modal -->
-<div id="lightbox" aria-hidden="true">
+<div id="lightbox" aria-hidden="true" style="display: none;">
   <div class="lightbox-inner">
-    <button class="lightbox-close" id="lbClose" aria-label="Close Lightbox">&times;</button>
+    <button class="lightbox-close" id="lbClose" type="button" aria-label="Close Lightbox">&times;</button>
     <div class="lightbox-img-placeholder" id="lbImage">🏠</div>
-    <button class="lightbox-nav lightbox-prev" id="lbPrev" aria-label="Previous Image">&#8249;</button>
-    <button class="lightbox-nav lightbox-next" id="lbNext" aria-label="Next Image">&#8250;</button>
+    <button class="lightbox-nav lightbox-prev" id="lbPrev" type="button" aria-label="Previous Image">&#8249;</button>
+    <button class="lightbox-nav lightbox-next" id="lbNext" type="button" aria-label="Next Image">&#8250;</button>
     <div class="lightbox-counter" id="lbCounter">1 / 1</div>
   </div>
 </div>
 
 <!-- PWA Install Banner -->
-<div id="pwaInstall">
+<div id="pwaInstall" style="display: none;">
   <div class="pwa-icon">🏠</div>
   <div class="pwa-text">
     <h4>Install Property Finder App</h4>
     <p>Quick access to Mumbai listings on your phone</p>
   </div>
-  <button class="pwa-install-btn" id="pwaInstallBtn">Install</button>
-  <button class="pwa-dismiss" id="pwaDismiss" aria-label="Dismiss">&times;</button>
+  <button class="pwa-install-btn" id="pwaInstallBtn" type="button">Install</button>
+  <button class="pwa-dismiss" id="pwaDismiss" type="button" aria-label="Dismiss">&times;</button>
 </div>
 <!-- ═══ END GLOBAL WIDGETS ═══ -->
 
@@ -649,38 +675,48 @@ if ('serviceWorker' in navigator) {
 
 /* Contact form handler */
 async function submitContact() {
-  if (window.PFRESecurity?.verifyTurnstile && !window.PFRESecurity.verifyTurnstile('#ts-widget')) return;
-  else if (window.turnstileOK && !window.turnstileOK('.cf-turnstile')) return;
-
-  var name     = document.getElementById('cf-name')?.value?.trim();
-  var phone    = document.getElementById('cf-phone')?.value?.trim();
-  var email    = document.getElementById('cf-email')?.value?.trim();
-  var purpose  = document.getElementById('cf-purpose')?.value;
-  var budget   = document.getElementById('cf-budget')?.value;
-  var locality = document.getElementById('cf-locality')?.value?.trim();
-  var propType = document.getElementById('cf-proptype')?.value;
-  var msg      = document.getElementById('cf-message')?.value?.trim();
-
-  if (!name || !phone) {
-    if (window.showToast) showToast('Please enter your name and phone number.', 'error');
+  if (window.PFRESecurity?.verifyTurnstile && !window.PFRESecurity.verifyTurnstile('#ts-widget')) {
+    if (typeof showToast === 'function') showToast('Please complete the verification check.', 'error');
+    return;
+  }
+  if (window.turnstileOK && !window.turnstileOK('.cf-turnstile')) {
+    if (typeof showToast === 'function') showToast('Please complete the verification check.', 'error');
     return;
   }
 
-  var btn = document.getElementById('cf-submit-btn');
+  const name     = document.getElementById('cf-name')?.value?.trim();
+  const phone    = document.getElementById('cf-phone')?.value?.trim();
+  const email    = document.getElementById('cf-email')?.value?.trim() || '';
+  const purpose  = document.getElementById('cf-purpose')?.value || '';
+  const budget   = document.getElementById('cf-budget')?.value || '';
+  const locality = document.getElementById('cf-locality')?.value?.trim() || '';
+  const propType = document.getElementById('cf-proptype')?.value || '';
+  const msg      = document.getElementById('cf-message')?.value?.trim() || '';
+
+  if (!name || !phone) {
+    if (typeof showToast === 'function') {
+      showToast('Please enter your name and phone number.', 'error');
+    } else {
+      alert('Please enter your name and phone number.');
+    }
+    return;
+  }
+
+  const btn = document.getElementById('cf-submit-btn');
   if (btn) {
     btn.disabled = true;
     btn.textContent = '⏳ Sending…';
   }
 
-  var data = {
+  const data = {
     name: name,
     phone: phone,
-    email: email || '',
-    purpose: purpose || '',
-    budget: budget || '',
-    locality: locality || '',
-    propertyType: propType || '',
-    message: msg || '',
+    email: email,
+    purpose: purpose,
+    budget: budget,
+    locality: locality,
+    propertyType: propType,
+    message: msg,
     page: 'contact',
     intent: 'contact_form',
     source: 'contact_page',
@@ -689,13 +725,13 @@ async function submitContact() {
 
   /* LocalStorage backup queue */
   try {
-    var pending = JSON.parse(localStorage.getItem('pfre_enquiries') || '[]');
+    const pending = JSON.parse(localStorage.getItem('pfre_enquiries') || '[]');
     pending.push(data);
     localStorage.setItem('pfre_enquiries', JSON.stringify(pending.slice(-20)));
   } catch (e) {}
 
-  /* Forward to Formspree if ID configured */
-  var formspreeId = window.PFRE_CONFIG?.FORMSPREE_ID;
+  /* Forward to Formspree */
+  const formspreeId = window.PFRE_CONFIG?.FORMSPREE_ID;
   if (formspreeId && formspreeId !== 'YOUR_FORMSPREE_ID') {
     fetch('https://formspree.io/f/' + encodeURIComponent(formspreeId), {
       method: 'POST',
@@ -709,10 +745,12 @@ async function submitContact() {
     window.PFREApi.leads.create(data).catch(() => {});
   }
 
-  /* Update UI */
+  /* Transition UI */
   document.getElementById('contactForm').style.display = 'none';
   document.getElementById('formSuccess').style.display = 'block';
-  if (window.showToast) showToast('✅ Enquiry sent! We will call you within 2 hours.', 'success');
+  if (typeof showToast === 'function') {
+    showToast('✅ Enquiry sent! We will call you within 2 hours.', 'success');
+  }
 }
 </script>
 
