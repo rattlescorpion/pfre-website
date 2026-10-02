@@ -613,14 +613,16 @@
 <!-- ═══ GLOBAL WIDGETS ═══ -->
 <div id="progressBar"></div>
 <div id="toastContainer"></div>
-<button id="backToTop" title="Back to top" aria-label="Back to top">&#8593;</button>
 
-<!-- Cookie Banner -->
-<div class="cookie-banner" id="cookieBanner">
+<!-- Back to Top Button -->
+<button id="backToTop" type="button" title="Back to top" aria-label="Back to top">&#8593;</button>
+
+<!-- Cookie Consent Banner -->
+<div class="cookie-banner" id="cookieBanner" style="display: none;">
   <p class="cookie-text">We use cookies to improve your browsing experience and provide personalized services.</p>
   <div class="cookie-btns">
-    <button class="cookie-accept" id="cookieAccept">Accept</button>
-    <button class="cookie-decline" id="cookieDecline">Decline</button>
+    <button class="cookie-accept" id="cookieAccept" type="button">Accept</button>
+    <button class="cookie-decline" id="cookieDecline" type="button">Decline</button>
   </div>
 </div>
 
@@ -628,7 +630,7 @@
 <div class="floating-actions">
   <div class="fab-wrap">
     <span class="fab-label">WhatsApp Us</span>
-    <a href="https://wa.me/919326990050?utm_source=whatsapp&utm_medium=chat&utm_campaign=homepage" target="_blank" rel="noopener noreferrer" class="fab fab-whatsapp" aria-label="WhatsApp">💬</a>
+    <a href="https://wa.me/919326990050?utm_source=whatsapp&utm_medium=chat&utm_campaign=mobile_fab" target="_blank" rel="noopener noreferrer" class="fab fab-whatsapp" aria-label="WhatsApp">💬</a>
   </div>
   <div class="fab-wrap">
     <span class="fab-label">Call Us</span>
@@ -636,7 +638,7 @@
   </div>
   <div class="fab-wrap">
     <span class="fab-label">AI Assistant</span>
-    <button class="fab fab-chat" id="chatToggle" aria-label="Open AI Assistant">🤖<span class="chat-badge">1</span></button>
+    <button class="fab fab-chat" id="chatToggle" type="button" aria-label="Open AI Assistant">🤖<span class="chat-badge">1</span></button>
   </div>
 </div>
 
@@ -672,13 +674,13 @@
   </div>
 </div>
 
-<!-- Lightbox Modal -->
-<div id="lightbox" aria-hidden="true">
+<!-- Lightbox Modal (Guaranteed Hidden by Default) -->
+<div id="lightbox" aria-hidden="true" style="display: none;">
   <div class="lightbox-inner">
-    <button class="lightbox-close" id="lbClose" aria-label="Close Lightbox">&times;</button>
+    <button class="lightbox-close" id="lbClose" type="button" aria-label="Close Lightbox">&times;</button>
     <div class="lightbox-img-placeholder" id="lbImage">🏠</div>
-    <button class="lightbox-nav lightbox-prev" id="lbPrev" aria-label="Previous Image">&#8249;</button>
-    <button class="lightbox-nav lightbox-next" id="lbNext" aria-label="Next Image">&#8250;</button>
+    <button class="lightbox-nav lightbox-prev" id="lbPrev" type="button" aria-label="Previous Image">&#8249;</button>
+    <button class="lightbox-nav lightbox-next" id="lbNext" type="button" aria-label="Next Image">&#8250;</button>
     <div class="lightbox-counter" id="lbCounter">1 / 1</div>
   </div>
 </div>
