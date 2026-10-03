@@ -1,16 +1,18 @@
 /* =====================================================
-   PROPERTY FINDER REAL ESTATE — Production Service Worker v3.2
+   PROPERTY FINDER REAL ESTATE — Production Service Worker v3.3
    Unified Caching · Resilient Pre-cache · Background Sync
-   Offline HTML/Image Fallbacks · Push Notifications
+   Network-First Inventory/HTML · Cache-First Assets
+   Offline Fallbacks · Push Notifications
    ===================================================== */
 
-const BUILD_ID   = '2026-06-18-02';
+const BUILD_ID   = '2026-10-03-01';
 const CACHE_NAME = `pfre-cache-${BUILD_ID}`;
 
-/* Core UI shell — required for offline rendering */
+/* Core UI shell & fallback templates (Guaranteed precache) */
 const CORE_ASSETS = [
   '/',
   '/index.html',
+  '/404.html',
   '/manifest.json',
   '/css/styles.css',
   '/css/theme.css',
@@ -26,16 +28,21 @@ const CORE_ASSETS = [
   '/js/api.js',
   '/js/tracker.js',
   '/js/properties-filter.js',
-  '/icons/favicon.png'
+  '/data/properties.json',
+  '/data/projects.json',
+  '/icons/favicon.svg',
+  '/icons/icon-192.png'
 ];
 
-/* Optional public pages to pre-warm in cache */
+/* Optional secondary pages (Cached gracefully in background) */
 const OPTIONAL_PAGES = [
   '/properties.html',
+  '/projects.html',
   '/about.html',
   '/contact.html',
   '/services.html',
   '/calculators.html',
+  '/terms.html',
   '/privacy-policy.html'
 ];
 
@@ -43,22 +50,26 @@ const OPTIONAL_PAGES = [
 self.addEventListener('install', (event) => {
   event.waitUntil(
     caches.open(CACHE_NAME).then(async (cache) => {
-      // 1. Guarantee core assets are cached
-      try {
-        await cache.addAll(CORE_ASSETS);
-      } catch (err) {
-        console.warn('[SW] Core pre-cache item missing, continuing gracefully:', err);
-      }
-
-      // 2. Fetch optional pages individually without failing the install step
+      // 1. Cache critical UI shell with individual error tolerance
       await Promise.allSettled(
-        OPTIONAL_PAGES.map((url) =>
-          fetch(url)
-            .then((res) => {
-              if (res.ok) return cache.put(url, res);
-            })
-            .catch(() => {})
-        )
+        CORE_ASSETS.map(async (url) => {
+          try {
+            const res = await fetch(url, { cache: 'no-cache' });
+            if (res.ok) await cache.put(url, res);
+          } catch (err) {
+            console.warn(`[SW] Pre-cache item skipped: ${url}`, err);
+          }
+        })
+      );
+
+      // 2. Pre-warm optional routes without blocking service worker activation
+      await Promise.allSettled(
+        OPTIONAL_PAGES.map(async (url) => {
+          try {
+            const res = await fetch(url);
+            if (res.ok) await cache.put(url, res);
+          } catch (_) {}
+        })
       );
     }).then(() => self.skipWaiting())
   );
@@ -70,7 +81,7 @@ self.addEventListener('activate', (event) => {
     caches.keys().then((keys) => {
       return Promise.all(
         keys
-          .filter((k) => k.startsWith('pfre-cache-') && k !== CACHE_NAME)
+          .filter((k) => (k.startsWith('pfre-cache-') || k.startsWith('pfre-static-')) && k !== CACHE_NAME)
           .map((k) => caches.delete(k))
       );
     }).then(() => self.clients.claim())
@@ -83,77 +94,78 @@ self.addEventListener('fetch', (event) => {
 
   const url = new URL(event.request.url);
 
-  // Skip dynamic API and backend endpoints (handled via offline queue in api.js)
+  // Skip dynamic backend API endpoints (handled via offline IndexedDB queue)
   if (url.pathname.startsWith('/api/') || url.pathname.includes('/api/website')) {
     return;
   }
 
-  // Check if same origin or trusted font CDN
   const isSameOrigin = url.origin === self.location.origin;
   const isFontCDN = url.hostname.includes('fonts.googleapis.com') || url.hostname.includes('fonts.gstatic.com');
 
   if (!isSameOrigin && !isFontCDN) return;
 
-  // STRATEGY A: Static Assets & Fonts (Cache-First with Network Fallback)
-  const isStaticAsset =
-    url.pathname.endsWith('.css') ||
-    url.pathname.endsWith('.js') ||
-    url.pathname.endsWith('.png') ||
-    url.pathname.endsWith('.jpg') ||
-    url.pathname.endsWith('.svg') ||
-    url.pathname.endsWith('.woff2') ||
-    isFontCDN;
+  // STRATEGY A: Dynamic Content, JSON Datastores & Navigation (Network-First)
+  const isDynamicContent =
+    event.request.mode === 'navigate' ||
+    event.request.destination === 'document' ||
+    url.pathname.endsWith('.html') ||
+    url.pathname.endsWith('.json') ||
+    url.pathname === '/';
 
-  if (isStaticAsset) {
+  if (isDynamicContent) {
     event.respondWith(
-      caches.match(event.request).then((cached) => {
-        if (cached) return cached;
+      fetch(event.request)
+        .then((networkRes) => {
+          if (networkRes && networkRes.status === 200 && networkRes.type === 'basic') {
+            const clone = networkRes.clone();
+            caches.open(CACHE_NAME).then((cache) => cache.put(event.request, clone));
+          }
+          return networkRes;
+        })
+        .catch(async () => {
+          const cached = await caches.match(event.request);
+          if (cached) return cached;
 
-        return fetch(event.request)
-          .then((networkRes) => {
-            if (networkRes && networkRes.status === 200) {
-              const clone = networkRes.clone();
-              caches.open(CACHE_NAME).then((cache) => cache.put(event.request, clone));
-            }
-            return networkRes;
-          })
-          .catch(() => {
-            // Image fallback placeholder
-            if (event.request.destination === 'image') {
-              return new Response(
-                `<svg xmlns="http://www.w3.org/2000/svg" width="200" height="200" viewBox="0 0 200 200"><rect width="200" height="200" fill="#F1F5F9"/><text x="100" y="105" font-family="sans-serif" font-size="13" fill="#94A3B8" text-anchor="middle">Image Offline</text></svg>`,
-                { headers: { 'Content-Type': 'image/svg+xml' } }
-              );
-            }
+          // Fallback hierarchy for page navigation failures
+          if (event.request.mode === 'navigate' || event.request.destination === 'document') {
+            const cached404 = await caches.match('/404.html');
+            if (cached404) return cached404;
+            return caches.match('/index.html');
+          }
+
+          return new Response('Content unavailable offline', {
+            status: 503,
+            statusText: 'Service Unavailable',
+            headers: { 'Content-Type': 'text/plain' }
           });
-      })
+        })
     );
     return;
   }
 
-  // STRATEGY B: Navigation / HTML Pages (Network-First with Cache Fallback)
+  // STRATEGY B: Static Assets, Fonts & Images (Cache-First with Network Fallback)
   event.respondWith(
-    fetch(event.request)
-      .then((networkRes) => {
-        if (networkRes && networkRes.status === 200 && networkRes.type === 'basic') {
-          const clone = networkRes.clone();
-          caches.open(CACHE_NAME).then((cache) => cache.put(event.request, clone));
-        }
-        return networkRes;
-      })
-      .catch(async () => {
-        const cached = await caches.match(event.request);
-        if (cached) return cached;
+    caches.match(event.request).then((cached) => {
+      if (cached) return cached;
 
-        // Fall back to offline page, then cached index
-        if (event.request.destination === 'document' || event.request.mode === 'navigate') {
-          const offlinePage = await caches.match('/offline.html');
-          if (offlinePage) return offlinePage;
-          return caches.match('/index.html');
-        }
-
-        return new Response('Network unavailable', { status: 503, statusText: 'Service Unavailable' });
-      })
+      return fetch(event.request)
+        .then((networkRes) => {
+          if (networkRes && networkRes.status === 200) {
+            const clone = networkRes.clone();
+            caches.open(CACHE_NAME).then((cache) => cache.put(event.request, clone));
+          }
+          return networkRes;
+        })
+        .catch(() => {
+          // Fallback placeholder image when offline
+          if (event.request.destination === 'image') {
+            return new Response(
+              `<svg xmlns="http://www.w3.org/2000/svg" width="300" height="200" viewBox="0 0 300 200"><rect width="300" height="200" fill="#F1F5F9"/><text x="150" y="105" font-family="sans-serif" font-size="14" fill="#94A3B8" text-anchor="middle">Image Offline</text></svg>`,
+              { headers: { 'Content-Type': 'image/svg+xml' } }
+            );
+          }
+        });
+    })
   );
 });
 
@@ -169,8 +181,8 @@ self.addEventListener('push', (event) => {
   const title = data.title || 'Property Finder Real Estate';
   const options = {
     body: data.body || 'New property match available in Mumbai!',
-    icon: data.icon || '/icons/favicon.png',
-    badge: data.badge || '/icons/favicon.png',
+    icon: data.icon || '/icons/icon-192.png',
+    badge: data.badge || '/icons/icon-192.png',
     data: { url: data.url || '/properties.html' },
     actions: [
       { action: 'view', title: '👀 View Details' },
@@ -207,7 +219,6 @@ self.addEventListener('notificationclick', (event) => {
 let runtimeApiBase = 'https://api.propertyfinderrealestate.com/api/website';
 let runtimeApiKey  = 'pfre_ws_key_2026_change_me';
 
-// Listen for config sync from main thread
 self.addEventListener('message', (event) => {
   if (event.data && event.data.type === 'CONFIG_SYNC') {
     if (event.data.apiBase) runtimeApiBase = event.data.apiBase;
@@ -268,7 +279,7 @@ async function syncPendingEnquiries() {
           );
         }
       } catch (_) {
-        // Will retry automatically on next network connection
+        // Automatically retries on next connection
       }
     }
   } catch (err) {
