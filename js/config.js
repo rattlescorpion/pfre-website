@@ -1,18 +1,13 @@
 /* =====================================================
-   PROPERTY FINDER RE — Website Configuration
-   =====================================================
-   ★ BEFORE PUBLISHING — update these values:
-   ─────────────────────────────────────────────────────
-   1. FORMSPREE_ID     → Formspree form ID (e.g. "xpwrgkqz")
-   2. TURNSTILE_SITEKEY → Cloudflare Turnstile site key
-   3. API_KEY          → Laravel backend website key
-   4. Flip FEATURES.* flags to true when backend is live
+   PROPERTY FINDER REAL ESTATE — Central Configuration Engine
+   Enterprise Client Setup · Production & Local Routing
+   Immutable Settings · Lead Pipeline & Backend Sync
    ===================================================== */
 
 (function (global) {
   'use strict';
 
-  /* ── Detect Environment ── */
+  /* ── 1. Environment Detection ── */
   const hostname = (typeof window !== 'undefined' && window.location && window.location.hostname) || '';
   const isLocal = Boolean(
     hostname === 'localhost' ||
@@ -25,13 +20,27 @@
     /^10\.\d{1,3}\.\d{1,3}\.\d{1,3}$/.test(hostname)
   );
 
-  /* ── Canonical Configuration ── */
+  /* ── 2. Unified Master Configuration ── */
   const PFRE_CONFIG = {
-    /* ── Formspree Lead Routing ── */
-    FORMSPREE_ID: 'YOUR_FORMSPREE_ID',
+    /* ── Core Identity ── */
+    SITE_NAME: 'Property Finder Real Estate',
+    BASE_URL: 'https://www.propertyfinderrealestate.com',
+    PHONE: '+919326990050',
+    PHONE_FORMATTED: '+919326990050',
+    WHATSAPP: '919326990050',
+    EMAIL: 'propertyfinderre@gmail.com',
+    ADDRESS: 'Shop No. 9, Ground Floor, Building No. 3, Deepanjali Co-operative Housing Society Limited, Baf-Hira Nagar, Lower Kharodi, Jankalyan Nagar Road, Malad West, Mumbai, Maharashtra, 400095, India',
 
-    /* ── Cloudflare Turnstile ── */
-    // Default: Cloudflare public test key (always passes)
+    /* ── Geolocation & Map Coordinates ── */
+    GEO: {
+      LATITUDE: 19.1886,
+      LONGITUDE: 72.8485
+    },
+
+    /* ── Lead Routing & Cloudflare Turnstile ── */
+    // Replace with your Formspree form ID (e.g. "xaygkqle")
+    FORMSPREE_ID: 'YOUR_FORMSPREE_ID',
+    // Default: Cloudflare Turnstile test key (passes automatically; replace with live dashboard key in production)
     TURNSTILE_SITEKEY: '1x00000000000000000000AA',
 
     /* ── API Backend Connection ── */
@@ -39,13 +48,11 @@
       ? 'http://localhost:8000/api/website'
       : 'https://api.propertyfinderrealestate.com/api/website',
 
-    // Generate via: php artisan pfre:generate-website-key
     API_KEY: 'pfre_ws_key_2026_change_me',
-
     API_VERSION: 'v1',
     TIMEOUT: 12000,
 
-    /* ── Feature Flags ── */
+    /* ── Feature Toggles ── */
     FEATURES: {
       LIVE_PROPERTIES:    false,
       LIVE_TESTIMONIALS:  false,
@@ -54,21 +61,22 @@
       LEAD_CAPTURE:       true,
       ANALYTICS:          true,
       CRM_SYNC:           false,
-      PUSH_NOTIFICATIONS: false,
+      PUSH_NOTIFICATIONS: true,
       LIVE_FINANCE:       false,
       LIVE_LEGAL:         false,
       LIVE_INVENTORY:     false,
       LIVE_AUTH:          false,
     },
 
-    /* ── Business Details ── */
+    /* ── Structured Business Record ── */
     BUSINESS: {
       name:     'Property Finder Real Estate',
       phone:    '+919326990050',
       whatsapp: '919326990050',
       email:    'propertyfinderre@gmail.com',
       website:  'https://www.propertyfinderrealestate.com',
-      address:  'Shop No. 9, Ground Floor, Building No. 3, Deepanjali CHS, Baf-Hira Nagar, Lower Kharodi, Jankalyan Nagar Road, Malad West',
+      address:  'Shop No. 9, Ground Floor, Building No. 3, Deepanjali Co-operative Housing Society Limited, Baf-Hira Nagar, Lower Kharodi, Jankalyan Nagar Road, Malad West, Mumbai, Maharashtra, 400095, India',
+      locality: 'Malad West',
       city:     'Mumbai',
       state:    'Maharashtra',
       country:  'India',
@@ -87,7 +95,7 @@
       settings:   '/settings',
     },
 
-    /* ── State Inspection Helpers ── */
+    /* ── Runtime Helper Methods ── */
     isLocal: () => isLocal,
     isConfigured: () => {
       return (
@@ -98,7 +106,7 @@
     }
   };
 
-  /* ── Deep Freeze Helper ── */
+  /* ── 3. Deep Freeze Helper ── */
   function deepFreeze(obj) {
     Object.keys(obj).forEach((prop) => {
       if (typeof obj[prop] === 'object' && obj[prop] !== null && !Object.isFrozen(obj[prop])) {
@@ -108,13 +116,12 @@
     return Object.freeze(obj);
   }
 
-  /* ── Development Diagnostic Check ── */
+  /* ── 4. Development Diagnostics ── */
   (function runDiagnostics() {
-    // Surface setup instructions during development, stay quiet in production
     if (isLocal) {
       if (PFRE_CONFIG.FORMSPREE_ID === 'YOUR_FORMSPREE_ID') {
         console.warn(
-          '%c[PFRE Config]%c FORMSPREE_ID is unset. Form submissions will fail or use local fallback.',
+          '%c[PFRE Config]%c FORMSPREE_ID is unset. Forms will rely on local storage/Omni fallback queue.',
           'color:#D97706;font-weight:bold;',
           'color:inherit;'
         );
@@ -128,7 +135,7 @@
       }
       if (!PFRE_CONFIG.isConfigured()) {
         console.info(
-          '%c[PFRE Config]%c API backend not linked (mock/local fallback active).',
+          '%c[PFRE Config]%c API backend not linked (mock/local data fallback active).',
           'color:#64748B;font-weight:bold;',
           'color:inherit;'
         );
@@ -136,7 +143,20 @@
     }
   })();
 
-  /* ── Export Immutable Config to Window ── */
+  /* ── 5. Service Worker Sync (Syncs API Keys to Worker) ── */
+  if (typeof navigator !== 'undefined' && 'serviceWorker' in navigator) {
+    window.addEventListener('load', () => {
+      if (navigator.serviceWorker.controller) {
+        navigator.serviceWorker.controller.postMessage({
+          type: 'CONFIG_SYNC',
+          apiBase: PFRE_CONFIG.API_BASE_URL,
+          apiKey: PFRE_CONFIG.API_KEY
+        });
+      }
+    });
+  }
+
+  /* ── 6. Export to Global Scope ── */
   global.PFRE_CONFIG = deepFreeze(PFRE_CONFIG);
 
 })(typeof window !== 'undefined' ? window : this);
