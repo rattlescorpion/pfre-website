@@ -4,22 +4,22 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>404 — Page Not Found | Property Finder Real Estate Mumbai</title>
-  <meta name="description" content="The page you are looking for could not be found. Browse residential and commercial properties in Mumbai with Property Finder Real Estate.">
-  <meta name="robots" content="noindex, nofollow">
+  <meta name="description" content="The page you are looking for could not be found. Browse verified residential and commercial properties across Mumbai with Property Finder Real Estate.">
+  <meta name="robots" content="noindex, follow">
   <link rel="canonical" href="https://www.propertyfinderrealestate.com/404.html">
 
-  <!-- Favicons & Manifest -->
-  <link rel="icon" type="image/png" sizes="192x192" href="icons/icon-192.png">
-  <link rel="icon" type="image/svg+xml" href="icons/favicon.svg">
-  <link rel="manifest" href="manifest.json">
+  <!-- Favicons & Manifest (Root-Relative) -->
+  <link rel="icon" type="image/png" sizes="192x192" href="/icons/icon-192.png">
+  <link rel="icon" type="image/svg+xml" href="/icons/favicon.svg">
+  <link rel="manifest" href="/manifest.json">
   <meta name="theme-color" content="#2563EB">
 
-  <!-- Content Security Policy & Security Headers -->
+  <!-- Content Security Policy & Security Headers (Valid in <meta>) -->
   <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' https://cdnjs.cloudflare.com https://challenges.cloudflare.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' data: https:; connect-src 'self' https://api.propertyfinderrealestate.com http://localhost:8000 https://formspree.io; frame-src https://www.google.com https://challenges.cloudflare.com; form-action 'self' https://formspree.io; object-src 'none'; base-uri 'self'">
   <meta http-equiv="X-Content-Type-Options" content="nosniff">
   <meta http-equiv="Referrer-Policy" content="strict-origin-when-cross-origin">
 
-  <!-- Geo Meta -->
+  <!-- Geolocation -->
   <meta name="geo.region" content="IN-MH">
   <meta name="geo.placename" content="Mumbai">
   <meta name="geo.position" content="19.1886;72.8485">
@@ -35,12 +35,12 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;0,900;1,700&family=DM+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 
-  <!-- Stylesheets -->
-  <link rel="stylesheet" href="css/styles.css">
-  <link rel="stylesheet" href="css/theme.css">
-  <link rel="stylesheet" href="css/mobile.css">
-  <link rel="stylesheet" href="css/overrides.css">
-  <link rel="stylesheet" href="css/utils.css">
+  <!-- Stylesheets (Strictly Root-Relative for Nested 404s) -->
+  <link rel="stylesheet" href="/css/styles.css">
+  <link rel="stylesheet" href="/css/theme.css">
+  <link rel="stylesheet" href="/css/mobile.css">
+  <link rel="stylesheet" href="/css/overrides.css">
+  <link rel="stylesheet" href="/css/utils.css">
 
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
@@ -96,6 +96,16 @@
       align-items: center;
       gap: 12px;
     }
+    .nav-phone-link {
+      font-size: 14px;
+      font-weight: 600;
+      color: var(--text);
+      text-decoration: none;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+    .nav-phone-link:hover { color: var(--blue); }
     .nav-cta {
       background: var(--blue);
       color: #FFFFFF;
@@ -118,7 +128,9 @@
       justify-content: center;
       cursor: pointer;
       font-size: 16px;
+      transition: border-color 0.2s;
     }
+    .theme-toggle:hover { border-color: var(--blue); }
 
     /* Main Container */
     main {
@@ -132,7 +144,7 @@
       background: var(--card);
       border-radius: 24px;
       padding: 56px 48px;
-      max-width: 640px;
+      max-width: 660px;
       width: 100%;
       text-align: center;
       box-shadow: 0 20px 60px rgba(0, 0, 0, 0.08);
@@ -141,7 +153,7 @@
     }
     .error-num {
       font-family: 'Playfair Display', serif;
-      font-size: 110px;
+      font-size: clamp(80px, 15vw, 110px);
       font-weight: 900;
       line-height: 1;
       color: var(--blue);
@@ -158,7 +170,7 @@
     }
     h1 {
       font-family: 'Playfair Display', serif;
-      font-size: 32px;
+      font-size: clamp(26px, 4vw, 32px);
       font-weight: 900;
       margin: 16px 0 10px;
       letter-spacing: -0.5px;
@@ -169,7 +181,7 @@
       color: var(--muted);
       line-height: 1.7;
       margin-bottom: 28px;
-      max-width: 440px;
+      max-width: 460px;
       margin-inline: auto;
     }
 
@@ -287,6 +299,23 @@
       margin: 24px 0;
     }
 
+    /* Help Box */
+    .help-box {
+      font-size: 13.5px;
+      color: var(--muted);
+      line-height: 1.6;
+      margin: 0;
+    }
+    .office-info {
+      font-size: 12.5px;
+      color: var(--muted);
+      line-height: 1.6;
+      margin-top: 14px;
+      padding-top: 14px;
+      border-top: 1px dashed var(--border);
+      text-align: left;
+    }
+
     /* Footer */
     footer {
       text-align: center;
@@ -305,6 +334,7 @@
       .error-icon { font-size: 50px; margin-top: -40px; }
       h1 { font-size: 24px; }
       .quick-grid { grid-template-columns: repeat(2, 1fr); }
+      .nav-phone-link { display: none; }
     }
   </style>
 </head>
@@ -313,15 +343,16 @@
 
   <!-- Navigation Bar -->
   <nav role="navigation" aria-label="Main navigation">
-    <a href="index.html" class="nav-logo">
-      <img src="images/logo.png" alt="Property Finder Real Estate" style="height:44px;width:auto;object-fit:contain" loading="eager">
+    <a href="/" class="nav-logo">
+      <img src="/images/logo.png" alt="Property Finder Real Estate" style="height:44px;width:auto;object-fit:contain" loading="eager">
     </a>
     <div class="nav-actions">
-      <button class="theme-toggle" id="themeToggle" type="button" aria-label="Toggle light or dark theme" aria-pressed="false" title="Toggle theme">
-        <span class="icon-light" aria-hidden="true">☀</span>
+      <a href="tel:+919326990050" class="nav-phone-link">📞 +919326990050</a>
+      <button class="theme-toggle" id="themeToggle" type="button" aria-label="Toggle light or dark theme" title="Toggle theme">
+        <span class="icon-light" aria-hidden="true">☀️</span>
         <span class="icon-dark" aria-hidden="true" style="display:none">🌙</span>
       </button>
-      <a href="index.html" class="nav-cta">🏠 Home</a>
+      <a href="/" class="nav-cta">🏠 Home</a>
     </div>
   </nav>
 
@@ -331,7 +362,7 @@
       <div class="error-num" aria-hidden="true">404</div>
       <span class="error-icon" aria-hidden="true">🔍</span>
       <h1>Page <em>Not Found</em></h1>
-      <p class="subtitle">Oops! The property listing or page you are looking for has moved, expired, or is unavailable. Search our current Mumbai listings below:</p>
+      <p class="subtitle">The property listing, project brochure, or page you are looking for has moved, expired, or is unavailable. Search our current Mumbai listings below:</p>
 
       <!-- Search Box -->
       <form class="search-wrap" onsubmit="event.preventDefault(); doSearch();">
@@ -342,60 +373,67 @@
       <!-- Quick Navigation -->
       <div class="quick-title">Popular Pages</div>
       <div class="quick-grid">
-        <a href="index.html" class="quick-link"><span class="ql-icon">🏠</span>Home</a>
-        <a href="properties.html" class="quick-link"><span class="ql-icon">🏘️</span>Properties</a>
-        <a href="projects.html" class="quick-link"><span class="ql-icon">🏗️</span>Projects</a>
-        <a href="calculators.html" class="quick-link"><span class="ql-icon">🧮</span>Calculators</a>
-        <a href="tds-calculators.html" class="quick-link"><span class="ql-icon">📋</span>TDS Calc</a>
-        <a href="contact.html" class="quick-link"><span class="ql-icon">📞</span>Contact</a>
-        <a href="faq.html" class="quick-link"><span class="ql-icon">❓</span>FAQ</a>
-        <a href="blog.html" class="quick-link"><span class="ql-icon">📝</span>Blog</a>
-        <a href="post-property.html" class="quick-link"><span class="ql-icon">➕</span>Post Property</a>
+        <a href="/" class="quick-link"><span class="ql-icon">🏠</span>Home</a>
+        <a href="/properties.html" class="quick-link"><span class="ql-icon">🏘️</span>Properties</a>
+        <a href="/projects.html" class="quick-link"><span class="ql-icon">🏗️</span>Projects</a>
+        <a href="/calculators.html" class="quick-link"><span class="ql-icon">🧮</span>Calculators</a>
+        <a href="/tds-calculators.html" class="quick-link"><span class="ql-icon">📋</span>TDS Calc</a>
+        <a href="/contact.html" class="quick-link"><span class="ql-icon">📞</span>Contact</a>
+        <a href="/faq.html" class="quick-link"><span class="ql-icon">❓</span>FAQ</a>
+        <a href="/blog.html" class="quick-link"><span class="ql-icon">📝</span>Blog</a>
+        <a href="/post-property.html" class="quick-link"><span class="ql-icon">➕</span>Post Property</a>
       </div>
 
       <div class="btn-group">
         <button type="button" onclick="history.back()" class="back-btn outline">← Go Back</button>
-        <a href="index.html" class="back-btn">🏠 Return to Homepage</a>
+        <a href="/" class="back-btn">🏠 Return to Homepage</a>
       </div>
 
       <div class="divider" aria-hidden="true"></div>
 
-      <p style="font-size:13.5px;color:var(--muted);margin:0">
-        Need assistance? Call us directly: <a href="tel:+919326990050" style="color:var(--blue);font-weight:700">+91 93269 90050</a> or 
-        <a href="https://wa.me/919326990050?utm_source=whatsapp&utm_medium=chat&utm_campaign=error_404" target="_blank" rel="noopener noreferrer" style="color:var(--green);font-weight:700">WhatsApp Us</a>
+      <p class="help-box">
+        Need assistance with a property? Call our desk: 
+        <a href="tel:+919326990050" style="color:var(--blue);font-weight:700;text-decoration:none">+919326990050</a> or 
+        <a href="https://wa.me/919326990050?text=Hello%20Property%20Finder%20Real%20Estate,%20I%20am%20looking%20for%20a%20property%20in%20Mumbai" target="_blank" rel="noopener noreferrer" style="color:var(--green);font-weight:700;text-decoration:none">💬 WhatsApp Us</a>
       </p>
+
+      <div class="office-info">
+        <strong>Office Desk:</strong> Shop No. 9, Ground Floor, Building No. 3, Deepanjali Co-operative Housing Society Limited, Baf-Hira Nagar, Lower Kharodi, Jankalyan Nagar Road, Malad West, Mumbai, Maharashtra, 400095, India
+      </div>
     </div>
   </main>
 
   <!-- Footer -->
   <footer>
-    <div style="display:flex;gap:8px;justify-content:center;margin:12px 0">
-      <a href="https://www.instagram.com/propertyfinderrealestate" target="_blank" rel="noopener noreferrer" aria-label="Instagram" style="width:32px;height:32px;background:rgba(0,0,0,0.06);border-radius:8px;display:flex;align-items:center;justify-content:center"><svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><rect x="2" y="2" width="20" height="20" rx="5"/><path d="M16 11.37A4 4 0 1112.63 8 4 4 0 0116 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg></a>
-      <a href="https://www.facebook.com/PropertyFinderRealEstate/reviews" target="_blank" rel="noopener noreferrer" aria-label="Facebook Reviews" style="width:32px;height:32px;background:rgba(0,0,0,0.06);border-radius:8px;display:flex;align-items:center;justify-content:center"><svg width="14" height="14" fill="currentColor" viewBox="0 0 24 24"><path d="M18 2h-3a5 5 0 00-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 011-1h3z"/></svg></a>
-      <a href="https://www.youtube.com/@PropertyFinderRealEstate" target="_blank" rel="noopener noreferrer" aria-label="YouTube" style="width:32px;height:32px;background:rgba(0,0,0,0.06);border-radius:8px;display:flex;align-items:center;justify-content:center"><svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M23.498 6.186a3.016 3.016 0 00-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 00.502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 002.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 002.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/></svg></a>
+    <div style="display:flex;gap:8px;justify-content:center;margin-bottom:12px">
+      <a href="https://www.instagram.com/propertyfinderrealestate" target="_blank" rel="noopener noreferrer" aria-label="Instagram" style="width:32px;height:32px;background:rgba(0,0,0,0.06);border-radius:8px;display:flex;align-items:center;justify-content:center;color:inherit"><svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1112.63 8 4 4 0 0116 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg></a>
+      <a href="https://www.facebook.com/PropertyFinderRealEstate/reviews" target="_blank" rel="noopener noreferrer" aria-label="Facebook Reviews" style="width:32px;height:32px;background:rgba(0,0,0,0.06);border-radius:8px;display:flex;align-items:center;justify-content:center;color:inherit"><svg width="14" height="14" fill="currentColor" viewBox="0 0 24 24"><path d="M18 2h-3a5 5 0 00-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 011-1h3z"/></svg></a>
+      <a href="https://www.youtube.com/@PropertyFinderRealEstate" target="_blank" rel="noopener noreferrer" aria-label="YouTube" style="width:32px;height:32px;background:rgba(0,0,0,0.06);border-radius:8px;display:flex;align-items:center;justify-content:center;color:inherit"><svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M23.498 6.186a3.016 3.016 0 00-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 00.502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 002.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 002.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/></svg></a>
       <a href="https://jsdl.in/RSL-XGK1779888146" target="_blank" rel="noopener noreferrer" aria-label="JustDial" style="width:32px;height:32px;background:#FF6B35;border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:10px;font-weight:900;color:white;text-decoration:none">JD</a>
     </div>
     <span>© 2026 Property Finder Real Estate · Malad West, Mumbai</span> ·
-    <a href="index.html">Home</a> · <a href="privacy-policy.html">Privacy Policy</a>
+    <a href="/">Home</a> · <a href="/privacy-policy.html">Privacy Policy</a>
   </footer>
 
   <script>
     function doSearch() {
       const inp = document.getElementById('searchInp');
       const q = inp ? inp.value.trim() : '';
-      if (q) window.location.href = 'properties.html?q=' + encodeURIComponent(q);
-      else window.location.href = 'properties.html';
+      if (q) window.location.href = '/properties.html?q=' + encodeURIComponent(q);
+      else window.location.href = '/properties.html';
     }
 
     if ('serviceWorker' in navigator) {
-      navigator.serviceWorker.register('./sw.js').catch(() => {});
+      window.addEventListener('load', () => {
+        navigator.serviceWorker.register('/sw.js').catch(() => {});
+      });
     }
   </script>
 
-  <!-- External Centralized Scripts -->
-  <script src="js/security.js"></script>
-  <script src="js/tracker.js" defer></script>
-  <script src="js/theme.js"></script>
-  <script src="js/i18n.js"></script>
+  <!-- External Centralized Scripts (Root-Relative) -->
+  <script src="/js/security.js"></script>
+  <script src="/js/tracker.js" defer></script>
+  <script src="/js/theme.js"></script>
+  <script src="/js/i18n.js"></script>
 </body>
 </html>
