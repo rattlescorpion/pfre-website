@@ -8,13 +8,7 @@
   <meta name="robots" content="noindex, follow">
   <link rel="canonical" href="https://www.propertyfinderrealestate.com/404.html">
 
-  <!-- Favicons & Manifest (Root-Relative) -->
-  <link rel="icon" type="image/png" sizes="192x192" href="/icons/icon-192.png">
-  <link rel="icon" type="image/svg+xml" href="/icons/favicon.svg">
-  <link rel="manifest" href="/manifest.json">
-  <meta name="theme-color" content="#2563EB">
-
-  <!-- Content Security Policy & Security Headers (Valid in <meta>) -->
+  <!-- Security & Content Security Policy (Valid in <meta>) -->
   <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' https://cdnjs.cloudflare.com https://challenges.cloudflare.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' data: https:; connect-src 'self' https://api.propertyfinderrealestate.com http://localhost:8000 https://formspree.io; frame-src https://www.google.com https://challenges.cloudflare.com; form-action 'self' https://formspree.io; object-src 'none'; base-uri 'self'">
   <meta http-equiv="X-Content-Type-Options" content="nosniff">
   <meta http-equiv="Referrer-Policy" content="strict-origin-when-cross-origin">
@@ -24,6 +18,12 @@
   <meta name="geo.placename" content="Mumbai">
   <meta name="geo.position" content="19.1886;72.8485">
   <meta name="ICBM" content="19.1886, 72.8485">
+
+  <!-- Favicons & Manifest (Strictly Root-Relative for Nested 404 Routes) -->
+  <link rel="icon" type="image/png" sizes="192x192" href="/icons/icon-192.png">
+  <link rel="icon" type="image/svg+xml" href="/icons/favicon.svg">
+  <link rel="manifest" href="/manifest.json">
+  <meta name="theme-color" content="#2563EB">
 
   <!-- Early Theme Boot (Prevents FOUC) -->
   <script>
@@ -35,210 +35,144 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;0,900;1,700&family=DM+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 
-  <!-- Stylesheets (Strictly Root-Relative for Nested 404s) -->
+  <!-- Stylesheets (Root-Relative) -->
   <link rel="stylesheet" href="/css/styles.css">
-  <link rel="stylesheet" href="/css/theme.css">
+  <link rel="stylesheet" href="/css/widgets.css">
   <link rel="stylesheet" href="/css/mobile.css">
+  <link rel="stylesheet" href="/css/theme.css">
   <link rel="stylesheet" href="/css/overrides.css">
   <link rel="stylesheet" href="/css/utils.css">
 
   <style>
-    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-    :root {
-      --blue: #2563EB;
-      --blue-dark: #1D4ED8;
-      --off-white: #F8FAFC;
-      --card: #FFFFFF;
-      --text: #0F172A;
-      --muted: #64748B;
-      --border: #E2E8F0;
-      --green: #10B981;
-    }
-    [data-theme="dark"] {
-      --off-white: #0B1120;
-      --card: #0F172A;
-      --text: #F8FAFC;
-      --muted: #94A3B8;
-      --border: #1E293B;
-    }
-    body {
-      font-family: 'DM Sans', system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
-      background: var(--off-white);
-      color: var(--text);
-      min-height: 100vh;
-      display: flex;
-      flex-direction: column;
-      transition: background 0.2s, color 0.2s;
-    }
-
-    /* Navbar */
-    nav {
-      background: var(--card);
-      border-bottom: 1px solid var(--border);
-      padding: 0 5%;
-      height: 68px;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      position: sticky;
-      top: 0;
-      z-index: 100;
-      transition: background 0.2s, border-color 0.2s;
-    }
-    .nav-logo {
-      display: flex;
-      align-items: center;
-      gap: 10px;
-      text-decoration: none;
-    }
-    .nav-actions {
-      display: flex;
-      align-items: center;
-      gap: 12px;
-    }
-    .nav-phone-link {
-      font-size: 14px;
-      font-weight: 600;
-      color: var(--text);
-      text-decoration: none;
-      display: flex;
-      align-items: center;
-      gap: 6px;
-    }
-    .nav-phone-link:hover { color: var(--blue); }
-    .nav-cta {
-      background: var(--blue);
-      color: #FFFFFF;
-      padding: 9px 20px;
-      border-radius: 10px;
-      font-size: 14px;
-      font-weight: 600;
-      text-decoration: none;
-      transition: background 0.2s;
-    }
-    .nav-cta:hover { background: var(--blue-dark); }
-    .theme-toggle {
-      background: var(--off-white);
-      border: 1px solid var(--border);
-      border-radius: 10px;
-      width: 40px;
-      height: 40px;
+    .error-wrapper {
+      min-height: calc(100vh - 180px);
       display: flex;
       align-items: center;
       justify-content: center;
-      cursor: pointer;
-      font-size: 16px;
-      transition: border-color 0.2s;
+      padding: 60px 5% 80px;
     }
-    .theme-toggle:hover { border-color: var(--blue); }
 
-    /* Main Container */
-    main {
-      flex: 1;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      padding: 40px 20px;
-    }
     .error-card {
-      background: var(--card);
-      border-radius: 24px;
+      background: var(--card, #FFFFFF);
+      border-radius: var(--radius-xl, 24px);
       padding: 56px 48px;
-      max-width: 660px;
+      max-width: 680px;
       width: 100%;
       text-align: center;
-      box-shadow: 0 20px 60px rgba(0, 0, 0, 0.08);
-      border: 1px solid var(--border);
+      box-shadow: var(--shadow-lg, 0 20px 60px rgba(0, 0, 0, 0.08));
+      border: 1.5px solid var(--border);
       transition: background 0.2s, border-color 0.2s;
     }
+
     .error-num {
       font-family: 'Playfair Display', serif;
-      font-size: clamp(80px, 15vw, 110px);
+      font-size: clamp(80px, 14vw, 120px);
       font-weight: 900;
       line-height: 1;
       color: var(--blue);
-      opacity: 0.12;
+      opacity: 0.15;
       position: relative;
       z-index: 0;
+      user-select: none;
     }
+
     .error-icon {
-      font-size: 64px;
-      margin-top: -54px;
+      font-size: 58px;
+      margin-top: -50px;
       position: relative;
       z-index: 1;
       display: block;
     }
-    h1 {
+
+    .error-card h1 {
       font-family: 'Playfair Display', serif;
-      font-size: clamp(26px, 4vw, 32px);
+      font-size: clamp(26px, 4vw, 34px);
       font-weight: 900;
       margin: 16px 0 10px;
-      letter-spacing: -0.5px;
+      color: var(--text);
     }
-    h1 em { font-style: italic; color: var(--blue); }
+
+    .error-card h1 em {
+      font-style: italic;
+      color: var(--blue);
+    }
+
     .subtitle {
       font-size: 15px;
-      color: var(--muted);
+      color: var(--text-muted);
       line-height: 1.7;
       margin-bottom: 28px;
-      max-width: 460px;
+      max-width: 500px;
       margin-inline: auto;
     }
 
-    /* Search Form */
+    /* Search Box */
     .search-wrap {
       display: flex;
-      gap: 0;
-      margin-bottom: 28px;
+      margin-bottom: 30px;
       border: 2px solid var(--border);
       border-radius: 12px;
       overflow: hidden;
+      background: var(--card, #FFFFFF);
       transition: border-color 0.2s;
     }
-    .search-wrap:focus-within { border-color: var(--blue); }
+
+    .search-wrap:focus-within {
+      border-color: var(--blue);
+    }
+
     .search-wrap input {
       flex: 1;
-      padding: 13px 16px;
+      padding: 14px 18px;
       border: none;
       outline: none;
       font-size: 14.5px;
-      font-family: 'DM Sans', sans-serif;
+      font-family: inherit;
       color: var(--text);
       background: transparent;
     }
+
     .search-wrap button {
       background: var(--blue);
       color: #FFFFFF;
       border: none;
-      padding: 13px 22px;
+      padding: 14px 24px;
       font-size: 14.5px;
       font-weight: 600;
       cursor: pointer;
       transition: background 0.2s;
-      font-family: 'DM Sans', sans-serif;
+      font-family: inherit;
       white-space: nowrap;
     }
-    .search-wrap button:hover { background: var(--blue-dark); }
 
-    /* Quick Links */
+    .search-wrap button:hover {
+      background: var(--blue-dark);
+    }
+
+    /* Quick Links Grid */
     .quick-title {
-      font-size: 12px;
+      font-size: 11.5px;
       font-weight: 700;
       letter-spacing: 1.5px;
       text-transform: uppercase;
-      color: var(--muted);
+      color: var(--text-muted);
       margin-bottom: 14px;
     }
+
     .quick-grid {
       display: grid;
       grid-template-columns: repeat(3, 1fr);
       gap: 10px;
       margin-bottom: 28px;
     }
+
     .quick-link {
-      display: block;
-      padding: 12px 10px;
-      background: var(--off-white);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 12px 8px;
+      background: var(--bg-secondary);
       border: 1px solid var(--border);
       border-radius: 12px;
       text-decoration: none;
@@ -246,16 +180,16 @@
       font-weight: 600;
       color: var(--text);
       transition: all 0.2s;
-      text-align: center;
     }
+
     .quick-link:hover {
       border-color: var(--blue);
       color: var(--blue);
       transform: translateY(-2px);
     }
+
     .quick-link .ql-icon {
       font-size: 20px;
-      display: block;
       margin-bottom: 4px;
     }
 
@@ -266,112 +200,71 @@
       gap: 12px;
       flex-wrap: wrap;
     }
-    .back-btn {
-      display: inline-flex;
-      align-items: center;
-      gap: 8px;
-      background: var(--blue);
-      color: #FFFFFF;
-      padding: 12px 24px;
-      border-radius: 12px;
-      font-size: 14.5px;
-      font-weight: 700;
-      text-decoration: none;
-      border: 2px solid transparent;
-      cursor: pointer;
-      transition: all 0.2s;
-    }
-    .back-btn:hover {
-      background: var(--blue-dark);
-      transform: translateY(-2px);
-    }
-    .back-btn.outline {
-      background: var(--off-white);
-      color: var(--blue);
-      border-color: var(--blue);
-    }
-    .back-btn.outline:hover {
-      background: var(--card);
-    }
+
     .divider {
       height: 1px;
       background: var(--border);
-      margin: 24px 0;
+      margin: 26px 0;
     }
 
-    /* Help Box */
     .help-box {
-      font-size: 13.5px;
-      color: var(--muted);
+      font-size: 14px;
+      color: var(--text-muted);
       line-height: 1.6;
       margin: 0;
     }
+
     .office-info {
       font-size: 12.5px;
-      color: var(--muted);
+      color: var(--text-muted);
       line-height: 1.6;
-      margin-top: 14px;
-      padding-top: 14px;
+      margin-top: 16px;
+      padding-top: 16px;
       border-top: 1px dashed var(--border);
       text-align: left;
     }
 
-    /* Footer */
-    footer {
-      text-align: center;
-      padding: 24px 20px;
-      font-size: 13px;
-      color: var(--muted);
-      border-top: 1px solid var(--border);
-      background: var(--card);
-    }
-    footer a { color: var(--blue); text-decoration: none; }
-    footer a:hover { text-decoration: underline; }
-
     @media (max-width: 640px) {
-      .error-card { padding: 36px 20px; }
-      .error-num { font-size: 80px; }
-      .error-icon { font-size: 50px; margin-top: -40px; }
-      h1 { font-size: 24px; }
-      .quick-grid { grid-template-columns: repeat(2, 1fr); }
-      .nav-phone-link { display: none; }
+      .error-card {
+        padding: 40px 20px;
+      }
+      .error-num {
+        font-size: 80px;
+      }
+      .error-icon {
+        font-size: 48px;
+        margin-top: -38px;
+      }
+      .quick-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+      .search-wrap button {
+        padding: 14px 16px;
+      }
     }
   </style>
 </head>
 <body>
-  <a href="#main-content" class="skip-link">Skip to main content</a>
 
-  <!-- Navigation Bar -->
-  <nav role="navigation" aria-label="Main navigation">
-    <a href="/" class="nav-logo">
-      <img src="/images/logo.png" alt="Property Finder Real Estate" style="height:44px;width:auto;object-fit:contain" loading="eager">
-    </a>
-    <div class="nav-actions">
-      <a href="tel:+919326990050" class="nav-phone-link">📞 +919326990050</a>
-      <button class="theme-toggle" id="themeToggle" type="button" aria-label="Toggle light or dark theme" title="Toggle theme">
-        <span class="icon-light" aria-hidden="true">☀️</span>
-        <span class="icon-dark" aria-hidden="true" style="display:none">🌙</span>
-      </button>
-      <a href="/" class="nav-cta">🏠 Home</a>
-    </div>
-  </nav>
+  <!-- MASTER NAVBAR (Single Source from js/layout.js) -->
+  <site-navbar></site-navbar>
 
-  <!-- Error Card -->
-  <main id="main-content">
+  <!-- MAIN ERROR VIEW -->
+  <main class="error-wrapper" id="main-content">
     <div class="error-card">
       <div class="error-num" aria-hidden="true">404</div>
       <span class="error-icon" aria-hidden="true">🔍</span>
       <h1>Page <em>Not Found</em></h1>
       <p class="subtitle">The property listing, project brochure, or page you are looking for has moved, expired, or is unavailable. Search our current Mumbai listings below:</p>
 
-      <!-- Search Box -->
+      <!-- Instant Inventory Search -->
       <form class="search-wrap" onsubmit="event.preventDefault(); doSearch();">
         <input type="text" id="searchInp" placeholder="Search by locality, e.g. Malad, Andheri, Goregaon…" aria-label="Search properties">
         <button type="submit">🔍 Search</button>
       </form>
 
       <!-- Quick Navigation -->
-      <div class="quick-title">Popular Pages</div>
+      <div class="quick-title">Explore Verified Portals</div>
       <div class="quick-grid">
         <a href="/" class="quick-link"><span class="ql-icon">🏠</span>Home</a>
         <a href="/properties.html" class="quick-link"><span class="ql-icon">🏘️</span>Properties</a>
@@ -379,22 +272,22 @@
         <a href="/calculators.html" class="quick-link"><span class="ql-icon">🧮</span>Calculators</a>
         <a href="/tds-calculators.html" class="quick-link"><span class="ql-icon">📋</span>TDS Calc</a>
         <a href="/contact.html" class="quick-link"><span class="ql-icon">📞</span>Contact</a>
-        <a href="/faq.html" class="quick-link"><span class="ql-icon">❓</span>FAQ</a>
-        <a href="/blog.html" class="quick-link"><span class="ql-icon">📝</span>Blog</a>
+        <a href="/about.html" class="quick-link"><span class="ql-icon">🏢</span>About Us</a>
+        <a href="/team.html" class="quick-link"><span class="ql-icon">👥</span>Our Team</a>
         <a href="/post-property.html" class="quick-link"><span class="ql-icon">➕</span>Post Property</a>
       </div>
 
       <div class="btn-group">
-        <button type="button" onclick="history.back()" class="back-btn outline">← Go Back</button>
-        <a href="/" class="back-btn">🏠 Return to Homepage</a>
+        <button type="button" onclick="history.back()" class="btn btn-outline btn-sm">← Go Back</button>
+        <a href="/" class="btn btn-primary btn-sm">🏠 Return to Homepage</a>
       </div>
 
       <div class="divider" aria-hidden="true"></div>
 
       <p class="help-box">
-        Need assistance with a property? Call our desk: 
-        <a href="tel:+919326990050" style="color:var(--blue);font-weight:700;text-decoration:none">+919326990050</a> or 
-        <a href="https://wa.me/919326990050?text=Hello%20Property%20Finder%20Real%20Estate,%20I%20am%20looking%20for%20a%20property%20in%20Mumbai" target="_blank" rel="noopener noreferrer" style="color:var(--green);font-weight:700;text-decoration:none">💬 WhatsApp Us</a>
+        Looking for a specific property? Call our advisory desk directly: 
+        <a href="tel:+919326990050" style="color:var(--blue);font-weight:700;text-decoration:none;">+919326990050</a> or 
+        <a href="https://wa.me/919326990050?text=Hello%20Property%20Finder%20Real%20Estate,%20I%20am%20looking%20for%20a%20property%20in%20Mumbai" target="_blank" rel="noopener noreferrer" style="color:#25D366;font-weight:700;text-decoration:none;">💬 WhatsApp Us</a>
       </p>
 
       <div class="office-info">
@@ -403,24 +296,19 @@
     </div>
   </main>
 
-  <!-- Footer -->
-  <footer>
-    <div style="display:flex;gap:8px;justify-content:center;margin-bottom:12px">
-      <a href="https://www.instagram.com/propertyfinderrealestate" target="_blank" rel="noopener noreferrer" aria-label="Instagram" style="width:32px;height:32px;background:rgba(0,0,0,0.06);border-radius:8px;display:flex;align-items:center;justify-content:center;color:inherit"><svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1112.63 8 4 4 0 0116 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg></a>
-      <a href="https://www.facebook.com/PropertyFinderRealEstate/reviews" target="_blank" rel="noopener noreferrer" aria-label="Facebook Reviews" style="width:32px;height:32px;background:rgba(0,0,0,0.06);border-radius:8px;display:flex;align-items:center;justify-content:center;color:inherit"><svg width="14" height="14" fill="currentColor" viewBox="0 0 24 24"><path d="M18 2h-3a5 5 0 00-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 011-1h3z"/></svg></a>
-      <a href="https://www.youtube.com/@PropertyFinderRealEstate" target="_blank" rel="noopener noreferrer" aria-label="YouTube" style="width:32px;height:32px;background:rgba(0,0,0,0.06);border-radius:8px;display:flex;align-items:center;justify-content:center;color:inherit"><svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M23.498 6.186a3.016 3.016 0 00-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 00.502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 002.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 002.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/></svg></a>
-      <a href="https://jsdl.in/RSL-XGK1779888146" target="_blank" rel="noopener noreferrer" aria-label="JustDial" style="width:32px;height:32px;background:#FF6B35;border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:10px;font-weight:900;color:white;text-decoration:none">JD</a>
-    </div>
-    <span>© 2026 Property Finder Real Estate · Malad West, Mumbai</span> ·
-    <a href="/">Home</a> · <a href="/privacy-policy.html">Privacy Policy</a>
-  </footer>
+  <!-- MASTER FOOTER & GLOBAL WIDGETS (Single Source from js/layout.js) -->
+  <site-footer></site-footer>
 
+  <!-- Client Search Redirection & Service Worker Registration -->
   <script>
     function doSearch() {
       const inp = document.getElementById('searchInp');
       const q = inp ? inp.value.trim() : '';
-      if (q) window.location.href = '/properties.html?q=' + encodeURIComponent(q);
-      else window.location.href = '/properties.html';
+      if (q) {
+        window.location.href = '/properties.html?q=' + encodeURIComponent(q);
+      } else {
+        window.location.href = '/properties.html';
+      }
     }
 
     if ('serviceWorker' in navigator) {
@@ -430,10 +318,13 @@
     }
   </script>
 
-  <!-- External Centralized Scripts (Root-Relative) -->
+  <!-- Centralized Script Engines in Order of Dependency -->
+  <script src="/js/config.js"></script>
+  <script src="/js/layout.js"></script>
   <script src="/js/security.js"></script>
   <script src="/js/tracker.js" defer></script>
   <script src="/js/theme.js"></script>
   <script src="/js/i18n.js"></script>
+  <script src="/js/widgets.js"></script>
 </body>
 </html>
