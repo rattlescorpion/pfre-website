@@ -3,12 +3,12 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Properties — Property Finder Real Estate | Mumbai</title>
-  <meta name="description" content="Browse residential & commercial properties for sale and rent across Mumbai. Flats, bungalows, plots, row houses, offices and retail spaces.">
+  <title>Properties for Sale &amp; Rent in Mumbai | Property Finder Real Estate</title>
+  <meta name="description" content="Explore verified flats, apartments, commercial shops, and office spaces in Malad West, Goregaon, Andheri, Kandivali, and Borivali. 100% verified listings with Property Finder Real Estate.">
   <meta name="author" content="Property Finder Real Estate">
   <link rel="canonical" href="https://www.propertyfinderrealestate.com/properties.html">
 
-  <!-- Security & Validated CSP (frame-ancestors removed from meta) -->
+  <!-- Security & CSP -->
   <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' https://cdnjs.cloudflare.com https://challenges.cloudflare.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' data: https:; connect-src 'self' https://api.propertyfinderrealestate.com http://localhost:8000 https://formspree.io; frame-src https://www.google.com https://challenges.cloudflare.com; form-action 'self' https://formspree.io; object-src 'none'; base-uri 'self'">
   <meta http-equiv="X-Content-Type-Options" content="nosniff">
   <meta http-equiv="Referrer-Policy" content="strict-origin-when-cross-origin">
@@ -17,18 +17,19 @@
   <meta property="og:type" content="website">
   <meta property="og:site_name" content="Property Finder Real Estate">
   <meta property="og:locale" content="en_IN">
-  <meta property="og:title" content="Properties in Mumbai | Buy & Rent | Property Finder Real Estate">
-  <meta property="og:description" content="Browse 100+ residential & commercial properties in Mumbai's western suburbs. Filter by BHK, budget, locality.">
+  <meta property="og:title" content="Properties for Sale &amp; Rent in Mumbai | PFRE">
+  <meta property="og:description" content="Verified residential apartments and commercial properties across Mumbai's Western Suburbs. Browse active inventory in Malad, Goregaon, Andheri &amp; Borivali.">
   <meta property="og:url" content="https://www.propertyfinderrealestate.com/properties.html">
   <meta property="og:image" content="https://www.propertyfinderrealestate.com/images/og-banner.jpg">
   <meta property="og:image:width" content="1200">
   <meta property="og:image:height" content="630">
+  <meta property="og:image:type" content="image/jpeg">
 
   <!-- Twitter Card -->
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:site" content="@PropertyFinderA">
-  <meta name="twitter:title" content="Properties in Mumbai | Buy & Rent | Property Finder Real Estate">
-  <meta name="twitter:description" content="Browse 100+ residential & commercial properties in Mumbai's western suburbs. Filter by BHK, budget, locality.">
+  <meta name="twitter:title" content="Properties for Sale &amp; Rent in Mumbai | PFRE">
+  <meta name="twitter:description" content="Verified residential apartments and commercial properties across Mumbai's Western Suburbs.">
   <meta name="twitter:image" content="https://www.propertyfinderrealestate.com/images/og-banner.jpg">
 
   <!-- SEO & Geolocation -->
@@ -39,406 +40,471 @@
   <meta name="ICBM" content="19.1886, 72.8485">
 
   <!-- Favicon & PWA -->
-  <link rel="icon" type="image/png" sizes="192x192" href="icons/icon-192.png">
-  <link rel="icon" type="image/svg+xml" href="icons/favicon.svg">
-  <link rel="manifest" href="manifest.json">
+  <link rel="icon" type="image/png" sizes="192x192" href="/icons/icon-192.png">
+  <link rel="icon" type="image/svg+xml" href="/icons/favicon.svg">
+  <link rel="manifest" href="/manifest.json">
   <meta name="theme-color" content="#2563EB">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="default">
+  <meta name="apple-mobile-web-app-title" content="Property Finder RE">
 
-  <!-- Early Theme Boot -->
+  <!-- Fonts & Early Theme Loader -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;0,900;1,700&family=DM+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
   <script>
     !function(){var t=localStorage.getItem("pfre_theme")||(window.matchMedia("(prefers-color-scheme:dark)").matches?"dark":"light");document.documentElement.setAttribute("data-theme",t);document.documentElement.classList.add("theme-"+t)}();
   </script>
 
-  <!-- Fonts & Styles -->
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;0,900;1,700&family=DM+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="css/styles.css">
-  <link rel="stylesheet" href="css/widgets.css">
-  <link rel="stylesheet" href="css/mobile.css">
-  <link rel="stylesheet" href="css/theme.css">
-  <link rel="stylesheet" href="css/overrides.css">
-  <link rel="stylesheet" href="css/utils.css">
+  <!-- Root-Relative Stylesheets -->
+  <link rel="stylesheet" href="/css/styles.css">
+  <link rel="stylesheet" href="/css/widgets.css">
+  <link rel="stylesheet" href="/css/mobile.css">
+  <link rel="stylesheet" href="/css/theme.css">
+  <link rel="stylesheet" href="/css/overrides.css">
+  <link rel="stylesheet" href="/css/utils.css">
 
   <style>
-    .listings-layout { display: grid; grid-template-columns: 280px 1fr; gap: 32px; padding: 48px 5%; }
-    .sidebar { position: sticky; top: 100px; align-self: start; background: var(--card, #fff); border: 1px solid var(--border, #E2E8F0); border-radius: var(--radius-lg, 16px); padding: 24px; box-shadow: var(--shadow-sm, 0 4px 12px rgba(0,0,0,0.04)); }
-    .sidebar h3 { font-size: 16px; font-weight: 700; margin-bottom: 20px; display: flex; align-items: center; gap: 8px; color: var(--text, #111827); }
-    .filter-section { margin-bottom: 20px; padding-bottom: 20px; border-bottom: 1px solid var(--border, #E2E8F0); }
-    .filter-section:last-child { border-bottom: none; margin-bottom: 0; padding-bottom: 0; }
-    .filter-section h4 { font-size: 12px; font-weight: 700; letter-spacing: 1.5px; text-transform: uppercase; color: var(--text-muted, #64748B); margin-bottom: 12px; }
-    .filter-check { display: flex; align-items: center; gap: 10px; margin-bottom: 9px; cursor: pointer; font-size: 14px; color: var(--text, #111827); }
-    .filter-check input { accent-color: var(--blue, #2563EB); width: 16px; height: 16px; cursor: pointer; }
-    .range-row { display: flex; gap: 10px; margin-top: 8px; }
-    .range-input { flex: 1; padding: 8px 10px; border: 1.5px solid var(--border, #E2E8F0); border-radius: 8px; font-size: 13px; outline: none; background: var(--card, #fff); color: var(--text, #111827); }
-    .apply-btn { width: 100%; margin-top: 14px; }
-    .results-header { display: flex; align-items: center; justify-content: space-between; margin-bottom: 24px; flex-wrap: wrap; gap: 12px; }
-    .results-count { font-size: 15px; color: var(--text-muted, #64748B); }
-    .prop-grid-4 { display: grid; grid-template-columns: repeat(2, 1fr); gap: 24px; }
-    .prop-card-link { text-decoration: none; color: inherit; display: block; }
-    .pagination { display: flex; align-items: center; justify-content: center; gap: 8px; margin-top: 48px; }
-    .page-btn { width: 38px; height: 38px; border: 1.5px solid var(--border, #E2E8F0); border-radius: 9px; font-size: 14px; font-weight: 600; cursor: pointer; background: var(--card, #fff); color: var(--text-muted, #64748B); display: flex; align-items: center; justify-content: center; transition: all .2s; }
-    .page-btn.active { background: var(--blue, #2563EB); color: #fff; border-color: var(--blue, #2563EB); }
-    .view-toggle { display: flex; gap: 4px; }
-    .view-btn { width: 34px; height: 34px; border: 1.5px solid var(--border, #E2E8F0); border-radius: 8px; background: var(--card, #fff); cursor: pointer; display: flex; align-items: center; justify-content: center; color: var(--text-muted, #64748B); }
-    .view-btn.active { background: var(--blue, #2563EB); border-color: var(--blue, #2563EB); color: #fff; }
-    @media(max-width:900px){ .listings-layout { grid-template-columns: 1fr; } .sidebar { position: static; } .prop-grid-4 { grid-template-columns: 1fr; } }
+    .catalog-wrapper {
+      max-width: 1280px;
+      margin: 0 auto;
+      padding: 32px 5% 80px;
+    }
+    .catalog-layout {
+      display: grid;
+      grid-template-columns: 280px 1fr;
+      gap: 32px;
+      align-items: start;
+    }
+
+    /* Sidebar Filters */
+    .filter-sidebar {
+      background: var(--card, white);
+      border: 1.5px solid var(--border);
+      border-radius: var(--radius-lg, 16px);
+      padding: 24px;
+      position: sticky;
+      top: 96px;
+      box-shadow: var(--shadow-sm);
+    }
+    .filter-group {
+      margin-bottom: 24px;
+      padding-bottom: 20px;
+      border-bottom: 1px solid var(--border);
+    }
+    .filter-group:last-child {
+      margin-bottom: 0;
+      padding-bottom: 0;
+      border-bottom: none;
+    }
+    .filter-title {
+      font-size: 13px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      color: var(--text-muted);
+      margin-bottom: 12px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .filter-pill-grid {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+    .filter-pill {
+      padding: 7px 14px;
+      border-radius: 8px;
+      font-size: 13px;
+      font-weight: 600;
+      border: 1.5px solid var(--border);
+      background: var(--bg-secondary);
+      color: var(--text);
+      cursor: pointer;
+      transition: all .2s;
+    }
+    .filter-pill.active, .filter-pill:hover {
+      border-color: var(--blue);
+      background: var(--blue-light, rgba(37,99,235,0.1));
+      color: var(--blue);
+    }
+    .filter-select, .filter-input {
+      width: 100%;
+      padding: 10px 14px;
+      border-radius: 9px;
+      border: 1.5px solid var(--border);
+      background: var(--card, white);
+      color: var(--text);
+      font-size: 13.5px;
+      outline: none;
+      font-family: inherit;
+      transition: border-color .2s;
+    }
+    .filter-select:focus, .filter-input:focus {
+      border-color: var(--blue);
+    }
+
+    /* Inventory Toolbar */
+    .catalog-toolbar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 24px;
+      flex-wrap: wrap;
+      gap: 16px;
+      padding-bottom: 16px;
+      border-bottom: 1px solid var(--border);
+    }
+    .catalog-count {
+      font-size: 15px;
+      font-weight: 600;
+      color: var(--text);
+    }
+    .catalog-sort {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    /* Property Cards Grid */
+    .prop-grid-4 {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(290px, 1fr));
+      gap: 24px;
+    }
+    .prop-card-link {
+      text-decoration: none;
+      color: inherit;
+      display: block;
+    }
+    .prop-card {
+      background: var(--card, white);
+      border-radius: var(--radius-lg, 16px);
+      border: 1.5px solid var(--border);
+      overflow: hidden;
+      box-shadow: var(--shadow-sm);
+      transition: transform .25s, box-shadow .25s, border-color .25s;
+      height: 100%;
+      display: flex;
+      flex-direction: column;
+    }
+    .prop-card:hover {
+      transform: translateY(-4px);
+      box-shadow: var(--shadow-lg);
+      border-color: var(--blue);
+    }
+    .prop-img {
+      height: 210px;
+      position: relative;
+      background: var(--bg-secondary);
+      overflow: hidden;
+    }
+    .prop-photo {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform .4s ease;
+    }
+    .prop-card:hover .prop-photo {
+      transform: scale(1.05);
+    }
+    .prop-badges {
+      position: absolute;
+      top: 12px;
+      left: 12px;
+      display: flex;
+      gap: 6px;
+      flex-wrap: wrap;
+      z-index: 2;
+    }
+    .prop-fav {
+      position: absolute;
+      top: 12px;
+      right: 12px;
+      width: 32px;
+      height: 32px;
+      border-radius: 50%;
+      background: rgba(255,255,255,0.85);
+      backdrop-filter: blur(4px);
+      border: none;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 15px;
+      transition: transform .2s;
+      z-index: 2;
+    }
+    .prop-fav:hover {
+      transform: scale(1.1);
+    }
+    .prop-body {
+      padding: 20px;
+      display: flex;
+      flex-direction: column;
+      flex: 1;
+    }
+    .prop-price {
+      font-family: 'Playfair Display', serif;
+      font-size: 22px;
+      font-weight: 900;
+      color: var(--blue);
+      margin-bottom: 6px;
+    }
+    .prop-name {
+      font-size: 16px;
+      font-weight: 700;
+      color: var(--text);
+      line-height: 1.35;
+      margin-bottom: 6px;
+      display: -webkit-box;
+      -webkit-line-clamp: 2;
+      -webkit-box-orient: vertical;
+      overflow: hidden;
+    }
+    .prop-loc {
+      font-size: 13px;
+      color: var(--text-muted);
+      margin-bottom: 16px;
+    }
+    .prop-meta {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin-top: auto;
+      padding-top: 14px;
+      border-top: 1px solid var(--border);
+      font-size: 12.5px;
+      color: var(--text-muted);
+    }
+    .prop-meta-item strong {
+      color: var(--text);
+    }
+
+    /* Mobile Filter Toggle */
+    .mobile-filter-trigger {
+      display: none;
+      width: 100%;
+      margin-bottom: 16px;
+      padding: 12px;
+      border-radius: 10px;
+      background: var(--blue);
+      color: white;
+      font-weight: 700;
+      border: none;
+      cursor: pointer;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+    }
+
+    @media (max-width: 960px) {
+      .catalog-layout {
+        grid-template-columns: 1fr;
+      }
+      .filter-sidebar {
+        display: none;
+        position: static;
+        margin-bottom: 24px;
+      }
+      .filter-sidebar.open {
+        display: block;
+      }
+      .mobile-filter-trigger {
+        display: flex;
+      }
+    }
   </style>
 
-  <!-- Schema Data -->
+  <!-- Schema Structured Data -->
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
     "@type": "ItemList",
     "name": "Properties for Sale and Rent in Mumbai",
-    "description": "Browse residential and commercial properties in Malad West, Goregaon, Andheri and across Mumbai.",
+    "description": "Verified residential flats and commercial properties across Mumbai's western suburbs.",
     "url": "https://www.propertyfinderrealestate.com/properties.html"
   }
   </script>
 </head>
 <body>
-<a href="#main-content" class="skip-link">Skip to main content</a>
 
-<!-- NAVBAR -->
-<nav class="navbar" role="navigation" aria-label="Main navigation">
-  <a href="index.html" class="nav-logo" style="display:flex;align-items:center">
-    <img src="images/logo.png" alt="Property Finder Real Estate" class="nav-logo-img" style="height:48px;width:auto;object-fit:contain" loading="eager">
-  </a>
-  <ul class="nav-menu" role="list">
-    <li class="nav-item"><a href="index.html" class="nav-link">Home</a></li>
-    <li class="nav-item">
-      <a href="properties.html" class="nav-link active">Properties <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M6 9l6 6 6-6"/></svg></a>
-      <div class="dropdown">
-        <a href="properties.html"><span class="dd-icon">🏠</span> All Properties</a>
-        <a href="projects.html"><span class="dd-icon">🏗️</span> Projects</a>
-        <a href="neighbourhoods.html"><span class="dd-icon">📍</span> Neighbourhoods</a>
-      </div>
-    </li>
-    <li class="nav-item"><a href="services.html" class="nav-link">Services</a></li>
-    <li class="nav-item">
-      <a href="about.html" class="nav-link">About <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M6 9l6 6 6-6"/></svg></a>
-      <div class="dropdown">
-        <a href="about.html"><span class="dd-icon">🏢</span> About Us</a>
-        <a href="team.html"><span class="dd-icon">👥</span> Our Team</a>
-        <a href="testimonials.html"><span class="dd-icon">⭐</span> Testimonials</a>
-        <a href="faq.html"><span class="dd-icon">❓</span> FAQ</a>
-        <a href="careers.html"><span class="dd-icon">💼</span> Careers</a>
-        <a href="nri.html"><span class="dd-icon">🌍</span> NRI Corner</a>
-      </div>
-    </li>
-    <li class="nav-item">
-      <a href="calculators.html" class="nav-link">Tools <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M6 9l6 6 6-6"/></svg></a>
-      <div class="dropdown">
-        <a href="calculators.html"><span class="dd-icon">🧮</span> EMI Calculator</a>
-        <a href="tds-calculators.html"><span class="dd-icon">📋</span> TDS Calculators</a>
-        <a href="converter.html"><span class="dd-icon">📐</span> Measurement Converter</a>
-        <a href="insurance.html"><span class="dd-icon">🛡️</span> Property Insurance</a>
-        <a href="price-trends.html"><span class="dd-icon">📈</span> Price Trends</a>
-        <a href="reminders.html"><span class="dd-icon">🔔</span> Reminders</a>
-      </div>
-    </li>
-    <li class="nav-item"><a href="blog.html" class="nav-link">Blog</a></li>
-    <li class="nav-item"><a href="contact.html" class="nav-link">Contact</a></li>
-  </ul>
-  <div class="nav-actions">
-    <a href="tel:+919326990050" class="nav-phone">📞 +91 93269 90050</a>
-    <a href="post-property.html" class="btn btn-primary btn-sm btn-green-inline">+ Post Property</a>
-    <a href="contact.html" class="btn btn-outline btn-sm">Get In Touch</a>
-    <button class="theme-toggle" id="themeToggle" type="button" aria-label="Toggle theme" title="Toggle Light/Dark Mode">
-      <span class="icon-light">☀️</span><span class="icon-dark" style="display:none">🌙</span>
-    </button>
-    <button class="hamburger" id="hamburger" aria-label="Toggle navigation" aria-expanded="false" role="button"><span></span><span></span><span></span></button>
-  </div>
-</nav>
+  <!-- MASTER NAVBAR (Controlled from js/layout.js) -->
+  <site-navbar></site-navbar>
 
-<!-- MOBILE MENU -->
-<div class="mobile-menu" id="mobileMenu">
-  <div class="mob-section">Navigation</div>
-  <a href="index.html">🏠 Home</a>
-  <a href="properties.html">🏘️ Properties</a>
-  <a href="projects.html">🏗️ Projects</a>
-  <a href="services.html">⚙️ Services</a>
-  <a href="about.html">🏢 About Us</a>
-  <a href="contact.html">📞 Contact</a>
-  <a href="tel:+919326990050" class="btn btn-primary mob-cta">📞 Call +91 93269 90050</a>
-</div>
+  <!-- MAIN PAGE CONTENT -->
+  <main id="main-content">
 
-<!-- PAGE HERO WITH SINGLE-LINE BREADCRUMB -->
-<section class="page-hero">
-  <span class="section-label">Explore Listings</span>
-  <h1>Find Your <em>Ideal Property</em></h1>
-  <p>Browse 2,400+ verified residential & commercial properties across Mumbai — for sale, rent, and high-yield investment.</p>
-  <nav aria-label="Breadcrumb">
-    <div class="breadcrumb">
-      <a href="index.html">Home</a><span class="breadcrumb-sep" aria-hidden="true">›</span><span>Properties</span>
-    </div>
-  </nav>
-</section>
-
-<!-- FILTER BAR -->
-<div class="filter-bar">
-  <div class="filter-tabs">
-    <button class="filter-tab active" data-type="all">All</button>
-    <button class="filter-tab" data-type="buy">Buy</button>
-    <button class="filter-tab" data-type="rent">Rent</button>
-    <button class="filter-tab" data-type="commercial">Commercial</button>
-  </div>
-  <select class="filter-select" id="quickPropType" aria-label="Filter by Property Type">
-    <option value="">Property Type</option>
-    <option value="flat">Flat / Apartment</option>
-    <option value="row house">Row House</option>
-    <option value="bungalow">Bungalow</option>
-    <option value="plot">Plot / Land</option>
-    <option value="commercial">Commercial</option>
-  </select>
-  <select class="filter-select" id="quickBHK" aria-label="Filter by Configuration">
-    <option value="">Configuration</option>
-    <option value="1">1 BHK</option>
-    <option value="2">2 BHK</option>
-    <option value="3">3 BHK</option>
-    <option value="4">4 BHK</option>
-    <option value="5">5+ BHK</option>
-  </select>
-  <select class="filter-select" id="quickLocality" aria-label="Filter by Locality">
-    <option value="">Locality</option>
-    <option value="malad west">Malad West</option>
-    <option value="goregaon">Goregaon</option>
-    <option value="andheri">Andheri</option>
-    <option value="borivali">Borivali</option>
-    <option value="kandivali">Kandivali</option>
-    <option value="mira road">Mira Road</option>
-  </select>
-  <span class="filter-results-count">Showing <strong>12</strong> properties</span>
-</div>
-
-<!-- LISTINGS LAYOUT -->
-<div class="listings-layout" id="main-content">
-  <!-- SIDEBAR -->
-  <aside class="sidebar">
-    <h3>🔍 Refine Search</h3>
-
-    <div class="filter-section" data-filter="use">
-      <h4>Property Use</h4>
-      <label class="filter-check"><input type="checkbox" data-value="residential" checked> Residential</label>
-      <label class="filter-check"><input type="checkbox" data-value="commercial"> Commercial</label>
-    </div>
-
-    <div class="filter-section">
-      <h4>Price Range</h4>
-      <div class="range-row">
-        <input class="range-input" placeholder="Min ₹" type="number" id="minPrice" aria-label="Minimum Price">
-        <input class="range-input" placeholder="Max ₹" type="number" id="maxPrice" aria-label="Maximum Price">
-      </div>
-    </div>
-
-    <div class="filter-section" data-filter="bhk">
-      <h4>Configuration</h4>
-      <label class="filter-check"><input type="checkbox" data-value="1"> 1 BHK</label>
-      <label class="filter-check"><input type="checkbox" data-value="2"> 2 BHK</label>
-      <label class="filter-check"><input type="checkbox" data-value="3" checked> 3 BHK</label>
-      <label class="filter-check"><input type="checkbox" data-value="4"> 4 BHK</label>
-      <label class="filter-check"><input type="checkbox" data-value="5"> 5+ BHK</label>
-    </div>
-
-    <div class="filter-section" data-filter="type">
-      <h4>Property Type</h4>
-      <label class="filter-check"><input type="checkbox" data-value="flat" checked> Flat / Apartment</label>
-      <label class="filter-check"><input type="checkbox" data-value="row house"> Row House</label>
-      <label class="filter-check"><input type="checkbox" data-value="bungalow"> Bungalow</label>
-      <label class="filter-check"><input type="checkbox" data-value="plot"> Plot / Land</label>
-      <label class="filter-check"><input type="checkbox" data-value="commercial"> Commercial</label>
-    </div>
-
-    <button class="btn btn-primary apply-btn" type="button" onclick="window.PFREPropertyFilter ? window.PFREPropertyFilter.apply() : null">Apply Filters</button>
-    <button class="btn btn-outline apply-btn" type="button" onclick="window.PFREPropertyFilter ? window.PFREPropertyFilter.reset() : null">Reset All</button>
-  </aside>
-
-  <!-- MAIN LISTINGS -->
-  <main class="main-col">
-    <div class="results-header">
-      <p class="results-count">Showing <strong>12</strong> properties</p>
-      <div class="sort-row">
-        <span style="color:var(--text-muted)">Sort:</span>
-        <select class="filter-select sort-select" id="sortProperties" style="font-size:13px" aria-label="Sort Properties">
-          <option value="newest">Newest First</option>
-          <option value="low to high">Price: Low to High</option>
-          <option value="high to low">Price: High to Low</option>
-        </select>
-        <div class="view-toggle">
-          <button class="view-btn active" type="button" title="Grid View" aria-label="Grid View">⊞</button>
-          <button class="view-btn" type="button" title="List View" aria-label="List View">☰</button>
+    <!-- PAGE HERO -->
+    <section class="page-hero">
+      <span class="section-label">Verified Listings</span>
+      <h1>Explore Mumbai <em>Properties</em></h1>
+      <p>Discover handpicked apartments, penthouses, and commercial spaces across Mumbai's most desirable Western Suburb corridors.</p>
+      <nav aria-label="Breadcrumb">
+        <div class="breadcrumb">
+          <a href="/index.html">Home</a><span class="breadcrumb-sep" aria-hidden="true">›</span><span>Properties</span>
         </div>
-      </div>
-    </div>
+      </nav>
+    </section>
 
-    <!-- Properties Grid With Active Data Attributes -->
-    <div class="prop-grid-4">
-      <a href="property-detail.html" class="prop-card-link">
-        <div class="prop-card" data-intent="buy" data-bhk="3" data-proptype="flat" data-building="private" data-use="residential" data-price="18500000" data-area="1240">
-          <div class="prop-img bg-grad-1">
-            <div class="prop-placeholder" role="img" aria-label="Property illustration">🏠</div>
-            <div class="prop-badges"><span class="badge badge-blue">For Sale</span><span class="badge badge-gray">3 BHK</span></div>
-            <button class="prop-fav" type="button" onclick="event.preventDefault();" aria-label="Add to favorites">🤍</button>
-          </div>
-          <div class="prop-body">
-            <div class="prop-price">₹1.85 Cr <small>onwards</small></div>
-            <div class="prop-name">Skyline Heights Residency</div>
-            <div class="prop-loc">📍 Malad West, Mumbai</div>
-            <div class="prop-meta">
-              <div class="prop-meta-item">🛏 <strong>3</strong> Beds</div>
-              <div class="prop-meta-item">🛁 <strong>2</strong> Baths</div>
-              <div class="prop-meta-item">📐 <strong>1,240</strong> sq.ft</div>
+    <!-- INVENTORY CATALOG WRAPPER -->
+    <div class="catalog-wrapper">
+      
+      <!-- Mobile Filter Toggle Button -->
+      <button class="mobile-filter-trigger" id="mobileFilterBtn" type="button" onclick="toggleMobileFilters()">
+        ⚙️ Filter Properties &amp; Pricing
+      </button>
+
+      <div class="catalog-layout">
+        
+        <!-- SIDEBAR FILTERS -->
+        <aside class="filter-sidebar" id="filterSidebar">
+          
+          <div class="filter-group">
+            <div class="filter-title">
+              <span>Purpose</span>
+            </div>
+            <div class="filter-pill-grid" id="intentFilters">
+              <button class="filter-pill active" data-filter-intent="all" type="button">All</button>
+              <button class="filter-pill" data-filter-intent="buy" type="button">Buy</button>
+              <button class="filter-pill" data-filter-intent="rent" type="button">Rent</button>
+              <button class="filter-pill" data-filter-intent="commercial" type="button">Commercial</button>
             </div>
           </div>
-        </div>
-      </a>
 
-      <a href="property-detail.html" class="prop-card-link">
-        <div class="prop-card" data-intent="rent" data-bhk="2" data-proptype="flat" data-building="private" data-use="residential" data-price="42000" data-area="980">
-          <div class="prop-img bg-grad-2">
-            <div class="prop-placeholder" role="img" aria-label="Property illustration">🏢</div>
-            <div class="prop-badges"><span class="badge badge-green">For Rent</span><span class="badge badge-gray">2 BHK</span></div>
-            <button class="prop-fav" type="button" onclick="event.preventDefault();" aria-label="Add to favorites">🤍</button>
+          <div class="filter-group">
+            <div class="filter-title">
+              <span>Locality</span>
+            </div>
+            <select class="filter-select" id="localitySelect" aria-label="Filter by Locality">
+              <option value="all">All Mumbai Localities</option>
+              <option value="malad west">Malad West</option>
+              <option value="goregaon east">Goregaon East</option>
+              <option value="andheri east">Andheri East</option>
+              <option value="kandivali west">Kandivali West</option>
+              <option value="borivali west">Borivali West</option>
+            </select>
           </div>
-          <div class="prop-body">
-            <div class="prop-price">₹42,000 <small>/ month</small></div>
-            <div class="prop-name">Oberoi Exquisite Apartment</div>
-            <div class="prop-loc">📍 Goregaon East, Mumbai</div>
-            <div class="prop-meta">
-              <div class="prop-meta-item">🛏 <strong>2</strong> Beds</div>
-              <div class="prop-meta-item">🛁 <strong>2</strong> Baths</div>
-              <div class="prop-meta-item">📐 <strong>980</strong> sq.ft</div>
+
+          <div class="filter-group">
+            <div class="filter-title">
+              <span>Configuration</span>
+            </div>
+            <div class="filter-pill-grid" id="bhkFilters">
+              <button class="filter-pill active" data-filter-bhk="all" type="button">Any</button>
+              <button class="filter-pill" data-filter-bhk="1" type="button">1 BHK</button>
+              <button class="filter-pill" data-filter-bhk="2" type="button">2 BHK</button>
+              <button class="filter-pill" data-filter-bhk="3" type="button">3 BHK</button>
+              <button class="filter-pill" data-filter-bhk="4" type="button">4+ BHK</button>
             </div>
           </div>
-        </div>
-      </a>
 
-      <a href="property-detail.html" class="prop-card-link">
-        <div class="prop-card" data-intent="buy" data-bhk="4" data-proptype="row house" data-building="private" data-use="residential" data-price="32000000" data-area="2100">
-          <div class="prop-img bg-grad-3">
-            <div class="prop-placeholder" role="img" aria-label="Property illustration">🏡</div>
-            <div class="prop-badges"><span class="badge badge-blue">For Sale</span><span class="badge badge-gray">Row House</span></div>
-            <button class="prop-fav" type="button" onclick="event.preventDefault();" aria-label="Add to favorites">🤍</button>
+          <div class="filter-group">
+            <div class="filter-title">
+              <span>Keyword Search</span>
+            </div>
+            <input type="text" class="filter-input" id="propertySearchInput" placeholder="Society name or landmark..." aria-label="Search properties">
           </div>
-          <div class="prop-body">
-            <div class="prop-price">₹3.20 Cr</div>
-            <div class="prop-name">Greenview Row House</div>
-            <div class="prop-loc">📍 Borivali West, Mumbai</div>
-            <div class="prop-meta">
-              <div class="prop-meta-item">🛏 <strong>4</strong> Beds</div>
-              <div class="prop-meta-item">🛁 <strong>3</strong> Baths</div>
-              <div class="prop-meta-item">📐 <strong>2,100</strong> sq.ft</div>
+
+          <div style="margin-top:20px;">
+            <button class="btn btn-outline btn-sm" id="resetFiltersBtn" type="button" style="width:100%;justify-content:center;">
+              🔄 Reset Filters
+            </button>
+          </div>
+
+          <div style="margin-top:28px;padding-top:20px;border-top:1px dashed var(--border);font-size:12.5px;color:var(--text-muted);line-height:1.6;">
+            <strong>Need Assistance?</strong><br>
+            Direct consultation with our Malad West desk:
+            <a href="tel:+919326990050" style="color:var(--blue);font-weight:700;display:block;margin-top:4px;text-decoration:none;">📞 +919326990050</a>
+          </div>
+        </aside>
+
+        <!-- MAIN LISTINGS COLUMN -->
+        <section>
+          
+          <div class="catalog-toolbar">
+            <div class="catalog-count" id="resultsCount">
+              Showing Active Mumbai Listings...
+            </div>
+            <div class="catalog-sort">
+              <label for="sortSelect" style="font-size:13px;color:var(--text-muted);font-weight:600;">Sort By:</label>
+              <select class="filter-select" id="sortSelect" style="width:auto;padding:7px 12px;" aria-label="Sort Properties">
+                <option value="featured">Featured First</option>
+                <option value="price-asc">Price: Low to High</option>
+                <option value="price-desc">Price: High to Low</option>
+                <option value="area-desc">Carpet Area: Largest</option>
+              </select>
             </div>
           </div>
-        </div>
-      </a>
 
-      <a href="property-detail.html" class="prop-card-link">
-        <div class="prop-card" data-intent="commercial" data-bhk="" data-proptype="commercial" data-building="private" data-use="commercial" data-price="35000000" data-area="1800">
-          <div class="prop-img bg-grad-4">
-            <div class="prop-placeholder" role="img" aria-label="Property illustration">🏬</div>
-            <div class="prop-badges"><span class="badge badge-blue">Commercial</span></div>
-            <button class="prop-fav" type="button" onclick="event.preventDefault();" aria-label="Add to favorites">🤍</button>
-          </div>
-          <div class="prop-body">
-            <div class="prop-price">₹3.50 Cr</div>
-            <div class="prop-name">Infinity Business Park — Office</div>
-            <div class="prop-loc">📍 Malad West, Mumbai</div>
-            <div class="prop-meta">
-              <div class="prop-meta-item">📐 <strong>1,800</strong> sq.ft</div>
-              <div class="prop-meta-item">🏢 Commercial</div>
-              <div class="prop-meta-item">🅿️ Parking</div>
+          <!-- Dynamic Property Cards Container -->
+          <div class="prop-grid-4" id="propertiesContainer">
+            <!-- Dynamically populated by /js/load-properties.js -->
+            <div style="grid-column:1/-1;text-align:center;padding:60px 20px;color:var(--text-muted);">
+              ⏳ Loading verified property catalog...
             </div>
           </div>
-        </div>
-      </a>
+
+          <!-- Empty State (Hidden by default) -->
+          <div id="noResults" style="display:none;text-align:center;padding:72px 20px;background:var(--card, white);border-radius:16px;border:1.5px solid var(--border);margin-top:20px;">
+            <div style="font-size:52px;margin-bottom:12px;">🔍</div>
+            <h3 style="font-family:'Playfair Display',serif;font-size:22px;margin-bottom:8px;">No Matching Properties Found</h3>
+            <p style="color:var(--text-muted);font-size:14px;max-width:440px;margin:0 auto 24px;line-height:1.6;">
+              We couldn't find active inventory matching your exact criteria. Try adjusting your locality or configuration filters.
+            </p>
+            <button class="btn btn-primary btn-sm" type="button" onclick="document.getElementById('resetFiltersBtn').click()">
+              Reset All Filters
+            </button>
+          </div>
+
+        </section>
+
+      </div>
     </div>
 
-    <!-- PAGINATION -->
-    <div class="pagination">
-      <button class="page-btn" type="button" aria-label="Previous Page">←</button>
-      <button class="page-btn active" type="button">1</button>
-      <button class="page-btn" type="button">2</button>
-      <button class="page-btn" type="button">3</button>
-      <span style="color:var(--text-muted);padding:0 4px">…</span>
-      <button class="page-btn" type="button">8</button>
-      <button class="page-btn" type="button" aria-label="Next Page">→</button>
-    </div>
+    <!-- CALL TO ACTION -->
+    <section class="cta-section">
+      <h2 class="section-title reveal">Want to List Your <em>Property?</em></h2>
+      <p class="reveal">Connect directly with verified buyers and premium tenants across Mumbai without brokerage hassles.</p>
+      <div class="cta-btns reveal">
+        <a href="/post-property.html" class="btn btn-white btn-lg">+ Post Your Property</a>
+        <a href="https://wa.me/919326990050?text=Hello%20Property%20Finder%20Real%20Estate,%20I%20want%20to%20list%20my%20property%20for%20sale/rent" target="_blank" rel="noopener noreferrer" class="btn-outline-white btn-lg">💬 WhatsApp Advisory</a>
+      </div>
+    </section>
+
   </main>
-</div>
 
-<!-- FOOTER -->
-<footer class="footer">
-  <div class="footer-grid">
-    <div class="footer-brand">
-      <div class="footer-logo">
-        <svg width="36" height="36" viewBox="0 0 40 40" fill="none"><circle cx="17" cy="17" r="13" stroke="#2563EB" stroke-width="2.8"/><path d="M17 22V18" stroke="#2563EB" stroke-width="2.2" stroke-linecap="round"/><rect x="14" y="18" width="6" height="4" rx="0.5" stroke="#2563EB" stroke-width="2.2"/><path d="M12 18L17 13L22 18" stroke="#2563EB" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/><path d="M27 27L33 33" stroke="#2563EB" stroke-width="2.8" stroke-linecap="round"/></svg>
-        <div class="footer-logo-text"><div class="brand">Property Finder Real Estate</div><div class="sub">Mumbai, Maharashtra</div></div>
-      </div>
-      <p class="tagline">"Your Search Ends Here."</p>
-      <p>Trusted real estate consultants in Mumbai's western suburbs since 2018.</p>
-    </div>
-    <div class="footer-col">
-      <h4>Quick Links</h4>
-      <a href="index.html">Home</a>
-      <a href="properties.html">Properties</a>
-      <a href="projects.html">Projects</a>
-      <a href="services.html">Services</a>
-      <a href="about.html">About Us</a>
-      <a href="contact.html">Contact</a>
-    </div>
-    <div class="footer-col">
-      <h4>Property Types</h4>
-      <a href="properties.html">Flats &amp; Apartments</a>
-      <a href="properties.html">Row Houses</a>
-      <a href="properties.html">Bungalows</a>
-      <a href="properties.html">Commercial Spaces</a>
-    </div>
-    <div class="footer-col">
-      <h4>Contact Us</h4>
-      <div class="footer-contact-row"><span>📍</span><span>Shop No. 9, Ground Floor, Building No. 3, Deepanjali CHS, Malad West, Mumbai - 400095</span></div>
-      <div class="footer-contact-row"><span>📞</span><a href="tel:+919326990050">+91 93269 90050</a></div>
-      <div class="footer-contact-row"><span>✉️</span><a href="mailto:propertyfinderre@gmail.com">propertyfinderre@gmail.com</a></div>
-    </div>
-  </div>
-  <div class="footer-bottom">
-    <span>© 2026 Property Finder Real Estate. All rights reserved.</span>
-  </div>
-</footer>
+  <!-- MASTER FOOTER & GLOBAL WIDGETS (Controlled from js/layout.js) -->
+  <site-footer></site-footer>
 
-<!-- GLOBAL WIDGETS -->
-<div id="progressBar"></div>
-<div id="toastContainer"></div>
-<button id="backToTop" title="Back to top" aria-label="Back to top">&#8593;</button>
+  <!-- Centralized Script Engines in Order of Dependency -->
+  <script src="/js/config.js"></script>
+  <script src="/js/layout.js"></script>
+  <script src="/js/api.js" defer></script>
+  <script src="/js/security.js"></script>
+  <script src="/js/tracker.js" defer></script>
+  <script src="/js/theme.js"></script>
+  <script src="/js/i18n.js"></script>
+  <script src="/js/load-properties.js"></script>
+  <script src="/js/properties-filter.js"></script>
+  <script src="/js/widgets.js"></script>
 
-<div class="cookie-banner" id="cookieBanner">
-  <p class="cookie-text">We use cookies to enhance your browsing experience and analyze site traffic.</p>
-  <div class="cookie-btns">
-    <button class="cookie-accept" id="cookieAccept">Accept</button>
-    <button class="cookie-decline" id="cookieDecline">Decline</button>
-  </div>
-</div>
+  <script>
+    // Mobile Filters Accordion Toggle
+    function toggleMobileFilters() {
+      const sidebar = document.getElementById('filterSidebar');
+      const btn = document.getElementById('mobileFilterBtn');
+      if (!sidebar) return;
+      sidebar.classList.toggle('open');
+      btn.textContent = sidebar.classList.contains('open') ? '✕ Close Filter Panel' : '⚙️ Filter Properties & Pricing';
+    }
 
-<div class="floating-actions">
-  <div class="fab-wrap">
-    <span class="fab-label">WhatsApp Us</span>
-    <a href="https://wa.me/919326990050?utm_source=whatsapp&utm_medium=chat&utm_campaign=properties_list" target="_blank" rel="noopener noreferrer" class="fab fab-whatsapp" aria-label="WhatsApp">💬</a>
-  </div>
-  <div class="fab-wrap">
-    <span class="fab-label">Call Us</span>
-    <a href="tel:+919326990050" class="fab fab-call" aria-label="Call Us">📞</a>
-  </div>
-</div>
-
-<!-- SCRIPTS IN PROPER DEPENDENCY ORDER -->
-<script src="js/config.js"></script>
-<script src="js/api.js" defer></script>
-<script src="js/security.js"></script>
-<script src="js/tracker.js" defer></script>
-<script src="js/theme.js"></script>
-<script src="js/i18n.js"></script>
-<script src="js/load-properties.js"></script>
-<script src="js/properties-filter.js"></script>
-<script src="js/widgets.js"></script>
+    if ('serviceWorker' in navigator) {
+      window.addEventListener('load', () => {
+        navigator.serviceWorker.register('/sw.js').catch(() => {});
+      });
+    }
+  </script>
 </body>
 </html>
