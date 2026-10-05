@@ -1,20 +1,20 @@
 /* =====================================================
-   PFRE WEBSITE — Global CSS Overrides v2.2
-   Theme Variable Overrides · Breadcrumbs Single-Line Fix
+   PROPERTY FINDER REAL ESTATE — Global CSS Overrides v3.1
+   Consolidated & Error-Free Production Build
+   Resolves #backToTop, Floating FAB & Widget Collisions
    ===================================================== */
 
 /* ── 1. Base Surfaces & Theme Fallbacks ── */
 body, main, article, aside {
-  background: var(--bg, var(--white, #ffffff)) !important;
+  background: var(--bg, var(--white, #FFFFFF)) !important;
   color: var(--text, #111827) !important;
 }
 
 .section:not(.cta-section):not(.stats-bar) {
-  background: var(--bg, var(--white, #ffffff));
+  background: var(--bg, var(--white, #FFFFFF));
   color: var(--text, #111827);
 }
 
-/* Card components */
 .prop-card, .service-card, .blog-card, .calc-card,
 .stat-box, .team-card, .testimonial-card, .faq-item,
 .project-card, .doc-card, .bank-card, .feature-card,
@@ -22,23 +22,22 @@ body, main, article, aside {
 .loan-result-card, .scale-card, .report-card,
 .qs-item, .stat-card, .strip-stat, .dash-card,
 .chart-box, .table-box, .crm-table-wrap, .tool-card {
-  background: var(--card-bg, var(--card, var(--white, #ffffff)));
+  background: var(--card-bg, var(--card, var(--white, #FFFFFF)));
   border-color: var(--border, #E5E7EB);
 }
 
-/* Secondary & Alternating Sections */
 .section-alt, .off-white-section, .services-section,
 .perks-section, .team-section, .testimonials-section,
 .calc-section {
   background: var(--bg-secondary, var(--off-white, #F0F2F5));
 }
 
-/* ── 2. Breadcrumbs — Single-Line Enforced Fix ── */
+/* ── 2. Breadcrumbs — Single-Line Enforced Layout ── */
 .breadcrumb {
   display: inline-flex !important;
   align-items: center !important;
   justify-content: center;
-  flex-wrap: nowrap !important; /* Prevents splitting into multiple lines */
+  flex-wrap: nowrap !important;
   white-space: nowrap !important;
   gap: 8px !important;
   font-size: 13.5px;
@@ -87,14 +86,12 @@ body, main, article, aside {
   font-size: 13px;
 }
 
-/* Current page active item */
 .breadcrumb > span:last-child,
 .breadcrumb span:not(.breadcrumb-sep) {
   color: var(--text, #111827);
   font-weight: 600;
 }
 
-/* Dark mode & Dark Hero contexts */
 [data-theme="dark"] .breadcrumb a,
 .cta-section .breadcrumb a,
 .page-hero.dark .breadcrumb a {
@@ -121,23 +118,7 @@ body, main, article, aside {
   color: #FFFFFF;
 }
 
-/* Mobile responsive single-line scroll */
-@media (max-width: 640px) {
-  .breadcrumb {
-    font-size: 12.5px;
-    gap: 6px !important;
-    overflow-x: auto;
-    -webkit-overflow-scrolling: touch;
-    scrollbar-width: none; /* Firefox */
-    padding: 4px 8px;
-    max-width: 100vw;
-  }
-  .breadcrumb::-webkit-scrollbar {
-    display: none; /* Chrome, Safari, Edge */
-  }
-}
-
-/* ── 3. Theme Toggle Button ── */
+/* ── 3. Theme Toggle, Navigation & Brand Logo ── */
 .theme-toggle {
   width: 38px;
   height: 38px;
@@ -157,7 +138,7 @@ body, main, article, aside {
 
 .theme-toggle:hover {
   border-color: var(--blue, #2563EB);
-  background: var(--blue-light, rgba(37,99,235,0.15));
+  background: var(--blue-light, rgba(37, 99, 235, 0.15));
   transform: scale(1.08);
 }
 
@@ -188,11 +169,10 @@ body, main, article, aside {
 }
 
 [data-theme="dark"] .theme-toggle:hover {
-  background: var(--blue-muted, rgba(37,99,235,0.25));
+  background: var(--blue-muted, rgba(37, 99, 235, 0.25));
   border-color: #3B82F6;
 }
 
-/* ── 4. Nav Actions & Header Layout ── */
 .nav-actions {
   display: flex;
   align-items: center;
@@ -204,12 +184,31 @@ body, main, article, aside {
   order: -1;
 }
 
-/* ── 5. Form Fields Theming ── */
+.nav-logo {
+  display: flex;
+  align-items: center;
+  gap: 0;
+  text-decoration: none;
+}
+
+.nav-logo-img {
+  height: 48px;
+  width: auto;
+  object-fit: contain;
+  max-width: 220px;
+  image-rendering: -webkit-optimize-contrast;
+}
+
+[data-theme="dark"] .nav-logo-img {
+  filter: drop-shadow(0 0 10px rgba(37, 99, 235, 0.3));
+}
+
+/* ── 4. Form Fields & Controls Theming ── */
 input:not([type="checkbox"]):not([type="radio"]):not([type="range"]):not([type="submit"]):not([type="button"]),
 select,
 textarea,
 .form-control {
-  background: var(--input-bg, var(--card, var(--white, #ffffff))) !important;
+  background: var(--input-bg, var(--card, var(--white, #FFFFFF))) !important;
   color: var(--text, #111827) !important;
   border-color: var(--border, #E5E7EB) !important;
 }
@@ -224,41 +223,305 @@ select:focus,
 textarea:focus,
 .form-control:focus {
   border-color: var(--border-focus, var(--blue, #2563EB)) !important;
-  background: var(--input-bg-focus, var(--card, var(--white, #ffffff))) !important;
-  box-shadow: 0 0 0 3px rgba(37,99,235,0.12) !important;
+  background: var(--input-bg-focus, var(--card, var(--white, #FFFFFF))) !important;
+  box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.12) !important;
 }
 
-/* ── 6. Mobile Layout Tweaks ── */
+/* ── 5. Floating Contact Actions (Locked to Bottom-Right) ── */
+.floating-actions {
+  position: fixed !important;
+  bottom: 24px !important;
+  right: 20px !important;
+  left: auto !important;
+  z-index: 990 !important;
+  display: flex !important;
+  flex-direction: column !important;
+  gap: 12px !important;
+  pointer-events: auto !important;
+  transition: bottom 0.3s ease;
+}
+
+.fab-wrap {
+  position: relative !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: flex-end !important;
+}
+
+.fab {
+  width: 50px !important;
+  height: 50px !important;
+  border-radius: 50% !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.16) !important;
+  transition: transform 0.25s ease, box-shadow 0.25s ease !important;
+  text-decoration: none !important;
+  font-size: 22px !important;
+  border: none !important;
+  cursor: pointer !important;
+}
+
+.fab:hover {
+  transform: scale(1.08) translateY(-2px) !important;
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.22) !important;
+}
+
+.fab-whatsapp {
+  background: #25D366 !important;
+  color: #FFFFFF !important;
+}
+
+.fab-call {
+  background: #2563EB !important;
+  color: #FFFFFF !important;
+}
+
+.fab-chat {
+  background: #0F172A !important;
+  color: #FFFFFF !important;
+  position: relative !important;
+}
+
+/* ── 6. Back to Top Button (Separated to Bottom-Left) ── */
+#backToTop {
+  position: fixed !important;
+  bottom: 24px !important;
+  left: 20px !important;
+  right: auto !important;
+  z-index: 995 !important;
+  width: 46px !important;
+  height: 46px !important;
+  border-radius: 50% !important;
+  background: var(--card, #FFFFFF) !important;
+  color: var(--blue, #2563EB) !important;
+  border: 1.5px solid var(--border, #E2E8F0) !important;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.12) !important;
+  cursor: pointer !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  font-size: 18px !important;
+  font-weight: 700 !important;
+  opacity: 0 !important;
+  visibility: hidden !important;
+  transform: translateY(12px) scale(0.9) !important;
+  transition: opacity 0.25s ease, transform 0.25s ease, visibility 0.25s ease, background 0.2s ease, bottom 0.3s ease !important;
+}
+
+#backToTop.show,
+#backToTop.visible {
+  opacity: 1 !important;
+  visibility: visible !important;
+  transform: translateY(0) scale(1) !important;
+}
+
+#backToTop:hover {
+  background: var(--blue, #2563EB) !important;
+  color: #FFFFFF !important;
+  border-color: var(--blue, #2563EB) !important;
+  transform: translateY(-3px) scale(1.05) !important;
+  box-shadow: 0 6px 20px rgba(37, 99, 235, 0.25) !important;
+}
+
+/* ── 7. Cookie Banner & Lightbox Modals ── */
+#cookieBanner {
+  position: fixed;
+  bottom: 16px;
+  left: 16px;
+  right: 16px;
+  max-width: 480px;
+  background: var(--card-bg, var(--card, #FFFFFF));
+  border: 1.5px solid var(--border, #E2E8F0);
+  border-radius: 16px;
+  padding: 18px 22px;
+  box-shadow: 0 16px 48px rgba(0, 0, 0, 0.18);
+  z-index: 1200;
+  display: none;
+  flex-direction: column;
+  gap: 12px;
+}
+
+#cookieBanner.show,
+.cookie-banner.show {
+  display: flex !important;
+}
+
+.cookie-text {
+  font-size: 13.5px;
+  line-height: 1.5;
+  color: var(--text-muted, #64748B);
+  margin: 0;
+}
+
+.cookie-btns {
+  display: flex;
+  gap: 10px;
+  width: 100%;
+}
+
+.cookie-accept {
+  flex: 1;
+  background: var(--blue, #2563EB) !important;
+  color: #FFFFFF !important;
+  border: none !important;
+  padding: 10px 16px;
+  border-radius: 10px;
+  font-size: 14px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: background 0.2s ease;
+}
+
+.cookie-accept:hover {
+  background: var(--blue-dark, #1D4ED8) !important;
+}
+
+.cookie-decline {
+  flex: 1;
+  background: transparent !important;
+  color: var(--text-muted, #64748B) !important;
+  border: 1.5px solid var(--border, #E2E8F0) !important;
+  padding: 10px 16px;
+  border-radius: 10px;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: border-color 0.2s ease, color 0.2s ease;
+}
+
+.cookie-decline:hover {
+  border-color: var(--text, #111827) !important;
+  color: var(--text, #111827) !important;
+}
+
+/* Lightbox Base */
+#lightbox {
+  position: fixed !important;
+  inset: 0 !important;
+  background: rgba(0, 0, 0, 0.94) !important;
+  z-index: 2500 !important;
+  display: none !important;
+  align-items: center;
+  justify-content: center;
+}
+
+#lightbox.open,
+#lightbox.show {
+  display: flex !important;
+}
+
+/* ── 8. Responsive Collisions & Media Queries ── */
 @media (max-width: 768px) {
   .page-hero {
     padding: 56px 5% 44px;
   }
+
   .page-hero h1 {
     font-size: clamp(26px, 6vw, 40px);
   }
+
   .navbar {
     padding: 0 4%;
     height: 64px;
   }
+
   .nav-actions {
     gap: 8px;
   }
+
   .nav-phone {
     display: none;
   }
+
   .nav-actions .btn.btn-sm {
     padding: 7px 12px;
     font-size: 12px;
   }
+
   .prop-card, .service-card, .blog-card {
     margin-bottom: 0;
   }
+
   .stats-strip {
     grid-template-columns: repeat(2, 1fr);
   }
+
   .footer-grid {
     grid-template-columns: 1fr 1fr;
     gap: 28px;
+  }
+
+  .floating-actions {
+    bottom: 18px !important;
+    right: 14px !important;
+    gap: 10px !important;
+  }
+
+  .fab {
+    width: 44px !important;
+    height: 44px !important;
+    font-size: 20px !important;
+  }
+
+  #backToTop {
+    bottom: 18px !important;
+    left: 14px !important;
+    width: 42px !important;
+    height: 42px !important;
+    font-size: 16px !important;
+  }
+
+  .nav-logo-img {
+    height: 40px;
+  }
+
+  /* Full-width mobile Cookie Banner */
+  #cookieBanner {
+    left: 12px;
+    right: 12px;
+    bottom: 12px;
+    max-width: none;
+    z-index: 1300;
+  }
+
+  /* Lift BOTH floating controls cleanly above the active Cookie Banner */
+  body:has(#cookieBanner.show) .floating-actions,
+  body:has(.cookie-banner.show) .floating-actions {
+    bottom: 165px !important;
+  }
+
+  body:has(#cookieBanner.show) #backToTop,
+  body:has(.cookie-banner.show) #backToTop {
+    bottom: 165px !important;
+  }
+
+  /* Lift BOTH floating controls cleanly above Sticky Property Enquiry bars */
+  body:has(#stickyEnquiry.show) .floating-actions,
+  body:has(#stickyEnquiry[style*="display: flex"]) .floating-actions {
+    bottom: 80px !important;
+  }
+
+  body:has(#stickyEnquiry.show) #backToTop,
+  body:has(#stickyEnquiry[style*="display: flex"]) #backToTop {
+    bottom: 80px !important;
+  }
+}
+
+@media (max-width: 640px) {
+  .breadcrumb {
+    font-size: 12.5px;
+    gap: 6px !important;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
+    padding: 4px 8px;
+    max-width: 100vw;
+  }
+
+  .breadcrumb::-webkit-scrollbar {
+    display: none;
   }
 }
 
@@ -266,21 +529,29 @@ textarea:focus,
   .page-hero {
     padding: 40px 4% 32px;
   }
+
   .page-hero h1 {
     font-size: 24px;
   }
+
   .footer-grid {
     grid-template-columns: 1fr;
   }
+
   .nav-actions .btn {
     display: none;
   }
+
   .nav-actions .theme-toggle {
     display: inline-flex;
   }
+
+  .nav-logo-img {
+    height: 36px;
+  }
 }
 
-/* ── 7. Accessibility, Contrast & Motion ── */
+/* ── 9. Accessibility, Motion & Print ── */
 .text-muted, .prop-meta span, .section-sub,
 .lead-phone, .source-pill {
   color: var(--text-muted, #64748B);
@@ -307,7 +578,6 @@ a:focus:not(:focus-visible) {
   outline: none;
 }
 
-/* Reduced Motion Consolidated */
 @media (prefers-reduced-motion: reduce) {
   html {
     scroll-behavior: auto;
@@ -318,15 +588,16 @@ a:focus:not(:focus-visible) {
   }
 }
 
-/* Print Styles */
 @media print {
   [data-theme="dark"] * {
     background: #FFFFFF !important;
     color: #000000 !important;
   }
+  .floating-actions, #backToTop, #cookieBanner, .theme-toggle {
+    display: none !important;
+  }
 }
 
-/* Screen Reader Utility */
 .sr-only {
   position: absolute !important;
   width: 1px !important;
@@ -344,133 +615,4 @@ a:focus:not(:focus-visible) {
   width: auto !important;
   height: auto !important;
   clip: auto !important;
-}
-
-/* ── 8. Navigation Logo ── */
-.nav-logo {
-  display: flex;
-  align-items: center;
-  gap: 0;
-  text-decoration: none;
-}
-
-.nav-logo-img {
-  height: 48px;
-  width: auto;
-  object-fit: contain;
-  max-width: 220px;
-  image-rendering: -webkit-optimize-contrast;
-}
-
-[data-theme="dark"] .nav-logo-img {
-  filter: drop-shadow(0 0 10px rgba(37, 99, 235, 0.3));
-}
-
-@media (max-width: 768px) {
-  .nav-logo-img {
-    height: 40px;
-  }
-}
-
-@media (max-width: 480px) {
-  .nav-logo-img {
-    height: 36px;
-  }
-}
-
-/* =====================================================
-   HOTFIX: Lightbox & Cookie Banner Collision Fix
-   ===================================================== */
-
-/* ── Force Lightbox Hidden by Default ── */
-#lightbox {
-  position: fixed !important;
-  inset: 0 !important;
-  background: rgba(0, 0, 0, 0.94) !important;
-  z-index: 2500 !important;
-  display: none !important;
-  align-items: center;
-  justify-content: center;
-}
-#lightbox.open {
-  display: flex !important;
-}
-
-/* ── Cookie Banner Floating & Styling Fix ── */
-#cookieBanner {
-  position: fixed;
-  bottom: 16px;
-  left: 16px;
-  right: 16px;
-  max-width: 480px;
-  background: var(--card-bg, #FFFFFF);
-  border: 1px solid var(--border, #E2E8F0);
-  border-radius: 16px;
-  padding: 16px 20px;
-  box-shadow: 0 16px 48px rgba(0, 0, 0, 0.18);
-  z-index: 1200;
-  display: none;
-  flex-direction: column;
-  gap: 12px;
-}
-#cookieBanner.show {
-  display: flex;
-}
-.cookie-text {
-  font-size: 13.5px;
-  line-height: 1.5;
-  color: var(--text-muted, #64748B);
-  margin: 0;
-}
-.cookie-btns {
-  display: flex;
-  gap: 10px;
-  width: 100%;
-}
-.cookie-accept {
-  flex: 1;
-  background: var(--blue, #2563EB) !important;
-  color: #FFFFFF !important;
-  border: none !important;
-  padding: 10px 16px;
-  border-radius: 10px;
-  font-size: 14px;
-  font-weight: 700;
-  cursor: pointer;
-  transition: background 0.2s ease;
-}
-.cookie-accept:hover {
-  background: var(--blue-dark, #1D4ED8) !important;
-}
-.cookie-decline {
-  flex: 1;
-  background: transparent !important;
-  color: var(--text-muted, #64748B) !important;
-  border: 1.5px solid var(--border, #E2E8F0) !important;
-  padding: 10px 16px;
-  border-radius: 10px;
-  font-size: 14px;
-  font-weight: 600;
-  cursor: pointer;
-}
-
-/* ── Prevent Mobile Collision Between Cookie Banner and FABs ── */
-@media (max-width: 768px) {
-  #cookieBanner {
-    left: 12px;
-    right: 12px;
-    bottom: 12px;
-    max-width: none;
-    z-index: 1300;
-  }
-  
-  /* Lift FABs above the cookie banner when active */
-  body:has(#cookieBanner.show) .floating-actions {
-    bottom: 160px;
-    transition: bottom 0.3s ease;
-  }
-  body:has(#cookieBanner.show) #backToTop {
-    bottom: 215px;
-    transition: bottom 0.3s ease;
-  }
 }
