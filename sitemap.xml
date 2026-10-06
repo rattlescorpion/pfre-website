@@ -7,196 +7,215 @@
   <!-- Homepage -->
   <url>
     <loc>https://www.propertyfinderrealestate.com/</loc>
-    <lastmod>2026-10-01</lastmod>
+    <lastmod>2026-10-06</lastmod>
     <changefreq>daily</changefreq>
     <priority>1.0</priority>
   </url>
 
-  <!-- Core Property Listings & Projects -->
+  <!-- Core Property Listings & Developments -->
   <url>
-    <loc>https://www.propertyfinderrealestate.com/properties.html</loc>
-    <lastmod>2026-10-01</lastmod>
+    <loc>https://www.propertyfinderrealestate.com/properties</loc>
+    <lastmod>2026-10-06</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
-    <loc>https://www.propertyfinderrealestate.com/projects.html</loc>
-    <lastmod>2026-07-05</lastmod>
+    <loc>https://www.propertyfinderrealestate.com/projects</loc>
+    <lastmod>2026-10-06</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
-    <loc>https://www.propertyfinderrealestate.com/property-detail.html</loc>
-    <lastmod>2026-10-01</lastmod>
+    <loc>https://www.propertyfinderrealestate.com/property-detail</loc>
+    <lastmod>2026-10-06</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://www.propertyfinderrealestate.com/price-trends</loc>
+    <lastmod>2026-10-06</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://www.propertyfinderrealestate.com/price-trends.html</loc>
-    <lastmod>2026-07-05</lastmod>
+    <loc>https://www.propertyfinderrealestate.com/neighbourhoods</loc>
+    <lastmod>2026-10-06</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://www.propertyfinderrealestate.com/compare.html</loc>
-    <lastmod>2026-07-05</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  <url>
-    <loc>https://www.propertyfinderrealestate.com/property-alerts.html</loc>
-    <lastmod>2026-07-05</lastmod>
+    <loc>https://www.propertyfinderrealestate.com/property-alerts</loc>
+    <lastmod>2026-10-06</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
-
-  <!-- High-Value Lead Capture & Inquiries -->
   <url>
-    <loc>https://www.propertyfinderrealestate.com/contact.html</loc>
-    <lastmod>2026-10-01</lastmod>
+    <loc>https://www.propertyfinderrealestate.com/compare</loc>
+    <lastmod>2026-10-06</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.6</priority>
+  </url>
+
+  <!-- Lead Capture & Inquiries -->
+  <url>
+    <loc>https://www.propertyfinderrealestate.com/contact</loc>
+    <lastmod>2026-10-06</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://www.propertyfinderrealestate.com/post-property.html</loc>
-    <lastmod>2026-07-05</lastmod>
+    <loc>https://www.propertyfinderrealestate.com/post-property</loc>
+    <lastmod>2026-10-06</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
 
-  <!-- Services & Specialty Solutions -->
+  <!-- Real Estate Services & Advisory -->
   <url>
-    <loc>https://www.propertyfinderrealestate.com/services.html</loc>
-    <lastmod>2026-10-01</lastmod>
+    <loc>https://www.propertyfinderrealestate.com/services</loc>
+    <lastmod>2026-10-06</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://www.propertyfinderrealestate.com/home-loan.html</loc>
-    <lastmod>2026-07-05</lastmod>
+    <loc>https://www.propertyfinderrealestate.com/home-loan</loc>
+    <lastmod>2026-10-06</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://www.propertyfinderrealestate.com/insurance.html</loc>
-    <lastmod>2026-07-05</lastmod>
+    <loc>https://www.propertyfinderrealestate.com/nri</loc>
+    <lastmod>2026-10-06</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://www.propertyfinderrealestate.com/nri.html</loc>
-    <lastmod>2026-07-05</lastmod>
+    <loc>https://www.propertyfinderrealestate.com/insurance</loc>
+    <lastmod>2026-10-06</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
 
-  <!-- Interactive Financial Tools & Calculators -->
+  <!-- Financial Calculators & Utilities -->
   <url>
-    <loc>https://www.propertyfinderrealestate.com/calculators.html</loc>
-    <lastmod>2026-10-01</lastmod>
+    <loc>https://www.propertyfinderrealestate.com/calculators</loc>
+    <lastmod>2026-10-06</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://www.propertyfinderrealestate.com/tds-calculators</loc>
+    <lastmod>2026-10-06</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://www.propertyfinderrealestate.com/converter</loc>
+    <lastmod>2026-10-06</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://www.propertyfinderrealestate.com/tds-calculators.html</loc>
-    <lastmod>2026-10-01</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  <url>
-    <loc>https://www.propertyfinderrealestate.com/converter.html</loc>
-    <lastmod>2026-07-05</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  <url>
-    <loc>https://www.propertyfinderrealestate.com/reminders.html</loc>
-    <lastmod>2026-07-05</lastmod>
+    <loc>https://www.propertyfinderrealestate.com/reminders</loc>
+    <lastmod>2026-10-06</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
   </url>
 
-  <!-- Content, Knowledge Hub & Community -->
+  <!-- Editorial & Knowledge Base -->
   <url>
-    <loc>https://www.propertyfinderrealestate.com/blog.html</loc>
-    <lastmod>2026-10-01</lastmod>
+    <loc>https://www.propertyfinderrealestate.com/blog</loc>
+    <lastmod>2026-10-06</lastmod>
     <changefreq>weekly</changefreq>
-    <priority>0.7</priority>
+    <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://www.propertyfinderrealestate.com/faq.html</loc>
-    <lastmod>2026-07-05</lastmod>
+    <loc>https://www.propertyfinderrealestate.com/faq</loc>
+    <lastmod>2026-10-06</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://www.propertyfinderrealestate.com/neighbourhoods.html</loc>
-    <lastmod>2026-07-05</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
-  </url>
-  <url>
-    <loc>https://www.propertyfinderrealestate.com/testimonials.html</loc>
-    <lastmod>2026-07-05</lastmod>
+    <loc>https://www.propertyfinderrealestate.com/testimonials</loc>
+    <lastmod>2026-10-06</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
 
   <!-- Company Profile & Legal -->
   <url>
-    <loc>https://www.propertyfinderrealestate.com/about.html</loc>
-    <lastmod>2026-10-01</lastmod>
+    <loc>https://www.propertyfinderrealestate.com/about</loc>
+    <lastmod>2026-10-06</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://www.propertyfinderrealestate.com/team.html</loc>
-    <lastmod>2026-07-05</lastmod>
+    <loc>https://www.propertyfinderrealestate.com/team</loc>
+    <lastmod>2026-10-06</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://www.propertyfinderrealestate.com/careers.html</loc>
-    <lastmod>2026-07-05</lastmod>
+    <loc>https://www.propertyfinderrealestate.com/careers</loc>
+    <lastmod>2026-10-06</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://www.propertyfinderrealestate.com/terms.html</loc>
-    <lastmod>2026-10-01</lastmod>
+    <loc>https://www.propertyfinderrealestate.com/privacy-policy</loc>
+    <lastmod>2026-10-06</lastmod>
     <changefreq>yearly</changefreq>
     <priority>0.3</priority>
   </url>
   <url>
-    <loc>https://www.propertyfinderrealestate.com/privacy-policy.html</loc>
-    <lastmod>2026-10-01</lastmod>
+    <loc>https://www.propertyfinderrealestate.com/terms</loc>
+    <lastmod>2026-10-06</lastmod>
     <changefreq>yearly</changefreq>
     <priority>0.3</priority>
+  </url>
+
+  <!-- High-Intent Mumbai Locality Landing Pages -->
+  <url>
+    <loc>https://www.propertyfinderrealestate.com/properties/flats-in-malad-west</loc>
+    <lastmod>2026-10-06</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+  </url>
+  <url>
+    <loc>https://www.propertyfinderrealestate.com/properties/flats-in-goregaon-east</loc>
+    <lastmod>2026-10-06</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
   </url>
   <url>
     <loc>https://www.propertyfinderrealestate.com/properties/flats-in-kandivali-west</loc>
-    <lastmod>2026-10-02</lastmod>
+    <lastmod>2026-10-06</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.85</priority>
   </url>
   <url>
     <loc>https://www.propertyfinderrealestate.com/properties/flats-in-borivali-west</loc>
-    <lastmod>2026-10-02</lastmod>
+    <lastmod>2026-10-06</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.85</priority>
   </url>
   <url>
     <loc>https://www.propertyfinderrealestate.com/properties/flats-in-andheri-west</loc>
-    <lastmod>2026-10-02</lastmod>
+    <lastmod>2026-10-06</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.85</priority>
   </url>
   <url>
     <loc>https://www.propertyfinderrealestate.com/properties/commercial-shops-malad</loc>
-    <lastmod>2026-10-02</lastmod>
+    <lastmod>2026-10-06</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.85</priority>
   </url>
-
+  <url>
+    <loc>https://www.propertyfinderrealestate.com/properties/commercial-office-andheri</loc>
+    <lastmod>2026-10-06</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.85</priority>
+  </url>
 
 </urlset>
