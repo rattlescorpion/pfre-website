@@ -4,13 +4,16 @@
     "title": "Marina Enclave 2 BHK High-Rise Flat",
     "slug": "2-bhk-flat-marina-enclave-jankalyan-nagar-malad-west",
     "intent": "buy",
+    "transactionType": "buy",
+    "type": "residential",
     "use": "residential",
-    "bhk": 2,
     "propType": "flat",
+    "bhk": 2,
     "price": 14500000,
     "priceDisplay": "₹1.45 Cr",
     "carpetArea": 685,
     "locality": "Malad West",
+    "localityKey": "malad west",
     "subLocality": "Jankalyan Nagar",
     "address": "Marina Enclave, Jankalyan Nagar Road, Malad West, Mumbai, Maharashtra 400095",
     "bathrooms": 2,
@@ -20,8 +23,10 @@
     "reraId": "P51800002144",
     "featured": true,
     "status": "available",
+    "coverImage": "/images/properties/malad-west-2bhk.webp",
     "images": [
-      "/images/properties/malad-west-2bhk.webp"
+      "/images/properties/malad-west-2bhk.webp",
+      "/images/og-banner.jpg"
     ],
     "amenities": [
       "Clubhouse",
@@ -38,13 +43,16 @@
     "title": "Compact 1 BHK Apartment in Orlem",
     "slug": "1-bhk-flat-rent-orlem-malad-west",
     "intent": "rent",
+    "transactionType": "rent",
+    "type": "residential",
     "use": "residential",
-    "bhk": 1,
     "propType": "flat",
+    "bhk": 1,
     "price": 28000,
     "priceDisplay": "₹28,000 / mo",
     "carpetArea": 435,
     "locality": "Malad West",
+    "localityKey": "malad west",
     "subLocality": "Orlem",
     "address": "Near Our Lady of Lourdes Church, Orlem, Malad West, Mumbai, Maharashtra 400064",
     "bathrooms": 1,
@@ -54,8 +62,10 @@
     "reraId": "Ready OC",
     "featured": false,
     "status": "available",
+    "coverImage": "/images/properties/malad-west-1bhk.webp",
     "images": [
-      "/images/properties/malad-west-1bhk.webp"
+      "/images/properties/malad-west-1bhk.webp",
+      "/images/og-banner.jpg"
     ],
     "amenities": [
       "24 Hours Water Supply",
@@ -69,13 +79,16 @@
     "title": "Oberoi Woods 3 BHK Luxury Suite",
     "slug": "3-bhk-flat-oberoi-woods-goregaon-east",
     "intent": "buy",
+    "transactionType": "buy",
+    "type": "residential",
     "use": "residential",
-    "bhk": 3,
     "propType": "flat",
+    "bhk": 3,
     "price": 32000000,
     "priceDisplay": "₹3.20 Cr",
     "carpetArea": 1180,
     "locality": "Goregaon East",
+    "localityKey": "goregaon east",
     "subLocality": "Oberoi Garden City",
     "address": "Oberoi Garden City, Off Western Express Highway, Goregaon East, Mumbai, Maharashtra 400063",
     "bathrooms": 3,
@@ -85,8 +98,10 @@
     "reraId": "P51800000812",
     "featured": true,
     "status": "available",
+    "coverImage": "/images/properties/goregaon-east-3bhk.webp",
     "images": [
-      "/images/properties/goregaon-east-3bhk.webp"
+      "/images/properties/goregaon-east-3bhk.webp",
+      "/images/og-banner.jpg"
     ],
     "amenities": [
       "Aarey Forest View",
@@ -103,13 +118,16 @@
     "title": "Prime Main-Road Retail Commercial Shop",
     "slug": "commercial-shop-link-road-malad-west",
     "intent": "commercial",
+    "transactionType": "buy",
+    "type": "commercial",
     "use": "commercial",
+    "propType": "shop",
     "bhk": null,
-    "propType": "commercial",
     "price": 17500000,
     "priceDisplay": "₹1.75 Cr",
     "carpetArea": 410,
     "locality": "Malad West",
+    "localityKey": "malad west",
     "subLocality": "New Link Road",
     "address": "Ground Floor, Opposite D-Mart, New Link Road, Malad West, Mumbai, Maharashtra 400064",
     "bathrooms": 1,
@@ -119,8 +137,10 @@
     "reraId": "Ready OC",
     "featured": true,
     "status": "available",
+    "coverImage": "/images/properties/malad-commercial-shop.webp",
     "images": [
-      "/images/properties/malad-commercial-shop.webp"
+      "/images/properties/malad-commercial-shop.webp",
+      "/images/og-banner.jpg"
     ],
     "amenities": [
       "High Footfall Location",
@@ -135,13 +155,16 @@
     "title": "Fully Furnished Grade-A Corporate Office",
     "slug": "commercial-office-lease-chakala-andheri-east",
     "intent": "commercial",
+    "transactionType": "rent",
+    "type": "commercial",
     "use": "commercial",
+    "propType": "office",
     "bhk": null,
-    "propType": "commercial",
     "price": 185000,
     "priceDisplay": "₹1.85 Lakh / mo",
     "carpetArea": 1250,
     "locality": "Andheri East",
+    "localityKey": "andheri east",
     "subLocality": "Chakala",
     "address": "Solitaire Business Park, Andheri-Ghatkopar Link Road, Chakala, Andheri East, Mumbai, Maharashtra 400093",
     "bathrooms": 2,
@@ -151,8 +174,10 @@
     "reraId": "Commercial Ready",
     "featured": false,
     "status": "available",
+    "coverImage": "/images/properties/andheri-office.webp",
     "images": [
-      "/images/properties/andheri-office.webp"
+      "/images/properties/andheri-office.webp",
+      "/images/og-banner.jpg"
     ],
     "amenities": [
       "26 Workstations & 2 Cabins",
