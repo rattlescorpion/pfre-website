@@ -6,7 +6,7 @@
   <title>Properties for Sale &amp; Rent in Mumbai | Property Finder Real Estate</title>
   <meta name="description" content="Explore verified flats, apartments, commercial shops, and office spaces in Malad West, Goregaon, Andheri, Kandivali, and Borivali. 100% verified listings with Property Finder Real Estate.">
   <meta name="author" content="Property Finder Real Estate">
-  <link rel="canonical" href="https://www.propertyfinderrealestate.com/properties.html">
+  <link rel="canonical" href="https://www.propertyfinderrealestate.com/properties">
 
   <!-- Security & CSP -->
   <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' https://cdnjs.cloudflare.com https://challenges.cloudflare.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' data: https:; connect-src 'self' https://api.propertyfinderrealestate.com http://localhost:8000 https://formspree.io; frame-src https://www.google.com https://challenges.cloudflare.com; form-action 'self' https://formspree.io; object-src 'none'; base-uri 'self'">
@@ -19,7 +19,7 @@
   <meta property="og:locale" content="en_IN">
   <meta property="og:title" content="Properties for Sale &amp; Rent in Mumbai | PFRE">
   <meta property="og:description" content="Verified residential apartments and commercial properties across Mumbai's Western Suburbs. Browse active inventory in Malad, Goregaon, Andheri &amp; Borivali.">
-  <meta property="og:url" content="https://www.propertyfinderrealestate.com/properties.html">
+  <meta property="og:url" content="https://www.propertyfinderrealestate.com/properties">
   <meta property="og:image" content="https://www.propertyfinderrealestate.com/images/og-banner.jpg">
   <meta property="og:image:width" content="1200">
   <meta property="og:image:height" content="630">
@@ -324,7 +324,7 @@
     "@type": "ItemList",
     "name": "Properties for Sale and Rent in Mumbai",
     "description": "Verified residential flats and commercial properties across Mumbai's western suburbs.",
-    "url": "https://www.propertyfinderrealestate.com/properties.html"
+    "url": "https://www.propertyfinderrealestate.com/properties"
   }
   </script>
 </head>
@@ -343,24 +343,24 @@
       <p>Discover handpicked apartments, penthouses, and commercial spaces across Mumbai's most desirable Western Suburb corridors.</p>
       <nav aria-label="Breadcrumb">
         <div class="breadcrumb">
-          <a href="/index.html">Home</a><span class="breadcrumb-sep" aria-hidden="true">›</span><span>Properties</span>
+          <a href="/">Home</a><span class="breadcrumb-sep" aria-hidden="true">›</span><span>Properties</span>
         </div>
       </nav>
     </section>
 
     <!-- INVENTORY CATALOG WRAPPER -->
     <div class="catalog-wrapper">
-      
+
       <!-- Mobile Filter Toggle Button -->
-      <button class="mobile-filter-trigger" id="mobileFilterBtn" type="button" onclick="toggleMobileFilters()">
+      <button class="mobile-filter-trigger" id="mobileFilterBtn" type="button" aria-expanded="false" aria-controls="filterSidebar" onclick="toggleMobileFilters()">
         ⚙️ Filter Properties &amp; Pricing
       </button>
 
       <div class="catalog-layout">
-        
+
         <!-- SIDEBAR FILTERS -->
-        <aside class="filter-sidebar" id="filterSidebar">
-          
+        <aside class="filter-sidebar" id="filterSidebar" aria-label="Property Search Filters">
+
           <div class="filter-group">
             <div class="filter-title">
               <span>Purpose</span>
@@ -422,7 +422,7 @@
 
         <!-- MAIN LISTINGS COLUMN -->
         <section>
-          
+
           <div class="catalog-toolbar">
             <div class="catalog-count" id="resultsCount">
               Showing Active Mumbai Listings...
@@ -482,22 +482,23 @@
   <script src="/js/config.js"></script>
   <script src="/js/layout.js"></script>
   <script src="/js/api.js" defer></script>
-  <script src="/js/security.js"></script>
+  <script src="/js/security.js" defer></script>
   <script src="/js/tracker.js" defer></script>
   <script src="/js/theme.js"></script>
   <script src="/js/i18n.js"></script>
-  <script src="/js/load-properties.js"></script>
-  <script src="/js/properties-filter.js"></script>
-  <script src="/js/widgets.js"></script>
+  <script src="/js/load-properties.js" defer></script>
+  <script src="/js/properties-filter.js" defer></script>
+  <script src="/js/widgets.js" defer></script>
 
   <script>
     // Mobile Filters Accordion Toggle
     function toggleMobileFilters() {
       const sidebar = document.getElementById('filterSidebar');
       const btn = document.getElementById('mobileFilterBtn');
-      if (!sidebar) return;
-      sidebar.classList.toggle('open');
-      btn.textContent = sidebar.classList.contains('open') ? '✕ Close Filter Panel' : '⚙️ Filter Properties & Pricing';
+      if (!sidebar || !btn) return;
+      const isOpen = sidebar.classList.toggle('open');
+      btn.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
+      btn.textContent = isOpen ? '✕ Close Filter Panel' : '⚙️ Filter Properties & Pricing';
     }
 
     if ('serviceWorker' in navigator) {
