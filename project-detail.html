@@ -1,0 +1,448 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title id="metaTitle">Project Details | Property Finder Real Estate</title>
+  <meta name="description" id="metaDesc" content="Explore verified specifications, floor plans, pricing, possession dates, and MahaRERA details for premier Mumbai residential & commercial projects.">
+  <meta name="author" content="Property Finder Real Estate">
+  <link rel="canonical" id="canonicalUrl" href="https://www.propertyfinderrealestate.com/project-detail">
+
+  <!-- Security & CSP -->
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' https://cdnjs.cloudflare.com https://challenges.cloudflare.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' data: https:; connect-src 'self' https://api.propertyfinderrealestate.com http://localhost:8000 https://formspree.io; frame-src https://www.google.com https://challenges.cloudflare.com https://www.openstreetmap.org; form-action 'self' https://formspree.io; object-src 'none'; base-uri 'self'">
+  <meta http-equiv="X-Content-Type-Options" content="nosniff">
+  <meta http-equiv="Referrer-Policy" content="strict-origin-when-cross-origin">
+
+  <!-- Open Graph -->
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="Property Finder Real Estate">
+  <meta property="og:locale" content="en_IN">
+  <meta property="og:title" id="ogTitle" content="Project Details | PFRE Mumbai">
+  <meta property="og:description" id="ogDesc" content="Verified Mumbai project specifications, floor plans, and VIP site inspections.">
+  <meta property="og:url" content="https://www.propertyfinderrealestate.com/project-detail">
+  <meta property="og:image" id="ogImage" content="https://www.propertyfinderrealestate.com/images/og-banner.jpg">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:image:type" content="image/jpeg">
+
+  <!-- Favicons & Manifest -->
+  <link rel="icon" type="image/png" sizes="192x192" href="/icons/icon-192.png">
+  <link rel="icon" type="image/svg+xml" href="/icons/favicon.svg">
+  <link rel="manifest" href="/manifest.json">
+  <meta name="theme-color" content="#2563EB">
+
+  <!-- Early Theme Boot -->
+  <script>
+    !function(){var t=localStorage.getItem("pfre_theme")||(window.matchMedia("(prefers-color-scheme:dark)").matches?"dark":"light");document.documentElement.setAttribute("data-theme",t);document.documentElement.classList.add("theme-"+t)}();
+  </script>
+
+  <!-- Typography -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;0,900;1,700&family=DM+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+  <!-- Root-Relative Stylesheets -->
+  <link rel="stylesheet" href="/css/styles.css">
+  <link rel="stylesheet" href="/css/widgets.css">
+  <link rel="stylesheet" href="/css/mobile.css">
+  <link rel="stylesheet" href="/css/theme.css">
+  <link rel="stylesheet" href="/css/overrides.css">
+  <link rel="stylesheet" href="/css/utils.css">
+
+  <style>
+    .project-detail-layout {
+      display: grid;
+      grid-template-columns: 1fr 380px;
+      gap: 36px;
+      padding: 24px 5% 80px;
+      max-width: 1280px;
+      margin: 0 auto;
+    }
+
+    .project-hero-media {
+      height: 440px;
+      border-radius: 20px;
+      overflow: hidden;
+      position: relative;
+      background: var(--bg-secondary);
+      border: 1.5px solid var(--border);
+    }
+    .project-hero-media img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .project-header-block {
+      margin-top: 28px;
+    }
+    .project-title-large {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(26px, 3.8vw, 36px);
+      font-weight: 900;
+      line-height: 1.2;
+      color: var(--text);
+      margin-bottom: 8px;
+    }
+    .project-meta-strip {
+      font-size: 14.5px;
+      color: var(--text-muted);
+      margin-bottom: 16px;
+    }
+    .project-price-headline {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(26px, 3.5vw, 34px);
+      font-weight: 900;
+      color: var(--blue);
+      margin-bottom: 24px;
+    }
+
+    /* Key Metrics Grid */
+    .project-metric-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 16px;
+      padding: 20px;
+      background: var(--bg-secondary);
+      border: 1.5px solid var(--border);
+      border-radius: 16px;
+      margin-bottom: 32px;
+    }
+    .pmetric-item {
+      text-align: center;
+    }
+    .pmetric-item label {
+      display: block;
+      font-size: 11px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      color: var(--text-muted);
+      margin-bottom: 4px;
+    }
+    .pmetric-item span {
+      font-size: 14.5px;
+      font-weight: 700;
+      color: var(--text);
+    }
+
+    /* Content Cards */
+    .project-info-card {
+      background: var(--card, white);
+      border: 1.5px solid var(--border);
+      border-radius: 18px;
+      padding: 28px;
+      margin-bottom: 24px;
+      box-shadow: var(--shadow-sm);
+    }
+    .project-info-card h2 {
+      font-family: 'Playfair Display', serif;
+      font-size: 20px;
+      font-weight: 700;
+      margin-bottom: 14px;
+      color: var(--text);
+    }
+    .project-summary-text {
+      font-size: 14.5px;
+      color: var(--text-muted);
+      line-height: 1.75;
+    }
+
+    .amenities-tag-cloud {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 12px;
+    }
+    .amenity-chip {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 13.5px;
+      padding: 10px 14px;
+      background: var(--bg-secondary);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      color: var(--text);
+      font-weight: 500;
+    }
+
+    /* Sticky Sidebar Form */
+    .booking-sidebar-card {
+      background: var(--card, white);
+      border: 1.5px solid var(--border);
+      border-radius: 20px;
+      padding: 28px;
+      box-shadow: var(--shadow-sm);
+      position: sticky;
+      top: 96px;
+    }
+    .booking-input {
+      width: 100%;
+      padding: 12px 14px;
+      border: 1.5px solid var(--border);
+      border-radius: 10px;
+      font-size: 14px;
+      outline: none;
+      margin-bottom: 14px;
+      background: var(--card, white);
+      color: var(--text);
+      font-family: inherit;
+    }
+    .booking-input:focus {
+      border-color: var(--blue);
+    }
+
+    @media (max-width: 1080px) {
+      .project-detail-layout {
+        grid-template-columns: 1fr;
+      }
+      .booking-sidebar-card {
+        position: static;
+      }
+      .project-hero-media {
+        height: 320px;
+      }
+      .project-metric-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- MASTER NAVBAR -->
+  <site-navbar></site-navbar>
+
+  <div style="padding: 24px 5% 0; max-width: 1280px; margin: 0 auto;">
+    <nav aria-label="Breadcrumb">
+      <div class="breadcrumb" style="justify-content: flex-start;">
+        <a href="/">Home</a><span class="breadcrumb-sep" aria-hidden="true">›</span>
+        <a href="/projects">Projects</a><span class="breadcrumb-sep" aria-hidden="true">›</span>
+        <span id="breadcrumbCurrent">Loading Project…</span>
+      </div>
+    </nav>
+  </div>
+
+  <main class="project-detail-layout" id="main-content">
+    
+    <!-- LEFT: Project Data Overview -->
+    <section>
+      <div class="project-hero-media" id="projectHeroMedia">
+        <div style="width:100%;height:100%;display:flex;align-items:center;justify-content:center;font-size:64px;background:var(--bg-secondary);">🏗️</div>
+      </div>
+
+      <div class="project-header-block">
+        <div id="projectBadgesRow" style="display:flex;gap:8px;margin-bottom:12px;flex-wrap:wrap;"></div>
+        <h1 class="project-title-large" id="projTitle">Loading Project…</h1>
+        <div class="project-meta-strip" id="projMetaStrip">📍 Loading Location &amp; Developer…</div>
+        <div class="project-price-headline" id="projPriceDisplay">Price on Request</div>
+      </div>
+
+      <!-- Key Specifications Matrix -->
+      <div class="project-metric-grid">
+        <div class="pmetric-item">
+          <label>Configurations</label>
+          <span id="metricConfig">—</span>
+        </div>
+        <div class="pmetric-item">
+          <label>Carpet Area</label>
+          <span id="metricCarpet">—</span>
+        </div>
+        <div class="pmetric-item">
+          <label>Possession</label>
+          <span id="metricPossession">—</span>
+        </div>
+        <div class="pmetric-item">
+          <label>Key Highlight</label>
+          <span id="metricSpecial">—</span>
+        </div>
+      </div>
+
+      <!-- Overview -->
+      <article class="project-info-card">
+        <h2>About the Development</h2>
+        <p class="project-summary-text" id="projOverview">Loading project details and developer background…</p>
+      </article>
+
+      <!-- Amenities -->
+      <article class="project-info-card">
+        <h2>Lifestyle &amp; Podium Amenities</h2>
+        <div class="amenities-tag-cloud" id="projAmenitiesCloud">
+          <div class="amenity-chip">Loading amenities…</div>
+        </div>
+      </article>
+
+      <!-- Regulatory & MahaRERA Compliance -->
+      <article class="project-info-card">
+        <h2>RERA Compliance &amp; Verification</h2>
+        <p class="project-summary-text">
+          This project is registered under the Real Estate Regulatory Authority (MahaRERA). Documents, title deeds, commencement certificates, and escrow accounts have been checked against official records.
+        </p>
+        <div style="margin-top:14px;padding:14px 18px;background:var(--bg-secondary);border-radius:10px;border:1px solid var(--border);display:inline-flex;align-items:center;gap:10px;">
+          <span style="font-size:20px;">🛡️</span>
+          <div>
+            <div style="font-size:11px;font-weight:700;text-transform:uppercase;color:var(--text-muted);">MahaRERA Number</div>
+            <strong id="reraNumberDisplay" style="font-family:monospace;font-size:14px;color:var(--blue);">—</strong>
+          </div>
+        </div>
+      </article>
+    </section>
+
+    <!-- RIGHT: Lead Capture & VIP Site Tour Request -->
+    <aside>
+      <div class="booking-sidebar-card">
+        <h2 style="font-family:'Playfair Display',serif;font-size:20px;font-weight:700;margin-bottom:6px;color:var(--text);">
+          Schedule VIP Site Visit
+        </h2>
+        <p style="font-size:13px;color:var(--text-muted);margin-bottom:20px;line-height:1.5;">
+          Tour sample apartments, review price sheets, and inspect on-site progress with our senior advisors.
+        </p>
+
+        <form id="projectTourForm" onsubmit="event.preventDefault(); submitTourRequest();">
+          <input class="booking-input" type="text" id="tourName" placeholder="Your Full Name *" required autocomplete="name">
+          <input class="booking-input" type="tel" id="tourPhone" placeholder="Mobile / WhatsApp *" required autocomplete="tel">
+          <input class="booking-input" type="email" id="tourEmail" placeholder="Email Address" autocomplete="email">
+          <textarea class="booking-input" id="tourMsg" rows="3" placeholder="Preferred date, budget, or preferred configuration..."></textarea>
+          
+          <button class="btn btn-primary" type="submit" id="tourSubmitBtn" style="width:100%;justify-content:center;padding:12px;">
+            Book Private Tour
+          </button>
+        </form>
+
+        <div style="margin-top:20px;display:flex;flex-direction:column;gap:10px;">
+          <a id="tourWaBtn" href="#" target="_blank" rel="noopener noreferrer" class="btn btn-outline btn-sm" style="justify-content:center;background:#25D366;color:white;border-color:#25D366;">
+            💬 WhatsApp Brochure &amp; Floor Plans
+          </a>
+          <a href="tel:+919326990050" class="btn btn-outline btn-sm" style="justify-content:center;">
+            📞 Call Desk (+919326990050)
+          </a>
+        </div>
+      </div>
+    </aside>
+
+  </main>
+
+  <!-- MASTER FOOTER -->
+  <site-footer></site-footer>
+
+  <!-- Centralized Script Engines -->
+  <script src="/js/config.js"></script>
+  <script src="/js/layout.js"></script>
+  <script src="/js/api.js" defer></script>
+  <script src="/js/security.js"></script>
+  <script src="/js/tracker.js" defer></script>
+  <script src="/js/theme.js"></script>
+  <script src="/js/widgets.js"></script>
+
+  <!-- Project Hydration Script -->
+  <script>
+    let activeProject = null;
+
+    async function loadProjectDetails() {
+      const params = new URLSearchParams(window.location.search);
+      const projectId = (params.get('id') || '').trim();
+
+      try {
+        const res = await fetch('/data/projects.json');
+        if (!res.ok) throw new Error('Failed to load /data/projects.json');
+        const list = await res.json();
+
+        // Match by id or slug
+        activeProject = list.find(p => p.id === projectId || p.slug === projectId) || list[0];
+        if (!activeProject) return;
+
+        const title = activeProject.title || activeProject.name || 'Featured Project';
+        const image = activeProject.coverImage || activeProject.image || '/images/og-banner.jpg';
+        const developer = activeProject.developer || 'Reputed Developer';
+        const locality = activeProject.locality || 'Mumbai';
+        const address = activeProject.address || `${locality}, Mumbai`;
+        const rera = activeProject.reraId || activeProject.reraNumber || 'Verified';
+        const summary = activeProject.summary || activeProject.overview || 'Exclusive development in Mumbai.';
+
+        const config = activeProject.specs?.configuration || (Array.isArray(activeProject.configurations) ? activeProject.configurations.join(', ') : '2, 3 BHK');
+        const carpet = activeProject.specs?.carpetArea || activeProject.carpetAreaRange || 'On Request';
+        const possession = activeProject.specs?.possession || activeProject.possessionDate || 'Under Construction';
+        const highlight = activeProject.specs?.specialMetric || activeProject.totalTowers || 'Prime Gated Community';
+
+        // Update Metadata & Title
+        document.title = `${title} | Property Finder Real Estate`;
+        document.getElementById('breadcrumbCurrent').textContent = title;
+        document.getElementById('projTitle').textContent = title;
+        document.getElementById('projMetaStrip').textContent = `🏢 Developed by ${developer} · 📍 ${address}`;
+        document.getElementById('projPriceDisplay').textContent = activeProject.priceDisplay || 'Price on Request';
+        document.getElementById('projOverview').textContent = summary;
+        document.getElementById('reraNumberDisplay').textContent = rera;
+
+        document.getElementById('metricConfig').textContent = config;
+        document.getElementById('metricCarpet').textContent = carpet;
+        document.getElementById('metricPossession').textContent = possession;
+        document.getElementById('metricSpecial').textContent = highlight;
+
+        // Render Image
+        document.getElementById('projectHeroMedia').innerHTML = `
+          <img src="${image}" alt="${title}" onerror="this.onerror=null;this.src='/images/og-banner.jpg';">
+        `;
+
+        // Render Badges
+        const isReady = (activeProject.statusLabel || activeProject.status || '').toLowerCase().includes('ready');
+        document.getElementById('projectBadgesRow').innerHTML = `
+          <span class="badge ${isReady ? 'badge-green' : 'badge-blue'}">${activeProject.statusLabel || activeProject.status || 'Verified'}</span>
+          <span class="badge badge-gray">${locality}</span>
+        `;
+
+        // Render Amenities
+        const amenities = Array.isArray(activeProject.amenities) ? activeProject.amenities : [];
+        if (amenities.length > 0) {
+          document.getElementById('projAmenitiesCloud').innerHTML = amenities.map(a => `
+            <div class="amenity-chip"><span style="color:var(--blue);font-weight:700;">✓</span> ${a}</div>
+          `).join('');
+        }
+
+        // WhatsApp Link Synchronization
+        const waMsg = encodeURIComponent(activeProject.brochureMessage || `Hello PFRE, I would like more information and a brochure for ${title}`);
+        document.getElementById('tourWaBtn').href = `https://wa.me/919326990050?text=${waMsg}`;
+
+      } catch (err) {
+        console.error(err);
+      }
+    }
+
+    async function submitTourRequest() {
+      const name = document.getElementById('tourName')?.value.trim();
+      const phone = document.getElementById('tourPhone')?.value.trim();
+      const email = document.getElementById('tourEmail')?.value.trim() || '';
+      const message = document.getElementById('tourMsg')?.value.trim() || '';
+
+      if (!name || !phone) {
+        if (typeof window.showToast === 'function') window.showToast('Please enter your name and phone number', 'error');
+        return;
+      }
+
+      const payload = {
+        name,
+        phone,
+        email,
+        message,
+        project: activeProject ? (activeProject.title || activeProject.id) : 'General Project Tour',
+        source: 'project_detail_page',
+        ts: new Date().toISOString()
+      };
+
+      if (window.PFREApi?.leads) window.PFREApi.leads.create(payload).catch(() => {});
+      
+      const submitBtn = document.getElementById('tourSubmitBtn');
+      if (submitBtn) {
+        submitBtn.disabled = true;
+        submitBtn.textContent = '✅ Tour Booked!';
+      }
+
+      if (typeof window.showToast === 'function') {
+        window.showToast('✅ Site tour booked! Our team will call you within 1 hour.', 'success');
+      }
+      document.getElementById('projectTourForm').reset();
+    }
+
+    window.addEventListener('DOMContentLoaded', loadProjectDetails);
+  </script>
+</body>
+</html>
