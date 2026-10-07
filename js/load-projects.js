@@ -1,7 +1,7 @@
 /* =====================================================
    PROPERTY FINDER REAL ESTATE — Projects Loader Engine
    Dynamic Data Hydration, Interactive Filters & Grid Sync
-   Production Build v3.1 · Zero-Dependency & Clean-URL Safe
+   Production Build v3.2 · Zero-Dependency & Clean-URL Safe
    ===================================================== */
 
 (function () {
@@ -66,6 +66,7 @@
     const summary = proj.summary || proj.overview || '';
     const rera = proj.reraId || proj.reraNumber || 'Applied';
     const statusClass = getStatusBadgeClass(proj.status);
+    const detailUrl = `/project-detail?id=${encodeURIComponent(proj.id)}`;
     const brochureText = encodeURIComponent(proj.brochureMessage || `Inquiry for ${title}`);
 
     const config = proj.specs?.configuration || (Array.isArray(proj.configurations) ? proj.configurations.join(', ') : '2, 3 BHK');
@@ -83,11 +84,13 @@
                data-locality="${escapeHTML(proj.localityKey || proj.locality || '')}" 
                data-developer="${escapeHTML(proj.developerKey || proj.developer || '')}">
         <div class="project-media-wrap">
-          <img src="${escapeHTML(image)}" 
-               alt="${escapeHTML(title)}" 
-               class="project-hero-img" 
-               loading="lazy" 
-               onerror="this.onerror=null;this.parentElement.style.background='linear-gradient(135deg, #1E3A8A, #3B82F6)';this.style.display='none';">
+          <a href="${detailUrl}" style="display:block;width:100%;height:100%;text-decoration:none;">
+            <img src="${escapeHTML(image)}" 
+                 alt="${escapeHTML(title)}" 
+                 class="project-hero-img" 
+                 loading="lazy" 
+                 onerror="this.onerror=null;this.parentElement.style.background='linear-gradient(135deg, #1E3A8A, #3B82F6)';this.style.display='none';">
+          </a>
           <div class="project-badge-stack">
             <span class="status-badge ${statusClass}">${escapeHTML(proj.statusLabel || proj.status || 'Verified')}</span>
             <span class="rera-tag">MahaRERA: ${escapeHTML(rera)}</span>
@@ -98,7 +101,11 @@
             <div class="project-header-top">
               <div>
                 <div class="project-brand-meta">🏢 ${escapeHTML(proj.developer || 'Reputed Developer')}</div>
-                <h2 class="project-title">${escapeHTML(title)}</h2>
+                <h2 class="project-title">
+                  <a href="${detailUrl}" style="color:inherit;text-decoration:none;transition:color .2s;" onmouseover="this.style.color='var(--blue)'" onmouseout="this.style.color='inherit'">
+                    ${escapeHTML(title)}
+                  </a>
+                </h2>
                 <div class="project-location">📍 ${escapeHTML(proj.address || proj.locality || 'Mumbai')}</div>
               </div>
               <div class="project-price-box">
@@ -133,9 +140,9 @@
           </div>
 
           <div class="project-actions-row">
-            <a href="/contact?project=${encodeURIComponent(proj.id || title)}" class="btn btn-primary btn-sm">Schedule VIP Site Tour</a>
+            <a href="${detailUrl}" class="btn btn-primary btn-sm">Explore Project Details →</a>
             <a href="https://wa.me/919326990050?text=${brochureText}" target="_blank" rel="noopener noreferrer" class="btn btn-brochure btn-sm">
-              💬 Instant Brochure &amp; Plans
+              💬 WhatsApp Brochure
             </a>
             <a href="tel:+919326990050" class="btn btn-outline btn-sm">📞 Call Desk</a>
           </div>
@@ -152,6 +159,7 @@
     const status = p.statusLabel || p.status || 'Under Construction';
     const isReady = status.toLowerCase().includes('ready');
     const badgeClass = isReady ? 'badge-green' : 'badge-gold';
+    const detailUrl = `/project-detail?id=${encodeURIComponent(p.id)}`;
     const configs = p.specs?.configuration || (Array.isArray(p.configurations) ? p.configurations.join(', ') : '2, 3 BHK');
     const carpet = p.specs?.carpetArea || p.carpetAreaRange || 'On Request';
     const possession = p.specs?.possession || p.possessionDate || 'Under Construction';
@@ -160,11 +168,13 @@
     return `
       <div class="project-card">
         <div class="project-img">
-          <img src="${escapeHTML(image)}" 
-               alt="${escapeHTML(title)} by ${escapeHTML(p.developer || '')} in ${escapeHTML(p.locality || 'Mumbai')}" 
-               loading="lazy" 
-               onerror="this.style.display='none'; if(this.nextElementSibling) this.nextElementSibling.style.display='flex';"
-               style="width:100%;height:100%;object-fit:cover;">
+          <a href="${detailUrl}" style="display:block;width:100%;height:100%;">
+            <img src="${escapeHTML(image)}" 
+                 alt="${escapeHTML(title)} by ${escapeHTML(p.developer || '')} in ${escapeHTML(p.locality || 'Mumbai')}" 
+                 loading="lazy" 
+                 onerror="this.style.display='none'; if(this.nextElementSibling) this.nextElementSibling.style.display='flex';"
+                 style="width:100%;height:100%;object-fit:cover;">
+          </a>
           <div class="project-placeholder" style="display:none;width:100%;height:100%;align-items:center;justify-content:center;font-size:48px;background:var(--bg-secondary);">🏗️</div>
         </div>
         <div class="project-body">
@@ -172,7 +182,9 @@
             <span class="badge ${badgeClass}">${escapeHTML(status)}</span>
             <span class="badge badge-blue">RERA: ${escapeHTML(rera)}</span>
           </div>
-          <h3 class="project-name" style="font-size:18px;font-weight:700;margin-bottom:6px;">${escapeHTML(title)}</h3>
+          <h3 class="project-name" style="font-size:18px;font-weight:700;margin-bottom:6px;">
+            <a href="${detailUrl}" style="color:inherit;text-decoration:none;">${escapeHTML(title)}</a>
+          </h3>
           <div class="project-dev" style="font-size:13px;color:var(--text-muted);margin-bottom:16px;">🏢 ${escapeHTML(p.developer || '')} · ${escapeHTML(subLoc)}${escapeHTML(p.locality || 'Mumbai')}</div>
           
           <div class="project-meta" style="display:grid;grid-template-columns:1fr 1fr;gap:12px;padding:12px 0;border-top:1px solid var(--border);border-bottom:1px solid var(--border);margin-bottom:16px;">
@@ -195,7 +207,7 @@
           </div>
 
           <div style="display:flex;gap:10px;">
-            <a href="tel:+919326990050" class="btn btn-primary btn-sm" style="flex:1;justify-content:center;">Book Site Visit</a>
+            <a href="${detailUrl}" class="btn btn-primary btn-sm" style="flex:1;justify-content:center;">Details</a>
             <a href="https://wa.me/919326990050?text=${encodeURIComponent('Hello Property Finder Real Estate, I would like more information and a brochure for ' + title)}" 
                target="_blank" 
                rel="noopener noreferrer" 
@@ -216,18 +228,14 @@
     const searchQuery = (DOM.searchInput?.value || '').trim().toLowerCase();
 
     const filtered = allProjects.filter(proj => {
-      // Status Match
       const matchesStatus = checkStatusMatch(proj, currentStatus);
 
-      // Locality Match
       const locBlob = `${proj.localityKey || ''} ${proj.locality || ''} ${proj.subLocality || ''} ${proj.address || ''}`.toLowerCase();
       const matchesLocality = (selectedLocality === 'all') || locBlob.includes(selectedLocality);
 
-      // Developer Match
       const devBlob = `${proj.developerKey || ''} ${proj.developer || ''}`.toLowerCase();
       const matchesDeveloper = (selectedDeveloper === 'all') || devBlob.includes(selectedDeveloper);
 
-      // Search Query Match
       const searchBlob = `${proj.title || ''} ${proj.name || ''} ${proj.developer || ''} ${proj.locality || ''} ${proj.subLocality || ''} ${proj.address || ''} ${proj.summary || ''} ${proj.overview || ''} ${(proj.amenities || []).join(' ')} ${(proj.configurations || []).join(' ')} ${proj.reraId || ''} ${proj.reraNumber || ''}`.toLowerCase();
       const matchesSearch = !searchQuery || searchBlob.includes(searchQuery);
 
