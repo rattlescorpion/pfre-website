@@ -1,6 +1,7 @@
 /* =====================================================
    PROPERTY FINDER REAL ESTATE — Projects Loader Engine
    Dynamic Data Hydration, Interactive Filters & Grid Sync
+   Production Build v3.1 · Zero-Dependency & Clean-URL Safe
    ===================================================== */
 
 (function () {
@@ -9,19 +10,23 @@
   let allProjects = [];
   let currentStatus = 'all';
 
-  const DOM = {
-    container: document.getElementById('projectsDirectory'),
-    emptyState: document.getElementById('emptyProjectsState'),
-    statusPills: document.querySelectorAll('.status-pill'),
-    localitySelect: document.getElementById('localityFilterSelect'),
-    developerSelect: document.getElementById('developerFilterSelect'),
-    searchInput: document.getElementById('projectSearchInput'),
-    resetBtn: document.getElementById('resetProjectFilters'),
-    simpleGrids: document.querySelectorAll('.project-grid')
-  };
+  let DOM = {};
+
+  function queryDOMElements() {
+    DOM = {
+      container: document.getElementById('projectsDirectory'),
+      emptyState: document.getElementById('emptyProjectsState'),
+      statusPills: document.querySelectorAll('.status-pill'),
+      localitySelect: document.getElementById('localityFilterSelect'),
+      developerSelect: document.getElementById('developerFilterSelect'),
+      searchInput: document.getElementById('projectSearchInput'),
+      resetBtn: document.getElementById('resetProjectFilters'),
+      simpleGrids: document.querySelectorAll('.project-grid')
+    };
+  }
 
   function escapeHTML(str) {
-    if (!str) return '';
+    if (str === null || str === undefined) return '';
     return String(str)
       .replace(/&/g, '&amp;')
       .replace(/</g, '&lt;')
@@ -35,6 +40,23 @@
     if (s.includes('launch')) return 'badge-launch';
     if (s.includes('ready')) return 'badge-ready';
     return 'badge-uc';
+  }
+
+  function checkStatusMatch(proj, filterStatus) {
+    if (filterStatus === 'all') return true;
+    const s = String(proj.status || '').toLowerCase();
+    const label = String(proj.statusLabel || '').toLowerCase();
+
+    if (filterStatus === 'uc') {
+      return s === 'uc' || s.includes('under') || label.includes('under') || label.includes('finishing');
+    }
+    if (filterStatus === 'ready') {
+      return s === 'ready' || s.includes('ready') || s.includes('oc') || label.includes('ready') || label.includes('oc');
+    }
+    if (filterStatus === 'launch') {
+      return s === 'launch' || s.includes('launch') || label.includes('launch') || label.includes('pre-launch');
+    }
+    return s.includes(filterStatus) || label.includes(filterStatus);
   }
 
   /* ── 1. Render Card for Main Catalog (#projectsDirectory) ── */
@@ -51,15 +73,15 @@
     const possession = proj.specs?.possession || proj.possessionDate || 'Under Construction';
     const metric = proj.specs?.specialMetric || proj.totalTowers || 'Prime Gated Community';
 
-    const amenitiesHTML = (proj.amenities || [])
+    const amenitiesHTML = (Array.isArray(proj.amenities) ? proj.amenities : [])
       .map(amenity => `<span class="amenity-pill">${escapeHTML(amenity)}</span>`)
       .join('');
 
     return `
       <article class="premium-project-card" 
-               data-status="${escapeHTML(proj.status)}" 
-               data-locality="${escapeHTML(proj.localityKey || proj.locality)}" 
-               data-developer="${escapeHTML(proj.developerKey || proj.developer)}">
+               data-status="${escapeHTML(proj.status || '')}" 
+               data-locality="${escapeHTML(proj.localityKey || proj.locality || '')}" 
+               data-developer="${escapeHTML(proj.developerKey || proj.developer || '')}">
         <div class="project-media-wrap">
           <img src="${escapeHTML(image)}" 
                alt="${escapeHTML(title)}" 
@@ -67,7 +89,7 @@
                loading="lazy" 
                onerror="this.onerror=null;this.parentElement.style.background='linear-gradient(135deg, #1E3A8A, #3B82F6)';this.style.display='none';">
           <div class="project-badge-stack">
-            <span class="status-badge ${statusClass}">${escapeHTML(proj.statusLabel || proj.status)}</span>
+            <span class="status-badge ${statusClass}">${escapeHTML(proj.statusLabel || proj.status || 'Verified')}</span>
             <span class="rera-tag">MahaRERA: ${escapeHTML(rera)}</span>
           </div>
         </div>
@@ -75,12 +97,12 @@
           <div>
             <div class="project-header-top">
               <div>
-                <div class="project-brand-meta">🏢 ${escapeHTML(proj.developer)}</div>
+                <div class="project-brand-meta">🏢 ${escapeHTML(proj.developer || 'Reputed Developer')}</div>
                 <h2 class="project-title">${escapeHTML(title)}</h2>
-                <div class="project-location">📍 ${escapeHTML(proj.address)}</div>
+                <div class="project-location">📍 ${escapeHTML(proj.address || proj.locality || 'Mumbai')}</div>
               </div>
               <div class="project-price-box">
-                <div class="price-value">${escapeHTML(proj.priceDisplay)}</div>
+                <div class="price-value">${escapeHTML(proj.priceDisplay || 'Price on Request')}</div>
                 <div class="price-sub">${escapeHTML(proj.priceSub || '')}</div>
               </div>
             </div>
@@ -111,7 +133,7 @@
           </div>
 
           <div class="project-actions-row">
-            <a href="/contact.html?project=${encodeURIComponent(proj.id)}" class="btn btn-primary btn-sm">Schedule VIP Site Tour</a>
+            <a href="/contact?project=${encodeURIComponent(proj.id || title)}" class="btn btn-primary btn-sm">Schedule VIP Site Tour</a>
             <a href="https://wa.me/919326990050?text=${brochureText}" target="_blank" rel="noopener noreferrer" class="btn btn-brochure btn-sm">
               💬 Instant Brochure &amp; Plans
             </a>
@@ -139,9 +161,9 @@
       <div class="project-card">
         <div class="project-img">
           <img src="${escapeHTML(image)}" 
-               alt="${escapeHTML(title)} by ${escapeHTML(p.developer)} in ${escapeHTML(p.locality)} Mumbai" 
+               alt="${escapeHTML(title)} by ${escapeHTML(p.developer || '')} in ${escapeHTML(p.locality || 'Mumbai')}" 
                loading="lazy" 
-               onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';"
+               onerror="this.style.display='none'; if(this.nextElementSibling) this.nextElementSibling.style.display='flex';"
                style="width:100%;height:100%;object-fit:cover;">
           <div class="project-placeholder" style="display:none;width:100%;height:100%;align-items:center;justify-content:center;font-size:48px;background:var(--bg-secondary);">🏗️</div>
         </div>
@@ -151,7 +173,7 @@
             <span class="badge badge-blue">RERA: ${escapeHTML(rera)}</span>
           </div>
           <h3 class="project-name" style="font-size:18px;font-weight:700;margin-bottom:6px;">${escapeHTML(title)}</h3>
-          <div class="project-dev" style="font-size:13px;color:var(--text-muted);margin-bottom:16px;">🏢 ${escapeHTML(p.developer)} · ${escapeHTML(subLoc)}${escapeHTML(p.locality)}</div>
+          <div class="project-dev" style="font-size:13px;color:var(--text-muted);margin-bottom:16px;">🏢 ${escapeHTML(p.developer || '')} · ${escapeHTML(subLoc)}${escapeHTML(p.locality || 'Mumbai')}</div>
           
           <div class="project-meta" style="display:grid;grid-template-columns:1fr 1fr;gap:12px;padding:12px 0;border-top:1px solid var(--border);border-bottom:1px solid var(--border);margin-bottom:16px;">
             <div class="project-meta-item">
@@ -160,7 +182,7 @@
             </div>
             <div class="project-meta-item">
               <label style="display:block;font-size:11px;text-transform:uppercase;color:var(--text-muted);font-weight:600;">Pricing</label>
-              <span style="font-weight:700;color:var(--blue);font-size:13.5px;">${escapeHTML(p.priceDisplay)}</span>
+              <span style="font-weight:700;color:var(--blue);font-size:13.5px;">${escapeHTML(p.priceDisplay || 'On Request')}</span>
             </div>
             <div class="project-meta-item">
               <label style="display:block;font-size:11px;text-transform:uppercase;color:var(--text-muted);font-weight:600;">Carpet Area</label>
@@ -194,15 +216,19 @@
     const searchQuery = (DOM.searchInput?.value || '').trim().toLowerCase();
 
     const filtered = allProjects.filter(proj => {
-      const projStatus = String(proj.status || '').toLowerCase();
-      const projLoc = String(proj.localityKey || proj.locality || '').toLowerCase();
-      const projDev = String(proj.developerKey || proj.developer || '').toLowerCase();
+      // Status Match
+      const matchesStatus = checkStatusMatch(proj, currentStatus);
 
-      const matchesStatus = (currentStatus === 'all') || projStatus.includes(currentStatus);
-      const matchesLocality = (selectedLocality === 'all') || projLoc.includes(selectedLocality);
-      const matchesDeveloper = (selectedDeveloper === 'all') || projDev.includes(selectedDeveloper);
+      // Locality Match
+      const locBlob = `${proj.localityKey || ''} ${proj.locality || ''} ${proj.subLocality || ''} ${proj.address || ''}`.toLowerCase();
+      const matchesLocality = (selectedLocality === 'all') || locBlob.includes(selectedLocality);
 
-      const searchBlob = `${proj.title || ''} ${proj.name || ''} ${proj.developer || ''} ${proj.locality || ''} ${proj.address || ''} ${proj.summary || ''} ${(proj.amenities || []).join(' ')}`.toLowerCase();
+      // Developer Match
+      const devBlob = `${proj.developerKey || ''} ${proj.developer || ''}`.toLowerCase();
+      const matchesDeveloper = (selectedDeveloper === 'all') || devBlob.includes(selectedDeveloper);
+
+      // Search Query Match
+      const searchBlob = `${proj.title || ''} ${proj.name || ''} ${proj.developer || ''} ${proj.locality || ''} ${proj.subLocality || ''} ${proj.address || ''} ${proj.summary || ''} ${proj.overview || ''} ${(proj.amenities || []).join(' ')} ${(proj.configurations || []).join(' ')} ${proj.reraId || ''} ${proj.reraNumber || ''}`.toLowerCase();
       const matchesSearch = !searchQuery || searchBlob.includes(searchQuery);
 
       return matchesStatus && matchesLocality && matchesDeveloper && matchesSearch;
@@ -286,6 +312,8 @@
 
   /* ── 7. Initialize Engine ── */
   async function init() {
+    queryDOMElements();
+
     if (!DOM.container && (!DOM.simpleGrids || DOM.simpleGrids.length === 0)) return;
 
     try {
@@ -316,5 +344,9 @@
     }
   }
 
-  document.addEventListener('DOMContentLoaded', init);
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', init);
+  } else {
+    init();
+  }
 })();
