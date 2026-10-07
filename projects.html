@@ -3,39 +3,62 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>404 — Page Not Found | Property Finder Real Estate Mumbai</title>
-  <meta name="description" content="The page you are looking for could not be found. Browse verified residential and commercial properties across Mumbai with Property Finder Real Estate.">
-  <meta name="robots" content="noindex, follow">
-  <link rel="canonical" href="https://www.propertyfinderrealestate.com/404.html">
+  <title>New Luxury Projects &amp; RERA Developments Mumbai | Property Finder Real Estate</title>
+  <meta name="description" content="Explore premier residential towers and commercial developments in Malad West, Goregaon, Andheri, Borivali, and Kandivali. Verified MahaRERA projects with floor plans, brochures, and price sheets.">
+  <meta name="author" content="Property Finder Real Estate">
+  <link rel="canonical" href="https://www.propertyfinderrealestate.com/projects">
 
-  <!-- Security & Content Security Policy (Valid in <meta>) -->
+  <!-- Security & CSP -->
   <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' https://cdnjs.cloudflare.com https://challenges.cloudflare.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' data: https:; connect-src 'self' https://api.propertyfinderrealestate.com http://localhost:8000 https://formspree.io; frame-src https://www.google.com https://challenges.cloudflare.com; form-action 'self' https://formspree.io; object-src 'none'; base-uri 'self'">
   <meta http-equiv="X-Content-Type-Options" content="nosniff">
   <meta http-equiv="Referrer-Policy" content="strict-origin-when-cross-origin">
 
-  <!-- Geolocation -->
+  <!-- Open Graph -->
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="Property Finder Real Estate">
+  <meta property="og:locale" content="en_IN">
+  <meta property="og:title" content="Premier Projects &amp; RERA Developments Mumbai | PFRE">
+  <meta property="og:description" content="Discover Mumbai's most prestigious gated communities, sky-villas, and corporate parks in Goregaon, Malad, Andheri &amp; Borivali.">
+  <meta property="og:url" content="https://www.propertyfinderrealestate.com/projects">
+  <meta property="og:image" content="https://www.propertyfinderrealestate.com/images/og-banner.jpg">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:image:type" content="image/jpeg">
+
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:site" content="@PropertyFinderA">
+  <meta name="twitter:title" content="Premier Projects &amp; RERA Developments Mumbai | PFRE">
+  <meta name="twitter:description" content="Curated new launches, high-rise towers, and ready OC residential projects across Mumbai.">
+  <meta name="twitter:image" content="https://www.propertyfinderrealestate.com/images/og-banner.jpg">
+
+  <!-- SEO & Geolocation -->
+  <meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large">
   <meta name="geo.region" content="IN-MH">
   <meta name="geo.placename" content="Mumbai">
   <meta name="geo.position" content="19.1886;72.8485">
   <meta name="ICBM" content="19.1886, 72.8485">
 
-  <!-- Favicons & Manifest (Strictly Root-Relative for Nested 404 Routes) -->
+  <!-- Favicon & PWA -->
   <link rel="icon" type="image/png" sizes="192x192" href="/icons/icon-192.png">
   <link rel="icon" type="image/svg+xml" href="/icons/favicon.svg">
   <link rel="manifest" href="/manifest.json">
   <meta name="theme-color" content="#2563EB">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="default">
+  <meta name="apple-mobile-web-app-title" content="Property Finder RE">
 
   <!-- Early Theme Boot (Prevents FOUC) -->
   <script>
     !function(){var t=localStorage.getItem("pfre_theme")||(window.matchMedia("(prefers-color-scheme:dark)").matches?"dark":"light");document.documentElement.setAttribute("data-theme",t);document.documentElement.classList.add("theme-"+t)}();
   </script>
 
-  <!-- Web Fonts -->
+  <!-- Typography & Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;0,900;1,700&family=DM+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,600;0,700;0,900;1,600;1,700&family=DM+Sans:ital,wght@0,400;0,500;0,600;0,700;1,400&display=swap" rel="stylesheet">
 
-  <!-- Stylesheets (Root-Relative) -->
+  <!-- Root-Relative Stylesheets -->
   <link rel="stylesheet" href="/css/styles.css">
   <link rel="stylesheet" href="/css/widgets.css">
   <link rel="stylesheet" href="/css/mobile.css">
@@ -44,287 +67,538 @@
   <link rel="stylesheet" href="/css/utils.css">
 
   <style>
-    .error-wrapper {
-      min-height: calc(100vh - 180px);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      padding: 60px 5% 80px;
+    .projects-container {
+      max-width: 1320px;
+      margin: 0 auto;
+      padding: 36px 5% 90px;
     }
 
-    .error-card {
+    /* Filter Panel */
+    .filter-panel {
       background: var(--card, #FFFFFF);
-      border-radius: var(--radius-xl, 24px);
-      padding: 56px 48px;
-      max-width: 680px;
-      width: 100%;
-      text-align: center;
-      box-shadow: var(--shadow-lg, 0 20px 60px rgba(0, 0, 0, 0.08));
-      border: 1.5px solid var(--border);
-      transition: background 0.2s, border-color 0.2s;
-    }
-
-    .error-num {
-      font-family: 'Playfair Display', serif;
-      font-size: clamp(80px, 14vw, 120px);
-      font-weight: 900;
-      line-height: 1;
-      color: var(--blue);
-      opacity: 0.15;
-      position: relative;
-      z-index: 0;
-      user-select: none;
-    }
-
-    .error-icon {
-      font-size: 58px;
-      margin-top: -50px;
-      position: relative;
-      z-index: 1;
-      display: block;
-    }
-
-    .error-card h1 {
-      font-family: 'Playfair Display', serif;
-      font-size: clamp(26px, 4vw, 34px);
-      font-weight: 900;
-      margin: 16px 0 10px;
-      color: var(--text);
-    }
-
-    .error-card h1 em {
-      font-style: italic;
-      color: var(--blue);
-    }
-
-    .subtitle {
-      font-size: 15px;
-      color: var(--text-muted);
-      line-height: 1.7;
-      margin-bottom: 28px;
-      max-width: 500px;
-      margin-inline: auto;
-    }
-
-    /* Search Box */
-    .search-wrap {
-      display: flex;
-      margin-bottom: 30px;
-      border: 2px solid var(--border);
-      border-radius: 12px;
-      overflow: hidden;
-      background: var(--card, #FFFFFF);
-      transition: border-color 0.2s;
-    }
-
-    .search-wrap:focus-within {
-      border-color: var(--blue);
-    }
-
-    .search-wrap input {
-      flex: 1;
-      padding: 14px 18px;
-      border: none;
-      outline: none;
-      font-size: 14.5px;
-      font-family: inherit;
-      color: var(--text);
-      background: transparent;
-    }
-
-    .search-wrap button {
-      background: var(--blue);
-      color: #FFFFFF;
-      border: none;
-      padding: 14px 24px;
-      font-size: 14.5px;
-      font-weight: 600;
-      cursor: pointer;
-      transition: background 0.2s;
-      font-family: inherit;
-      white-space: nowrap;
-    }
-
-    .search-wrap button:hover {
-      background: var(--blue-dark);
-    }
-
-    /* Quick Links Grid */
-    .quick-title {
-      font-size: 11.5px;
-      font-weight: 700;
-      letter-spacing: 1.5px;
-      text-transform: uppercase;
-      color: var(--text-muted);
-      margin-bottom: 14px;
-    }
-
-    .quick-grid {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 10px;
-      margin-bottom: 28px;
-    }
-
-    .quick-link {
+      border: 1.5px solid var(--border, #E2E8F0);
+      border-radius: var(--radius-xl, 20px);
+      padding: 24px;
+      margin-bottom: 40px;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.04);
       display: flex;
       flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      padding: 12px 8px;
-      background: var(--bg-secondary);
-      border: 1px solid var(--border);
-      border-radius: 12px;
-      text-decoration: none;
-      font-size: 13px;
-      font-weight: 600;
-      color: var(--text);
-      transition: all 0.2s;
+      gap: 20px;
     }
 
-    .quick-link:hover {
-      border-color: var(--blue);
-      color: var(--blue);
-      transform: translateY(-2px);
-    }
-
-    .quick-link .ql-icon {
-      font-size: 20px;
-      margin-bottom: 4px;
-    }
-
-    /* Action Buttons */
-    .btn-group {
+    .filter-pills-row {
       display: flex;
-      justify-content: center;
-      gap: 12px;
+      align-items: center;
+      gap: 10px;
       flex-wrap: wrap;
     }
 
-    .divider {
-      height: 1px;
-      background: var(--border);
-      margin: 26px 0;
+    .status-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 8px 18px;
+      border-radius: 100px;
+      font-size: 13.5px;
+      font-weight: 600;
+      border: 1.5px solid var(--border);
+      background: var(--bg-secondary);
+      color: var(--text-muted);
+      cursor: pointer;
+      transition: all 0.25s ease;
     }
 
-    .help-box {
+    .status-pill.active,
+    .status-pill:hover {
+      border-color: var(--blue);
+      color: var(--blue);
+      background: var(--blue-light, rgba(37, 99, 235, 0.1));
+      transform: translateY(-1px);
+    }
+
+    .filter-inputs-grid {
+      display: grid;
+      grid-template-columns: 1.2fr 1fr 1fr auto;
+      gap: 14px;
+      align-items: center;
+    }
+
+    .filter-field {
+      width: 100%;
+      padding: 11px 16px;
+      border-radius: 10px;
+      border: 1.5px solid var(--border);
+      background: var(--card, #FFFFFF);
+      color: var(--text);
+      font-size: 14px;
+      outline: none;
+      font-family: inherit;
+      transition: border-color 0.2s, box-shadow 0.2s;
+    }
+
+    .filter-field:focus {
+      border-color: var(--blue);
+      box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.12);
+    }
+
+    .reset-btn {
+      padding: 11px 20px;
+      border-radius: 10px;
+      background: transparent;
+      border: 1.5px solid var(--border);
+      color: var(--text-muted);
+      font-size: 13.5px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.2s;
+      white-space: nowrap;
+    }
+
+    .reset-btn:hover {
+      border-color: var(--text);
+      color: var(--text);
+    }
+
+    /* Projects Grid & Cards */
+    .projects-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 36px;
+    }
+
+    .premium-project-card {
+      background: var(--card, #FFFFFF);
+      border: 1.5px solid var(--border);
+      border-radius: 24px;
+      overflow: hidden;
+      box-shadow: 0 12px 35px rgba(0, 0, 0, 0.05);
+      display: grid;
+      grid-template-columns: 440px 1fr;
+      transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.3s ease, border-color 0.3s ease;
+      position: relative;
+    }
+
+    .premium-project-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 20px 45px rgba(0, 0, 0, 0.1);
+      border-color: var(--blue);
+    }
+
+    .project-media-wrap {
+      position: relative;
+      background: var(--bg-secondary);
+      overflow: hidden;
+      min-height: 380px;
+    }
+
+    .project-hero-img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: center;
+      transition: transform 0.6s cubic-bezier(0.25, 1, 0.5, 1);
+    }
+
+    .premium-project-card:hover .project-hero-img {
+      transform: scale(1.05);
+    }
+
+    .project-badge-stack {
+      position: absolute;
+      top: 18px;
+      left: 18px;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      z-index: 2;
+    }
+
+    .status-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 6px 14px;
+      border-radius: 100px;
+      font-size: 11.5px;
+      font-weight: 700;
+      letter-spacing: 0.5px;
+      text-transform: uppercase;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+      backdrop-filter: blur(8px);
+    }
+
+    .badge-launch { background: #2563EB; color: #FFFFFF; }
+    .badge-uc { background: #D97706; color: #FFFFFF; }
+    .badge-ready { background: #059669; color: #FFFFFF; }
+
+    .rera-tag {
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      background: rgba(15, 23, 42, 0.85);
+      color: #93C5FD;
+      border: 1px solid rgba(255, 255, 255, 0.15);
+      padding: 4px 10px;
+      border-radius: 6px;
+      font-size: 11px;
+      font-weight: 600;
+      font-family: monospace;
+    }
+
+    .project-details-body {
+      padding: 34px 38px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+
+    .project-header-top {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      gap: 16px;
+      margin-bottom: 12px;
+    }
+
+    .project-brand-meta {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 12.5px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      color: var(--blue);
+      margin-bottom: 6px;
+    }
+
+    .project-title {
+      font-family: 'Playfair Display', serif;
+      font-size: 26px;
+      font-weight: 800;
+      color: var(--text);
+      line-height: 1.25;
+      margin-bottom: 6px;
+    }
+
+    .project-location {
       font-size: 14px;
       color: var(--text-muted);
-      line-height: 1.6;
-      margin: 0;
+      display: flex;
+      align-items: center;
+      gap: 5px;
+      margin-bottom: 16px;
     }
 
-    .office-info {
-      font-size: 12.5px;
+    .project-price-box {
+      text-align: right;
+      flex-shrink: 0;
+    }
+
+    .price-value {
+      font-family: 'Playfair Display', serif;
+      font-size: 24px;
+      font-weight: 900;
+      color: var(--blue);
+      line-height: 1;
+    }
+
+    .price-sub {
+      font-size: 12px;
       color: var(--text-muted);
-      line-height: 1.6;
-      margin-top: 16px;
-      padding-top: 16px;
-      border-top: 1px dashed var(--border);
-      text-align: left;
+      margin-top: 4px;
+      font-weight: 500;
     }
 
-    @media (max-width: 640px) {
-      .error-card {
-        padding: 40px 20px;
+    .project-summary {
+      font-size: 14px;
+      color: var(--text-muted);
+      line-height: 1.7;
+      margin-bottom: 22px;
+    }
+
+    /* Metric Grid */
+    .spec-matrix {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 12px;
+      background: var(--bg-secondary);
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      padding: 16px 18px;
+      margin-bottom: 24px;
+    }
+
+    .spec-node label {
+      display: block;
+      font-size: 10.5px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.8px;
+      color: var(--text-muted);
+      margin-bottom: 4px;
+    }
+
+    .spec-node span {
+      font-size: 13.5px;
+      font-weight: 700;
+      color: var(--text);
+    }
+
+    .amenities-pills {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-bottom: 28px;
+    }
+
+    .amenity-pill {
+      font-size: 12px;
+      font-weight: 600;
+      padding: 4px 10px;
+      border-radius: 6px;
+      background: rgba(37, 99, 235, 0.08);
+      color: var(--text);
+      border: 1px solid rgba(37, 99, 235, 0.15);
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+    }
+
+    .project-actions-row {
+      display: flex;
+      gap: 12px;
+      align-items: center;
+      flex-wrap: wrap;
+      margin-top: auto;
+      padding-top: 20px;
+      border-top: 1px solid var(--border);
+    }
+
+    .btn-brochure {
+      background: #25D366;
+      color: #FFFFFF;
+      border: none;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      font-weight: 600;
+      transition: all 0.2s;
+    }
+
+    .btn-brochure:hover {
+      background: #1da851;
+      transform: translateY(-2px);
+    }
+
+    #emptyProjectsState {
+      display: none;
+      background: var(--card);
+      border: 1.5px dashed var(--border);
+      border-radius: 20px;
+      padding: 64px 24px;
+      text-align: center;
+      margin-top: 20px;
+    }
+
+    @media (max-width: 1080px) {
+      .premium-project-card {
+        grid-template-columns: 1fr;
       }
-      .error-num {
-        font-size: 80px;
+      .project-media-wrap {
+        min-height: 280px;
       }
-      .error-icon {
-        font-size: 48px;
-        margin-top: -38px;
+      .filter-inputs-grid {
+        grid-template-columns: 1fr 1fr;
       }
-      .quick-grid {
+    }
+
+    @media (max-width: 768px) {
+      .projects-container {
+        padding: 24px 4% 60px;
+      }
+      .project-details-body {
+        padding: 24px 20px;
+      }
+      .project-header-top {
+        flex-direction: column;
+      }
+      .project-price-box {
+        text-align: left;
+        margin-bottom: 12px;
+      }
+      .spec-matrix {
         grid-template-columns: repeat(2, 1fr);
+        gap: 14px;
       }
-      .search-wrap button {
-        padding: 14px 16px;
+      .filter-inputs-grid {
+        grid-template-columns: 1fr;
       }
     }
   </style>
+
+  <!-- Schema: ItemList for Apartment Complexes -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "ItemList",
+    "name": "Featured Projects & RERA Developments in Mumbai",
+    "description": "Verified residential & commercial developments in Malad, Goregaon, Andheri, and Borivali by Property Finder Real Estate.",
+    "url": "https://www.propertyfinderrealestate.com/projects"
+  }
+  </script>
 </head>
 <body>
 
-  <!-- MASTER NAVBAR (Single Source from js/layout.js) -->
+  <!-- MASTER NAVBAR (Single Source from /js/layout.js) -->
   <site-navbar></site-navbar>
 
-  <!-- MAIN ERROR VIEW -->
-  <main class="error-wrapper" id="main-content">
-    <div class="error-card">
-      <div class="error-num" aria-hidden="true">404</div>
-      <span class="error-icon" aria-hidden="true">🔍</span>
-      <h1>Page <em>Not Found</em></h1>
-      <p class="subtitle">The property listing, project brochure, or page you are looking for has moved, expired, or is unavailable. Search our current Mumbai listings below:</p>
+  <main id="main-content">
 
-      <!-- Instant Inventory Search -->
-      <form class="search-wrap" onsubmit="event.preventDefault(); doSearch();">
-        <input type="text" id="searchInp" placeholder="Search by locality, e.g. Malad, Andheri, Goregaon…" aria-label="Search properties">
-        <button type="submit">🔍 Search</button>
-      </form>
+    <!-- PAGE HERO -->
+    <section class="page-hero">
+      <span class="section-label">Curated Developments · Mumbai Western Suburbs</span>
+      <h1>Exclusive Residential &amp; Commercial <em>Projects</em></h1>
+      <p>Handpicked architectural landmarks, gated sky-villas, and MahaRERA-certified towers verified by our advisory desk.</p>
+      <nav aria-label="Breadcrumb">
+        <div class="breadcrumb">
+          <a href="/">Home</a><span class="breadcrumb-sep" aria-hidden="true">›</span><span>Projects</span>
+        </div>
+      </nav>
+    </section>
 
-      <!-- Quick Navigation -->
-      <div class="quick-title">Explore Verified Portals</div>
-      <div class="quick-grid">
-        <a href="/" class="quick-link"><span class="ql-icon">🏠</span>Home</a>
-        <a href="/properties.html" class="quick-link"><span class="ql-icon">🏘️</span>Properties</a>
-        <a href="/projects.html" class="quick-link"><span class="ql-icon">🏗️</span>Projects</a>
-        <a href="/calculators.html" class="quick-link"><span class="ql-icon">🧮</span>Calculators</a>
-        <a href="/tds-calculators.html" class="quick-link"><span class="ql-icon">📋</span>TDS Calc</a>
-        <a href="/contact.html" class="quick-link"><span class="ql-icon">📞</span>Contact</a>
-        <a href="/about.html" class="quick-link"><span class="ql-icon">🏢</span>About Us</a>
-        <a href="/team.html" class="quick-link"><span class="ql-icon">👥</span>Our Team</a>
-        <a href="/post-property.html" class="quick-link"><span class="ql-icon">➕</span>Post Property</a>
+    <!-- MAIN PROJECTS CATALOG SECTION -->
+    <div class="projects-container">
+
+      <!-- FILTER & SEARCH PANEL -->
+      <section class="filter-panel" aria-label="Filter Projects">
+        
+        <!-- Status Tabs -->
+        <div class="filter-pills-row">
+          <span style="font-size:12.5px;font-weight:700;text-transform:uppercase;color:var(--text-muted);margin-right:6px;">Status:</span>
+          <button class="status-pill active" type="button" data-status="all">All Projects</button>
+          <button class="status-pill" type="button" data-status="launch">🚀 New Launch</button>
+          <button class="status-pill" type="button" data-status="uc">🏗️ Under Construction</button>
+          <button class="status-pill" type="button" data-status="ready">✅ Ready Possession (OC)</button>
+        </div>
+
+        <!-- Dropdowns & Search -->
+        <div class="filter-inputs-grid">
+          <div>
+            <input type="text" id="projectSearchInput" class="filter-field" placeholder="Search by Project, Builder, or Landmark…" aria-label="Search projects">
+          </div>
+          <div>
+            <select id="localityFilterSelect" class="filter-field" aria-label="Filter by locality">
+              <option value="all">All Mumbai Localities</option>
+              <option value="goregaon east">Goregaon East</option>
+              <option value="malad west">Malad West</option>
+              <option value="andheri west">Andheri West</option>
+              <option value="kandivali east">Kandivali East</option>
+              <option value="goregaon west">Goregaon West</option>
+              <option value="borivali west">Borivali West</option>
+            </select>
+          </div>
+          <div>
+            <select id="developerFilterSelect" class="filter-field" aria-label="Filter by Developer">
+              <option value="all">All Top Developers</option>
+              <option value="oberoi">Oberoi Realty</option>
+              <option value="sheth">Sheth Creators</option>
+              <option value="kalpataru">Kalpataru Group</option>
+              <option value="transcon">Transcon Developers</option>
+              <option value="rustomjee">Rustomjee Group</option>
+            </select>
+          </div>
+          <div>
+            <button type="button" id="resetProjectFilters" class="reset-btn">🔄 Clear Filters</button>
+          </div>
+        </div>
+
+      </section>
+
+      <!-- DYNAMIC PROJECTS DIRECTORY (Hydrated by js/load-projects.js) -->
+      <div class="projects-grid" id="projectsDirectory">
+        <div style="grid-column:1/-1;text-align:center;padding:60px 20px;color:var(--text-muted);">
+          ⏳ Loading curated developments...
+        </div>
       </div>
 
-      <div class="btn-group">
-        <button type="button" onclick="history.back()" class="btn btn-outline btn-sm">← Go Back</button>
-        <a href="/" class="btn btn-primary btn-sm">🏠 Return to Homepage</a>
+      <!-- ZERO RESULTS FALLBACK -->
+      <div id="emptyProjectsState">
+        <div style="font-size:48px;margin-bottom:12px;">🏗️</div>
+        <h3 style="font-family:'Playfair Display',serif;font-size:22px;margin-bottom:8px;color:var(--text);">No Matching Developments Found</h3>
+        <p style="color:var(--text-muted);font-size:14.5px;max-width:460px;margin:0 auto 20px;line-height:1.6;">
+          We couldn't locate a verified project matching your current filter criteria. Speak directly with our advisory desk for confidential and unlisted inventories.
+        </p>
+        <button class="btn btn-primary btn-sm" type="button" onclick="document.getElementById('resetProjectFilters').click();">
+          Reset Filter Selections
+        </button>
       </div>
 
-      <div class="divider" aria-hidden="true"></div>
-
-      <p class="help-box">
-        Looking for a specific property? Call our advisory desk directly: 
-        <a href="tel:+919326990050" style="color:var(--blue);font-weight:700;text-decoration:none;">+919326990050</a> or 
-        <a href="https://wa.me/919326990050?text=Hello%20Property%20Finder%20Real%20Estate,%20I%20am%20looking%20for%20a%20property%20in%20Mumbai" target="_blank" rel="noopener noreferrer" style="color:#25D366;font-weight:700;text-decoration:none;">💬 WhatsApp Us</a>
-      </p>
-
-      <div class="office-info">
-        <strong>Office Desk:</strong> Shop No. 9, Ground Floor, Building No. 3, Deepanjali Co-operative Housing Society Limited, Baf-Hira Nagar, Lower Kharodi, Jankalyan Nagar Road, Malad West, Mumbai, Maharashtra, 400095, India
-      </div>
     </div>
+
+    <!-- VALUE GUARANTEE STRIP -->
+    <section class="section section-alt" style="padding: 64px 5%;">
+      <div style="max-width: 1200px; margin: 0 auto; text-align: center;">
+        <span class="section-label">Institutional Assurance</span>
+        <h2 style="font-family:'Playfair Display',serif;font-size:32px;margin:10px 0 16px;">The Property Finder Standard for Developers</h2>
+        <p style="color:var(--text-muted);font-size:15px;max-width:640px;margin:0 auto 40px;line-height:1.7;">
+          Every project presented in our portfolio undergoes stringent title audits and regulatory validation before client presentation.
+        </p>
+
+        <div style="display:grid;grid-template-columns:repeat(auto-fit, minmax(260px, 1fr));gap:24px;text-align:left;">
+          <div style="background:var(--card);padding:28px;border-radius:16px;border:1.5px solid var(--border);">
+            <div style="font-size:32px;margin-bottom:12px;">🛡️</div>
+            <h4 style="font-size:17px;font-weight:700;margin-bottom:6px;">MahaRERA Audited</h4>
+            <p style="font-size:13.5px;color:var(--text-muted);line-height:1.6;">Quarterly compliances, escrow account disclosures, and encumbrance reports are verified directly with state registries.</p>
+          </div>
+
+          <div style="background:var(--card);padding:28px;border-radius:16px;border:1.5px solid var(--border);">
+            <div style="font-size:32px;margin-bottom:12px;">⚖️</div>
+            <h4 style="font-size:17px;font-weight:700;margin-bottom:6px;">Zero Builder Surcharges</h4>
+            <p style="font-size:13.5px;color:var(--text-muted);line-height:1.6;">Direct developer tier-1 pricing with zero unauthorized loading fees or hidden transfer lock-ins.</p>
+          </div>
+
+          <div style="background:var(--card);padding:28px;border-radius:16px;border:1.5px solid var(--border);">
+            <div style="font-size:32px;margin-bottom:12px;">📑</div>
+            <h4 style="font-size:17px;font-weight:700;margin-bottom:6px;">Turnkey Legal Support</h4>
+            <p style="font-size:13.5px;color:var(--text-muted);line-height:1.6;">From allotment letter scrutiny and agreement registration to possession snag audits, our desk oversees every transaction.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- CALL TO ACTION -->
+    <section class="cta-section">
+      <h2 class="section-title reveal">Looking for Confidential or <em>Pre-Market Projects?</em></h2>
+      <p class="reveal">Our advisory desk holds early-access allocations in Mumbai's upcoming residential and commercial towers. Get in touch today.</p>
+      <div class="cta-btns reveal">
+        <a href="tel:+919326990050" class="btn btn-white btn-lg">📞 Call +919326990050</a>
+        <a href="https://wa.me/919326990050?text=Hello%20Property%20Finder%20Real%20Estate,%20I%20am%20looking%20for%20upcoming%20luxury%20projects%20in%20Mumbai" target="_blank" rel="noopener noreferrer" class="btn-outline-white btn-lg">💬 WhatsApp Advisory</a>
+      </div>
+    </section>
+
   </main>
 
-  <!-- MASTER FOOTER & GLOBAL WIDGETS (Single Source from js/layout.js) -->
+  <!-- MASTER FOOTER & CLEAN WIDGETS (Single Source from /js/layout.js) -->
   <site-footer></site-footer>
 
-  <!-- Client Search Redirection & Service Worker Registration -->
-  <script>
-    function doSearch() {
-      const inp = document.getElementById('searchInp');
-      const q = inp ? inp.value.trim() : '';
-      if (q) {
-        window.location.href = '/properties.html?q=' + encodeURIComponent(q);
-      } else {
-        window.location.href = '/properties.html';
-      }
-    }
+  <!-- Script Architecture -->
+  <script src="/js/config.js"></script>
+  <script src="/js/layout.js"></script>
+  <script src="/js/api.js" defer></script>
+  <script src="/js/security.js" defer></script>
+  <script src="/js/tracker.js" defer></script>
+  <script src="/js/theme.js"></script>
+  <script src="/js/i18n.js"></script>
+  <script src="/js/load-projects.js" defer></script>
+  <script src="/js/widgets.js" defer></script>
 
+  <script>
     if ('serviceWorker' in navigator) {
       window.addEventListener('load', () => {
         navigator.serviceWorker.register('/sw.js').catch(() => {});
       });
     }
   </script>
-
-  <!-- Centralized Script Engines in Order of Dependency -->
-  <script src="/js/config.js"></script>
-  <script src="/js/layout.js"></script>
-  <script src="/js/security.js"></script>
-  <script src="/js/tracker.js" defer></script>
-  <script src="/js/theme.js"></script>
-  <script src="/js/i18n.js"></script>
-  <script src="/js/widgets.js"></script>
 </body>
 </html>
