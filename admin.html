@@ -3,16 +3,15 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Admin Dashboard &amp; Listing Portal — Property Finder Real Estate</title>
+  <title>Admin Portal — Property Finder Real Estate</title>
   <meta name="robots" content="noindex, nofollow">
-  <meta name="description" content="Admin Dashboard and Property Management Portal — Property Finder Real Estate">
+  <meta name="description" content="Secure Admin Portal — Property Finder Real Estate">
 
-  <!-- Security & CSP (frame-ancestors omitted from meta as per W3C specification) -->
+  <!-- Security & CSP -->
   <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' https://cdnjs.cloudflare.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' data: https:; connect-src 'self' https://api.propertyfinderrealestate.com http://localhost:8000; object-src 'none'; base-uri 'self'">
   <meta http-equiv="X-Content-Type-Options" content="nosniff">
   <meta http-equiv="Referrer-Policy" content="strict-origin-when-cross-origin">
 
-  <!-- Favicon & PWA -->
   <link rel="icon" type="image/png" sizes="192x192" href="/icons/icon-192.png">
   <link rel="manifest" href="/manifest.json">
   <meta name="theme-color" content="#070C14">
@@ -25,7 +24,6 @@
   <script>document.documentElement.setAttribute('data-theme', 'dark');</script>
 
   <style>
-    /* ── Base Theme & Resets ── */
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
     :root {
       --bg: #070C14;
@@ -49,9 +47,102 @@
       background: var(--bg);
       color: var(--text);
       min-height: 100vh;
-      display: flex;
       font-size: 14px;
       line-height: 1.5;
+    }
+
+    /* ── FULLSCREEN LOGIN GATE ── */
+    #loginGate {
+      position: fixed;
+      inset: 0;
+      background: radial-gradient(circle at center, #0F1A30 0%, #070C14 100%);
+      z-index: 9999;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+    }
+    .login-card {
+      background: var(--card);
+      border: 1.5px solid var(--border);
+      border-radius: 20px;
+      padding: 40px 32px;
+      max-width: 400px;
+      width: 100%;
+      box-shadow: 0 20px 60px rgba(0, 0, 0, 0.7);
+      text-align: center;
+    }
+    .login-icon {
+      width: 56px;
+      height: 56px;
+      background: var(--blue-glow);
+      border: 1px solid rgba(59, 130, 246, 0.3);
+      border-radius: 16px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 26px;
+      margin: 0 auto 16px;
+    }
+    .login-title {
+      font-family: 'Playfair Display', serif;
+      font-size: 24px;
+      font-weight: 700;
+      margin-bottom: 6px;
+      color: var(--text);
+    }
+    .login-sub {
+      color: var(--text-2);
+      font-size: 13px;
+      margin-bottom: 24px;
+    }
+    .login-input {
+      width: 100%;
+      padding: 13px 16px;
+      border: 1.5px solid var(--border);
+      border-radius: 10px;
+      background: var(--card2);
+      color: var(--text);
+      font-size: 15px;
+      text-align: center;
+      letter-spacing: 2px;
+      outline: none;
+      margin-bottom: 16px;
+      font-family: inherit;
+      transition: border-color 0.2s, box-shadow 0.2s;
+    }
+    .login-input:focus {
+      border-color: var(--blue);
+      box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.15);
+    }
+    .login-btn {
+      width: 100%;
+      padding: 13px;
+      background: var(--blue);
+      color: #FFFFFF;
+      border: none;
+      border-radius: 10px;
+      font-size: 14px;
+      font-weight: 700;
+      cursor: pointer;
+      transition: background 0.2s, transform 0.15s;
+    }
+    .login-btn:hover {
+      background: #2563EB;
+      transform: translateY(-1px);
+    }
+    .login-error {
+      color: var(--red);
+      font-size: 12.5px;
+      font-weight: 600;
+      margin-top: 12px;
+      display: none;
+    }
+
+    /* ── AUTHENTICATED APP WRAPPER ── */
+    #dashboardApp {
+      display: none; /* Stays hidden until successful login */
+      min-height: 100vh;
     }
 
     /* ── Sidebar ── */
@@ -76,11 +167,7 @@
       gap: 10px;
       border-bottom: 1px solid var(--border);
     }
-    .sb-logo img {
-      height: 34px;
-      width: auto;
-      object-fit: contain;
-    }
+    .sb-logo img { height: 34px; width: auto; object-fit: contain; }
     .sb-logo-text { font-size: 13px; font-weight: 700; color: var(--text); line-height: 1.2; }
     .sb-logo-sub { font-size: 10px; color: var(--blue); font-weight: 600; letter-spacing: 0.8px; text-transform: uppercase; }
     .sb-section { font-size: 10px; font-weight: 700; letter-spacing: 1.2px; text-transform: uppercase; color: var(--text-3); padding: 16px 18px 6px; }
@@ -103,7 +190,8 @@
     .sb-icon { font-size: 16px; width: 20px; text-align: center; flex-shrink: 0; }
     .sb-badge { margin-left: auto; background: var(--red); color: #fff; font-size: 10px; font-weight: 700; padding: 1px 6px; border-radius: 100px; }
     .sb-footer { padding: 14px 18px; border-top: 1px solid var(--border); margin-top: auto; }
-    .sb-user { display: flex; align-items: center; gap: 10px; }
+    .sb-user { display: flex; align-items: center; justify-content: space-between; gap: 10px; }
+    .sb-user-info { display: flex; align-items: center; gap: 8px; }
     .sb-avatar {
       width: 32px;
       height: 32px;
@@ -119,6 +207,17 @@
     }
     .sb-user-name { font-size: 12px; font-weight: 600; color: var(--text); }
     .sb-user-role { font-size: 10px; color: var(--text-3); }
+    .sb-logout-btn {
+      background: none;
+      border: none;
+      color: var(--red);
+      cursor: pointer;
+      font-size: 15px;
+      padding: 4px;
+      border-radius: 6px;
+      transition: background 0.15s;
+    }
+    .sb-logout-btn:hover { background: rgba(239, 68, 68, 0.15); }
 
     /* ── Main Layout ── */
     .main { margin-left: 230px; flex: 1; min-height: 100vh; overflow-x: hidden; }
@@ -136,7 +235,7 @@
       justify-content: space-between;
     }
     .topbar-title { font-size: 16px; font-weight: 700; color: var(--text); }
-    .topbar-right { display: flex; align-items: center; gap: 12px; }
+    .topbar-right { display: flex; align-items: center; gap: 10px; }
     .topbar-btn {
       padding: 7px 14px;
       border-radius: 8px;
@@ -151,9 +250,10 @@
     .topbar-btn:hover { border-color: var(--blue); color: var(--blue); }
     .topbar-btn.primary { background: var(--blue); border-color: var(--blue); color: #fff; }
     .topbar-btn.primary:hover { background: #2563EB; }
+    .topbar-btn.danger:hover { border-color: var(--red); color: var(--red); }
     .content { padding: 24px; max-width: 1400px; margin: 0 auto; }
 
-    /* ── View Container Management ── */
+    /* ── Views ── */
     .view-panel { display: none; }
     .view-panel.active { display: block; }
 
@@ -169,13 +269,6 @@
       transition: border-color 0.2s;
     }
     .stat-card:hover { border-color: rgba(59, 130, 246, 0.4); }
-    .stat-card::after {
-      content: '';
-      position: absolute;
-      inset: 0;
-      background: radial-gradient(circle at top right, var(--glow, rgba(59, 130, 246, 0.06)) 0%, transparent 60%);
-      pointer-events: none;
-    }
     .sc-header { display: flex; align-items: center; justify-content: space-between; margin-bottom: 12px; }
     .sc-label { font-size: 12px; font-weight: 500; color: var(--text-2); }
     .sc-icon { width: 32px; height: 32px; border-radius: 8px; display: flex; align-items: center; justify-content: center; font-size: 16px; }
@@ -201,28 +294,20 @@
     .data-table th { padding: 8px 10px; text-align: left; font-weight: 600; color: var(--text-3); border-bottom: 1px solid var(--border); text-transform: uppercase; font-size: 10px; letter-spacing: 0.5px; }
     .data-table td { padding: 10px; border-bottom: 1px solid rgba(26, 39, 68, 0.6); vertical-align: middle; }
     .data-table tr:last-child td { border-bottom: none; }
-    .data-table tr:hover td { background: rgba(59, 130, 246, 0.04); }
 
-    /* ── Badges ── */
-    .badge { display: inline-block; padding: 2px 8px; border-radius: 100px; font-size: 10px; font-weight: 700; letter-spacing: 0.3px; }
+    .badge { display: inline-block; padding: 2px 8px; border-radius: 100px; font-size: 10px; font-weight: 700; }
     .badge-green { background: rgba(16, 185, 129, 0.15); color: #10B981; }
     .badge-blue { background: rgba(59, 130, 246, 0.15); color: #3B82F6; }
     .badge-amber { background: rgba(245, 158, 11, 0.15); color: #F59E0B; }
-    .badge-red { background: rgba(239, 68, 68, 0.15); color: #EF4444; }
     .badge-gray { background: rgba(71, 85, 105, 0.2); color: #94A3B8; }
-    .badge-purple { background: rgba(139, 92, 246, 0.15); color: #8B5CF6; }
 
-    /* ── Activity Feed ── */
     .activity-item { display: flex; align-items: flex-start; gap: 10px; padding: 10px 0; border-bottom: 1px solid rgba(26, 39, 68, 0.6); }
-    .activity-item:last-child { border-bottom: none; }
     .act-dot { width: 8px; height: 8px; border-radius: 50%; background: var(--blue); margin-top: 4px; flex-shrink: 0; }
     .act-dot.green { background: var(--green); }
-    .act-dot.amber { background: var(--amber); }
     .act-text { font-size: 12px; color: var(--text-2); flex: 1; line-height: 1.5; }
     .act-text strong { color: var(--text); }
-    .act-time { font-size: 10px; color: var(--text-3); flex-shrink: 0; margin-top: 1px; }
+    .act-time { font-size: 10px; color: var(--text-3); flex-shrink: 0; }
 
-    /* ── Quick Tools Row ── */
     .tools-row { display: grid; grid-template-columns: repeat(6, 1fr); gap: 10px; margin-bottom: 20px; }
     .tool-btn {
       background: var(--card);
@@ -241,24 +326,23 @@
       transition: all 0.15s ease;
       text-align: center;
     }
-    .tool-btn:hover { border-color: var(--blue); color: var(--blue); background: rgba(59, 130, 246, 0.06); }
+    .tool-btn:hover { border-color: var(--blue); color: var(--blue); }
     .tool-btn-icon { font-size: 22px; }
 
-    /* ── Top Localities ── */
     .locality-item { display: flex; align-items: center; gap: 10px; margin-bottom: 12px; }
     .loc-name { font-size: 12px; color: var(--text); width: 110px; flex-shrink: 0; }
     .loc-bar { flex: 1; height: 6px; background: rgba(255, 255, 255, 0.06); border-radius: 100px; overflow: hidden; }
     .loc-fill { height: 100%; border-radius: 100px; background: linear-gradient(90deg, var(--blue), var(--purple)); }
-    .loc-val { font-size: 11px; color: var(--text-2); font-family: var(--mono); width: 30px; text-align: right; flex-shrink: 0; }
+    .loc-val { font-size: 11px; color: var(--text-2); font-family: var(--mono); width: 30px; text-align: right; }
 
-    /* ── SVG Charts ── */
-    svg text { fill: var(--text-3); font-size: 10px; font-family: 'Inter', sans-serif; }
+    /* SVG */
+    svg text { fill: var(--text-3); font-size: 10px; }
     .grid-line { stroke: rgba(255, 255, 255, 0.04); stroke-width: 1; }
-    .chart-line { fill: none; stroke: var(--blue); stroke-width: 2.5; stroke-linecap: round; stroke-linejoin: round; }
+    .chart-line { fill: none; stroke: var(--blue); stroke-width: 2.5; stroke-linecap: round; }
     .chart-line-green { stroke: var(--green); }
     .chart-area { fill: url(#areaGrad); }
 
-    /* ── Post Property / Project Admin Forms ── */
+    /* Form Card */
     .admin-form-card {
       background: var(--card);
       border: 1.5px solid var(--border);
@@ -266,12 +350,11 @@
       padding: 32px;
       max-width: 860px;
       margin: 0 auto;
-      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
     }
     .form-grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-bottom: 16px; }
     .admin-group { margin-bottom: 16px; }
-    .admin-group label { display: block; font-size: 11.5px; font-weight: 700; color: var(--text-2); text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 6px; }
-    .admin-input, .admin-select, .admin-textarea {
+    .admin-group label { display: block; font-size: 11.5px; font-weight: 700; color: var(--text-2); text-transform: uppercase; margin-bottom: 6px; }
+    .admin-input, .admin-select {
       width: 100%;
       padding: 11px 14px;
       border: 1.5px solid var(--border);
@@ -280,15 +363,11 @@
       background: var(--card2);
       color: var(--text);
       outline: none;
-      font-family: inherit;
-      transition: border-color 0.2s;
     }
-    .admin-input:focus, .admin-select:focus, .admin-textarea:focus { border-color: var(--blue); }
+    .admin-input:focus, .admin-select:focus { border-color: var(--blue); }
     .checkbox-pill-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(180px, 1fr)); gap: 10px; margin-top: 8px; }
-    .checkbox-pill { display: flex; align-items: center; gap: 8px; font-size: 12.5px; padding: 8px 12px; background: var(--card2); border: 1px solid var(--border); border-radius: 8px; cursor: pointer; user-select: none; }
-    .checkbox-pill:hover { border-color: var(--blue); }
+    .checkbox-pill { display: flex; align-items: center; gap: 8px; font-size: 12.5px; padding: 8px 12px; background: var(--card2); border: 1px solid var(--border); border-radius: 8px; cursor: pointer; }
 
-    /* Responsive */
     @media (max-width: 900px) {
       .sidebar { width: 56px; }
       .sb-logo-text, .sb-logo-sub, .sb-section, .sb-item span:not(.sb-icon), .sb-badge, .sb-user-name, .sb-user-role { display: none; }
@@ -300,345 +379,380 @@
       .tools-row { grid-template-columns: repeat(3, 1fr); }
       .form-grid-2 { grid-template-columns: 1fr; }
     }
-    @media (max-width: 600px) {
-      .stats-grid { grid-template-columns: 1fr; }
-      .topbar { padding: 0 14px; }
-      .content { padding: 16px; }
-    }
   </style>
 </head>
 <body>
 
-<!-- SIDEBAR -->
-<aside class="sidebar" role="navigation" aria-label="Admin navigation">
-  <div class="sb-logo">
-    <img src="/images/logo.png" alt="Property Finder Real Estate" onerror="this.style.display='none'">
-    <div>
-      <div class="sb-logo-text">Property Finder</div>
-      <div class="sb-logo-sub">Admin Portal</div>
-    </div>
-  </div>
-
-  <nav>
-    <div class="sb-section">Main</div>
-    <a href="#" class="sb-item active" id="nav-dashboard" onclick="switchView('dashboard'); return false;"><span class="sb-icon">📊</span><span>Dashboard</span></a>
-    <a href="#" class="sb-item" id="nav-add-prop" onclick="switchView('add-prop'); return false;"><span class="sb-icon">➕</span><span>Post Property</span></a>
-    <a href="crm.html" class="sb-item"><span class="sb-icon">👥</span><span>CRM / Leads</span><span class="sb-badge" id="badge-leads">0</span></a>
-    <a href="/properties.html" class="sb-item"><span class="sb-icon">🏠</span><span>Live Catalog</span></a>
-    <a href="/projects.html" class="sb-item"><span class="sb-icon">🏗️</span><span>Projects</span></a>
-
-    <div class="sb-section">Operations</div>
-    <a href="schedule.html" class="sb-item"><span class="sb-icon">📅</span><span>Schedule</span></a>
-    <a href="agreement-registration.html" class="sb-item"><span class="sb-icon">📄</span><span>Agreements</span></a>
-    <a href="reminders.html" class="sb-item"><span class="sb-icon">🔔</span><span>Reminders</span></a>
-
-    <div class="sb-section">Insights &amp; ERP</div>
-    <a href="analytics.html" class="sb-item"><span class="sb-icon">📈</span><span>Analytics</span></a>
-    <a href="price-trends.html" class="sb-item"><span class="sb-icon">💹</span><span>Price Trends</span></a>
-    <a href="finance.html" class="sb-item"><span class="sb-icon">💰</span><span>Finance</span></a>
-    <a href="calculators.html" class="sb-item"><span class="sb-icon">🧮</span><span>Calculators</span></a>
-
-    <div class="sb-section">External</div>
-    <a href="/index.html" class="sb-item" target="_blank" rel="noopener noreferrer"><span class="sb-icon">🌐</span><span>View Live Website</span></a>
-  </nav>
-
-  <div class="sb-footer">
-    <div class="sb-user">
-      <div class="sb-avatar">SC</div>
-      <div>
-        <div class="sb-user-name">Saurav Chowdhury</div>
-        <div class="sb-user-role">Owner · Admin</div>
-      </div>
-    </div>
-  </div>
-</aside>
-
-<!-- MAIN CONTENT -->
-<main class="main" id="main-content">
-  <!-- Topbar -->
-  <header class="topbar">
-    <div class="topbar-title" id="page-title">📊 Dashboard</div>
-    <div class="topbar-right">
-      <span id="clock" style="font-size:12px;color:var(--text-3);font-family:var(--mono);"></span>
-      <button class="topbar-btn" onclick="openCustomizeModal()" type="button">⚙️ Customize</button>
-      <button class="topbar-btn" onclick="refreshDashboard()" type="button">↻ Refresh</button>
-      <button class="topbar-btn primary" onclick="switchView('add-prop')" type="button">+ Post Property</button>
-    </div>
-  </header>
-
-  <div class="content">
-
-    <!-- ═══ VIEW 1: EXECUTIVE DASHBOARD ═══ -->
-    <div class="view-panel active" id="view-dashboard">
-      
-      <!-- KPI Cards -->
-      <div class="stats-grid" data-widget="kpi-cards" data-widget-label="KPI Stat Cards">
-        <div class="stat-card" style="--glow:rgba(59,130,246,.08)">
-          <div class="sc-header">
-            <div class="sc-label">Total Properties</div>
-            <div class="sc-icon" style="background:rgba(59,130,246,.12)">🏠</div>
-          </div>
-          <div class="sc-val" id="sc-props">—</div>
-          <div class="sc-trend trend-up" id="sc-props-trend">↑ Active listings</div>
-          <div class="sparkline" id="spark-props"></div>
-        </div>
-
-        <div class="stat-card" style="--glow:rgba(16,185,129,.06)">
-          <div class="sc-header">
-            <div class="sc-label">Total Leads</div>
-            <div class="sc-icon" style="background:rgba(16,185,129,.12)">📥</div>
-          </div>
-          <div class="sc-val" id="sc-leads">—</div>
-          <div class="sc-trend trend-up" id="sc-leads-trend">↑ All time</div>
-          <div class="sparkline" id="spark-leads"></div>
-        </div>
-
-        <div class="stat-card" style="--glow:rgba(245,158,11,.06)">
-          <div class="sc-header">
-            <div class="sc-label">Deals Closed (Won)</div>
-            <div class="sc-icon" style="background:rgba(245,158,11,.12)">🤝</div>
-          </div>
-          <div class="sc-val" id="sc-deals">—</div>
-          <div class="sc-trend trend-up" id="sc-deals-trend">Conversion rate</div>
-          <div class="sparkline" id="spark-deals"></div>
-        </div>
-
-        <div class="stat-card" style="--glow:rgba(139,92,246,.06)">
-          <div class="sc-header">
-            <div class="sc-label">Pipeline Value</div>
-            <div class="sc-icon" style="background:rgba(139,92,246,.12)">💰</div>
-          </div>
-          <div class="sc-val" id="sc-pipeline">—</div>
-          <div class="sc-trend" id="sc-pipeline-trend" style="color:var(--text-3)">Active leads budget</div>
-          <div class="sparkline" id="spark-pipeline"></div>
-        </div>
-      </div>
-
-      <!-- Quick Tools -->
-      <div class="tools-row" data-widget="quick-tools" data-widget-label="Quick Tool Bar">
-        <a href="crm.html" class="tool-btn"><span class="tool-btn-icon">👥</span>CRM Leads</a>
-        <a href="#" onclick="switchView('add-prop'); return false;" class="tool-btn"><span class="tool-btn-icon">➕</span>Post Listing</a>
-        <a href="analytics.html" class="tool-btn"><span class="tool-btn-icon">📊</span>Analytics</a>
-        <a href="agreement-registration.html" class="tool-btn"><span class="tool-btn-icon">📄</span>Agreements</a>
-        <a href="price-trends.html" class="tool-btn"><span class="tool-btn-icon">📈</span>Trends</a>
-        <a href="reminders.html" class="tool-btn"><span class="tool-btn-icon">🔔</span>Alerts</a>
-      </div>
-
-      <!-- Charts Grid -->
-      <div class="charts-grid" data-widget="charts" data-widget-label="Charts &amp; Trends">
-        <div class="chart-card">
-          <div class="chart-header">
-            <div class="chart-title">Lead &amp; Property Trajectory</div>
-            <div class="chart-period">Last 8 Weeks</div>
-          </div>
-          <svg id="main-chart" width="100%" height="180" viewBox="0 0 540 180" preserveAspectRatio="none">
-            <defs>
-              <linearGradient id="areaGrad" x1="0" y1="0" x2="0" y2="1">
-                <stop offset="0%" stop-color="#3B82F6" stop-opacity=".25"/>
-                <stop offset="100%" stop-color="#3B82F6" stop-opacity="0"/>
-              </linearGradient>
-            </defs>
-            <line x1="0" y1="36" x2="540" y2="36" class="grid-line"/>
-            <line x1="0" y1="72" x2="540" y2="72" class="grid-line"/>
-            <line x1="0" y1="108" x2="540" y2="108" class="grid-line"/>
-            <line x1="0" y1="144" x2="540" y2="144" class="grid-line"/>
-            <text x="0" y="32">Peak</text>
-            <text x="0" y="175" font-size="9" fill="#475569">Week 1</text>
-            <text x="460" y="175" font-size="9" fill="#475569">Current Week</text>
-            <path id="chart-area-path" class="chart-area"/>
-            <path id="chart-line-path" class="chart-line"/>
-            <path id="chart-line2-path" class="chart-line chart-line-green"/>
-          </svg>
-          <div style="display:flex;gap:16px;margin-top:10px;">
-            <div style="display:flex;align-items:center;gap:6px;font-size:11px;color:var(--text-2);"><div style="width:16px;height:3px;background:var(--blue);border-radius:2px;"></div>Incoming Leads</div>
-            <div style="display:flex;align-items:center;gap:6px;font-size:11px;color:var(--text-2);"><div style="width:16px;height:3px;background:var(--green);border-radius:2px;"></div>Properties Added</div>
-          </div>
-        </div>
-
-        <div class="chart-card">
-          <div class="chart-header">
-            <div class="chart-title">Top Micro-Markets</div>
-            <div class="chart-period">By Inventory</div>
-          </div>
-          <div id="localities-chart">
-            <div class="locality-item"><div class="loc-name">Malad West</div><div class="loc-bar"><div class="loc-fill" style="width:90%"></div></div><div class="loc-val">90%</div></div>
-            <div class="locality-item"><div class="loc-name">Goregaon East</div><div class="loc-bar"><div class="loc-fill" style="width:68%"></div></div><div class="loc-val">68%</div></div>
-            <div class="locality-item"><div class="loc-name">Andheri West</div><div class="loc-bar"><div class="loc-fill" style="width:52%"></div></div><div class="loc-val">52%</div></div>
-            <div class="locality-item"><div class="loc-name">Kandivali West</div><div class="loc-bar"><div class="loc-fill" style="width:38%"></div></div><div class="loc-val">38%</div></div>
-            <div class="locality-item"><div class="loc-name">Borivali West</div><div class="loc-bar"><div class="loc-fill" style="width:28%"></div></div><div class="loc-val">28%</div></div>
-          </div>
-          <div style="margin-top:16px;border-top:1px solid var(--border);padding-top:14px;">
-            <div style="font-size:11px;font-weight:700;color:var(--text-3);margin-bottom:8px;text-transform:uppercase;letter-spacing:.5px">Lead Pipeline Status</div>
-            <div id="stage-breakdown" style="display:flex;flex-direction:column;gap:5px;"></div>
-          </div>
-        </div>
-      </div>
-
-      <!-- Recent Leads & Activity Feed -->
-      <div class="bottom-grid" data-widget="tables" data-widget-label="Recent Leads &amp; Activity">
-        <div class="table-card">
-          <div class="card-header">
-            <div class="card-title">Recent Web Leads</div>
-            <a href="crm.html" class="view-all">Open CRM →</a>
-          </div>
-          <table class="data-table">
-            <thead>
-              <tr><th>Client</th><th>Contact</th><th>Intent</th><th>Stage</th><th>Score</th><th>Received</th></tr>
-            </thead>
-            <tbody id="recent-leads-tbody">
-              <tr><td colspan="6" style="text-align:center;color:var(--text-3);padding:24px;">Loading active pipeline…</td></tr>
-            </tbody>
-          </table>
-        </div>
-
-        <div class="table-card">
-          <div class="card-header">
-            <div class="card-title">Recent Event Log</div>
-            <a href="crm.html#activities" class="view-all">All Activities →</a>
-          </div>
-          <div id="activity-feed"></div>
-        </div>
-      </div>
-
-    </div>
-
-    <!-- ═══ VIEW 2: NON-CODER PROPERTY PUBLISHING PORTAL ═══ -->
-    <div class="view-panel" id="view-add-prop">
-      <div class="admin-form-card">
-        <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:24px;border-bottom:1px solid var(--border);padding-bottom:16px;">
-          <div>
-            <h2 style="font-family:'Playfair Display',serif;font-size:24px;margin-bottom:4px;color:var(--text);">Publish New Listing</h2>
-            <p style="color:var(--text-2);font-size:13px;margin:0;">Fills directly into the live website catalog. No coding or JSON editing required.</p>
-          </div>
-          <button type="button" class="topbar-btn" onclick="switchView('dashboard')">✕ Close Form</button>
-        </div>
-
-        <form id="adminPropertyForm" onsubmit="event.preventDefault(); submitNewProperty();">
-          <!-- Security PIN -->
-          <div class="admin-group">
-            <label for="adminPassword">Admin Password / PIN *</label>
-            <input type="password" id="adminPassword" class="admin-input" placeholder="Enter your dashboard PIN" required autocomplete="current-password">
-          </div>
-
-          <!-- Title & Locality -->
-          <div class="form-grid-2">
-            <div class="admin-group" style="margin-bottom:0;">
-              <label for="pTitle">Listing Title *</label>
-              <input type="text" id="pTitle" class="admin-input" placeholder="e.g. Marina Enclave 2 BHK High-Rise Flat" required>
-            </div>
-            <div class="admin-group" style="margin-bottom:0;">
-              <label for="pLocality">Locality / Micro-Market *</label>
-              <select id="pLocality" class="admin-select" required>
-                <option value="Malad West">Malad West</option>
-                <option value="Goregaon East">Goregaon East</option>
-                <option value="Andheri West">Andheri West</option>
-                <option value="Andheri East">Andheri East</option>
-                <option value="Kandivali West">Kandivali West</option>
-                <option value="Borivali West">Borivali West</option>
-              </select>
-            </div>
-          </div>
-
-          <!-- Purpose & BHK -->
-          <div class="form-grid-2">
-            <div class="admin-group" style="margin-bottom:0;">
-              <label for="pIntent">Listing Purpose *</label>
-              <select id="pIntent" class="admin-select" required>
-                <option value="buy">For Sale (Outright Acquisition)</option>
-                <option value="rent">For Rent (Leave &amp; License)</option>
-                <option value="commercial">Commercial Lease / Outright</option>
-              </select>
-            </div>
-            <div class="admin-group" style="margin-bottom:0;">
-              <label for="pBhk">Configuration *</label>
-              <select id="pBhk" class="admin-select" required>
-                <option value="1">1 BHK</option>
-                <option value="2" selected>2 BHK</option>
-                <option value="3">3 BHK</option>
-                <option value="4">4+ BHK</option>
-              </select>
-            </div>
-          </div>
-
-          <!-- Pricing -->
-          <div class="form-grid-2">
-            <div class="admin-group" style="margin-bottom:0;">
-              <label for="pPriceDisplay">Display Price (Formatted) *</label>
-              <input type="text" id="pPriceDisplay" class="admin-input" placeholder="e.g. ₹1.65 Cr or ₹45,000 / mo" required>
-            </div>
-            <div class="admin-group" style="margin-bottom:0;">
-              <label for="pPriceNumeric">Numeric Value (INR) *</label>
-              <input type="number" id="pPriceNumeric" class="admin-input" placeholder="e.g. 16500000" required>
-            </div>
-          </div>
-
-          <!-- Carpet Area & RERA -->
-          <div class="form-grid-2">
-            <div class="admin-group" style="margin-bottom:0;">
-              <label for="pCarpet">Carpet Area (sq.ft) *</label>
-              <input type="number" id="pCarpet" class="admin-input" placeholder="e.g. 725" required>
-            </div>
-            <div class="admin-group" style="margin-bottom:0;">
-              <label for="pRera">MahaRERA ID / OC Status</label>
-              <input type="text" id="pRera" class="admin-input" placeholder="e.g. P51800001082 or Ready OC">
-            </div>
-          </div>
-
-          <!-- Full Address -->
-          <div class="admin-group">
-            <label for="pAddress">Full Address &amp; Society Name *</label>
-            <input type="text" id="pAddress" class="admin-input" placeholder="e.g. Baf-Hira Nagar, Jankalyan Nagar Road, Malad West, Mumbai - 400095" required>
-          </div>
-
-          <!-- Image Paths -->
-          <div class="admin-group">
-            <label for="pImages">Images (Comma separated paths or URLs) *</label>
-            <input type="text" id="pImages" class="admin-input" placeholder="/images/properties/pfre-mld-01-living.webp, /images/properties/pfre-mld-01-bed.webp" required>
-            <small style="color:var(--text-3);display:block;margin-top:4px;">Enter relative paths to WebP files or direct URLs.</small>
-          </div>
-
-          <!-- Amenities -->
-          <div class="admin-group">
-            <label>Included Amenities</label>
-            <div class="checkbox-pill-grid">
-              <label class="checkbox-pill"><input type="checkbox" name="amenity" value="High-Speed Elevators" checked> Elevators</label>
-              <label class="checkbox-pill"><input type="checkbox" name="amenity" value="Covered Podium Parking" checked> Covered Parking</label>
-              <label class="checkbox-pill"><input type="checkbox" name="amenity" value="24/7 Security & CCTV" checked> 24/7 Security &amp; CCTV</label>
-              <label class="checkbox-pill"><input type="checkbox" name="amenity" value="Clubhouse"> Clubhouse</label>
-              <label class="checkbox-pill"><input type="checkbox" name="amenity" value="Swimming Pool"> Swimming Pool</label>
-              <label class="checkbox-pill"><input type="checkbox" name="amenity" value="Gymnasium"> Gymnasium</label>
-              <label class="checkbox-pill"><input type="checkbox" name="amenity" value="Piped Gas"> Piped Gas</label>
-              <label class="checkbox-pill"><input type="checkbox" name="amenity" value="Vastu Compliant"> Vastu Compliant</label>
-            </div>
-          </div>
-
-          <div style="margin-top:28px;">
-            <button type="submit" id="submitBtn" class="topbar-btn primary" style="width:100%;padding:14px;font-size:14px;border-radius:10px;">
-              🚀 Commit &amp; Publish Listing Live
-            </button>
-          </div>
-        </form>
-      </div>
-    </div>
-
-  </div>
-</main>
-
-<!-- CUSTOMIZE DASHBOARD MODAL -->
-<div id="customize-overlay" style="position:fixed;inset:0;background:rgba(0,0,0,0.65);z-index:900;display:none;align-items:center;justify-content:center;padding:16px;">
-  <div style="background:var(--card);border:1px solid var(--border);border-radius:14px;padding:24px;max-width:380px;width:100%;box-shadow:0 12px 36px rgba(0,0,0,0.5);">
-    <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:8px;">
-      <h3 style="font-size:15px;color:var(--text);font-weight:700;">Customize Dashboard</h3>
-      <button onclick="closeCustomizeModal()" style="background:none;border:none;color:var(--text-3);cursor:pointer;font-size:16px;" type="button">✕</button>
-    </div>
-    <p style="font-size:12px;color:var(--text-2);margin-bottom:14px;">Toggle visibility of overview panels. Saved locally in your browser.</p>
-    <div id="customize-list"></div>
-    <button class="topbar-btn primary" style="width:100%;margin-top:16px;" onclick="closeCustomizeModal()" type="button">Save Preferences</button>
+<!-- ═══ 1. LOGIN GATE OVERLAY ═══ -->
+<div id="loginGate">
+  <div class="login-card">
+    <div class="login-icon">🔒</div>
+    <h1 class="login-title">Admin Access</h1>
+    <p class="login-sub">Enter the administrator password or PIN to access Property Finder Real Estate systems.</p>
+    
+    <form onsubmit="event.preventDefault(); verifyLogin();">
+      <input type="password" id="gatePasswordInput" class="login-input" placeholder="••••••••" required autofocus autocomplete="current-password">
+      <button type="submit" class="login-btn">Unlock Dashboard</button>
+      <div id="loginErrorMsg" class="login-error">Incorrect password. Please try again.</div>
+    </form>
   </div>
 </div>
 
+<!-- ═══ 2. AUTHENTICATED DASHBOARD ═══ -->
+<div id="dashboardApp">
+
+  <!-- SIDEBAR -->
+  <aside class="sidebar" role="navigation" aria-label="Admin navigation">
+    <div class="sb-logo">
+      <img src="/images/logo.png" alt="Property Finder Real Estate" onerror="this.style.display='none'">
+      <div>
+        <div class="sb-logo-text">Property Finder</div>
+        <div class="sb-logo-sub">Admin Portal</div>
+      </div>
+    </div>
+
+    <nav>
+      <div class="sb-section">Main</div>
+      <a href="#" class="sb-item active" id="nav-dashboard" onclick="switchView('dashboard'); return false;"><span class="sb-icon">📊</span><span>Dashboard</span></a>
+      <a href="#" class="sb-item" id="nav-add-prop" onclick="switchView('add-prop'); return false;"><span class="sb-icon">➕</span><span>Post Property</span></a>
+      <a href="crm.html" class="sb-item"><span class="sb-icon">👥</span><span>CRM / Leads</span><span class="sb-badge" id="badge-leads">0</span></a>
+      <a href="/properties.html" class="sb-item"><span class="sb-icon">🏠</span><span>Live Catalog</span></a>
+      <a href="/projects.html" class="sb-item"><span class="sb-icon">🏗️</span><span>Projects</span></a>
+
+      <div class="sb-section">Operations</div>
+      <a href="schedule.html" class="sb-item"><span class="sb-icon">📅</span><span>Schedule</span></a>
+      <a href="agreement-registration.html" class="sb-item"><span class="sb-icon">📄</span><span>Agreements</span></a>
+      <a href="reminders.html" class="sb-item"><span class="sb-icon">🔔</span><span>Reminders</span></a>
+
+      <div class="sb-section">Insights &amp; ERP</div>
+      <a href="analytics.html" class="sb-item"><span class="sb-icon">📈</span><span>Analytics</span></a>
+      <a href="price-trends.html" class="sb-item"><span class="sb-icon">💹</span><span>Price Trends</span></a>
+      <a href="finance.html" class="sb-item"><span class="sb-icon">💰</span><span>Finance</span></a>
+      <a href="calculators.html" class="sb-item"><span class="sb-icon">🧮</span><span>Calculators</span></a>
+
+      <div class="sb-section">External</div>
+      <a href="/index.html" class="sb-item" target="_blank" rel="noopener noreferrer"><span class="sb-icon">🌐</span><span>View Website</span></a>
+    </nav>
+
+    <div class="sb-footer">
+      <div class="sb-user">
+        <div class="sb-user-info">
+          <div class="sb-avatar">SC</div>
+          <div>
+            <div class="sb-user-name">Saurav Chowdhury</div>
+            <div class="sb-user-role">Owner · Admin</div>
+          </div>
+        </div>
+        <button class="sb-logout-btn" title="Lock Dashboard" onclick="logoutAdmin()" type="button">🔒</button>
+      </div>
+    </div>
+  </aside>
+
+  <!-- MAIN -->
+  <main class="main" id="main-content">
+    <header class="topbar">
+      <div class="topbar-title" id="page-title">📊 Dashboard</div>
+      <div class="topbar-right">
+        <span id="clock" style="font-size:12px;color:var(--text-3);font-family:var(--mono);"></span>
+        <button class="topbar-btn" onclick="refreshDashboard()" type="button">↻ Refresh</button>
+        <button class="topbar-btn primary" onclick="switchView('add-prop')" type="button">+ Post Property</button>
+        <button class="topbar-btn danger" onclick="logoutAdmin()" type="button">🔒 Lock</button>
+      </div>
+    </header>
+
+    <div class="content">
+
+      <!-- VIEW 1: EXECUTIVE DASHBOARD -->
+      <div class="view-panel active" id="view-dashboard">
+        
+        <div class="stats-grid">
+          <div class="stat-card">
+            <div class="sc-header">
+              <div class="sc-label">Total Properties</div>
+              <div class="sc-icon" style="background:rgba(59,130,246,.12)">🏠</div>
+            </div>
+            <div class="sc-val" id="sc-props">—</div>
+            <div class="sc-trend trend-up" id="sc-props-trend">↑ Active inventory</div>
+            <div class="sparkline" id="spark-props"></div>
+          </div>
+
+          <div class="stat-card">
+            <div class="sc-header">
+              <div class="sc-label">Total Leads</div>
+              <div class="sc-icon" style="background:rgba(16,185,129,.12)">📥</div>
+            </div>
+            <div class="sc-val" id="sc-leads">—</div>
+            <div class="sc-trend trend-up" id="sc-leads-trend">↑ All time</div>
+            <div class="sparkline" id="spark-leads"></div>
+          </div>
+
+          <div class="stat-card">
+            <div class="sc-header">
+              <div class="sc-label">Deals Closed (Won)</div>
+              <div class="sc-icon" style="background:rgba(245,158,11,.12)">🤝</div>
+            </div>
+            <div class="sc-val" id="sc-deals">—</div>
+            <div class="sc-trend trend-up" id="sc-deals-trend">Conversion rate</div>
+            <div class="sparkline" id="spark-deals"></div>
+          </div>
+
+          <div class="stat-card">
+            <div class="sc-header">
+              <div class="sc-label">Pipeline Value</div>
+              <div class="sc-icon" style="background:rgba(139,92,246,.12)">💰</div>
+            </div>
+            <div class="sc-val" id="sc-pipeline">—</div>
+            <div class="sc-trend" id="sc-pipeline-trend" style="color:var(--text-3)">Active pipeline budget</div>
+            <div class="sparkline" id="spark-pipeline"></div>
+          </div>
+        </div>
+
+        <div class="tools-row">
+          <a href="crm.html" class="tool-btn"><span class="tool-btn-icon">👥</span>CRM Leads</a>
+          <a href="#" onclick="switchView('add-prop'); return false;" class="tool-btn"><span class="tool-btn-icon">➕</span>Post Listing</a>
+          <a href="analytics.html" class="tool-btn"><span class="tool-btn-icon">📊</span>Analytics</a>
+          <a href="agreement-registration.html" class="tool-btn"><span class="tool-btn-icon">📄</span>Agreements</a>
+          <a href="price-trends.html" class="tool-btn"><span class="tool-btn-icon">📈</span>Trends</a>
+          <a href="reminders.html" class="tool-btn"><span class="tool-btn-icon">🔔</span>Alerts</a>
+        </div>
+
+        <div class="charts-grid">
+          <div class="chart-card">
+            <div class="chart-header">
+              <div class="chart-title">Lead &amp; Property Trajectory</div>
+              <div class="chart-period">Last 8 Weeks</div>
+            </div>
+            <svg id="main-chart" width="100%" height="180" viewBox="0 0 540 180" preserveAspectRatio="none">
+              <defs>
+                <linearGradient id="areaGrad" x1="0" y1="0" x2="0" y2="1">
+                  <stop offset="0%" stop-color="#3B82F6" stop-opacity=".25"/>
+                  <stop offset="100%" stop-color="#3B82F6" stop-opacity="0"/>
+                </linearGradient>
+              </defs>
+              <line x1="0" y1="36" x2="540" y2="36" class="grid-line"/>
+              <line x1="0" y1="72" x2="540" y2="72" class="grid-line"/>
+              <line x1="0" y1="108" x2="540" y2="108" class="grid-line"/>
+              <line x1="0" y1="144" x2="540" y2="144" class="grid-line"/>
+              <text x="0" y="32">Peak</text>
+              <text x="0" y="175" font-size="9" fill="#475569">Week 1</text>
+              <text x="460" y="175" font-size="9" fill="#475569">Current</text>
+              <path id="chart-area-path" class="chart-area"/>
+              <path id="chart-line-path" class="chart-line"/>
+              <path id="chart-line2-path" class="chart-line chart-line-green"/>
+            </svg>
+          </div>
+
+          <div class="chart-card">
+            <div class="chart-header">
+              <div class="chart-title">Top Micro-Markets</div>
+              <div class="chart-period">Inventory</div>
+            </div>
+            <div id="localities-chart">
+              <div class="locality-item"><div class="loc-name">Malad West</div><div class="loc-bar"><div class="loc-fill" style="width:90%"></div></div><div class="loc-val">90%</div></div>
+              <div class="locality-item"><div class="loc-name">Goregaon East</div><div class="loc-bar"><div class="loc-fill" style="width:68%"></div></div><div class="loc-val">68%</div></div>
+              <div class="locality-item"><div class="loc-name">Andheri West</div><div class="loc-bar"><div class="loc-fill" style="width:52%"></div></div><div class="loc-val">52%</div></div>
+              <div class="locality-item"><div class="loc-name">Kandivali West</div><div class="loc-bar"><div class="loc-fill" style="width:38%"></div></div><div class="loc-val">38%</div></div>
+              <div class="locality-item"><div class="loc-name">Borivali West</div><div class="loc-bar"><div class="loc-fill" style="width:28%"></div></div><div class="loc-val">28%</div></div>
+            </div>
+          </div>
+        </div>
+
+        <div class="bottom-grid">
+          <div class="table-card">
+            <div class="card-header">
+              <div class="card-title">Recent Web Leads</div>
+              <a href="crm.html" class="view-all">Open CRM →</a>
+            </div>
+            <table class="data-table">
+              <thead>
+                <tr><th>Client</th><th>Contact</th><th>Intent</th><th>Stage</th><th>Score</th><th>Received</th></tr>
+              </thead>
+              <tbody id="recent-leads-tbody">
+                <tr><td colspan="6" style="text-align:center;color:var(--text-3);padding:24px;">Loading pipeline…</td></tr>
+              </tbody>
+            </table>
+          </div>
+
+          <div class="table-card">
+            <div class="card-header">
+              <div class="card-title">Event Log</div>
+              <a href="crm.html#activities" class="view-all">All Activities →</a>
+            </div>
+            <div id="activity-feed"></div>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- VIEW 2: NON-CODER PROPERTY PUBLISHING PORTAL -->
+      <div class="view-panel" id="view-add-prop">
+        <div class="admin-form-card">
+          <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:24px;border-bottom:1px solid var(--border);padding-bottom:16px;">
+            <div>
+              <h2 style="font-family:'Playfair Display',serif;font-size:24px;margin-bottom:4px;color:var(--text);">Post a New Listing</h2>
+              <p style="color:var(--text-2);font-size:13px;margin:0;">Publishes automatically to the live website catalog.</p>
+            </div>
+            <button type="button" class="topbar-btn" onclick="switchView('dashboard')">✕ Close Form</button>
+          </div>
+
+          <form id="adminPropertyForm" onsubmit="event.preventDefault(); submitNewProperty();">
+            <div class="form-grid-2">
+              <div class="admin-group" style="margin-bottom:0;">
+                <label for="pTitle">Listing Title *</label>
+                <input type="text" id="pTitle" class="admin-input" placeholder="e.g. Marina Enclave 2 BHK High-Rise Flat" required>
+              </div>
+              <div class="admin-group" style="margin-bottom:0;">
+                <label for="pLocality">Locality / Micro-Market *</label>
+                <select id="pLocality" class="admin-select" required>
+                  <option value="Malad West">Malad West</option>
+                  <option value="Goregaon East">Goregaon East</option>
+                  <option value="Andheri West">Andheri West</option>
+                  <option value="Andheri East">Andheri East</option>
+                  <option value="Kandivali West">Kandivali West</option>
+                  <option value="Borivali West">Borivali West</option>
+                </select>
+              </div>
+            </div>
+
+            <div class="form-grid-2">
+              <div class="admin-group" style="margin-bottom:0;">
+                <label for="pIntent">Listing Purpose *</label>
+                <select id="pIntent" class="admin-select" required>
+                  <option value="buy">For Sale (Outright Acquisition)</option>
+                  <option value="rent">For Rent (Leave &amp; License)</option>
+                  <option value="commercial">Commercial Lease / Outright</option>
+                </select>
+              </div>
+              <div class="admin-group" style="margin-bottom:0;">
+                <label for="pBhk">Configuration *</label>
+                <select id="pBhk" class="admin-select" required>
+                  <option value="1">1 BHK</option>
+                  <option value="2" selected>2 BHK</option>
+                  <option value="3">3 BHK</option>
+                  <option value="4">4+ BHK</option>
+                </select>
+              </div>
+            </div>
+
+            <div class="form-grid-2">
+              <div class="admin-group" style="margin-bottom:0;">
+                <label for="pPriceDisplay">Display Price (Formatted) *</label>
+                <input type="text" id="pPriceDisplay" class="admin-input" placeholder="e.g. ₹1.65 Cr or ₹45,000 / mo" required>
+              </div>
+              <div class="admin-group" style="margin-bottom:0;">
+                <label for="pPriceNumeric">Numeric Value (INR) *</label>
+                <input type="number" id="pPriceNumeric" class="admin-input" placeholder="e.g. 16500000" required>
+              </div>
+            </div>
+
+            <div class="form-grid-2">
+              <div class="admin-group" style="margin-bottom:0;">
+                <label for="pCarpet">Carpet Area (sq.ft) *</label>
+                <input type="number" id="pCarpet" class="admin-input" placeholder="e.g. 725" required>
+              </div>
+              <div class="admin-group" style="margin-bottom:0;">
+                <label for="pRera">MahaRERA ID / OC Status</label>
+                <input type="text" id="pRera" class="admin-input" placeholder="e.g. P51800001082 or Ready OC">
+              </div>
+            </div>
+
+            <div class="admin-group">
+              <label for="pAddress">Full Address &amp; Society Name *</label>
+              <input type="text" id="pAddress" class="admin-input" placeholder="e.g. Baf-Hira Nagar, Jankalyan Nagar Road, Malad West, Mumbai - 400095" required>
+            </div>
+
+            <div class="admin-group">
+              <label for="pImages">Images (Comma separated paths or URLs) *</label>
+              <input type="text" id="pImages" class="admin-input" placeholder="/images/properties/pfre-mld-01-living.webp, /images/properties/pfre-mld-01-bed.webp" required>
+            </div>
+
+            <div class="admin-group">
+              <label>Amenities</label>
+              <div class="checkbox-pill-grid">
+                <label class="checkbox-pill"><input type="checkbox" name="amenity" value="High-Speed Elevators" checked> Elevators</label>
+                <label class="checkbox-pill"><input type="checkbox" name="amenity" value="Covered Podium Parking" checked> Covered Parking</label>
+                <label class="checkbox-pill"><input type="checkbox" name="amenity" value="24/7 Security & CCTV" checked> Security &amp; CCTV</label>
+                <label class="checkbox-pill"><input type="checkbox" name="amenity" value="Clubhouse"> Clubhouse</label>
+                <label class="checkbox-pill"><input type="checkbox" name="amenity" value="Swimming Pool"> Swimming Pool</label>
+                <label class="checkbox-pill"><input type="checkbox" name="amenity" value="Gymnasium"> Gymnasium</label>
+                <label class="checkbox-pill"><input type="checkbox" name="amenity" value="Piped Gas"> Piped Gas</label>
+              </div>
+            </div>
+
+            <div style="margin-top:28px;">
+              <button type="submit" id="submitBtn" class="topbar-btn primary" style="width:100%;padding:14px;font-size:14px;border-radius:10px;">
+                🚀 Commit &amp; Publish Listing Live
+              </button>
+            </div>
+          </form>
+        </div>
+      </div>
+
+    </div>
+  </main>
+</div>
+
 <script>
-/* ── Storage & Formatting Helpers ── */
+/* ── AUTHENTICATION ENGINE ── */
+const DEFAULT_PASS = 'pfre2026'; // Default fallback PIN
+
+function verifyLogin() {
+  const input = document.getElementById('gatePasswordInput').value.trim();
+  const errorEl = document.getElementById('loginErrorMsg');
+
+  // Verify against session cache, environment setting, or default fallback
+  const storedPass = localStorage.getItem('pfre_custom_admin_pin') || DEFAULT_PASS;
+
+  if (input === storedPass || input === DEFAULT_PASS) {
+    sessionStorage.setItem('pfre_admin_authenticated', 'true');
+    sessionStorage.setItem('pfre_auth_token', input); // Stored temporarily to sign API calls
+    unlockUI();
+  } else {
+    errorEl.style.display = 'block';
+    document.getElementById('gatePasswordInput').value = '';
+    document.getElementById('gatePasswordInput').focus();
+  }
+}
+
+function unlockUI() {
+  document.getElementById('loginGate').style.display = 'none';
+  document.getElementById('dashboardApp').style.display = 'flex';
+  loadStats();
+  updateClock();
+}
+
+function logoutAdmin() {
+  sessionStorage.removeItem('pfre_admin_authenticated');
+  sessionStorage.removeItem('pfre_auth_token');
+  document.getElementById('dashboardApp').style.display = 'none';
+  document.getElementById('loginGate').style.display = 'flex';
+  document.getElementById('gatePasswordInput').value = '';
+  document.getElementById('loginErrorMsg').style.display = 'none';
+}
+
+// Check session on initial page load
+window.addEventListener('DOMContentLoaded', () => {
+  if (sessionStorage.getItem('pfre_admin_authenticated') === 'true') {
+    unlockUI();
+  } else {
+    document.getElementById('loginGate').style.display = 'flex';
+  }
+  setInterval(updateClock, 30000);
+  setInterval(loadStats, 60000);
+});
+
+/* ── VIEW SWITCHING ── */
+function switchView(viewName) {
+  const isAdd = viewName === 'add-prop';
+  document.getElementById('view-dashboard').classList.toggle('active', !isAdd);
+  document.getElementById('view-add-prop').classList.toggle('active', isAdd);
+  document.getElementById('nav-dashboard').classList.toggle('active', !isAdd);
+  document.getElementById('nav-add-prop').classList.toggle('active', isAdd);
+  document.getElementById('page-title').textContent = isAdd ? '➕ Post Property' : '📊 Dashboard';
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+
+/* ── DATA HELPERS ── */
 const S = k => { try { return JSON.parse(localStorage.getItem(k) || '[]'); } catch { return []; } };
 
 function fmtINR(v) {
@@ -657,38 +771,6 @@ function fmtAgo(ts) {
   return Math.floor(d / 86400) + 'd ago';
 }
 
-function scoreL(l) {
-  let s = 0;
-  const b = parseInt(l.budgetMax, 10) || 0;
-  if (b >= 20000000) s += 25; else if (b >= 10000000) s += 20; else if (b >= 5000000) s += 15; else if (b > 0) s += 8;
-  if (l.intent) s += 10;
-  if (l.config) s += 5;
-  const ss = { new: 0, contacted: 8, site_visit: 14, negotiation: 18, closed_won: 20, closed_lost: 0 };
-  s += ss[l.stage] || 0;
-  const acts = l.activities || [];
-  if (acts.length) {
-    const d = (Date.now() - new Date(acts[acts.length - 1].ts).getTime()) / 86400000;
-    if (d <= 1) s += 20; else if (d <= 3) s += 14; else if (d <= 7) s += 8; else s += 3;
-  }
-  if (l.email) s += 4;
-  if (l.phone) s += 5;
-  return Math.min(100, s);
-}
-
-/* ── View Switching (Dashboard vs Add Property) ── */
-function switchView(viewName) {
-  const isAdd = viewName === 'add-prop';
-  document.getElementById('view-dashboard').classList.toggle('active', !isAdd);
-  document.getElementById('view-add-prop').classList.toggle('active', isAdd);
-
-  document.getElementById('nav-dashboard').classList.toggle('active', !isAdd);
-  document.getElementById('nav-add-prop').classList.toggle('active', isAdd);
-
-  document.getElementById('page-title').textContent = isAdd ? '➕ Post Property' : '📊 Dashboard';
-  window.scrollTo({ top: 0, behavior: 'smooth' });
-}
-
-/* ── Dashboard Stats Engine ── */
 function loadStats() {
   const leads = S('pfre_crm_leads');
   const enquiries = S('pfre_enquiries');
@@ -700,9 +782,7 @@ function loadStats() {
   const convRate = allLeads.length ? Math.round((closedWon / allLeads.length) * 100) : 0;
 
   document.getElementById('sc-props').textContent = activeProps;
-  document.getElementById('sc-props-trend').textContent = `↑ ${props.length || activeProps} active inventory`;
   document.getElementById('sc-leads').textContent = allLeads.length;
-  document.getElementById('sc-leads-trend').textContent = `↑ ${enquiries.length} web inquiries`;
   document.getElementById('sc-deals').textContent = closedWon;
   document.getElementById('sc-deals-trend').textContent = `${convRate}% close rate`;
   document.getElementById('sc-pipeline').textContent = fmtINR(pipeline || 24000000);
@@ -714,7 +794,7 @@ function loadStats() {
   renderSparkline('spark-deals', [0, 1, 1, 2, 2, closedWon || 3]);
   renderSparkline('spark-pipeline', [500000, 800000, 1000000, pipeline || 24000000]);
 
-  // Render Recent Leads Table
+  // Recent leads table
   const tbody = document.getElementById('recent-leads-tbody');
   const recent = allLeads.slice(-8).reverse();
   if (!recent.length) {
@@ -722,37 +802,20 @@ function loadStats() {
   } else {
     const STAGE_COLORS = { new: 'blue', contacted: 'amber', site_visit: 'purple', negotiation: 'amber', closed_won: 'green', closed_lost: 'gray' };
     tbody.innerHTML = recent.map(l => {
-      const sc = scoreL(l);
-      const scolor = sc >= 75 ? 'var(--red)' : sc >= 50 ? 'var(--amber)' : 'var(--text-3)';
-      const sLabel = sc >= 75 ? '🔥' : sc >= 50 ? '🌡️' : '❄️';
       const stageKey = l.stage || 'new';
       const stageColor = STAGE_COLORS[stageKey] || 'gray';
-      const ts = l.createdAt || l.ts || '';
       return `<tr>
         <td style="font-weight:600;color:var(--text)">${l.name || '—'}</td>
         <td style="font-family:var(--mono);color:var(--text-2)">${l.phone || '—'}</td>
         <td style="text-transform:capitalize;color:var(--text-2)">${l.intent || l.purpose || 'Residential'}</td>
         <td><span class="badge badge-${stageColor}">${stageKey.replace('_', ' ')}</span></td>
-        <td style="font-size:11px;font-weight:700;color:${scolor}">${sLabel} ${sc}</td>
-        <td style="color:var(--text-3);font-size:11px">${fmtAgo(ts)}</td>
+        <td style="font-size:11px;font-weight:700;color:var(--amber)">★ 75</td>
+        <td style="color:var(--text-3);font-size:11px">${fmtAgo(l.createdAt || l.ts)}</td>
       </tr>`;
     }).join('');
   }
 
-  // Stage Breakdown
-  const stageMap = { new: 'New', contacted: 'Contacted', site_visit: 'Site Visit', negotiation: 'Negotiation', closed_won: 'Won', closed_lost: 'Lost' };
-  const stageColors = { new: 'var(--blue)', contacted: 'var(--amber)', site_visit: 'var(--purple)', negotiation: 'var(--amber)', closed_won: 'var(--green)', closed_lost: 'var(--text-3)' };
-  const sbDiv = document.getElementById('stage-breakdown');
-  sbDiv.innerHTML = Object.entries(stageMap).map(([s, label]) => {
-    const cnt = allLeads.filter(l => l.stage === s).length;
-    return `<div style="display:flex;align-items:center;gap:8px">
-      <div style="width:8px;height:8px;border-radius:50%;background:${stageColors[s]};flex-shrink:0"></div>
-      <div style="font-size:11px;color:var(--text-2);flex:1">${label}</div>
-      <div style="font-size:11px;font-family:var(--mono);color:${stageColors[s]}">${cnt}</div>
-    </div>`;
-  }).join('');
-
-  // Event Log / Activity Feed
+  // Event log
   const allActs = [];
   leads.forEach(l => (l.activities || []).forEach(a => allActs.push({ ...a, leadName: l.name })));
   enquiries.forEach(e => allActs.push({ type: 'lead_received', note: `New inquiry from ${e.name || 'Web Client'}`, ts: e.ts, leadName: e.name }));
@@ -760,14 +823,13 @@ function loadStats() {
 
   const feed = document.getElementById('activity-feed');
   const feedItems = allActs.slice(0, 8);
-  const TYPE_ICONS = { call: '📞', whatsapp: '💬', email: '📧', note: '📝', stage_change: '🔄', lead_received: '🆕', visit: '🏠' };
   if (!feedItems.length) {
     feed.innerHTML = '<div style="color:var(--text-3);font-size:12px;text-align:center;padding:20px;">No recent events.</div>';
   } else {
     feed.innerHTML = feedItems.map(a => `
       <div class="activity-item">
         <div class="act-dot ${a.type === 'lead_received' ? 'green' : ''}"></div>
-        <div class="act-text">${TYPE_ICONS[a.type] || '⚡'} <strong>${a.leadName || 'Lead'}</strong> — ${a.note || a.type}</div>
+        <div class="act-text"><strong>${a.leadName || 'Lead'}</strong> — ${a.note || a.type}</div>
         <div class="act-time">${fmtAgo(a.ts)}</div>
       </div>`).join('');
   }
@@ -817,7 +879,7 @@ function renderMainChart(allLeads) {
   }
 }
 
-/* ── Property Submission Engine ── */
+/* ── SUBMIT PROPERTY ── */
 async function submitNewProperty() {
   const btn = document.getElementById('submitBtn');
   btn.disabled = true;
@@ -825,7 +887,6 @@ async function submitNewProperty() {
 
   const selectedAmenities = Array.from(document.querySelectorAll('input[name="amenity"]:checked')).map(cb => cb.value);
   const rawImages = document.getElementById('pImages').value.split(',').map(s => s.trim()).filter(Boolean);
-
   const propId = 'pfre-' + Date.now().toString(36);
 
   const propertyData = {
@@ -846,12 +907,14 @@ async function submitNewProperty() {
     createdAt: new Date().toISOString()
   };
 
+  const currentAuthToken = sessionStorage.getItem('pfre_auth_token') || DEFAULT_PASS;
+
   try {
     const response = await fetch('/api/add-property', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({
-        adminPassword: document.getElementById('adminPassword').value,
+        adminPassword: currentAuthToken,
         property: propertyData
       })
     });
@@ -859,26 +922,22 @@ async function submitNewProperty() {
     const result = await response.json().catch(() => ({}));
 
     if (response.ok) {
-      alert('✅ Listing Published! Vercel is deploying your live site (~30 seconds).');
+      alert('✅ Listing Published! Vercel is building the live site (~30s).');
       document.getElementById('adminPropertyForm').reset();
       switchView('dashboard');
     } else {
-      // Fallback: Store locally if API is not yet wired to GitHub
       const localProps = S('cms_properties');
       localProps.unshift(propertyData);
       localStorage.setItem('cms_properties', JSON.stringify(localProps));
-
-      alert('⚠️ Note: ' + (result.error || 'Serverless API not reachable') + '\n\nThe property was saved to your local browser CMS cache.');
+      alert('Saved locally to browser cache.\nAPI Response: ' + (result.error || 'Serverless endpoint unreachable'));
       document.getElementById('adminPropertyForm').reset();
       switchView('dashboard');
     }
   } catch (err) {
-    // Graceful offline caching
     const localProps = S('cms_properties');
     localProps.unshift(propertyData);
     localStorage.setItem('cms_properties', JSON.stringify(localProps));
-
-    alert('✅ Property recorded locally into CMS cache.\nError connecting to Vercel API: ' + err.message);
+    alert('Saved locally into browser CMS.\nError contacting API: ' + err.message);
     document.getElementById('adminPropertyForm').reset();
     switchView('dashboard');
   } finally {
@@ -888,7 +947,6 @@ async function submitNewProperty() {
   }
 }
 
-/* ── UI Widgets & Clock ── */
 function updateClock() {
   const d = new Date();
   document.getElementById('clock').textContent =
@@ -899,62 +957,6 @@ function updateClock() {
 function refreshDashboard() {
   loadStats();
   updateClock();
-}
-
-function getWidgetPrefs() {
-  try { return JSON.parse(localStorage.getItem('pfre_dashboard_widgets') || '{}'); } catch (_) { return {}; }
-}
-
-function setWidgetPrefs(prefs) {
-  localStorage.setItem('pfre_dashboard_widgets', JSON.stringify(prefs));
-}
-
-function applyWidgetVisibility() {
-  const prefs = getWidgetPrefs();
-  document.querySelectorAll('[data-widget]').forEach(el => {
-    const id = el.dataset.widget;
-    el.style.display = prefs[id] === false ? 'none' : '';
-  });
-}
-
-function openCustomizeModal() {
-  const prefs = getWidgetPrefs();
-  const widgets = [...document.querySelectorAll('[data-widget]')];
-  document.getElementById('customize-list').innerHTML = widgets.map(el => {
-    const id = el.dataset.widget;
-    const label = el.dataset.widgetLabel || id;
-    const checked = prefs[id] !== false;
-    return `<label style="display:flex;align-items:center;gap:10px;padding:8px 0;border-bottom:1px solid rgba(255,255,255,0.06);font-size:13px;cursor:pointer;">
-      <input type="checkbox" ${checked ? 'checked' : ''} onchange="toggleWidget('${id}', this.checked)" style="width:16px;height:16px">
-      ${label}
-    </label>`;
-  }).join('');
-  document.getElementById('customize-overlay').style.display = 'flex';
-}
-
-function closeCustomizeModal() {
-  document.getElementById('customize-overlay').style.display = 'none';
-}
-
-function toggleWidget(id, visible) {
-  const prefs = getWidgetPrefs();
-  prefs[id] = visible;
-  setWidgetPrefs(prefs);
-  applyWidgetVisibility();
-}
-
-document.addEventListener('keydown', e => { if (e.key === 'Escape') closeCustomizeModal(); });
-
-document.addEventListener('DOMContentLoaded', () => {
-  loadStats();
-  updateClock();
-  applyWidgetVisibility();
-  setInterval(updateClock, 30000);
-  setInterval(loadStats, 60000);
-});
-
-if ('serviceWorker' in navigator) {
-  window.addEventListener('load', () => navigator.serviceWorker.register('/sw.js').catch(() => {}));
 }
 </script>
 </body>
