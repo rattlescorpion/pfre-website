@@ -1,0 +1,63 @@
+[
+  {
+    "id": "c-mld-001",
+    "name": {
+      "prefix": "Mr.",
+      "firstName": "Rahul",
+      "middleName": "Kishore",
+      "lastName": "Sharma",
+      "suffix": "",
+      "displayName": "Rahul Sharma",
+      "nickname": "Rahul Marina"
+    },
+    "organization": {
+      "company": "Tata Consultancy Services",
+      "jobTitle": "Principal Architect",
+      "department": "Engineering"
+    },
+    "phones": [
+      { "type": "Mobile", "number": "+91 98201 12345", "isPrimary": true },
+      { "type": "WhatsApp", "number": "+91 98201 12345", "isPrimary": false },
+      { "type": "Work", "number": "+91 22 6677 8899", "isPrimary": false }
+    ],
+    "emails": [
+      { "type": "Personal", "address": "rahul.sharma@gmail.com", "isPrimary": true },
+      { "type": "Work", "address": "rahul.k@tcs.com", "isPrimary": false }
+    ],
+    "addresses": [
+      {
+        "type": "Residence",
+        "street": "Flat 1402, Tower B, Marina Enclave, Jankalyan Nagar",
+        "city": "Malad West, Mumbai",
+        "state": "Maharashtra",
+        "postalCode": "400095",
+        "country": "India"
+      }
+    ],
+    "dates": {
+      "birthday": "1984-06-15",
+      "anniversary": "2012-11-20"
+    },
+    "websites": [
+      { "type": "LinkedIn", "url": "https://linkedin.com/in/example" }
+    ],
+    "groups": ["Hot Buyer", "High Net Worth", "Malad West Resident"],
+    "relationship": {
+      "spouse": "Pooja Sharma",
+      "referredBy": "Abhishek Sable"
+    },
+    "rems": {
+      "contactType": "Buyer",
+      "budgetRange": "₹1.50 Cr – ₹2.00 Cr",
+      "preferredLocations": ["Malad West", "Goregaon West"],
+      "panNumber": "ABCPS1234F",
+      "aadhaarMasked": "XXXX-XXXX-8901",
+      "kycVerified": true,
+      "linkedLeadId": "L-2026-0042",
+      "vipStarred": true
+    },
+    "notes": "Interested strictly in high-floor 2 BHK units facing sea/open view. Token ready.",
+    "createdAt": "2026-01-15T10:30:00.000Z",
+    "updatedAt": "2026-04-12T08:15:00.000Z"
+  }
+]
