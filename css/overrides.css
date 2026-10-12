@@ -1,7 +1,6 @@
 /* =====================================================
-   PROPERTY FINDER REAL ESTATE — Global CSS Overrides v3.1
-   Consolidated & Error-Free Production Build
-   Resolves #backToTop, Floating FAB & Widget Collisions
+   PROPERTY FINDER REAL ESTATE - MUMBAI
+   css/overrides.css - Global Overrides & Collision Fixes
    ===================================================== */
 
 /* ── 1. Base Surfaces & Theme Fallbacks ── */
@@ -32,7 +31,7 @@ body, main, article, aside {
   background: var(--bg-secondary, var(--off-white, #F0F2F5));
 }
 
-/* ── 2. Breadcrumbs — Single-Line Enforced Layout ── */
+/* ── 2. Breadcrumbs - Single-Line Layout ── */
 .breadcrumb {
   display: inline-flex !important;
   align-items: center !important;
@@ -227,7 +226,7 @@ textarea:focus,
   box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.12) !important;
 }
 
-/* ── 5. Floating Contact Actions (Locked to Bottom-Right) ── */
+/* ── 5. Floating Contact Actions - Bottom-Right ── */
 .floating-actions {
   position: fixed !important;
   bottom: 24px !important;
@@ -284,7 +283,7 @@ textarea:focus,
   position: relative !important;
 }
 
-/* ── 6. Back to Top Button (Separated to Bottom-Left) ── */
+/* ── 6. Back to Top Button - Bottom-Left ── */
 #backToTop {
   position: fixed !important;
   bottom: 24px !important;
@@ -325,7 +324,7 @@ textarea:focus,
   box-shadow: 0 6px 20px rgba(37, 99, 235, 0.25) !important;
 }
 
-/* ── 7. Cookie Banner & Lightbox Modals ── */
+/* ── 7. Cookie Banner & Modals ── */
 #cookieBanner {
   position: fixed;
   bottom: 16px;
@@ -396,7 +395,6 @@ textarea:focus,
   color: var(--text, #111827) !important;
 }
 
-/* Lightbox Base */
 #lightbox {
   position: fixed !important;
   inset: 0 !important;
@@ -412,47 +410,8 @@ textarea:focus,
   display: flex !important;
 }
 
-/* ── 8. Responsive Collisions & Media Queries ── */
-@media (max-width: 768px) {
-  .page-hero {
-    padding: 56px 5% 44px;
-  }
-
-  .page-hero h1 {
-    font-size: clamp(26px, 6vw, 40px);
-  }
-
-  .navbar {
-    padding: 0 4%;
-    height: 64px;
-  }
-
-  .nav-actions {
-    gap: 8px;
-  }
-
-  .nav-phone {
-    display: none;
-  }
-
-  .nav-actions .btn.btn-sm {
-    padding: 7px 12px;
-    font-size: 12px;
-  }
-
-  .prop-card, .service-card, .blog-card {
-    margin-bottom: 0;
-  }
-
-  .stats-strip {
-    grid-template-columns: repeat(2, 1fr);
-  }
-
-  .footer-grid {
-    grid-template-columns: 1fr 1fr;
-    gap: 28px;
-  }
-
+/* ── 8. Mobile Bottom Bar Clearances ── */
+@media screen and (max-width: 768px) {
   .floating-actions {
     bottom: 18px !important;
     right: 14px !important;
@@ -473,11 +432,6 @@ textarea:focus,
     font-size: 16px !important;
   }
 
-  .nav-logo-img {
-    height: 40px;
-  }
-
-  /* Full-width mobile Cookie Banner */
   #cookieBanner {
     left: 12px;
     right: 12px;
@@ -486,7 +440,6 @@ textarea:focus,
     z-index: 1300;
   }
 
-  /* Lift BOTH floating controls cleanly above the active Cookie Banner */
   body:has(#cookieBanner.show) .floating-actions,
   body:has(.cookie-banner.show) .floating-actions {
     bottom: 165px !important;
@@ -497,7 +450,6 @@ textarea:focus,
     bottom: 165px !important;
   }
 
-  /* Lift BOTH floating controls cleanly above Sticky Property Enquiry bars */
   body:has(#stickyEnquiry.show) .floating-actions,
   body:has(#stickyEnquiry[style*="display: flex"]) .floating-actions {
     bottom: 80px !important;
@@ -509,49 +461,7 @@ textarea:focus,
   }
 }
 
-@media (max-width: 640px) {
-  .breadcrumb {
-    font-size: 12.5px;
-    gap: 6px !important;
-    overflow-x: auto;
-    -webkit-overflow-scrolling: touch;
-    scrollbar-width: none;
-    padding: 4px 8px;
-    max-width: 100vw;
-  }
-
-  .breadcrumb::-webkit-scrollbar {
-    display: none;
-  }
-}
-
-@media (max-width: 480px) {
-  .page-hero {
-    padding: 40px 4% 32px;
-  }
-
-  .page-hero h1 {
-    font-size: 24px;
-  }
-
-  .footer-grid {
-    grid-template-columns: 1fr;
-  }
-
-  .nav-actions .btn {
-    display: none;
-  }
-
-  .nav-actions .theme-toggle {
-    display: inline-flex;
-  }
-
-  .nav-logo-img {
-    height: 36px;
-  }
-}
-
-/* ── 9. Accessibility, Motion & Print ── */
+/* ── 9. A11y, Focus Rings & Print ── */
 .text-muted, .prop-meta span, .section-sub,
 .lead-phone, .source-pill {
   color: var(--text-muted, #64748B);
@@ -593,7 +503,7 @@ a:focus:not(:focus-visible) {
     background: #FFFFFF !important;
     color: #000000 !important;
   }
-  .floating-actions, #backToTop, #cookieBanner, .theme-toggle {
+  .floating-actions, #backToTop, #cookieBanner, .theme-toggle, .navbar, .mobile-menu {
     display: none !important;
   }
 }
