@@ -16,13 +16,33 @@
       "department": "Engineering"
     },
     "phones": [
-      { "type": "Mobile", "number": "+91 98201 12345", "isPrimary": true },
-      { "type": "WhatsApp", "number": "+91 98201 12345", "isPrimary": false },
-      { "type": "Work", "number": "+91 22 6677 8899", "isPrimary": false }
+      {
+        "type": "Mobile",
+        "number": "+91 98201 12345",
+        "isPrimary": true
+      },
+      {
+        "type": "WhatsApp",
+        "number": "+91 98201 12345",
+        "isPrimary": false
+      },
+      {
+        "type": "Work",
+        "number": "+91 22 6677 8899",
+        "isPrimary": false
+      }
     ],
     "emails": [
-      { "type": "Personal", "address": "rahul.sharma@gmail.com", "isPrimary": true },
-      { "type": "Work", "address": "rahul.k@tcs.com", "isPrimary": false }
+      {
+        "type": "Personal",
+        "address": "rahul.sharma@gmail.com",
+        "isPrimary": true
+      },
+      {
+        "type": "Work",
+        "address": "rahul.k@tcs.com",
+        "isPrimary": false
+      }
     ],
     "addresses": [
       {
@@ -39,9 +59,16 @@
       "anniversary": "2012-11-20"
     },
     "websites": [
-      { "type": "LinkedIn", "url": "https://linkedin.com/in/example" }
+      {
+        "type": "LinkedIn",
+        "url": "https://linkedin.com/in/rahulsharma"
+      }
     ],
-    "groups": ["Hot Buyer", "High Net Worth", "Malad West Resident"],
+    "groups": [
+      "Hot Buyer",
+      "High Net Worth",
+      "Malad West Resident"
+    ],
     "relationship": {
       "spouse": "Pooja Sharma",
       "referredBy": "Abhishek Sable"
@@ -49,15 +76,322 @@
     "rems": {
       "contactType": "Buyer",
       "budgetRange": "₹1.50 Cr – ₹2.00 Cr",
-      "preferredLocations": ["Malad West", "Goregaon West"],
+      "preferredLocations": [
+        "Malad West",
+        "Goregaon West"
+      ],
       "panNumber": "ABCPS1234F",
       "aadhaarMasked": "XXXX-XXXX-8901",
       "kycVerified": true,
       "linkedLeadId": "L-2026-0042",
       "vipStarred": true
     },
-    "notes": "Interested strictly in high-floor 2 BHK units facing sea/open view. Token ready.",
+    "notes": "Interested in high-floor 2 BHK units facing open view. Ready token payment.",
     "createdAt": "2026-01-15T10:30:00.000Z",
     "updatedAt": "2026-04-12T08:15:00.000Z"
+  },
+  {
+    "id": "c-mld-002",
+    "name": {
+      "prefix": "Mr.",
+      "firstName": "Amit",
+      "middleName": "Ramesh",
+      "lastName": "Patil",
+      "suffix": "",
+      "displayName": "Amit Patil",
+      "nickname": "Amit Auris Landlord"
+    },
+    "organization": {
+      "company": "Patil Logistics and Warehousing",
+      "jobTitle": "Managing Director",
+      "department": "Management"
+    },
+    "phones": [
+      {
+        "type": "Mobile",
+        "number": "+91 98202 54321",
+        "isPrimary": true
+      },
+      {
+        "type": "WhatsApp",
+        "number": "+91 98202 54321",
+        "isPrimary": false
+      }
+    ],
+    "emails": [
+      {
+        "type": "Personal",
+        "address": "amit.patil@rediffmail.com",
+        "isPrimary": true
+      }
+    ],
+    "addresses": [
+      {
+        "type": "Property",
+        "street": "Flat 2204, Auris Serenity, New Link Road",
+        "city": "Malad West, Mumbai",
+        "state": "Maharashtra",
+        "postalCode": "400064",
+        "country": "India"
+      }
+    ],
+    "dates": {
+      "birthday": "1978-03-22",
+      "anniversary": "2004-12-10"
+    },
+    "websites": [],
+    "groups": [
+      "Landlord",
+      "High Ticket Owner"
+    ],
+    "relationship": {
+      "spouse": "Sneha Patil",
+      "referredBy": "Saurav Chowdhury"
+    },
+    "rems": {
+      "contactType": "Landlord",
+      "budgetRange": "₹75,000 / mo",
+      "preferredLocations": [
+        "Malad West"
+      ],
+      "panNumber": "AABCP5678K",
+      "aadhaarMasked": "XXXX-XXXX-4312",
+      "kycVerified": true,
+      "linkedLeadId": "L-2026-0088",
+      "vipStarred": true
+    },
+    "notes": "Furnished 3 BHK ready for leave and license agreement. Prefers corporate lease only.",
+    "createdAt": "2026-02-10T11:00:00.000Z",
+    "updatedAt": "2026-04-14T09:30:00.000Z"
+  },
+  {
+    "id": "c-gor-003",
+    "name": {
+      "prefix": "Ms.",
+      "firstName": "Priya",
+      "middleName": "",
+      "lastName": "Desai",
+      "suffix": "",
+      "displayName": "Priya Desai",
+      "nickname": "Priya Oberoi"
+    },
+    "organization": {
+      "company": "Morgan Stanley",
+      "jobTitle": "Vice President",
+      "department": "Equities"
+    },
+    "phones": [
+      {
+        "type": "Mobile",
+        "number": "+91 98199 87654",
+        "isPrimary": true
+      },
+      {
+        "type": "WhatsApp",
+        "number": "+91 98199 87654",
+        "isPrimary": false
+      }
+    ],
+    "emails": [
+      {
+        "type": "Work",
+        "address": "priya.desai@morganstanley.com",
+        "isPrimary": true
+      }
+    ],
+    "addresses": [
+      {
+        "type": "Residence",
+        "street": "Tower 3, Oberoi Woods, Mohan Gokhale Road",
+        "city": "Goregaon East, Mumbai",
+        "state": "Maharashtra",
+        "postalCode": "400063",
+        "country": "India"
+      }
+    ],
+    "dates": {
+      "birthday": "1989-08-14",
+      "anniversary": ""
+    },
+    "websites": [],
+    "groups": [
+      "Investor",
+      "Goregaon East"
+    ],
+    "relationship": {
+      "spouse": "",
+      "referredBy": "Direct Website Form"
+    },
+    "rems": {
+      "contactType": "Investor",
+      "budgetRange": "₹2.50 Cr – ₹3.20 Cr",
+      "preferredLocations": [
+        "Goregaon East",
+        "Malad East"
+      ],
+      "panNumber": "AKLPD4321M",
+      "aadhaarMasked": "XXXX-XXXX-6543",
+      "kycVerified": true,
+      "linkedLeadId": "L-2026-0105",
+      "vipStarred": false
+    },
+    "notes": "Looking for pre-launch investor tickets with rental yield focus.",
+    "createdAt": "2026-03-01T14:20:00.000Z",
+    "updatedAt": "2026-04-10T12:00:00.000Z"
+  },
+  {
+    "id": "c-and-004",
+    "name": {
+      "prefix": "Mr.",
+      "firstName": "Vikram",
+      "middleName": "Anand",
+      "lastName": "Mehta",
+      "suffix": "",
+      "displayName": "Vikram Mehta",
+      "nickname": "Vikram Channel Partner"
+    },
+    "organization": {
+      "company": "Mehta Realtors and Associates",
+      "jobTitle": "Principal Broker",
+      "department": "Commercial Sales"
+    },
+    "phones": [
+      {
+        "type": "Mobile",
+        "number": "+91 98205 99887",
+        "isPrimary": true
+      },
+      {
+        "type": "WhatsApp",
+        "number": "+91 98205 99887",
+        "isPrimary": false
+      }
+    ],
+    "emails": [
+      {
+        "type": "Work",
+        "address": "vikram@mehtarealtors.in",
+        "isPrimary": true
+      }
+    ],
+    "addresses": [
+      {
+        "type": "Office",
+        "street": "Office 408, Morya Classic, Off New Link Road",
+        "city": "Andheri West, Mumbai",
+        "state": "Maharashtra",
+        "postalCode": "400053",
+        "country": "India"
+      }
+    ],
+    "dates": {
+      "birthday": "1975-11-04",
+      "anniversary": "2001-02-14"
+    },
+    "websites": [
+      {
+        "type": "Website",
+        "url": "https://mehtarealtors.in"
+      }
+    ],
+    "groups": [
+      "Channel Partner",
+      "MahaRERA Registered"
+    ],
+    "relationship": {
+      "spouse": "",
+      "referredBy": "Arshiya Shaikh"
+    },
+    "rems": {
+      "contactType": "Partner",
+      "budgetRange": "₹3.00 Cr – ₹15.00 Cr",
+      "preferredLocations": [
+        "Andheri West",
+        "Oshiwara"
+      ],
+      "panNumber": "AAEFM9912P",
+      "aadhaarMasked": "XXXX-XXXX-1122",
+      "kycVerified": true,
+      "linkedLeadId": "",
+      "vipStarred": true
+    },
+    "notes": "Channel partner MahaRERA A51800000412. Co-broking outright commercial and residential mandates.",
+    "createdAt": "2026-01-20T09:15:00.000Z",
+    "updatedAt": "2026-03-30T17:45:00.000Z"
+  },
+  {
+    "id": "c-bor-005",
+    "name": {
+      "prefix": "Mr.",
+      "firstName": "Kunal",
+      "middleName": "Suresh",
+      "lastName": "Joshi",
+      "suffix": "",
+      "displayName": "Kunal Joshi",
+      "nickname": "Kunal Tenant"
+    },
+    "organization": {
+      "company": "HDFC Bank",
+      "jobTitle": "Branch Manager",
+      "department": "Retail Banking"
+    },
+    "phones": [
+      {
+        "type": "Mobile",
+        "number": "+91 97690 33445",
+        "isPrimary": true
+      },
+      {
+        "type": "WhatsApp",
+        "number": "+91 97690 33445",
+        "isPrimary": false
+      }
+    ],
+    "emails": [
+      {
+        "type": "Personal",
+        "address": "kunal.joshi82@gmail.com",
+        "isPrimary": true
+      }
+    ],
+    "addresses": [
+      {
+        "type": "Residence",
+        "street": "Flat 701, Om Sai Krupa, Shimpoli Road",
+        "city": "Borivali West, Mumbai",
+        "state": "Maharashtra",
+        "postalCode": "400092",
+        "country": "India"
+      }
+    ],
+    "dates": {
+      "birthday": "1982-05-18",
+      "anniversary": "2010-06-25"
+    },
+    "websites": [],
+    "groups": [
+      "Tenant",
+      "Borivali West"
+    ],
+    "relationship": {
+      "spouse": "Ananya Joshi",
+      "referredBy": "Direct Inquiry"
+    },
+    "rems": {
+      "contactType": "Tenant",
+      "budgetRange": "₹40,000 / mo",
+      "preferredLocations": [
+        "Borivali West",
+        "Kandivali West"
+      ],
+      "panNumber": "BPXPK7890L",
+      "aadhaarMasked": "XXXX-XXXX-9900",
+      "kycVerified": true,
+      "linkedLeadId": "L-2026-0118",
+      "vipStarred": false
+    },
+    "notes": "Looking for 2 BHK on rent near Shimpoli metro station. Family profile, clean documentation.",
+    "createdAt": "2026-03-15T15:00:00.000Z",
+    "updatedAt": "2026-04-02T10:10:00.000Z"
   }
 ]
