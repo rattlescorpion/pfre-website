@@ -1,293 +1,183 @@
-/* =====================================================
-   PROPERTY FINDER REAL ESTATE — Resilient Property Loader Engine
-   Dynamic Data Hydration, Interactive Filters & URL Parameter Sync
-   ===================================================== */
+/**
+ * js/load-properties.js
+ * Property Finder Real Estate - Mumbai
+ * Property Catalog Loader, Sorter & Card Renderer
+ */
 
-(function () {
+(function (window, document) {
   'use strict';
 
-  let propertiesData = [];
-  let activeIntent = 'all';
-  let activeBhk = 'all';
+  let propertiesCache = [];
+  let currentPage = 1;
+  const itemsPerPage = 9;
 
-  const DOM = {
-    container: document.getElementById('propertiesContainer') || document.querySelector('.prop-grid-4') || document.querySelector('.prop-grid'),
-    count: document.getElementById('resultsCount'),
-    noResults: document.getElementById('noResults'),
-    localitySelect: document.getElementById('localitySelect'),
-    sortSelect: document.getElementById('sortSelect'),
-    searchInput: document.getElementById('propertySearchInput'),
-    resetBtn: document.getElementById('resetFiltersBtn'),
-    intentPills: document.querySelectorAll('#intentFilters .filter-pill, [data-filter-intent]'),
-    bhkPills: document.querySelectorAll('#bhkFilters .filter-pill, [data-filter-bhk]')
-  };
-
-  function escapeHTML(str) {
-    if (str === null || str === undefined) return '';
-    return String(str)
-      .replace(/&/g, '&amp;')
-      .replace(/</g, '&lt;')
-      .replace(/>/g, '&gt;')
-      .replace(/"/g, '&quot;')
-      .replace(/'/g, '&#039;');
+  function formatPriceInr(val) {
+    if (!val || isNaN(val)) return 'Price on Request';
+    const num = Number(val);
+    if (num >= 10000000) {
+      const cr = num / 10000000;
+      return '₹' + (cr % 1 === 0 ? cr.toFixed(0) : cr.toFixed(2)) + ' Cr';
+    }
+    if (num >= 100000) {
+      const lk = num / 100000;
+      return '₹' + (lk % 1 === 0 ? lk.toFixed(0) : lk.toFixed(2)) + ' Lakh';
+    }
+    return '₹' + num.toLocaleString('en-IN');
   }
 
-  function renderCard(p) {
-    const title = p.title || p.name || 'Verified Mumbai Property';
-    const locality = p.locality || 'Mumbai';
-    const subLoc = p.subLocality ? `${p.subLocality}, ` : '';
-    const fullLocality = `${subLoc}${locality}`;
-    const image = (Array.isArray(p.images) && p.images[0]) || p.coverImage || '/images/og-banner.jpg';
-    
-    // Resolve transaction intent & badges
-    const isCommercial = (p.use === 'commercial') || (p.type === 'commercial') || (p.intent === 'commercial');
-    let intentLabel = 'For Sale';
-    let intentBadgeClass = 'badge-blue';
-
-    if (p.intent === 'rent' || p.transactionType === 'rent') {
-      intentLabel = 'For Rent';
-      intentBadgeClass = 'badge-green';
-    } else if (isCommercial && p.intent !== 'rent' && p.transactionType !== 'rent') {
-      intentLabel = 'Commercial Sale';
-      intentBadgeClass = 'badge-gold';
+  function getCategoryBadge(intent) {
+    const type = (intent || 'buy').toLowerCase();
+    if (type === 'rent') {
+      return '<span class="badge badge-amber">For Rent</span>';
     }
+    if (type === 'commercial') {
+      return '<span class="badge badge-purple">Commercial</span>';
+    }
+    return '<span class="badge badge-blue">For Sale</span>';
+  }
 
-    const detailUrl = `/property-detail.html?id=${encodeURIComponent(p.id)}`;
-    const bhkBadge = p.bhk ? `<span class="badge badge-gray">${escapeHTML(p.bhk)} BHK</span>` : (isCommercial ? `<span class="badge badge-gray">Commercial</span>` : '');
-    const carpetDisplay = p.carpetArea ? `${Number(p.carpetArea).toLocaleString('en-IN')} sq.ft Carpet` : 'On Request';
+  function createPropertyCard(item) {
+    const firstImg = item.images && item.images.length > 0 ? item.images[0] : '/images/og-banner.jpg';
+    const displayPrice = item.priceDisplay || formatPriceInr(item.priceNumeric);
+    const detailLink = `property-detail.html?id=${encodeURIComponent(item.id)}`;
+    const phone = window.PFRE_CONFIG ? window.PFRE_CONFIG.BRAND.phone : '+919326990050';
+    const cleanPhone = phone.replace('+', '');
+    const waText = encodeURIComponent(`Hello, I am interested in property "${item.title}" in ${item.locality}. Please provide pricing details and arrange an inspection.`);
 
     return `
-      <a href="${detailUrl}" class="prop-card-link">
-        <article class="prop-card" 
-                 data-id="${escapeHTML(p.id)}"
-                 data-intent="${escapeHTML(p.intent || '')}" 
-                 data-bhk="${escapeHTML(p.bhk || '')}" 
-                 data-proptype="${escapeHTML(p.propType || '')}" 
-                 data-use="${escapeHTML(p.use || p.type || '')}" 
-                 data-price="${escapeHTML(p.price || 0)}" 
-                 data-area="${escapeHTML(p.carpetArea || 0)}"
-                 data-locality="${escapeHTML(locality.toLowerCase())}">
-          <div class="prop-img">
-            <img src="${escapeHTML(image)}" 
-                 alt="${escapeHTML(title)} in ${escapeHTML(fullLocality)}" 
-                 class="prop-photo" 
-                 loading="lazy" 
-                 onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
-            <div class="prop-placeholder" style="display:none;width:100%;height:100%;align-items:center;justify-content:center;font-size:48px;background:var(--bg-secondary);">${isCommercial ? '🏬' : '🏠'}</div>
-            <div class="prop-badges">
-              <span class="badge ${intentBadgeClass}">${intentLabel}</span>
-              ${bhkBadge}
-            </div>
-            <button class="prop-fav" 
-                    type="button" 
-                    aria-label="Add to Favorites"
-                    onclick="event.preventDefault(); this.textContent = this.textContent === '❤️' ? '🤍' : '❤️';">🤍</button>
+      <article class="prop-card" data-id="${item.id}" data-intent="${item.intent || 'buy'}" data-locality="${item.locality || ''}" data-price="${item.priceNumeric || 0}" data-bhk="${item.bhk || 0}">
+        <div class="prop-img">
+          <img src="${firstImg}" alt="${item.title}" loading="lazy" onerror="this.onerror=null;this.src='/images/og-banner.jpg';">
+          <div class="prop-badge-stack">
+            ${getCategoryBadge(item.intent)}
+            ${item.featured ? '<span class="badge badge-green">Featured</span>' : ''}
           </div>
-          <div class="prop-body">
-            <div class="prop-price">${escapeHTML(p.priceDisplay || 'Price on Request')}</div>
-            <h3 class="prop-name">${escapeHTML(title)}</h3>
-            <div class="prop-loc">📍 ${escapeHTML(fullLocality)}</div>
-            <div class="prop-meta">
-              ${p.bhk ? `<div class="prop-meta-item">🛏 <strong>${escapeHTML(p.bhk)}</strong> Beds</div>` : ''}
-              ${p.bathrooms ? `<div class="prop-meta-item">🛁 <strong>${escapeHTML(p.bathrooms)}</strong> Baths</div>` : ''}
-              <div class="prop-meta-item">📐 <strong>${escapeHTML(carpetDisplay)}</strong></div>
+        </div>
+
+        <div class="prop-body">
+          <div class="prop-price">
+            ${displayPrice}
+            ${item.intent === 'rent' ? '<small>/ month</small>' : ''}
+          </div>
+
+          <h3 class="prop-title">
+            <a href="${detailLink}">${item.title}</a>
+          </h3>
+
+          <p class="prop-address">&#128205; ${item.address || item.locality + ', Mumbai'}</p>
+
+          <div class="prop-specs">
+            <div class="spec-item">
+              <label>Configuration</label>
+              <span>${item.bhk ? item.bhk + ' BHK' : 'Office Space'}</span>
+            </div>
+            <div class="spec-item">
+              <label>Carpet Area</label>
+              <span>${item.carpetArea ? item.carpetArea + ' sq.ft' : 'On Request'}</span>
+            </div>
+            <div class="spec-item">
+              <label>Floor</label>
+              <span>${item.floor || 'Middle'}</span>
             </div>
           </div>
-        </article>
-      </a>
+
+          <div class="prop-card-actions">
+            <a href="${detailLink}" class="btn btn-outline btn-sm flex-1 text-center">View Details</a>
+            <a href="https://wa.me/${cleanPhone}?text=${waText}" target="_blank" rel="noopener" class="btn btn-green-inline btn-sm" aria-label="WhatsApp regarding ${item.title}">&#128172;</a>
+            <a href="tel:${phone}" class="btn btn-primary btn-sm" aria-label="Call for ${item.title}">&#128222;</a>
+          </div>
+        </div>
+      </article>
     `;
   }
 
-  function applyFilters() {
-    if (!DOM.container) return;
+  function renderList(list, targetElementId) {
+    const container = document.getElementById(targetElementId);
+    if (!container) return;
 
-    const selectedLocality = (DOM.localitySelect?.value || 'all').toLowerCase();
-    const query = (DOM.searchInput?.value || '').trim().toLowerCase();
-    const sort = DOM.sortSelect?.value || 'featured';
-
-    let filtered = propertiesData.filter(p => {
-      // 1. Purpose / Intent filter
-      if (activeIntent !== 'all') {
-        const intent = String(p.intent || '').toLowerCase();
-        const transType = String(p.transactionType || '').toLowerCase();
-        const useType = String(p.use || p.type || '').toLowerCase();
-
-        if (activeIntent === 'commercial') {
-          if (!useType.includes('commercial') && intent !== 'commercial') return false;
-        } else if (activeIntent === 'buy') {
-          if (intent !== 'buy' && transType !== 'buy') return false;
-        } else if (activeIntent === 'rent') {
-          if (intent !== 'rent' && transType !== 'rent') return false;
-        }
-      }
-
-      // 2. Configuration (BHK) filter
-      if (activeBhk !== 'all') {
-        const bhkVal = Number(p.bhk);
-        if (activeBhk === '4') {
-          if (!bhkVal || bhkVal < 4) return false;
-        } else {
-          if (String(p.bhk) !== activeBhk) return false;
-        }
-      }
-
-      // 3. Locality dropdown filter
-      if (selectedLocality !== 'all') {
-        const locString = `${p.locality || ''} ${p.subLocality || ''} ${p.address || ''}`.toLowerCase();
-        if (!locString.includes(selectedLocality)) return false;
-      }
-
-      // 4. Keyword search input
-      if (query) {
-        const searchBlob = `${p.title || ''} ${p.locality || ''} ${p.subLocality || ''} ${p.address || ''} ${p.bhk || ''} ${p.reraId || ''}`.toLowerCase();
-        if (!searchBlob.includes(query)) return false;
-      }
-
-      return true;
-    });
-
-    // 5. Sorting
-    if (sort === 'price-asc') {
-      filtered.sort((a, b) => (Number(a.price) || 0) - (Number(b.price) || 0));
-    } else if (sort === 'price-desc') {
-      filtered.sort((a, b) => (Number(b.price) || 0) - (Number(a.price) || 0));
-    } else if (sort === 'area-desc') {
-      filtered.sort((a, b) => (Number(b.carpetArea) || 0) - (Number(a.carpetArea) || 0));
+    if (!list || list.length === 0) {
+      container.innerHTML = `
+        <div class="no-results" style="grid-column: 1 / -1; text-align: center; padding: 48px 16px;">
+          <p style="font-size: 18px; font-weight: 700; color: var(--text);">No properties found matching your criteria</p>
+          <p style="color: var(--text-muted); margin-top: 8px;">Try clearing filters or adjusting your budget and configuration.</p>
+        </div>
+      `;
+      return;
     }
 
-    // 6. Update results count indicator
-    if (DOM.count) {
-      DOM.count.textContent = `Showing ${filtered.length} of ${propertiesData.length} Verified Properties`;
-    }
-
-    // 7. Render cards or empty state
-    if (filtered.length === 0) {
-      DOM.container.innerHTML = '';
-      if (DOM.noResults) DOM.noResults.style.display = 'block';
-    } else {
-      if (DOM.noResults) DOM.noResults.style.display = 'none';
-      DOM.container.innerHTML = filtered.map(renderCard).join('');
-    }
-
-    // Secondary hook if external filter scripts are present
-    if (window.PFREPropertyFilter && typeof window.PFREPropertyFilter.init === 'function') {
-      try { window.PFREPropertyFilter.init(); } catch (_) {}
-    }
+    container.innerHTML = list.map(createPropertyCard).join('');
   }
 
-  function bindEvents() {
-    // Intent pill triggers
-    DOM.intentPills.forEach(pill => {
-      pill.addEventListener('click', () => {
-        DOM.intentPills.forEach(p => p.classList.remove('active'));
-        pill.classList.add('active');
-        activeIntent = pill.getAttribute('data-filter-intent') || 'all';
-        applyFilters();
-      });
-    });
-
-    // BHK pill triggers
-    DOM.bhkPills.forEach(pill => {
-      pill.addEventListener('click', () => {
-        DOM.bhkPills.forEach(p => p.classList.remove('active'));
-        pill.classList.add('active');
-        activeBhk = pill.getAttribute('data-filter-bhk') || 'all';
-        applyFilters();
-      });
-    });
-
-    DOM.localitySelect?.addEventListener('change', applyFilters);
-    DOM.sortSelect?.addEventListener('change', applyFilters);
-
-    // Debounced search input
-    let searchDebounce = null;
-    DOM.searchInput?.addEventListener('input', () => {
-      clearTimeout(searchDebounce);
-      searchDebounce = setTimeout(applyFilters, 150);
-    });
-
-    // Reset button
-    DOM.resetBtn?.addEventListener('click', () => {
-      activeIntent = 'all';
-      activeBhk = 'all';
-
-      DOM.intentPills.forEach(p => p.classList.remove('active'));
-      document.querySelector('[data-filter-intent="all"]')?.classList.add('active');
-
-      DOM.bhkPills.forEach(p => p.classList.remove('active'));
-      document.querySelector('[data-filter-bhk="all"]')?.classList.add('active');
-
-      if (DOM.localitySelect) DOM.localitySelect.value = 'all';
-      if (DOM.sortSelect) DOM.sortSelect.value = 'featured';
-      if (DOM.searchInput) DOM.searchInput.value = '';
-
-      applyFilters();
-    });
-  }
-
-  function syncURLParameters() {
-    const params = new URLSearchParams(window.location.search);
-    const intentParam = params.get('intent');
-    const bhkParam = params.get('bhk');
-    const locParam = params.get('locality');
-    const queryParam = params.get('q');
-
-    if (intentParam) {
-      const target = document.querySelector(`[data-filter-intent="${intentParam.toLowerCase()}"]`);
-      if (target) {
-        DOM.intentPills.forEach(p => p.classList.remove('active'));
-        target.classList.add('active');
-        activeIntent = intentParam.toLowerCase();
-      }
+  function sortProperties(list, sortValue) {
+    const copy = [...list];
+    if (sortValue === 'price-asc') {
+      return copy.sort((a, b) => (Number(a.priceNumeric) || 0) - (Number(b.priceNumeric) || 0));
     }
-
-    if (bhkParam) {
-      const target = document.querySelector(`[data-filter-bhk="${bhkParam}"]`);
-      if (target) {
-        DOM.bhkPills.forEach(p => p.classList.remove('active'));
-        target.classList.add('active');
-        activeBhk = bhkParam;
-      }
+    if (sortValue === 'price-desc') {
+      return copy.sort((a, b) => (Number(b.priceNumeric) || 0) - (Number(a.priceNumeric) || 0));
     }
-
-    if (locParam && DOM.localitySelect) {
-      DOM.localitySelect.value = locParam.toLowerCase();
+    if (sortValue === 'area-desc') {
+      return copy.sort((a, b) => (Number(b.carpetArea) || 0) - (Number(a.carpetArea) || 0));
     }
-
-    if (queryParam && DOM.searchInput) {
-      DOM.searchInput.value = queryParam;
-    }
+    return copy.sort((a, b) => new Date(b.createdAt || 0) - new Date(a.createdAt || 0));
   }
 
   async function init() {
-    if (!DOM.container) return;
+    const catalogContainer = document.getElementById('propertiesGrid') || document.getElementById('propertiesContainer');
+    const featuredContainer = document.getElementById('featuredGrid');
+
+    if (!catalogContainer && !featuredContainer) return;
 
     try {
-      const res = await fetch('/data/properties.json');
-      if (!res.ok) {
-        throw new Error(`HTTP error ${res.status}: Failed to fetch /data/properties.json`);
+      if (window.pfreApi && typeof window.pfreApi.getProperties === 'function') {
+        propertiesCache = await window.pfreApi.getProperties();
+      } else {
+        const response = await fetch('/data/properties.json', { cache: 'no-cache' });
+        propertiesCache = await response.json();
       }
 
-      propertiesData = await res.json();
-      bindEvents();
-      syncURLParameters();
-      applyFilters();
+      window.allPropertiesCache = propertiesCache;
+
+      if (featuredContainer) {
+        const featuredList = propertiesCache.filter(p => Boolean(p.featured)).slice(0, 6);
+        renderList(featuredList.length > 0 ? featuredList : propertiesCache.slice(0, 6), 'featuredGrid');
+      }
+
+      if (catalogContainer) {
+        const sortSelect = document.getElementById('sortBy');
+        const countDisplay = document.getElementById('totalPropertiesCount');
+
+        function updateCatalogView() {
+          const currentSort = sortSelect ? sortSelect.value : 'newest';
+          const sorted = sortProperties(window.filteredPropertiesCache || propertiesCache, currentSort);
+          renderList(sorted, catalogContainer.id);
+
+          if (countDisplay) {
+            countDisplay.textContent = sorted.length;
+          }
+        }
+
+        if (sortSelect) {
+          sortSelect.addEventListener('change', updateCatalogView);
+        }
+
+        window.addEventListener('pfre:properties-filtered', function (e) {
+          window.filteredPropertiesCache = e.detail && e.detail.filtered ? e.detail.filtered : propertiesCache;
+          updateCatalogView();
+        });
+
+        updateCatalogView();
+      }
     } catch (err) {
-      console.error('Properties load error:', err);
-      DOM.container.innerHTML = `
-        <div style="grid-column: 1/-1; text-align: center; padding: 48px 20px; background: var(--card, #FFF); border-radius: 16px; border: 1.5px solid var(--border);">
-          <div style="font-size: 40px; margin-bottom: 12px;">⚠️</div>
-          <h3 style="font-size: 18px; margin-bottom: 8px;">Unable to load property catalog</h3>
-          <p style="font-size: 13.5px; color: var(--text-muted); max-width: 480px; margin: 0 auto 16px;">
-            ${err.message.includes('Failed to fetch')
-              ? 'If testing locally, please run through a local server (e.g., Live Server or "npx serve") instead of opening file:// directly.'
-              : 'Could not fetch /data/properties.json. Verify that the file is located in your public/data/ folder.'}
-          </p>
-          <a href="tel:+919326990050" class="btn btn-primary btn-sm">📞 Call Desk (+919326990050)</a>
-        </div>
-      `;
+      console.error('Error rendering property cards:', err);
     }
   }
 
+  window.pfreLoadProperties = {
+    init: init,
+    formatPrice: formatPriceInr,
+    render: renderList
+  };
+
   document.addEventListener('DOMContentLoaded', init);
-})();
+})(window, document);
