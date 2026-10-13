@@ -6,222 +6,262 @@
 
   <!-- Homepage -->
   <url>
-    <loc>https://www.propertyfinderrealestate.com/</loc>
-    <lastmod>2026-10-06</lastmod>
+    <loc>https://propertyfinderrealestate.com/</loc>
+    <lastmod>2026-10-14</lastmod>
     <changefreq>daily</changefreq>
     <priority>1.0</priority>
   </url>
 
   <!-- Core Property Listings & Developments -->
   <url>
-    <loc>https://www.propertyfinderrealestate.com/properties</loc>
-    <lastmod>2026-10-06</lastmod>
+    <loc>https://propertyfinderrealestate.com/properties.html</loc>
+    <lastmod>2026-10-14</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.9</priority>
   </url>
+
   <url>
-    <loc>https://www.propertyfinderrealestate.com/projects</loc>
-    <lastmod>2026-10-06</lastmod>
+    <loc>https://propertyfinderrealestate.com/projects.html</loc>
+    <lastmod>2026-10-14</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.9</priority>
   </url>
+
   <url>
-    <loc>https://www.propertyfinderrealestate.com/property-detail</loc>
-    <lastmod>2026-10-06</lastmod>
+    <loc>https://propertyfinderrealestate.com/property-detail.html</loc>
+    <lastmod>2026-10-14</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.8</priority>
   </url>
+
   <url>
-    <loc>https://www.propertyfinderrealestate.com/project-detail</loc>
-    <lastmod>2026-10-06</lastmod>
+    <loc>https://propertyfinderrealestate.com/project-detail.html</loc>
+    <lastmod>2026-10-14</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.8</priority>
   </url>
+
   <url>
-    <loc>https://www.propertyfinderrealestate.com/price-trends</loc>
-    <lastmod>2026-10-06</lastmod>
+    <loc>https://propertyfinderrealestate.com/price-trends.html</loc>
+    <lastmod>2026-10-14</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
+
   <url>
-    <loc>https://www.propertyfinderrealestate.com/neighbourhoods</loc>
-    <lastmod>2026-10-06</lastmod>
+    <loc>https://propertyfinderrealestate.com/neighbourhoods.html</loc>
+    <lastmod>2026-10-14</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
+
   <url>
-    <loc>https://www.propertyfinderrealestate.com/property-alerts</loc>
-    <lastmod>2026-10-06</lastmod>
+    <loc>https://propertyfinderrealestate.com/property-alerts.html</loc>
+    <lastmod>2026-10-14</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
+
   <url>
-    <loc>https://www.propertyfinderrealestate.com/compare</loc>
-    <lastmod>2026-10-06</lastmod>
+    <loc>https://propertyfinderrealestate.com/compare.html</loc>
+    <lastmod>2026-10-14</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.6</priority>
+  </url>
+
+  <!-- High-Intent Mumbai Western Suburbs Micro-Market Landing Pages -->
+  <url>
+    <loc>https://propertyfinderrealestate.com/properties/flats-in-malad-west.html</loc>
+    <lastmod>2026-10-14</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+  </url>
+
+  <url>
+    <loc>https://propertyfinderrealestate.com/properties/rental-flats-malad.html</loc>
+    <lastmod>2026-10-14</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+  </url>
+
+  <url>
+    <loc>https://propertyfinderrealestate.com/properties/flats-in-goregaon-east.html</loc>
+    <lastmod>2026-10-14</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+  </url>
+
+  <url>
+    <loc>https://propertyfinderrealestate.com/properties/flats-in-andheri-west.html</loc>
+    <lastmod>2026-10-14</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+  </url>
+
+  <url>
+    <loc>https://propertyfinderrealestate.com/properties/flats-in-kandivali-west.html</loc>
+    <lastmod>2026-10-14</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+  </url>
+
+  <url>
+    <loc>https://propertyfinderrealestate.com/properties/flats-in-borivali-west.html</loc>
+    <lastmod>2026-10-14</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+  </url>
+
+  <url>
+    <loc>https://propertyfinderrealestate.com/properties/commercial-shops-malad.html</loc>
+    <lastmod>2026-10-14</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <url>
+    <loc>https://propertyfinderrealestate.com/properties/commercial-office-andheri.html</loc>
+    <lastmod>2026-10-14</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <!-- Real Estate Services, Legal Registration & Advisory -->
+  <url>
+    <loc>https://propertyfinderrealestate.com/services.html</loc>
+    <lastmod>2026-10-14</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.9</priority>
+  </url>
+
+  <url>
+    <loc>https://propertyfinderrealestate.com/agreement-registration.html</loc>
+    <lastmod>2026-10-14</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+  </url>
+
+  <url>
+    <loc>https://propertyfinderrealestate.com/home-loan.html</loc>
+    <lastmod>2026-10-14</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <url>
+    <loc>https://propertyfinderrealestate.com/nri.html</loc>
+    <lastmod>2026-10-14</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+
+  <url>
+    <loc>https://propertyfinderrealestate.com/insurance.html</loc>
+    <lastmod>2026-10-14</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
   </url>
 
   <!-- Lead Capture & Inquiries -->
   <url>
-    <loc>https://www.propertyfinderrealestate.com/contact</loc>
-    <lastmod>2026-10-06</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
-  </url>
-  <url>
-    <loc>https://www.propertyfinderrealestate.com/post-property</loc>
-    <lastmod>2026-10-06</lastmod>
+    <loc>https://propertyfinderrealestate.com/post-property.html</loc>
+    <lastmod>2026-10-14</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
 
-  <!-- Real Estate Services & Advisory -->
   <url>
-    <loc>https://www.propertyfinderrealestate.com/services</loc>
-    <lastmod>2026-10-06</lastmod>
+    <loc>https://propertyfinderrealestate.com/contact.html</loc>
+    <lastmod>2026-10-14</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
-  </url>
-  <url>
-    <loc>https://www.propertyfinderrealestate.com/home-loan</loc>
-    <lastmod>2026-10-06</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
-  </url>
-  <url>
-    <loc>https://www.propertyfinderrealestate.com/nri</loc>
-    <lastmod>2026-10-06</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
-  </url>
-  <url>
-    <loc>https://www.propertyfinderrealestate.com/insurance</loc>
-    <lastmod>2026-10-06</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
   </url>
 
   <!-- Financial Calculators & Utilities -->
   <url>
-    <loc>https://www.propertyfinderrealestate.com/calculators</loc>
-    <lastmod>2026-10-06</lastmod>
+    <loc>https://propertyfinderrealestate.com/calculators.html</loc>
+    <lastmod>2026-10-14</lastmod>
     <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
+    <priority>0.8</priority>
   </url>
+
   <url>
-    <loc>https://www.propertyfinderrealestate.com/tds-calculators</loc>
-    <lastmod>2026-10-06</lastmod>
+    <loc>https://propertyfinderrealestate.com/tds-calculators.html</loc>
+    <lastmod>2026-10-14</lastmod>
     <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
+    <priority>0.8</priority>
   </url>
+
   <url>
-    <loc>https://www.propertyfinderrealestate.com/converter</loc>
-    <lastmod>2026-10-06</lastmod>
+    <loc>https://propertyfinderrealestate.com/converter.html</loc>
+    <lastmod>2026-10-14</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
+
   <url>
-    <loc>https://www.propertyfinderrealestate.com/reminders</loc>
-    <lastmod>2026-10-06</lastmod>
+    <loc>https://propertyfinderrealestate.com/reminders.html</loc>
+    <lastmod>2026-10-14</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
   </url>
 
   <!-- Editorial & Knowledge Base -->
   <url>
-    <loc>https://www.propertyfinderrealestate.com/blog</loc>
-    <lastmod>2026-10-06</lastmod>
+    <loc>https://propertyfinderrealestate.com/blog.html</loc>
+    <lastmod>2026-10-14</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
+
   <url>
-    <loc>https://www.propertyfinderrealestate.com/faq</loc>
-    <lastmod>2026-10-06</lastmod>
+    <loc>https://propertyfinderrealestate.com/faq.html</loc>
+    <lastmod>2026-10-14</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
+
   <url>
-    <loc>https://www.propertyfinderrealestate.com/testimonials</loc>
-    <lastmod>2026-10-06</lastmod>
+    <loc>https://propertyfinderrealestate.com/testimonials.html</loc>
+    <lastmod>2026-10-14</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
 
-  <!-- Company Profile & Legal -->
+  <!-- Company Profile & Statutory Governance -->
   <url>
-    <loc>https://www.propertyfinderrealestate.com/about</loc>
-    <lastmod>2026-10-06</lastmod>
+    <loc>https://propertyfinderrealestate.com/about.html</loc>
+    <lastmod>2026-10-14</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
+
   <url>
-    <loc>https://www.propertyfinderrealestate.com/team</loc>
-    <lastmod>2026-10-06</lastmod>
+    <loc>https://propertyfinderrealestate.com/team.html</loc>
+    <lastmod>2026-10-14</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
+
   <url>
-    <loc>https://www.propertyfinderrealestate.com/careers</loc>
-    <lastmod>2026-10-06</lastmod>
+    <loc>https://propertyfinderrealestate.com/careers.html</loc>
+    <lastmod>2026-10-14</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
+
   <url>
-    <loc>https://www.propertyfinderrealestate.com/privacy-policy</loc>
-    <lastmod>2026-10-06</lastmod>
+    <loc>https://propertyfinderrealestate.com/privacy.html</loc>
+    <lastmod>2026-10-14</lastmod>
     <changefreq>yearly</changefreq>
-    <priority>0.3</priority>
-  </url>
-  <url>
-    <loc>https://www.propertyfinderrealestate.com/terms</loc>
-    <lastmod>2026-10-06</lastmod>
-    <changefreq>yearly</changefreq>
-    <priority>0.3</priority>
+    <priority>0.4</priority>
   </url>
 
-  <!-- High-Intent Mumbai Locality Landing Pages -->
   <url>
-    <loc>https://www.propertyfinderrealestate.com/properties/flats-in-malad-west</loc>
-    <lastmod>2026-10-06</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.9</priority>
-  </url>
-  <url>
-    <loc>https://www.propertyfinderrealestate.com/properties/flats-in-goregaon-east</loc>
-    <lastmod>2026-10-06</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.9</priority>
-  </url>
-  <url>
-    <loc>https://www.propertyfinderrealestate.com/properties/flats-in-kandivali-west</loc>
-    <lastmod>2026-10-06</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.85</priority>
-  </url>
-  <url>
-    <loc>https://www.propertyfinderrealestate.com/properties/flats-in-borivali-west</loc>
-    <lastmod>2026-10-06</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.85</priority>
-  </url>
-  <url>
-    <loc>https://www.propertyfinderrealestate.com/properties/flats-in-andheri-west</loc>
-    <lastmod>2026-10-06</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.85</priority>
-  </url>
-  <url>
-    <loc>https://www.propertyfinderrealestate.com/properties/commercial-shops-malad</loc>
-    <lastmod>2026-10-06</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.85</priority>
-  </url>
-  <url>
-    <loc>https://www.propertyfinderrealestate.com/properties/commercial-office-andheri</loc>
-    <lastmod>2026-10-06</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.85</priority>
+    <loc>https://propertyfinderrealestate.com/terms.html</loc>
+    <lastmod>2026-10-14</lastmod>
+    <changefreq>yearly</changefreq>
+    <priority>0.4</priority>
   </url>
 
 </urlset>
