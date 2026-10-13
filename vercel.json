@@ -47,6 +47,28 @@
       ]
     },
     {
+      "source": "/(sw\\.js|manifest\\.json|sitemap\\.xml|robots\\.txt)",
+      "headers": [
+        {
+          "key": "Cache-Control",
+          "value": "public, max-age=0, must-revalidate"
+        }
+      ]
+    },
+    {
+      "source": "/(admin|login|crm|contacts|inventory|schedule|analytics|finance|hrms|legal|email-templates|cms|business-blueprint|card|403|404|500)(\\.html)?",
+      "headers": [
+        {
+          "key": "X-Robots-Tag",
+          "value": "noindex, nofollow, noarchive"
+        },
+        {
+          "key": "Cache-Control",
+          "value": "private, no-cache, no-store, must-revalidate"
+        }
+      ]
+    },
+    {
       "source": "/(.*)",
       "headers": [
         {
@@ -68,6 +90,10 @@
         {
           "key": "Permissions-Policy",
           "value": "camera=(), microphone=*, geolocation=()"
+        },
+        {
+          "key": "Strict-Transport-Security",
+          "value": "max-age=63072000; includeSubDomains; preload"
         }
       ]
     }
