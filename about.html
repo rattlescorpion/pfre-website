@@ -1,402 +1,287 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" data-theme="light">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>About Us — Property Finder Real Estate | Malad West, Mumbai</title>
-  <meta name="description" content="Learn about Property Finder Real Estate, founded in August 2018 in Malad West, Mumbai. Expert property consultation, transparent deals, and verified residential and commercial listings.">
-  <meta name="author" content="Property Finder Real Estate">
-  <link rel="canonical" href="https://www.propertyfinderrealestate.com/about.html">
-
-  <!-- Security & CSP -->
-  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' https://cdnjs.cloudflare.com https://challenges.cloudflare.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' data: https:; connect-src 'self' https://api.propertyfinderrealestate.com http://localhost:8000 https://formspree.io; frame-src https://www.google.com https://challenges.cloudflare.com; form-action 'self' https://formspree.io; object-src 'none'; base-uri 'self'">
-  <meta http-equiv="X-Content-Type-Options" content="nosniff">
-  <meta http-equiv="Referrer-Policy" content="strict-origin-when-cross-origin">
+  <title>about us | Property Finder Real Estate Mumbai</title>
+  <meta name="description" content="Learn about Property Finder Real Estate, founded by Saurav Ganesh Chowdhury in 2018 in Malad West, Mumbai. MahaRERA registered property advisory and legal documentation desk.">
+  <meta name="keywords" content="about property finder real estate, saurav chowdhury real estate, malad west property consultant, maharera agent mumbai, real estate consultancy mumbai">
+  <meta name="robots" content="index, follow">
+  <link rel="canonical" href="https://propertyfinderrealestate.com/about.html">
+  <meta name="theme-color" content="#FFFFFF">
 
   <!-- Open Graph -->
   <meta property="og:type" content="website">
-  <meta property="og:site_name" content="Property Finder Real Estate">
-  <meta property="og:locale" content="en_IN">
-  <meta property="og:title" content="About Property Finder Real Estate | Mumbai">
-  <meta property="og:description" content="Trusted real estate advisory firm in Mumbai's Western Suburbs since 2018. Transparent, verified residential & commercial solutions.">
-  <meta property="og:url" content="https://www.propertyfinderrealestate.com/about.html">
-  <meta property="og:image" content="https://www.propertyfinderrealestate.com/images/og-banner.jpg">
-  <meta property="og:image:width" content="1200">
-  <meta property="og:image:height" content="630">
-  <meta property="og:image:type" content="image/jpeg">
+  <meta property="og:title" content="about Property Finder Real Estate | Mumbai">
+  <meta property="og:description" content="MahaRERA registered real estate consultancy firm based in Malad West, Mumbai. Founded by Saurav Ganesh Chowdhury in 2018.">
+  <meta property="og:url" content="https://propertyfinderrealestate.com/about.html">
+  <meta property="og:image" content="/images/og-banner.jpg">
 
-  <!-- Twitter Card -->
-  <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:site" content="@PropertyFinderA">
-  <meta name="twitter:title" content="About Property Finder Real Estate | Mumbai">
-  <meta name="twitter:description" content="Trusted real estate advisory firm in Mumbai's Western Suburbs since 2018. Transparent, verified residential & commercial solutions.">
-  <meta name="twitter:image" content="https://www.propertyfinderrealestate.com/images/og-banner.jpg">
-
-  <!-- SEO & Geolocation -->
-  <meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large">
-  <meta name="geo.region" content="IN-MH">
-  <meta name="geo.placename" content="Mumbai">
-  <meta name="geo.position" content="19.1886;72.8485">
-  <meta name="ICBM" content="19.1886, 72.8485">
-
-  <!-- Favicon & PWA -->
-  <link rel="icon" type="image/png" sizes="192x192" href="/icons/icon-192.png">
-  <link rel="icon" type="image/svg+xml" href="/icons/favicon.svg">
+  <link rel="icon" type="image/png" href="/images/logo.png">
   <link rel="manifest" href="/manifest.json">
-  <meta name="theme-color" content="#2563EB">
-  <meta name="apple-mobile-web-app-capable" content="yes">
-  <meta name="apple-mobile-web-app-status-bar-style" content="default">
-  <meta name="apple-mobile-web-app-title" content="Property Finder RE">
 
-  <!-- Early Theme Boot -->
-  <script>
-    !function(){var t=localStorage.getItem("pfre_theme")||(window.matchMedia("(prefers-color-scheme:dark)").matches?"dark":"light");document.documentElement.setAttribute("data-theme",t);document.documentElement.classList.add("theme-"+t)}();
-  </script>
-
-  <!-- Fonts -->
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;0,900;1,700&family=DM+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-
-  <!-- Root-Relative Stylesheets -->
+  <!-- Stylesheets -->
   <link rel="stylesheet" href="/css/styles.css">
+  <link rel="stylesheet" href="/css/theme.css">
   <link rel="stylesheet" href="/css/widgets.css">
   <link rel="stylesheet" href="/css/mobile.css">
-  <link rel="stylesheet" href="/css/theme.css">
   <link rel="stylesheet" href="/css/overrides.css">
   <link rel="stylesheet" href="/css/utils.css">
-
-  <style>
-    .story-grid {
-      display: grid;
-      grid-template-columns: 1.1fr 0.9fr;
-      gap: 56px;
-      align-items: center;
-      margin-top: 24px;
-    }
-    .story-card {
-      background: var(--card, #FFFFFF);
-      border: 1.5px solid var(--border);
-      border-radius: var(--radius-xl, 24px);
-      padding: 40px;
-      box-shadow: var(--shadow-sm);
-    }
-    .stats-ribbon {
-      display: grid;
-      grid-template-columns: repeat(4, 1fr);
-      gap: 20px;
-      margin: 64px 0 24px;
-    }
-    .stat-box {
-      background: var(--bg-secondary);
-      border: 1px solid var(--border);
-      border-radius: var(--radius, 16px);
-      padding: 24px;
-      text-align: center;
-    }
-    .stat-number {
-      font-family: 'Playfair Display', serif;
-      font-size: clamp(32px, 3.5vw, 44px);
-      font-weight: 900;
-      color: var(--blue);
-      line-height: 1;
-      margin-bottom: 8px;
-    }
-    .stat-label {
-      font-size: 13px;
-      color: var(--text-muted);
-      font-weight: 600;
-      text-transform: uppercase;
-      letter-spacing: 0.5px;
-    }
-    .values-grid {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 24px;
-      margin-top: 36px;
-    }
-    .value-card {
-      background: var(--card, #FFFFFF);
-      border: 1.5px solid var(--border);
-      border-radius: var(--radius, 16px);
-      padding: 32px 28px;
-      transition: transform 0.25s, box-shadow 0.25s;
-    }
-    .value-card:hover {
-      transform: translateY(-4px);
-      box-shadow: var(--shadow-md);
-    }
-    .value-icon {
-      font-size: 36px;
-      margin-bottom: 16px;
-      display: inline-block;
-    }
-    .value-title {
-      font-family: 'Playfair Display', serif;
-      font-size: 20px;
-      font-weight: 700;
-      margin-bottom: 10px;
-      color: var(--text);
-    }
-    .value-desc {
-      font-size: 14px;
-      color: var(--text-muted);
-      line-height: 1.7;
-    }
-    .founder-spotlight {
-      background: var(--card, #FFFFFF);
-      border: 1.5px solid var(--border);
-      border-radius: var(--radius-xl, 24px);
-      padding: 48px;
-      display: grid;
-      grid-template-columns: 260px 1fr;
-      gap: 40px;
-      align-items: center;
-      margin-top: 48px;
-    }
-    .founder-avatar {
-      width: 220px;
-      height: 220px;
-      border-radius: 50%;
-      background: linear-gradient(135deg, var(--blue), #60A5FA);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 80px;
-      margin: 0 auto;
-      border: 4px solid var(--border);
-      box-shadow: var(--shadow-md);
-      overflow: hidden;
-    }
-    .founder-avatar img {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-      object-position: top;
-    }
-    @media (max-width: 960px) {
-      .story-grid { grid-template-columns: 1fr; gap: 36px; }
-      .stats-ribbon { grid-template-columns: repeat(2, 1fr); }
-      .values-grid { grid-template-columns: 1fr; }
-      .founder-spotlight { grid-template-columns: 1fr; text-align: center; padding: 36px 24px; }
-    }
-  </style>
-
-  <!-- Structured Data: RealEstateAgent & AboutPage -->
-  <script type="application/ld+json">
-  {
-    "@context": "https://schema.org",
-    "@type": "AboutPage",
-    "name": "About Property Finder Real Estate",
-    "description": "Learn about Property Finder Real Estate, founded in August 2018 in Malad West, Mumbai.",
-    "url": "https://www.propertyfinderrealestate.com/about.html",
-    "mainEntity": {
-      "@type": "RealEstateAgent",
-      "@id": "https://www.propertyfinderrealestate.com/#organization",
-      "name": "Property Finder Real Estate",
-      "foundingDate": "2018-08-01",
-      "telephone": "+919326990050",
-      "email": "propertyfinderre@gmail.com",
-      "address": {
-        "@type": "PostalAddress",
-        "streetAddress": "Shop No. 9, Ground Floor, Building No. 3, Deepanjali Co-operative Housing Society Limited, Baf-Hira Nagar, Lower Kharodi, Jankalyan Nagar Road",
-        "addressLocality": "Malad West",
-        "addressRegion": "Maharashtra",
-        "postalCode": "400095",
-        "addressCountry": "IN"
-      },
-      "founder": {
-        "@type": "Person",
-        "name": "Saurav Ganesh Chowdhury",
-        "jobTitle": "Principal Consultant & Proprietor"
-      }
-    }
-  }
-  </script>
 </head>
 <body>
+  <a href="#mainContent" class="skip-link">skip to main content</a>
 
-  <!-- MASTER NAVBAR (Controlled from js/layout.js) -->
-  <site-navbar></site-navbar>
+  <!-- Header Mount Point -->
+  <header id="mainHeader"></header>
 
-  <!-- MAIN PAGE CONTENT -->
-  <main id="main-content">
-    
-    <!-- PAGE HERO -->
+  <main id="mainContent">
+    <!-- Hero Section -->
     <section class="page-hero">
-      <span class="section-label">Established August 2018</span>
-      <h1>Your Search <em>Ends Here</em></h1>
-      <p>Guiding families and businesses across Mumbai's Western Suburbs with transparent dealings, legal rigor, and localized expertise.</p>
-      <nav aria-label="Breadcrumb">
-        <div class="breadcrumb">
-          <a href="/index.html">Home</a><span class="breadcrumb-sep" aria-hidden="true">›</span><span>About Us</span>
-        </div>
-      </nav>
+      <div class="container">
+        <span class="section-label">established 2018 in Mumbai</span>
+        <h1>trusted property advisory built on <em>transparency</em> and legal rigour</h1>
+        <p>Headquartered in Jankalyan Nagar, Malad West, Property Finder Real Estate guides buyers, families, and commercial enterprises through every phase of property acquisition, leasing, and registration across Mumbai Western Suburbs.</p>
+        <nav class="breadcrumb" aria-label="Breadcrumb navigation">
+          <a href="/index.html">home</a>
+          <span class="breadcrumb-sep">/</span>
+          <span>about us</span>
+        </nav>
+      </div>
     </section>
 
-    <!-- SECTION: OUR STORY -->
-    <section class="section" style="max-width:1200px;margin:0 auto;padding-top:20px;">
-      <div class="story-grid">
+    <!-- Key Firm Highlights -->
+    <section class="container my-6">
+      <div class="stats-row grid-cols-4 d-grid gap-4">
+        <div class="calc-widget text-center">
+          <span class="text-xs fw-bold text-muted text-uppercase">regulatory credential</span>
+          <div class="calc-result-amount text-blue mt-1">A51800000412</div>
+          <span class="text-xs text-muted">MahaRERA registered agent</span>
+        </div>
+        <div class="calc-widget text-center">
+          <span class="text-xs fw-bold text-muted text-uppercase">founded</span>
+          <div class="calc-result-amount text-blue mt-1">1 August 2018</div>
+          <span class="text-xs text-muted">active in Malad West, Mumbai</span>
+        </div>
+        <div class="calc-widget text-center">
+          <span class="text-xs fw-bold text-muted text-uppercase">verified inventory</span>
+          <div class="calc-result-amount text-blue mt-1">500+ properties</div>
+          <span class="text-xs text-muted">residential &amp; commercial</span>
+        </div>
+        <div class="calc-widget text-center">
+          <span class="text-xs fw-bold text-muted text-uppercase">client satisfaction</span>
+          <div class="calc-result-amount text-blue mt-1">99.4%</div>
+          <span class="text-xs text-muted">flawless title deed record</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- Company Narrative & Leadership -->
+    <section class="container my-8">
+      <div class="about-grid d-grid gap-8">
         <div>
-          <span class="section-label">Our Founding Story</span>
-          <h2 style="font-family:'Playfair Display',serif;font-size:clamp(26px, 3.5vw, 36px);margin:10px 0 20px;line-height:1.25;">
-            Built on Integrity, Verified by <em>Due Diligence</em>
-          </h2>
-          <p style="color:var(--text-muted);font-size:15px;line-height:1.8;margin-bottom:18px;">
-            Founded on <strong>August 1, 2018</strong>, in Malad West, Mumbai, <strong>Property Finder Real Estate</strong> was established with a singular objective: to eliminate the ambiguity, hidden terms, and misinformation historically associated with property transactions.
-          </p>
-          <p style="color:var(--text-muted);font-size:15px;line-height:1.8;margin-bottom:18px;">
-            What began as a focused consultancy in Jankalyan Nagar and Lower Kharodi has expanded across Mumbai's Western Suburbs—serving buyers, sellers, investors, and corporate tenants across Malad, Goregaon, Andheri, Kandivali, and Borivali.
-          </p>
-          <p style="color:var(--text-muted);font-size:15px;line-height:1.8;">
-            From initial property inspection and title verification to Leave &amp; License registration, MahaRERA scrutiny, and society handover, we stand beside our clients through every legal and financial phase.
-          </p>
-        </div>
+          <span class="badge badge-blue mb-3">our story</span>
+          <h2 class="text-xl fw-bold mb-4">redefining Mumbai real estate advisory with legal accountability</h2>
+          <p class="text-muted mb-4">Property Finder Real Estate was established on 1 August 2018 in Malad West, Mumbai, under the leadership of proprietor and founder Saurav Ganesh Chowdhury. The firm was built to eliminate the opacity, aggressive speculation, and incomplete documentation common in suburban real estate transactions.</p>
+          <p class="text-muted mb-4">Operating across Malad West, Goregaon East, Andheri West, Kandivali West, and Borivali West, we serve as dedicated client advocates rather than commission brokers. Every residential resale flat, new development unit, and commercial workplace listed in our catalog undergoes rigorous pre-market title scrutiny, ensuring clear cooperative housing society records, verified deemed conveyance, and full MahaRERA compliance.</p>
+          <p class="text-muted mb-6">From initial property evaluation and comparative market analysis to doorstep biometric leave and license execution, stamp duty adjudication, and bank home loan disbursement, our team delivers seamless guidance backed by deep local micro-market insight.</p>
 
-        <div class="story-card">
-          <h3 style="font-family:'Playfair Display',serif;font-size:22px;margin-bottom:18px;">At a Glance</h3>
-          <ul style="list-style:none;padding:0;margin:0;display:flex;flex-direction:column;gap:14px;font-size:14.5px;">
-            <li style="display:flex;align-items:flex-start;gap:12px;">
-              <span style="color:var(--blue);font-weight:700;">📍</span>
-              <div><strong>Registered Office:</strong> Malad West, Mumbai, Maharashtra 400095</div>
-            </li>
-            <li style="display:flex;align-items:flex-start;gap:12px;">
-              <span style="color:var(--blue);font-weight:700;">📅</span>
-              <div><strong>Establishment Date:</strong> August 1, 2018 (7+ Years of Operations)</div>
-            </li>
-            <li style="display:flex;align-items:flex-start;gap:12px;">
-              <span style="color:var(--blue);font-weight:700;">⚖️</span>
-              <div><strong>Regulatory Framework:</strong> MahaRERA Aligned &amp; Freehold/Title Verified</div>
-            </li>
-            <li style="display:flex;align-items:flex-start;gap:12px;">
-              <span style="color:var(--blue);font-weight:700;">🏢</span>
-              <div><strong>Core Specialization:</strong> High-Rise Residences, Society Resales, Office Spaces &amp; Commercial Retail</div>
-            </li>
-          </ul>
-        </div>
-      </div>
-
-      <!-- STATS RIBBON -->
-      <div class="stats-ribbon">
-        <div class="stat-box">
-          <div class="stat-number">2018</div>
-          <div class="stat-label">Year Founded</div>
-        </div>
-        <div class="stat-box">
-          <div class="stat-number">2,400+</div>
-          <div class="stat-label">Verified Listings Matched</div>
-        </div>
-        <div class="stat-box">
-          <div class="stat-number">100%</div>
-          <div class="stat-label">Title-Vetted Mandates</div>
-        </div>
-        <div class="stat-box">
-          <div class="stat-number">4.9 ★</div>
-          <div class="stat-label">Client Satisfaction</div>
-        </div>
-      </div>
-    </section>
-
-    <!-- SECTION: OUR CORE PILLARS -->
-    <section class="section section-alt" style="padding:64px 5%;">
-      <div style="max-width:1200px;margin:0 auto;">
-        <div style="text-align:center;max-width:680px;margin:0 auto;">
-          <span class="section-label">How We Operate</span>
-          <h2 style="font-family:'Playfair Display',serif;font-size:32px;margin:10px 0 16px;">The Principles Behind Every Mandate</h2>
-          <p style="color:var(--text-muted);font-size:15px;line-height:1.7;">
-            We believe that finding a home or commercial property should be structured, objective, and legally sound.
-          </p>
-        </div>
-
-        <div class="values-grid">
-          <div class="value-card">
-            <span class="value-icon">📜</span>
-            <h3 class="value-title">Rigorous Title Scrutiny</h3>
-            <p class="value-desc">
-              Every outright resale or leasing inventory is verified against society share certificates, chain agreements, registered documents, and OC status before being offered to clients.
-            </p>
-          </div>
-
-          <div class="value-card">
-            <span class="value-icon">🤝</span>
-            <h3 class="value-title">Zero Ambiguity Negotiations</h3>
-            <p class="value-desc">
-              Complete transparency on pricing, maintenance components, stamp duty, registration charges, and brokerages. No inflated valuations or undisclosed clauses.
-            </p>
-          </div>
-
-          <div class="value-card">
-            <span class="value-icon">📍</span>
-            <h3 class="value-title">Hyper-Local Micro-Market Focus</h3>
-            <p class="value-desc">
-              Deep, street-level insight into Mumbai's Western Suburbs—from building quality and water supply history to upcoming metro alignments and realistic rental yields.
-            </p>
+          <div class="d-grid grid-cols-2 gap-4 mt-6">
+            <div class="calc-widget">
+              <h3 class="text-sm fw-bold text-blue mb-1">&#128737;&#65039; zero litigation policy</h3>
+              <p class="text-xs text-muted">Every asset is vetted against municipal sanctions, society share certificates, chain of title deeds, and encumbrance registers.</p>
+            </div>
+            <div class="calc-widget">
+              <h3 class="text-sm fw-bold text-blue mb-1">&#128221; turnkey legal conveyance</h3>
+              <p class="text-xs text-muted">Complete facilitation of leave and license deeds, sale agreements, power of attorney filings, and government e-registration.</p>
+            </div>
           </div>
         </div>
+
+        <aside>
+          <!-- Founder Card -->
+          <div class="contact-form-card">
+            <div class="founder-badge text-center mb-4">
+              <div class="sb-avatar mx-auto mb-3" style="width:72px;height:72px;font-size:24px;background:var(--blue);color:#FFFFFF;border-radius:50%;display:flex;align-items:center;justify-content:center;font-weight:800;">SC</div>
+              <h3 class="text-md fw-bold mb-1">Saurav Ganesh Chowdhury</h3>
+              <span class="text-xs text-blue fw-bold text-uppercase d-block mb-1">founder and proprietor</span>
+              <span class="text-xs text-muted">MahaRERA certified real estate advisor</span>
+            </div>
+
+            <div class="p-3 bg-secondary rounded mb-4 text-sm text-muted">
+              <p class="mb-2">&#8220;In Mumbai real estate, a home represents both the emotional center of a family and their single largest capital commitment. Our mandate is simple: ensure complete legal safety, absolute pricing transparency, and long-term asset value.&#8221;</p>
+              <div class="fw-bold text-text">— Saurav Chowdhury</div>
+            </div>
+
+            <div class="border-top pt-3 text-xs text-muted">
+              <div class="d-flex justify-between py-1">
+                <span>head office</span>
+                <span class="fw-bold text-text">Jankalyan Nagar, Malad West</span>
+              </div>
+              <div class="d-flex justify-between py-1">
+                <span>direct desk</span>
+                <a href="tel:+919326990050" class="fw-bold text-blue">+91 93269 90050</a>
+              </div>
+              <div class="d-flex justify-between py-1">
+                <span>official email</span>
+                <a href="mailto:propertyfinderre@gmail.com" class="fw-bold text-blue">propertyfinderre@gmail.com</a>
+              </div>
+              <div class="d-flex justify-between py-1">
+                <span>RERA license</span>
+                <span class="fw-bold text-text">A51800000412</span>
+              </div>
+            </div>
+
+            <div class="mt-4">
+              <a href="https://wa.me/919326990050?text=Hello%20Saurav,%20I%20would%20like%20to%20schedule%20a%20property%20consultation." target="_blank" rel="noopener" class="btn btn-green-inline w-100 btn-sm">&#128172; chat directly on WhatsApp</a>
+            </div>
+          </div>
+        </aside>
       </div>
     </section>
 
-    <!-- SECTION: LEADERSHIP SPOTLIGHT -->
-    <section class="section" style="max-width:1200px;margin:0 auto;padding-top:40px;padding-bottom:80px;">
-      <div style="text-align:center;">
-        <span class="section-label">Executive Leadership</span>
-        <h2 style="font-family:'Playfair Display',serif;font-size:32px;margin-top:10px;">Meet Our <em>Principal Consultant</em></h2>
-      </div>
-
-      <div class="founder-spotlight">
-        <div class="founder-avatar">
-          <img src="/images/team/saurav-chowdhury-1.webp" alt="Mr. Saurav Ganesh Chowdhury" onerror="this.style.display='none'; this.parentElement.innerHTML='👨‍💼';">
+    <!-- Operational Core Values -->
+    <section class="bg-secondary py-8">
+      <div class="container">
+        <div class="text-center max-w-xl mx-auto mb-6">
+          <span class="section-label">the PFRE standard</span>
+          <h2 class="text-lg fw-bold">four foundational pillars of our advisory</h2>
+          <p class="text-sm text-muted">How we protect client equity and eliminate risks across Mumbai property acquisitions.</p>
         </div>
-        <div>
-          <h3 style="font-family:'Playfair Display',serif;font-size:26px;font-weight:700;margin-bottom:6px;color:var(--text);">
-            Mr. Saurav Ganesh Chowdhury
-          </h3>
-          <div style="font-size:13px;font-weight:700;color:var(--blue);text-transform:uppercase;letter-spacing:1px;margin-bottom:16px;">
-            Owner &amp; Principal Consultant
+
+        <div class="d-grid grid-cols-4 gap-4">
+          <div class="calc-widget">
+            <div class="text-blue text-lg fw-bold mb-2">01</div>
+            <h3 class="text-sm fw-bold mb-2">rigorous title investigation</h3>
+            <p class="text-xs text-muted">We scrutinize the thirty-year chain of title, deemed conveyance orders, index II entries, society no objection certificates, and BMC sanction plans before presenting any listing.</p>
           </div>
-          <p style="color:var(--text-muted);font-size:14.5px;line-height:1.8;margin-bottom:16px;">
-            As the proprietor of Property Finder Real Estate, Saurav has spent over 7 years actively advising homeowners, corporate tenants, and property investors across Mumbai. With deep expertise in local documentation, Leave &amp; License agreements, and society compliance, he personally reviews high-value mandates to ensure absolute legal integrity.
-          </p>
-          <div style="display:flex;gap:12px;flex-wrap:wrap;">
-            <a href="/team.html" class="btn btn-outline btn-sm">View Full Leadership Profile →</a>
-            <a href="https://wa.me/919326990050?text=Hello%20Saurav,%20I%20would%20like%20to%20consult%20regarding%20a%20property%20in%20Mumbai" target="_blank" rel="noopener noreferrer" class="btn btn-primary btn-sm">
-              💬 Direct Consultation
-            </a>
+
+          <div class="calc-widget">
+            <div class="text-blue text-lg fw-bold mb-2">02</div>
+            <h3 class="text-sm fw-bold mb-2">accurate carpet pricing</h3>
+            <p class="text-xs text-muted">We operate exclusively on genuine RERA carpet area measurements and micro-market comparative transactions, eliminating misleading super built-up loadings.</p>
+          </div>
+
+          <div class="calc-widget">
+            <div class="text-blue text-lg fw-bold mb-2">03</div>
+            <h3 class="text-sm fw-bold mb-2">digital regulatory compliance</h3>
+            <p class="text-xs text-muted">From online e-registration and Aadhaar biometric authentication to Section 194-IA TDS deduction filings, our workflow adheres to Maharashtra state revenue rules.</p>
+          </div>
+
+          <div class="calc-widget">
+            <div class="text-blue text-lg fw-bold mb-2">04</div>
+            <h3 class="text-sm fw-bold mb-2">end-to-end client advocacy</h3>
+            <p class="text-xs text-muted">We represent buyers and landlords from the first site visit through negotiation, agreement drafting, stamp duty adjudication, keys handover, and society transfer fees.</p>
           </div>
         </div>
       </div>
     </section>
 
-    <!-- SECTION: CALL TO ACTION -->
-    <section class="cta-section">
-      <h2 class="section-title reveal">Looking for Property in <em>Mumbai?</em></h2>
-      <p class="reveal">Whether buying an apartment, leasing an office, or listing a prime flat, our advisory desk is ready to assist you.</p>
-      <div class="cta-btns reveal">
-        <a href="tel:+919326990050" class="btn btn-white btn-lg">📞 Call +919326990050</a>
-        <a href="https://wa.me/919326990050?text=Hello%20Property%20Finder%20Real%20Estate,%20I%20would%20like%20guidance%20on%20property%20in%20Mumbai" target="_blank" rel="noopener noreferrer" class="btn-outline-white btn-lg">💬 WhatsApp Us</a>
+    <!-- Micro-Markets We Serve -->
+    <section class="container my-8">
+      <div class="text-center max-w-xl mx-auto mb-6">
+        <span class="section-label">geographical focus</span>
+        <h2 class="text-lg fw-bold">mumbai western suburbs micro-markets</h2>
+        <p class="text-sm text-muted">Specialized hyper-local insight across high-demand residential and commercial corridors.</p>
+      </div>
+
+      <div class="d-grid grid-cols-3 gap-4">
+        <div class="calc-widget">
+          <h3 class="text-sm fw-bold text-blue mb-1">&#128205; Malad West &amp; East</h3>
+          <p class="text-xs text-muted mb-3">Jankalyan Nagar, Marina Enclave, New Link Road, Evershine Nagar, Mindspace, Liberty Garden, and Upper Govind Nagar.</p>
+          <a href="/properties/flats-in-malad-west.html" class="text-xs fw-bold text-blue">view Malad properties &rarr;</a>
+        </div>
+
+        <div class="calc-widget">
+          <h3 class="text-sm fw-bold text-blue mb-1">&#128205; Goregaon East &amp; West</h3>
+          <p class="text-xs text-muted mb-3">Oberoi Garden City, Oberoi Woods, Gokuldham, Yashodham, Film City Road, Bangur Nagar, and SV Road corridor.</p>
+          <a href="/properties/flats-in-goregaon-east.html" class="text-xs fw-bold text-blue">view Goregaon properties &rarr;</a>
+        </div>
+
+        <div class="calc-widget">
+          <h3 class="text-sm fw-bold text-blue mb-1">&#128205; Andheri West &amp; East</h3>
+          <p class="text-xs text-muted mb-3">Lokhandwala Complex, Oshiwara, Veera Desai Road, DN Nagar, Versova, Chakala, and MIDC commercial district.</p>
+          <a href="/properties/flats-in-andheri-west.html" class="text-xs fw-bold text-blue">view Andheri properties &rarr;</a>
+        </div>
+
+        <div class="calc-widget">
+          <h3 class="text-sm fw-bold text-blue mb-1">&#128205; Kandivali West &amp; East</h3>
+          <p class="text-xs text-muted mb-3">Mahavir Nagar, Dahanukar Wadi, Charkop Sector 1 through 9, Akurli Road, Lokhandwala Township, and Thakur Complex.</p>
+          <a href="/properties/flats-in-kandivali-west.html" class="text-xs fw-bold text-blue">view Kandivali properties &rarr;</a>
+        </div>
+
+        <div class="calc-widget">
+          <h3 class="text-sm fw-bold text-blue mb-1">&#128205; Borivali West &amp; East</h3>
+          <p class="text-xs text-muted mb-3">IC Colony, Holy Cross Road, Yogi Nagar, Shimpoli Road, Gorai, and National Park border residential towers.</p>
+          <a href="/properties/flats-in-borivali-west.html" class="text-xs fw-bold text-blue">view Borivali properties &rarr;</a>
+        </div>
+
+        <div class="calc-widget">
+          <h3 class="text-sm fw-bold text-blue mb-1">&#128205; Bandra East &amp; BKC Connect</h3>
+          <p class="text-xs text-muted mb-3">Kalanagar, BKC Connect, Bandra Kurla Complex corporate towers, and prime residential developments along the Western Express Highway.</p>
+          <a href="/properties.html" class="text-xs fw-bold text-blue">explore prime listings &rarr;</a>
+        </div>
       </div>
     </section>
 
+    <!-- Consultation Request Form -->
+    <section class="container my-8">
+      <div class="contact-form-card max-w-xl mx-auto">
+        <div class="text-center mb-4">
+          <span class="badge badge-green mb-2">direct consultation</span>
+          <h2 class="text-md fw-bold">schedule an advisory session with our founder</h2>
+          <p class="text-xs text-muted">Whether buying your primary home, leasing commercial space, or seeking legal due diligence, we are here to assist.</p>
+        </div>
+
+        <form class="pfre-lead-form" data-pfre-inquiry data-source="about-page">
+          <div class="form-group">
+            <label class="form-label" for="abName">your full name *</label>
+            <input type="text" id="abName" name="name" class="form-control" required placeholder="Enter full name">
+          </div>
+
+          <div class="form-group">
+            <label class="form-label" for="abPhone">phone or WhatsApp number *</label>
+            <input type="tel" id="abPhone" name="phone" class="form-control" required placeholder="+91 98XXX XXXXX">
+          </div>
+
+          <div class="form-group">
+            <label class="form-label" for="abTopic">discussion topic</label>
+            <select id="abTopic" name="intent" class="form-control">
+              <option value="buy">Residential Flat Purchase</option>
+              <option value="commercial">Commercial Office or Shop</option>
+              <option value="rent">Rental or Lease Assistance</option>
+              <option value="legal">Agreement Registration &amp; Title Verification</option>
+            </select>
+          </div>
+
+          <div class="form-group">
+            <label class="form-label" for="abMessage">your requirements or questions</label>
+            <textarea id="abMessage" name="message" class="form-control" rows="3" placeholder="Preferred locality, budget range, or property details"></textarea>
+          </div>
+
+          <button type="submit" class="btn btn-primary w-100">submit consultation request</button>
+        </form>
+
+        <div class="mt-4 pt-3 border-top text-center text-xs text-muted">
+          <span>office walk-in address: Shop No. 2, Ground Floor, Baf-Hira Nagar, Jankalyan Nagar Road, Malad West, Mumbai - 400095</span>
+        </div>
+      </div>
+    </section>
   </main>
 
-  <!-- MASTER FOOTER & GLOBAL WIDGETS (Controlled from js/layout.js) -->
-  <site-footer></site-footer>
+  <!-- Footer Mount Point -->
+  <footer id="mainFooter"></footer>
 
-  <!-- Centralized Script Engines in Order of Dependency -->
+  <!-- Scripts -->
   <script src="/js/config.js"></script>
-  <script src="/js/layout.js"></script>
+  <script src="/js/auth-guard.js"></script>
+  <script src="/js/api.js"></script>
   <script src="/js/security.js"></script>
-  <script src="/js/tracker.js" defer></script>
   <script src="/js/theme.js"></script>
-  <script src="/js/i18n.js"></script>
+  <script src="/js/tracker.js"></script>
   <script src="/js/widgets.js"></script>
-
-  <script>
-    if ('serviceWorker' in navigator) {
-      window.addEventListener('load', () => {
-        navigator.serviceWorker.register('/sw.js').catch(() => {});
-      });
-    }
-  </script>
+  <script src="/js/i18n.js"></script>
+  <script src="/js/app.js"></script>
+  <script src="/js/app-shell.js"></script>
+  <script src="/js/layout.js"></script>
 </body>
 </html>
