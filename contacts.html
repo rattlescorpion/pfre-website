@@ -1,598 +1,628 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" data-theme="light">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Contact Directory — Property Finder Real Estate</title>
+  <title>contact directory and phonebook | Property Finder Real Estate</title>
+  <meta name="description" content="Operational phonebook and contact directory for managing property owners, channel partners, tenants, and society secretaries across Mumbai Western Suburbs.">
   <meta name="robots" content="noindex, nofollow">
+  <meta name="theme-color" content="#FFFFFF">
 
-  <!-- Security & CSP -->
-  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' https://cdnjs.cloudflare.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' data: https:; connect-src 'self' https: http://localhost:8000; object-src 'none'; base-uri 'self'">
-  <meta http-equiv="X-Content-Type-Options" content="nosniff">
-  <meta http-equiv="Referrer-Policy" content="strict-origin-when-cross-origin">
-
-  <link rel="icon" type="image/png" sizes="192x192" href="/icons/icon-192.png">
+  <link rel="icon" type="image/png" href="/images/logo.png">
   <link rel="manifest" href="/manifest.json">
-  <meta name="theme-color" content="#070C14">
 
-  <!-- Auth Guard & Theme -->
-  <script src="/js/auth-guard.js"></script>
-  <script>
-    !function(){var t=localStorage.getItem("pfre_theme")||(window.matchMedia("(prefers-color-scheme:dark)").matches?"dark":"light");document.documentElement.setAttribute("data-theme",t);document.documentElement.classList.add("theme-"+t)}();
-  </script>
-
-  <!-- Fonts -->
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
-
-  <style>
-    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-    :root {
-      --bg: #070C14;
-      --sidebar: #0A0F1E;
-      --card: #0F1729;
-      --card2: #111B2E;
-      --border: #1A2744;
-      --blue: #3B82F6;
-      --green: #10B981;
-      --red: #EF4444;
-      --amber: #F59E0B;
-      --purple: #8B5CF6;
-      --text: #E2E8F0;
-      --text-2: #94A3B8;
-      --text-3: #475569;
-    }
-
-    body {
-      font-family: 'Inter', system-ui, -apple-system, sans-serif;
-      background: var(--bg);
-      color: var(--text);
-      min-height: 100vh;
-      display: flex;
-    }
-
-    /* Sidebar Navigation */
-    .sidebar {
-      width: 230px;
-      min-height: 100vh;
-      background: var(--sidebar);
-      border-right: 1px solid var(--border);
-      display: flex;
-      flex-direction: column;
-      position: fixed;
-      left: 0; top: 0; bottom: 0;
-      z-index: 100;
-      overflow-y: auto;
-    }
-    .sb-logo { padding: 20px 18px 14px; border-bottom: 1px solid var(--border); display: flex; align-items: center; gap: 10px; }
-    .sb-logo img { height: 34px; width: auto; }
-    .sb-logo-text { font-size: 13px; font-weight: 700; color: var(--text); }
-    .sb-section { font-size: 10px; font-weight: 700; letter-spacing: 1.2px; text-transform: uppercase; color: var(--text-3); padding: 16px 18px 6px; }
-    .sb-item { display: flex; align-items: center; gap: 10px; padding: 9px 18px; color: var(--text-2); font-size: 13px; font-weight: 500; cursor: pointer; text-decoration: none; border-left: 2px solid transparent; transition: all .15s; }
-    .sb-item:hover { background: rgba(59,130,246,.06); color: var(--text); }
-    .sb-item.active { background: rgba(59,130,246,.12); color: var(--blue); border-left-color: var(--blue); font-weight: 600; }
-
-    /* Main Workspace */
-    .main { margin-left: 230px; flex: 1; min-height: 100vh; display: flex; flex-direction: column; }
-    .topbar {
-      position: sticky; top: 0; z-index: 50;
-      background: rgba(7, 12, 20, 0.9);
-      backdrop-filter: blur(12px);
-      border-bottom: 1px solid var(--border);
-      padding: 0 24px;
-      height: 56px;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-    }
-    .topbar-title { font-size: 16px; font-weight: 700; display: flex; align-items: center; gap: 8px; }
-    .topbar-actions { display: flex; align-items: center; gap: 10px; }
-
-    .btn { padding: 8px 14px; border-radius: 8px; font-size: 12.5px; font-weight: 600; cursor: pointer; border: 1px solid var(--border); background: var(--card); color: var(--text); display: inline-flex; align-items: center; gap: 6px; transition: all .15s; }
-    .btn:hover { border-color: var(--blue); color: var(--blue); }
-    .btn-primary { background: var(--blue); border-color: var(--blue); color: #fff; }
-    .btn-primary:hover { background: #2563EB; color: #fff; }
-
-    /* Search & Filter Bar */
-    .search-row { padding: 16px 24px; border-bottom: 1px solid var(--border); display: flex; gap: 12px; align-items: center; flex-wrap: wrap; }
-    .search-box { flex: 1; min-width: 260px; position: relative; }
-    .search-input { width: 100%; padding: 10px 14px 10px 38px; border-radius: 10px; border: 1.5px solid var(--border); background: var(--card2); color: var(--text); font-size: 13.5px; outline: none; }
-    .search-input:focus { border-color: var(--blue); }
-    .search-icon { position: absolute; left: 12px; top: 50%; transform: translateY(-50%); color: var(--text-3); font-size: 15px; }
-    .filter-select { padding: 9px 14px; border-radius: 10px; border: 1.5px solid var(--border); background: var(--card2); color: var(--text); font-size: 13px; outline: none; }
-
-    /* Directory Layout with Samsung A-Z Scrubber */
-    .directory-container { display: flex; flex: 1; position: relative; }
-    .contact-list-area { flex: 1; padding: 20px 24px; }
-    .az-scrubber {
-      width: 28px;
-      position: sticky;
-      top: 56px;
-      height: calc(100vh - 56px);
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: space-evenly;
-      background: rgba(15, 23, 41, 0.4);
-      border-left: 1px solid var(--border);
-      user-select: none;
-      padding: 6px 0;
-    }
-    .az-char { font-size: 11px; font-weight: 700; color: var(--text-3); cursor: pointer; text-decoration: none; padding: 2px 4px; transition: color .15s; }
-    .az-char:hover { color: var(--blue); transform: scale(1.2); }
-
-    /* Contact Row Card */
-    .contact-group-header { font-size: 13px; font-weight: 800; color: var(--blue); padding: 12px 0 6px; border-bottom: 1px solid var(--border); margin-bottom: 10px; }
-    .contact-card {
-      background: var(--card);
-      border: 1px solid var(--border);
-      border-radius: 12px;
-      padding: 14px 18px;
-      margin-bottom: 10px;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      transition: all .2s;
-    }
-    .contact-card:hover { border-color: var(--blue); box-shadow: 0 4px 16px rgba(0,0,0,0.3); }
-    .contact-left { display: flex; align-items: center; gap: 14px; }
-    .avatar-circle {
-      width: 44px; height: 44px;
-      border-radius: 50%;
-      background: linear-gradient(135deg, var(--blue), var(--purple));
-      display: flex; align-items: center; justify-content: center;
-      font-size: 16px; font-weight: 700; color: #fff;
-      flex-shrink: 0;
-    }
-    .c-name { font-size: 14.5px; font-weight: 700; color: var(--text); display: flex; align-items: center; gap: 8px; }
-    .c-meta { font-size: 12px; color: var(--text-2); margin-top: 3px; }
-    .star-btn { background: none; border: none; cursor: pointer; font-size: 18px; line-height: 1; }
-
-    .tag-badge { padding: 2px 8px; border-radius: 100px; font-size: 10.5px; font-weight: 700; }
-    .tag-buyer { background: rgba(59,130,246,.15); color: #3B82F6; }
-    .tag-investor { background: rgba(139,92,246,.15); color: #8B5CF6; }
-    .tag-landlord { background: rgba(16,185,129,.15); color: #10B981; }
-    .tag-partner { background: rgba(245,158,11,.15); color: #F59E0B; }
-
-    .contact-actions { display: flex; gap: 6px; }
-
-    /* Modal Styling */
-    .modal-overlay { position: fixed; inset: 0; background: rgba(0,0,0,.7); z-index: 1000; display: none; align-items: center; justify-content: center; padding: 20px; backdrop-filter: blur(4px); }
-    .modal-overlay.open { display: flex; }
-    .modal-card { background: var(--card); border: 1.5px solid var(--border); border-radius: 18px; width: 100%; max-width: 760px; max-height: 90vh; overflow-y: auto; padding: 28px; }
-    .form-grid-3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; margin-bottom: 14px; }
-    .form-grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; margin-bottom: 14px; }
-    .form-group { margin-bottom: 14px; }
-    .form-group label { display: block; font-size: 11.5px; font-weight: 700; text-transform: uppercase; color: var(--text-2); margin-bottom: 6px; }
-    .form-control { width: 100%; padding: 10px 12px; border-radius: 8px; border: 1.5px solid var(--border); background: var(--card2); color: var(--text); font-size: 13.5px; outline: none; font-family: inherit; }
-    .form-control:focus { border-color: var(--blue); }
-
-    @media (max-width: 768px) {
-      .sidebar { display: none; }
-      .main { margin-left: 0; }
-      .form-grid-3, .form-grid-2 { grid-template-columns: 1fr; }
-    }
-  </style>
+  <!-- Stylesheets -->
+  <link rel="stylesheet" href="/css/styles.css">
+  <link rel="stylesheet" href="/css/theme.css">
+  <link rel="stylesheet" href="/css/widgets.css">
+  <link rel="stylesheet" href="/css/mobile.css">
+  <link rel="stylesheet" href="/css/overrides.css">
+  <link rel="stylesheet" href="/css/utils.css">
 </head>
-<body>
+<body class="admin-body">
+  <a href="#contactsMain" class="skip-link">skip to main content</a>
 
-  <!-- SIDEBAR -->
-  <aside class="sidebar">
-    <div class="sb-logo">
-      <img src="/images/logo.png" alt="PFRE" onerror="this.style.display='none'">
-      <div>
-        <div class="sb-logo-text">Property Finder RE</div>
-        <div style="font-size:10px;color:var(--blue);font-weight:600;text-transform:uppercase;">Directory Suite</div>
+  <div class="admin-shell">
+    <!-- Admin Sidebar Navigation -->
+    <aside class="admin-sidebar">
+      <div class="sb-header">
+        <a href="/admin.html" class="sb-brand">
+          <span class="sb-brand-title">PFRE MUMBAI</span>
+          <span class="sb-brand-sub">operations hub</span>
+        </a>
       </div>
+
+      <nav class="sb-nav" aria-label="Admin Navigation">
+        <div class="sb-group-title">core operations</div>
+        <a href="/admin.html" class="sb-item">&#128202; dashboard</a>
+        <a href="/crm.html" class="sb-item">&#128101; crm leads</a>
+        <a href="/contacts.html" class="sb-item active">&#128214; phonebook</a>
+        <a href="/inventory.html" class="sb-item">&#127968; inventory</a>
+        <a href="/schedule.html" class="sb-item">&#128197; inspection calendar</a>
+
+        <div class="sb-group-title">intelligence &amp; legal</div>
+        <a href="/analytics.html" class="sb-item">&#128200; analytics &amp; traffic</a>
+        <a href="/price-trends.html" class="sb-item">&#128201; price trends</a>
+        <a href="/agreement-registration.html" class="sb-item">&#128221; leave &amp; license</a>
+        <a href="/finance.html" class="sb-item" data-min-role="super_admin">&#128178; brokerage finance</a>
+        <a href="/hrms.html" class="sb-item" data-min-role="admin">&#128188; team hrms</a>
+
+        <div class="sb-group-title">configuration</div>
+        <a href="/email-templates.html" class="sb-item">&#9993;&#65039; templates</a>
+        <a href="/cms.html" class="sb-item">&#9881;&#65039; site cms</a>
+        <a href="/index.html" class="sb-item" target="_blank">&#127760; live website</a>
+      </nav>
+
+      <div class="sb-user">
+        <div class="sb-avatar user-avatar-text">SC</div>
+        <div class="sb-user-meta">
+          <strong data-user-name>Saurav Chowdhury</strong>
+          <span data-user-role>Super Admin</span>
+        </div>
+        <button type="button" class="btn btn-outline btn-sm py-1 px-2 text-xs" onclick="window.pfreLogout()">exit</button>
+      </div>
+    </aside>
+
+    <!-- Main Content Area -->
+    <div class="admin-main">
+      <header class="admin-topbar">
+        <div class="d-flex items-center gap-3">
+          <h1 class="text-md fw-bold mb-0">contact directory &amp; stakeholder phonebook</h1>
+          <span class="badge badge-blue" id="contactCountBadge">0 contacts</span>
+        </div>
+
+        <div class="d-flex items-center gap-3">
+          <button type="button" id="openAddContactBtn" class="btn btn-primary btn-sm">&#43; add contact</button>
+          <button type="button" id="exportContactsBtn" class="btn btn-outline btn-sm">&#128190; export vcf or csv</button>
+        </div>
+      </header>
+
+      <main id="contactsMain" class="admin-content p-6">
+        <!-- Search and Categorization Toolbar -->
+        <div class="calc-widget p-4 mb-6">
+          <div class="d-flex justify-between items-center flex-wrap gap-4">
+            <!-- Label Filters -->
+            <div class="d-flex gap-2 flex-wrap" id="contactTagFilters">
+              <button type="button" class="tab-pill active" data-tag-filter="all">all entries</button>
+              <button type="button" class="tab-pill" data-tag-filter="owner">property owners</button>
+              <button type="button" class="tab-pill" data-tag-filter="buyer">buyers</button>
+              <button type="button" class="tab-pill" data-tag-filter="tenant">tenants</button>
+              <button type="button" class="tab-pill" data-tag-filter="broker">channel partners</button>
+              <button type="button" class="tab-pill" data-tag-filter="society">society secretaries</button>
+              <button type="button" class="tab-pill" data-tag-filter="vendor">advocates &amp; valuers</button>
+            </div>
+
+            <!-- Search Field -->
+            <div class="d-flex gap-3 items-center flex-1" style="max-width: 440px;">
+              <input type="text" id="contactSearchInput" class="form-control text-xs" placeholder="Search by name, mobile number, society or building...">
+              <select id="localityDirectorySelect" class="form-control text-xs" style="max-width: 160px;">
+                <option value="all">all localities</option>
+                <option value="Malad West">Malad West</option>
+                <option value="Goregaon East">Goregaon East</option>
+                <option value="Andheri West">Andheri West</option>
+                <option value="Borivali West">Borivali West</option>
+                <option value="Kandivali West">Kandivali West</option>
+              </select>
+            </div>
+          </div>
+        </div>
+
+        <!-- Contacts Grid View -->
+        <div class="d-grid grid-cols-3 gap-4" id="contactsCardGrid">
+          <!-- Populated by JavaScript -->
+        </div>
+
+        <!-- Empty State -->
+        <div id="noContactsNotice" class="calc-widget text-center py-8" style="display: none;">
+          <h2 class="text-sm fw-bold mb-1">no matching contacts found</h2>
+          <p class="text-xs text-muted mb-4">Try clearing your filters or create a new entry for your stakeholder directory.</p>
+          <button type="button" class="btn btn-outline btn-sm" onclick="document.getElementById('openAddContactBtn').click()">add contact record</button>
+        </div>
+      </main>
     </div>
+  </div>
 
-    <div class="sb-section">Directories</div>
-    <a href="contacts.html" class="sb-item active"><span>👥</span><span>All Contacts</span></a>
-    <a href="#" class="sb-item" onclick="filterByTag('Buyer')"><span>🛒</span><span>Buyers &amp; Investors</span></a>
-    <a href="#" class="sb-item" onclick="filterByTag('Landlord')"><span>🏠</span><span>Landlords &amp; Owners</span></a>
-    <a href="#" class="sb-item" onclick="filterByTag('Partner')"><span>🤝</span><span>Channel Partners</span></a>
-
-    <div class="sb-section">Operations</div>
-    <a href="crm.html" class="sb-item"><span>🏗️</span><span>CRM Pipelines</span></a>
-    <a href="admin.html" class="sb-item"><span>⚙️</span><span>Admin Console</span></a>
-    <a href="schedule.html" class="sb-item"><span>📅</span><span>Site Schedules</span></a>
-  </aside>
-
-  <!-- MAIN AREA -->
-  <main class="main" id="main-content">
-    <header class="topbar">
-      <div class="topbar-title">
-        <span>📖 Contact Directory</span>
-        <span id="totalBadge" style="font-size:12px;background:var(--border);padding:2px 8px;border-radius:100px;font-weight:600;">0 contacts</span>
-      </div>
-      <div class="topbar-actions">
-        <button class="btn" onclick="exportMasterVCF()" type="button">📲 Export All vCard</button>
-        <button class="btn btn-primary" onclick="openAddModal()" type="button">+ New Contact</button>
-      </div>
-    </header>
-
-    <!-- SEARCH & FILTER TOOLBAR -->
-    <div class="search-row">
-      <div class="search-box">
-        <span class="search-icon">🔍</span>
-        <input type="text" id="searchInput" class="search-input" placeholder="Search by name, mobile, society, PAN, or budget..." oninput="handleSearch()">
-      </div>
-      <select id="typeFilter" class="filter-select" onchange="handleSearch()">
-        <option value="all">All Stakeholder Types</option>
-        <option value="Buyer">Buyers</option>
-        <option value="Investor">Investors</option>
-        <option value="Landlord">Landlords</option>
-        <option value="Partner">Channel Partners</option>
-      </select>
-    </div>
-
-    <!-- DIRECTORY & A-Z SCRUBBER WRAPPER -->
-    <div class="directory-container">
-      <div class="contact-list-area" id="contactList">
-        <!-- Rendered dynamically -->
+  <!-- Add or Edit Contact Modal -->
+  <div class="modal-backdrop" id="contactModal" style="display: none;">
+    <div class="modal-card max-w-xl">
+      <div class="d-flex justify-between items-center mb-4">
+        <h2 class="text-md fw-bold mb-0" id="contactModalTitle">create new contact record</h2>
+        <button type="button" class="btn btn-outline btn-sm py-0 px-2" id="closeContactModalBtn">&times;</button>
       </div>
 
-      <!-- Samsung A-Z Quick Scrubber -->
-      <nav class="az-scrubber" id="azScrubber" aria-label="Alphabetical Jump"></nav>
-    </div>
-  </main>
+      <form id="contactEntryForm">
+        <input type="hidden" id="editContactId" value="">
 
-  <!-- ADD / EDIT CONTACT MODAL (Google + Samsung + REMS Fields) -->
-  <div class="modal-overlay" id="contactModal">
-    <div class="modal-card">
-      <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:20px;border-bottom:1px solid var(--border);padding-bottom:14px;">
-        <h3 id="modalTitle" style="font-size:18px;font-weight:700;">Add New Contact</h3>
-        <button onclick="closeModal()" style="background:none;border:none;color:var(--text-3);font-size:20px;cursor:pointer;">✕</button>
-      </div>
-
-      <form id="contactForm" onsubmit="event.preventDefault(); saveContact();">
-        <input type="hidden" id="cId">
-
-        <!-- 1. Name Breakdown (Samsung / Google Spec) -->
-        <div class="form-grid-3">
+        <!-- Name Group -->
+        <div class="d-grid grid-cols-2 gap-4 mb-3">
           <div class="form-group">
-            <label for="cPrefix">Prefix</label>
-            <input type="text" id="cPrefix" class="form-control" placeholder="Mr. / Mrs. / Dr.">
+            <label class="form-label" for="cFirstName">first name *</label>
+            <input type="text" id="cFirstName" class="form-control" required placeholder="First name">
           </div>
           <div class="form-group">
-            <label for="cFirstName">First Name *</label>
-            <input type="text" id="cFirstName" class="form-control" required placeholder="First Name">
-          </div>
-          <div class="form-group">
-            <label for="cLastName">Last Name</label>
-            <input type="text" id="cLastName" class="form-control" placeholder="Last Name">
+            <label class="form-label" for="cLastName">last name</label>
+            <input type="text" id="cLastName" class="form-control" placeholder="Last name">
           </div>
         </div>
 
-        <div class="form-grid-2">
+        <!-- Phone and Email -->
+        <div class="d-grid grid-cols-2 gap-4 mb-3">
           <div class="form-group">
-            <label for="cNickname">Nickname / Reference</label>
-            <input type="text" id="cNickname" class="form-control" placeholder="e.g. Marina 2BHK Investor">
+            <label class="form-label" for="cPhonePrimary">primary mobile phone *</label>
+            <input type="tel" id="cPhonePrimary" class="form-control" required placeholder="+91 98XXX XXXXX">
           </div>
           <div class="form-group">
-            <label for="cCompany">Company / Employer</label>
-            <input type="text" id="cCompany" class="form-control" placeholder="e.g. TCS / Self-Employed">
-          </div>
-        </div>
-
-        <!-- 2. Phone Numbers & WhatsApp -->
-        <div class="form-grid-2">
-          <div class="form-group">
-            <label for="cPrimaryPhone">Primary Mobile *</label>
-            <input type="tel" id="cPrimaryPhone" class="form-control" required placeholder="+91 98201 XXXXX">
-          </div>
-          <div class="form-group">
-            <label for="cWaPhone">WhatsApp Number</label>
-            <input type="tel" id="cWaPhone" class="form-control" placeholder="+91 98201 XXXXX">
+            <label class="form-label" for="cPhoneAlt">alternate phone</label>
+            <input type="tel" id="cPhoneAlt" class="form-control" placeholder="Secondary number or landline">
           </div>
         </div>
 
-        <!-- 3. Emails & Dates -->
-        <div class="form-grid-2">
+        <div class="d-grid grid-cols-2 gap-4 mb-3">
           <div class="form-group">
-            <label for="cEmail">Personal / Work Email</label>
-            <input type="email" id="cEmail" class="form-control" placeholder="name@example.com">
+            <label class="form-label" for="cEmail">email address</label>
+            <input type="email" id="cEmail" class="form-control" placeholder="name@domain.com">
           </div>
           <div class="form-group">
-            <label for="cBirthday">Birthday (Anniversary Sync)</label>
-            <input type="date" id="cBirthday" class="form-control">
+            <label class="form-label" for="cCategory">stakeholder role *</label>
+            <select id="cCategory" class="form-control">
+              <option value="owner">Property Owner</option>
+              <option value="buyer">Prospective Buyer</option>
+              <option value="tenant">Tenant</option>
+              <option value="broker">Channel Partner / Broker</option>
+              <option value="society">Society Committee Member</option>
+              <option value="vendor">Legal Advocate / Valuer</option>
+            </select>
           </div>
         </div>
 
-        <!-- 4. Real Estate (REMS / ERP) Extensions -->
-        <div class="form-grid-3">
+        <!-- Location & Society Association -->
+        <div class="d-grid grid-cols-2 gap-4 mb-3">
           <div class="form-group">
-            <label for="cType">Stakeholder Type</label>
-            <select id="cType" class="form-control">
-              <option value="Buyer">Buyer</option>
-              <option value="Investor">Investor</option>
-              <option value="Landlord">Landlord / Owner</option>
-              <option value="Partner">Channel Partner / Broker</option>
-              <option value="Tenant">Tenant</option>
+            <label class="form-label" for="cLocality">mumbai micro-market</label>
+            <select id="cLocality" class="form-control">
+              <option value="Malad West">Malad West</option>
+              <option value="Goregaon East">Goregaon East</option>
+              <option value="Andheri West">Andheri West</option>
+              <option value="Borivali West">Borivali West</option>
+              <option value="Kandivali West">Kandivali West</option>
+              <option value="Other Area">Other Suburb</option>
             </select>
           </div>
           <div class="form-group">
-            <label for="cBudget">Budget Bracket</label>
-            <input type="text" id="cBudget" class="form-control" placeholder="e.g. ₹1.5 Cr – ₹2.2 Cr">
-          </div>
-          <div class="form-group">
-            <label for="cPan">PAN (Registration Docs)</label>
-            <input type="text" id="cPan" class="form-control" placeholder="ABCDE1234F">
+            <label class="form-label" for="cBuilding">building or society name</label>
+            <input type="text" id="cBuilding" class="form-control" placeholder="e.g. Marina Enclave, Oberoi Woods">
           </div>
         </div>
 
-        <div class="form-group">
-          <label for="cAddress">Residential / Office Address</label>
-          <input type="text" id="cAddress" class="form-control" placeholder="Flat No, Building, Road, Malad West, Mumbai - 400095">
+        <!-- Flat or Office Number -->
+        <div class="form-group mb-3">
+          <label class="form-label" for="cUnitDetails">flat or unit details</label>
+          <input type="text" id="cUnitDetails" class="form-control" placeholder="e.g. Flat 1402, Wing B or Shop 3">
         </div>
 
-        <div class="form-group">
-          <label for="cNotes">Confidential Notes / Requirements</label>
-          <textarea id="cNotes" class="form-control" rows="3" placeholder="Specific carpet area, Vaastu preference, parking requirements..."></textarea>
+        <!-- Notes and Google Keep Style Tags -->
+        <div class="form-group mb-4">
+          <label class="form-label" for="cNotes">confidential notes and preferences</label>
+          <textarea id="cNotes" rows="3" class="form-control" placeholder="Specific expectations, agreement expiry dates, preferred inspection timing, or family references"></textarea>
         </div>
 
-        <div style="display:flex;justify-content:flex-end;gap:10px;margin-top:20px;border-top:1px solid var(--border);padding-top:16px;">
-          <button type="button" class="btn" onclick="closeModal()">Cancel</button>
-          <button type="submit" class="btn btn-primary">Save to Phonebook</button>
+        <div class="d-flex justify-end gap-2">
+          <button type="button" class="btn btn-outline btn-sm" id="cancelContactModalBtn">cancel</button>
+          <button type="submit" class="btn btn-primary btn-sm">save contact</button>
         </div>
       </form>
     </div>
   </div>
 
+  <!-- Scripts -->
+  <script src="/js/config.js"></script>
+  <script src="/js/auth-guard.js"></script>
+  <script src="/js/api.js"></script>
+  <script src="/js/security.js"></script>
+  <script src="/js/theme.js"></script>
+  <script src="/js/tracker.js"></script>
+  <script src="/js/widgets.js"></script>
+  <script src="/js/i18n.js"></script>
+  <script src="/js/app.js"></script>
+  <script src="/js/app-shell.js"></script>
+
+  <!-- Contacts Phonebook Controller -->
   <script>
-    /* =====================================================
-       PHONEBOOK DIRECTORY CONTROLLER
-       ===================================================== */
-    const STORAGE_KEY = 'pfre_phonebook_contacts';
-    let directory = JSON.parse(localStorage.getItem(STORAGE_KEY) || '[]');
+    (function () {
+      'use strict';
 
-    // Build Samsung A-Z Quick Scrubber Bar
-    const azChars = '#ABCDEFGHIJKLMNOPQRSTUVWXYZ'.split('');
-    const scrubberEl = document.getElementById('azScrubber');
-    azChars.forEach(ch => {
-      const a = document.createElement('a');
-      a.className = 'az-char';
-      a.textContent = ch;
-      a.onclick = () => scrollToLetter(ch);
-      scrubberEl.appendChild(a);
-    });
+      const STORAGE_KEY_CONTACTS = 'pfre_phonebook_contacts';
 
-    function scrollToLetter(letter) {
-      const target = document.getElementById('group-' + letter);
-      if (target) target.scrollIntoView({ behavior: 'smooth' });
-    }
+      const initialDirectory = [
+        {
+          id: 'cnt-101',
+          firstName: 'Prashant',
+          lastName: 'Mehta',
+          phonePrimary: '+919820123987',
+          phoneAlt: '+912228801234',
+          email: 'prashant.mehta@example.com',
+          category: 'owner',
+          locality: 'Malad West',
+          building: 'Marina Enclave',
+          unitDetails: 'Flat 1204, Wing C, 2 BHK',
+          notes: 'Sole owner. Looking for long term family tenant. Registered index 2 available.',
+          updatedAt: new Date(Date.now() - 86400000 * 3).toISOString()
+        },
+        {
+          id: 'cnt-102',
+          firstName: 'Sunil',
+          lastName: 'Deshmukh',
+          phonePrimary: '+919819456789',
+          phoneAlt: '',
+          email: 'sunil.deshmukh@example.com',
+          category: 'society',
+          locality: 'Malad West',
+          building: 'Palm Court CHS',
+          unitDetails: 'Secretary Office, Wing A Ground Floor',
+          notes: 'Society Secretary. Connect for society NOC paperwork and parking transfer rules.',
+          updatedAt: new Date(Date.now() - 86400000 * 5).toISOString()
+        },
+        {
+          id: 'cnt-103',
+          firstName: 'Amit',
+          lastName: 'Bansal',
+          phonePrimary: '+919833789012',
+          phoneAlt: '',
+          email: 'amit.bansal@example.com',
+          category: 'buyer',
+          locality: 'Goregaon East',
+          building: 'Oberoi Garden City',
+          unitDetails: 'Looking for 3 BHK high floor',
+          notes: 'Pre-approved loan sanction of ₹3.5 Cr from HDFC Bank. Ready for outright registration.',
+          updatedAt: new Date(Date.now() - 86400000 * 2).toISOString()
+        },
+        {
+          id: 'cnt-104',
+          firstName: 'Advocate Ramesh',
+          lastName: 'Iyer',
+          phonePrimary: '+919821998877',
+          phoneAlt: '',
+          email: 'iyer.legal@mumbaibar.com',
+          category: 'vendor',
+          locality: 'Andheri West',
+          building: 'Adjudication Chambers',
+          unitDetails: 'Office 402, Veera Desai Road',
+          notes: 'Title search advocate. Handles thirty-year search reports and sub-registrar verification.',
+          updatedAt: new Date(Date.now() - 86400000 * 8).toISOString()
+        },
+        {
+          id: 'cnt-105',
+          firstName: 'Siddhesh',
+          lastName: 'Bagkar',
+          phonePrimary: '+919702112233',
+          phoneAlt: '',
+          email: 'siddhesh.b@example.com',
+          category: 'broker',
+          locality: 'Borivali West',
+          building: 'Shimpoli Associates',
+          unitDetails: 'Channel Partner Desk',
+          notes: 'Specializes in IC Colony resale inventory and deemed conveyance societies.',
+          updatedAt: new Date(Date.now() - 86400000 * 4).toISOString()
+        }
+      ];
 
-    function renderContacts(data = directory) {
-      const container = document.getElementById('contactList');
-      document.getElementById('totalBadge').textContent = `${data.length} contacts`;
+      let currentTag = 'all';
+      let currentLocality = 'all';
+      let currentQuery = '';
 
-      if (!data.length) {
-        container.innerHTML = '<div style="text-align:center;padding:60px;color:var(--text-3);">No matching contacts found in phonebook.</div>';
-        return;
+      function getContacts() {
+        try {
+          const raw = localStorage.getItem(STORAGE_KEY_CONTACTS);
+          if (!raw) {
+            localStorage.setItem(STORAGE_KEY_CONTACTS, JSON.stringify(initialDirectory));
+            return initialDirectory;
+          }
+          return JSON.parse(raw);
+        } catch (e) {
+          return initialDirectory;
+        }
       }
 
-      // Group alphabetically
-      const grouped = {};
-      data.forEach(c => {
-        const firstLetter = (c.name.displayName || 'A').charAt(0).toUpperCase();
-        const key = /[A-Z]/.test(firstLetter) ? firstLetter : '#';
-        if (!grouped[key]) grouped[key] = [];
-        grouped[key].push(c);
-      });
+      function saveContacts(list) {
+        localStorage.setItem(STORAGE_KEY_CONTACTS, JSON.stringify(list));
+      }
 
-      const sortedKeys = Object.keys(grouped).sort();
-      let html = '';
+      function getCategoryBadge(cat) {
+        switch (cat) {
+          case 'owner': return '<span class="badge badge-green">property owner</span>';
+          case 'buyer': return '<span class="badge badge-blue">prospective buyer</span>';
+          case 'tenant': return '<span class="badge badge-purple">tenant</span>';
+          case 'broker': return '<span class="badge badge-gold">channel partner</span>';
+          case 'society': return '<span class="badge badge-amber">society secretary</span>';
+          case 'vendor': return '<span class="badge badge-gray">legal advocate</span>';
+          default: return '<span class="badge badge-gray">' + cat + '</span>';
+        }
+      }
 
-      sortedKeys.forEach(key => {
-        html += `<div class="contact-group-header" id="group-${key}">${key}</div>`;
-        grouped[key].sort((a, b) => a.name.displayName.localeCompare(b.name.displayName)).forEach(c => {
-          const initials = c.name.displayName.split(' ').map(n => n[0]).join('').slice(0, 2).toUpperCase();
-          const primaryPhone = c.phones?.[0]?.number || 'No phone';
-          const type = c.rems?.contactType || 'Buyer';
+      function renderContacts() {
+        const list = getContacts();
+        const badge = document.getElementById('contactCountBadge');
+        if (badge) badge.textContent = `${list.length} contacts`;
 
-          html += `
-            <div class="contact-card">
-              <div class="contact-left">
-                <div class="avatar-circle">${initials}</div>
-                <div>
-                  <div class="c-name">
-                    <span>${c.name.displayName}</span>
-                    <span class="tag-badge tag-${type.toLowerCase()}">${type}</span>
-                    ${c.rems?.vipStarred ? '⭐' : ''}
+        const filtered = list.filter(item => {
+          if (currentTag !== 'all' && item.category !== currentTag) return false;
+          if (currentLocality !== 'all' && item.locality !== currentLocality) return false;
+
+          if (currentQuery) {
+            const q = currentQuery.toLowerCase();
+            const fullName = `${item.firstName} ${item.lastName}`.toLowerCase();
+            const phoneMatch = (item.phonePrimary || '').includes(q) || (item.phoneAlt || '').includes(q);
+            const bldMatch = (item.building || '').toLowerCase().includes(q);
+            const locMatch = (item.locality || '').toLowerCase().includes(q);
+            const notesMatch = (item.notes || '').toLowerCase().includes(q);
+
+            if (!fullName.includes(q) && !phoneMatch && !bldMatch && !locMatch && !notesMatch) {
+              return false;
+            }
+          }
+          return true;
+        });
+
+        const grid = document.getElementById('contactsCardGrid');
+        const emptyNotice = document.getElementById('noContactsNotice');
+
+        if (!grid) return;
+
+        if (filtered.length === 0) {
+          grid.innerHTML = '';
+          if (emptyNotice) emptyNotice.style.display = 'block';
+          return;
+        }
+
+        if (emptyNotice) emptyNotice.style.display = 'none';
+
+        grid.innerHTML = filtered.map(item => {
+          const cleanPhone = (item.phonePrimary || '').replace(/[\s\-\+]/g, '');
+          const waUrl = `https://wa.me/${cleanPhone}?text=Hello%20${encodeURIComponent(item.firstName)},%20connecting%20from%20Property%20Finder%20Real%20Estate%20Mumbai.`;
+          const avatarInitials = `${(item.firstName || '')[0] || ''}${(item.lastName || '')[0] || ''}`.toUpperCase() || 'P';
+
+          return `
+            <div class="calc-widget d-flex flex-column justify-between">
+              <div>
+                <div class="d-flex justify-between items-start mb-3">
+                  <div class="d-flex items-center gap-3">
+                    <div class="sb-avatar" style="width:42px;height:42px;background:var(--bg-secondary);color:var(--blue);font-weight:700;font-size:15px;border-radius:50%;display:flex;align-items:center;justify-content:center;border:1px solid var(--border-color);">
+                      ${avatarInitials}
+                    </div>
+                    <div>
+                      <h2 class="text-sm fw-bold mb-0 text-text">${window.pfreSecurity ? window.pfreSecurity.escapeHTML(item.firstName + ' ' + item.lastName) : item.firstName + ' ' + item.lastName}</h2>
+                      <span class="text-xxs text-muted d-block">${item.building || item.locality}</span>
+                    </div>
                   </div>
-                  <div class="c-meta">
-                    📞 ${primaryPhone} &nbsp;·&nbsp;
-                    📍 ${c.addresses?.[0]?.city || c.addresses?.[0]?.street || 'Mumbai'}
-                    ${c.rems?.budgetRange ? `&nbsp;·&nbsp; <strong>${c.rems.budgetRange}</strong>` : ''}
+                  <div>
+                    ${getCategoryBadge(item.category)}
                   </div>
                 </div>
+
+                <div class="p-2 bg-secondary rounded mb-3 text-xs">
+                  <div class="d-flex justify-between py-1">
+                    <span class="text-muted">mobile phone</span>
+                    <a href="tel:${item.phonePrimary}" class="fw-bold text-blue">${item.phonePrimary}</a>
+                  </div>
+                  ${item.phoneAlt ? `
+                    <div class="d-flex justify-between py-1 border-top">
+                      <span class="text-muted">alternate</span>
+                      <a href="tel:${item.phoneAlt}" class="text-text">${item.phoneAlt}</a>
+                    </div>
+                  ` : ''}
+                  ${item.email ? `
+                    <div class="d-flex justify-between py-1 border-top">
+                      <span class="text-muted">email</span>
+                      <a href="mailto:${item.email}" class="text-text text-truncate" style="max-width:160px;">${item.email}</a>
+                    </div>
+                  ` : ''}
+                  ${item.unitDetails ? `
+                    <div class="d-flex justify-between py-1 border-top">
+                      <span class="text-muted">unit / flat</span>
+                      <span class="fw-bold text-text">${window.pfreSecurity ? window.pfreSecurity.escapeHTML(item.unitDetails) : item.unitDetails}</span>
+                    </div>
+                  ` : ''}
+                </div>
+
+                ${item.notes ? `
+                  <p class="text-xxs text-muted mb-3" style="font-style:italic;">
+                    &#8220;${window.pfreSecurity ? window.pfreSecurity.escapeHTML(item.notes) : item.notes}&#8221;
+                  </p>
+                ` : ''}
               </div>
-              <div class="contact-actions">
-                <a href="tel:${primaryPhone.replace(/\s+/g,'')}" class="btn" title="Call">📞</a>
-                <a href="https://wa.me/${primaryPhone.replace(/\D/g,'')}" target="_blank" rel="noopener noreferrer" class="btn" title="WhatsApp">💬</a>
-                <button class="btn" onclick="downloadSingleVCF('${c.id}')" title="Save to Phone">📲</button>
-                <button class="btn" onclick="openEditModal('${c.id}')" title="Edit">✏️</button>
-                <button class="btn" onclick="deleteContact('${c.id}')" title="Delete" style="color:var(--red);">🗑</button>
+
+              <div class="d-flex justify-between items-center border-top pt-3 mt-2">
+                <div class="d-flex gap-2">
+                  <a href="${waUrl}" target="_blank" rel="noopener" class="btn btn-green-inline btn-sm py-1 px-2" title="WhatsApp Message">&#128172;</a>
+                  <a href="tel:${item.phonePrimary}" class="btn btn-outline btn-sm py-1 px-2" title="Dial Phone">&#128222;</a>
+                </div>
+                <div class="d-flex gap-1">
+                  <button type="button" class="btn btn-outline btn-sm py-1 px-2 text-blue" data-edit-contact="${item.id}" title="Edit Record">&#9998;</button>
+                  <button type="button" class="btn btn-outline btn-sm py-1 px-2 text-red" data-delete-contact="${item.id}" title="Delete Record">&times;</button>
+                </div>
               </div>
             </div>
           `;
+        }).join('');
+
+        grid.querySelectorAll('[data-edit-contact]').forEach(btn => {
+          btn.addEventListener('click', function () {
+            const id = this.getAttribute('data-edit-contact');
+            openEditModal(id);
+          });
         });
-      });
 
-      container.innerHTML = html;
-    }
-
-    function handleSearch() {
-      const q = document.getElementById('searchInput').value.toLowerCase();
-      const typeFilter = document.getElementById('typeFilter').value;
-
-      const filtered = directory.filter(c => {
-        const matchesQ = !q ||
-          (c.name.displayName || '').toLowerCase().includes(q) ||
-          (c.phones || []).some(p => p.number.includes(q)) ||
-          (c.rems?.budgetRange || '').toLowerCase().includes(q) ||
-          (c.addresses || []).some(a => (a.street + a.city).toLowerCase().includes(q)) ||
-          (c.rems?.panNumber || '').toLowerCase().includes(q);
-
-        const matchesType = typeFilter === 'all' || c.rems?.contactType === typeFilter;
-        return matchesQ && matchesType;
-      });
-
-      renderContacts(filtered);
-    }
-
-    function filterByTag(tag) {
-      document.getElementById('typeFilter').value = tag;
-      handleSearch();
-    }
-
-    /* Modal Form Operations */
-    function openAddModal() {
-      document.getElementById('modalTitle').textContent = 'Add New Contact';
-      document.getElementById('contactForm').reset();
-      document.getElementById('cId').value = '';
-      document.getElementById('contactModal').classList.add('open');
-    }
-
-    function openEditModal(id) {
-      const c = directory.find(x => x.id === id);
-      if (!c) return;
-      document.getElementById('modalTitle').textContent = 'Edit Contact';
-      document.getElementById('cId').value = c.id;
-      document.getElementById('cPrefix').value = c.name?.prefix || '';
-      document.getElementById('cFirstName').value = c.name?.firstName || '';
-      document.getElementById('cLastName').value = c.name?.lastName || '';
-      document.getElementById('cNickname').value = c.name?.nickname || '';
-      document.getElementById('cCompany').value = c.organization?.company || '';
-      document.getElementById('cPrimaryPhone').value = c.phones?.[0]?.number || '';
-      document.getElementById('cWaPhone').value = c.phones?.[1]?.number || '';
-      document.getElementById('cEmail').value = c.emails?.[0]?.address || '';
-      document.getElementById('cBirthday').value = c.dates?.birthday || '';
-      document.getElementById('cType').value = c.rems?.contactType || 'Buyer';
-      document.getElementById('cBudget').value = c.rems?.budgetRange || '';
-      document.getElementById('cPan').value = c.rems?.panNumber || '';
-      document.getElementById('cAddress').value = c.addresses?.[0]?.street || '';
-      document.getElementById('cNotes').value = c.notes || '';
-      document.getElementById('contactModal').classList.add('open');
-    }
-
-    function closeModal() {
-      document.getElementById('contactModal').classList.remove('open');
-    }
-
-    function saveContact() {
-      const id = document.getElementById('cId').value;
-      const fName = document.getElementById('cFirstName').value.trim();
-      const lName = document.getElementById('cLastName').value.trim();
-      const dName = [fName, lName].filter(Boolean).join(' ');
-
-      const record = {
-        id: id || 'c-' + Date.now().toString(36),
-        name: {
-          prefix: document.getElementById('cPrefix').value.trim(),
-          firstName: fName,
-          lastName: lName,
-          displayName: dName,
-          nickname: document.getElementById('cNickname').value.trim()
-        },
-        organization: { company: document.getElementById('cCompany').value.trim() },
-        phones: [
-          { type: 'Mobile', number: document.getElementById('cPrimaryPhone').value.trim(), isPrimary: true },
-          { type: 'WhatsApp', number: document.getElementById('cWaPhone').value.trim() || document.getElementById('cPrimaryPhone').value.trim() }
-        ],
-        emails: [{ type: 'Primary', address: document.getElementById('cEmail').value.trim() }],
-        dates: { birthday: document.getElementById('cBirthday').value },
-        addresses: [{ type: 'Residence', street: document.getElementById('cAddress').value.trim(), city: 'Mumbai' }],
-        rems: {
-          contactType: document.getElementById('cType').value,
-          budgetRange: document.getElementById('cBudget').value.trim(),
-          panNumber: document.getElementById('cPan').value.trim().toUpperCase(),
-          vipStarred: false
-        },
-        notes: document.getElementById('cNotes').value.trim(),
-        updatedAt: new Date().toISOString()
-      };
-
-      if (id) {
-        const idx = directory.findIndex(x => x.id === id);
-        if (idx !== -1) directory[idx] = record;
-      } else {
-        directory.unshift(record);
+        grid.querySelectorAll('[data-delete-contact]').forEach(btn => {
+          btn.addEventListener('click', function () {
+            const id = this.getAttribute('data-delete-contact');
+            deleteContact(id);
+          });
+        });
       }
 
-      localStorage.setItem(STORAGE_KEY, JSON.stringify(directory));
-      closeModal();
-      handleSearch();
-    }
+      function openEditModal(id) {
+        const list = getContacts();
+        const contact = list.find(c => c.id === id);
+        if (!contact) return;
 
-    function deleteContact(id) {
-      if (!confirm('Are you sure you want to remove this contact from the directory?')) return;
-      directory = directory.filter(x => x.id !== id);
-      localStorage.setItem(STORAGE_KEY, JSON.stringify(directory));
-      handleSearch();
-    }
+        document.getElementById('editContactId').value = contact.id;
+        document.getElementById('contactModalTitle').textContent = 'edit contact record';
 
-    /* vCard (.vcf) Export Engine for Android / iOS / Google Sync */
-    function generateVCardString(c) {
-      const tel = c.phones?.[0]?.number || '';
-      const email = c.emails?.[0]?.address || '';
-      return [
-        'BEGIN:VCARD',
-        'VERSION:3.0',
-        `FN:${c.name.displayName}`,
-        `N:${c.name.lastName || ''};${c.name.firstName || ''};;;`,
-        `TEL;TYPE=CELL:${tel}`,
-        email ? `EMAIL;TYPE=INTERNET:${email}` : '',
-        c.organization?.company ? `ORG:${c.organization.company}` : 'ORG:Property Finder Real Estate',
-        c.notes ? `NOTE:${c.notes.replace(/\n/g, ' ')}` : '',
-        'END:VCARD'
-      ].filter(Boolean).join('\r\n');
-    }
+        document.getElementById('cFirstName').value = contact.firstName || '';
+        document.getElementById('cLastName').value = contact.lastName || '';
+        document.getElementById('cPhonePrimary').value = contact.phonePrimary || '';
+        document.getElementById('cPhoneAlt').value = contact.phoneAlt || '';
+        document.getElementById('cEmail').value = contact.email || '';
+        document.getElementById('cCategory').value = contact.category || 'owner';
+        document.getElementById('cLocality').value = contact.locality || 'Malad West';
+        document.getElementById('cBuilding').value = contact.building || '';
+        document.getElementById('cUnitDetails').value = contact.unitDetails || '';
+        document.getElementById('cNotes').value = contact.notes || '';
 
-    function downloadSingleVCF(id) {
-      const c = directory.find(x => x.id === id);
-      if (!c) return;
-      const vcfData = generateVCardString(c);
-      const blob = new Blob([vcfData], { type: 'text/vcard;charset=utf-8;' });
-      const a = document.createElement('a');
-      a.href = URL.createObjectURL(blob);
-      a.download = `${c.name.displayName.replace(/\s+/g, '_')}.vcf`;
-      a.click();
-    }
+        const modal = document.getElementById('contactModal');
+        if (modal) modal.style.display = 'flex';
+      }
 
-    function exportMasterVCF() {
-      if (!directory.length) return alert('No contacts to export.');
-      const allVcf = directory.map(generateVCardString).join('\r\n');
-      const blob = new Blob([allVcf], { type: 'text/vcard;charset=utf-8;' });
-      const a = document.createElement('a');
-      a.href = URL.createObjectURL(blob);
-      a.download = `PFRE_Master_Contacts_${new Date().toISOString().slice(0,10)}.vcf`;
-      a.click();
-    }
+      function deleteContact(id) {
+        if (!confirm('Are you sure you want to delete this contact record?')) return;
+        const list = getContacts().filter(c => c.id !== id);
+        saveContacts(list);
+        renderContacts();
+      }
 
-    // Initialize with sample records if clean
-    if (!directory.length) {
-      directory = [
-        {
-          id: 'c-1',
-          name: { firstName: 'Rahul', lastName: 'Sharma', displayName: 'Rahul Sharma' },
-          phones: [{ type: 'Mobile', number: '+91 98201 12345' }],
-          rems: { contactType: 'Buyer', budgetRange: '₹1.80 Cr', panNumber: 'ABCPS1234F', vipStarred: true },
-          addresses: [{ street: 'Marina Enclave, Malad West' }]
-        },
-        {
-          id: 'c-2',
-          name: { firstName: 'Amit', lastName: 'Patil', displayName: 'Amit Patil' },
-          phones: [{ type: 'Mobile', number: '+91 98202 54321' }],
-          rems: { contactType: 'Landlord', budgetRange: '₹45,000 / mo' },
-          addresses: [{ street: 'Auris Serenity, Link Road' }]
+      function exportContacts() {
+        const list = getContacts();
+        if (list.length === 0) {
+          alert('No contacts available to export.');
+          return;
         }
-      ];
-      localStorage.setItem(STORAGE_KEY, JSON.stringify(directory));
-    }
 
-    renderContacts();
+        const headers = ['ContactID', 'FirstName', 'LastName', 'PrimaryPhone', 'AltPhone', 'Email', 'Role', 'Locality', 'Building', 'Unit', 'Notes'];
+        const rows = list.map(c => [
+          `"${c.id}"`,
+          `"${c.firstName}"`,
+          `"${c.lastName || ''}"`,
+          `"${c.phonePrimary}"`,
+          `"${c.phoneAlt || ''}"`,
+          `"${c.email || ''}"`,
+          `"${c.category}"`,
+          `"${c.locality}"`,
+          `"${c.building || ''}"`,
+          `"${c.unitDetails || ''}"`,
+          `"${(c.notes || '').replace(/"/g, '""')}"`
+        ].join(','));
+
+        const csvContent = 'data:text/csv;charset=utf-8,' + [headers.join(','), ...rows].join('\n');
+        const encodedUri = encodeURI(csvContent);
+        const link = document.createElement('a');
+        link.setAttribute('href', encodedUri);
+        link.setAttribute('download', `pfre_phonebook_${Date.now()}.csv`);
+        document.body.appendChild(link);
+        link.click();
+        document.body.removeChild(link);
+      }
+
+      function bindEvents() {
+        const searchInput = document.getElementById('contactSearchInput');
+        if (searchInput) {
+          searchInput.addEventListener('input', function (e) {
+            currentQuery = e.target.value.trim();
+            renderContacts();
+          });
+        }
+
+        const localitySelect = document.getElementById('localityDirectorySelect');
+        if (localitySelect) {
+          localitySelect.addEventListener('change', function (e) {
+            currentLocality = e.target.value;
+            renderContacts();
+          });
+        }
+
+        const tagBtns = document.querySelectorAll('[data-tag-filter]');
+        tagBtns.forEach(btn => {
+          btn.addEventListener('click', function () {
+            tagBtns.forEach(b => b.classList.remove('active'));
+            this.classList.add('active');
+            currentTag = this.getAttribute('data-tag-filter');
+            renderContacts();
+          });
+        });
+
+        const openAddBtn = document.getElementById('openAddContactBtn');
+        const modal = document.getElementById('contactModal');
+        const closeModalBtn = document.getElementById('closeContactModalBtn');
+        const cancelModalBtn = document.getElementById('cancelContactModalBtn');
+        const form = document.getElementById('contactEntryForm');
+
+        if (openAddBtn && modal && form) {
+          openAddBtn.addEventListener('click', function () {
+            form.reset();
+            document.getElementById('editContactId').value = '';
+            document.getElementById('contactModalTitle').textContent = 'create new contact record';
+            modal.style.display = 'flex';
+          });
+        }
+
+        if (closeModalBtn && modal) {
+          closeModalBtn.addEventListener('click', () => modal.style.display = 'none');
+        }
+        if (cancelModalBtn && modal) {
+          cancelModalBtn.addEventListener('click', () => modal.style.display = 'none');
+        }
+
+        if (form) {
+          form.addEventListener('submit', function (e) {
+            e.preventDefault();
+            const list = getContacts();
+            const editId = document.getElementById('editContactId').value;
+
+            const recordData = {
+              firstName: document.getElementById('cFirstName').value.trim(),
+              lastName: document.getElementById('cLastName').value.trim(),
+              phonePrimary: document.getElementById('cPhonePrimary').value.trim(),
+              phoneAlt: document.getElementById('cPhoneAlt').value.trim(),
+              email: document.getElementById('cEmail').value.trim(),
+              category: document.getElementById('cCategory').value,
+              locality: document.getElementById('cLocality').value,
+              building: document.getElementById('cBuilding').value.trim(),
+              unitDetails: document.getElementById('cUnitDetails').value.trim(),
+              notes: document.getElementById('cNotes').value.trim(),
+              updatedAt: new Date().toISOString()
+            };
+
+            if (editId) {
+              const idx = list.findIndex(c => c.id === editId);
+              if (idx !== -1) {
+                list[idx] = { ...list[idx], ...recordData };
+              }
+            } else {
+              recordData.id = 'cnt-' + Date.now().toString(36).substr(-4);
+              list.unshift(recordData);
+            }
+
+            saveContacts(list);
+            renderContacts();
+            form.reset();
+            if (modal) modal.style.display = 'none';
+
+            if (typeof window.showToast === 'function') {
+              window.showToast('Contact saved successfully.', 'success');
+            }
+          });
+        }
+
+        const exportBtn = document.getElementById('exportContactsBtn');
+        if (exportBtn) {
+          exportBtn.addEventListener('click', exportContacts);
+        }
+      }
+
+      document.addEventListener('DOMContentLoaded', function () {
+        renderContacts();
+        bindEvents();
+      });
+    })();
   </script>
 </body>
 </html>
