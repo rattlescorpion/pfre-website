@@ -1,11 +1,11 @@
 /* =====================================================
-   PROPERTY FINDER REAL ESTATE — Production Service Worker v3.3
+   PROPERTY FINDER REAL ESTATE — Production Service Worker v3.4
    Unified Caching · Resilient Pre-cache · Background Sync
    Network-First Inventory/HTML · Cache-First Assets
-   Offline Fallbacks · Push Notifications
+   ERP/Admin Bypass · Offline Fallbacks · Push Notifications
    ===================================================== */
 
-const BUILD_ID   = '2026-10-03-01';
+const BUILD_ID   = '2026-10-14-01';
 const CACHE_NAME = `pfre-cache-${BUILD_ID}`;
 
 /* Core UI shell & fallback templates (Guaranteed precache) */
@@ -16,34 +16,68 @@ const CORE_ASSETS = [
   '/manifest.json',
   '/css/styles.css',
   '/css/theme.css',
+  '/css/widgets.css',
+  '/css/mobile.css',
   '/css/overrides.css',
   '/css/utils.css',
-  '/css/mobile.css',
-  '/css/widgets.css',
   '/js/config.js',
+  '/js/auth-guard.js',
+  '/js/api.js',
+  '/js/security.js',
   '/js/theme.js',
+  '/js/tracker.js',
   '/js/widgets.js',
   '/js/i18n.js',
-  '/js/security.js',
-  '/js/api.js',
-  '/js/tracker.js',
+  '/js/app.js',
+  '/js/app-shell.js',
+  '/js/layout.js',
   '/js/properties-filter.js',
   '/data/properties.json',
   '/data/projects.json',
+  '/images/logo.png',
+  '/images/og-banner.jpg',
   '/icons/favicon.svg',
   '/icons/icon-192.png'
 ];
 
-/* Optional secondary pages (Cached gracefully in background) */
+/* Secondary public pages & micro-market hubs (Cached gracefully in background) */
 const OPTIONAL_PAGES = [
   '/properties.html',
-  '/projects.html',
+  '/property-detail.html',
+  '/post-property.html',
+  '/services.html',
+  '/agreement-registration.html',
+  '/calculators.html',
+  '/tds-calculators.html',
+  '/price-trends.html',
   '/about.html',
   '/contact.html',
-  '/services.html',
-  '/calculators.html',
+  '/privacy.html',
   '/terms.html',
-  '/privacy-policy.html'
+  '/properties/flats-in-malad-west.html',
+  '/properties/rental-flats-malad.html',
+  '/properties/flats-in-goregaon-east.html',
+  '/properties/flats-in-andheri-west.html',
+  '/properties/flats-in-kandivali-west.html',
+  '/properties/flats-in-borivali-west.html'
+];
+
+/* Internal ERP, CRM, and Admin routes that must NEVER be cached */
+const PRIVATE_ADMIN_ROUTES = [
+  '/admin',
+  '/login',
+  '/crm',
+  '/contacts',
+  '/inventory',
+  '/schedule',
+  '/analytics',
+  '/finance',
+  '/hrms',
+  '/legal',
+  '/email-templates',
+  '/cms',
+  '/business-blueprint',
+  '/card'
 ];
 
 /* ── 1. INSTALL: Resilient Pre-caching ── */
@@ -62,7 +96,7 @@ self.addEventListener('install', (event) => {
         })
       );
 
-      // 2. Pre-warm optional routes without blocking service worker activation
+      // 2. Pre-warm optional public routes without blocking activation
       await Promise.allSettled(
         OPTIONAL_PAGES.map(async (url) => {
           try {
@@ -99,6 +133,14 @@ self.addEventListener('fetch', (event) => {
     return;
   }
 
+  // Skip caching for internal ERP/CRM/Admin consoles (matches vercel.json no-store rules)
+  const isPrivateAdminRoute = PRIVATE_ADMIN_ROUTES.some(
+    (route) => url.pathname === route || url.pathname === `${route}.html`
+  );
+  if (isPrivateAdminRoute) {
+    return;
+  }
+
   const isSameOrigin = url.origin === self.location.origin;
   const isFontCDN = url.hostname.includes('fonts.googleapis.com') || url.hostname.includes('fonts.gstatic.com');
 
@@ -123,7 +165,12 @@ self.addEventListener('fetch', (event) => {
           return networkRes;
         })
         .catch(async () => {
-          const cached = await caches.match(event.request);
+          // Match exact request, or fallback to .html extension for Vercel cleanUrls
+          const cached =
+            (await caches.match(event.request)) ||
+            (await caches.match(`${url.pathname}.html`)) ||
+            (await caches.match(url.pathname, { ignoreSearch: true }));
+
           if (cached) return cached;
 
           // Fallback hierarchy for page navigation failures
@@ -157,7 +204,7 @@ self.addEventListener('fetch', (event) => {
           return networkRes;
         })
         .catch(() => {
-          // Fallback placeholder image when offline
+          // Fallback placeholder SVG when an image is offline
           if (event.request.destination === 'image') {
             return new Response(
               `<svg xmlns="http://www.w3.org/2000/svg" width="300" height="200" viewBox="0 0 300 200"><rect width="300" height="200" fill="#F1F5F9"/><text x="150" y="105" font-family="sans-serif" font-size="14" fill="#94A3B8" text-anchor="middle">Image Offline</text></svg>`,
@@ -180,13 +227,13 @@ self.addEventListener('push', (event) => {
 
   const title = data.title || 'Property Finder Real Estate';
   const options = {
-    body: data.body || 'New property match available in Mumbai!',
+    body: data.body || 'New verified property match available in Mumbai!',
     icon: data.icon || '/icons/icon-192.png',
     badge: data.badge || '/icons/icon-192.png',
     data: { url: data.url || '/properties.html' },
     actions: [
-      { action: 'view', title: '👀 View Details' },
-      { action: 'dismiss', title: '✕ Close' }
+      { action: 'view', title: 'View Details' },
+      { action: 'dismiss', title: 'Close' }
     ],
     vibrate: [150, 80, 150]
   };
