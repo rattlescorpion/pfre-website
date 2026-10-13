@@ -1,468 +1,359 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" data-theme="light">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Real Estate Services — Property Finder Real Estate | Mumbai</title>
-  <meta name="description" content="Comprehensive real estate services in Mumbai: Residential outright sales, commercial leasing, biometric Leave & License registration, MahaRERA compliance, and title verification.">
-  <meta name="author" content="Property Finder Real Estate">
-  <link rel="canonical" href="https://www.propertyfinderrealestate.com/services.html">
-
-  <!-- Security & CSP -->
-  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' https://cdnjs.cloudflare.com https://challenges.cloudflare.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' data: https:; connect-src 'self' https://api.propertyfinderrealestate.com http://localhost:8000 https://formspree.io; frame-src https://www.google.com https://challenges.cloudflare.com; form-action 'self' https://formspree.io; object-src 'none'; base-uri 'self'">
-  <meta http-equiv="X-Content-Type-Options" content="nosniff">
-  <meta http-equiv="Referrer-Policy" content="strict-origin-when-cross-origin">
+  <title>real estate advisory services mumbai | Property Finder Real Estate</title>
+  <meta name="description" content="Explore end-to-end real estate services in Mumbai Western Suburbs including residential purchase, commercial leasing, leave and license registration, and title verification.">
+  <meta name="keywords" content="real estate services mumbai, property buying consultant malad, commercial leasing andheri, leave and license registration, title search lawyer mumbai, property finder real estate">
+  <meta name="robots" content="index, follow">
+  <link rel="canonical" href="https://propertyfinderrealestate.com/services.html">
+  <meta name="theme-color" content="#FFFFFF">
 
   <!-- Open Graph -->
   <meta property="og:type" content="website">
-  <meta property="og:site_name" content="Property Finder Real Estate">
-  <meta property="og:locale" content="en_IN">
-  <meta property="og:title" content="Real Estate Services in Mumbai | Property Finder Real Estate">
-  <meta property="og:description" content="End-to-end property solutions in Mumbai's Western Suburbs. Residential sales, commercial leasing, legal title checks, and door-step agreement registration.">
-  <meta property="og:url" content="https://www.propertyfinderrealestate.com/services.html">
-  <meta property="og:image" content="https://www.propertyfinderrealestate.com/images/og-banner.jpg">
-  <meta property="og:image:width" content="1200">
-  <meta property="og:image:height" content="630">
-  <meta property="og:image:type" content="image/jpeg">
+  <meta property="og:title" content="real estate advisory services | Property Finder Real Estate">
+  <meta property="og:description" content="Turnkey property acquisition, leasing, legal diligence, and agreement registration services across Mumbai.">
+  <meta property="og:url" content="https://propertyfinderrealestate.com/services.html">
+  <meta property="og:image" content="/images/og-banner.jpg">
 
-  <!-- Twitter Card -->
-  <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:site" content="@PropertyFinderA">
-  <meta name="twitter:title" content="Real Estate Services in Mumbai | PFRE">
-  <meta name="twitter:description" content="Residential sales, commercial leasing, and legal agreement registration in Mumbai.">
-  <meta name="twitter:image" content="https://www.propertyfinderrealestate.com/images/og-banner.jpg">
-
-  <!-- SEO & Geolocation -->
-  <meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large">
-  <meta name="geo.region" content="IN-MH">
-  <meta name="geo.placename" content="Mumbai">
-  <meta name="geo.position" content="19.1886;72.8485">
-  <meta name="ICBM" content="19.1886, 72.8485">
-
-  <!-- Favicon & PWA -->
-  <link rel="icon" type="image/png" sizes="192x192" href="/icons/icon-192.png">
-  <link rel="icon" type="image/svg+xml" href="/icons/favicon.svg">
+  <link rel="icon" type="image/png" href="/images/logo.png">
   <link rel="manifest" href="/manifest.json">
-  <meta name="theme-color" content="#2563EB">
-  <meta name="apple-mobile-web-app-capable" content="yes">
-  <meta name="apple-mobile-web-app-status-bar-style" content="default">
-  <meta name="apple-mobile-web-app-title" content="Property Finder RE">
 
-  <!-- Fonts & Early Theme Loader -->
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;0,900;1,700&family=DM+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-  <script>
-    !function(){var t=localStorage.getItem("pfre_theme")||(window.matchMedia("(prefers-color-scheme:dark)").matches?"dark":"light");document.documentElement.setAttribute("data-theme",t);document.documentElement.classList.add("theme-"+t)}();
-  </script>
-
-  <!-- Root-Relative Stylesheets -->
+  <!-- Stylesheets -->
   <link rel="stylesheet" href="/css/styles.css">
+  <link rel="stylesheet" href="/css/theme.css">
   <link rel="stylesheet" href="/css/widgets.css">
   <link rel="stylesheet" href="/css/mobile.css">
-  <link rel="stylesheet" href="/css/theme.css">
   <link rel="stylesheet" href="/css/overrides.css">
   <link rel="stylesheet" href="/css/utils.css">
-
-  <style>
-    .services-catalog {
-      max-width: 1240px;
-      margin: 0 auto;
-      padding: 32px 5% 80px;
-    }
-    .services-grid {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 28px;
-      margin-top: 24px;
-    }
-    .service-card {
-      background: var(--card, white);
-      border: 1.5px solid var(--border);
-      border-radius: var(--radius-xl, 20px);
-      padding: 32px 28px;
-      box-shadow: var(--shadow-sm);
-      display: flex;
-      flex-direction: column;
-      transition: transform .25s, box-shadow .25s, border-color .25s;
-    }
-    .service-card:hover {
-      transform: translateY(-4px);
-      box-shadow: var(--shadow-lg);
-      border-color: var(--blue);
-    }
-    .service-icon-box {
-      width: 52px;
-      height: 52px;
-      border-radius: 14px;
-      background: var(--blue-light, rgba(37, 99, 235, 0.1));
-      color: var(--blue);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 26px;
-      margin-bottom: 20px;
-    }
-    .service-title {
-      font-family: 'Playfair Display', serif;
-      font-size: 21px;
-      font-weight: 700;
-      color: var(--text);
-      margin-bottom: 10px;
-      line-height: 1.3;
-    }
-    .service-desc {
-      font-size: 14px;
-      color: var(--text-muted);
-      line-height: 1.7;
-      margin-bottom: 20px;
-    }
-    .service-features {
-      list-style: none;
-      padding: 0;
-      margin: 0 0 24px 0;
-      display: flex;
-      flex-direction: column;
-      gap: 10px;
-      font-size: 13.5px;
-      color: var(--text);
-    }
-    .service-features li {
-      display: flex;
-      align-items: flex-start;
-      gap: 8px;
-    }
-    .service-features li span {
-      color: var(--blue);
-      font-weight: 700;
-      flex-shrink: 0;
-    }
-    .service-action-row {
-      margin-top: auto;
-      padding-top: 18px;
-      border-top: 1px solid var(--border);
-    }
-
-    /* Process Flow */
-    .process-section {
-      background: var(--bg-secondary);
-      border-radius: var(--radius-xl, 24px);
-      padding: 56px 40px;
-      margin: 64px 0 20px;
-      border: 1px solid var(--border);
-    }
-    .process-grid {
-      display: grid;
-      grid-template-columns: repeat(4, 1fr);
-      gap: 24px;
-      margin-top: 36px;
-    }
-    .process-step {
-      background: var(--card, white);
-      border: 1.5px solid var(--border);
-      border-radius: 16px;
-      padding: 28px 24px;
-      position: relative;
-    }
-    .process-step-num {
-      font-family: 'Playfair Display', serif;
-      font-size: 32px;
-      font-weight: 900;
-      color: var(--blue);
-      opacity: 0.25;
-      line-height: 1;
-      margin-bottom: 8px;
-    }
-    .process-step-title {
-      font-size: 16px;
-      font-weight: 700;
-      margin-bottom: 8px;
-      color: var(--text);
-    }
-    .process-step-desc {
-      font-size: 13px;
-      color: var(--text-muted);
-      line-height: 1.6;
-    }
-
-    @media (max-width: 1024px) {
-      .services-grid { grid-template-columns: repeat(2, 1fr); }
-      .process-grid { grid-template-columns: repeat(2, 1fr); }
-    }
-    @media (max-width: 680px) {
-      .services-grid { grid-template-columns: 1fr; }
-      .process-grid { grid-template-columns: 1fr; }
-      .process-section { padding: 36px 20px; }
-    }
-  </style>
-
-  <!-- Schema Structured Data -->
-  <script type="application/ld+json">
-  {
-    "@context": "https://schema.org",
-    "@type": "Service",
-    "serviceType": "Real Estate Consulting",
-    "provider": {
-      "@type": "RealEstateAgent",
-      "@id": "https://www.propertyfinderrealestate.com/#organization",
-      "name": "Property Finder Real Estate",
-      "telephone": "+919326990050",
-      "address": {
-        "@type": "PostalAddress",
-        "streetAddress": "Shop No. 9, Ground Floor, Building No. 3, Deepanjali Co-operative Housing Society Limited, Baf-Hira Nagar, Lower Kharodi, Jankalyan Nagar Road",
-        "addressLocality": "Malad West",
-        "addressRegion": "Maharashtra",
-        "postalCode": "400095",
-        "addressCountry": "IN"
-      }
-    },
-    "areaServed": [
-      { "@type": "AdministrativeArea", "name": "Malad West" },
-      { "@type": "AdministrativeArea", "name": "Goregaon East" },
-      { "@type": "AdministrativeArea", "name": "Andheri West" },
-      { "@type": "AdministrativeArea", "name": "Kandivali West" },
-      { "@type": "AdministrativeArea", "name": "Borivali West" }
-    ],
-    "hasOfferCatalog": {
-      "@type": "OfferCatalog",
-      "name": "Real Estate Advisory Services",
-      "itemListElement": [
-        { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Residential Property Sales & Acquisition" } },
-        { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Commercial Office & Retail Leasing" } },
-        { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Door-Step Leave & License Agreement Registration" } },
-        { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Property Legal Verification & Title Scrutiny" } }
-      ]
-    }
-  }
-  </script>
 </head>
 <body>
+  <a href="#mainContent" class="skip-link">skip to main content</a>
 
-  <!-- MASTER NAVBAR (Controlled from js/layout.js) -->
-  <site-navbar></site-navbar>
+  <!-- Header Mount Point -->
+  <header id="mainHeader"></header>
 
-  <!-- MAIN PAGE CONTENT -->
-  <main id="main-content">
-
-    <!-- PAGE HERO -->
+  <main id="mainContent">
+    <!-- Hero Section -->
     <section class="page-hero">
-      <span class="section-label">End-to-End Real Estate Advisory</span>
-      <h1>Comprehensive Property <em>Services</em></h1>
-      <p>From strategic outright acquisitions and retail leases to doorstep agreement registrations and title scrutiny across Mumbai.</p>
-      <nav aria-label="Breadcrumb">
-        <div class="breadcrumb">
-          <a href="/index.html">Home</a><span class="breadcrumb-sep" aria-hidden="true">›</span><span>Services</span>
-        </div>
-      </nav>
+      <div class="container">
+        <span class="section-label">end-to-end real estate solutions</span>
+        <h1>specialized advisory and legal <em>property services</em> in Mumbai</h1>
+        <p>From primary developer purchases and outright resale due diligence to commercial leases and doorstep biometric agreement registration, our advisory ensures transparent transactions across Mumbai Western Suburbs.</p>
+        <nav class="breadcrumb" aria-label="Breadcrumb navigation">
+          <a href="/index.html">home</a>
+          <span class="breadcrumb-sep">/</span>
+          <span>services</span>
+        </nav>
+      </div>
     </section>
 
-    <!-- CORE SERVICES CATALOG -->
-    <div class="services-catalog">
-
-      <div class="services-grid">
-
-        <!-- 1. RESIDENTIAL SALES -->
-        <article class="service-card">
-          <div class="service-icon-box">🏠</div>
-          <h2 class="service-title">Residential Sales &amp; Resale</h2>
-          <p class="service-desc">
-            Strategic assistance for purchasing and selling premium 1, 2, 3, and 4 BHK residences across Mumbai's Western Suburbs with complete transparency.
-          </p>
-          <ul class="service-features">
-            <li><span>✓</span> Direct mandates in gated society complexes</li>
-            <li><span>✓</span> Comparative market valuation &amp; price negotiation</li>
-            <li><span>✓</span> Society NOC &amp; transfer clearance assistance</li>
-            <li><span>✓</span> Pre-booking allocations in top builder projects</li>
-          </ul>
-          <div class="service-action-row">
-            <a href="https://wa.me/919326990050?text=Hello%20PFRE,%20I%20am%20inquiring%20about%20Residential%20Sales%20services" target="_blank" rel="noopener noreferrer" class="btn btn-outline btn-sm" style="width:100%;justify-content:center;">
-              Inquire Residential Sales
-            </a>
-          </div>
-        </article>
-
-        <!-- 2. COMMERCIAL LEASING & INVESTMENTS -->
-        <article class="service-card">
-          <div class="service-icon-box">🏢</div>
-          <h2 class="service-title">Commercial Offices &amp; Retail</h2>
-          <p class="service-desc">
-            Corporate leasing and investment brokerage for Grade-A IT parks, standalone boutique offices, retail high-street shops, and warehouse properties.
-          </p>
-          <ul class="service-features">
-            <li><span>✓</span> Bare-shell, warm-shell &amp; fully furnished offices</li>
-            <li><span>✓</span> Main-road retail frontage properties with high footfall</li>
-            <li><span>✓</span> Commercial lease deed drafting &amp; lock-in structuring</li>
-            <li><span>✓</span> Pre-leased asset investments with 7–9% rental yields</li>
-          </ul>
-          <div class="service-action-row">
-            <a href="https://wa.me/919326990050?text=Hello%20PFRE,%20I%20need%20assistance%20with%20Commercial%20Leasing" target="_blank" rel="noopener noreferrer" class="btn btn-outline btn-sm" style="width:100%;justify-content:center;">
-              Consult Commercial Desk
-            </a>
-          </div>
-        </article>
-
-        <!-- 3. LEAVE & LICENSE REGISTRATION -->
-        <article class="service-card">
-          <div class="service-icon-box">📋</div>
-          <h2 class="service-title">Leave &amp; License Registration</h2>
-          <p class="service-desc">
-            Official government-approved e-registration service with door-step biometric verification for landlords and tenants across Maharashtra.
-          </p>
-          <ul class="service-features">
-            <li><span>✓</span> Doorstep biometric fingerprint &amp; iris scanning</li>
-            <li><span>✓</span> Stamp duty &amp; registration fee calculation</li>
-            <li><span>✓</span> Drafting custom clauses (lock-in, escalation, deposit)</li>
-            <li><span>✓</span> Mandatory Mumbai Police tenant intimation support</li>
-          </ul>
-          <div class="service-action-row">
-            <a href="tel:+919326990050" class="btn btn-outline btn-sm" style="width:100%;justify-content:center;">
-              📞 Call for Registration Desk
-            </a>
-          </div>
-        </article>
-
-        <!-- 4. TITLE SCRUTINY & LEGAL DUE DILIGENCE -->
-        <article class="service-card">
-          <div class="service-icon-box">⚖️</div>
-          <h2 class="service-title">Title Verification &amp; Legal</h2>
-          <p class="service-desc">
-            Rigorous legal verification and paperwork scrutiny to protect capital and prevent future disputes before paying property earnest money.
-          </p>
-          <ul class="service-features">
-            <li><span>✓</span> 30-year property search report coordination</li>
-            <li><span>✓</span> Scrutiny of chain of agreements &amp; allotment letters</li>
-            <li><span>✓</span> Verification of Occupancy Certificate (OC) &amp; CC</li>
-            <li><span>✓</span> Encumbrance checks on IGR Maharashtra portals</li>
-          </ul>
-          <div class="service-action-row">
-            <a href="/contact.html" class="btn btn-outline btn-sm" style="width:100%;justify-content:center;">
-              Request Document Audit
-            </a>
-          </div>
-        </article>
-
-        <!-- 5. HOME LOAN ADVISORY & SANCTION -->
-        <article class="service-card">
-          <div class="service-icon-box">🏦</div>
-          <h2 class="service-title">Home Loan &amp; Mortgage Aid</h2>
-          <p class="service-desc">
-            Direct coordination with premier nationalized and private banks (SBI, HDFC, ICICI, Axis) for expedited home loan processing and title clearance.
-          </p>
-          <ul class="service-features">
-            <li><span>✓</span> Competitive interest rate negotiation</li>
-            <li><span>✓</span> Eligibility computation and CIBIL score guidance</li>
-            <li><span>✓</span> Resale &amp; balance transfer processing</li>
-            <li><span>✓</span> Minimal turnaround on banking legal &amp; technical reports</li>
-          </ul>
-          <div class="service-action-row">
-            <a href="/calculators.html" class="btn btn-outline btn-sm" style="width:100%;justify-content:center;">
-              🧮 Calculate EMI Breakdown
-            </a>
-          </div>
-        </article>
-
-        <!-- 6. NRI & PROPERTY MANAGEMENT -->
-        <article class="service-card">
-          <div class="service-icon-box">🌍</div>
-          <h2 class="service-title">NRI Property Management</h2>
-          <p class="service-desc">
-            Comprehensive remote portfolio management for Non-Resident Indians owning residential and commercial real estate across Mumbai.
-          </p>
-          <ul class="service-features">
-            <li><span>✓</span> Rigorous tenant screening and background vetting</li>
-            <li><span>✓</span> Periodic digital inspection photos &amp; video walkthroughs</li>
-            <li><span>✓</span> Society maintenance &amp; property tax remittance</li>
-            <li><span>✓</span> Repatriation (Form 15CA/CB) &amp; TDS compliance guidance</li>
-          </ul>
-          <div class="service-action-row">
-            <a href="https://wa.me/919326990050?text=Hello%20PFRE,%20I%20am%20an%20NRI%20inquiring%20about%20Property%20Management" target="_blank" rel="noopener noreferrer" class="btn btn-outline btn-sm" style="width:100%;justify-content:center;">
-              Connect via WhatsApp Desk
-            </a>
-          </div>
-        </article>
-
+    <!-- Services Metric Highlights -->
+    <section class="container my-6">
+      <div class="stats-row grid-cols-4 d-grid gap-4">
+        <div class="calc-widget text-center">
+          <span class="text-xs fw-bold text-muted text-uppercase">regulatory accreditation</span>
+          <div class="calc-result-amount text-blue mt-1">A51800000412</div>
+          <span class="text-xs text-muted">MahaRERA registered consultant</span>
+        </div>
+        <div class="calc-widget text-center">
+          <span class="text-xs fw-bold text-muted text-uppercase">title search standard</span>
+          <div class="calc-result-amount text-blue mt-1">30 years</div>
+          <span class="text-xs text-muted">sub-registrar deed verification</span>
+        </div>
+        <div class="calc-widget text-center">
+          <span class="text-xs fw-bold text-muted text-uppercase">agreement registration</span>
+          <div class="calc-result-amount text-blue mt-1">doorstep biometrics</div>
+          <span class="text-xs text-muted">fast Index II delivery</span>
+        </div>
+        <div class="calc-widget text-center">
+          <span class="text-xs fw-bold text-muted text-uppercase">developer brokerage</span>
+          <div class="calc-result-amount text-green mt-1">₹0 brokerage</div>
+          <span class="text-xs text-muted">on verified new project bookings</span>
+        </div>
       </div>
+    </section>
 
-      <!-- PROCESS FLOW SECTION -->
-      <section class="process-section">
-        <div style="text-align:center;max-width:680px;margin:0 auto;">
-          <span class="section-label">How We Work</span>
-          <h2 style="font-family:'Playfair Display',serif;font-size:32px;margin:10px 0 14px;">The Transaction Roadmap</h2>
-          <p style="color:var(--text-muted);font-size:14.5px;line-height:1.7;">
-            Every property transaction is guided by structured checkpoints to ensure safety, legal accuracy, and financial clarity.
-          </p>
+    <!-- Six Core Services Grid -->
+    <section class="container my-8">
+      <div class="d-grid grid-cols-3 gap-6 mb-8">
+        <!-- Service 1 -->
+        <div class="calc-widget d-flex flex-column justify-between">
+          <div>
+            <div class="d-flex justify-between items-center mb-3">
+              <span class="badge badge-blue">residential</span>
+              <span class="text-lg">&#127968;</span>
+            </div>
+            <h2 class="text-sm fw-bold mb-2">residential sales &amp; resale acquisition</h2>
+            <p class="text-xs text-muted mb-4">Complete guidance for purchasing ready-to-move flats and new construction homes across Malad, Goregaon, Andheri, Borivali, and Kandivali. We handle unit shortlisting, developer negotiation, price benchmarking, and bank valuation.</p>
+            <ul class="text-xs text-muted d-flex flex-column gap-2 mb-4" style="list-style:disc;padding-left:16px;">
+              <li>Zero brokerage on direct developer bookings</li>
+              <li>Carpet area verification as per MahaRERA filings</li>
+              <li>Comparative market analysis on recent registered sales</li>
+              <li>Payment milestone monitoring and construction audits</li>
+            </ul>
+          </div>
+          <a href="/properties.html?type=buy" class="btn btn-outline btn-sm w-100 text-center">explore residential inventory &rarr;</a>
         </div>
 
-        <div class="process-grid">
-          
-          <div class="process-step">
-            <div class="process-step-num">01</div>
-            <h3 class="process-step-title">Requirement Mapping</h3>
-            <p class="process-step-desc">
-              Detailed assessment of your space configuration, preferred micro-market, commute criteria, and strict budget parameters.
-            </p>
+        <!-- Service 2 -->
+        <div class="calc-widget d-flex flex-column justify-between">
+          <div>
+            <div class="d-flex justify-between items-center mb-3">
+              <span class="badge badge-purple">commercial</span>
+              <span class="text-lg">&#127970;</span>
+            </div>
+            <h2 class="text-sm fw-bold mb-2">commercial office &amp; retail leasing</h2>
+            <p class="text-xs text-muted mb-4">Advisory for acquiring outright corporate suites, furnished workspaces, high-street shops, and boutique retail premises. We structure tax-efficient leases and long-term commercial tenancy agreements.</p>
+            <ul class="text-xs text-muted d-flex flex-column gap-2 mb-4" style="list-style:disc;padding-left:16px;">
+              <li>Bare shell and furnished plug-and-play offices</li>
+              <li>High-street retail shops with clear frontage</li>
+              <li>Lease deed drafting with escalation clauses</li>
+              <li>Society commercial trade permissions scrutiny</li>
+            </ul>
           </div>
-
-          <div class="process-step">
-            <div class="process-step-num">02</div>
-            <h3 class="process-step-title">Inspections</h3>
-            <p class="process-step-desc">
-              Curated shortlisting followed by guided, scheduled on-site inspections of verified flats or commercial spaces.
-            </p>
-          </div>
-
-          <div class="process-step">
-            <div class="process-step-num">03</div>
-            <h3 class="process-step-title">Due Diligence</h3>
-            <p class="process-step-desc">
-              Verification of chain titles, OC status, society share certificates, and transparent, zero-ambiguity price negotiations.
-            </p>
-          </div>
-
-          <div class="process-step">
-            <div class="process-step-num">04</div>
-            <h3 class="process-step-title">Registration</h3>
-            <p class="process-step-desc">
-              Complete support with sub-registrar stamping, biometric Leave &amp; License execution, keys handover, and society transfer.
-            </p>
-          </div>
-
+          <a href="/properties.html?type=commercial" class="btn btn-outline btn-sm w-100 text-center">browse commercial spaces &rarr;</a>
         </div>
-      </section>
 
-    </div>
+        <!-- Service 3 -->
+        <div class="calc-widget d-flex flex-column justify-between">
+          <div>
+            <div class="d-flex justify-between items-center mb-3">
+              <span class="badge badge-green">statutory desk</span>
+              <span class="text-lg">&#128221;</span>
+            </div>
+            <h2 class="text-sm fw-bold mb-2">doorstep leave &amp; license registration</h2>
+            <p class="text-xs text-muted mb-4">Government authorized e-registration for rental agreements across Mumbai. UIDAI approved biometric scanning conducted directly at your home or office, eliminating sub-registrar visits.</p>
+            <ul class="text-xs text-muted d-flex flex-column gap-2 mb-4" style="list-style:disc;padding-left:16px;">
+              <li>Standardized Maharashtra government deed drafting</li>
+              <li>Doorstep biometric verification for parties and witnesses</li>
+              <li>Direct treasury stamp duty and registration fee filing</li>
+              <li>Issuance of barcoded registered Index II within 48 hours</li>
+            </ul>
+          </div>
+          <a href="/agreement-registration.html" class="btn btn-primary btn-sm w-100 text-center">calculate duty &amp; book &rarr;</a>
+        </div>
 
-    <!-- CALL TO ACTION -->
+        <!-- Service 4 -->
+        <div class="calc-widget d-flex flex-column justify-between">
+          <div>
+            <div class="d-flex justify-between items-center mb-3">
+              <span class="badge badge-gold">legal diligence</span>
+              <span class="text-lg">&#128737;&#65039;</span>
+            </div>
+            <h2 class="text-sm fw-bold mb-2">title search &amp; legal conveyance</h2>
+            <p class="text-xs text-muted mb-4">Independent legal audits for resale properties to confirm clear and marketable title deeds prior to signing sale agreements or disbursing financial tokens.</p>
+            <ul class="text-xs text-muted d-flex flex-column gap-2 mb-4" style="list-style:disc;padding-left:16px;">
+              <li>30-year title search at Joint Sub-Registrar offices</li>
+              <li>Cooperative housing society share certificate scrutiny</li>
+              <li>Deemed conveyance order and property card verification</li>
+              <li>Public newspaper notice issuance and title clearance certificate</li>
+            </ul>
+          </div>
+          <a href="/contact.html?service=legal" class="btn btn-outline btn-sm w-100 text-center">request title search report &rarr;</a>
+        </div>
+
+        <!-- Service 5 -->
+        <div class="calc-widget d-flex flex-column justify-between">
+          <div>
+            <div class="d-flex justify-between items-center mb-3">
+              <span class="badge badge-amber">banking</span>
+              <span class="text-lg">&#128178;</span>
+            </div>
+            <h2 class="text-sm fw-bold mb-2">home loan &amp; mortgage syndication</h2>
+            <p class="text-xs text-muted mb-4">Assistance with leading nationalized and private banking partners to secure competitive home loan interest rates, quick legal technical clearance, and smooth loan disbursement.</p>
+            <ul class="text-xs text-muted d-flex flex-column gap-2 mb-4" style="list-style:disc;padding-left:16px;">
+              <li>Tie-ups with SBI, HDFC Bank, ICICI Bank, and Bank of Baroda</li>
+              <li>Fast track property legal technical validation</li>
+              <li>Balance transfer and loan against property assistance</li>
+              <li>Special guidance for NRI borrowers and self-employed professionals</li>
+            </ul>
+          </div>
+          <a href="/calculators.html#emiSection" class="btn btn-outline btn-sm w-100 text-center">check emi &amp; loan eligibility &rarr;</a>
+        </div>
+
+        <!-- Service 6 -->
+        <div class="calc-widget d-flex flex-column justify-between">
+          <div>
+            <div class="d-flex justify-between items-center mb-3">
+              <span class="badge badge-blue">global desk</span>
+              <span class="text-lg">&#127757;</span>
+            </div>
+            <h2 class="text-sm fw-bold mb-2">NRI property management &amp; repatriation</h2>
+            <p class="text-xs text-muted mb-4">Dedicated property care, leasing, rent collection, and sales assistance for non-resident Indians owning residential or commercial assets in Mumbai.</p>
+            <ul class="text-xs text-muted d-flex flex-column gap-2 mb-4" style="list-style:disc;padding-left:16px;">
+              <li>Tenant identification, background checks, and digital lease execution</li>
+              <li>Periodic physical property inspection visits with photo reports</li>
+              <li>Section 195 TDS reduction certificate filings</li>
+              <li>Repatriation assistance through NRE or NRO banking channels</li>
+            </ul>
+          </div>
+          <a href="/contact.html?service=nri" class="btn btn-outline btn-sm w-100 text-center">consult NRI advisory desk &rarr;</a>
+        </div>
+      </div>
+    </section>
+
+    <!-- Operational Workflow: How We Represent Clients -->
+    <section class="bg-secondary py-8">
+      <div class="container">
+        <div class="text-center max-w-xl mx-auto mb-6">
+          <span class="section-label">the PFRE execution framework</span>
+          <h2 class="text-lg fw-bold">four-step client engagement process</h2>
+          <p class="text-sm text-muted">How our advisory protects your interests throughout every property transaction in Mumbai.</p>
+        </div>
+
+        <div class="d-grid grid-cols-4 gap-4">
+          <div class="calc-widget">
+            <div class="text-blue text-lg fw-bold mb-2">01</div>
+            <h3 class="text-sm fw-bold mb-2">requirement scoping</h3>
+            <p class="text-xs text-muted">We map your budget, micro-market preference, required carpet dimensions, and transit requirements against verified property inventories.</p>
+          </div>
+
+          <div class="calc-widget">
+            <div class="text-blue text-lg fw-bold mb-2">02</div>
+            <h3 class="text-sm fw-bold mb-2">curated site inspections</h3>
+            <p class="text-xs text-muted">Accompanied physical property inspections with our licensed area specialists, covering natural ventilation, building age, and society maintenance records.</p>
+          </div>
+
+          <div class="calc-widget">
+            <div class="text-blue text-lg fw-bold mb-2">03</div>
+            <h3 class="text-sm fw-bold mb-2">legal title scrutiny</h3>
+            <p class="text-xs text-muted">Our legal desk reviews thirty-year chain documents, society share certificates, municipal taxes, and bank encumbrances before you commit funds.</p>
+          </div>
+
+          <div class="calc-widget">
+            <div class="text-blue text-lg fw-bold mb-2">04</div>
+            <h3 class="text-sm fw-bold mb-2">conveyance &amp; registration</h3>
+            <p class="text-xs text-muted">We coordinate agreement drafting, stamp duty payment, sub-registrar execution, physical key handover, and society transfer fee compliance.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Inquiry Booking Form -->
+    <section class="container my-8">
+      <div class="catalog-layout d-grid gap-8">
+        <div>
+          <h2 class="text-md fw-bold mb-3">standard service fee schedule</h2>
+          <p class="text-xs text-muted mb-4">We maintain strict adherence to ethical brokerage guidelines and Maharashtra real estate standards with zero hidden fees.</p>
+
+          <div class="calc-widget p-0 overflow-hidden mb-6">
+            <div class="table-responsive">
+              <table class="data-table w-100 text-xs">
+                <thead>
+                  <tr>
+                    <th>transaction type</th>
+                    <th>standard advisory fee</th>
+                    <th>deliverables included</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td><strong class="text-text">Primary New Developer Purchases</strong></td>
+                    <td><span class="text-green fw-bold">₹0 Free to Buyer</span></td>
+                    <td>Advisory, inventory selection, price negotiation, bank loan assistance</td>
+                  </tr>
+                  <tr>
+                    <td><strong class="text-text">Residential Resale Flat Purchase</strong></td>
+                    <td><span class="text-blue fw-bold">1% to 2% of Agreement Value</span></td>
+                    <td>Title check, society NOC coordination, agreement drafting, registration</td>
+                  </tr>
+                  <tr>
+                    <td><strong class="text-text">Residential Tenancy Lease</strong></td>
+                    <td><span class="text-blue fw-bold">One Month Rent Equivalent</span></td>
+                    <td>Tenant screening, society NOC documentation, key handover inventory</td>
+                  </tr>
+                  <tr>
+                    <td><strong class="text-text">Commercial Office or Shop Lease</strong></td>
+                    <td><span class="text-blue fw-bold">One to Two Months Rent Equivalent</span></td>
+                    <td>Commercial lease deed structuring, fitout term negotiation, lock-in terms</td>
+                  </tr>
+                  <tr>
+                    <td><strong class="text-text">Doorstep Agreement Registration</strong></td>
+                    <td><span class="text-blue fw-bold">Fixed Doorstep Executive Fee</span></td>
+                    <td>Biometric visit, government e-filing, registered Index II delivery</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+
+        <!-- Right Side Service Form -->
+        <aside>
+          <div class="contact-form-card" style="position: sticky; top: 90px;">
+            <h3 class="text-sm fw-bold text-uppercase mb-2">request service consultation</h3>
+            <p class="text-xs text-muted mb-4">Connect directly with Saurav Chowdhury, licensed real estate advisor at Property Finder Real Estate.</p>
+
+            <form class="pfre-lead-form" data-pfre-inquiry data-source="services-page">
+              <div class="form-group mb-3">
+                <label class="form-label" for="srvName">full name *</label>
+                <input type="text" id="srvName" name="name" class="form-control" required placeholder="Enter full name">
+              </div>
+
+              <div class="form-group mb-3">
+                <label class="form-label" for="srvPhone">phone number *</label>
+                <input type="tel" id="srvPhone" name="phone" class="form-control" required placeholder="+91 98XXX XXXXX">
+              </div>
+
+              <div class="form-group mb-3">
+                <label class="form-label" for="srvCategory">service required *</label>
+                <select id="srvCategory" name="intent" class="form-control">
+                  <option value="buy">Residential Flat Purchase</option>
+                  <option value="commercial">Commercial Office or Retail Shop</option>
+                  <option value="rent">Rental Home Acquisition</option>
+                  <option value="legal">Doorstep Agreement Registration</option>
+                  <option value="title_search">Title Search &amp; Document Diligence</option>
+                  <option value="nri">NRI Property Management</option>
+                </select>
+              </div>
+
+              <div class="form-group mb-4">
+                <label class="form-label" for="srvNotes">project requirements</label>
+                <textarea id="srvNotes" name="message" rows="3" class="form-control" placeholder="Mention preferred micro-market, budget range, or property details"></textarea>
+              </div>
+
+              <button type="submit" class="btn btn-primary w-100">book advisory session</button>
+            </form>
+
+            <div class="mt-4 pt-3 border-top text-center">
+              <span class="text-xs text-muted d-block mb-2">direct telephone assistance</span>
+              <a href="tel:+919326990050" class="btn btn-outline btn-sm w-100 mb-2">&#128222; +91 93269 90050</a>
+              <a href="https://wa.me/919326990050?text=Hello%20PFRE,%20I%20would%20like%20to%20consult%20on%20your%20services." target="_blank" rel="noopener" class="btn btn-green-inline btn-sm w-100">&#128172; chat on WhatsApp</a>
+            </div>
+          </div>
+        </aside>
+      </div>
+    </section>
+
+    <!-- Bottom CTA Bar -->
     <section class="cta-section">
-      <h2 class="section-title reveal">Need Tailored Property <em>Advice?</em></h2>
-      <p class="reveal">Speak directly with our principal consultants in Malad West. We are ready to assist you today.</p>
-      <div class="cta-btns reveal">
-        <a href="tel:+919326990050" class="btn btn-white btn-lg">📞 Call +919326990050</a>
-        <a href="https://wa.me/919326990050?text=Hello%20Property%20Finder%20Real%20Estate,%20I%20would%20like%20to%20discuss%20your%20services" target="_blank" rel="noopener noreferrer" class="btn-outline-white btn-lg">💬 WhatsApp Us</a>
+      <div class="container">
+        <h2>ready to start your property search or register an agreement in <em>Mumbai</em></h2>
+        <p>Visit our Malad West office or book a private consultation for transparent property advice.</p>
+        <div class="cta-btns">
+          <a href="/properties.html" class="btn btn-white">view verified properties</a>
+          <a href="/contact.html" class="btn btn-outline-white">visit our Malad office</a>
+        </div>
       </div>
     </section>
-
   </main>
 
-  <!-- MASTER FOOTER & GLOBAL WIDGETS (Controlled from js/layout.js) -->
-  <site-footer></site-footer>
+  <!-- Footer Mount Point -->
+  <footer id="mainFooter"></footer>
 
-  <!-- Centralized Script Engines in Order of Dependency -->
+  <!-- Scripts -->
   <script src="/js/config.js"></script>
-  <script src="/js/layout.js"></script>
-  <script src="/js/api.js" defer></script>
+  <script src="/js/auth-guard.js"></script>
+  <script src="/js/api.js"></script>
   <script src="/js/security.js"></script>
-  <script src="/js/tracker.js" defer></script>
   <script src="/js/theme.js"></script>
-  <script src="/js/i18n.js"></script>
+  <script src="/js/tracker.js"></script>
   <script src="/js/widgets.js"></script>
-
-  <script>
-    if ('serviceWorker' in navigator) {
-      window.addEventListener('load', () => {
-        navigator.serviceWorker.register('/sw.js').catch(() => {});
-      });
-    }
-  </script>
+  <script src="/js/i18n.js"></script>
+  <script src="/js/app.js"></script>
+  <script src="/js/app-shell.js"></script>
+  <script src="/js/layout.js"></script>
 </body>
 </html>
