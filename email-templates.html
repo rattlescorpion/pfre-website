@@ -1,584 +1,465 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" data-theme="light">
 <head>
-<meta charset="UTF-8">
-<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' https://cdnjs.cloudflare.com https://challenges.cloudflare.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' data: https:; connect-src 'self' https://api.propertyfinderrealestate.com http://localhost:8000 https://formspree.io; frame-src https://www.google.com https://challenges.cloudflare.com; form-action 'self' https://formspree.io; object-src 'none'; base-uri 'self'; frame-ancestors 'none'">
-<meta http-equiv="X-Content-Type-Options" content="nosniff">
-<meta http-equiv="X-Frame-Options" content="SAMEORIGIN">
-<meta http-equiv="Referrer-Policy" content="strict-origin-when-cross-origin">
-<link rel="canonical" href="https://www.propertyfinderrealestate.com/email-templates.html"><meta name="viewport" content="width=device-width,initial-scale=1.0">
-  <!-- Open Graph -->
-  <meta property="og:type"        content="website">
-  <meta property="og:title"       content="Email & WhatsApp Templates | Property Finder Real Estate">
-  <meta property="og:description" content="15 professional email and WhatsApp templates for birthday, anniversary, agreement expiry and more.">
-  <meta property="og:url"         content="https://www.propertyfinderrealestate.com/email-templates.html">
-  <meta property="og:image"       content="https://www.propertyfinderrealestate.com/images/og-banner.jpg">
-  <meta property="og:image:width"  content="1200">
-  <meta property="og:image:height" content="630">
-  <meta property="og:image:type"   content="image/jpeg">
-  <meta property="og:site_name"   content="Property Finder Real Estate">
-  <meta property="og:locale"      content="en_IN">
-  <!-- Twitter Card -->
-  <meta name="twitter:card"        content="summary">
-  <meta name="twitter:title"       content="Email & WhatsApp Templates | Property Finder Real Estate">
-  <meta name="twitter:description" content="15 professional email and WhatsApp templates for birthday, anniversary, agreement expiry and more.">
-  <meta name="twitter:image"       content="https://www.propertyfinderrealestate.com/icons/icon.svg">
-  <meta name="twitter:site"        content="@PropertyFinderA">
-  <!-- Additional SEO -->
-  <meta name="robots"  content="index, follow, max-snippet:-1, max-image-preview:large">
-  <meta name="author"  content="Property Finder Real Estate">
-  <meta name="geo.region"       content="IN-MH">
-  <meta name="geo.placename"    content="Mumbai">
-  <meta name="geo.position"     content="19.1886;72.8485">
-  <meta name="ICBM"             content="19.1886, 72.8485">
-    <meta name="description" content="15 professional email and WhatsApp templates for birthday, anniversary, agreement expiry, site visit and more.">
-  <title>Email & WhatsApp Templates — Property Finder Real Estate</title>
-<link rel="icon" type="image/png" sizes="192x192" href="icons/icon-192.png">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;0,900&family=DM+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="css/styles.css">
-<link rel="stylesheet" href="css/widgets.css">
-<link rel="stylesheet" href="css/mobile.css">
-<script>!function(){var t=localStorage.getItem("pfre_theme")||(window.matchMedia("(prefers-color-scheme:dark)").matches?"dark":"light");document.documentElement.setAttribute("data-theme",t);document.documentElement.classList.add("theme-"+t)}();</script>
-<style>
-.tmpl-layout{display:grid;grid-template-columns:280px 1fr 380px;gap:0;height:calc(100vh - 68px);overflow:hidden}
-.tmpl-sidebar{background:var(--dark);overflow-y:auto;padding:16px 10px}
-.tmpl-sidebar h3{font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:2px;color:rgba(255,255,255,.4);padding:14px 8px 6px}
-.tmpl-btn{display:flex;align-items:center;gap:10px;width:100%;padding:10px 12px;border:none;background:transparent;color:rgba(255,255,255,.7);font-size:13px;font-weight:600;text-align:left;cursor:pointer;border-radius:9px;transition:all .2s;font-family:'DM Sans',sans-serif}
-.tmpl-btn:hover{background:rgba(255,255,255,.08);color:white}
-.tmpl-btn.active{background:var(--blue);color:white}
-.tmpl-btn .tb-icon{font-size:18px;width:24px;flex-shrink:0}
-.tmpl-center{overflow-y:auto;padding:24px;background:var(--off-white)}
-[data-theme="dark"] .tmpl-center{background:#0F172A}
-.tmpl-right{background:white;border-left:1px solid var(--border);overflow-y:auto;padding:20px}
-[data-theme="dark"] .tmpl-right{background:#1E293B;border-color:#334155}
-/* Email Preview */
-.email-preview{background:white;border-radius:12px;box-shadow:0 8px 32px rgba(0,0,0,.12);overflow:hidden;max-width:600px;margin:0 auto;font-family:Arial,sans-serif}
-.ep-header{background:linear-gradient(135deg,#0F172A,#1D4ED8);padding:28px 32px;text-align:center}
-.ep-logo{display:flex;align-items:center;justify-content:center;gap:12px;margin-bottom:0}
-.ep-logo-text{color:white;text-align:left}
-.ep-logo-text .brand{font-size:18px;font-weight:700}
-.ep-logo-text .sub{font-size:10px;opacity:.6;letter-spacing:2px;text-transform:uppercase}
-.ep-body{padding:28px 32px;background:white}
-.ep-greeting{font-size:16px;font-weight:700;color:#111827;margin-bottom:14px}
-.ep-intro{font-size:15px;color:#374151;line-height:1.75;margin-bottom:20px}
-.ep-highlight{margin:20px 0;padding:0}
-.ep-row{display:flex;align-items:flex-start;gap:10px;padding:10px 0;border-bottom:1px solid #F3F4F6;font-size:14px}
-.ep-row:last-child{border-bottom:none}
-.ep-row .ep-icon{font-size:20px;flex-shrink:0;margin-top:1px}
-.ep-row .ep-detail{line-height:1.6}
-.ep-row .ep-label{font-weight:700}
-.ep-message{font-size:14px;color:#4B5563;line-height:1.85;margin:20px 0}
-.ep-cta{display:block;text-align:center;background:#2563EB;color:white;padding:13px 32px;border-radius:10px;text-decoration:none;font-weight:700;font-size:15px;margin:20px 0}
-.ep-sign{margin-top:24px;padding-top:20px;border-top:1px solid #F3F4F6}
-.ep-sign p{font-size:14px;color:#6B7280;margin:2px 0}
-.ep-sign .sign-name{font-weight:700;color:#111827;font-size:15px}
-.ep-sign .sign-co{color:#2563EB;font-weight:700}
-.ep-footer{background:#0F172A;padding:16px 32px;text-align:center}
-.ep-footer p{color:rgba(255,255,255,.5);font-size:11px;margin:3px 0}
-.ep-footer a{color:rgba(255,255,255,.7)}
-.ep-tagline{background:linear-gradient(135deg,#1D4ED8,#3B82F6);padding:12px 32px;text-align:center;font-style:italic;font-size:13px;color:rgba(255,255,255,.9);font-family:'Georgia',serif}
-/* Colors for different templates */
-.color-birthday .ep-header{background:linear-gradient(135deg,#7C3AED,#A855F7)}
-.color-birthday .ep-cta{background:#7C3AED}
-.color-anniv .ep-header{background:linear-gradient(135deg,#BE185D,#EC4899)}
-.color-anniv .ep-cta{background:#BE185D}
-.color-death .ep-header{background:linear-gradient(135deg,#374151,#6B7280)}
-.color-death .ep-cta{background:#374151}
-.color-agr .ep-header{background:linear-gradient(135deg,#B45309,#F59E0B)}
-.color-agr .ep-cta{background:#B45309}
-.color-visit .ep-header{background:linear-gradient(135deg,#065F46,#10B981)}
-.color-visit .ep-cta{background:#065F46}
-.color-booking .ep-header{background:linear-gradient(135deg,#1D4ED8,#3B82F6)}
-.color-booking .ep-cta{background:#1D4ED8}
-.color-welcome .ep-header{background:linear-gradient(135deg,#0F172A,#1D4ED8)}
-.color-alert .ep-header{background:linear-gradient(135deg,#7C3AED,#2563EB)}
-.color-festival .ep-header{background:linear-gradient(135deg,#D97706,#F59E0B,#EF4444)}
-.color-loan .ep-header{background:linear-gradient(135deg,#047857,#10B981)}
-.color-followup .ep-header{background:linear-gradient(135deg,#1D4ED8,#6366F1)}
-/* Right panel */
-.field-group{margin-bottom:16px}
-.field-label{font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.8px;color:var(--text-muted);margin-bottom:6px;display:block}
-.field-input{width:100%;padding:9px 12px;border:1.5px solid var(--border);border-radius:8px;font-size:13px;font-family:'DM Sans',sans-serif;color:var(--text);background:white;outline:none}
-[data-theme="dark"] .field-input{background:#0F172A;border-color:#334155;color:#E2E8F0}
-.field-input:focus{border-color:var(--blue)}
-.action-btns{display:flex;flex-direction:column;gap:8px;margin-top:16px}
-.action-btn{padding:10px 14px;border-radius:9px;font-size:13px;font-weight:700;cursor:pointer;border:none;font-family:'DM Sans',sans-serif;display:flex;align-items:center;gap:8px;transition:all .2s}
-.ab-wa{background:#25D366;color:white}
-.ab-email{background:var(--blue);color:white}
-.ab-copy{background:var(--off-white);color:var(--text);border:1.5px solid var(--border)}
-.ab-print{background:#6B7280;color:white}
-.wa-preview{background:#075E54;border-radius:12px;padding:14px;margin-top:14px}
-.wa-preview h4{color:rgba(255,255,255,.7);font-size:10px;text-transform:uppercase;letter-spacing:1px;margin-bottom:8px}
-.wa-bubble{background:#DCF8C6;border-radius:12px;padding:12px 14px;font-size:12px;line-height:1.65;color:#111827;white-space:pre-wrap;word-break:break-word}
-@media(max-width:1100px){.tmpl-layout{grid-template-columns:240px 1fr}}
-@media(max-width:768px){.tmpl-layout{grid-template-columns:1fr;height:auto}.tmpl-sidebar{height:auto;padding:12px}.tmpl-right{border-left:none;border-top:1px solid var(--border)}}
-</style>
-<link rel="stylesheet" href="css/theme.css">
-<link rel="stylesheet" href="css/overrides.css">
-<link rel="stylesheet" href="css/utils.css">
-<link rel="manifest" href="manifest.json">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>email correspondence templates | Property Finder Real Estate</title>
+  <meta name="description" content="Administrative console for customizing automated email correspondence, site visit confirmations, and registration dispatch notices.">
+  <meta name="robots" content="noindex, nofollow">
+  <meta name="theme-color" content="#FFFFFF">
+
+  <link rel="icon" type="image/png" href="/images/logo.png">
+  <link rel="manifest" href="/manifest.json">
+
+  <!-- Stylesheets -->
+  <link rel="stylesheet" href="/css/styles.css">
+  <link rel="stylesheet" href="/css/theme.css">
+  <link rel="stylesheet" href="/css/widgets.css">
+  <link rel="stylesheet" href="/css/mobile.css">
+  <link rel="stylesheet" href="/css/overrides.css">
+  <link rel="stylesheet" href="/css/utils.css">
 </head>
-<body>
-<a href="#main-content" class="skip-link" aria-label="Skip to main content">Skip to main content</a>
-<nav class="navbar" role="navigation" aria-label="Main navigation">
-  <a href="index.html" class="nav-logo" data-i18n-aria="nav.home">
-    <img src="images/logo.png" alt="Property Finder Real Estate" class="nav-logo-img" style="height:48px;width:auto;object-fit:contain" loading="eager">
-  </a>
-  <div style="flex:1;padding:0 20px;font-size:15px;font-weight:700" id="currentTmplName">📧 Email & WhatsApp Templates</div>
-  <div class="nav-actions">
-    <a href="reminders.html" class="btn btn-outline btn-sm">🔔 Reminders</a>
-    <a href="crm.html" class="btn btn-outline btn-sm">👥 CRM</a>
-    <button class="theme-toggle" id="themeToggle"><span class="icon-light">☀️</span><span class="icon-dark">🌙</span></button>
-  </div>
-</nav>
+<body class="admin-body">
+  <a href="#templatesMain" class="skip-link">skip to main content</a>
 
-<div class="tmpl-layout" id="main-content">
-<h1 class="sr-only" aria-label="Email & WhatsApp Templates">Email & WhatsApp Templates</h1>
+  <div class="admin-shell">
+    <!-- Admin Sidebar Navigation -->
+    <aside class="admin-sidebar">
+      <div class="sb-header">
+        <a href="/admin.html" class="sb-brand">
+          <span class="sb-brand-title">PFRE MUMBAI</span>
+          <span class="sb-brand-sub">operations hub</span>
+        </a>
+      </div>
 
-  <!-- LEFT: Template List -->
-  <div class="tmpl-sidebar">
-    <h3>Personal</h3>
-    <button class="tmpl-btn active" onclick="loadTmpl('birthday',this)"><span class="tb-icon">🎂</span> Birthday Greeting</button>
-    <button class="tmpl-btn" onclick="loadTmpl('marriage',this)"><span class="tb-icon">💍</span> Marriage Anniversary</button>
-    <button class="tmpl-btn" onclick="loadTmpl('death',this)"><span class="tb-icon">🕯️</span> Death Anniversary</button>
-    <h3>Agreements</h3>
-    <button class="tmpl-btn" onclick="loadTmpl('ll_expiry',this)"><span class="tb-icon">📄</span> L&L Agreement Expiry</button>
-    <button class="tmpl-btn" onclick="loadTmpl('rent_expiry',this)"><span class="tb-icon">🔑</span> Rent Agreement Expiry</button>
-    <button class="tmpl-btn" onclick="loadTmpl('pg_expiry',this)"><span class="tb-icon">🏠</span> PG Agreement Expiry</button>
-    <button class="tmpl-btn" onclick="loadTmpl('lease_expiry',this)"><span class="tb-icon">📋</span> Lease Agreement Expiry</button>
-    <h3>Transactions</h3>
-    <button class="tmpl-btn" onclick="loadTmpl('site_visit',this)"><span class="tb-icon">✅</span> Site Visit Confirmed</button>
-    <button class="tmpl-btn" onclick="loadTmpl('booking',this)"><span class="tb-icon">🎉</span> Booking Confirmation</button>
-    <button class="tmpl-btn" onclick="loadTmpl('welcome',this)"><span class="tb-icon">👋</span> Welcome New Client</button>
-    <button class="tmpl-btn" onclick="loadTmpl('property_alert',this)"><span class="tb-icon">🏡</span> New Property Alert</button>
-    <button class="tmpl-btn" onclick="loadTmpl('loan_received',this)"><span class="tb-icon">🏦</span> Loan Application Received</button>
-    <h3>Follow-ups</h3>
-    <button class="tmpl-btn" onclick="loadTmpl('followup',this)"><span class="tb-icon">📞</span> Follow-up Reminder</button>
-    <button class="tmpl-btn" onclick="loadTmpl('festival',this)"><span class="tb-icon">🪔</span> Festival Greeting</button>
-    <button class="tmpl-btn" onclick="loadTmpl('token',this)"><span class="tb-icon">🧾</span> Token/Booking Receipt</button>
-  </div>
+      <nav class="sb-nav" aria-label="Admin Navigation">
+        <div class="sb-group-title">core operations</div>
+        <a href="/admin.html" class="sb-item">&#128202; dashboard</a>
+        <a href="/crm.html" class="sb-item">&#128101; crm leads</a>
+        <a href="/contacts.html" class="sb-item">&#128214; phonebook</a>
+        <a href="/inventory.html" class="sb-item">&#127968; inventory</a>
+        <a href="/schedule.html" class="sb-item">&#128197; inspection calendar</a>
 
-  <!-- CENTER: Email Preview -->
-  <div class="tmpl-center">
-    <div class="email-preview" id="emailPreview"><!-- rendered by JS --></div>
-  </div>
+        <div class="sb-group-title">intelligence &amp; legal</div>
+        <a href="/analytics.html" class="sb-item">&#128200; analytics &amp; traffic</a>
+        <a href="/price-trends.html" class="sb-item">&#128201; price trends</a>
+        <a href="/agreement-registration.html" class="sb-item">&#128221; leave &amp; license</a>
+        <a href="/finance.html" class="sb-item" data-min-role="super_admin">&#128178; brokerage finance</a>
+        <a href="/hrms.html" class="sb-item" data-min-role="admin">&#128188; team hrms</a>
 
-  <!-- RIGHT: Customise + Actions -->
-  <div class="tmpl-right">
-    <h3 style="font-size:15px;font-weight:700;margin-bottom:16px">✏️ Customise Template</h3>
+        <div class="sb-group-title">configuration</div>
+        <a href="/email-templates.html" class="sb-item active">&#9993;&#65039; templates</a>
+        <a href="/cms.html" class="sb-item">&#9881;&#65039; site cms</a>
+        <a href="/index.html" class="sb-item" target="_blank">&#127760; live website</a>
+      </nav>
 
-    <div class="field-group"><label class="field-label">Client / Recipient Name</label><input class="field-input" id="fName" value="Rahul Sharma" oninput="renderPreview()"></div>
-    <div class="field-group"><label class="field-label">Phone / WhatsApp</label><input class="field-input" id="fPhone" value="+91 98765 43210" oninput="renderPreview()"></div>
-    <div class="field-group"><label class="field-label">Property / Reference</label><input class="field-input" id="fProperty" value="2BHK, Malad West" oninput="renderPreview()"></div>
-    <div class="field-group"><label class="field-label">Date</label><input class="field-input" type="date" id="fDate" oninput="renderPreview()"></div>
-    <div class="field-group"><label class="field-label">Time</label><input class="field-input" type="time" id="fTime" value="11:00" oninput="renderPreview()"></div>
-    <div class="field-group"><label class="field-label">Amount (₹)</label><input class="field-input" id="fAmount" value="5,00,000" oninput="renderPreview()"></div>
-    <div class="field-group"><label class="field-label">Custom Note (optional)</label><textarea class="field-input" id="fNote" rows="2" oninput="renderPreview()" placeholder="Any additional info…"></textarea></div>
+      <div class="sb-user">
+        <div class="sb-avatar user-avatar-text">SC</div>
+        <div class="sb-user-meta">
+          <strong data-user-name>Saurav Chowdhury</strong>
+          <span data-user-role>Super Admin</span>
+        </div>
+        <button type="button" class="btn btn-outline btn-sm py-1 px-2 text-xs" onclick="window.pfreLogout()">exit</button>
+      </div>
+    </aside>
 
-    <div class="action-btns">
-      <button class="action-btn ab-wa" onclick="sendWA()">💬 Send via WhatsApp</button>
-      <button class="action-btn ab-email" onclick="sendEmail()">✉️ Open in Email</button>
-      <button class="action-btn ab-copy" onclick="copyWAText()">📋 Copy WhatsApp Text</button>
-      <button class="action-btn ab-print" onclick="printEmail()">🖨️ Print / Save PDF</button>
+    <!-- Main Content Area -->
+    <div class="admin-main">
+      <header class="admin-topbar">
+        <div class="d-flex items-center gap-3">
+          <h1 class="text-md fw-bold mb-0">email templates &amp; client notices</h1>
+          <span class="badge badge-purple">merge tag engine</span>
+        </div>
+
+        <div class="d-flex items-center gap-3">
+          <button type="button" id="copyTemplateHtmlBtn" class="btn btn-outline btn-sm">&#128203; copy html</button>
+          <button type="button" id="saveTemplateChangesBtn" class="btn btn-primary btn-sm">&#128190; save template</button>
+        </div>
+      </header>
+
+      <main id="templatesMain" class="admin-content p-6">
+        <div class="d-grid grid-cols-3 gap-6">
+          <!-- Left Column: Template List & Available Merge Tags -->
+          <div>
+            <div class="calc-widget p-4 mb-4">
+              <h2 class="text-sm fw-bold mb-3">standard correspondence templates</h2>
+              <div class="d-flex flex-column gap-2" id="templateListSelector">
+                <button type="button" class="tab-pill active text-left w-100" data-template-key="lead_welcome">
+                  &#128075; lead inquiry acknowledgment
+                </button>
+                <button type="button" class="tab-pill text-left w-100" data-template-key="site_visit">
+                  &#128197; property inspection confirmation
+                </button>
+                <button type="button" class="tab-pill text-left w-100" data-template-key="agreement_draft">
+                  &#128221; leave and license draft ready
+                </button>
+                <button type="button" class="tab-pill text-left w-100" data-template-key="registration_complete">
+                  &#10004;&#65039; registered index II dispatch
+                </button>
+                <button type="button" class="tab-pill text-left w-100" data-template-key="invoice_receipt">
+                  &#128176; advisory fee invoice receipt
+                </button>
+              </div>
+            </div>
+
+            <!-- Merge Tag Helper Box -->
+            <div class="calc-widget p-4">
+              <h3 class="text-xs fw-bold text-uppercase text-muted mb-2">available merge tags</h3>
+              <p class="text-xxs text-muted mb-3">Click any placeholder tag to copy it to your clipboard for template editing.</p>
+              
+              <div class="d-flex flex-wrap gap-1" id="tagPillContainer">
+                <button type="button" class="badge badge-blue pointer" data-tag="{{client_name}}">{{client_name}}</button>
+                <button type="button" class="badge badge-blue pointer" data-tag="{{property_title}}">{{property_title}}</button>
+                <button type="button" class="badge badge-blue pointer" data-tag="{{locality}}">{{locality}}</button>
+                <button type="button" class="badge badge-blue pointer" data-tag="{{visit_datetime}}">{{visit_datetime}}</button>
+                <button type="button" class="badge badge-blue pointer" data-tag="{{consultant_name}}">{{consultant_name}}</button>
+                <button type="button" class="badge badge-blue pointer" data-tag="{{consultant_phone}}">{{consultant_phone}}</button>
+                <button type="button" class="badge badge-blue pointer" data-tag="{{token_number}}">{{token_number}}</button>
+                <button type="button" class="badge badge-blue pointer" data-tag="{{fee_amount}}">{{fee_amount}}</button>
+              </div>
+            </div>
+          </div>
+
+          <!-- Middle Column: Editor Form -->
+          <div>
+            <div class="calc-widget p-4">
+              <h2 class="text-sm fw-bold mb-3">template source editor</h2>
+
+              <form id="templateEditorForm">
+                <div class="form-group mb-3">
+                  <label class="form-label" for="tplSubject">email subject line *</label>
+                  <input type="text" id="tplSubject" class="form-control" required>
+                </div>
+
+                <div class="form-group mb-3">
+                  <label class="form-label" for="tplPreheader">preview preheader text</label>
+                  <input type="text" id="tplPreheader" class="form-control">
+                </div>
+
+                <div class="form-group mb-4">
+                  <label class="form-label" for="tplBody">html template markup *</label>
+                  <textarea id="tplBody" rows="18" class="form-control" style="font-family: monospace; font-size: 11.5px; line-height: 1.45;" required></textarea>
+                </div>
+
+                <div class="d-flex justify-between items-center">
+                  <button type="button" id="resetToDefaultBtn" class="btn btn-outline btn-sm text-red">reset to default</button>
+                  <button type="submit" class="btn btn-primary btn-sm">update template</button>
+                </div>
+              </form>
+            </div>
+          </div>
+
+          <!-- Right Column: Live Email Client Preview -->
+          <div>
+            <div class="calc-widget p-4">
+              <div class="d-flex justify-between items-center mb-3">
+                <h2 class="text-sm fw-bold mb-0">client view preview</h2>
+                <span class="badge badge-green">interpolated sample</span>
+              </div>
+
+              <!-- Simulated Mail Client Window -->
+              <div class="border rounded overflow-hidden" style="background: var(--bg-surface);">
+                <!-- Client Header -->
+                <div class="p-3 border-bottom bg-secondary text-xs">
+                  <div class="d-flex justify-between py-1">
+                    <span class="text-muted">from:</span>
+                    <strong class="text-text">Property Finder Real Estate &lt;propertyfinderre@gmail.com&gt;</strong>
+                  </div>
+                  <div class="d-flex justify-between py-1">
+                    <span class="text-muted">to:</span>
+                    <span class="text-text">Rajesh Sharma &lt;client@example.com&gt;</span>
+                  </div>
+                  <div class="d-flex justify-between py-1 border-top mt-1 pt-1">
+                    <span class="text-muted">subject:</span>
+                    <strong class="text-blue" id="previewSubjectText">Inquiry Acknowledgment</strong>
+                  </div>
+                </div>
+
+                <!-- Email Body Container -->
+                <div id="previewEmailContainer" class="p-4" style="min-height: 380px; background: #FFFFFF; color: #1E293B;">
+                  <!-- Rendered dynamically -->
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </main>
     </div>
-
-    <div class="wa-preview" id="waPreview">
-      <h4>📱 WhatsApp Preview</h4>
-      <div class="wa-bubble" id="waBubble">Loading…</div>
-    </div>
   </div>
-</div>
 
-<script src="js/widgets.js"></script>
-<script src="js/i18n.js"></script>
-<script src="js/tracker.js" defer></script>
-<script>
-/* ═══ TEMPLATE DEFINITIONS ═══ */
-const COMPANY = 'Property Finder Real Estate';
-const PHONE   = '+91 93269 90050';
-const EMAIL   = 'propertyfinderre@gmail.com';
-const WEB     = 'www.propertyfinderrealestate.com';
-const ADDRESS = 'Shop No. 9, Ground Floor, Building No. 3, Deepanjali CHS, Malad West, Mumbai – 400095';
+  <!-- Scripts -->
+  <script src="/js/config.js"></script>
+  <script src="/js/auth-guard.js"></script>
+  <script src="/js/api.js"></script>
+  <script src="/js/security.js"></script>
+  <script src="/js/theme.js"></script>
+  <script src="/js/tracker.js"></script>
+  <script src="/js/widgets.js"></script>
+  <script src="/js/i18n.js"></script>
+  <script src="/js/app.js"></script>
+  <script src="/js/app-shell.js"></script>
 
-let currentKey = 'birthday';
+  <!-- Templates Engine Controller -->
+  <script>
+    (function () {
+      'use strict';
 
-const TEMPLATES = {
+      const STORAGE_KEY_TEMPLATES = 'pfre_email_templates';
 
-  birthday: {
-    name:'🎂 Birthday Greeting', colorClass:'color-birthday',
-    subject: (d) => `🎂 Happy Birthday, ${d.name}! — Property Finder Real Estate`,
-    html: (d) => `
-      <div class="ep-greeting">Dear ${d.name},</div>
-      <div class="ep-intro">Congratulations! 🎉 Wishing you a very <strong>Happy Birthday!</strong> May this special day bring you abundant joy, happiness, and the fulfilment of all your dreams.</div>
-      <div class="ep-highlight">
-        <div class="ep-row"><span class="ep-icon">🎂</span><div class="ep-detail"><span class="ep-label" style="color:#7C3AED">Birthday Greetings</span><br>On this wonderful occasion, we at <strong>${COMPANY}</strong> wish you and your family a day filled with love and laughter! 🌟</div></div>
-        <div class="ep-row"><span class="ep-icon">🏠</span><div class="ep-detail"><span class="ep-label">Your Property Partner</span><br>Thank you for your trust in us. We remain committed to serving all your real estate needs — today and always!</div></div>
-      </div>
-      <div class="ep-message">"May each year bring you closer to all your goals — including finding your <em>dream home</em> in Mumbai! We are always here to help." 😊</div>
-      <a class="ep-cta" href="https://wa.me/919326990050">💬 WhatsApp Us Anytime</a>`,
-    wa: (d) => `🎂 *Happy Birthday, ${d.name}!*\n\nWishing you a wonderful birthday filled with joy and happiness! 🎉🌟\n\nMay all your dreams come true — including finding your perfect home! 🏠\n\n*Property Finder Real Estate*\n📞 ${PHONE}\n🌐 ${WEB}\n\n_"Your Search Ends Here."_ ✨`
-  },
-
-  marriage: {
-    name:'💍 Marriage Anniversary', colorClass:'color-anniv',
-    subject: (d) => `💍 Happy Wedding Anniversary, ${d.name}! — Property Finder Real Estate`,
-    html: (d) => `
-      <div class="ep-greeting">Dear ${d.name} &amp; Family,</div>
-      <div class="ep-intro">Heartiest congratulations on your <strong>Wedding Anniversary!</strong> 💕 We at <strong>${COMPANY}</strong> wish you and your partner a beautiful journey ahead, filled with love and togetherness.</div>
-      <div class="ep-highlight">
-        <div class="ep-row"><span class="ep-icon">💍</span><div class="ep-detail"><span class="ep-label" style="color:#BE185D">Happy Wedding Anniversary!</span><br>May your bond grow stronger with every passing year. Your love story is an inspiration to us all! 🌹</div></div>
-        <div class="ep-row"><span class="ep-icon">🏡</span><div class="ep-detail"><span class="ep-label">A New Home for Your New Chapter?</span><br>Every anniversary is a perfect time to think about upgrading your home. Let us help you find your dream property! 🌟</div></div>
-      </div>
-      <div class="ep-message">Celebrate this milestone with loved ones. We are grateful to be your trusted real estate partner and look forward to serving you for many more years.</div>
-      <a class="ep-cta" href="https://wa.me/919326990050">💬 WhatsApp Us</a>`,
-    wa: (d) => `💍 *Happy Wedding Anniversary, ${d.name}!*\n\nWishing you and your partner a beautiful anniversary! 🌹💕\n\nMay your love grow stronger with every passing year. Congratulations on this wonderful milestone!\n\n*Property Finder Real Estate*\n📞 ${PHONE}\n\n_"Your Search Ends Here."_ 🏠`
-  },
-
-  death: {
-    name:'🕯️ Death Anniversary', colorClass:'color-death',
-    subject: (d) => `Remembering Your Loved One — Property Finder Real Estate`,
-    html: (d) => `
-      <div class="ep-greeting">Dear ${d.name},</div>
-      <div class="ep-intro">On this solemn occasion, we at <strong>${COMPANY}</strong> remember and honour your loved one with you. Our heartfelt condolences and prayers are with you and your family.</div>
-      <div class="ep-highlight">
-        <div class="ep-row"><span class="ep-icon">🕯️</span><div class="ep-detail"><span class="ep-label">In Loving Memory</span><br>May their soul rest in eternal peace. 🙏 Their memories will always remain a guiding light.</div></div>
-        <div class="ep-row"><span class="ep-icon">❤️</span><div class="ep-detail"><span class="ep-label">We Are With You</span><br>In times of grief and in moments of joy, we remain your trusted friends. Please reach out if there is anything we can assist you with.</div></div>
-      </div>
-      <div class="ep-message">We stand by you and your family during this time of remembrance. May you find strength and solace in the memories you hold dear.</div>`,
-    wa: (d) => `🕯️ Dear ${d.name},\n\nOn this solemn occasion, we remember and honour your loved one. May their soul rest in eternal peace. 🙏\n\nOur thoughts and prayers are with you and your family.\n\n— *Property Finder Real Estate*\n📞 ${PHONE}`
-  },
-
-  ll_expiry: {
-    name:'📄 L&L Agreement Expiry', colorClass:'color-agr',
-    subject: (d) => `⚠️ Leave & Licence Agreement Expiry — ${d.property} — Action Required`,
-    html: (d) => `
-      <div class="ep-greeting">Dear ${d.name},</div>
-      <div class="ep-intro">This is a gentle reminder from <strong>${COMPANY}</strong> that your <strong>Leave &amp; Licence Agreement</strong> is approaching its expiry date. Please take the necessary action to avoid any legal complications.</div>
-      <div class="ep-highlight">
-        <div class="ep-row"><span class="ep-icon" style="color:#D97706">📋</span><div class="ep-detail"><span class="ep-label" style="color:#D97706">Agreement Type</span><br>Leave &amp; Licence Agreement</div></div>
-        <div class="ep-row"><span class="ep-icon">🏠</span><div class="ep-detail"><span class="ep-label">Property</span><br>${d.property}</div></div>
-        <div class="ep-row"><span class="ep-icon" style="color:#EF4444">📅</span><div class="ep-detail"><span class="ep-label" style="color:#EF4444">Expiry Date</span><br><strong>${d.dateDisplay}</strong></div></div>
-        <div class="ep-row"><span class="ep-icon">⚖️</span><div class="ep-detail"><span class="ep-label">Action Required</span><br>Please contact us immediately to initiate renewal or vacation formalities.</div></div>
-      </div>
-      <div class="ep-message">A Leave &amp; Licence Agreement must be renewed before expiry to maintain legal validity. Delay may result in the agreement becoming void and may create complications for both parties.</div>
-      <a class="ep-cta" href="https://wa.me/919326990050">📞 Contact Us to Renew</a>`,
-    wa: (d) => `📄 Dear ${d.name},\n\nThis is a reminder that your *Leave & Licence Agreement* for *${d.property}* is expiring on *${d.dateDisplay}*.\n\n⚠️ Please contact us immediately to:\n• Renew the agreement, OR\n• Initiate vacation formalities\n\n📞 *${PHONE}*\n\nDelaying renewal can create legal complications for both parties.\n\n— *Property Finder Real Estate*`
-  },
-
-  rent_expiry: {
-    name:'🔑 Rent Agreement Expiry', colorClass:'color-agr',
-    subject: (d) => `⚠️ Rent Agreement Expiry — ${d.property} — Renewal Required`,
-    html: (d) => `
-      <div class="ep-greeting">Dear ${d.name},</div>
-      <div class="ep-intro">We wish to inform you that your <strong>Rent Agreement</strong> for the property <strong>${d.property}</strong> is due to expire soon. Please get in touch with us to initiate the renewal process well in advance.</div>
-      <div class="ep-highlight">
-        <div class="ep-row"><span class="ep-icon">🔑</span><div class="ep-detail"><span class="ep-label" style="color:#D97706">Rent Agreement</span><br>${d.property}</div></div>
-        <div class="ep-row"><span class="ep-icon" style="color:#EF4444">📅</span><div class="ep-detail"><span class="ep-label" style="color:#EF4444">Expiry Date</span><br><strong>${d.dateDisplay}</strong></div></div>
-        <div class="ep-row"><span class="ep-icon">📝</span><div class="ep-detail"><span class="ep-label">Renewal Process</span><br>New agreement drafting · Stamp duty · Registration · KYC update</div></div>
-      </div>
-      <a class="ep-cta" href="https://wa.me/919326990050">🔑 Renew Agreement Now</a>`,
-    wa: (d) => `🔑 Dear ${d.name},\n\nYour *Rent Agreement* for *${d.property}* is expiring on *${d.dateDisplay}*.\n\nKindly contact us to renew in advance and avoid any gap in the agreement period.\n\n📞 *${PHONE}*\n— *Property Finder Real Estate*`
-  },
-
-  pg_expiry: {
-    name:'🏠 PG Agreement Expiry', colorClass:'color-agr',
-    subject: (d) => `⚠️ PG Agreement Expiry — ${d.property}`,
-    html: (d) => `
-      <div class="ep-greeting">Dear ${d.name},</div>
-      <div class="ep-intro">This is a reminder that your <strong>Paying Guest (PG) Agreement</strong> is approaching expiry. Please contact us at the earliest to discuss renewal or alternative accommodation arrangements.</div>
-      <div class="ep-highlight">
-        <div class="ep-row"><span class="ep-icon">🏠</span><div class="ep-detail"><span class="ep-label" style="color:#D97706">PG Agreement</span><br>${d.property}</div></div>
-        <div class="ep-row"><span class="ep-icon" style="color:#EF4444">📅</span><div class="ep-detail"><span class="ep-label" style="color:#EF4444">Expiry Date</span><br><strong>${d.dateDisplay}</strong></div></div>
-      </div>
-      <a class="ep-cta" href="https://wa.me/919326990050">Contact Us Now</a>`,
-    wa: (d) => `🏠 Dear ${d.name},\n\nYour *PG Agreement* for *${d.property}* is expiring on *${d.dateDisplay}*.\n\nPlease contact us to discuss renewal or alternative accommodation.\n\n📞 *${PHONE}*\n— *Property Finder Real Estate*`
-  },
-
-  lease_expiry: {
-    name:'📋 Lease Agreement Expiry', colorClass:'color-agr',
-    subject: (d) => `⚠️ Lease Agreement Expiry Notice — ${d.property}`,
-    html: (d) => `
-      <div class="ep-greeting">Dear ${d.name},</div>
-      <div class="ep-intro">Your <strong>Lease Agreement</strong> for <strong>${d.property}</strong> is due to expire. We strongly recommend beginning the renewal process at least 30 days before the expiry date to ensure continuity.</div>
-      <div class="ep-highlight">
-        <div class="ep-row"><span class="ep-icon">📋</span><div class="ep-detail"><span class="ep-label" style="color:#D97706">Lease Agreement</span><br>${d.property}</div></div>
-        <div class="ep-row"><span class="ep-icon" style="color:#EF4444">📅</span><div class="ep-detail"><span class="ep-label" style="color:#EF4444">Expiry Date</span><br><strong>${d.dateDisplay}</strong></div></div>
-        <div class="ep-row"><span class="ep-icon">💰</span><div class="ep-detail"><span class="ep-label">Renewal Charges</span><br>Stamp duty + Registration fee applicable. We assist with end-to-end documentation.</div></div>
-      </div>
-      <a class="ep-cta" href="https://wa.me/919326990050">📋 Start Renewal Process</a>`,
-    wa: (d) => `📋 Dear ${d.name},\n\nYour *Lease Agreement* for *${d.property}* expires on *${d.dateDisplay}*.\n\nPlease connect with us immediately to begin the renewal process.\n\n📞 *${PHONE}*\n— *Property Finder Real Estate*`
-  },
-
-  site_visit: {
-    name:'✅ Site Visit Confirmed', colorClass:'color-visit',
-    subject: (d) => `✅ Site Visit Confirmed — ${d.property} — Property Finder Real Estate`,
-    html: (d) => `
-      <div class="ep-greeting">Dear ${d.name},</div>
-      <div class="ep-intro">Congratulations! 🎉 Your site visit has been <strong>confirmed!</strong> We're thrilled to show you the property and help you take a step closer to your dream home.</div>
-      <div class="ep-highlight">
-        <div class="ep-row"><span class="ep-icon" style="color:#10B981">📅</span><div class="ep-detail"><span class="ep-label" style="color:#10B981">Date</span><br><strong>${d.dateDisplay}</strong></div></div>
-        <div class="ep-row"><span class="ep-icon" style="color:#3B82F6">⏰</span><div class="ep-detail"><span class="ep-label" style="color:#3B82F6">Time</span><br><strong>${d.timeDisplay}</strong></div></div>
-        <div class="ep-row"><span class="ep-icon" style="color:#EF4444">📍</span><div class="ep-detail"><span class="ep-label" style="color:#EF4444">Property</span><br><strong>${d.property}</strong></div></div>
-        <div class="ep-row"><span class="ep-icon">📞</span><div class="ep-detail"><span class="ep-label">Your Agent</span><br>Saurav Chowdhury · ${PHONE}</div></div>
-      </div>
-      <div class="ep-message">The visit will take approximately <strong>30–45 minutes.</strong> We kindly request you to arrive on time for a smooth and complete experience. Bring both parents or decision-makers if possible!</div>
-      <a class="ep-cta" href="https://wa.me/919326990050">💬 WhatsApp Us</a>`,
-    wa: (d) => `✅ *Site Visit Confirmed!*\n\nDear ${d.name},\n\nYour property visit has been confirmed.\n\n📅 *Date:* ${d.dateDisplay}\n⏰ *Time:* ${d.timeDisplay}\n🏠 *Property:* ${d.property}\n📍 *Address:* ${ADDRESS}\n\nWe kindly request you to arrive on time. Our agent will be present to guide you.\n\n📞 ${PHONE}\n— *Property Finder Real Estate*\n\n_"Your Search Ends Here."_`
-  },
-
-  booking: {
-    name:'🎉 Booking Confirmation', colorClass:'color-booking',
-    subject: (d) => `🎉 Booking Confirmed — ${d.property} — Property Finder Real Estate`,
-    html: (d) => `
-      <div class="ep-greeting">Dear ${d.name},</div>
-      <div class="ep-intro">Congratulations! 🎊 Your property booking has been <strong>successfully confirmed!</strong> Welcome to the Property Finder family. We are delighted to have assisted you in this important milestone.</div>
-      <div class="ep-highlight">
-        <div class="ep-row"><span class="ep-icon" style="color:#10B981">✅</span><div class="ep-detail"><span class="ep-label" style="color:#10B981">Booking Confirmed</span><br>${d.property}</div></div>
-        <div class="ep-row"><span class="ep-icon" style="color:#3B82F6">📅</span><div class="ep-detail"><span class="ep-label" style="color:#3B82F6">Booking Date</span><br><strong>${d.dateDisplay}</strong></div></div>
-        <div class="ep-row"><span class="ep-icon" style="color:#D97706">💰</span><div class="ep-detail"><span class="ep-label" style="color:#D97706">Token Amount</span><br><strong>₹${d.amount}</strong></div></div>
-        <div class="ep-row"><span class="ep-icon">📋</span><div class="ep-detail"><span class="ep-label">Next Steps</span><br>Agreement drafting · Stamp duty · Registration · Possession</div></div>
-      </div>
-      <div class="ep-message">Your trust means everything to us. Our team will guide you through every step from here — agreements, stamp duty, registration, and possession. <strong>Congratulations on your new property!</strong> 🏡</div>
-      <a class="ep-cta" href="https://wa.me/919326990050">💬 Connect With Your Agent</a>`,
-    wa: (d) => `🎉 *Congratulations, ${d.name}!*\n\nYour property booking is *confirmed!* 🏡\n\n✅ *Property:* ${d.property}\n📅 *Date:* ${d.dateDisplay}\n💰 *Token Paid:* ₹${d.amount}\n\nOur team will contact you shortly for the next steps — agreement drafting, stamp duty, and registration.\n\nWelcome to the Property Finder family! 🎊\n\n📞 ${PHONE}\n— *Property Finder Real Estate*`
-  },
-
-  welcome: {
-    name:'👋 Welcome New Client', colorClass:'color-welcome',
-    subject: (d) => `👋 Welcome to Property Finder Real Estate, ${d.name}!`,
-    html: (d) => `
-      <div class="ep-greeting">Dear ${d.name},</div>
-      <div class="ep-intro">A very warm welcome to <strong>Property Finder Real Estate!</strong> 🏠 We are delighted to have you as our valued client and look forward to helping you find your perfect property in Mumbai.</div>
-      <div class="ep-highlight">
-        <div class="ep-row"><span class="ep-icon">🤝</span><div class="ep-detail"><span class="ep-label" style="color:#2563EB">Your Trusted Partner</span><br>7+ years of experience · 1,800+ happy clients · ₹800Cr+ in transactions</div></div>
-        <div class="ep-row"><span class="ep-icon">📍</span><div class="ep-detail"><span class="ep-label">Service Areas</span><br>Malad, Goregaon, Andheri, Borivali, Kandivali, Dahisar, Mira Road</div></div>
-        <div class="ep-row"><span class="ep-icon">📞</span><div class="ep-detail"><span class="ep-label">Available 7 Days a Week</span><br>${PHONE} · ${EMAIL}</div></div>
-      </div>
-      <div class="ep-message">We are here to assist you with property buying, selling, renting, home loans, insurance, legal documentation, and much more. Our team is just a WhatsApp message away!</div>
-      <a class="ep-cta" href="https://wa.me/919326990050">💬 Start a Conversation</a>`,
-    wa: (d) => `👋 *Welcome to Property Finder Real Estate, ${d.name}!*\n\nWe're delighted to have you with us! 🏠\n\n🤝 *Your trusted Mumbai property partner since 2018*\n📍 Western Suburbs specialist\n📞 Available 7 days: ${PHONE}\n\nWe'll help you with:\n✅ Buying & Selling\n✅ Rentals & Leasing\n✅ Home Loans\n✅ Legal Documentation\n\nFeel free to WhatsApp us anytime!\n— *Property Finder Real Estate*`
-  },
-
-  property_alert: {
-    name:'🏡 New Property Alert', colorClass:'color-alert',
-    subject: (d) => `🏡 New Property Alert — ${d.property} — Matches Your Requirement`,
-    html: (d) => `
-      <div class="ep-greeting">Dear ${d.name},</div>
-      <div class="ep-intro">Great news! 🌟 We have found a <strong>new property listing</strong> that closely matches your requirements. Don't miss this opportunity — properties in this locality are moving fast!</div>
-      <div class="ep-highlight">
-        <div class="ep-row"><span class="ep-icon" style="color:#7C3AED">🏡</span><div class="ep-detail"><span class="ep-label" style="color:#7C3AED">Property Details</span><br><strong>${d.property}</strong></div></div>
-        <div class="ep-row"><span class="ep-icon" style="color:#D97706">💰</span><div class="ep-detail"><span class="ep-label" style="color:#D97706">Price</span><br><strong>₹${d.amount}</strong></div></div>
-        <div class="ep-row"><span class="ep-icon">📅</span><div class="ep-detail"><span class="ep-label">Available From</span><br>${d.dateDisplay}</div></div>
-        <div class="ep-row"><span class="ep-icon">⚡</span><div class="ep-detail"><span class="ep-label">Act Fast!</span><br>Properties in this micro-market have an average availability of 30–45 days. Book a site visit today!</div></div>
-      </div>
-      <a class="ep-cta" href="https://wa.me/919326990050">🏡 Book Site Visit Now</a>`,
-    wa: (d) => `🏡 *New Property Alert for ${d.name}!*\n\nWe found a property matching your requirements:\n\n🏠 *${d.property}*\n💰 *Price:* ₹${d.amount}\n📅 *Available:* ${d.dateDisplay}\n\n⚡ Properties in this area move fast!\n\nReply *"VISIT"* to schedule a site visit.\n\n📞 ${PHONE}\n— *Property Finder Real Estate*`
-  },
-
-  loan_received: {
-    name:'🏦 Loan Application Received', colorClass:'color-loan',
-    subject: (d) => `🏦 Home Loan Application Received — Property Finder Real Estate`,
-    html: (d) => `
-      <div class="ep-greeting">Dear ${d.name},</div>
-      <div class="ep-intro">Thank you for applying for <strong>Home Loan Assistance</strong> through Property Finder Real Estate! 🏦 Your application has been received and our loan expert will contact you within 4 hours.</div>
-      <div class="ep-highlight">
-        <div class="ep-row"><span class="ep-icon" style="color:#10B981">✅</span><div class="ep-detail"><span class="ep-label" style="color:#10B981">Application Received</span><br>${d.dateDisplay}</div></div>
-        <div class="ep-row"><span class="ep-icon">🏦</span><div class="ep-detail"><span class="ep-label">Our Bank Partners</span><br>SBI · HDFC · ICICI · Axis · Kotak · PNB Housing · 10+ more</div></div>
-        <div class="ep-row"><span class="ep-icon" style="color:#2563EB">📞</span><div class="ep-detail"><span class="ep-label" style="color:#2563EB">Next Step</span><br>Our expert will call you within 4 hours to discuss the best loan options</div></div>
-      </div>
-      <a class="ep-cta" href="https://wa.me/919326990050">💬 WhatsApp for Quick Response</a>`,
-    wa: (d) => `🏦 Dear ${d.name},\n\nYour *Home Loan Application* has been received! ✅\n\n📅 Date: ${d.dateDisplay}\n\nOur loan expert will call you within *4 hours* to:\n• Compare rates from 15+ banks\n• Check your eligibility\n• Assist with documentation\n\n📞 ${PHONE}\n— *Property Finder Real Estate*`
-  },
-
-  followup: {
-    name:'📞 Follow-up Reminder', colorClass:'color-followup',
-    subject: (d) => `Checking In — ${d.property} — Property Finder Real Estate`,
-    html: (d) => `
-      <div class="ep-greeting">Dear ${d.name},</div>
-      <div class="ep-intro">We hope you are doing well! This is a quick follow-up from <strong>${COMPANY}</strong> regarding your property enquiry for <strong>${d.property}</strong>.</div>
-      <div class="ep-highlight">
-        <div class="ep-row"><span class="ep-icon">🏠</span><div class="ep-detail"><span class="ep-label">Your Enquiry</span><br>${d.property}</div></div>
-        <div class="ep-row"><span class="ep-icon">🤔</span><div class="ep-detail"><span class="ep-label">We Would Love to Know</span><br>Have you had a chance to consider the properties we shared? Are you ready for a site visit?</div></div>
-        <div class="ep-row"><span class="ep-icon">🆕</span><div class="ep-detail"><span class="ep-label">New Options Available</span><br>We have some exciting new listings that match your budget and requirements!</div></div>
-      </div>
-      <a class="ep-cta" href="https://wa.me/919326990050">💬 Let's Connect</a>`,
-    wa: (d) => `📞 Dear ${d.name},\n\nHope you are doing well! 😊\n\nThis is a follow-up regarding your property enquiry for *${d.property}*.\n\nWe have some exciting *new options* available that match your requirements! 🏠\n\nWould you like to schedule a site visit this week?\n\nReply or call us:\n📞 *${PHONE}*\n— *Property Finder Real Estate*`
-  },
-
-  festival: {
-    name:'🪔 Festival Greeting', colorClass:'color-festival',
-    subject: (d) => `🪔 Warm Wishes for the Festive Season — Property Finder Real Estate`,
-    html: (d) => `
-      <div class="ep-greeting">Dear ${d.name} &amp; Family,</div>
-      <div class="ep-intro">On behalf of the entire team at <strong>${COMPANY}</strong>, we wish you and your family a very happy and prosperous festive season! 🪔✨</div>
-      <div class="ep-highlight">
-        <div class="ep-row"><span class="ep-icon">🪔</span><div class="ep-detail"><span class="ep-label" style="color:#D97706">Warm Festival Wishes</span><br>May this season bring you joy, prosperity, and new beginnings. May light always triumph over darkness! 🌟</div></div>
-        <div class="ep-row"><span class="ep-icon">🏡</span><div class="ep-detail"><span class="ep-label">The Gift of a New Home?</span><br>The festive season is the perfect time to invest in your dream property. Special offers available — contact us!</div></div>
-      </div>
-      <div class="ep-message">Thank you for being a cherished member of the <strong>Property Finder Real Estate</strong> family. We look forward to serving you in the coming year with the same dedication and commitment.</div>
-      <a class="ep-cta" href="https://wa.me/919326990050">💬 Festive Offers Available!</a>`,
-    wa: (d) => `🪔 *Warm Festival Wishes, ${d.name}!*\n\nOn behalf of the entire *Property Finder Real Estate* team, we wish you and your family a joyful, prosperous, and blessed festive season! 🌟✨\n\nMay this season bring new beginnings and light into your home! 🏡\n\nWarm regards,\n*Saurav Chowdhury*\n*Property Finder Real Estate*\n📞 ${PHONE}`
-  },
-
-  token: {
-    name:'🧾 Token/Booking Receipt', colorClass:'color-booking',
-    subject: (d) => `🧾 Token Receipt — ${d.property} — Property Finder Real Estate`,
-    html: (d) => `
-      <div class="ep-greeting">Dear ${d.name},</div>
-      <div class="ep-intro">This is to confirm receipt of your <strong>token / booking amount</strong> for the property mentioned below. Please keep this for your records.</div>
-      <div class="ep-highlight">
-        <div class="ep-row"><span class="ep-icon" style="color:#10B981">✅</span><div class="ep-detail"><span class="ep-label" style="color:#10B981">Receipt Confirmed</span><br>Token/Booking Amount Received</div></div>
-        <div class="ep-row"><span class="ep-icon">🏠</span><div class="ep-detail"><span class="ep-label">Property</span><br><strong>${d.property}</strong></div></div>
-        <div class="ep-row"><span class="ep-icon" style="color:#D97706">💰</span><div class="ep-detail"><span class="ep-label" style="color:#D97706">Amount Received</span><br><strong>₹${d.amount}</strong></div></div>
-        <div class="ep-row"><span class="ep-icon">📅</span><div class="ep-detail"><span class="ep-label">Date</span><br>${d.dateDisplay}</div></div>
-        <div class="ep-row"><span class="ep-icon">📝</span><div class="ep-detail"><span class="ep-label">Note</span><br>Subject to formal agreement. Balance amount as per agreement terms.</div></div>
-      </div>
-      <div class="ep-message">Thank you for your token/booking. Our team will contact you within 24–48 hours for the next steps including agreement drafting, stamp duty, and registration formalities.</div>
-      <a class="ep-cta" href="https://wa.me/919326990050">💬 WhatsApp for Agreement Status</a>`,
-    wa: (d) => `🧾 *Token Receipt — Property Finder Real Estate*\n\nDear ${d.name},\n\nWe confirm receipt of your token/booking amount.\n\n🏠 *Property:* ${d.property}\n💰 *Amount:* ₹${d.amount}\n📅 *Date:* ${d.dateDisplay}\n\n📝 Subject to formal agreement. Our team will contact you for next steps within 24 hours.\n\n📞 ${PHONE}\n— *Property Finder Real Estate*`
-  }
-};
-
-/* ═══ RENDER ENGINE ═══ */
-function getData() {
-  const dateVal = document.getElementById('fDate').value;
-  const timeVal = document.getElementById('fTime').value;
-  return {
-    name:        document.getElementById('fName').value || 'Valued Client',
-    phone:       document.getElementById('fPhone').value,
-    property:    document.getElementById('fProperty').value || 'Property',
-    dateDisplay: dateVal ? new Date(dateVal).toLocaleDateString('en-IN',{day:'2-digit',month:'long',year:'numeric'}) : 'To be confirmed',
-    timeDisplay: timeVal ? formatTime(timeVal) : 'To be confirmed',
-    amount:      document.getElementById('fAmount').value || '—',
-    note:        document.getElementById('fNote').value,
-  };
-}
-function formatTime(t) {
-  const [h,m] = t.split(':').map(Number);
-  const ampm = h >= 12 ? 'PM' : 'AM';
-  const h12 = h % 12 || 12;
-  return `${h12}:${String(m).padStart(2,'0')} ${ampm}`;
-}
-
-function renderLogo() {
-  return `<div class="ep-logo">
-    <svg width="36" height="36" viewBox="0 0 40 40" fill="none">
-      <circle cx="17" cy="17" r="13" stroke="white" stroke-width="2.5"/>
-      <path d="M17 22V18" stroke="white" stroke-width="2" stroke-linecap="round"/>
-      <rect x="14" y="18" width="6" height="4" rx="0.5" stroke="white" stroke-width="2"/>
-      <path d="M12 18L17 13L22 18" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-      <path d="M27 27L33 33" stroke="white" stroke-width="2.5" stroke-linecap="round"/>
-    </svg>
-    <div class="ep-logo-text"><div class="brand">Property Finder Real Estate</div><div class="sub">Mumbai · Maharashtra</div></div>
-  </div>`;
-}
-
-function renderPreview() {
-  const t = TEMPLATES[currentKey];
-  if (!t) return;
-  const d = getData();
-  const preview = document.getElementById('emailPreview');
-  preview.className = `email-preview ${t.colorClass}`;
-  preview.innerHTML = `
-    <div class="ep-header">${renderLogo()}</div>
-    <div class="ep-body">
-      ${t.html(d)}
-      <div class="ep-sign">
-        <p>Warm regards,</p>
-        <p class="sign-name">Saurav Ganesh Chowdhury</p>
-        <p class="sign-co">${COMPANY}</p>
-        <p style="font-size:12px;margin-top:6px">📞 ${PHONE} · ✉️ ${EMAIL}</p>
-        <p style="font-size:11px;color:#9CA3AF;margin-top:4px">📍 ${ADDRESS}</p>
-      </div>
-    </div>
-    <div class="ep-tagline">"Your Search Ends Here." — ${COMPANY}</div>
-    <div class="ep-footer">
-      <p>${COMPANY} · ${ADDRESS}</p>
-      <p>📞 ${PHONE} · <a href="https://www.${WEB}">${WEB}</a></p>
-      <p style="margin-top:8px;opacity:.4">To unsubscribe, reply STOP to this message.</p>
-    </div>`;
-  /* Update WA bubble */
-  document.getElementById('waBubble').textContent = t.wa(d);
-}
-
-function loadTmpl(key, btn) {
-  currentKey = key;
-  document.querySelectorAll('.tmpl-btn').forEach(b => b.classList.remove('active'));
-  btn.classList.add('active');
-  document.getElementById('currentTmplName').textContent = TEMPLATES[key]?.name || '';
-  renderPreview();
-}
-
-function sendWA() {
-  const t = TEMPLATES[currentKey];
-  const d = getData();
-  const phone = d.phone.replace(/\D/g,'');
-  const msg = t.wa(d);
-  window.open(`https://wa.me/${phone}?text=${encodeURIComponent(msg)}`, '_blank');
-}
-function sendEmail() {
-  const t = TEMPLATES[currentKey];
-  const d = getData();
-  const subject = t.subject(d);
-  const bodyText = t.wa(d).replace(/\*/g,'');
-  window.location.href = `mailto:?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(bodyText)}`;
-}
-function copyWAText() {
-  const t = TEMPLATES[currentKey];
-  const d = getData();
-  navigator.clipboard.writeText(t.wa(d)).then(() => {
-    if (window.showToast) showToast('📋 WhatsApp text copied!','success');
-  });
-}
-function printEmail() {
-  window.print();
-}
-
-
-/* ── Read URL params to pre-fill form ── */
-(function() {
-  const p = new URLSearchParams(window.location.search);
-  if (p.get('name'))     document.getElementById('fName').value     = p.get('name');
-  if (p.get('phone'))    document.getElementById('fPhone').value    = p.get('phone');
-  if (p.get('property')) document.getElementById('fProperty').value = p.get('property');
-  const typeParam = p.get('type');
-  if (typeParam && TEMPLATES[typeParam]) {
-    currentKey = typeParam;
-    const btn = document.querySelector(`[onclick="loadTmpl('${typeParam}',this)"]`);
-    if (btn) {
-      document.querySelectorAll('.tmpl-btn').forEach(b => b.classList.remove('active'));
-      btn.classList.add('active');
-    }
-  }
-  renderPreview();
-})();
-/* Init */
-document.getElementById('fDate').value = new Date().toISOString().split('T')[0];
-renderPreview();
-</script>
-<script src="js/theme.js"></script>
-<script src="js/security.js"></script>
-
-<div class="no-print" style="text-align:center;padding:16px 5%;border-top:1px solid var(--border);font-size:12px;color:var(--text-muted);display:flex;align-items:center;justify-content:center;gap:14px;flex-wrap:wrap">
-  <span>© 2026 Property Finder Real Estate · Malad West, Mumbai</span>
-  <div style="display:flex;gap:8px;align-items:center">
-    <a href="https://www.instagram.com/propertyfinderrealestate" target="_blank" rel="noopener noreferrer" aria-label="Instagram" style="color:var(--text-muted)">Instagram</a>
-    <span aria-hidden="true">·</span>
-    <a href="https://www.facebook.com/PropertyFinderRealEstate/reviews" target="_blank" rel="noopener noreferrer" aria-label="Facebook Reviews" style="color:var(--text-muted)">Facebook</a>
-    <span aria-hidden="true">·</span>
-    <a href="https://jsdl.in/RSL-XGK1779888146" target="_blank" rel="noopener noreferrer" aria-label="JustDial" style="color:var(--text-muted)">JustDial</a>
-    <span aria-hidden="true">·</span>
-    <a href="index.html" style="color:var(--blue);font-weight:600">Website</a>
+      const defaultTemplates = {
+        lead_welcome: {
+          subject: 'Thank you for contacting Property Finder Real Estate Mumbai',
+          preheader: 'We have received your real estate requirement in {{locality}}.',
+          body: `<div style="font-family: Arial, sans-serif; max-width: 580px; margin: 0 auto; color: #1E293B; line-height: 1.6;">
+  <div style="background: #0284C7; padding: 24px; text-align: center; border-radius: 8px 8px 0 0;">
+    <h2 style="color: #FFFFFF; margin: 0; font-size: 20px;">PROPERTY FINDER REAL ESTATE</h2>
+    <span style="color: #E0F2FE; font-size: 12px; letter-spacing: 1px;">MahaRERA REGISTRATION A51800000412</span>
   </div>
-</div>
-<script>
-if ("serviceWorker" in navigator) {
-  window.addEventListener("load", () => {
-    navigator.serviceWorker.register("./sw.js").catch(() => {});
-  });
-}
-</script>
+  <div style="padding: 24px; border: 1px solid #E2E8F0; border-top: none; border-radius: 0 0 8px 8px;">
+    <p>Dear <strong>{{client_name}}</strong>,</p>
+    <p>Thank you for reaching out to Property Finder Real Estate regarding your requirement for <strong>{{property_title}}</strong> in <strong>{{locality}}</strong>.</p>
+    <p>Our dedicated advisor <strong>{{consultant_name}}</strong> is reviewing our verified inventory matching your preferences and will connect with you shortly.</p>
+    <div style="background: #F8FAFC; border-left: 4px solid #0284C7; padding: 14px; margin: 20px 0;">
+      <p style="margin: 0; font-size: 13px; color: #475569;">
+        <strong>Direct Consultation Desk:</strong><br>
+        Phone: {{consultant_phone}}<br>
+        Head Office: Shop No. 2, Baf-Hira Nagar, Jankalyan Nagar, Malad West, Mumbai 400095
+      </p>
+    </div>
+    <p style="font-size: 13px; color: #64748B;">Warm regards,<br><strong>Saurav Ganesh Chowdhury</strong><br>Founder, Property Finder Real Estate</p>
+  </div>
+</div>`
+        },
+        site_visit: {
+          subject: 'Property Inspection Scheduled: {{property_title}}',
+          preheader: 'Your site visit is confirmed for {{visit_datetime}}.',
+          body: `<div style="font-family: Arial, sans-serif; max-width: 580px; margin: 0 auto; color: #1E293B; line-height: 1.6;">
+  <div style="background: #059669; padding: 24px; text-align: center; border-radius: 8px 8px 0 0;">
+    <h2 style="color: #FFFFFF; margin: 0; font-size: 20px;">SITE INSPECTION CONFIRMED</h2>
+    <span style="color: #D1FAE5; font-size: 12px;">PROPERTY FINDER REAL ESTATE MUMBAI</span>
+  </div>
+  <div style="padding: 24px; border: 1px solid #E2E8F0; border-top: none; border-radius: 0 0 8px 8px;">
+    <p>Dear <strong>{{client_name}}</strong>,</p>
+    <p>Your property walkthrough inspection has been successfully scheduled:</p>
+    <table style="width: 100%; border-collapse: collapse; margin: 18px 0; font-size: 13.5px;">
+      <tr>
+        <td style="padding: 8px 0; border-bottom: 1px solid #E2E8F0; color: #64748B;">Property:</td>
+        <td style="padding: 8px 0; border-bottom: 1px solid #E2E8F0; font-weight: bold;">{{property_title}}</td>
+      </tr>
+      <tr>
+        <td style="padding: 8px 0; border-bottom: 1px solid #E2E8F0; color: #64748B;">Location:</td>
+        <td style="padding: 8px 0; border-bottom: 1px solid #E2E8F0; font-weight: bold;">{{locality}}</td>
+      </tr>
+      <tr>
+        <td style="padding: 8px 0; border-bottom: 1px solid #E2E8F0; color: #64748B;">Inspection Date & Time:</td>
+        <td style="padding: 8px 0; border-bottom: 1px solid #E2E8F0; font-weight: bold; color: #0284C7;">{{visit_datetime}}</td>
+      </tr>
+      <tr>
+        <td style="padding: 8px 0; color: #64748B;">Assigned Consultant:</td>
+        <td style="padding: 8px 0; font-weight: bold;">{{consultant_name}} ({{consultant_phone}})</td>
+      </tr>
+    </table>
+    <p style="font-size: 13px; color: #64748B;">Please contact us at {{consultant_phone}} if you need to adjust your timing.</p>
+  </div>
+</div>`
+        },
+        agreement_draft: {
+          subject: 'Leave & License Draft for Approval: {{property_title}}',
+          preheader: 'Please review your draft agreement before biometric scheduling.',
+          body: `<div style="font-family: Arial, sans-serif; max-width: 580px; margin: 0 auto; color: #1E293B; line-height: 1.6;">
+  <div style="background: #4F46E5; padding: 24px; text-align: center; border-radius: 8px 8px 0 0;">
+    <h2 style="color: #FFFFFF; margin: 0; font-size: 20px;">LEAVE & LICENSE DRAFT READY</h2>
+    <span style="color: #E0E7FF; font-size: 12px;">DEPARTMENT OF REGISTRATION & STAMPS MAHARASHTRA</span>
+  </div>
+  <div style="padding: 24px; border: 1px solid #E2E8F0; border-top: none; border-radius: 0 0 8px 8px;">
+    <p>Dear <strong>{{client_name}}</strong>,</p>
+    <p>The draft leave and license deed for <strong>{{property_title}}</strong> in <strong>{{locality}}</strong> has been prepared under Maharashtra Stamp Act provisions.</p>
+    <p>Government Token Number: <strong>{{token_number}}</strong></p>
+    <p>Please review the party names, spellings as per Aadhaar card, monthly license fee, refundable security deposit, and lock-in period. Upon your confirmation, our biometric executive will coordinate doorstep Aadhaar verification.</p>
+    <p style="font-size: 13px; color: #64748B;">Support desk: {{consultant_phone}}</p>
+  </div>
+</div>`
+        },
+        registration_complete: {
+          subject: 'Registered Index II Issued: {{property_title}}',
+          preheader: 'Your leave and license deed has been officially registered.',
+          body: `<div style="font-family: Arial, sans-serif; max-width: 580px; margin: 0 auto; color: #1E293B; line-height: 1.6;">
+  <div style="background: #15803D; padding: 24px; text-align: center; border-radius: 8px 8px 0 0;">
+    <h2 style="color: #FFFFFF; margin: 0; font-size: 20px;">REGISTRATION COMPLETED</h2>
+    <span style="color: #DCFCE7; font-size: 12px;">GOVERNMENT INDEX II ISSUED</span>
+  </div>
+  <div style="padding: 24px; border: 1px solid #E2E8F0; border-top: none; border-radius: 0 0 8px 8px;">
+    <p>Dear <strong>{{client_name}}</strong>,</p>
+    <p>We are pleased to inform you that your agreement for <strong>{{property_title}}</strong> has been approved by the Joint Sub-Registrar Office.</p>
+    <p>Registered Token Number: <strong>{{token_number}}</strong></p>
+    <p>The digitally signed Index II document with official government barcode is attached for your records and society NOC submission.</p>
+    <p style="font-size: 13px; color: #64748B;">Thank you for choosing Property Finder Real Estate.</p>
+  </div>
+</div>`
+        },
+        invoice_receipt: {
+          subject: 'Consultancy Service Receipt: {{property_title}}',
+          preheader: 'Advisory fee receipt from Property Finder Real Estate.',
+          body: `<div style="font-family: Arial, sans-serif; max-width: 580px; margin: 0 auto; color: #1E293B; line-height: 1.6;">
+  <div style="background: #0284C7; padding: 24px; text-align: center; border-radius: 8px 8px 0 0;">
+    <h2 style="color: #FFFFFF; margin: 0; font-size: 20px;">PAYMENT RECEIPT</h2>
+    <span style="color: #E0F2FE; font-size: 12px;">PROPERTY FINDER REAL ESTATE MUMBAI</span>
+  </div>
+  <div style="padding: 24px; border: 1px solid #E2E8F0; border-top: none; border-radius: 0 0 8px 8px;">
+    <p>Dear <strong>{{client_name}}</strong>,</p>
+    <p>We acknowledge receipt of <strong>{{fee_amount}}</strong> towards real estate consultancy services for <strong>{{property_title}}</strong>, <strong>{{locality}}</strong>.</p>
+    <p>Official invoice and tax compliance records have been logged under Proprietor Saurav Ganesh Chowdhury, Malad West.</p>
+  </div>
+</div>`
+        }
+      };
+
+      const sampleValues = {
+        '{{client_name}}': 'Rajesh Sharma',
+        '{{property_title}}': 'Marina Enclave 2 BHK Apartment',
+        '{{locality}}': 'Jankalyan Nagar, Malad West',
+        '{{visit_datetime}}': 'Saturday, 18 October 2026 at 11:30 AM',
+        '{{consultant_name}}': 'Saurav Chowdhury',
+        '{{consultant_phone}}': '+91 93269 90050',
+        '{{token_number}}': '520260114191',
+        '{{fee_amount}}': '₹45,000'
+      };
+
+      let activeKey = 'lead_welcome';
+
+      function getTemplates() {
+        try {
+          const raw = localStorage.getItem(STORAGE_KEY_TEMPLATES);
+          if (!raw) {
+            localStorage.setItem(STORAGE_KEY_TEMPLATES, JSON.stringify(defaultTemplates));
+            return defaultTemplates;
+          }
+          return JSON.parse(raw);
+        } catch (e) {
+          return defaultTemplates;
+        }
+      }
+
+      function saveTemplates(tpls) {
+        localStorage.setItem(STORAGE_KEY_TEMPLATES, JSON.stringify(tpls));
+      }
+
+      function interpolate(templateString) {
+        let result = templateString || '';
+        Object.keys(sampleValues).forEach(tag => {
+          result = result.split(tag).join(sampleValues[tag]);
+        });
+        return result;
+      }
+
+      function loadTemplate(key) {
+        activeKey = key;
+        const allTpls = getTemplates();
+        const tpl = allTpls[key] || defaultTemplates[key];
+
+        document.getElementById('tplSubject').value = tpl.subject;
+        document.getElementById('tplPreheader').value = tpl.preheader || '';
+        document.getElementById('tplBody').value = tpl.body;
+
+        updatePreview();
+      }
+
+      function updatePreview() {
+        const subject = document.getElementById('tplSubject').value;
+        const body = document.getElementById('tplBody').value;
+
+        const renderedSubject = interpolate(subject);
+        const renderedBody = interpolate(body);
+
+        document.getElementById('previewSubjectText').textContent = renderedSubject;
+        document.getElementById('previewEmailContainer').innerHTML = renderedBody;
+      }
+
+      function bindEvents() {
+        document.querySelectorAll('#templateListSelector button').forEach(btn => {
+          btn.addEventListener('click', function () {
+            document.querySelectorAll('#templateListSelector button').forEach(b => b.classList.remove('active'));
+            this.classList.add('active');
+            loadTemplate(this.getAttribute('data-template-key'));
+          });
+        });
+
+        const subjectInput = document.getElementById('tplSubject');
+        const bodyInput = document.getElementById('tplBody');
+
+        if (subjectInput) subjectInput.addEventListener('input', updatePreview);
+        if (bodyInput) bodyInput.addEventListener('input', updatePreview);
+
+        document.querySelectorAll('#tagPillContainer button').forEach(btn => {
+          btn.addEventListener('click', function () {
+            const tag = this.getAttribute('data-tag');
+            if (navigator.clipboard) {
+              navigator.clipboard.writeText(tag).then(() => {
+                if (typeof window.showToast === 'function') {
+                  window.showToast(`Copied ${tag} to clipboard.`, 'info');
+                }
+              });
+            }
+          });
+        });
+
+        const editorForm = document.getElementById('templateEditorForm');
+        if (editorForm) {
+          editorForm.addEventListener('submit', function (e) {
+            e.preventDefault();
+            const allTpls = getTemplates();
+            allTpls[activeKey] = {
+              subject: document.getElementById('tplSubject').value.trim(),
+              preheader: document.getElementById('tplPreheader').value.trim(),
+              body: document.getElementById('tplBody').value.trim()
+            };
+            saveTemplates(allTpls);
+            updatePreview();
+
+            if (typeof window.showToast === 'function') {
+              window.showToast('Email template saved successfully.', 'success');
+            }
+          });
+        }
+
+        const saveBtn = document.getElementById('saveTemplateChangesBtn');
+        if (saveBtn) {
+          saveBtn.addEventListener('click', function () {
+            if (editorForm) editorForm.dispatchEvent(new Event('submit'));
+          });
+        }
+
+        const resetBtn = document.getElementById('resetToDefaultBtn');
+        if (resetBtn) {
+          resetBtn.addEventListener('click', function () {
+            if (!confirm('Reset current template to original default?')) return;
+            const allTpls = getTemplates();
+            allTpls[activeKey] = defaultTemplates[activeKey];
+            saveTemplates(allTpls);
+            loadTemplate(activeKey);
+          });
+        }
+
+        const copyHtmlBtn = document.getElementById('copyTemplateHtmlBtn');
+        if (copyHtmlBtn) {
+          copyHtmlBtn.addEventListener('click', function () {
+            const bodyVal = document.getElementById('tplBody').value;
+            if (navigator.clipboard) {
+              navigator.clipboard.writeText(bodyVal).then(() => {
+                if (typeof window.showToast === 'function') {
+                  window.showToast('Template HTML copied to clipboard.', 'success');
+                }
+              });
+            }
+          });
+        }
+      }
+
+      document.addEventListener('DOMContentLoaded', function () {
+        bindEvents();
+        loadTemplate('lead_welcome');
+      });
+    })();
+  </script>
 </body>
 </html>
