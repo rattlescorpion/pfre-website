@@ -1,31 +1,51 @@
 # =====================================================
 # Property Finder Real Estate — robots.txt
-# https://www.propertyfinderrealestate.com
+# https://propertyfinderrealestate.com
+# MahaRERA Registration: NA
 # =====================================================
 
 User-agent: *
 Allow: /
 
-# Disallow internal ERP, CRM, HRMS, and administrative modules
+# Explicitly allow public pages, micro-market hubs, and static assets
+Allow: /index.html
+Allow: /properties.html
+Allow: /property-detail.html
+Allow: /post-property.html
+Allow: /services.html
+Allow: /agreement-registration.html
+Allow: /calculators.html
+Allow: /tds-calculators.html
+Allow: /price-trends.html
+Allow: /about.html
+Allow: /contact.html
+Allow: /privacy.html
+Allow: /terms.html
+Allow: /properties/
+Allow: /css/
+Allow: /js/
+Allow: /images/
+
+# Disallow internal ERP, CRM, HRMS, and administrative consoles
 Disallow: /admin.html
+Disallow: /login.html
 Disallow: /crm.html
-Disallow: /hrms.html
-Disallow: /finance.html
-Disallow: /legal.html
+Disallow: /contacts.html
 Disallow: /inventory.html
 Disallow: /schedule.html
 Disallow: /analytics.html
-Disallow: /cms.html
+Disallow: /finance.html
+Disallow: /hrms.html
+Disallow: /legal.html
 Disallow: /email-templates.html
-Disallow: /agreement-registration.html
+Disallow: /cms.html
 Disallow: /business-blueprint.html
 Disallow: /card.html
-Disallow: /login.html
+
+# Disallow error pages, backend API endpoints, and service worker scripts
 Disallow: /403.html
 Disallow: /404.html
 Disallow: /500.html
-
-# Disallow backend API endpoints & sensitive assets
 Disallow: /api/
 Disallow: /sw.js
 
@@ -33,4 +53,4 @@ Disallow: /sw.js
 Crawl-delay: 1
 
 # Canonical XML Sitemap
-Sitemap: https://www.propertyfinderrealestate.com/sitemap.xml
+Sitemap: https://propertyfinderrealestate.com/sitemap.xml
