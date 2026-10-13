@@ -1,540 +1,265 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" data-theme="light">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Contact Us — Property Finder Real Estate | Malad West, Mumbai</title>
-  <meta name="description" content="Get in touch with Property Finder Real Estate in Malad West, Mumbai. Schedule site inspections, list properties, or consult on residential and commercial real estate.">
-  <meta name="author" content="Property Finder Real Estate">
-  <link rel="canonical" href="https://www.propertyfinderrealestate.com/contact.html">
-
-  <!-- Security & CSP -->
-  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' https://cdnjs.cloudflare.com https://challenges.cloudflare.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' data: https:; connect-src 'self' https://api.propertyfinderrealestate.com http://localhost:8000 https://formspree.io; frame-src https://www.google.com https://challenges.cloudflare.com https://www.openstreetmap.org; form-action 'self' https://formspree.io; object-src 'none'; base-uri 'self'">
-  <meta http-equiv="X-Content-Type-Options" content="nosniff">
-  <meta http-equiv="Referrer-Policy" content="strict-origin-when-cross-origin">
+  <title>contact us | Property Finder Real Estate Mumbai</title>
+  <meta name="description" content="Get in touch with Property Finder Real Estate in Jankalyan Nagar, Malad West, Mumbai. Contact Saurav Ganesh Chowdhury for property buying, selling, leasing, and agreement registration.">
+  <meta name="keywords" content="contact property finder real estate, malad west real estate office, property consultant contact number, saurav chowdhury mumbai, real estate agent malad west">
+  <meta name="robots" content="index, follow">
+  <link rel="canonical" href="https://propertyfinderrealestate.com/contact.html">
+  <meta name="theme-color" content="#FFFFFF">
 
   <!-- Open Graph -->
   <meta property="og:type" content="website">
-  <meta property="og:site_name" content="Property Finder Real Estate">
-  <meta property="og:locale" content="en_IN">
-  <meta property="og:title" content="Contact Us | Property Finder Real Estate Mumbai">
-  <meta property="og:description" content="Reach our real estate advisory desk in Malad West. Book site visits, discuss property valuations, or list your flat.">
-  <meta property="og:url" content="https://www.propertyfinderrealestate.com/contact.html">
-  <meta property="og:image" content="https://www.propertyfinderrealestate.com/images/og-banner.jpg">
-  <meta property="og:image:width" content="1200">
-  <meta property="og:image:height" content="630">
-  <meta property="og:image:type" content="image/jpeg">
+  <meta property="og:title" content="contact Property Finder Real Estate | Mumbai">
+  <meta property="og:description" content="Reach our real estate advisory desk in Malad West, Mumbai. Telephone, WhatsApp, and walk-in consultation details.">
+  <meta property="og:url" content="https://propertyfinderrealestate.com/contact.html">
+  <meta property="og:image" content="/images/og-banner.jpg">
 
-  <!-- Twitter Card -->
-  <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:site" content="@PropertyFinderA">
-  <meta name="twitter:title" content="Contact Us | Property Finder Real Estate Mumbai">
-  <meta name="twitter:description" content="Reach our real estate advisory desk in Malad West. Book site visits, discuss property valuations, or list your flat.">
-  <meta name="twitter:image" content="https://www.propertyfinderrealestate.com/images/og-banner.jpg">
-
-  <!-- SEO & Geolocation -->
-  <meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large">
-  <meta name="geo.region" content="IN-MH">
-  <meta name="geo.placename" content="Mumbai">
-  <meta name="geo.position" content="19.1886;72.8485">
-  <meta name="ICBM" content="19.1886, 72.8485">
-
-  <!-- Favicon & PWA -->
-  <link rel="icon" type="image/png" sizes="192x192" href="/icons/icon-192.png">
-  <link rel="icon" type="image/svg+xml" href="/icons/favicon.svg">
+  <link rel="icon" type="image/png" href="/images/logo.png">
   <link rel="manifest" href="/manifest.json">
-  <meta name="theme-color" content="#2563EB">
-  <meta name="apple-mobile-web-app-capable" content="yes">
-  <meta name="apple-mobile-web-app-status-bar-style" content="default">
-  <meta name="apple-mobile-web-app-title" content="Property Finder RE">
 
-  <!-- Fonts & Early Theme Loader -->
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;0,900;1,700&family=DM+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-  <script>
-    !function(){var t=localStorage.getItem("pfre_theme")||(window.matchMedia("(prefers-color-scheme:dark)").matches?"dark":"light");document.documentElement.setAttribute("data-theme",t);document.documentElement.classList.add("theme-"+t)}();
-  </script>
-
-  <!-- Root-Relative Stylesheets -->
+  <!-- Stylesheets -->
   <link rel="stylesheet" href="/css/styles.css">
+  <link rel="stylesheet" href="/css/theme.css">
   <link rel="stylesheet" href="/css/widgets.css">
   <link rel="stylesheet" href="/css/mobile.css">
-  <link rel="stylesheet" href="/css/theme.css">
   <link rel="stylesheet" href="/css/overrides.css">
   <link rel="stylesheet" href="/css/utils.css">
-
-  <style>
-    .contact-layout {
-      max-width: 1240px;
-      margin: 0 auto;
-      padding: 32px 5% 80px;
-      display: grid;
-      grid-template-columns: 1.15fr 0.85fr;
-      gap: 48px;
-      align-items: start;
-    }
-
-    /* Lead Form Card */
-    .contact-form-card {
-      background: var(--card, white);
-      border: 1.5px solid var(--border);
-      border-radius: var(--radius-xl, 24px);
-      padding: 40px;
-      box-shadow: var(--shadow-sm);
-    }
-    .contact-form-card h2 {
-      font-family: 'Playfair Display', serif;
-      font-size: 28px;
-      font-weight: 700;
-      margin-bottom: 8px;
-      color: var(--text);
-    }
-    .form-subtitle {
-      font-size: 14.5px;
-      color: var(--text-muted);
-      margin-bottom: 28px;
-      line-height: 1.6;
-    }
-
-    .form-row {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 16px;
-      margin-bottom: 16px;
-    }
-    .form-group {
-      margin-bottom: 16px;
-    }
-    .form-label {
-      display: block;
-      font-size: 12.5px;
-      font-weight: 700;
-      text-transform: uppercase;
-      letter-spacing: 0.5px;
-      color: var(--text-muted);
-      margin-bottom: 6px;
-    }
-    .form-control {
-      width: 100%;
-      padding: 12px 16px;
-      border: 1.5px solid var(--border);
-      border-radius: 10px;
-      background: var(--card, white);
-      color: var(--text);
-      font-size: 14.5px;
-      outline: none;
-      font-family: inherit;
-      transition: border-color .2s, box-shadow .2s;
-    }
-    .form-control:focus {
-      border-color: var(--blue);
-      box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.12);
-    }
-    textarea.form-control {
-      resize: vertical;
-      min-height: 110px;
-    }
-
-    /* Info Column */
-    .contact-info-stack {
-      display: flex;
-      flex-direction: column;
-      gap: 24px;
-    }
-    .info-card {
-      background: var(--card, white);
-      border: 1.5px solid var(--border);
-      border-radius: var(--radius-lg, 20px);
-      padding: 32px;
-      box-shadow: var(--shadow-sm);
-    }
-    .info-item {
-      display: flex;
-      gap: 16px;
-      margin-bottom: 24px;
-    }
-    .info-item:last-child {
-      margin-bottom: 0;
-    }
-    .info-icon {
-      width: 44px;
-      height: 44px;
-      border-radius: 12px;
-      background: var(--blue-light, rgba(37, 99, 235, 0.1));
-      color: var(--blue);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 20px;
-      flex-shrink: 0;
-    }
-    .info-label {
-      font-size: 11.5px;
-      font-weight: 700;
-      text-transform: uppercase;
-      letter-spacing: 0.5px;
-      color: var(--text-muted);
-      margin-bottom: 4px;
-    }
-    .info-val {
-      font-size: 14.5px;
-      font-weight: 600;
-      color: var(--text);
-      line-height: 1.55;
-    }
-    .info-val a {
-      color: inherit;
-      text-decoration: none;
-      transition: color .2s;
-    }
-    .info-val a:hover {
-      color: var(--blue);
-    }
-
-    /* Map Box */
-    .map-container {
-      height: 280px;
-      border-radius: 16px;
-      overflow: hidden;
-      border: 1.5px solid var(--border);
-      position: relative;
-    }
-    .map-container iframe {
-      width: 100%;
-      height: 100%;
-      border: none;
-    }
-
-    @media (max-width: 960px) {
-      .contact-layout {
-        grid-template-columns: 1fr;
-        gap: 36px;
-      }
-      .form-row {
-        grid-template-columns: 1fr;
-      }
-      .contact-form-card {
-        padding: 28px 20px;
-      }
-    }
-  </style>
-
-  <!-- Schema Structured Data -->
-  <script type="application/ld+json">
-  {
-    "@context": "https://schema.org",
-    "@type": "ContactPage",
-    "name": "Contact Property Finder Real Estate",
-    "description": "Reach our real estate advisory desk in Malad West, Mumbai for site inspections, sales, leasing, and verified property investments.",
-    "url": "https://www.propertyfinderrealestate.com/contact.html",
-    "mainEntity": {
-      "@type": "RealEstateAgent",
-      "@id": "https://www.propertyfinderrealestate.com/#organization",
-      "name": "Property Finder Real Estate",
-      "telephone": "+919326990050",
-      "email": "propertyfinderre@gmail.com",
-      "address": {
-        "@type": "PostalAddress",
-        "streetAddress": "Shop No. 9, Ground Floor, Building No. 3, Deepanjali Co-operative Housing Society Limited, Baf-Hira Nagar, Lower Kharodi, Jankalyan Nagar Road",
-        "addressLocality": "Malad West",
-        "addressRegion": "Maharashtra",
-        "postalCode": "400095",
-        "addressCountry": "IN"
-      },
-      "geo": {
-        "@type": "GeoCoordinates",
-        "latitude": 19.1886,
-        "longitude": 72.8485
-      },
-      "openingHoursSpecification": [
-        {
-          "@type": "OpeningHoursSpecification",
-          "dayOfWeek": ["Monday","Tuesday","Wednesday","Thursday","Friday","Saturday"],
-          "opens": "10:00",
-          "closes": "19:00"
-        },
-        {
-          "@type": "OpeningHoursSpecification",
-          "dayOfWeek": "Sunday",
-          "opens": "11:00",
-          "closes": "17:00"
-        }
-      ]
-    }
-  }
-  </script>
 </head>
 <body>
+  <a href="#mainContent" class="skip-link">skip to main content</a>
 
-  <!-- MASTER NAVBAR (Controlled from js/layout.js) -->
-  <site-navbar></site-navbar>
+  <!-- Header Mount Point -->
+  <header id="mainHeader"></header>
 
-  <!-- MAIN PAGE CONTENT -->
-  <main id="main-content">
-
-    <!-- PAGE HERO -->
+  <main id="mainContent">
+    <!-- Hero Section -->
     <section class="page-hero">
-      <span class="section-label">Connect With Our Advisory Desk</span>
-      <h1>Get in <em>Touch</em></h1>
-      <p>Schedule an on-site property inspection, discuss outright sale mandates, or request a complete price valuation with our local consultants.</p>
-      <nav aria-label="Breadcrumb">
-        <div class="breadcrumb">
-          <a href="/index.html">Home</a><span class="breadcrumb-sep" aria-hidden="true">›</span><span>Contact</span>
-        </div>
-      </nav>
-    </section>
-
-    <!-- CONTACT GRID SECTION -->
-    <div class="contact-layout">
-      
-      <!-- LEFT: Lead Capture Form -->
-      <section class="contact-form-card">
-        <h2>Send an Inquiry</h2>
-        <p class="form-subtitle">Fill in your requirements below. Our Malad West desk will review your submission and connect within 1 business hour.</p>
-
-        <form id="contactLeadForm" onsubmit="event.preventDefault(); handleContactSubmit();">
-          <div class="form-row">
-            <div class="form-group" style="margin-bottom:0;">
-              <label class="form-label" for="contact-name">Full Name *</label>
-              <input class="form-control" type="text" id="contact-name" name="name" placeholder="e.g. Rahul Sharma" required autocomplete="name">
-            </div>
-            <div class="form-group" style="margin-bottom:0;">
-              <label class="form-label" for="contact-phone">Phone / WhatsApp *</label>
-              <input class="form-control" type="tel" id="contact-phone" name="phone" placeholder="+91 98765 43210" required autocomplete="tel">
-            </div>
-          </div>
-
-          <div class="form-row">
-            <div class="form-group" style="margin-bottom:0;">
-              <label class="form-label" for="contact-email">Email Address</label>
-              <input class="form-control" type="email" id="contact-email" name="email" placeholder="name@example.com" autocomplete="email">
-            </div>
-            <div class="form-group" style="margin-bottom:0;">
-              <label class="form-label" for="contact-service">Interest / Service *</label>
-              <select class="form-control" id="contact-service" name="service" aria-label="Select Inquiry Type" required>
-                <option value="Buy Residential Flat">Buy Residential Flat (1, 2, 3 BHK)</option>
-                <option value="Rent / Lease Flat">Rent / Lease Apartment</option>
-                <option value="Commercial Office / Retail">Commercial Office / Retail Space</option>
-                <option value="List / Sell My Property">List / Sell My Property</option>
-                <option value="Legal & Registration Assistance">Leave &amp; License / Registration Support</option>
-                <option value="General Property Consultation">General Consultation</option>
-              </select>
-            </div>
-          </div>
-
-          <div class="form-group">
-            <label class="form-label" for="contact-message">Property Requirement / Preferred Localities</label>
-            <textarea class="form-control" id="contact-message" name="message" rows="4" placeholder="Mention budget, preferred locality (e.g. Malad West, Goregaon), or convenient inspection timing..."></textarea>
-          </div>
-
-          <!-- Cloudflare Turnstile CAPTCHA Protection -->
-          <div class="cf-turnstile" id="contact-turnstile-widget" data-sitekey="1x00000000000000000000AA" data-theme="auto" style="margin-bottom:20px;"></div>
-
-          <button class="btn btn-primary btn-lg" id="contactSubmitBtn" type="submit" style="width:100%;justify-content:center;">
-            📤 Submit Inquiry
-          </button>
-        </form>
-
-        <div style="margin-top:24px;text-align:center;font-size:13px;color:var(--text-muted);">
-          Prefer direct messaging? 
-          <a href="https://wa.me/919326990050?text=Hello%20Property%20Finder%20Real%20Estate,%20I%20have%20an%20inquiry%20regarding%20Mumbai%20properties" target="_blank" rel="noopener noreferrer" style="color:var(--blue);font-weight:700;text-decoration:none;">
-            Chat on WhatsApp (+919326990050)
-          </a>
-        </div>
-      </section>
-
-      <!-- RIGHT: Office Credentials & Map -->
-      <aside class="contact-info-stack">
-        
-        <div class="info-card">
-          <div class="info-item">
-            <div class="info-icon">📍</div>
-            <div>
-              <div class="info-label">Office Address</div>
-              <div class="info-val">
-                Shop No. 9, Ground Floor, Building No. 3, Deepanjali Co-operative Housing Society Limited, Baf-Hira Nagar, Lower Kharodi, Jankalyan Nagar Road, Malad West, Mumbai, Maharashtra, 400095, India
-              </div>
-            </div>
-          </div>
-
-          <div class="info-item">
-            <div class="info-icon">📞</div>
-            <div>
-              <div class="info-label">Direct Calling &amp; WhatsApp</div>
-              <div class="info-val">
-                <a href="tel:+919326990050">+919326990050</a>
-              </div>
-            </div>
-          </div>
-
-          <div class="info-item">
-            <div class="info-icon">✉️</div>
-            <div>
-              <div class="info-label">Official Correspondence</div>
-              <div class="info-val">
-                <a href="mailto:propertyfinderre@gmail.com">propertyfinderre@gmail.com</a>
-              </div>
-            </div>
-          </div>
-
-          <div class="info-item">
-            <div class="info-icon">⏰</div>
-            <div>
-              <div class="info-label">Consultation Timings</div>
-              <div class="info-val">
-                Monday – Saturday: 10:00 AM – 7:00 PM<br>
-                Sunday: 11:00 AM – 5:00 PM (By Appointment)
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <!-- Embedded Map Location -->
-        <div class="info-card" style="padding:20px;">
-          <div class="info-label" style="margin-bottom:12px;">Office Location on Map</div>
-          <div class="map-container">
-            <iframe title="Property Finder Real Estate Malad West Office" loading="lazy" referrerpolicy="no-referrer-when-downgrade" src="https://www.openstreetmap.org/export/embed.html?bbox=72.8386,19.1760,72.8586,19.1960&layer=mapnik&marker=19.1860,72.8486"></iframe>
-          </div>
-          <div style="display:flex;gap:10px;margin-top:14px;flex-wrap:wrap;">
-            <a href="https://maps.google.com/?q=19.1886,72.8485" target="_blank" rel="noopener noreferrer" class="btn btn-outline btn-sm" style="flex:1;justify-content:center;">
-              📍 Open Google Maps
-            </a>
-            <a href="https://maps.google.com/?q=19.1886,72.8485&dirflg=d" target="_blank" rel="noopener noreferrer" class="btn btn-outline btn-sm" style="flex:1;justify-content:center;">
-              🧭 Get Directions
-            </a>
-          </div>
-        </div>
-
-      </aside>
-
-    </div>
-
-    <!-- CALL TO ACTION -->
-    <section class="cta-section">
-      <h2 class="section-title reveal">Looking for Instant <em>Assistance?</em></h2>
-      <p class="reveal">Our senior consultants are available right now to help you evaluate properties, price points, and legal documentation.</p>
-      <div class="cta-btns reveal">
-        <a href="tel:+919326990050" class="btn btn-white btn-lg">📞 Call +919326990050</a>
-        <a href="https://wa.me/919326990050?text=Hello%20Property%20Finder%20Real%20Estate,%20I%20need%20immediate%20property%20assistance" target="_blank" rel="noopener noreferrer" class="btn-outline-white btn-lg">💬 WhatsApp Us</a>
+      <div class="container">
+        <span class="section-label">client advisory desk</span>
+        <h1>connect with our <em>Mumbai</em> property advisors</h1>
+        <p>Whether evaluating residential resale flats, acquiring prime commercial space, listing your apartment, or scheduling biometric agreement registration, our team provides prompt and transparent assistance.</p>
+        <nav class="breadcrumb" aria-label="Breadcrumb navigation">
+          <a href="/index.html">home</a>
+          <span class="breadcrumb-sep">/</span>
+          <span>contact us</span>
+        </nav>
       </div>
     </section>
 
+    <!-- Contact Channels & Information Grid -->
+    <section class="container my-8">
+      <div class="catalog-layout d-grid gap-8">
+        <!-- Left Side Main Form -->
+        <div>
+          <div class="contact-form-card mb-8">
+            <div class="mb-4">
+              <span class="badge badge-blue mb-2">send an enquiry</span>
+              <h2 class="text-md fw-bold">share your real estate requirements</h2>
+              <p class="text-xs text-muted">Fill out the form below and an advisor will contact you within two business hours with relevant market listings or guidance.</p>
+            </div>
+
+            <form class="pfre-lead-form" id="mainContactForm" data-pfre-inquiry data-source="contact-page">
+              <div class="d-grid grid-cols-2 gap-4 mb-4">
+                <div class="form-group">
+                  <label class="form-label" for="contactFullName">full name *</label>
+                  <input type="text" id="contactFullName" name="name" class="form-control" required placeholder="Enter your full name">
+                </div>
+
+                <div class="form-group">
+                  <label class="form-label" for="contactPhone">phone or WhatsApp number *</label>
+                  <input type="tel" id="contactPhone" name="phone" class="form-control" required placeholder="+91 98XXX XXXXX">
+                </div>
+              </div>
+
+              <div class="d-grid grid-cols-2 gap-4 mb-4">
+                <div class="form-group">
+                  <label class="form-label" for="contactEmail">email address</label>
+                  <input type="email" id="contactEmail" name="email" class="form-control" placeholder="name@domain.com">
+                </div>
+
+                <div class="form-group">
+                  <label class="form-label" for="contactCategory">service required *</label>
+                  <select id="contactCategory" name="intent" class="form-control" required>
+                    <option value="buy">buy residential property</option>
+                    <option value="rent">rent residential apartment</option>
+                    <option value="commercial">commercial office or shop</option>
+                    <option value="sell">list property for sale</option>
+                    <option value="lease">list property for lease</option>
+                    <option value="legal">leave and license agreement registration</option>
+                    <option value="loan">home loan and mortgage advisory</option>
+                  </select>
+                </div>
+              </div>
+
+              <div class="d-grid grid-cols-2 gap-4 mb-4">
+                <div class="form-group">
+                  <label class="form-label" for="contactLocality">target micro-market</label>
+                  <select id="contactLocality" name="locality" class="form-control">
+                    <option value="Malad West">Malad West</option>
+                    <option value="Goregaon East">Goregaon East</option>
+                    <option value="Andheri West">Andheri West</option>
+                    <option value="Kandivali West">Kandivali West</option>
+                    <option value="Borivali West">Borivali West</option>
+                    <option value="Other Western Suburbs">Other Western Suburbs</option>
+                  </select>
+                </div>
+
+                <div class="form-group">
+                  <label class="form-label" for="contactBudget">planned budget or rent ceiling</label>
+                  <input type="text" id="contactBudget" name="budget" class="form-control" placeholder="e.g. ₹1.8 Cr or ₹45,000 per month">
+                </div>
+              </div>
+
+              <div class="form-group mb-4">
+                <label class="form-label" for="contactMessage">detailed message or property specifications</label>
+                <textarea id="contactMessage" name="message" class="form-control" rows="4" placeholder="Mention configuration, floor preference, possession date, or property details if selling."></textarea>
+              </div>
+
+              <button type="submit" class="btn btn-primary w-100 py-3 text-sm fw-bold">submit enquiry</button>
+            </form>
+          </div>
+
+          <!-- Transit Directions -->
+          <div class="calc-widget">
+            <h2 class="text-sm fw-bold mb-3">how to reach our Malad West office</h2>
+            <div class="d-grid grid-cols-3 gap-4">
+              <div>
+                <strong class="text-xs text-blue d-block mb-1">&#128657; via metro line 2A</strong>
+                <p class="text-xs text-muted mb-0">Alight at Malad West or Mithchowki metro station. Our office in Jankalyan Nagar is five minutes by auto-rickshaw.</p>
+              </div>
+              <div>
+                <strong class="text-xs text-blue d-block mb-1">&#128646; via western railway</strong>
+                <p class="text-xs text-muted mb-0">From Malad railway station west side, take BEST bus feeder route 271 or an auto-rickshaw directly along Marve Road.</p>
+              </div>
+              <div>
+                <strong class="text-xs text-blue d-block mb-1">&#128663; via link road</strong>
+                <p class="text-xs text-muted mb-0">Turn onto Jankalyan Nagar Road from New Link Road junction near Mithchowki flyover. Baf-Hira Nagar is landmarked opposite Marina Enclave complex.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Right Side Direct Contact Information -->
+        <aside>
+          <!-- Office Address Card -->
+          <div class="contact-form-card mb-6">
+            <h3 class="text-xs fw-bold text-uppercase text-muted mb-3">registered office address</h3>
+            <div class="text-sm fw-bold text-text mb-2">Property Finder Real Estate</div>
+            <p class="text-xs text-muted mb-3">
+              Shop No. 2, Ground Floor, Baf-Hira Nagar,<br>
+              Jankalyan Nagar Road, Malad West,<br>
+              Mumbai 400095, Maharashtra, India
+            </p>
+            <div class="p-2 bg-secondary rounded text-xs mb-4">
+              <span class="text-muted">landmark:</span> near Marina Enclave entrance gate
+            </div>
+
+            <div class="border-top pt-3 text-xs">
+              <div class="d-flex justify-between py-1">
+                <span class="text-muted">regulatory license:</span>
+                <span class="fw-bold text-text">MahaRERA A51800000412</span>
+              </div>
+              <div class="d-flex justify-between py-1">
+                <span class="text-muted">proprietor:</span>
+                <span class="fw-bold text-text">Saurav Ganesh Chowdhury</span>
+              </div>
+              <div class="d-flex justify-between py-1">
+                <span class="text-muted">establishment:</span>
+                <span class="fw-bold text-text">1 August 2018</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Working Hours Card -->
+          <div class="contact-form-card mb-6">
+            <h3 class="text-xs fw-bold text-uppercase text-muted mb-3">office operational hours</h3>
+            <div class="d-flex flex-column gap-2 text-xs">
+              <div class="d-flex justify-between items-center py-1 border-bottom">
+                <span>Monday to Saturday</span>
+                <strong class="text-blue">9:30 AM to 8:30 PM</strong>
+              </div>
+              <div class="d-flex justify-between items-center py-1 border-bottom">
+                <span>Sunday</span>
+                <strong class="text-blue">10:00 AM to 7:00 PM</strong>
+              </div>
+              <div class="d-flex justify-between items-center py-1">
+                <span>site visits and inspections</span>
+                <span class="text-green fw-bold">available on prior booking</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Direct Phone and WhatsApp Card -->
+          <div class="contact-form-card">
+            <h3 class="text-xs fw-bold text-uppercase text-muted mb-3">direct helplines</h3>
+            <div class="d-flex flex-column gap-2">
+              <a href="tel:+919326990050" class="btn btn-outline btn-sm w-100 text-center py-2">
+                &#128222; call +91 93269 90050
+              </a>
+              <a href="https://wa.me/919326990050?text=Hello%20PFRE,%20I%20would%20like%20to%20discuss%20a%20property%20enquiry." target="_blank" rel="noopener" class="btn btn-green-inline btn-sm w-100 text-center py-2">
+                &#128172; message on WhatsApp
+              </a>
+              <a href="mailto:propertyfinderre@gmail.com" class="btn btn-outline btn-sm w-100 text-center py-2">
+                &#9993;&#65039; propertyfinderre@gmail.com
+              </a>
+            </div>
+          </div>
+        </aside>
+      </div>
+    </section>
+
+    <!-- Bottom Map Location Showcase -->
+    <section class="container mb-8">
+      <div class="calc-widget p-0 overflow-hidden">
+        <div class="p-4 border-bottom">
+          <h2 class="text-sm fw-bold mb-1">find our Malad West office on the map</h2>
+          <p class="text-xs text-muted mb-0">Visit us in person for private documentation reviews, society conveyance consultations, or outright property negotiations.</p>
+        </div>
+        <div style="width: 100%; height: 360px; background: var(--bg-secondary); display: flex; align-items: center; justify-content: center;">
+          <iframe
+            title="Property Finder Real Estate Malad West Office Map"
+            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3768.17540209489!2d72.82285!3d19.19842!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3be7b71000000001%3A0x1!2sJankalyan%20Nagar%2C%20Malad%20West%2C%20Mumbai%2C%20Maharashtra%20400095!5e0!3m2!1sen!2sin!4v1700000000000!5m2!1sen!2sin"
+            width="100%"
+            height="360"
+            style="border:0;"
+            allowfullscreen=""
+            loading="lazy"
+            referrerpolicy="no-referrer-when-downgrade">
+          </iframe>
+        </div>
+      </div>
+    </section>
+
+    <!-- Bottom CTA Bar -->
+    <section class="cta-section">
+      <div class="container">
+        <h2>planning a property inspection this weekend</h2>
+        <p>Book private walkthroughs across verified residential towers in Malad, Goregaon, Andheri, Borivali, and Kandivali.</p>
+        <div class="cta-btns">
+          <a href="/properties.html" class="btn btn-white">browse property catalog</a>
+          <a href="https://wa.me/919326990050?text=Hello%20PFRE,%20I%20want%20to%20schedule%20a%20weekend%20site%20visit." target="_blank" rel="noopener" class="btn btn-outline-white">schedule via WhatsApp</a>
+        </div>
+      </div>
+    </section>
   </main>
 
-  <!-- MASTER FOOTER & GLOBAL WIDGETS (Controlled from js/layout.js) -->
-  <site-footer></site-footer>
+  <!-- Footer Mount Point -->
+  <footer id="mainFooter"></footer>
 
-  <!-- Centralized Script Engines in Order of Dependency -->
+  <!-- Scripts -->
   <script src="/js/config.js"></script>
-  <script src="/js/layout.js"></script>
-  <script src="/js/api.js" defer></script>
-  <script src="https://challenges.cloudflare.com/turnstile/v0/api.js" defer></script>
+  <script src="/js/auth-guard.js"></script>
+  <script src="/js/api.js"></script>
   <script src="/js/security.js"></script>
-  <script src="/js/tracker.js" defer></script>
   <script src="/js/theme.js"></script>
-  <script src="/js/i18n.js"></script>
+  <script src="/js/tracker.js"></script>
   <script src="/js/widgets.js"></script>
-
-  <!-- Form Handling Script -->
-  <script>
-    // Synchronize Turnstile sitekey from config if present
-    document.addEventListener('DOMContentLoaded', () => {
-      const widget = document.getElementById('contact-turnstile-widget');
-      if (widget && window.PFRE_CONFIG && window.PFRE_CONFIG.TURNSTILE_SITEKEY) {
-        widget.setAttribute('data-sitekey', window.PFRE_CONFIG.TURNSTILE_SITEKEY);
-      }
-    });
-
-    async function handleContactSubmit() {
-      // 1. Validate Turnstile Challenge
-      if (window.PFRESecurity?.verifyTurnstile && !window.PFRESecurity.verifyTurnstile('#contact-turnstile-widget')) {
-        if (typeof window.showToast === 'function') {
-          window.showToast('Please complete the verification check.', 'error');
-        }
-        return;
-      }
-      if (window.turnstileOK && !window.turnstileOK('.cf-turnstile')) {
-        if (typeof window.showToast === 'function') {
-          window.showToast('Please complete the verification check.', 'error');
-        }
-        return;
-      }
-
-      const name = document.getElementById('contact-name')?.value?.trim();
-      const phone = document.getElementById('contact-phone')?.value?.trim();
-      const email = document.getElementById('contact-email')?.value?.trim() || '';
-      const service = document.getElementById('contact-service')?.value || '';
-      const message = document.getElementById('contact-message')?.value?.trim() || '';
-
-      if (!name || !phone) {
-        if (typeof window.showToast === 'function') {
-          window.showToast('Name and phone number are required.', 'error');
-        }
-        return;
-      }
-
-      const submitBtn = document.getElementById('contactSubmitBtn');
-      if (submitBtn) {
-        submitBtn.disabled = true;
-        submitBtn.textContent = '⏳ Submitting...';
-      }
-
-      const payload = {
-        name,
-        phone,
-        email,
-        purpose: service,
-        message,
-        source: 'contact_page',
-        ts: new Date().toISOString()
-      };
-
-      // 2. LocalStorage Offline Backup
-      try {
-        const queue = JSON.parse(localStorage.getItem('pfre_enquiries') || '[]');
-        queue.push(payload);
-        localStorage.setItem('pfre_enquiries', JSON.stringify(queue.slice(-20)));
-      } catch (_) {}
-
-      // 3. Formspree Forwarder
-      const formspreeId = window.PFRE_CONFIG?.FORMSPREE_ID;
-      if (formspreeId && formspreeId !== 'YOUR_FORMSPREE_ID') {
-        fetch('https://formspree.io/f/' + encodeURIComponent(formspreeId), {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
-          body: JSON.stringify(payload)
-        }).catch(() => {});
-      }
-
-      // 4. Omni Platform Backend API Dispatch
-      if (window.PFREApi?.leads) {
-        window.PFREApi.leads.create(payload).catch(() => {});
-      }
-
-      setTimeout(() => {
-        if (submitBtn) {
-          submitBtn.disabled = false;
-          submitBtn.textContent = '📤 Submit Inquiry';
-        }
-        document.getElementById('contactLeadForm')?.reset();
-
-        // Reset Turnstile token
-        if (window.turnstile) {
-          try { window.turnstile.reset('#contact-turnstile-widget'); } catch (_) {}
-        }
-
-        if (typeof window.showToast === 'function') {
-          window.showToast('✅ Inquiry sent successfully! Our team will reach out shortly.', 'success');
-        }
-      }, 500);
-    }
-
-    if ('serviceWorker' in navigator) {
-      window.addEventListener('load', () => {
-        navigator.serviceWorker.register('/sw.js').catch(() => {});
-      });
-    }
-  </script>
+  <script src="/js/i18n.js"></script>
+  <script src="/js/app.js"></script>
+  <script src="/js/app-shell.js"></script>
+  <script src="/js/layout.js"></script>
 </body>
 </html>
