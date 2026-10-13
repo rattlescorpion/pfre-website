@@ -1,1085 +1,491 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" data-theme="light">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Post Property Free — List in Mumbai | Property Finder Real Estate</title>
-  <meta name="description" content="List your property for free on Property Finder Real Estate. Sell or rent your flat, bungalow, plot, or commercial space in Mumbai. Reach thousands of genuine verified buyers & tenants.">
-  <meta name="author" content="Property Finder Real Estate">
-  <link rel="canonical" href="https://www.propertyfinderrealestate.com/post-property">
-
-  <!-- Security & CSP -->
-  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' https://cdnjs.cloudflare.com https://challenges.cloudflare.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' data: https:; connect-src 'self' https://api.propertyfinderrealestate.com http://localhost:8000 https://formspree.io; frame-src https://www.google.com https://challenges.cloudflare.com; form-action 'self' https://formspree.io; object-src 'none'; base-uri 'self'">
-  <meta http-equiv="X-Content-Type-Options" content="nosniff">
-  <meta http-equiv="Referrer-Policy" content="strict-origin-when-cross-origin">
+  <title>post your property for sale or rent in mumbai | Property Finder Real Estate</title>
+  <meta name="description" content="List your residential apartment, penthouse, or commercial office for sale or rent in Mumbai. Reach pre-approved buyers and verified tenants with Property Finder Real Estate.">
+  <meta name="keywords" content="post property mumbai, sell flat malad west, rent out flat goregaon east, list commercial property andheri, property finder real estate listing">
+  <meta name="robots" content="index, follow">
+  <link rel="canonical" href="https://propertyfinderrealestate.com/post-property.html">
+  <meta name="theme-color" content="#FFFFFF">
 
   <!-- Open Graph -->
   <meta property="og:type" content="website">
-  <meta property="og:site_name" content="Property Finder Real Estate">
-  <meta property="og:locale" content="en_IN">
-  <meta property="og:title" content="Post Property Free | List Your Property in Mumbai">
-  <meta property="og:description" content="List your property for free on Property Finder Real Estate. Sell or rent faster with our verified Mumbai buyer database.">
-  <meta property="og:url" content="https://www.propertyfinderrealestate.com/post-property">
-  <meta property="og:image" content="https://www.propertyfinderrealestate.com/images/og-banner.jpg">
-  <meta property="og:image:width" content="1200">
-  <meta property="og:image:height" content="630">
-  <meta property="og:image:type" content="image/jpeg">
+  <meta property="og:title" content="post your property in mumbai | Property Finder Real Estate">
+  <meta property="og:description" content="List your residential flat or commercial workspace with Property Finder Real Estate. Dedicated marketing, verified prospects, and complete legal assistance.">
+  <meta property="og:url" content="https://propertyfinderrealestate.com/post-property.html">
+  <meta property="og:image" content="/images/og-banner.jpg">
 
-  <!-- Twitter Card -->
-  <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:site" content="@PropertyFinderA">
-  <meta name="twitter:title" content="Post Property Free | List Your Property in Mumbai">
-  <meta name="twitter:description" content="List your property for free on Property Finder Real Estate. Sell or rent faster with our verified Mumbai buyer database.">
-  <meta name="twitter:image" content="https://www.propertyfinderrealestate.com/images/og-banner.jpg">
-
-  <!-- SEO & Geolocation -->
-  <meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large">
-  <meta name="geo.region" content="IN-MH">
-  <meta name="geo.placename" content="Mumbai">
-  <meta name="geo.position" content="19.1886;72.8485">
-  <meta name="ICBM" content="19.1886, 72.8485">
-
-  <!-- Favicons & Manifest -->
-  <link rel="icon" type="image/png" sizes="192x192" href="/icons/icon-192.png">
-  <link rel="icon" type="image/svg+xml" href="/icons/favicon.svg">
+  <link rel="icon" type="image/png" href="/images/logo.png">
   <link rel="manifest" href="/manifest.json">
-  <meta name="theme-color" content="#2563EB">
 
-  <!-- Early Theme Boot -->
-  <script>
-    !function(){var t=localStorage.getItem("pfre_theme")||(window.matchMedia("(prefers-color-scheme:dark)").matches?"dark":"light");document.documentElement.setAttribute("data-theme",t);document.documentElement.classList.add("theme-"+t)}();
-  </script>
-
-  <!-- Typography -->
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;0,900;1,700&family=DM+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-
-  <!-- Core Stylesheets -->
+  <!-- Stylesheets -->
   <link rel="stylesheet" href="/css/styles.css">
+  <link rel="stylesheet" href="/css/theme.css">
   <link rel="stylesheet" href="/css/widgets.css">
   <link rel="stylesheet" href="/css/mobile.css">
-  <link rel="stylesheet" href="/css/theme.css">
   <link rel="stylesheet" href="/css/overrides.css">
   <link rel="stylesheet" href="/css/utils.css">
-
-  <style>
-    .post-layout {
-      display: grid;
-      grid-template-columns: 1fr 360px;
-      gap: 40px;
-      padding: 40px 5% 80px;
-      max-width: 1280px;
-      margin: 0 auto;
-    }
-    .post-sidebar {
-      position: sticky;
-      top: 92px;
-      display: flex;
-      flex-direction: column;
-      gap: 24px;
-    }
-
-    /* Steps Progress Bar */
-    .steps-bar {
-      display: flex;
-      align-items: center;
-      margin-bottom: 32px;
-    }
-    .step {
-      display: flex;
-      align-items: center;
-      gap: 10px;
-      flex: 1;
-    }
-    .step:not(:last-child)::after {
-      content: '';
-      flex: 1;
-      height: 2px;
-      background: var(--border);
-      margin: 0 8px;
-    }
-    .step.done:not(:last-child)::after {
-      background: var(--blue);
-    }
-    .step-num {
-      width: 34px;
-      height: 34px;
-      border-radius: 50%;
-      background: var(--bg-secondary);
-      border: 2px solid var(--border);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 13px;
-      font-weight: 700;
-      color: var(--text-muted);
-      flex-shrink: 0;
-      transition: all .25s ease;
-    }
-    .step.active .step-num {
-      background: var(--blue);
-      border-color: var(--blue);
-      color: white;
-    }
-    .step.done .step-num {
-      background: #10B981;
-      border-color: #10B981;
-      color: white;
-    }
-    .step-label {
-      font-size: 12.5px;
-      font-weight: 600;
-      color: var(--text-muted);
-      white-space: nowrap;
-    }
-    .step.active .step-label,
-    .step.done .step-label {
-      color: var(--text);
-    }
-
-    /* Multi-Step Panels */
-    .form-panel {
-      display: none;
-      background: var(--card, white);
-      border-radius: var(--radius-xl, 20px);
-      padding: 36px;
-      border: 1.5px solid var(--border);
-      box-shadow: var(--shadow-sm);
-    }
-    .form-panel.active {
-      display: block;
-    }
-    .form-panel h2 {
-      font-family: 'Playfair Display', serif;
-      font-size: 24px;
-      font-weight: 700;
-      margin-bottom: 6px;
-      color: var(--text);
-    }
-    .panel-desc {
-      font-size: 14px;
-      color: var(--text-muted);
-      margin-bottom: 28px;
-      line-height: 1.6;
-      padding-bottom: 18px;
-      border-bottom: 1px solid var(--border);
-    }
-
-    /* Purpose & Type Selector Cards */
-    .type-select-grid {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 12px;
-      margin-bottom: 22px;
-    }
-    .type-option {
-      border: 2px solid var(--border);
-      border-radius: 12px;
-      padding: 16px 10px;
-      text-align: center;
-      cursor: pointer;
-      transition: all .2s;
-      background: var(--card, white);
-    }
-    .type-option.active,
-    .type-option:hover {
-      border-color: var(--blue);
-      background: var(--blue-light, rgba(37, 99, 235, 0.08));
-    }
-    .type-option .to-icon {
-      font-size: 28px;
-      margin-bottom: 6px;
-    }
-    .type-option .to-label {
-      font-size: 13px;
-      font-weight: 700;
-      color: var(--text);
-    }
-
-    /* Section Divider Subheaders inside Form */
-    .form-subhead {
-      margin: 28px 0 16px;
-      padding: 12px 16px;
-      background: var(--blue-light, rgba(37, 99, 235, 0.08));
-      border-radius: 10px;
-      border-left: 4px solid var(--blue);
-      font-size: 13.5px;
-      font-weight: 700;
-      color: var(--blue);
-    }
-
-    /* Form Fields Styling */
-    .form-row {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 16px;
-      margin-bottom: 16px;
-    }
-    .form-group {
-      margin-bottom: 16px;
-    }
-    .form-label {
-      display: block;
-      font-size: 12px;
-      font-weight: 700;
-      text-transform: uppercase;
-      letter-spacing: 0.5px;
-      color: var(--text-muted);
-      margin-bottom: 6px;
-    }
-    .form-control {
-      width: 100%;
-      padding: 11px 14px;
-      border: 1.5px solid var(--border);
-      border-radius: 10px;
-      background: var(--card, white);
-      color: var(--text);
-      font-size: 14px;
-      outline: none;
-      font-family: inherit;
-      transition: border-color .2s;
-    }
-    .form-control:focus {
-      border-color: var(--blue);
-    }
-
-    /* Photo Upload Area */
-    .photo-upload-area {
-      border: 2px dashed var(--border);
-      border-radius: 16px;
-      padding: 36px 20px;
-      text-align: center;
-      cursor: pointer;
-      transition: all .2s;
-      background: var(--bg-secondary);
-    }
-    .photo-upload-area:hover {
-      border-color: var(--blue);
-      background: var(--blue-light, rgba(37, 99, 235, 0.06));
-    }
-    .pu-icon {
-      font-size: 44px;
-      margin-bottom: 10px;
-    }
-    .photo-thumb-grid {
-      display: grid;
-      grid-template-columns: repeat(4, 1fr);
-      gap: 12px;
-      margin-top: 18px;
-    }
-    .photo-thumb {
-      position: relative;
-      height: 90px;
-      border-radius: 10px;
-      overflow: hidden;
-      border: 1.5px solid var(--border);
-    }
-    .photo-thumb img {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-    }
-
-    /* Form Step Navigation */
-    .form-nav {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      margin-top: 32px;
-      gap: 12px;
-      padding-top: 20px;
-      border-top: 1px solid var(--border);
-    }
-
-    /* ── Quick QR Hub (Interactive Switcher) ── */
-    .qr-hub-card {
-      background: var(--card, white);
-      border: 1.5px solid var(--border);
-      border-radius: 18px;
-      padding: 24px;
-      box-shadow: var(--shadow-sm);
-    }
-    .qr-tabs {
-      display: flex;
-      gap: 6px;
-      margin-bottom: 16px;
-      background: var(--bg-secondary);
-      padding: 4px;
-      border-radius: 10px;
-    }
-    .qr-tab {
-      flex: 1;
-      padding: 7px 4px;
-      font-size: 11.5px;
-      font-weight: 700;
-      text-align: center;
-      border-radius: 8px;
-      border: none;
-      background: transparent;
-      color: var(--text-muted);
-      cursor: pointer;
-      transition: all .2s;
-    }
-    .qr-tab.active {
-      background: var(--card, white);
-      color: var(--blue);
-      box-shadow: var(--shadow-sm);
-    }
-    .qr-display-box {
-      background: white;
-      border: 1.5px solid var(--border);
-      border-radius: 14px;
-      padding: 16px;
-      text-align: center;
-    }
-    .qr-img {
-      width: 170px;
-      height: 170px;
-      margin: 0 auto 12px;
-      display: block;
-      border-radius: 8px;
-    }
-    .qr-caption {
-      font-size: 12.5px;
-      font-weight: 600;
-      color: var(--text);
-      line-height: 1.4;
-      margin-bottom: 12px;
-    }
-    .qr-action-btn {
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      gap: 6px;
-      width: 100%;
-      padding: 9px 12px;
-      border-radius: 8px;
-      font-size: 12.5px;
-      font-weight: 700;
-      text-decoration: none;
-      border: 1.5px solid var(--border);
-      background: var(--bg-secondary);
-      color: var(--text);
-      transition: all .2s;
-    }
-    .qr-action-btn:hover {
-      border-color: var(--blue);
-      color: var(--blue);
-    }
-
-    /* Success State View */
-    .success-state {
-      text-align: center;
-      padding: 56px 28px;
-      display: none;
-      background: var(--card, white);
-      border-radius: 20px;
-      border: 1.5px solid var(--border);
-      box-shadow: var(--shadow-sm);
-    }
-    .success-state.show {
-      display: block;
-    }
-    .success-icon {
-      font-size: 72px;
-      margin-bottom: 16px;
-      animation: bounce .6s ease;
-    }
-    @keyframes bounce {
-      0%, 100% { transform: scale(1); }
-      50% { transform: scale(1.15); }
-    }
-
-    @media(max-width: 980px) {
-      .post-layout {
-        grid-template-columns: 1fr;
-      }
-      .post-sidebar {
-        position: static;
-      }
-      .form-row {
-        grid-template-columns: 1fr;
-      }
-      .type-select-grid {
-        grid-template-columns: repeat(2, 1fr);
-      }
-      .photo-thumb-grid {
-        grid-template-columns: repeat(2, 1fr);
-      }
-    }
-  </style>
-
-  <!-- Schema Structured Data -->
-  <script type="application/ld+json">
-  {
-    "@context": "https://schema.org",
-    "@type": "WebPage",
-    "name": "Post Property Free — List in Mumbai",
-    "description": "Free property listing portal for owners in Mumbai. List your flat, commercial office, or shop for sale or rent.",
-    "url": "https://www.propertyfinderrealestate.com/post-property",
-    "provider": {
-      "@type": "RealEstateAgent",
-      "name": "Property Finder Real Estate",
-      "telephone": "+919326990050",
-      "address": {
-        "@type": "PostalAddress",
-        "streetAddress": "Shop No. 9, Ground Floor, Building No. 3, Deepanjali CHS, Baf-Hira Nagar, Lower Kharodi, Jankalyan Nagar Road",
-        "addressLocality": "Malad West",
-        "addressRegion": "Maharashtra",
-        "postalCode": "400095",
-        "addressCountry": "IN"
-      }
-    }
-  }
-  </script>
 </head>
 <body>
+  <a href="#mainContent" class="skip-link">skip to main content</a>
 
-  <!-- MASTER NAVBAR (Single Source from js/layout.js) -->
-  <site-navbar></site-navbar>
+  <!-- Header Mount Point -->
+  <header id="mainHeader"></header>
 
-  <main id="main-content">
-
-    <!-- PAGE HERO -->
+  <main id="mainContent">
+    <!-- Hero Section -->
     <section class="page-hero">
-      <span class="section-label">Direct Owner Listings</span>
-      <h1>Post Your Property <em>For Free</em></h1>
-      <p>Connect with 1,800+ verified buyers and premium tenants across Mumbai's Western Suburbs. Zero brokerage for direct owners.</p>
-      <nav aria-label="Breadcrumb">
-        <div class="breadcrumb">
-          <a href="/">Home</a><span class="breadcrumb-sep" aria-hidden="true">›</span><span>Post Property</span>
-        </div>
-      </nav>
+      <div class="container">
+        <span class="section-label">owner and landlord listing portal</span>
+        <h1>list your property with <em>Property Finder Real Estate</em></h1>
+        <p>Connect with pre-approved genuine buyers, corporate executive families, and institutional tenants across Malad, Goregaon, Andheri, Borivali, and Kandivali with complete documentation support.</p>
+        <nav class="breadcrumb" aria-label="Breadcrumb navigation">
+          <a href="/index.html">home</a>
+          <span class="breadcrumb-sep">/</span>
+          <span>post property</span>
+        </nav>
+      </div>
     </section>
 
-    <!-- HIGHLIGHTS BANNER -->
-    <div style="background:var(--blue);padding:16px 5%;display:flex;align-items:center;justify-content:center;gap:32px;flex-wrap:wrap;">
-      <span style="color:white;font-size:13.5px;font-weight:600;">✅ 100% Free Listing</span>
-      <span style="color:rgba(255,255,255,.4)">|</span>
-      <span style="color:white;font-size:13.5px;font-weight:600;">👁️ 10,000+ Monthly Buyers</span>
-      <span style="color:rgba(255,255,255,.4)">|</span>
-      <span style="color:white;font-size:13.5px;font-weight:600;">📞 Direct Inquiries</span>
-      <span style="color:rgba(255,255,255,.4)">|</span>
-      <span style="color:white;font-size:13.5px;font-weight:600;">🔒 Owner Verified Badge</span>
-    </div>
-
-    <!-- MAIN FORM & SIDEBAR GRID -->
-    <div class="post-layout">
-
-      <!-- LEFT: STEP FORM -->
-      <div class="post-form-wrap">
-        
-        <!-- Step Indicator -->
-        <div class="steps-bar" role="tablist" aria-label="Listing Progress">
-          <div class="step active" id="s1"><div class="step-num">1</div><span class="step-label">Purpose</span></div>
-          <div class="step" id="s2"><div class="step-num">2</div><span class="step-label">Details</span></div>
-          <div class="step" id="s3"><div class="step-num">3</div><span class="step-label">Photos</span></div>
-          <div class="step" id="s4"><div class="step-num">4</div><span class="step-label">Contact</span></div>
+    <!-- Value Proposition Row -->
+    <section class="container my-6">
+      <div class="stats-row grid-cols-4 d-grid gap-4">
+        <div class="calc-widget text-center">
+          <span class="text-xs fw-bold text-muted text-uppercase">listing fee</span>
+          <div class="calc-result-amount text-green mt-1">₹0 free</div>
+          <span class="text-xs text-muted">zero advance marketing charges</span>
         </div>
-
-        <!-- STEP 1: Property Type & Intent -->
-        <div class="form-panel active" id="panel1">
-          <h2>1. What are you listing?</h2>
-          <p class="panel-desc">Select your transaction type and the property category you want to list.</p>
-
-          <div class="form-group">
-            <label class="form-label">Listing Purpose *</label>
-            <div style="display:flex;gap:12px;flex-wrap:wrap;">
-              <button class="btn btn-primary" id="btnSell" type="button" onclick="setIntent('sell', this)">🏷️ Sell / Outright</button>
-              <button class="btn btn-outline" id="btnRent" type="button" onclick="setIntent('rent', this)">🔑 Rent / Lease</button>
-              <button class="btn btn-outline" id="btnCommercial" type="button" onclick="setIntent('commercial', this)">🏢 Commercial</button>
-              <button class="btn btn-outline" id="btnPG" type="button" onclick="setIntent('pg', this)">🛏️ PG / Co-living</button>
-            </div>
-          </div>
-
-          <div class="form-group" style="margin-top:24px;">
-            <label class="form-label">Property Category *</label>
-            <div class="type-select-grid">
-              <div class="type-option active" onclick="selectPropType(this)" role="button" tabindex="0">
-                <div class="to-icon">🏢</div><div class="to-label">Flat / Apartment</div>
-              </div>
-              <div class="type-option" onclick="selectPropType(this)" role="button" tabindex="0">
-                <div class="to-icon">🏠</div><div class="to-label">Independent House</div>
-              </div>
-              <div class="type-option" onclick="selectPropType(this)" role="button" tabindex="0">
-                <div class="to-icon">🏡</div><div class="to-label">Row House / Villa</div>
-              </div>
-              <div class="type-option" onclick="selectPropType(this)" role="button" tabindex="0">
-                <div class="to-icon">🌳</div><div class="to-label">Plot / Land</div>
-              </div>
-              <div class="type-option" onclick="selectPropType(this)" role="button" tabindex="0">
-                <div class="to-icon">🏬</div><div class="to-label">Commercial Office</div>
-              </div>
-              <div class="type-option" onclick="selectPropType(this)" role="button" tabindex="0">
-                <div class="to-icon">🛍️</div><div class="to-label">Shop / Retail</div>
-              </div>
-            </div>
-          </div>
-
-          <div class="form-group">
-            <label class="form-label">Building Ownership Type</label>
-            <select class="form-control" name="building_type" id="buildingType">
-              <option value="private">Private Builder Society</option>
-              <option value="mhada">MHADA Colony</option>
-              <option value="sra">SRA Rehabilitation Scheme</option>
-              <option value="collector">Collector Land</option>
-              <option value="cidco">CIDCO Allotment</option>
-            </select>
-          </div>
-
-          <div class="form-nav">
-            <div></div>
-            <button class="btn btn-primary" type="button" onclick="goStep(2)">Next: Property Details →</button>
-          </div>
+        <div class="calc-widget text-center">
+          <span class="text-xs fw-bold text-muted text-uppercase">prospect verification</span>
+          <div class="calc-result-amount text-blue mt-1">100% verified</div>
+          <span class="text-xs text-muted">Aadhaar and loan pre-cleared buyers</span>
         </div>
-
-        <!-- STEP 2: Comprehensive Property Details -->
-        <div class="form-panel" id="panel2">
-          <h2>2. Property Specifications</h2>
-          <p class="panel-desc">Accurate details help us match genuine pre-screened buyers and tenants rapidly.</p>
-
-          <div class="form-row">
-            <div class="form-group">
-              <label class="form-label">Society / Building Name *</label>
-              <input class="form-control" name="society_name" id="societyName" type="text" placeholder="e.g. Marina Enclave CHS" required>
-            </div>
-            <div class="form-group">
-              <label class="form-label">Flat / Unit Number</label>
-              <input class="form-control" name="unit_number" id="unitNumber" type="text" placeholder="e.g. A-1402">
-            </div>
-          </div>
-
-          <div class="form-row">
-            <div class="form-group">
-              <label class="form-label">Locality Corridor *</label>
-              <select class="form-control" name="locality" id="postLocality" required>
-                <option value="Malad West">Malad West</option>
-                <option value="Goregaon East">Goregaon East</option>
-                <option value="Goregaon West">Goregaon West</option>
-                <option value="Andheri West">Andheri West</option>
-                <option value="Andheri East">Andheri East</option>
-                <option value="Kandivali West">Kandivali West</option>
-                <option value="Kandivali East">Kandivali East</option>
-                <option value="Borivali West">Borivali West</option>
-                <option value="Borivali East">Borivali East</option>
-                <option value="Dahisar">Dahisar</option>
-                <option value="Mira Road">Mira Road</option>
-              </select>
-            </div>
-            <div class="form-group">
-              <label class="form-label">Floor Number</label>
-              <input class="form-control" name="floor_number" id="floorNumber" type="number" placeholder="e.g. 14">
-            </div>
-          </div>
-
-          <div class="form-row">
-            <div class="form-group">
-              <label class="form-label">Configuration (BHK)</label>
-              <select class="form-control" name="bedrooms" id="bhkSelect">
-                <option value="1">1 BHK</option>
-                <option value="2" selected>2 BHK</option>
-                <option value="3">3 BHK</option>
-                <option value="4">4 BHK</option>
-                <option value="5+">5+ BHK / Penthouse</option>
-                <option value="Studio">Studio / 1 RK</option>
-              </select>
-            </div>
-            <div class="form-group">
-              <label class="form-label">Bathrooms</label>
-              <select class="form-control" name="bathrooms" id="bathSelect">
-                <option value="1">1 Bathroom</option>
-                <option value="2" selected>2 Bathrooms</option>
-                <option value="3">3 Bathrooms</option>
-                <option value="4+">4+ Bathrooms</option>
-              </select>
-            </div>
-          </div>
-
-          <div class="form-row">
-            <div class="form-group">
-              <label class="form-label">Carpet Area (sq.ft) *</label>
-              <input class="form-control" name="carpet_area" id="carpetArea" type="number" placeholder="e.g. 685" required>
-            </div>
-            <div class="form-group">
-              <label class="form-label">Facing Direction</label>
-              <select class="form-control" name="facing">
-                <option value="East">East</option>
-                <option value="West">West</option>
-                <option value="North">North</option>
-                <option value="South">South</option>
-                <option value="North-East">North-East</option>
-                <option value="North-West">North-West</option>
-              </select>
-            </div>
-          </div>
-
-          <div class="form-row">
-            <div class="form-group">
-              <label class="form-label">Expected Price / Monthly Rent (₹) *</label>
-              <input class="form-control" name="price" id="expectedPrice" type="number" placeholder="e.g. 14500000 or 45000" required>
-            </div>
-            <div class="form-group">
-              <label class="form-label">Price Negotiable?</label>
-              <select class="form-control" name="price_negotiable">
-                <option value="Yes">Yes — Slightly Negotiable</option>
-                <option value="Fixed">Fixed Price</option>
-              </select>
-            </div>
-          </div>
-
-          <!-- BUILDING & RERA REGISTRATION -->
-          <div class="form-subhead">🏢 Building &amp; Society Background</div>
-
-          <div class="form-row">
-            <div class="form-group">
-              <label class="form-label">Building / Wing</label>
-              <input class="form-control" name="wing" placeholder="e.g. Wing B / Tower 2">
-            </div>
-            <div class="form-group">
-              <label class="form-label">MahaRERA Registration No. (If applicable)</label>
-              <input class="form-control" name="rera_number" placeholder="e.g. P5180000XXXX">
-            </div>
-          </div>
-
-          <div class="form-row">
-            <div class="form-group">
-              <label class="form-label">Property Age</label>
-              <select class="form-control" name="property_age">
-                <option value="New (0-2 years)">New (0–2 years)</option>
-                <option value="2-5 years">2–5 years</option>
-                <option value="5-10 years">5–10 years</option>
-                <option value="10+ years">10+ years</option>
-                <option value="Under Construction">Under Construction</option>
-              </select>
-            </div>
-            <div class="form-group">
-              <label class="form-label">Reserved Parking</label>
-              <select class="form-control" name="parking">
-                <option value="1 Covered">1 Covered Parking</option>
-                <option value="2 Covered">2 Covered Parkings</option>
-                <option value="Open Parking">Open Stilt Parking</option>
-                <option value="None">No Parking</option>
-              </select>
-            </div>
-          </div>
-
-          <!-- AMENITIES & FEATURES -->
-          <div class="form-subhead">✨ Amenities &amp; Unit Features</div>
-
-          <div class="form-group">
-            <label class="form-label">Available Amenities</label>
-            <div style="display:flex;gap:10px;flex-wrap:wrap;padding:12px;background:var(--bg-secondary);border-radius:10px;border:1px solid var(--border);">
-              <label style="display:flex;align-items:center;gap:6px;font-size:13.5px;"><input type="checkbox" name="amenity_lift" checked> 🛗 High-Speed Lift</label>
-              <label style="display:flex;align-items:center;gap:6px;font-size:13.5px;"><input type="checkbox" name="amenity_security" checked> 👮 24/7 Security &amp; CCTV</label>
-              <label style="display:flex;align-items:center;gap:6px;font-size:13.5px;"><input type="checkbox" name="amenity_water" checked> 💧 24/7 Water Supply</label>
-              <label style="display:flex;align-items:center;gap:6px;font-size:13.5px;"><input type="checkbox" name="amenity_gym"> 🏋️ Gymnasium</label>
-              <label style="display:flex;align-items:center;gap:6px;font-size:13.5px;"><input type="checkbox" name="amenity_pool"> 🏊 Swimming Pool</label>
-              <label style="display:flex;align-items:center;gap:6px;font-size:13.5px;"><input type="checkbox" name="amenity_gas"> ⛽ Piped Mahanagar Gas</label>
-            </div>
-          </div>
-
-          <div class="form-row">
-            <div class="form-group">
-              <label class="form-label">Balcony</label>
-              <select class="form-control" name="balcony">
-                <option value="Yes - 1 Balcony">Yes — 1 Balcony</option>
-                <option value="Yes - 2+ Balconies">Yes — 2+ Balconies</option>
-                <option value="No Balcony">No Balcony</option>
-              </select>
-            </div>
-            <div class="form-group">
-              <label class="form-label">Preferred Tenant (If Renting)</label>
-              <select class="form-control" name="preferred_tenant">
-                <option value="Family / Any">Family or Working Professionals</option>
-                <option value="Family Only">Family Only</option>
-                <option value="Company Lease">Company Lease</option>
-                <option value="Any">Any</option>
-              </select>
-            </div>
-          </div>
-
-          <div class="form-group">
-            <label class="form-label">Detailed Highlights / Society Remarks</label>
-            <textarea class="form-control" name="property_description" rows="3" placeholder="Mention nearby metro stations, market proximity, cross-ventilation, OC status, maintenance charges..."></textarea>
-          </div>
-
-          <div class="form-nav">
-            <button class="btn btn-outline" type="button" onclick="goStep(1)">← Back</button>
-            <button class="btn btn-primary" type="button" onclick="goStep(3)">Next: Photos →</button>
-          </div>
+        <div class="calc-widget text-center">
+          <span class="text-xs fw-bold text-muted text-uppercase">legal coverage</span>
+          <div class="calc-result-amount text-blue mt-1">turnkey</div>
+          <span class="text-xs text-muted">agreements and society clearance</span>
         </div>
-
-        <!-- STEP 3: Property Photos -->
-        <div class="form-panel" id="panel3">
-          <h2>3. Property Photographs</h2>
-          <p class="panel-desc">Properties with genuine photos receive 5× more serious site visit inquiries.</p>
-
-          <div class="photo-upload-area" onclick="document.getElementById('photoInput').click()" role="button" tabindex="0">
-            <input type="file" id="photoInput" multiple accept="image/*" style="display:none;" onchange="handlePhotos(this)">
-            <div class="pu-icon">📸</div>
-            <h3 style="font-size:16px;font-weight:700;margin-bottom:4px;">Click to Upload Property Photos</h3>
-            <p style="font-size:13px;color:var(--text-muted);margin:0;">JPEG, PNG, WebP up to 10MB each · Up to 15 photos</p>
-            <button class="btn btn-outline btn-sm" type="button" style="margin-top:14px;">Select Files</button>
-          </div>
-
-          <div id="photoPreview" class="photo-thumb-grid"></div>
-
-          <div style="margin-top:20px;padding:16px;background:var(--blue-light, rgba(37, 99, 235, 0.08));border-radius:12px;font-size:13px;color:var(--blue);line-height:1.6;">
-            💡 <strong>Pro Tip:</strong> Upload photos of the living room, master bedroom, kitchen platform, balcony view, and building facade. You can also send them via WhatsApp after submission!
-          </div>
-
-          <div class="form-nav">
-            <button class="btn btn-outline" type="button" onclick="goStep(2)">← Back</button>
-            <button class="btn btn-primary" type="button" onclick="goStep(4)">Next: Contact Details →</button>
-          </div>
+        <div class="calc-widget text-center">
+          <span class="text-xs fw-bold text-muted text-uppercase">regulatory desk</span>
+          <div class="calc-result-amount text-purple mt-1">MahaRERA</div>
+          <span class="text-xs text-muted">license A51800000412</span>
         </div>
-
-        <!-- STEP 4: Owner Contact & Verification -->
-        <div class="form-panel" id="panel4">
-          <h2>4. Your Contact Information</h2>
-          <p class="panel-desc">Verified contact numbers prevent spam. Your phone number is shared only with vetted buyers.</p>
-
-          <div class="form-row">
-            <div class="form-group">
-              <label class="form-label">Full Name *</label>
-              <input class="form-control" type="text" id="ownerName" placeholder="e.g. Saurav Chowdhury" required autocomplete="name">
-            </div>
-            <div class="form-group">
-              <label class="form-label">Mobile Number *</label>
-              <input class="form-control" type="tel" id="ownerPhone" placeholder="+91 93269 90050" required autocomplete="tel">
-            </div>
-          </div>
-
-          <div class="form-row">
-            <div class="form-group">
-              <label class="form-label">Email Address</label>
-              <input class="form-control" type="email" id="ownerEmail" placeholder="name@example.com" autocomplete="email">
-            </div>
-            <div class="form-group">
-              <label class="form-label">I am the</label>
-              <select class="form-control" id="ownerRole">
-                <option value="owner">Direct Property Owner</option>
-                <option value="agent">Broker / Authorized Representative</option>
-                <option value="builder">Builder / Developer Desk</option>
-              </select>
-            </div>
-          </div>
-
-          <!-- Cloudflare Turnstile Bot Protection -->
-          <div class="cf-turnstile" id="post-turnstile-widget" data-sitekey="1x00000000000000000000AA" data-theme="auto" style="margin:20px 0;"></div>
-
-          <div class="form-nav">
-            <button class="btn btn-outline" type="button" onclick="goStep(3)">← Back</button>
-            <button class="btn btn-primary btn-lg" id="submitListingBtn" type="button" onclick="submitListing()" style="background:#10B981;border-color:#10B981;">
-              🚀 Publish Free Listing
-            </button>
-          </div>
-        </div>
-
-        <!-- SUCCESS STATE -->
-        <div class="success-state" id="successState">
-          <div class="success-icon">🎉</div>
-          <h2 style="font-family:'Playfair Display',serif;font-size:28px;">Listing Submitted Successfully!</h2>
-          <p style="font-size:15px;color:var(--text-muted);margin:14px auto 24px;max-width:520px;line-height:1.7;">
-            Thank you! Our advisory team will call you at <strong id="successPhone" style="color:var(--text);"></strong> within 2 business hours to verify details and publish your property live on our portal.
-          </p>
-
-          <div style="display:flex;gap:12px;justify-content:center;flex-wrap:wrap;margin-bottom:28px;">
-            <a id="successWaBtn" href="https://wa.me/919326990050?text=Hello%20Property%20Finder%20Real%20Estate,%20I%20just%20submitted%20my%20property%20listing." class="btn btn-primary" target="_blank" rel="noopener noreferrer">
-              💬 Send Photos on WhatsApp
-            </a>
-            <a href="/properties" class="btn btn-outline">🏠 Browse Active Listings</a>
-          </div>
-
-          <!-- Success State Google Review Invitation -->
-          <div style="padding:20px;background:var(--bg-secondary);border-radius:14px;border:1px solid var(--border);max-width:480px;margin:0 auto;text-align:center;">
-            <div style="font-size:13px;font-weight:700;color:var(--text);margin-bottom:6px;">⭐ Happy with our consultation?</div>
-            <p style="font-size:12.5px;color:var(--text-muted);margin:0 0 12px;">Help other Mumbai property seekers by sharing your verified Google review.</p>
-            <a href="https://g.page/r/Cdemit189ERsECk/review" target="_blank" rel="noopener noreferrer" class="btn btn-outline btn-sm">
-              Write a Google Review
-            </a>
-          </div>
-        </div>
-
       </div>
+    </section>
 
-      <!-- RIGHT: SIDEBAR (BENEFITS & INTERACTIVE QR DESK) -->
-      <aside class="post-sidebar">
-        
-        <!-- INTERACTIVE QR ACCESS DESK -->
-        <div class="qr-hub-card">
-          <div style="font-size:12px;font-weight:700;text-transform:uppercase;letter-spacing:1px;color:var(--blue);margin-bottom:8px;">
-            📱 Instant Mobile Desk
-          </div>
-          <h3 style="font-size:16px;font-weight:700;margin-bottom:14px;">Scan &amp; Connect with PFRE</h3>
+    <!-- Main Listing Form and Owner Guidance -->
+    <section class="container my-8">
+      <div class="catalog-layout d-grid gap-8">
+        <!-- Left Side: Comprehensive Property Submission Form -->
+        <div>
+          <div class="contact-form-card mb-8">
+            <div class="d-flex justify-between items-center mb-4 flex-wrap gap-2">
+              <div>
+                <h2 class="text-md fw-bold mb-1">submit property listing details</h2>
+                <p class="text-xs text-muted mb-0">Fill in the specifications below to have your property vetted and showcased to prospective buyers or tenants.</p>
+              </div>
+              <span class="badge badge-blue">direct owner submission</span>
+            </div>
 
-          <!-- QR Switcher Tabs -->
-          <div class="qr-tabs" role="tablist">
-            <button class="qr-tab active" type="button" onclick="switchQR('review', this)">⭐ Review</button>
-            <button class="qr-tab" type="button" onclick="switchQR('location', this)">📍 Maps</button>
-            <button class="qr-tab" type="button" onclick="switchQR('mobile', this)">📱 Mobile</button>
-            <button class="qr-tab" type="button" onclick="switchQR('pay', this)">💳 UPI</button>
-          </div>
+            <form id="publicPostPropertyForm">
+              <!-- Step 1: Listing Intent & Category -->
+              <div class="p-3 bg-secondary rounded mb-4">
+                <span class="text-xs fw-bold text-uppercase text-blue d-block mb-3">step 1: intent and asset classification</span>
+                
+                <div class="d-grid grid-cols-3 gap-4 mb-3">
+                  <div class="form-group">
+                    <label class="form-label" for="ppIntent">listing intent *</label>
+                    <select id="ppIntent" class="form-control" required>
+                      <option value="sell" selected>sell outright</option>
+                      <option value="rent">lease or rent</option>
+                    </select>
+                  </div>
 
-          <!-- Dynamic QR Box -->
-          <div class="qr-display-box">
-            <img id="activeQrImg" class="qr-img" src="https://api.qrserver.com/v1/create-qr-code/?size=200x200&data=https%3A%2F%2Fg.page%2Fr%2FCdemit189ERsECk%2Freview" alt="Scan QR Code" loading="lazy">
-            <div id="activeQrCaption" class="qr-caption">Scan to review Property Finder Real Estate on Google</div>
-            <a id="activeQrLink" href="https://g.page/r/Cdemit189ERsECk/review" target="_blank" rel="noopener noreferrer" class="qr-action-btn">
-              Open Direct Link ↗
-            </a>
+                  <div class="form-group">
+                    <label class="form-label" for="ppCategory">property type *</label>
+                    <select id="ppCategory" class="form-control" required>
+                      <option value="residential" selected>residential apartment</option>
+                      <option value="penthouse">penthouse or duplex</option>
+                      <option value="commercial_office">commercial office</option>
+                      <option value="commercial_shop">retail shop or showroom</option>
+                    </select>
+                  </div>
+
+                  <div class="form-group">
+                    <label class="form-label" for="ppBhk">configuration *</label>
+                    <select id="ppBhk" class="form-control" required>
+                      <option value="1">1 BHK</option>
+                      <option value="2" selected>2 BHK</option>
+                      <option value="3">3 BHK</option>
+                      <option value="4">4 BHK or larger</option>
+                      <option value="commercial">commercial unit</option>
+                    </select>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Step 2: Location and Society Details -->
+              <div class="p-3 bg-secondary rounded mb-4">
+                <span class="text-xs fw-bold text-uppercase text-blue d-block mb-3">step 2: location and building credentials</span>
+
+                <div class="d-grid grid-cols-2 gap-4 mb-3">
+                  <div class="form-group">
+                    <label class="form-label" for="ppLocality">micro-market *</label>
+                    <select id="ppLocality" class="form-control" required>
+                      <option value="Malad West">Malad West</option>
+                      <option value="Goregaon East">Goregaon East</option>
+                      <option value="Andheri West">Andheri West</option>
+                      <option value="Borivali West">Borivali West</option>
+                      <option value="Kandivali West">Kandivali West</option>
+                      <option value="Other Western Suburbs">other western suburbs</option>
+                    </select>
+                  </div>
+
+                  <div class="form-group">
+                    <label class="form-label" for="ppBuilding">building or society name *</label>
+                    <input type="text" id="ppBuilding" class="form-control" required placeholder="e.g. Marina Enclave, Oberoi Woods, Palm Court">
+                  </div>
+                </div>
+
+                <div class="d-grid grid-cols-2 gap-4 mb-3">
+                  <div class="form-group">
+                    <label class="form-label" for="ppAddress">street address and landmark *</label>
+                    <input type="text" id="ppAddress" class="form-control" required placeholder="Road name, near metro or station, pin code">
+                  </div>
+
+                  <div class="form-group">
+                    <label class="form-label" for="ppFloor">floor and total tower height</label>
+                    <input type="text" id="ppFloor" class="form-control" placeholder="e.g. 12th of 22 floors">
+                  </div>
+                </div>
+              </div>
+
+              <!-- Step 3: Area Dimensions and Features -->
+              <div class="p-3 bg-secondary rounded mb-4">
+                <span class="text-xs fw-bold text-uppercase text-blue d-block mb-3">step 3: carpet area and fixtures</span>
+
+                <div class="d-grid grid-cols-3 gap-4 mb-3">
+                  <div class="form-group">
+                    <label class="form-label" for="ppCarpet">carpet area in sq ft *</label>
+                    <input type="number" id="ppCarpet" class="form-control" required min="150" max="25000" placeholder="e.g. 725">
+                  </div>
+
+                  <div class="form-group">
+                    <label class="form-label" for="ppParking">reserved car parking</label>
+                    <select id="ppParking" class="form-control">
+                      <option value="1 Covered Podium">1 covered podium</option>
+                      <option value="2 Covered Stilt">2 covered stilt</option>
+                      <option value="Open Society Parking">open society parking</option>
+                      <option value="None">no reserved parking</option>
+                    </select>
+                  </div>
+
+                  <div class="form-group">
+                    <label class="form-label" for="ppFurnishing">furnishing condition</label>
+                    <select id="ppFurnishing" class="form-control">
+                      <option value="Unfurnished">unfurnished bare shell</option>
+                      <option value="Semi-Furnished" selected>semi-furnished with modular kitchen</option>
+                      <option value="Fully Furnished">fully furnished luxury</option>
+                    </select>
+                  </div>
+                </div>
+
+                <div class="form-group mb-0">
+                  <label class="form-label">amenities and building features</label>
+                  <div class="d-grid grid-cols-3 gap-2 text-xs text-muted">
+                    <label class="d-flex items-center gap-2">
+                      <input type="checkbox" id="amLift" checked> high-speed elevators
+                    </label>
+                    <label class="d-flex items-center gap-2">
+                      <input type="checkbox" id="amGas" checked> piped natural gas
+                    </label>
+                    <label class="d-flex items-center gap-2">
+                      <input type="checkbox" id="amSecurity" checked> 24x7 security and cctv
+                    </label>
+                    <label class="d-flex items-center gap-2">
+                      <input type="checkbox" id="amGym"> gymnasium and fitness hub
+                    </label>
+                    <label class="d-flex items-center gap-2">
+                      <input type="checkbox" id="amBackup"> power backup for common areas
+                    </label>
+                    <label class="d-flex items-center gap-2">
+                      <input type="checkbox" id="amConveyance" checked> deemed conveyance complete
+                    </label>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Step 4: Pricing and Title Status -->
+              <div class="p-3 bg-secondary rounded mb-4">
+                <span class="text-xs fw-bold text-uppercase text-blue d-block mb-3">step 4: pricing and possession readiness</span>
+
+                <div class="d-grid grid-cols-3 gap-4 mb-3">
+                  <div class="form-group">
+                    <label class="form-label" for="ppPrice">expected price or monthly rent in ₹ *</label>
+                    <input type="number" id="ppPrice" class="form-control" required min="10000" placeholder="e.g. 18500000 or 55000">
+                  </div>
+
+                  <div class="form-group">
+                    <label class="form-label" for="ppMaintenance">monthly society maintenance in ₹</label>
+                    <input type="number" id="ppMaintenance" class="form-control" placeholder="e.g. 4500">
+                  </div>
+
+                  <div class="form-group">
+                    <label class="form-label" for="ppPossession">possession status</label>
+                    <select id="ppPossession" class="form-control">
+                      <option value="Immediate Ready OC" selected>immediate ready OC</option>
+                      <option value="Within 30 Days">within 30 days</option>
+                      <option value="Under Construction 2026">under construction 2026</option>
+                    </select>
+                  </div>
+                </div>
+
+                <div class="form-group mb-0">
+                  <label class="form-label" for="ppRemarks">additional highlights or special instructions</label>
+                  <textarea id="ppRemarks" rows="3" class="form-control" placeholder="Mention cross ventilation, sea or garden view, modular wardrobes, or specific inspection hours."></textarea>
+                </div>
+              </div>
+
+              <!-- Step 5: Owner Identification & Contact Authorization -->
+              <div class="p-3 bg-secondary rounded mb-4">
+                <span class="text-xs fw-bold text-uppercase text-blue d-block mb-3">step 5: owner contact and representation consent</span>
+
+                <div class="d-grid grid-cols-3 gap-4 mb-3">
+                  <div class="form-group">
+                    <label class="form-label" for="ppOwnerName">your full name *</label>
+                    <input type="text" id="ppOwnerName" class="form-control" required placeholder="Owner or authorized person">
+                  </div>
+
+                  <div class="form-group">
+                    <label class="form-label" for="ppOwnerPhone">mobile or WhatsApp number *</label>
+                    <input type="tel" id="ppOwnerPhone" class="form-control" required placeholder="+91 98XXX XXXXX">
+                  </div>
+
+                  <div class="form-group">
+                    <label class="form-label" for="ppOwnerRole">you are the *</label>
+                    <select id="ppOwnerRole" class="form-control" required>
+                      <option value="Sole Owner" selected>sole property owner</option>
+                      <option value="Joint Co-Owner">joint co-owner</option>
+                      <option value="Power of Attorney Holder">power of attorney holder</option>
+                      <option value="Developer Partner">builder or developer</option>
+                    </select>
+                  </div>
+                </div>
+
+                <div class="form-group mb-0">
+                  <label class="d-flex items-center gap-2 text-xs text-muted mb-0">
+                    <input type="checkbox" id="ppConsent" required checked>
+                    <span>I authorize Property Finder Real Estate to verify title documents, coordinate client walkthroughs, and market this property to verified prospects.</span>
+                  </label>
+                </div>
+              </div>
+
+              <button type="submit" class="btn btn-primary w-100 py-3 text-sm fw-bold">submit property for verification &amp; listing</button>
+            </form>
           </div>
         </div>
 
-        <!-- OWNER BENEFITS CARD -->
-        <div style="background:linear-gradient(135deg, #1E3A8A, #3B82F6);border-radius:18px;padding:24px;color:white;">
-          <h3 style="font-size:17px;font-weight:700;margin-bottom:14px;">Why List with Property Finder?</h3>
-          <div style="display:flex;flex-direction:column;gap:12px;font-size:13.5px;">
-            <div style="display:flex;gap:10px;"><span>✅</span><span><strong>100% Free:</strong> Zero listing fees or hidden owner charges.</span></div>
-            <div style="display:flex;gap:10px;"><span>👁️</span><span><strong>10,000+ Viewers:</strong> High visibility across Mumbai Western Suburbs.</span></div>
-            <div style="display:flex;gap:10px;"><span>📞</span><span><strong>Verified Leads:</strong> Pre-screened tenants and buyers only.</span></div>
-            <div style="display:flex;gap:10px;"><span>⚖️️</span><span><strong>Legal Advisory:</strong> Assistance with Leave &amp; License registration.</span></div>
+        <!-- Right Side: Why List With PFRE & Direct Helpline -->
+        <aside>
+          <!-- Owner Advantage Card -->
+          <div class="contact-form-card mb-6">
+            <h3 class="text-xs fw-bold text-uppercase text-muted mb-3">why list with PFRE Mumbai</h3>
+            <div class="d-flex flex-column gap-3 text-xs text-muted">
+              <div>
+                <strong class="text-text d-block mb-1">&#128737;&#65039; qualified buyer screening</strong>
+                <span>We filter out non-serious inquiries and verify bank home loan pre-approvals before scheduling physical visits to your home.</span>
+              </div>
+              <div>
+                <strong class="text-text d-block mb-1">&#128221; doorstep legal conveyance</strong>
+                <span>Complete assistance with society no-objection certificates, leave and license e-registration, and stamp duty adjudication.</span>
+              </div>
+              <div>
+                <strong class="text-text d-block mb-1">&#128200; realistic market valuation</strong>
+                <span>We benchmark your asking price against recent registered Index II transaction values to ensure faster closure without undervaluation.</span>
+              </div>
+              <div>
+                <strong class="text-text d-block mb-1">&#128274; zero upfront listing charge</strong>
+                <span>Free portal marketing and professional representation across Mumbai Western Suburbs. Brokerage is payable strictly upon deal closure.</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Direct Advisory Helpline -->
+          <div class="contact-form-card" style="position: sticky; top: 90px;">
+            <h3 class="text-xs fw-bold text-uppercase text-muted mb-3">speak to our listing desk</h3>
+            <p class="text-xs text-muted mb-3">Need guidance on ready reckoner pricing or society deemed conveyance before listing your apartment?</p>
+
+            <div class="p-3 bg-secondary rounded text-xs mb-3">
+              <div class="d-flex justify-between py-1">
+                <span class="text-muted">listing advisor:</span>
+                <strong class="text-text">Saurav Chowdhury</strong>
+              </div>
+              <div class="d-flex justify-between py-1 border-top mt-1 pt-1">
+                <span class="text-muted">registered office:</span>
+                <span class="text-text">Jankalyan Nagar, Malad West</span>
+              </div>
+            </div>
+
+            <div class="d-flex flex-column gap-2">
+              <a href="tel:+919326990050" class="btn btn-outline btn-sm w-100 text-center">&#128222; call +91 93269 90050</a>
+              <a href="https://wa.me/919326990050?text=Hello%20PFRE,%20I%20want%20to%20list%20my%20property%20for%20sale%20or%20rent." target="_blank" rel="noopener" class="btn btn-green-inline btn-sm w-100 text-center">&#128172; chat on WhatsApp</a>
+            </div>
+          </div>
+        </aside>
+      </div>
+    </section>
+
+    <!-- Bottom Guidance Section -->
+    <section class="container mb-8">
+      <div class="calc-widget p-6">
+        <h2 class="text-md fw-bold mb-2">documents required for listing resale flats in Mumbai</h2>
+        <p class="text-xs text-muted mb-4">Having these verified records accessible speeds up negotiations and helps conclude bank loan clearances without delay.</p>
+
+        <div class="d-grid grid-cols-4 gap-4 text-xs text-muted">
+          <div class="p-3 bg-secondary rounded">
+            <strong class="text-text d-block mb-1">01 society share certificate</strong>
+            <span>Proof of membership and allotment of flat shares issued by the cooperative housing society.</span>
+          </div>
+          <div class="p-3 bg-secondary rounded">
+            <strong class="text-text d-block mb-1">02 registered chain of deeds</strong>
+            <span>All historical sale agreements starting from the original builder agreement to the current owner.</span>
+          </div>
+          <div class="p-3 bg-secondary rounded">
+            <strong class="text-text d-block mb-1">03 occupancy certificate &amp; plan</strong>
+            <span>Approved municipal corporation floor plan and final OC confirming building safety.</span>
+          </div>
+          <div class="p-3 bg-secondary rounded">
+            <strong class="text-text d-block mb-1">04 society no-dues certificate</strong>
+            <span>Latest society maintenance receipt and property tax paid clearance slip.</span>
           </div>
         </div>
-
-        <!-- DIRECT DESK SUPPORT -->
-        <div style="background:var(--card, white);border:1.5px solid var(--border);border-radius:18px;padding:22px;">
-          <h4 style="font-size:15px;font-weight:700;margin-bottom:12px;">Need Help Listing?</h4>
-          <div style="font-size:13.5px;color:var(--text-muted);line-height:1.6;margin-bottom:16px;">
-            Our Malad West advisory desk can assist you with documentation, photo shoots, and price valuations.
-          </div>
-          <div style="display:flex;flex-direction:column;gap:10px;">
-            <a href="tel:+919326990050" class="btn btn-outline btn-sm" style="justify-content:center;">📞 Call +91 93269 90050</a>
-            <a href="https://wa.me/919326990050?text=Hello%20PFRE,%20I%20need%20help%20listing%20my%20property" target="_blank" rel="noopener noreferrer" class="btn btn-outline btn-sm" style="justify-content:center;background:#25D366;color:white;border-color:#25D366;">💬 WhatsApp Us</a>
-          </div>
-        </div>
-
-      </aside>
-
-    </div>
-
+      </div>
+    </section>
   </main>
 
-  <!-- MASTER FOOTER (Single Source from js/layout.js) -->
-  <site-footer></site-footer>
+  <!-- Footer Mount Point -->
+  <footer id="mainFooter"></footer>
 
-  <!-- Centralized Script Engines in Order of Dependency -->
+  <!-- Scripts -->
   <script src="/js/config.js"></script>
-  <script src="/js/layout.js"></script>
-  <script src="/js/api.js" defer></script>
-  <script src="https://challenges.cloudflare.com/turnstile/v0/api.js" defer></script>
+  <script src="/js/auth-guard.js"></script>
+  <script src="/js/api.js"></script>
   <script src="/js/security.js"></script>
-  <script src="/js/tracker.js" defer></script>
   <script src="/js/theme.js"></script>
-  <script src="/js/i18n.js"></script>
+  <script src="/js/tracker.js"></script>
   <script src="/js/widgets.js"></script>
+  <script src="/js/i18n.js"></script>
+  <script src="/js/app.js"></script>
+  <script src="/js/app-shell.js"></script>
+  <script src="/js/layout.js"></script>
 
-  <!-- Form Engine & Interactive QR Switcher -->
+  <!-- Post Property Client Controller -->
   <script>
-    let curStep = 1;
+    (function () {
+      'use strict';
 
-    function goStep(n) {
-      if (n > curStep && curStep === 2) {
-        const society = document.getElementById('societyName')?.value?.trim();
-        const price = document.getElementById('expectedPrice')?.value?.trim();
-        if (!society || !price) {
-          if (typeof window.showToast === 'function') {
-            window.showToast('Please enter the Society Name and Expected Price.', 'error');
-          } else {
-            alert('Please enter the Society Name and Expected Price.');
+      const postForm = document.getElementById('publicPostPropertyForm');
+      if (!postForm) return;
+
+      postForm.addEventListener('submit', function (e) {
+        e.preventDefault();
+
+        const intent = document.getElementById('ppIntent').value;
+        const category = document.getElementById('ppCategory').value;
+        const bhk = document.getElementById('ppBhk').value;
+        const locality = document.getElementById('ppLocality').value;
+        const building = document.getElementById('ppBuilding').value.trim();
+        const address = document.getElementById('ppAddress').value.trim();
+        const floor = document.getElementById('ppFloor').value.trim();
+        const carpet = Number(document.getElementById('ppCarpet').value) || 0;
+        const price = Number(document.getElementById('ppPrice').value) || 0;
+        const maintenance = document.getElementById('ppMaintenance').value.trim();
+        const possession = document.getElementById('ppPossession').value;
+        const remarks = document.getElementById('ppRemarks').value.trim();
+        const ownerName = document.getElementById('ppOwnerName').value.trim();
+        const ownerPhone = document.getElementById('ppOwnerPhone').value.trim();
+        const ownerRole = document.getElementById('ppOwnerRole').value;
+
+        // Format price display
+        let priceDisplay = '₹' + price.toLocaleString('en-IN');
+        if (intent === 'sell') {
+          if (price >= 10000000) {
+            priceDisplay = '₹' + (price / 10000000).toFixed(2) + ' Cr';
+          } else if (price >= 100000) {
+            priceDisplay = '₹' + (price / 100000).toFixed(2) + ' Lakh';
           }
-          return;
-        }
-      }
-
-      document.querySelector(`#panel${curStep}`)?.classList.remove('active');
-      document.querySelector(`#s${curStep}`)?.classList.remove('active');
-      document.querySelector(`#s${curStep}`)?.classList.add('done');
-
-      curStep = n;
-
-      document.querySelector(`#panel${n}`)?.classList.add('active');
-      document.querySelector(`#s${n}`)?.classList.add('active');
-      window.scrollTo({ top: 120, behavior: 'smooth' });
-    }
-
-    function setIntent(type, btn) {
-      document.querySelectorAll('#btnSell, #btnRent, #btnCommercial, #btnPG').forEach(b => {
-        b.className = 'btn btn-outline';
-      });
-      btn.className = 'btn btn-primary';
-    }
-
-    function selectPropType(el) {
-      document.querySelectorAll('.type-option').forEach(t => t.classList.remove('active'));
-      el.classList.add('active');
-    }
-
-    function handlePhotos(input) {
-      const preview = document.getElementById('photoPreview');
-      preview.innerHTML = '';
-      if (!input.files || input.files.length === 0) return;
-
-      Array.from(input.files).slice(0, 16).forEach(file => {
-        const reader = new FileReader();
-        reader.onload = e => {
-          const div = document.createElement('div');
-          div.className = 'photo-thumb';
-          div.innerHTML = `<img src="${e.target.result}" alt="Property Preview">`;
-          preview.appendChild(div);
-        };
-        reader.readAsDataURL(file);
-      });
-    }
-
-    /* ── Dynamic QR Switcher Logic ── */
-    const qrDataMap = {
-      review: {
-        url: 'https://g.page/r/Cdemit189ERsECk/review',
-        caption: 'Scan to review Property Finder Real Estate on Google ⭐',
-        actionText: 'Review on Google ↗'
-      },
-      location: {
-        url: 'https://maps.app.goo.gl/a7kDMMokRK2vNNx4A',
-        caption: 'Scan to open our Malad West office directions on Google Maps 📍',
-        actionText: 'Open Google Maps ↗'
-      },
-      mobile: {
-        url: 'https://www.propertyfinderrealestate.com/post-property',
-        caption: 'Scan to open this form on your phone and upload camera photos 📱',
-        actionText: 'Open Page URL ↗'
-      },
-      pay: {
-        url: 'upi://pay?pa=propertyfinderre@okhdfcbank&pn=Property%20Finder%20Real%20Estate&cu=INR',
-        caption: 'Scan to initiate secure UPI payment / token deposit 💳',
-        actionText: 'Pay via UPI App ↗'
-      }
-    };
-
-    function switchQR(type, tabBtn) {
-      document.querySelectorAll('.qr-tab').forEach(t => t.classList.remove('active'));
-      tabBtn.classList.add('active');
-
-      const data = qrDataMap[type];
-      if (!data) return;
-
-      const encodedUrl = encodeURIComponent(data.url);
-      document.getElementById('activeQrImg').src = `https://api.qrserver.com/v1/create-qr-code/?size=200x200&data=${encodedUrl}`;
-      document.getElementById('activeQrCaption').textContent = data.caption;
-      const link = document.getElementById('activeQrLink');
-      link.href = data.url;
-      link.textContent = data.actionText;
-    }
-
-    /* ── Form Submission Handler ── */
-    async function submitListing() {
-      // 1. Verify Cloudflare Turnstile if available
-      if (window.PFRESecurity?.verifyTurnstile && !window.PFRESecurity.verifyTurnstile('#post-turnstile-widget')) {
-        if (typeof window.showToast === 'function') {
-          window.showToast('Please complete the verification check.', 'error');
-        }
-        return;
-      }
-      if (window.turnstileOK && !window.turnstileOK('.cf-turnstile')) {
-        if (typeof window.showToast === 'function') {
-          window.showToast('Please complete the verification check.', 'error');
-        }
-        return;
-      }
-
-      const name = document.getElementById('ownerName')?.value?.trim();
-      const phone = document.getElementById('ownerPhone')?.value?.trim();
-      const email = document.getElementById('ownerEmail')?.value?.trim() || '';
-      const role = document.getElementById('ownerRole')?.value || 'owner';
-
-      if (!name || !phone) {
-        if (typeof window.showToast === 'function') {
-          window.showToast('Name and phone number are required.', 'error');
         } else {
-          alert('Name and phone number are required.');
+          priceDisplay = priceDisplay + ' / month';
         }
-        return;
-      }
 
-      const submitBtn = document.getElementById('submitListingBtn');
-      if (submitBtn) {
-        submitBtn.disabled = true;
-        submitBtn.textContent = '⏳ Submitting Listing...';
-      }
+        // Format title
+        const configText = bhk === 'commercial' ? 'Commercial Space' : bhk + ' BHK';
+        const title = building + ' ' + configText + ' ' + (intent === 'sell' ? 'for Sale' : 'on Rent');
 
-      // Collect all inputs generically
-      const data = {
-        name,
-        phone,
-        email,
-        role,
-        source: 'post_property_page',
-        ts: new Date().toISOString()
-      };
+        // Store into internal catalog
+        const newProperty = {
+          id: 'pfre-post-' + Date.now().toString(36).substr(-4),
+          title: title,
+          locality: locality,
+          address: address + ', ' + building + ', ' + locality,
+          intent: intent === 'sell' ? 'buy' : 'rent',
+          bhk: bhk,
+          carpetArea: carpet,
+          priceNumeric: price,
+          priceDisplay: priceDisplay,
+          floor: floor || 'N/A',
+          reraId: 'Verification in Progress',
+          status: 'available',
+          description: remarks || (configText + ' in ' + building + ', ' + locality + '. Possession: ' + possession + '.'),
+          ownerContact: {
+            name: ownerName,
+            phone: ownerPhone,
+            role: ownerRole
+          },
+          submittedAt: new Date().toISOString()
+        };
 
-      document.querySelectorAll('#panel1 [name], #panel2 [name]').forEach(el => {
-        const key = el.name;
-        if (!key) return;
-        if (el.type === 'checkbox') {
-          if (el.checked) data[key] = true;
-        } else if (el.type === 'radio') {
-          if (el.checked) data[key] = el.value;
-        } else if (el.value) {
-          data[key] = el.value.trim ? el.value.trim() : el.value;
+        try {
+          const catalogRaw = localStorage.getItem('pfre_catalog_inventory');
+          const catalog = catalogRaw ? JSON.parse(catalogRaw) : [];
+          catalog.unshift(newProperty);
+          localStorage.setItem('pfre_catalog_inventory', JSON.stringify(catalog));
+        } catch (err) {
+          // Continue gracefully
         }
+
+        // Log telemetry event
+        if (window.pfreTracker && typeof window.pfreTracker.trackEvent === 'function') {
+          window.pfreTracker.trackEvent('property_post', 'form_submission', title);
+        }
+
+        // Also record lead entry into CRM
+        try {
+          const leadsRaw = localStorage.getItem('pfre_crm_leads');
+          const leads = leadsRaw ? JSON.parse(leadsRaw) : [];
+          leads.unshift({
+            id: 'lead-post-' + Date.now().toString(36).substr(-4),
+            name: ownerName,
+            phone: ownerPhone,
+            intent: intent === 'sell' ? 'sell' : 'lease',
+            locality: locality,
+            budget: priceDisplay,
+            stage: 'new',
+            source: 'post_property_form',
+            notes: 'Owner posted ' + title + '. Carpet: ' + carpet + ' sq ft. Price: ' + priceDisplay,
+            createdAt: new Date().toISOString()
+          });
+          localStorage.setItem('pfre_crm_leads', JSON.stringify(leads));
+        } catch (err) {
+          // Continue gracefully
+        }
+
+        alert('Thank you ' + ownerName + '. Your property listing for ' + title + ' has been submitted. Our advisor Saurav Chowdhury will verify the title details and contact you shortly.');
+        postForm.reset();
       });
-
-      data.intent = document.querySelector('#btnSell.btn-primary, #btnRent.btn-primary, #btnCommercial.btn-primary, #btnPG.btn-primary')?.id?.replace('btn', '').toLowerCase() || 'sell';
-      data.propType = document.querySelector('.type-option.active .to-label')?.textContent || 'Flat / Apartment';
-
-      // 1. LocalStorage Backup
-      try {
-        const listings = JSON.parse(localStorage.getItem('pfre_listings') || '[]');
-        listings.unshift(data);
-        localStorage.setItem('pfre_listings', JSON.stringify(listings.slice(0, 20)));
-      } catch (_) {}
-
-      // 2. Formspree Forwarder
-      const formspreeId = window.PFRE_CONFIG?.FORMSPREE_ID;
-      if (formspreeId && formspreeId !== 'YOUR_FORMSPREE_ID') {
-        fetch('https://formspree.io/f/' + encodeURIComponent(formspreeId), {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
-          body: JSON.stringify(data)
-        }).catch(() => {});
-      }
-
-      // 3. API Dispatch
-      if (window.PFREApi?.leads?.postProperty) {
-        window.PFREApi.leads.postProperty(data).catch(() => {});
-      } else if (window.PFREApi?.leads?.create) {
-        window.PFREApi.leads.create(data).catch(() => {});
-      }
-
-      setTimeout(() => {
-        document.querySelectorAll('.form-panel').forEach(p => p.classList.remove('active'));
-        document.querySelectorAll('.steps-bar .step').forEach(s => s.classList.add('done'));
-        document.getElementById('successState').classList.add('show');
-        document.getElementById('successPhone').textContent = phone;
-
-        // Sync WhatsApp link in success state
-        const waMsg = encodeURIComponent(`Hello Property Finder Real Estate, I just submitted my property (${data.propType} for ${data.intent} in ${data.locality || 'Mumbai'}). Please activate it.`);
-        document.getElementById('successWaBtn').href = `https://wa.me/919326990050?text=${waMsg}`;
-
-        window.scrollTo({ top: 120, behavior: 'smooth' });
-        if (typeof window.showToast === 'function') {
-          window.showToast('🎉 Property submitted successfully! Our team will contact you shortly.', 'success');
-        }
-      }, 600);
-    }
-
-    // Service Worker Registration
-    if ('serviceWorker' in navigator) {
-      window.addEventListener('load', () => {
-        navigator.serviceWorker.register('/sw.js').catch(() => {});
-      });
-    }
+    })();
   </script>
 </body>
 </html>
