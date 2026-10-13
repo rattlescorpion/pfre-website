@@ -1,607 +1,659 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" data-theme="light">
 <head>
-<meta charset="UTF-8">
-<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' https://cdnjs.cloudflare.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' data: https: blob:; media-src 'self' blob:; connect-src 'self' https:; frame-ancestors 'none'; object-src 'none'">
-<meta http-equiv="X-Content-Type-Options" content="nosniff">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="robots" content="noindex, nofollow">
-<meta name="description" content="Inventory & Asset Tracking — Property Finder Real Estate">
-<link rel="icon" type="image/png" sizes="192x192" href="icons/icon-192.png">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
-<title>Inventory — Property Finder RE</title>
-<script>document.documentElement.setAttribute('data-theme','dark');</script>
-<style>
-*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
-:root{
-  --bg:#070C14;--sidebar:#0A0F1E;--card:#0F1729;--card2:#111B2E;--border:#1A2744;
-  --blue:#3B82F6;--green:#10B981;--red:#EF4444;--amber:#F59E0B;--purple:#8B5CF6;
-  --text:#E2E8F0;--text-2:#94A3B8;--text-3:#475569;--mono:'JetBrains Mono',monospace;
-}
-body{font-family:'Inter',system-ui,sans-serif;background:var(--bg);color:var(--text);min-height:100vh;display:flex;font-size:14px;line-height:1.5}
-.sidebar{width:220px;min-height:100vh;background:var(--sidebar);border-right:1px solid var(--border);position:fixed;left:0;top:0;bottom:0;z-index:100;overflow-y:auto}
-.sb-logo{padding:20px 18px 14px;display:flex;align-items:center;gap:10px;border-bottom:1px solid var(--border)}
-.sb-logo img{height:32px;filter:brightness(0) invert(1)}
-.sb-logo-text{font-size:13px;font-weight:700}
-.sb-logo-sub{font-size:10px;color:var(--blue);font-weight:600;text-transform:uppercase}
-.sb-section{font-size:10px;font-weight:700;letter-spacing:1px;text-transform:uppercase;color:var(--text-3);padding:16px 18px 6px}
-.sb-item{display:flex;align-items:center;gap:10px;padding:9px 18px;color:var(--text-2);font-size:13px;font-weight:500;cursor:pointer;border-left:2px solid transparent;text-decoration:none}
-.sb-item:hover{background:rgba(59,130,246,.06);color:var(--text)}
-.sb-item.active{background:rgba(59,130,246,.12);color:var(--blue);border-left-color:var(--blue);font-weight:600}
-.sb-icon{font-size:16px;width:20px;text-align:center}
-.main{margin-left:220px;flex:1;min-height:100vh}
-.content{padding:24px}
-.page-head{display:flex;justify-content:space-between;align-items:center;margin-bottom:20px;flex-wrap:wrap;gap:10px}
-.page-title{font-size:20px;font-weight:800}
-.btn{padding:8px 16px;border-radius:8px;font-size:13px;font-weight:600;cursor:pointer;border:1px solid var(--border);background:var(--card);color:var(--text-2)}
-.btn:hover{border-color:var(--blue);color:var(--blue)}
-.btn-primary{background:var(--blue);border-color:var(--blue);color:#fff}
-.btn-sm{padding:5px 11px;font-size:12px}
-.stats-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin-bottom:20px}
-.stat-card{background:var(--card);border:1px solid var(--border);border-radius:12px;padding:16px}
-.stat-label{font-size:11px;color:var(--text-2);margin-bottom:6px}
-.stat-val{font-size:22px;font-weight:800;font-family:var(--mono)}
-.tab-row{display:flex;gap:4px;margin-bottom:20px;border-bottom:1px solid var(--border);overflow-x:auto}
-.tab-btn{padding:10px 16px;background:none;border:none;color:var(--text-2);font-size:13px;font-weight:600;cursor:pointer;border-bottom:2px solid transparent;white-space:nowrap}
-.tab-btn.active{color:var(--blue);border-bottom-color:var(--blue)}
-.panel{background:var(--card);border:1px solid var(--border);border-radius:12px;padding:18px;margin-bottom:16px}
-.panel h3{font-size:14px;margin-bottom:14px;display:flex;justify-content:space-between;align-items:center}
-table{width:100%;border-collapse:collapse;font-size:12.5px}
-th{text-align:left;padding:8px 10px;color:var(--text-3);text-transform:uppercase;font-size:10px;border-bottom:1px solid var(--border)}
-td{padding:9px 10px;border-bottom:1px solid rgba(26,39,68,.6)}
-tr:hover td{background:rgba(59,130,246,.04)}
-.badge{padding:2px 8px;border-radius:100px;font-size:10px;font-weight:700}
-.badge-green{background:rgba(16,185,129,.15);color:var(--green)}
-.badge-red{background:rgba(239,68,68,.15);color:var(--red)}
-.badge-gray{background:rgba(71,85,105,.2);color:var(--text-2)}
-.form-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px}
-.field label{display:block;font-size:11px;color:var(--text-2);margin-bottom:5px;font-weight:600}
-.field input,.field select{width:100%;padding:9px 11px;background:rgba(255,255,255,.04);border:1.5px solid var(--border);border-radius:8px;color:var(--text);font-size:13px;font-family:inherit}
-.field input:focus,.field select:focus{outline:none;border-color:var(--blue)}
-.overlay{position:fixed;inset:0;background:rgba(0,0,0,.55);z-index:800;display:none;align-items:center;justify-content:center;padding:16px}
-.overlay.open{display:flex}
-.modal{background:var(--card);border:1px solid var(--border);border-radius:14px;padding:22px;max-width:480px;width:100%;max-height:85vh;overflow-y:auto;text-align:center}
-#qr-canvas-wrap{background:#fff;display:inline-block;padding:14px;border-radius:10px;margin:14px 0}
-#scan-video{width:100%;max-width:360px;border-radius:10px;background:#000}
-.scan-result{margin-top:14px;padding:12px;background:var(--card2);border-radius:8px;font-size:13px;text-align:left}
-</style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>property inventory management | Property Finder Real Estate</title>
+  <meta name="description" content="Central inventory catalog console for tracking residential and commercial properties across Mumbai Western Suburbs.">
+  <meta name="robots" content="noindex, nofollow">
+  <meta name="theme-color" content="#FFFFFF">
+
+  <link rel="icon" type="image/png" href="/images/logo.png">
+  <link rel="manifest" href="/manifest.json">
+
+  <!-- Stylesheets -->
+  <link rel="stylesheet" href="/css/styles.css">
+  <link rel="stylesheet" href="/css/theme.css">
+  <link rel="stylesheet" href="/css/widgets.css">
+  <link rel="stylesheet" href="/css/mobile.css">
+  <link rel="stylesheet" href="/css/overrides.css">
+  <link rel="stylesheet" href="/css/utils.css">
 </head>
-<body>
-<h1 class="sr-only" style="position:absolute;left:-9999px">Inventory & Asset Tracking — Property Finder Real Estate</h1>
+<body class="admin-body">
+  <a href="#inventoryMain" class="skip-link">skip to main content</a>
 
-<aside class="sidebar" role="navigation" aria-label="Inventory navigation">
-  <div class="sb-logo"><img src="images/logo.png" alt="PFRE"><div><div class="sb-logo-text">Property Finder</div><div class="sb-logo-sub">Inventory</div></div></div>
-  <nav>
-    <div class="sb-section">Overview</div>
-    <a href="admin.html" class="sb-item"><span class="sb-icon">📊</span><span>Dashboard</span></a>
-    <a href="inventory.html" class="sb-item active"><span class="sb-icon">📦</span><span>Inventory</span></a>
-    <div class="sb-section">Modules</div>
-    <a href="crm.html" class="sb-item"><span class="sb-icon">👥</span><span>CRM</span></a>
-    <a href="finance.html" class="sb-item"><span class="sb-icon">💰</span><span>Finance</span></a>
-    <a href="hrms.html" class="sb-item"><span class="sb-icon">🏢</span><span>HRMS</span></a>
-    <a href="legal.html" class="sb-item"><span class="sb-icon">⚖️</span><span>Legal</span></a>
-    <div class="sb-section">System</div>
-    <a href="index.html" class="sb-item"><span class="sb-icon">🌐</span><span>View Website</span></a>
-  </nav>
-</aside>
-
-<main class="main">
-  <div class="content">
-    <div class="page-head">
-      <div class="page-title">📦 Inventory &amp; Asset Tracking</div>
-      <div style="display:flex;gap:8px">
-        <button class="btn" onclick="openScanModal()">📷 Scan QR</button>
-        <button class="btn btn-primary" onclick="openModal('sku')">+ New SKU</button>
+  <div class="admin-shell">
+    <!-- Admin Sidebar Navigation -->
+    <aside class="admin-sidebar">
+      <div class="sb-header">
+        <a href="/admin.html" class="sb-brand">
+          <span class="sb-brand-title">PFRE MUMBAI</span>
+          <span class="sb-brand-sub">operations hub</span>
+        </a>
       </div>
+
+      <nav class="sb-nav" aria-label="Admin Navigation">
+        <div class="sb-group-title">core operations</div>
+        <a href="/admin.html" class="sb-item">&#128202; dashboard</a>
+        <a href="/crm.html" class="sb-item">&#128101; crm leads</a>
+        <a href="/contacts.html" class="sb-item">&#128214; phonebook</a>
+        <a href="/inventory.html" class="sb-item active">&#127968; inventory</a>
+        <a href="/schedule.html" class="sb-item">&#128197; inspection calendar</a>
+
+        <div class="sb-group-title">intelligence &amp; legal</div>
+        <a href="/analytics.html" class="sb-item">&#128200; analytics &amp; traffic</a>
+        <a href="/price-trends.html" class="sb-item">&#128201; price trends</a>
+        <a href="/agreement-registration.html" class="sb-item">&#128221; leave &amp; license</a>
+        <a href="/finance.html" class="sb-item" data-min-role="super_admin">&#128178; brokerage finance</a>
+        <a href="/hrms.html" class="sb-item" data-min-role="admin">&#128188; team hrms</a>
+
+        <div class="sb-group-title">configuration</div>
+        <a href="/email-templates.html" class="sb-item">&#9993;&#65039; templates</a>
+        <a href="/cms.html" class="sb-item">&#9881;&#65039; site cms</a>
+        <a href="/index.html" class="sb-item" target="_blank">&#127760; live website</a>
+      </nav>
+
+      <div class="sb-user">
+        <div class="sb-avatar user-avatar-text">SC</div>
+        <div class="sb-user-meta">
+          <strong data-user-name>Saurav Chowdhury</strong>
+          <span data-user-role>Super Admin</span>
+        </div>
+        <button type="button" class="btn btn-outline btn-sm py-1 px-2 text-xs" onclick="window.pfreLogout()">exit</button>
+      </div>
+    </aside>
+
+    <!-- Main Content Area -->
+    <div class="admin-main">
+      <header class="admin-topbar">
+        <div class="d-flex items-center gap-3">
+          <h1 class="text-md fw-bold mb-0">active property inventory catalog</h1>
+          <span class="badge badge-blue" id="inventoryCountBadge">0 units</span>
+        </div>
+
+        <div class="d-flex items-center gap-3">
+          <button type="button" id="openNewPropertyBtn" class="btn btn-primary btn-sm">&#43; add property</button>
+          <button type="button" id="exportInventoryCsvBtn" class="btn btn-outline btn-sm">&#128190; export inventory</button>
+        </div>
+      </header>
+
+      <main id="inventoryMain" class="admin-content p-6">
+        <!-- Key Inventory KPI Summary -->
+        <section class="stats-row grid-cols-4 d-grid gap-4 mb-6">
+          <div class="calc-widget">
+            <span class="text-xs fw-bold text-muted text-uppercase">total listed units</span>
+            <div id="statTotalInventory" class="calc-result-amount text-blue mt-1">0</div>
+            <span class="text-xs text-muted">residential &amp; commercial</span>
+          </div>
+
+          <div class="calc-widget">
+            <span class="text-xs fw-bold text-muted text-uppercase">residential buy outright</span>
+            <div id="statResBuy" class="calc-result-amount text-green mt-1">0</div>
+            <span class="text-xs text-muted">resale and developer flats</span>
+          </div>
+
+          <div class="calc-widget">
+            <span class="text-xs fw-bold text-muted text-uppercase">active rental inventory</span>
+            <div id="statActiveRent" class="calc-result-amount text-gold mt-1">0</div>
+            <span class="text-xs text-muted">verified flats on lease</span>
+          </div>
+
+          <div class="calc-widget">
+            <span class="text-xs fw-bold text-muted text-uppercase">commercial offices &amp; shops</span>
+            <div id="statCommercialUnits" class="calc-result-amount text-purple mt-1">0</div>
+            <span class="text-xs text-muted">workplaces &amp; retail galas</span>
+          </div>
+        </section>
+
+        <!-- Filter and Search Controls -->
+        <div class="calc-widget p-4 mb-6">
+          <div class="d-flex justify-between items-center flex-wrap gap-4">
+            <div class="d-flex gap-2 flex-wrap" id="inventoryTypeFilters">
+              <button type="button" class="tab-pill active" data-type-filter="all">all types</button>
+              <button type="button" class="tab-pill" data-type-filter="buy">residential buy</button>
+              <button type="button" class="tab-pill" data-type-filter="rent">residential rent</button>
+              <button type="button" class="tab-pill" data-type-filter="commercial">commercial</button>
+            </div>
+
+            <div class="d-flex gap-3 items-center flex-1" style="max-width: 480px;">
+              <input type="text" id="inventorySearchInput" class="form-control text-xs" placeholder="Search by building, locality, id, or owner...">
+              <select id="inventoryLocalitySelect" class="form-control text-xs" style="max-width: 160px;">
+                <option value="all">all localities</option>
+                <option value="Malad West">Malad West</option>
+                <option value="Goregaon East">Goregaon East</option>
+                <option value="Andheri West">Andheri West</option>
+                <option value="Borivali West">Borivali West</option>
+                <option value="Kandivali West">Kandivali West</option>
+              </select>
+            </div>
+          </div>
+        </div>
+
+        <!-- Inventory Data Table -->
+        <div class="calc-widget p-0 overflow-hidden">
+          <div class="table-responsive">
+            <table class="data-table w-100 text-xs">
+              <thead>
+                <tr>
+                  <th style="width: 100px;">id</th>
+                  <th style="width: 220px;">property title &amp; address</th>
+                  <th style="width: 110px;">category</th>
+                  <th style="width: 100px;">carpet area</th>
+                  <th style="width: 120px;">quoted price</th>
+                  <th style="width: 110px;">floor / config</th>
+                  <th style="width: 120px;">MahaRERA / title</th>
+                  <th style="width: 100px;">status</th>
+                  <th style="width: 140px;" class="text-right">actions</th>
+                </tr>
+              </thead>
+              <tbody id="inventoryTableBody">
+                <tr>
+                  <td colspan="9" class="text-center py-6 text-muted">loading property inventory catalog...</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </main>
     </div>
+  </div>
 
-    <div class="stats-grid" id="inv-stats"></div>
+  <!-- Add or Edit Property Modal -->
+  <div class="modal-backdrop" id="propertyModal" style="display: none;">
+    <div class="modal-card max-w-xl">
+      <div class="d-flex justify-between items-center mb-4">
+        <h2 class="text-md fw-bold mb-0" id="propertyModalTitle">add new property listing</h2>
+        <button type="button" class="btn btn-outline btn-sm py-0 px-2" id="closePropertyModalBtn">&times;</button>
+      </div>
 
-    <div class="tab-row">
-      <button class="tab-btn active" data-tab="all" onclick="showTab('all',this)">All Items</button>
-      <button class="tab-btn" data-tab="low" onclick="showTab('low',this)">Low Stock</button>
-      <button class="tab-btn" data-tab="movements" onclick="showTab('movements',this)">Movements</button>
-      <button class="tab-btn" data-tab="challans" onclick="showTab('challans',this)">Delivery Challans</button>
+      <form id="propertyEntryForm">
+        <input type="hidden" id="editPropertyId" value="">
+
+        <div class="d-grid grid-cols-2 gap-4 mb-3">
+          <div class="form-group">
+            <label class="form-label" for="pTitle">listing title *</label>
+            <input type="text" id="pTitle" class="form-control" required placeholder="e.g. Marina Enclave 2 BHK High Rise Flat">
+          </div>
+          <div class="form-group">
+            <label class="form-label" for="pLocality">micro-market *</label>
+            <select id="pLocality" class="form-control">
+              <option value="Malad West">Malad West</option>
+              <option value="Goregaon East">Goregaon East</option>
+              <option value="Andheri West">Andheri West</option>
+              <option value="Borivali West">Borivali West</option>
+              <option value="Kandivali West">Kandivali West</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="form-group mb-3">
+          <label class="form-label" for="pAddress">detailed property address *</label>
+          <input type="text" id="pAddress" class="form-control" required placeholder="Building name, road, landmark, pincode">
+        </div>
+
+        <div class="d-grid grid-cols-3 gap-4 mb-3">
+          <div class="form-group">
+            <label class="form-label" for="pIntent">intent classification *</label>
+            <select id="pIntent" class="form-control">
+              <option value="buy">Residential Buy</option>
+              <option value="rent">Residential Rent</option>
+              <option value="commercial">Commercial</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label class="form-label" for="pBhk">configuration</label>
+            <select id="pBhk" class="form-control">
+              <option value="1">1 BHK</option>
+              <option value="2" selected>2 BHK</option>
+              <option value="3">3 BHK</option>
+              <option value="4">4 BHK</option>
+              <option value="commercial">Commercial Space</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label class="form-label" for="pCarpet">carpet area in sq.ft *</label>
+            <input type="number" id="pCarpet" class="form-control" required min="100" max="25000" placeholder="e.g. 725">
+          </div>
+        </div>
+
+        <div class="d-grid grid-cols-3 gap-4 mb-3">
+          <div class="form-group">
+            <label class="form-label" for="pPriceNumeric">price numeric in ₹ *</label>
+            <input type="number" id="pPriceNumeric" class="form-control" required min="5000" placeholder="e.g. 16500000">
+          </div>
+          <div class="form-group">
+            <label class="form-label" for="pPriceDisplay">display formatted price</label>
+            <input type="text" id="pPriceDisplay" class="form-control" placeholder="e.g. ₹1.65 Cr or ₹52,000 / mo">
+          </div>
+          <div class="form-group">
+            <label class="form-label" for="pStatus">inventory status</label>
+            <select id="pStatus" class="form-control">
+              <option value="available">Available</option>
+              <option value="under_offer">Under Offer</option>
+              <option value="sold">Sold</option>
+              <option value="leased">Leased</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="d-grid grid-cols-2 gap-4 mb-3">
+          <div class="form-group">
+            <label class="form-label" for="pFloor">floor and building height</label>
+            <input type="text" id="pFloor" class="form-control" placeholder="e.g. 14th of 24 floors">
+          </div>
+          <div class="form-group">
+            <label class="form-label" for="pRera">MahaRERA registration id</label>
+            <input type="text" id="pRera" class="form-control" placeholder="e.g. P51800002145 or Ready OC">
+          </div>
+        </div>
+
+        <div class="form-group mb-4">
+          <label class="form-label" for="pDescription">property description and key highlights</label>
+          <textarea id="pDescription" rows="3" class="form-control" placeholder="Cross ventilation, modular kitchen, dedicated car parking, society deemed conveyance status"></textarea>
+        </div>
+
+        <div class="d-flex justify-end gap-2">
+          <button type="button" class="btn btn-outline btn-sm" id="cancelPropertyModalBtn">cancel</button>
+          <button type="submit" class="btn btn-primary btn-sm">save listing</button>
+        </div>
+      </form>
     </div>
-
-    <div id="tab-body"></div>
   </div>
-</main>
 
-<!-- New SKU modal -->
-<div class="overlay" id="modal-sku"><div class="modal" style="text-align:left">
-  <h3 style="margin-bottom:14px;display:flex;justify-content:space-between">New Inventory Item <button onclick="closeModal('sku')" style="background:none;border:none;color:var(--text-2);cursor:pointer;font-size:16px">✕</button></h3>
-  <div class="form-grid">
-    <div class="field"><label>Item Name</label><input type="text" id="sku-name" placeholder="e.g. Site Visit Key Set — Flat A"></div>
-    <div class="field"><label>Category</label><select id="sku-category"><option>Key Set</option><option>Signage</option><option>Marketing Material</option><option>Office Equipment</option><option>Other</option></select></div>
-    <div class="field"><label>Unit</label><select id="sku-unit"><option>pcs</option><option>set</option><option>box</option></select></div>
-    <div class="field"><label>Opening Stock</label><input type="number" id="sku-stock" value="1"></div>
-    <div class="field"><label>Purchase Rate (₹)</label><input type="number" id="sku-purchase-rate" value="0"></div>
-    <div class="field"><label>Reorder Level</label><input type="number" id="sku-reorder" value="1"></div>
-  </div>
-  <button class="btn btn-primary" style="width:100%;margin-top:14px" onclick="saveSku()">Save Item</button>
-</div></div>
+  <!-- Scripts -->
+  <script src="/js/config.js"></script>
+  <script src="/js/auth-guard.js"></script>
+  <script src="/js/api.js"></script>
+  <script src="/js/security.js"></script>
+  <script src="/js/theme.js"></script>
+  <script src="/js/tracker.js"></script>
+  <script src="/js/widgets.js"></script>
+  <script src="/js/i18n.js"></script>
+  <script src="/js/app.js"></script>
+  <script src="/js/app-shell.js"></script>
 
-<!-- QR display modal -->
-<div class="overlay" id="modal-qr"><div class="modal">
-  <h3 style="margin-bottom:6px;display:flex;justify-content:space-between">Asset QR Tag <button onclick="closeModal('qr')" style="background:none;border:none;color:var(--text-2);cursor:pointer;font-size:16px">✕</button></h3>
-  <p style="font-size:12px;color:var(--text-2)" id="qr-item-name"></p>
-  <div id="qr-canvas-wrap"><div id="qr-canvas"></div></div>
-  <div><button class="btn btn-sm btn-primary" onclick="downloadQr()">⬇ Download PNG</button></div>
-  <p style="font-size:11px;color:var(--text-2);margin-top:10px">Print and attach to the physical item. Scanning it opens this item's record directly.</p>
-</div></div>
+  <!-- Inventory Catalog Controller -->
+  <script>
+    (function () {
+      'use strict';
 
-<!-- Scan modal -->
-<div class="overlay" id="modal-scan"><div class="modal">
-  <h3 style="margin-bottom:14px;display:flex;justify-content:space-between">Scan Asset QR Code <button onclick="closeScanModal()" style="background:none;border:none;color:var(--text-2);cursor:pointer;font-size:16px">✕</button></h3>
-  <video id="scan-video" playsinline muted></video>
-  <canvas id="scan-canvas" style="display:none"></canvas>
-  <p id="scan-status" style="font-size:12px;color:var(--text-2);margin-top:10px">Point your camera at a printed asset QR tag.</p>
-  <div id="scan-result-box"></div>
-</div></div>
+      const STORAGE_KEY_INVENTORY = 'pfre_catalog_inventory';
 
-<!-- Purchase/Sale quick modal -->
-<div class="overlay" id="modal-move"><div class="modal" style="text-align:left">
-  <h3 style="margin-bottom:14px;display:flex;justify-content:space-between"><span id="move-title">Record Purchase</span> <button onclick="closeModal('move')" style="background:none;border:none;color:var(--text-2);cursor:pointer;font-size:16px">✕</button></h3>
-  <input type="hidden" id="move-sku-id">
-  <input type="hidden" id="move-kind">
-  <div class="form-grid">
-    <div class="field"><label>Quantity</label><input type="number" id="move-qty" value="1" min="1"></div>
-    <div class="field"><label>Rate (₹ each)</label><input type="number" id="move-rate" value="0"></div>
-    <div class="field"><label id="move-party-label">Vendor Name</label><input type="text" id="move-party" placeholder="e.g. ABC Suppliers"></div>
-    <div class="field"><label>Payment Method</label>
-      <select id="move-payment"><option value="cash">Cash</option><option value="bank_transfer">Bank Transfer</option><option value="upi">UPI</option><option value="cheque">Cheque</option><option value="credit">Credit</option></select>
-    </div>
-  </div>
-  <button class="btn btn-primary" style="width:100%;margin-top:14px" onclick="saveMovement()">Confirm</button>
-</div></div>
+      const defaultCatalog = [
+        {
+          id: 'pfre-mld-001',
+          title: 'Marina Enclave 2 BHK High Rise Flat',
+          locality: 'Malad West',
+          address: 'Jankalyan Nagar Road, Malad West, Mumbai - 400095',
+          intent: 'buy',
+          bhk: '2',
+          carpetArea: 725,
+          priceNumeric: 16500000,
+          priceDisplay: '₹1.65 Cr',
+          floor: '14th of 24 floors',
+          reraId: 'Ready OC',
+          status: 'available',
+          description: 'Verified 2 BHK apartment in Marina Enclave with dedicated podium parking and society conveyance.'
+        },
+        {
+          id: 'pfre-mld-002',
+          title: 'Auris Serenity 3 BHK Sea View Apartment',
+          locality: 'Malad West',
+          address: 'New Link Road, Malad West, Mumbai - 400064',
+          intent: 'buy',
+          bhk: '3',
+          carpetArea: 1225,
+          priceNumeric: 34000000,
+          priceDisplay: '₹3.40 Cr',
+          floor: '38th of 54 floors',
+          reraId: 'P51800001082',
+          status: 'available',
+          description: 'Luxury high floor apartment with sea views across Marve and Madh Island.'
+        },
+        {
+          id: 'pfre-mld-004',
+          title: 'K Raheja Palm Court 2 BHK on Rent',
+          locality: 'Malad West',
+          address: 'Palm Court Complex, Link Road, Malad West, Mumbai - 400064',
+          intent: 'rent',
+          bhk: '2',
+          carpetArea: 750,
+          priceNumeric: 52000,
+          priceDisplay: '₹52,000 / month',
+          floor: '7th of 16 floors',
+          reraId: 'Ready OC',
+          status: 'available',
+          description: 'Semi-furnished rental apartment with reserved parking, suitable for family occupancy.'
+        },
+        {
+          id: 'pfre-gor-003',
+          title: 'Oberoi Woods 2.5 BHK Luxury Flat',
+          locality: 'Goregaon East',
+          address: 'Oberoi Garden City, Mohan Gokhale Road, Goregaon East, Mumbai - 400063',
+          intent: 'buy',
+          bhk: '3',
+          carpetArea: 980,
+          priceNumeric: 29500000,
+          priceDisplay: '₹2.95 Cr',
+          floor: '18th of 35 floors',
+          reraId: 'Ready OC',
+          status: 'available',
+          description: 'Spacious 2.5 BHK facing green expanse of Aarey forest inside gated township.'
+        },
+        {
+          id: 'pfre-and-005',
+          title: 'Morya Classic Furnished Commercial Office',
+          locality: 'Andheri West',
+          address: 'Off New Link Road, Andheri West, Mumbai - 400053',
+          intent: 'commercial',
+          bhk: 'commercial',
+          carpetArea: 680,
+          priceNumeric: 24500000,
+          priceDisplay: '₹2.45 Cr',
+          floor: '5th of 12 floors',
+          reraId: 'Ready OC',
+          status: 'available',
+          description: 'Fully furnished commercial corporate office with eighteen seats and executive cabin.'
+        },
+        {
+          id: 'pfre-bor-006',
+          title: 'Romell Empress 1 BHK Modern Flat',
+          locality: 'Borivali West',
+          address: 'Shimpoli Road, Borivali West, Mumbai - 400092',
+          intent: 'buy',
+          bhk: '1',
+          carpetArea: 425,
+          priceNumeric: 9200000,
+          priceDisplay: '₹92 Lakh',
+          floor: '9th of 22 floors',
+          reraId: 'P51800021450',
+          status: 'available',
+          description: 'Well ventilated 1 BHK apartment close to metro line 2A station and Shimpoli market.'
+        }
+      ];
 
-<!-- Delivery Challan modal -->
-<div class="overlay" id="modal-challan"><div class="modal" style="text-align:left;max-width:560px">
-  <h3 style="margin-bottom:14px;display:flex;justify-content:space-between">New Delivery Challan <button onclick="closeModal('challan')" style="background:none;border:none;color:var(--text-2);cursor:pointer;font-size:16px">✕</button></h3>
-  <div class="form-grid">
-    <div class="field"><label>Consignee Name</label><input type="text" id="dc-consignee" placeholder="e.g. Rahul Sharma"></div>
-    <div class="field"><label>Consignee Address</label><input type="text" id="dc-address" placeholder="Delivery address"></div>
-  </div>
-  <div id="dc-items" style="margin-top:12px"></div>
-  <button class="btn btn-sm" type="button" onclick="addChallanLine()">+ Add Item</button>
-  <button class="btn btn-primary" style="width:100%;margin-top:14px" onclick="saveChallan()">Save as Draft</button>
-</div></div>
+      let currentType = 'all';
+      let currentLocality = 'all';
+      let currentQuery = '';
 
-<script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jsqr/1.4.0/jsQR.js"></script>
-<script src="js/config.js"></script>
-<script src="js/api.js"></script>
-<script>
-/* ══════════════════════════════════════════════════════
-   REMS Inventory — local demo layer mirroring the Laravel
-   Sku model. Shares the SAME localStorage ledger keys as
-   finance.html (fin_journal, fin_accounts) so a purchase or
-   sale recorded here shows up in Finance's Trading Account
-   and P&L — the three ERP pages read one shared ledger, not
-   three isolated silos.
-═══════════════════════════════════════════════════════ */
-const LIVE = !!(window.PFRE_CONFIG?.FEATURES?.LIVE_INVENTORY && window.PFRE_CONFIG?.API_BASE_URL);
-const INV = {
-  get(key, fallback) { try { return JSON.parse(localStorage.getItem(key) || 'null') ?? fallback; } catch { return fallback; } },
-  set(key, val) { localStorage.setItem(key, JSON.stringify(val)); },
-};
+      function getInventory() {
+        try {
+          const raw = localStorage.getItem(STORAGE_KEY_INVENTORY);
+          if (!raw) {
+            localStorage.setItem(STORAGE_KEY_INVENTORY, JSON.stringify(defaultCatalog));
+            return defaultCatalog;
+          }
+          return JSON.parse(raw);
+        } catch (e) {
+          return defaultCatalog;
+        }
+      }
 
-/* Same fail-safe sync/mirror pattern as finance.html and legal.html.
-   Sku's fields map directly onto this page's shape, so no transform
-   layer is needed here — the one real gap is that Purchase/Sale here
-   only update local stock + the shared ledger, they don't yet call
-   /accounting/purchases or /accounting/sales (those expect full line-
-   item + tax + SKU-id payloads this quick-entry form doesn't collect). */
-function authHeaders() {
-  let token = null;
-  try { token = JSON.parse(localStorage.getItem('pfre_session') || 'null')?.token; } catch (_) {}
-  return { 'Content-Type': 'application/json', 'X-PFRE-Key': window.PFRE_CONFIG?.API_KEY || '', ...(token ? { 'Authorization': `Bearer ${token}` } : {}) };
-}
-function unwrapList(payload) {
-  if (Array.isArray(payload)) return payload;
-  if (Array.isArray(payload?.data)) return payload.data;
-  return [];
-}
-async function apiGet(path) {
-  if (!LIVE) return null;
-  try {
-    const res = await fetch(`${window.PFRE_CONFIG.API_BASE_URL}${path}`, { headers: authHeaders() });
-    if (!res.ok) return null;
-    const json = await res.json();
-    return json.success ? json.data : null;
-  } catch (_) { return null; }
-}
-async function apiPost(path, body) {
-  if (!LIVE) return null;
-  try {
-    const res = await fetch(`${window.PFRE_CONFIG.API_BASE_URL}${path}`, { method: 'POST', headers: authHeaders(), body: JSON.stringify(body) });
-    const json = await res.json().catch(() => null);
-    return (res.ok && json?.success) ? json.data : null;
-  } catch (_) { return null; }
-}
-async function syncFromLiveApi() {
-  if (!LIVE) return;
-  try {
-    const skusRaw = await apiGet('/accounting/skus');
-    if (skusRaw) {
-      setSkus(unwrapList(skusRaw).map(s => ({
-        id: s.id, code: s.code, name: s.name, category: s.category, unit: s.unit,
-        current_stock: parseFloat(s.current_stock) || 0, purchase_rate: parseFloat(s.purchase_rate) || 0,
-        reorder_level: parseFloat(s.reorder_level) || 0,
-      })));
-    }
-  } catch (err) {
-    console.warn('Live sync failed, continuing with local data:', err);
-  }
-}
+      function saveInventory(list) {
+        localStorage.setItem(STORAGE_KEY_INVENTORY, JSON.stringify(list));
+      }
 
+      function updateKpis(list) {
+        document.getElementById('statTotalInventory').textContent = list.length;
+        document.getElementById('statResBuy').textContent = list.filter(i => i.intent === 'buy').length;
+        document.getElementById('statActiveRent').textContent = list.filter(i => i.intent === 'rent').length;
+        document.getElementById('statCommercialUnits').textContent = list.filter(i => i.intent === 'commercial').length;
+        document.getElementById('inventoryCountBadge').textContent = `${list.length} units`;
+      }
 
-function getSkus() { return INV.get('inv_skus', []); }
-function setSkus(list) { INV.set('inv_skus', list); }
-function getAccounts() {
-  let a = INV.get('fin_accounts', null);
-  if (!a) { a = [{code:'1001',name:'Cash in Hand',type:'asset'},{code:'1004',name:'Inventory',type:'asset'},{code:'2001',name:'Accounts Payable',type:'liability'},{code:'4002',name:'Sales Revenue',type:'income'},{code:'5001',name:'Purchases',type:'expense'},{code:'5011',name:'Cost of Goods Sold',type:'expense',subtype:'direct_expense'}]; INV.set('fin_accounts', a); }
-  return a;
-}
-function fmt(n) { return (Number(n)||0).toLocaleString('en-IN'); }
-function today() { return new Date().toISOString().slice(0,10); }
-function genCode(list) { return `SKU-${String(list.length + 1).padStart(4, '0')}`; }
+      function getStatusBadge(status) {
+        switch (status) {
+          case 'available': return '<span class="badge badge-green">available</span>';
+          case 'under_offer': return '<span class="badge badge-gold">under offer</span>';
+          case 'sold': return '<span class="badge badge-purple">sold</span>';
+          case 'leased': return '<span class="badge badge-blue">leased</span>';
+          default: return '<span class="badge badge-gray">' + status + '</span>';
+        }
+      }
 
-/* Post a balanced 2-line journal entry to the shared ledger — same shape finance.html reads. */
-function postJournal(date, narration, lines) {
-  const debit = lines.reduce((s,l)=>s+(l.debit||0),0), credit = lines.reduce((s,l)=>s+(l.credit||0),0);
-  if (Math.round(debit*100) !== Math.round(credit*100)) { console.warn('Unbalanced entry skipped:', narration); return; }
-  const journal = INV.get('fin_journal', []);
-  journal.push({ id: Date.now(), entry_number: `JE-${new Date().getFullYear()}-${String(journal.length+1).padStart(4,'0')}`, date, narration, lines });
-  INV.set('fin_journal', journal);
-}
+      function renderInventory() {
+        const catalog = getInventory();
+        updateKpis(catalog);
 
-/* ══════════════════════ STATS ══════════════════════ */
-function renderStats() {
-  const skus = getSkus();
-  const totalValue = skus.reduce((s,i) => s + i.current_stock * i.purchase_rate, 0);
-  const lowStock = skus.filter(i => i.current_stock <= i.reorder_level).length;
-  document.getElementById('inv-stats').innerHTML = `
-    <div class="stat-card"><div class="stat-label">Total Items</div><div class="stat-val">${skus.length}</div></div>
-    <div class="stat-card"><div class="stat-label">Total Units in Stock</div><div class="stat-val">${fmt(skus.reduce((s,i)=>s+i.current_stock,0))}</div></div>
-    <div class="stat-card"><div class="stat-label">Stock Value</div><div class="stat-val" style="color:var(--green)">₹${fmt(totalValue)}</div></div>
-    <div class="stat-card"><div class="stat-label">Low Stock Alerts</div><div class="stat-val" style="color:${lowStock?'var(--red)':'var(--text)'}">${lowStock}</div></div>
-  `;
-}
+        const filtered = catalog.filter(item => {
+          if (currentType !== 'all' && item.intent !== currentType) return false;
+          if (currentLocality !== 'all' && item.locality !== currentLocality) return false;
 
-/* ══════════════════════ TABS ══════════════════════ */
-function showTab(tab, btn) {
-  document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
-  btn?.classList.add('active');
-  const body = document.getElementById('tab-body');
-  if (tab === 'all') renderList(body, getSkus());
-  else if (tab === 'low') renderList(body, getSkus().filter(i => i.current_stock <= i.reorder_level));
-  else if (tab === 'movements') renderMovements(body);
-  else if (tab === 'challans') renderChallans(body);
-}
+          if (currentQuery) {
+            const q = currentQuery.toLowerCase();
+            const titleMatch = (item.title || '').toLowerCase().includes(q);
+            const addrMatch = (item.address || '').toLowerCase().includes(q);
+            const idMatch = (item.id || '').toLowerCase().includes(q);
+            const locMatch = (item.locality || '').toLowerCase().includes(q);
+            if (!titleMatch && !addrMatch && !idMatch && !locMatch) return false;
+          }
+          return true;
+        });
 
-function renderList(body, items) {
-  body.innerHTML = `<div class="panel"><h3>Items</h3>
-    ${items.length ? `<table><thead><tr><th>Code</th><th>Item</th><th>Category</th><th>Stock</th><th>Value</th><th>Status</th><th>Actions</th></tr></thead><tbody>
-      ${items.map(i => {
-        const low = i.current_stock <= i.reorder_level;
-        return `<tr><td style="font-family:var(--mono)">${i.code}</td><td>${i.name}</td><td>${i.category}</td>
-          <td>${i.current_stock} ${i.unit}</td><td>₹${fmt(i.current_stock * i.purchase_rate)}</td>
-          <td>${low ? '<span class="badge badge-red">Low Stock</span>' : '<span class="badge badge-green">OK</span>'}</td>
-          <td style="white-space:nowrap">
-            <button class="btn btn-sm" onclick="showQr(${i.id})">📱 QR</button>
-            <button class="btn btn-sm" onclick="openMoveModal(${i.id},'in')">+ In</button>
-            <button class="btn btn-sm" onclick="openMoveModal(${i.id},'out')">− Out</button>
-          </td></tr>`;
-      }).join('')}
-    </tbody></table>` : `<p style="color:var(--text-2);font-size:13px;padding:20px 0;text-align:center">No items yet. Click "+ New SKU" to add one.</p>`}
-  </div>`;
-}
+        const tbody = document.getElementById('inventoryTableBody');
+        if (!tbody) return;
 
-function renderMovements(body) {
-  const journal = INV.get('fin_journal', []).filter(j => j.narration.includes('Stock')).slice().reverse();
-  body.innerHTML = `<div class="panel"><h3>Stock Movements (Ledger)</h3>
-    ${journal.length ? `<table><thead><tr><th>Date</th><th>Entry</th><th>Narration</th><th>Amount</th></tr></thead><tbody>
-      ${journal.map(j => `<tr><td>${j.date}</td><td style="font-family:var(--mono)">${j.entry_number}</td><td>${j.narration}</td><td>₹${fmt(j.lines.reduce((s,l)=>s+l.debit,0))}</td></tr>`).join('')}
-    </tbody></table>` : `<p style="color:var(--text-2);font-size:13px;padding:20px 0;text-align:center">No stock movements recorded yet.</p>`}
-  </div>`;
-}
+        if (filtered.length === 0) {
+          tbody.innerHTML = '<tr><td colspan="9" class="text-center py-6 text-muted">no property inventory records matched.</td></tr>';
+          return;
+        }
 
-/* ══════════════════════════════════════════════════════
-   DELIVERY CHALLANS — frontend for the Challan-to-Ledger
-   bridge built on the backend this session. Confirming
-   dispatch decrements local stock + posts a local COGS
-   journal entry (mirroring DeliveryChallanService exactly,
-   so the demo behaves the same with or without a live
-   backend), and additionally calls the real API when
-   LIVE_INVENTORY is on and the challan has a real synced id.
-═══════════════════════════════════════════════════════ */
-function getChallans() { return INV.get('inv_challans', []); }
-function setChallans(list) { INV.set('inv_challans', list); }
+        tbody.innerHTML = filtered.map(item => `
+          <tr>
+            <td><strong class="text-blue">${item.id}</strong></td>
+            <td>
+              <strong class="d-block text-text">${window.pfreSecurity ? window.pfreSecurity.escapeHTML(item.title) : item.title}</strong>
+              <span class="text-xxs text-muted text-truncate d-block" style="max-width:210px;">${item.address}</span>
+            </td>
+            <td>
+              <span class="badge badge-blue text-uppercase">${item.intent}</span>
+            </td>
+            <td><strong>${item.carpetArea} sq.ft</strong></td>
+            <td><strong class="text-green">${item.priceDisplay}</strong></td>
+            <td>
+              <span class="d-block">${item.bhk === 'commercial' ? 'Commercial' : item.bhk + ' BHK'}</span>
+              <span class="text-xxs text-muted">${item.floor || 'N/A'}</span>
+            </td>
+            <td>
+              <span class="text-xxs text-muted d-block">${item.reraId || 'Verified'}</span>
+            </td>
+            <td>${getStatusBadge(item.status)}</td>
+            <td class="text-right">
+              <div class="d-flex justify-end gap-1">
+                <a href="/property-detail.html?id=${item.id}" target="_blank" class="btn btn-outline btn-sm py-1 px-2 text-blue" title="View Detail">&#128065;</a>
+                <button type="button" class="btn btn-outline btn-sm py-1 px-2 text-blue" data-edit-prop="${item.id}" title="Edit Listing">&#9998;</button>
+                <button type="button" class="btn btn-outline btn-sm py-1 px-2 text-red" data-delete-prop="${item.id}" title="Delete Listing">&times;</button>
+              </div>
+            </td>
+          </tr>
+        `).join('');
 
-function renderChallans(body) {
-  const challans = getChallans().slice().reverse();
-  body.innerHTML = `<div class="panel"><h3>Delivery Challans <button class="btn btn-sm btn-primary" onclick="openChallanModal()">+ New Challan</button></h3>
-    ${challans.length ? `<table><thead><tr><th>Challan #</th><th>Consignee</th><th>Date</th><th>Items</th><th>Status</th><th>Actions</th></tr></thead><tbody>
-      ${challans.map(c => `<tr><td style="font-family:var(--mono)">${c.number}</td><td>${c.consignee}</td><td>${c.date}</td>
-        <td>${c.items.map(i => `${i.name} ×${i.qty}`).join(', ')}</td>
-        <td><span class="badge ${c.status==='dispatched'?'badge-green':'badge-gray'}">${c.status}</span></td>
-        <td>${c.status==='prepared' ? `<button class="btn btn-sm btn-primary" onclick="confirmDispatch(${c.id})">Confirm Dispatch</button>` : '—'}</td></tr>`).join('')}
-    </tbody></table>` : `<p style="color:var(--text-2);font-size:13px;padding:20px 0;text-align:center">No delivery challans yet.</p>`}
-  </div>`;
-}
+        tbody.querySelectorAll('[data-edit-prop]').forEach(btn => {
+          btn.addEventListener('click', function () {
+            const id = this.getAttribute('data-edit-prop');
+            openEditModal(id);
+          });
+        });
 
-let challanLineCount = 0;
-function addChallanLine() {
-  const wrap = document.getElementById('dc-items');
-  const idx = challanLineCount++;
-  const row = document.createElement('div');
-  row.className = 'form-grid challan-line';
-  row.style.marginBottom = '8px';
-  row.innerHTML = `
-    <select class="dc-sku">${getSkus().map(s => `<option value="${s.id}">${s.name} (${s.current_stock} ${s.unit} avail.)</option>`).join('')}</select>
-    <div style="display:flex;gap:6px"><input type="number" class="dc-qty" placeholder="Qty" value="1" min="1" style="flex:1"><button type="button" onclick="this.closest('.challan-line').remove()" style="background:none;border:none;color:var(--red);cursor:pointer">✕</button></div>`;
-  wrap.appendChild(row);
-}
+        tbody.querySelectorAll('[data-delete-prop]').forEach(btn => {
+          btn.addEventListener('click', function () {
+            const id = this.getAttribute('data-delete-prop');
+            deleteProperty(id);
+          });
+        });
+      }
 
-function openChallanModal() {
-  document.getElementById('dc-consignee').value = '';
-  document.getElementById('dc-address').value = '';
-  document.getElementById('dc-items').innerHTML = '';
-  challanLineCount = 0;
-  addChallanLine();
-  openModal('challan');
-}
+      function openEditModal(id) {
+        const catalog = getInventory();
+        const item = catalog.find(i => i.id === id);
+        if (!item) return;
 
-function saveChallan() {
-  const consignee = document.getElementById('dc-consignee').value.trim();
-  if (!consignee) { alert('Enter a consignee name.'); return; }
-  const lines = [...document.querySelectorAll('.challan-line')].map(row => {
-    const skuId = parseInt(row.querySelector('.dc-sku').value);
-    const sku = getSkus().find(s => s.id === skuId);
-    return { sku_id: skuId, name: sku?.name, unit: sku?.unit, qty: parseFloat(row.querySelector('.dc-qty').value) || 0 };
-  }).filter(l => l.qty > 0);
-  if (!lines.length) { alert('Add at least one item.'); return; }
+        document.getElementById('editPropertyId').value = item.id;
+        document.getElementById('propertyModalTitle').textContent = 'edit property listing';
 
-  const challans = getChallans();
-  challans.push({
-    id: Date.now(), number: `DC-${new Date().getFullYear()}-${String(challans.length + 1).padStart(4, '0')}`,
-    consignee, address: document.getElementById('dc-address').value.trim(),
-    date: today(), status: 'prepared',
-    items: lines.map(l => ({ sku_id: l.sku_id, name: l.name, unit: l.unit, qty: l.qty })),
-  });
-  setChallans(challans);
-  closeModal('challan');
-  showTab('challans', document.querySelector('[data-tab="challans"]'));
-}
+        document.getElementById('pTitle').value = item.title || '';
+        document.getElementById('pLocality').value = item.locality || 'Malad West';
+        document.getElementById('pAddress').value = item.address || '';
+        document.getElementById('pIntent').value = item.intent || 'buy';
+        document.getElementById('pBhk').value = item.bhk || '2';
+        document.getElementById('pCarpet').value = item.carpetArea || '';
+        document.getElementById('pPriceNumeric').value = item.priceNumeric || '';
+        document.getElementById('pPriceDisplay').value = item.priceDisplay || '';
+        document.getElementById('pStatus').value = item.status || 'available';
+        document.getElementById('pFloor').value = item.floor || '';
+        document.getElementById('pRera').value = item.reraId || '';
+        document.getElementById('pDescription').value = item.description || '';
 
-/** Mirrors DeliveryChallanService::markDispatched() exactly: COGS journal
- *  entry (Dr 5011 COGS, Cr 1004 Inventory), stock decrement per line, and
- *  a low-stock check — all locally, so this works identically whether or
- *  not a live backend is connected. Additionally calls the real endpoint
- *  when the challan has a real synced id. */
-function confirmDispatch(challanId) {
-  const challans = getChallans();
-  const challan = challans.find(c => c.id === challanId);
-  if (!challan || challan.status === 'dispatched') return;
+        const modal = document.getElementById('propertyModal');
+        if (modal) modal.style.display = 'flex';
+      }
 
-  const skus = getSkus();
-  let cogs = 0;
-  const lowStockNames = [];
-  challan.items.forEach(item => {
-    const sku = skus.find(s => s.id === item.sku_id);
-    if (!sku) return;
-    cogs += item.qty * sku.purchase_rate;
-    sku.current_stock -= item.qty;
-    if (sku.current_stock <= sku.reorder_level) lowStockNames.push(sku.name);
-  });
-  setSkus(skus);
+      function deleteProperty(id) {
+        if (!confirm('Are you sure you want to remove this property listing from the catalog?')) return;
+        const catalog = getInventory().filter(i => i.id !== id);
+        saveInventory(catalog);
+        renderInventory();
+      }
 
-  if (cogs > 0) {
-    postJournal(today(), `COGS for Delivery Challan ${challan.number}`, [
-      { account: '5011', debit: cogs, credit: 0 },
-      { account: '1004', debit: 0, credit: cogs },
-    ]);
-  }
-  challan.status = 'dispatched';
-  setChallans(challans);
+      function exportCsv() {
+        const catalog = getInventory();
+        if (catalog.length === 0) {
+          alert('No property records available to export.');
+          return;
+        }
 
-  if (typeof challanId === 'number' && challanId < 1_000_000_000) {
-    apiPost(`/accounting/delivery-challans/${challanId}/status`, { status: 'dispatched' });
-  }
+        const headers = ['PropertyID', 'Title', 'Locality', 'Address', 'Intent', 'BHK', 'CarpetSqFt', 'PriceNumeric', 'PriceDisplay', 'Floor', 'ReraID', 'Status'];
+        const rows = catalog.map(p => [
+          `"${p.id}"`,
+          `"${p.title}"`,
+          `"${p.locality}"`,
+          `"${p.address}"`,
+          `"${p.intent}"`,
+          `"${p.bhk}"`,
+          `"${p.carpetArea}"`,
+          `"${p.priceNumeric}"`,
+          `"${p.priceDisplay}"`,
+          `"${p.floor || ''}"`,
+          `"${p.reraId || ''}"`,
+          `"${p.status}"`
+        ].join(','));
 
-  renderStats();
-  showTab('challans', document.querySelector('[data-tab="challans"]'));
-  if (lowStockNames.length) alert(`⚠️ Low stock after dispatch: ${lowStockNames.join(', ')}`);
-}
+        const csvContent = 'data:text/csv;charset=utf-8,' + [headers.join(','), ...rows].join('\n');
+        const encodedUri = encodeURI(csvContent);
+        const link = document.createElement('a');
+        link.setAttribute('href', encodedUri);
+        link.setAttribute('download', `pfre_inventory_catalog_${Date.now()}.csv`);
+        document.body.appendChild(link);
+        link.click();
+        document.body.removeChild(link);
+      }
 
-/* ══════════════════════ SAVE SKU ══════════════════════ */
-function saveSku() {
-  const name = document.getElementById('sku-name').value.trim();
-  if (!name) { alert('Enter an item name.'); return; }
-  const skus = getSkus();
-  const stock = parseFloat(document.getElementById('sku-stock').value) || 0;
-  const rate = parseFloat(document.getElementById('sku-purchase-rate').value) || 0;
-  const item = {
-    id: Date.now(), code: genCode(skus), name,
-    category: document.getElementById('sku-category').value, unit: document.getElementById('sku-unit').value,
-    current_stock: stock, purchase_rate: rate, reorder_level: parseFloat(document.getElementById('sku-reorder').value) || 0,
-  };
-  skus.push(item);
-  setSkus(skus);
-  apiPost('/accounting/skus', { code: item.code, name: item.name, category: item.category, unit: item.unit, current_stock: stock, purchase_rate: rate, reorder_level: item.reorder_level });
+      function bindEvents() {
+        const searchInput = document.getElementById('inventorySearchInput');
+        if (searchInput) {
+          searchInput.addEventListener('input', function (e) {
+            currentQuery = e.target.value.trim();
+            renderInventory();
+          });
+        }
 
-  if (stock > 0 && rate > 0) {
-    postJournal(today(), `Stock: opening balance for ${item.name}`, [
-      { account: '1004', debit: stock * rate, credit: 0 },
-      { account: '3001', debit: 0, credit: stock * rate }, // opening stock funded from capital, for a clean starting ledger
-    ]);
-  }
+        const localitySelect = document.getElementById('inventoryLocalitySelect');
+        if (localitySelect) {
+          localitySelect.addEventListener('change', function (e) {
+            currentLocality = e.target.value;
+            renderInventory();
+          });
+        }
 
-  closeModal('sku');
-  renderStats();
-  showTab('all', document.querySelector('[data-tab="all"]'));
-}
+        const typeBtns = document.querySelectorAll('[data-type-filter]');
+        typeBtns.forEach(btn => {
+          btn.addEventListener('click', function () {
+            typeBtns.forEach(b => b.classList.remove('active'));
+            this.classList.add('active');
+            currentType = this.getAttribute('data-type-filter');
+            renderInventory();
+          });
+        });
 
-/* ══════════════════════ STOCK MOVEMENTS (Purchase = In, Sale = Out) ══════════════════════ */
-function openMoveModal(skuId, kind) {
-  document.getElementById('move-sku-id').value = skuId;
-  document.getElementById('move-kind').value = kind;
-  document.getElementById('move-title').textContent = kind === 'in' ? 'Record Purchase (Stock In)' : 'Record Sale (Stock Out)';
-  document.getElementById('move-party-label').textContent = kind === 'in' ? 'Vendor Name' : 'Customer Name';
-  document.getElementById('move-party').value = '';
-  document.getElementById('move-party').placeholder = kind === 'in' ? 'e.g. ABC Suppliers' : 'e.g. Walk-in customer';
-  const sku = getSkus().find(s => s.id === skuId);
-  document.getElementById('move-rate').value = kind === 'in' ? sku.purchase_rate : sku.purchase_rate * 1.3; // demo markup for sale suggestion
-  openModal('move');
-}
-function saveMovement() {
-  const skuId = parseInt(document.getElementById('move-sku-id').value);
-  const kind = document.getElementById('move-kind').value;
-  const qty = parseFloat(document.getElementById('move-qty').value) || 0;
-  const rate = parseFloat(document.getElementById('move-rate').value) || 0;
-  const party = document.getElementById('move-party').value.trim();
-  const payment = document.getElementById('move-payment').value;
-  if (!qty || !rate) { alert('Enter quantity and rate.'); return; }
-  if (!party) { alert(kind === 'in' ? 'Enter a vendor name.' : 'Enter a customer name.'); return; }
+        const openBtn = document.getElementById('openNewPropertyBtn');
+        const modal = document.getElementById('propertyModal');
+        const closeBtn = document.getElementById('closePropertyModalBtn');
+        const cancelBtn = document.getElementById('cancelPropertyModalBtn');
+        const form = document.getElementById('propertyEntryForm');
 
-  const skus = getSkus();
-  const sku = skus.find(s => s.id === skuId);
-  if (kind === 'out' && sku.current_stock < qty) { alert(`Insufficient stock: have ${sku.current_stock}, need ${qty}.`); return; }
+        if (openBtn && modal && form) {
+          openBtn.addEventListener('click', function () {
+            form.reset();
+            document.getElementById('editPropertyId').value = '';
+            document.getElementById('propertyModalTitle').textContent = 'add new property listing';
+            modal.style.display = 'flex';
+          });
+        }
 
-  sku.current_stock += kind === 'in' ? qty : -qty;
-  setSkus(skus);
+        if (closeBtn && modal) closeBtn.addEventListener('click', () => modal.style.display = 'none');
+        if (cancelBtn && modal) cancelBtn.addEventListener('click', () => modal.style.display = 'none');
 
-  const amount = qty * rate;
-  if (kind === 'in') {
-    postJournal(today(), `Stock In: ${qty} × ${sku.name} (${party})`, [
-      { account: '1004', debit: amount, credit: 0 },
-      { account: '2001', debit: 0, credit: amount },
-    ]);
-  } else {
-    postJournal(today(), `Stock Out (Sale): ${qty} × ${sku.name} (${party})`, [
-      { account: '1001', debit: amount, credit: 0 },
-      { account: '4002', debit: 0, credit: amount },
-    ]);
-  }
+        if (form) {
+          form.addEventListener('submit', function (e) {
+            e.preventDefault();
+            const catalog = getInventory();
+            const editId = document.getElementById('editPropertyId').value;
 
-  // Live mirror to the real Purchase/Sale endpoints — both require a real
-  // sku_id, which only exists once this SKU came from a successful live
-  // sync (see syncFromLiveApi). Local-only SKUs get an id from Date.now(),
-  // a 13-digit millisecond timestamp; real DB auto-increment ids are small
-  // integers, so "under 1 billion" reliably tells the two apart given how
-  // ids are actually generated here — not a guess, a consequence of the
-  // two id schemes never overlapping in practice.
-  if (skuId < 1_000_000_000) {
-    const path = kind === 'in' ? '/accounting/purchases' : '/accounting/sales';
-    const base = { payment_method: payment, notes: `Quick entry via Inventory`, items: [{ sku_id: skuId, quantity: qty, rate }] };
-    const payload = kind === 'in'
-      ? { ...base, vendor_name: party, purchase_date: today() }
-      : { ...base, customer_name: party, sale_date: today() };
-    apiPost(path, payload);
-  }
+            const recordData = {
+              title: document.getElementById('pTitle').value.trim(),
+              locality: document.getElementById('pLocality').value,
+              address: document.getElementById('pAddress').value.trim(),
+              intent: document.getElementById('pIntent').value,
+              bhk: document.getElementById('pBhk').value,
+              carpetArea: Number(document.getElementById('pCarpet').value) || 0,
+              priceNumeric: Number(document.getElementById('pPriceNumeric').value) || 0,
+              priceDisplay: document.getElementById('pPriceDisplay').value.trim(),
+              status: document.getElementById('pStatus').value,
+              floor: document.getElementById('pFloor').value.trim(),
+              reraId: document.getElementById('pRera').value.trim(),
+              description: document.getElementById('pDescription').value.trim()
+            };
 
-  closeModal('move');
-  renderStats();
-  showTab('all', document.querySelector('[data-tab="all"]'));
-}
+            if (editId) {
+              const idx = catalog.findIndex(i => i.id === editId);
+              if (idx !== -1) {
+                catalog[idx] = { ...catalog[idx], ...recordData };
+              }
+            } else {
+              const prefixMap = {
+                'Malad West': 'pfre-mld-',
+                'Goregaon East': 'pfre-gor-',
+                'Andheri West': 'pfre-and-',
+                'Borivali West': 'pfre-bor-',
+                'Kandivali West': 'pfre-knd-'
+              };
+              const prefix = prefixMap[recordData.locality] || 'pfre-mum-';
+              recordData.id = prefix + Math.floor(100 + Math.random() * 900);
+              catalog.unshift(recordData);
+            }
 
-/* ══════════════════════════════════════════════════════
-   QR GENERATION — qrcodejs (davidshimjs), via CDN.
-   Encodes a simple PFRE-ASSET:{code} identifier that the
-   scanner below looks up against the local SKU list.
-═══════════════════════════════════════════════════════ */
-let currentQrItem = null;
-function showQr(id) {
-  const item = getSkus().find(i => i.id === id);
-  if (!item) return;
-  currentQrItem = item;
-  document.getElementById('qr-item-name').textContent = `${item.code} — ${item.name}`;
-  const wrap = document.getElementById('qr-canvas');
-  wrap.innerHTML = '';
-  new QRCode(wrap, { text: `PFRE-ASSET:${item.code}`, width: 200, height: 200, colorDark: '#000', colorLight: '#fff' });
-  document.getElementById('modal-qr').classList.add('open');
-}
-function downloadQr() {
-  if (!currentQrItem) return;
-  const canvas = document.querySelector('#qr-canvas canvas');
-  if (!canvas) return;
-  const a = document.createElement('a');
-  a.href = canvas.toDataURL('image/png');
-  a.download = `${currentQrItem.code}-qr.png`;
-  a.click();
-}
+            saveInventory(catalog);
+            renderInventory();
+            form.reset();
+            if (modal) modal.style.display = 'none';
 
-/* ══════════════════════════════════════════════════════
-   QR SCANNING — camera via getUserMedia, decoded frame-by-
-   frame with jsQR (cozmo/jsQR). Purely client-side; no
-   image data leaves the browser.
-═══════════════════════════════════════════════════════ */
-let scanStream = null, scanRAF = null;
-async function openScanModal() {
-  document.getElementById('modal-scan').classList.add('open');
-  document.getElementById('scan-result-box').innerHTML = '';
-  document.getElementById('scan-status').textContent = 'Requesting camera access…';
-  try {
-    scanStream = await navigator.mediaDevices.getUserMedia({ video: { facingMode: 'environment' } });
-    const video = document.getElementById('scan-video');
-    video.srcObject = scanStream;
-    await video.play();
-    document.getElementById('scan-status').textContent = 'Point your camera at a printed asset QR tag.';
-    scanLoop();
-  } catch (e) {
-    document.getElementById('scan-status').textContent = '⚠️ Camera access denied or unavailable. Check your browser permissions.';
-  }
-}
-function scanLoop() {
-  const video = document.getElementById('scan-video');
-  const canvas = document.getElementById('scan-canvas');
-  if (!video.videoWidth) { scanRAF = requestAnimationFrame(scanLoop); return; }
-  canvas.width = video.videoWidth; canvas.height = video.videoHeight;
-  const ctx = canvas.getContext('2d');
-  ctx.drawImage(video, 0, 0, canvas.width, canvas.height);
-  const imageData = ctx.getImageData(0, 0, canvas.width, canvas.height);
-  const code = jsQR(imageData.data, imageData.width, imageData.height);
-  if (code && code.data.startsWith('PFRE-ASSET:')) {
-    handleScanResult(code.data.replace('PFRE-ASSET:', ''));
-    return; // stop the loop once we get a hit
-  }
-  scanRAF = requestAnimationFrame(scanLoop);
-}
-function handleScanResult(skuCode) {
-  const item = getSkus().find(i => i.code === skuCode);
-  const box = document.getElementById('scan-result-box');
-  if (item) {
-    box.innerHTML = `<div class="scan-result">
-      <strong>${item.name}</strong><br>
-      Code: ${item.code} · Category: ${item.category}<br>
-      Stock: ${item.current_stock} ${item.unit} · Value: ₹${fmt(item.current_stock * item.purchase_rate)}
-    </div>`;
-    document.getElementById('scan-status').textContent = '✅ Match found';
-  } else {
-    box.innerHTML = `<div class="scan-result" style="color:var(--red)">No item found for code "${skuCode}".</div>`;
-  }
-  stopScan();
-}
-function closeScanModal() { stopScan(); document.getElementById('modal-scan').classList.remove('open'); }
-function stopScan() {
-  if (scanRAF) cancelAnimationFrame(scanRAF);
-  if (scanStream) { scanStream.getTracks().forEach(t => t.stop()); scanStream = null; }
-}
+            if (typeof window.showToast === 'function') {
+              window.showToast('Property catalog listing saved successfully.', 'success');
+            }
+          });
+        }
 
-/* ══════════════════════ MODAL open/close ══════════════════════ */
-function openModal(which) { document.getElementById(`modal-${which}`).classList.add('open'); }
-function closeModal(which) { document.getElementById(`modal-${which}`).classList.remove('open'); }
-document.addEventListener('keydown', e => { if (e.key === 'Escape') { ['sku','qr','move'].forEach(closeModal); closeScanModal(); } });
+        const exportBtn = document.getElementById('exportInventoryCsvBtn');
+        if (exportBtn) {
+          exportBtn.addEventListener('click', exportCsv);
+        }
+      }
 
-document.addEventListener('DOMContentLoaded', async () => {
-  await syncFromLiveApi();
-  renderStats();
-  showTab('all', document.querySelector('[data-tab="all"]'));
-});
-</script>
-<script src="js/app-shell.js"></script>
+      document.addEventListener('DOMContentLoaded', function () {
+        renderInventory();
+        bindEvents();
+      });
+    })();
+  </script>
 </body>
 </html>
