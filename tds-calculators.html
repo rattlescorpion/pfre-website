@@ -1,682 +1,1020 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" data-theme="light">
 <head>
-<meta charset="UTF-8">
-<link rel="canonical" href="https://www.propertyfinderrealestate.com/tds-calculators.html">
-<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' https://cdnjs.cloudflare.com https://challenges.cloudflare.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' data: https:; connect-src 'self' https://api.propertyfinderrealestate.com http://localhost:8000 https://formspree.io; frame-src https://www.google.com https://challenges.cloudflare.com; form-action 'self' https://formspree.io; object-src 'none'; base-uri 'self'; frame-ancestors 'none'">
-<meta http-equiv="X-Content-Type-Options" content="nosniff">
-<meta http-equiv="X-Frame-Options" content="SAMEORIGIN">
-<meta http-equiv="Referrer-Policy" content="strict-origin-when-cross-origin"><meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <!-- Open Graph -->
-  <meta property="og:type"        content="website">
-  <meta property="og:title"       content="TDS Calculator on Property | Section 194-IA, 195, 194-IB, 194-I">
-  <meta property="og:description" content="Calculate TDS on property purchase and rent. Section 194-IA, 195 for NRI, 194-IB, 194-I Maharashtra.">
-  <meta property="og:url"         content="https://www.propertyfinderrealestate.com/tds-calculators.html">
-  <meta property="og:image"       content="https://www.propertyfinderrealestate.com/images/og-banner.jpg">
-  <meta property="og:image:width"  content="1200">
-  <meta property="og:image:height" content="630">
-  <meta property="og:image:type"   content="image/jpeg">
-  <meta property="og:site_name"   content="Property Finder Real Estate">
-  <meta property="og:locale"      content="en_IN">
-  <!-- Twitter Card -->
-  <meta name="twitter:card"        content="summary">
-  <meta name="twitter:title"       content="TDS Calculator on Property | Section 194-IA, 195, 194-IB, 194-I">
-  <meta name="twitter:description" content="Calculate TDS on property purchase and rent. Section 194-IA, 195 for NRI, 194-IB, 194-I Maharashtra.">
-  <meta name="twitter:image"       content="https://www.propertyfinderrealestate.com/icons/icon.svg">
-  <meta name="twitter:site"        content="@PropertyFinderA">
-  <!-- Additional SEO -->
-  <meta name="robots"  content="index, follow, max-snippet:-1, max-image-preview:large">
-  <meta name="author"  content="Property Finder Real Estate">
-  <meta name="geo.region"       content="IN-MH">
-  <meta name="geo.placename"    content="Mumbai">
-  <meta name="geo.position"     content="19.1886;72.8485">
-  <meta name="ICBM"             content="19.1886, 72.8485">
-  <title>TDS Calculator on Property — 194-IA, 195 | PFRE</title>
-<meta name="description" content="Free TDS calculators for property transactions in India. TDS on purchase of immovable property (194-IA), purchase from NRI (Section 195), rent from owner (194-IB, 194-I). Mumbai real estate.">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;0,900;1,700&family=DM+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="css/styles.css">
-<link rel="stylesheet" href="css/widgets.css">
-<link rel="stylesheet" href="css/mobile.css">
-<link rel="manifest" href="manifest.json">
-<link rel="icon" type="image/png" sizes="192x192" href="icons/icon-192.png">
-<meta name="theme-color" content="#2563EB">
-<script>!function(){var t=localStorage.getItem("pfre_theme")||(window.matchMedia("(prefers-color-scheme:dark)").matches?"dark":"light");document.documentElement.setAttribute("data-theme",t);document.documentElement.classList.add("theme-"+t)}();</script>
-<style>
-.tds-layout { padding: 56px 5%; }
-.tds-intro { background: linear-gradient(135deg,#1D4ED8,#3B82F6); border-radius: 20px; padding: 40px 48px; color: white; margin-bottom: 48px; display: grid; grid-template-columns: 1fr auto; gap: 32px; align-items: center; }
-.tds-intro h2 { font-family:'Playfair Display',serif; font-size: 28px; font-weight: 900; margin-bottom: 10px; }
-.tds-intro p { font-size: 15px; opacity: .85; line-height: 1.7; }
-.tds-intro-stats { display: flex; gap: 32px; }
-.tds-stat { text-align: center; background: rgba(255,255,255,.12); padding: 16px 24px; border-radius: 14px; border: 1px solid rgba(255,255,255,.2); }
-.tds-stat .val { font-family:'Playfair Display',serif; font-size: 26px; font-weight: 900; }
-.tds-stat .lbl { font-size: 11px; opacity: .75; margin-top: 3px; text-transform: uppercase; letter-spacing: 1px; }
-.tds-section-tabs { display: flex; gap: 10px; flex-wrap: wrap; margin-bottom: 40px; }
-.tds-tab { padding: 11px 24px; border-radius: 100px; font-size: 14px; font-weight: 600; border: 2px solid var(--border); background: white; color: var(--text-muted); cursor: pointer; transition: all .2s; }
-.tds-tab:hover,.tds-tab.active { background: var(--blue); color: white; border-color: var(--blue); }
-[data-theme="dark"] .tds-tab { background: #1E293B; border-color: #334155; }
-.tds-panel { display: none; }
-.tds-panel.active { display: grid; grid-template-columns: 1fr 380px; gap: 32px; }
-.tds-form-card { background: white; border-radius: 20px; padding: 36px; border: 1.5px solid var(--border); }
-[data-theme="dark"] .tds-form-card { background: #1E293B; border-color: #334155; }
-.tds-form-card h3 { font-family:'Playfair Display',serif; font-size: 22px; font-weight: 700; margin-bottom: 6px; }
-.tds-form-card .section-num { display: inline-flex; background: var(--blue); color: white; padding: 3px 12px; border-radius: 100px; font-size: 12px; font-weight: 700; letter-spacing: 0.5px; margin-bottom: 14px; }
-.tds-form-card .desc { font-size: 14px; color: var(--text-muted); line-height: 1.7; margin-bottom: 28px; padding-bottom: 20px; border-bottom: 1px solid var(--border); }
-[data-theme="dark"] .tds-form-card .desc { border-bottom-color: #334155; }
-.tds-field { margin-bottom: 18px; }
-.tds-field label { display: flex; justify-content: space-between; font-size: 13px; font-weight: 600; color: var(--text-muted); margin-bottom: 6px; text-transform: uppercase; letter-spacing: 0.5px; }
-.tds-field label span { color: var(--blue); font-weight: 700; text-transform: none; letter-spacing: 0; }
-.tds-input { width: 100%; padding: 12px 14px; border: 1.5px solid var(--border); border-radius: 10px; font-size: 15px; color: var(--text); background: var(--white); outline: none; transition: border-color .2s; font-family: 'DM Sans',sans-serif; }
-.tds-input:focus { border-color: var(--blue); }
-[data-theme="dark"] .tds-input { background: #0F172A; border-color: #334155; color: #E2E8F0; }
-.tds-input-row { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
-.tds-calc-btn { width: 100%; padding: 14px; background: var(--blue); color: white; border: none; border-radius: 11px; font-size: 15px; font-weight: 700; cursor: pointer; transition: all .2s; margin-top: 8px; font-family: 'DM Sans',sans-serif; }
-.tds-calc-btn:hover { background: var(--blue-dark); transform: translateY(-1px); }
-.tds-result { background: linear-gradient(135deg,#1D4ED8,#3B82F6); border-radius: 16px; padding: 24px; color: white; margin-top: 20px; display: none; }
-.tds-result.show { display: block; }
-.tds-result-main { font-family:'Playfair Display',serif; font-size: 36px; font-weight: 900; text-align: center; margin: 12px 0 6px; }
-.tds-result-label { font-size: 12px; text-align: center; opacity: .8; text-transform: uppercase; letter-spacing: 1px; }
-.tds-breakdown { margin-top: 20px; display: flex; flex-direction: column; gap: 8px; border-top: 1px solid rgba(255,255,255,.2); padding-top: 16px; }
-.tds-bd-row { display: flex; justify-content: space-between; font-size: 14px; }
-.tds-bd-row.total { font-weight: 700; font-size: 15px; border-top: 1px solid rgba(255,255,255,.2); padding-top: 8px; margin-top: 4px; }
-.tds-bd-row .amt { font-weight: 700; }
+  <meta charset="UTF-8">
+  <link rel="canonical" href="https://www.propertyfinderrealestate.com/tds-calculators.html">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' https://cdnjs.cloudflare.com https://challenges.cloudflare.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' data: https:; connect-src 'self' https://api.propertyfinderrealestate.com http://localhost:8000 https://formspree.io; frame-src https://www.google.com https://challenges.cloudflare.com; form-action 'self' https://formspree.io; object-src 'none'; base-uri 'self'; frame-ancestors 'none'">
+  <meta http-equiv="X-Content-Type-Options" content="nosniff">
+  <meta http-equiv="X-Frame-Options" content="SAMEORIGIN">
+  <meta http-equiv="Referrer-Policy" content="strict-origin-when-cross-origin">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-/* Info sidebar */
-.tds-info-card { background: var(--off-white); border-radius: 16px; padding: 24px; border: 1.5px solid var(--border); height: fit-content; position: sticky; top: 92px; }
-[data-theme="dark"] .tds-info-card { background: #1E293B; border-color: #334155; }
-.tds-info-card h4 { font-size: 15px; font-weight: 700; margin-bottom: 14px; display: flex; align-items: center; gap: 8px; }
-.tds-rule { padding: 12px 0; border-bottom: 1px solid var(--border); font-size: 13px; }
-[data-theme="dark"] .tds-rule { border-bottom-color: #334155; }
-.tds-rule:last-child { border-bottom: none; }
-.tds-rule .rule-label { font-weight: 700; color: var(--text); margin-bottom: 3px; }
-.tds-rule .rule-val { color: var(--blue); font-weight: 700; font-size: 14px; }
-.tds-rule .rule-desc { color: var(--text-muted); font-size: 12px; margin-top: 3px; }
-.form-steps { display: flex; flex-direction: column; gap: 10px; margin-top: 16px; }
-.form-step { display: flex; gap: 10px; font-size: 13px; color: var(--text-muted); align-items: flex-start; }
-.form-step .step-dot { width: 20px; height: 20px; background: var(--blue); color: white; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 10px; font-weight: 700; flex-shrink: 0; margin-top: 1px; }
-.alert-warn { background: #FEF3C7; border: 1.5px solid #F59E0B; border-radius: 10px; padding: 12px 14px; font-size: 13px; color: #92400E; margin-top: 12px; display: flex; gap: 8px; align-items: flex-start; }
-[data-theme="dark"] .alert-warn { background: rgba(245,158,11,0.1); color: #FCD34D; border-color: rgba(245,158,11,0.3); }
-.surcharge-table { width: 100%; font-size: 12.5px; border-collapse: collapse; margin-top: 8px; }
-.surcharge-table th { background: var(--off-white); padding: 6px 10px; text-align: left; font-weight: 700; font-size: 11px; }
-.surcharge-table td { padding: 7px 10px; border-bottom: 1px solid var(--border); }
-[data-theme="dark"] .surcharge-table th { background: #0F172A; }
-[data-theme="dark"] .surcharge-table td { border-bottom-color: #334155; }
-@media(max-width:1000px){ .tds-panel.active{grid-template-columns:1fr;} .tds-info-card{position:static;} .tds-intro{grid-template-columns:1fr;} }
-@media(max-width:600px){ .tds-intro-stats{flex-wrap:wrap;} .tds-input-row{grid-template-columns:1fr;} }
-</style>
-<link rel="stylesheet" href="css/theme.css">
-<link rel="stylesheet" href="css/overrides.css">
-<link rel="stylesheet" href="css/utils.css">
-<script type="application/ld+json">
-{
-  "@context": "https://schema.org",
-  "@type": "RealEstateAgent",
-  "name": "Property Finder Real Estate",
-  "url": "https://www.propertyfinderrealestate.com",
-  "telephone": "+91-93269-90050",
-  "email": "propertyfinderre@gmail.com",
-  "logo": "https://www.propertyfinderrealestate.com/images/logo.png",
-  "image": "https://www.propertyfinderrealestate.com/images/logo.png",
-  "address": {
-    "@type": "PostalAddress",
-    "streetAddress": "Shop No. 9, Deepanjali CHS, Baf-Hira Nagar, Lower Kharodi, Jankalyan Nagar Rd",
-    "addressLocality": "Malad West",
-    "addressRegion": "Maharashtra",
-    "postalCode": "400095",
-    "addressCountry": "IN"
-  },
-  "geo": {
-    "@type": "GeoCoordinates",
-    "latitude": 19.1886,
-    "longitude": 72.8485
-  },
-  "openingHoursSpecification": [
-    {
-      "@type": "OpeningHoursSpecification",
-      "dayOfWeek": [
-        "Monday",
-        "Tuesday",
-        "Wednesday",
-        "Thursday",
-        "Friday",
-        "Saturday"
-      ],
-      "opens": "10:00",
-      "closes": "19:00"
+  <!-- Open Graph -->
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="TDS on Property Calculators — Form 141 (New) & Form 26QB (Legacy) | PFRE Mumbai">
+  <meta property="og:description" content="Calculate TDS on property purchase and rent under the New Finance Bill Form 141 & Form 132 Certificate as well as legacy Section 194-IA, 195 (NRI), 194-IB, and 194-I rules.">
+  <meta property="og:url" content="https://www.propertyfinderrealestate.com/tds-calculators.html">
+  <meta property="og:image" content="https://www.propertyfinderrealestate.com/images/og-banner.jpg">
+  <meta property="og:site_name" content="Property Finder Real Estate">
+  <meta property="og:locale" content="en_IN">
+
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Property TDS Calculator — Form 141 & Form 26QB | PFRE">
+  <meta name="twitter:description" content="Dual compliance calculator for property transactions under new Form 141 / 132 and legacy Form 26QB / 16B frameworks.">
+  <meta name="twitter:image" content="https://www.propertyfinderrealestate.com/icons/icon.svg">
+
+  <meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large">
+  <meta name="author" content="Property Finder Real Estate">
+  <meta name="geo.region" content="IN-MH">
+  <meta name="geo.placename" content="Mumbai">
+  <meta name="geo.position" content="19.1886;72.8485">
+  <meta name="ICBM" content="19.1886, 72.8485">
+
+  <title>Property TDS Calculator — Form 141 &amp; Legacy 26QB, 195, 194-IB | PFRE</title>
+  <meta name="description" content="Free dual-regime property TDS calculator in India. Calculate TDS on purchase of immovable property (Form 141 Schedule B / Form 26QB), NRI sales (Sec 195), and rent (Form 141 Schedule A / 194-IB & 194-I).">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;0,900;1,700&family=DM+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  
+  <link rel="stylesheet" href="css/styles.css">
+  <link rel="stylesheet" href="css/widgets.css">
+  <link rel="stylesheet" href="css/mobile.css">
+  <link rel="stylesheet" href="css/theme.css">
+  <link rel="stylesheet" href="css/overrides.css">
+  <link rel="stylesheet" href="css/utils.css">
+  <link rel="manifest" href="manifest.json">
+  <link rel="icon" type="image/png" sizes="192x192" href="icons/icon-192.png">
+  <meta name="theme-color" content="#2563EB">
+
+  <script>
+    !function(){var t=localStorage.getItem("pfre_theme")||(window.matchMedia("(prefers-color-scheme:dark)").matches?"dark":"light");document.documentElement.setAttribute("data-theme",t);document.documentElement.classList.add("theme-"+t)}();
+  </script>
+
+  <style>
+    .tds-layout { padding: 48px 5%; max-width: 1400px; margin: 0 auto; }
+    .tds-intro { background: linear-gradient(135deg,#1D4ED8,#3B82F6); border-radius: 20px; padding: 36px 44px; color: white; margin-bottom: 36px; display: grid; grid-template-columns: 1fr auto; gap: 32px; align-items: center; }
+    .tds-intro h2 { font-family:'Playfair Display',serif; font-size: 28px; font-weight: 900; margin-bottom: 10px; color:#FFFFFF; }
+    .tds-intro p { font-size: 15px; opacity: .9; line-height: 1.7; margin-bottom: 0; }
+    .tds-intro-stats { display: flex; gap: 20px; flex-wrap: wrap; }
+    .tds-stat { text-align: center; background: rgba(255,255,255,.14); padding: 14px 20px; border-radius: 14px; border: 1px solid rgba(255,255,255,.25); min-width: 110px; }
+    .tds-stat .val { font-family:'Playfair Display',serif; font-size: 22px; font-weight: 900; }
+    .tds-stat .lbl { font-size: 11px; opacity: .85; margin-top: 3px; text-transform: uppercase; letter-spacing: 0.8px; }
+
+    /* Regime Bar */
+    .regime-banner { background: var(--off-white, #F8FAFC); border: 2px solid var(--border, #E2E8F0); border-radius: 16px; padding: 20px 28px; margin-bottom: 32px; display: flex; justify-content: space-between; align-items: center; flex-wrap: gap; gap: 20px; }
+    [data-theme="dark"] .regime-banner { background: #1E293B; border-color: #334155; }
+    .regime-btns { display: flex; gap: 10px; flex-wrap: wrap; }
+    .regime-pill { padding: 10px 22px; border-radius: 100px; font-size: 13.5px; font-weight: 700; border: 2px solid var(--border, #CBD5E1); background: white; color: var(--text-muted, #64748B); cursor: pointer; transition: all .2s; }
+    .regime-pill.active { background: var(--blue, #2563EB); color: white; border-color: var(--blue, #2563EB); box-shadow: 0 4px 12px rgba(37,99,235,0.25); }
+    [data-theme="dark"] .regime-pill { background: #0F172A; border-color: #334155; }
+
+    .tds-section-tabs { display: flex; gap: 10px; flex-wrap: wrap; margin-bottom: 32px; }
+    .tds-tab { padding: 12px 24px; border-radius: 100px; font-size: 14px; font-weight: 600; border: 2px solid var(--border, #E2E8F0); background: white; color: var(--text-muted, #64748B); cursor: pointer; transition: all .2s; }
+    .tds-tab:hover, .tds-tab.active { background: var(--blue, #2563EB); color: white; border-color: var(--blue, #2563EB); }
+    [data-theme="dark"] .tds-tab { background: #1E293B; border-color: #334155; color: #94A3B8; }
+
+    .tds-panel { display: none; }
+    .tds-panel.active { display: grid; grid-template-columns: 1fr 390px; gap: 32px; }
+    .tds-form-card { background: white; border-radius: 20px; padding: 36px; border: 1.5px solid var(--border, #E2E8F0); }
+    [data-theme="dark"] .tds-form-card { background: #1E293B; border-color: #334155; }
+    .tds-form-card h3 { font-family:'Playfair Display',serif; font-size: 23px; font-weight: 700; margin-bottom: 6px; }
+    .tds-form-card .section-badge { display: inline-flex; background: var(--blue, #2563EB); color: white; padding: 4px 14px; border-radius: 100px; font-size: 12px; font-weight: 700; letter-spacing: 0.5px; margin-bottom: 14px; }
+    .tds-form-card .desc { font-size: 14px; color: var(--text-muted, #64748B); line-height: 1.7; margin-bottom: 24px; padding-bottom: 18px; border-bottom: 1px solid var(--border, #E2E8F0); }
+    [data-theme="dark"] .tds-form-card .desc { border-bottom-color: #334155; }
+
+    .regime-info-notice { background: rgba(37,99,235,0.08); border-left: 4px solid var(--blue, #2563EB); border-radius: 8px; padding: 14px 18px; margin-bottom: 24px; font-size: 13px; line-height: 1.6; }
+    [data-theme="dark"] .regime-info-notice { background: rgba(37,99,235,0.18); color: #E2E8F0; }
+
+    .tds-field { margin-bottom: 18px; }
+    .tds-field label { display: flex; justify-content: space-between; font-size: 12.5px; font-weight: 700; color: var(--text-muted, #64748B); margin-bottom: 6px; text-transform: uppercase; letter-spacing: 0.5px; }
+    .tds-field label span { color: var(--blue, #2563EB); font-weight: 700; text-transform: none; letter-spacing: 0; }
+    .tds-input { width: 100%; padding: 12px 14px; border: 1.5px solid var(--border, #E2E8F0); border-radius: 10px; font-size: 14.5px; color: var(--text, #1E293B); background: var(--white, #FFFFFF); outline: none; transition: border-color .2s; font-family: 'DM Sans',sans-serif; }
+    .tds-input:focus { border-color: var(--blue, #2563EB); }
+    [data-theme="dark"] .tds-input { background: #0F172A; border-color: #334155; color: #E2E8F0; }
+    .tds-input-row { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+    .tds-input-row-3 { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 14px; }
+
+    .tds-calc-btn { width: 100%; padding: 14px; background: var(--blue, #2563EB); color: white; border: none; border-radius: 11px; font-size: 15px; font-weight: 700; cursor: pointer; transition: all .2s; margin-top: 8px; font-family: 'DM Sans',sans-serif; }
+    .tds-calc-btn:hover { background: #1D4ED8; transform: translateY(-1px); }
+
+    .tds-result { background: linear-gradient(135deg,#1D4ED8,#3B82F6); border-radius: 16px; padding: 24px; color: white; margin-top: 24px; display: none; }
+    .tds-result.show { display: block; animation: fadeIn .3s ease-in; }
+    @keyframes fadeIn { from { opacity: 0; transform: translateY(6px); } to { opacity: 1; transform: translateY(0); } }
+    .tds-result-main { font-family:'Playfair Display',serif; font-size: 36px; font-weight: 900; text-align: center; margin: 10px 0 4px; }
+    .tds-result-label { font-size: 12px; text-align: center; opacity: .85; text-transform: uppercase; letter-spacing: 1px; }
+    .tds-breakdown { margin-top: 18px; display: flex; flex-direction: column; gap: 8px; border-top: 1px solid rgba(255,255,255,.22); padding-top: 16px; }
+    .tds-bd-row { display: flex; justify-content: space-between; font-size: 13.5px; }
+    .tds-bd-row.total { font-weight: 700; font-size: 15px; border-top: 1px solid rgba(255,255,255,.22); padding-top: 8px; margin-top: 4px; }
+    .tds-bd-row .amt { font-weight: 700; }
+
+    /* Info sidebar */
+    .tds-info-card { background: var(--off-white, #F8FAFC); border-radius: 16px; padding: 26px; border: 1.5px solid var(--border, #E2E8F0); height: fit-content; position: sticky; top: 92px; }
+    [data-theme="dark"] .tds-info-card { background: #1E293B; border-color: #334155; }
+    .tds-info-card h4 { font-size: 15px; font-weight: 700; margin-bottom: 14px; display: flex; align-items: center; gap: 8px; }
+    .tds-rule { padding: 11px 0; border-bottom: 1px solid var(--border, #E2E8F0); font-size: 13px; }
+    [data-theme="dark"] .tds-rule { border-bottom-color: #334155; }
+    .tds-rule:last-child { border-bottom: none; }
+    .tds-rule .rule-label { font-weight: 700; color: var(--text, #1E293B); margin-bottom: 3px; }
+    .tds-rule .rule-val { color: var(--blue, #2563EB); font-weight: 700; font-size: 13.5px; }
+    .tds-rule .rule-desc { color: var(--text-muted, #64748B); font-size: 12px; margin-top: 2px; }
+    
+    .form-steps { display: flex; flex-direction: column; gap: 10px; margin-top: 18px; }
+    .form-step { display: flex; gap: 10px; font-size: 13px; color: var(--text-muted, #64748B); align-items: flex-start; }
+    .form-step .step-dot { width: 22px; height: 22px; background: var(--blue, #2563EB); color: white; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 11px; font-weight: 700; flex-shrink: 0; margin-top: 1px; }
+
+    .comparison-table-wrap { margin-top: 40px; background: white; border-radius: 18px; border: 1.5px solid var(--border, #E2E8F0); overflow: hidden; }
+    [data-theme="dark"] .comparison-table-wrap { background: #1E293B; border-color: #334155; }
+    .comparison-table { width: 100%; font-size: 13px; border-collapse: collapse; text-align: left; }
+    .comparison-table th { background: var(--off-white, #F8FAFC); padding: 14px 18px; font-weight: 700; font-size: 12px; text-transform: uppercase; letter-spacing: 0.5px; border-bottom: 1.5px solid var(--border, #E2E8F0); }
+    .comparison-table td { padding: 13px 18px; border-bottom: 1px solid var(--border, #E2E8F0); vertical-align: middle; }
+    [data-theme="dark"] .comparison-table th { background: #0F172A; border-bottom-color: #334155; color: #CBD5E1; }
+    [data-theme="dark"] .comparison-table td { border-bottom-color: #334155; }
+
+    .alert-warn { background: #FEF3C7; border: 1.5px solid #F59E0B; border-radius: 10px; padding: 12px 14px; font-size: 13px; color: #92400E; margin-top: 14px; display: flex; gap: 8px; align-items: flex-start; }
+    [data-theme="dark"] .alert-warn { background: rgba(245,158,11,0.12); color: #FCD34D; border-color: rgba(245,158,11,0.3); }
+
+    .surcharge-table { width: 100%; font-size: 12px; border-collapse: collapse; margin-top: 8px; }
+    .surcharge-table th { background: var(--off-white, #F8FAFC); padding: 6px 8px; text-align: left; font-weight: 700; font-size: 11px; }
+    .surcharge-table td { padding: 6px 8px; border-bottom: 1px solid var(--border, #E2E8F0); }
+    [data-theme="dark"] .surcharge-table th { background: #0F172A; }
+    [data-theme="dark"] .surcharge-table td { border-bottom-color: #334155; }
+
+    @media(max-width:1020px){ 
+      .tds-panel.active { grid-template-columns: 1fr; } 
+      .tds-info-card { position: static; } 
+      .tds-intro { grid-template-columns: 1fr; }
+      .regime-banner { flex-direction: column; align-items: flex-start; }
     }
-  ],
-  "areaServed": [
-    "Malad",
-    "Goregaon",
-    "Andheri",
-    "Borivali",
-    "Kandivali",
-    "Dahisar",
-    "Mira Road"
-  ],
-  "priceRange": "Free consultation"
-}
-</script>
-<script type="application/ld+json">
-{
-  "@context": "https://schema.org",
-  "@type": "WebApplication",
-  "name": "TDS Calculator on Property — Section 194-IA",
-  "description": "Calculate TDS on property purchase under Sections 194-IA, 194-IB and 195 for NRI transactions.",
-  "url": "https://www.propertyfinderrealestate.com/tds-calculators.html",
-  "applicationCategory": "FinanceApplication",
-  "operatingSystem": "Web"
-}
-</script>
+    @media(max-width:640px){ 
+      .tds-intro-stats { flex-wrap: wrap; } 
+      .tds-input-row, .tds-input-row-3 { grid-template-columns: 1fr; } 
+      .tds-layout { padding: 32px 4%; }
+    }
+  </style>
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "RealEstateAgent",
+    "name": "Property Finder Real Estate",
+    "url": "https://www.propertyfinderrealestate.com",
+    "telephone": "+91-93269-90050",
+    "email": "propertyfinderre@gmail.com",
+    "logo": "https://www.propertyfinderrealestate.com/images/logo.png",
+    "image": "https://www.propertyfinderrealestate.com/images/logo.png",
+    "address": {
+      "@type": "PostalAddress",
+      "streetAddress": "Shop No. 2, Ground Floor, Baf-Hira Nagar, Jankalyan Nagar Road, Malad West",
+      "addressLocality": "Mumbai",
+      "addressRegion": "Maharashtra",
+      "postalCode": "400095",
+      "addressCountry": "IN"
+    },
+    "geo": {
+      "@type": "GeoCoordinates",
+      "latitude": 19.1886,
+      "longitude": 72.8485
+    },
+    "priceRange": "Free consultation"
+  }
+  </script>
 </head>
 <body>
 <a href="#main-content" class="skip-link">Skip to main content</a>
+
+<!-- Navigation Bar -->
 <nav class="navbar" role="navigation" aria-label="Main navigation">
   <a href="index.html" class="nav-logo" style="display:flex;align-items:center">
-    <img src="images/logo.png" alt="Property Finder Real Estate" class="nav-logo-img" style="height:48px;width:auto;object-fit:contain" loading="eager">
+    <img src="images/logo.png" alt="Property Finder Real Estate" class="nav-logo-img" style="height:46px;width:auto;object-fit:contain" loading="eager">
   </a>
   <ul class="nav-menu" role="list">
-    <li class="nav-item"><a href="index.html" class="nav-link" data-i18n="nav.home">Home</a></li>
-    <li class="nav-item"><a href="properties.html" class="nav-link">Properties <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M6 9l6 6 6-6"/></svg></a><div class="dropdown"><a href="properties.html"><span class="dd-icon">🏠</span> All Properties</a><a href="projects.html"><span class="dd-icon">🏗️</span> Projects</a><a href="neighbourhoods.html"><span class="dd-icon">📍</span> Neighbourhoods</a></div></li>
-    <li class="nav-item"><a href="services.html" class="nav-link" data-i18n="nav.services">Services</a></li>
-    <li class="nav-item"><a href="about.html" class="nav-link">About <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M6 9l6 6 6-6"/></svg></a><div class="dropdown"><a href="about.html"><span class="dd-icon">🏢</span> About Us</a><a href="team.html"><span class="dd-icon">👥</span> Our Team</a><a href="testimonials.html"><span class="dd-icon">⭐</span> Testimonials</a><a href="faq.html"><span class="dd-icon">❓</span> FAQ</a><a href="careers.html"><span class="dd-icon">💼</span> Careers</a><a href="nri.html"><span class="dd-icon">🌍</span> NRI Corner</a></div></li>
-    <li class="nav-item"><a href="calculators.html" class="nav-link active">Calculators <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M6 9l6 6 6-6"/></svg></a><div class="dropdown"><a href="calculators.html"><span class="dd-icon">🏦</span> Property Calculators</a><a href="tds-calculators.html"><span class="dd-icon">📋</span> TDS Calculators</a><a href="insurance.html"><span class="dd-icon">🛡️</span> Property Insurance</a></div></li>
-    <li class="nav-item"><a href="blog.html" class="nav-link" data-i18n="nav.blog">Blog</a></li>
-    <li class="nav-item"><a href="contact.html" class="nav-link" data-i18n="nav.contact">Contact</a></li>
+    <li class="nav-item"><a href="index.html" class="nav-link">Home</a></li>
+    <li class="nav-item"><a href="properties.html" class="nav-link">Properties</a></li>
+    <li class="nav-item"><a href="services.html" class="nav-link">Services</a></li>
+    <li class="nav-item"><a href="about.html" class="nav-link">About</a></li>
+    <li class="nav-item"><a href="calculators.html" class="nav-link active">Calculators</a></li>
+    <li class="nav-item"><a href="contact.html" class="nav-link">Contact</a></li>
   </ul>
   <div class="nav-actions">
     <a href="tel:+919326990050" class="nav-phone">📞 +91 93269 90050</a>
-    <a href="post-property.html" class="btn btn-primary btn-sm" class="btn-green-inline">+ Post Property</a>
-    <a href="contact.html" class="btn btn-outline btn-sm">Get In Touch</a>
-    <button class="theme-toggle" id="themeToggle"><span class="icon-light">☀️</span><span class="icon-dark">🌙</span></button>
+    <a href="post-property.html" class="btn btn-primary btn-sm">+ Post Property</a>
+    <button class="theme-toggle" id="themeToggle" aria-label="Toggle theme"><span class="icon-light">☀️</span><span class="icon-dark">🌙</span></button>
     <button class="hamburger" id="hamburger" aria-label="Toggle navigation" aria-expanded="false" role="button"><span></span><span></span><span></span></button>
   </div>
 </nav>
-<div class="mobile-menu" id="mobileMenu">
-  <a href="index.html">🏠 Home</a><a href="properties.html">🏘️ Properties</a><a href="services.html">⚙️ Services</a><a href="calculators.html">🧮 Calculators</a><a href="tds-calculators.html">📋 TDS Calculators</a><a href="insurance.html">🛡️ Insurance</a><a href="email-templates.html">Email Templates</a>
-<a href="agreement-registration.html">Registration Tracker</a>
-<a href="reminders.html">🔔 Reminders</a><a href="faq.html">❓ FAQ</a><a href="nri.html">🌍 NRI</a><a href="price-trends.html">📈 Price Trends</a><a href="insurance.html">🛡️ Insurance</a><a href="tds-calculators.html">📋 TDS</a><a href="converter.html">📐 Converter</a><a href="email-templates.html">Email Templates</a>
-<a href="agreement-registration.html">Registration Tracker</a>
-<a href="reminders.html">🔔 Reminders</a><a href="post-property.html">➕ Post Property FREE</a><a href="home-loan.html">🏦 Home Loan</a><a href="blog.html">📝 Blog</a><a href="contact.html">📞 Contact</a>
-  <a href="tel:+919326990050" class="btn btn-primary mob-cta">📞 Call Now</a>
-</div>
 
+<!-- Hero Section -->
 <section id="main-content" class="page-hero">
-  <span class="section-label">Tax Tools</span>
-  <h1>TDS on Property <em>Calculators</em></h1>
-  <p>Calculate TDS on purchase of immovable property, purchase from NRI, and rent payments — as per latest Indian Income Tax rules (AY 2025–26).</p>
-  <nav aria-label="Breadcrumb"><div class="breadcrumb"><a href="index.html">Home</a><span class="breadcrumb-sep" aria-hidden="true">›</span><a href="calculators.html">Calculators</a><span class="breadcrumb-sep" aria-hidden="true">›</span><span>TDS Calculators</span></div></nav><!-- /breadcrumb -->
+  <div class="container">
+    <span class="section-label">taxation &amp; regulatory compliance</span>
+    <h1>TDS on Property <em>Calculators</em></h1>
+    <p>Calculate statutory tax deduction at source across property purchases, NRI transactions, and rental leases. Supports both the new unified <strong>Form 141 &amp; Form 132</strong> framework and the legacy <strong>Form 26QB, 26QC &amp; 16B</strong> regime.</p>
+    <nav class="breadcrumb" aria-label="Breadcrumb navigation">
+      <a href="index.html">Home</a>
+      <span class="breadcrumb-sep">/</span>
+      <a href="calculators.html">Calculators</a>
+      <span class="breadcrumb-sep">/</span>
+      <span>TDS Calculators</span>
+    </nav>
+  </div>
 </section>
 
 <div class="tds-layout">
-  <div class="tds-intro reveal">
+  <!-- Top Intro Card -->
+  <div class="tds-intro">
     <div>
-      <h2>Understanding TDS on Property Transactions</h2>
-      <p>TDS (Tax Deducted at Source) is mandatory on certain property transactions in India. The buyer/tenant is responsible for deducting TDS and depositing it with the government. Non-compliance attracts interest & penalties.</p>
-      <div class="alert-warn" style="margin-top:16px">⚠️ <span><strong>Disclaimer:</strong> These calculators are for indicative purposes only. Always consult a Chartered Accountant for actual TDS computation, especially for NRI transactions which involve complex surcharge calculations.</span></div>
+      <h2>Comprehensive Property TDS Suite</h2>
+      <p>Under the Income Tax Act, buyers and tenants are statutorily required to deduct tax at source and remit it to the government treasury within 30 days of the month-end. Non-compliance invites penal interest under Section 201(1A) and fees under Section 234E.</p>
+      <div class="alert-warn" style="margin-top:16px;">
+        ⚠️ <span><strong>Advisory Note:</strong> These calculators incorporate statutory thresholds. For complex multi-party deeds, capital gain exemptions, or NRI double taxation treaties, consult our Malad West advisory desk.</span>
+      </div>
     </div>
     <div class="tds-intro-stats">
-      <div class="tds-stat"><div class="val">194-IA</div><div class="lbl">Resident Seller</div></div>
+      <div class="tds-stat"><div class="val">Sec 194-IA</div><div class="lbl">Resident Sale</div></div>
       <div class="tds-stat"><div class="val">Sec 195</div><div class="lbl">NRI Seller</div></div>
-      <div class="tds-stat"><div class="val">194-IB</div><div class="lbl">Rent (Individual)</div></div>
-      <div class="tds-stat"><div class="val">194-I</div><div class="lbl">Rent (Others)</div></div>
+      <div class="tds-stat"><div class="val">Sec 194-IB</div><div class="lbl">Rent (Individual)</div></div>
+      <div class="tds-stat"><div class="val">Sec 194-I</div><div class="lbl">Rent (Entities)</div></div>
     </div>
   </div>
 
+  <!-- Compliance Framework / Regime Switcher -->
+  <div class="regime-banner">
+    <div>
+      <span class="text-xs fw-bold text-muted text-uppercase d-block mb-1">compliance reporting framework</span>
+      <div class="regime-btns">
+        <button type="button" class="regime-pill active" id="btnRegimeNew" onclick="setRegime('new')">
+          ⭐ New Unified Regime: Form 141 &amp; Form 132 Certificate
+        </button>
+        <button type="button" class="regime-pill" id="btnRegimeLegacy" onclick="setRegime('legacy')">
+          🏛️ Legacy Regime: Form 26QB, 26QC, 27Q &amp; Form 16B/16C
+        </button>
+      </div>
+    </div>
+    <div class="text-right">
+      <span class="badge badge-green" id="activeRegimeBadge">New Regime Active: Form 141 (Unified Statements)</span>
+      <span class="text-xxs text-muted d-block mt-1" id="activeRegimeSub">Reformed Challan-cum-Statement Architecture</span>
+    </div>
+  </div>
+
+  <!-- Section Category Tabs -->
   <div class="tds-section-tabs">
-    <button class="tds-tab active" onclick="openTDSTab('ia',this)">📋 Sec 194-IA — Purchase from Resident</button>
-    <button class="tds-tab" onclick="openTDSTab('nri',this)">🌍 Sec 195 — Purchase from NRI</button>
-    <button class="tds-tab" onclick="openTDSTab('ib',this)">🏠 Sec 194-IB — Rent (Individual)</button>
-    <button class="tds-tab" onclick="openTDSTab('i',this)">🏢 Sec 194-I — Rent (Others)</button>
+    <button class="tds-tab active" onclick="openTDSTab('ia', this)">📋 Purchase from Resident (194-IA)</button>
+    <button class="tds-tab" onclick="openTDSTab('nri', this)">🌍 Purchase from NRI (Sec 195)</button>
+    <button class="tds-tab" onclick="openTDSTab('ib', this)">🏠 Rent by Individual/HUF (194-IB)</button>
+    <button class="tds-tab" onclick="openTDSTab('i', this)">🏢 Rent by Businesses &amp; LLPs (194-I)</button>
   </div>
 
-  <!-- ── SECTION 194-IA ── -->
+  <!-- ══════════════ TAB 1: SECTION 194-IA ══════════════ -->
   <div class="tds-panel active" id="panel-ia">
-    <div class="tds-form-card reveal">
-      <span class="section-num">Section 194-IA</span>
+    <div class="tds-form-card">
+      <span class="section-badge" id="iaBadge">Section 194-IA • Form 141 Schedule B</span>
       <h3>TDS on Purchase of Immovable Property (Resident Seller)</h3>
-      <p class="desc">When a buyer purchases immovable property (other than agricultural land) from a resident seller for ₹50 Lakhs or more, TDS @ 1% must be deducted. Both buyer and seller must have PAN. Form 26QB must be filed within 30 days.</p>
-      <div class="tds-field">
-        <label>Sale Consideration (₹) <span id="ia_val_lbl">₹1,00,00,000</span></label>
-        <input type="range" class="tds-input" style="padding:4px 0" min="1000000" max="100000000" step="100000" value="10000000" id="ia_value" oninput="document.getElementById('ia_val_lbl').textContent='₹'+parseInt(this.value).toLocaleString('en-IN');calcIA()">
-      </div>
-      <div class="tds-field">
-        <label>Stamp Duty Value (₹) <span id="ia_sd_lbl">₹1,00,00,000</span></label>
-        <input type="range" class="tds-input" style="padding:4px 0" min="1000000" max="100000000" step="100000" value="10000000" id="ia_stamp" oninput="document.getElementById('ia_sd_lbl').textContent='₹'+parseInt(this.value).toLocaleString('en-IN');calcIA()">
-      </div>
-      <p style="font-size:12px;color:var(--text-muted);margin:-12px 0 16px">TDS is calculated on higher of Sale Consideration or Stamp Duty Value.</p>
-      <div class="tds-input-row">
-        <div class="tds-field" style="margin-bottom:0">
-          <label>Seller PAN Available?</label>
-          <select class="tds-input" id="ia_pan" onchange="calcIA()">
-            <option value="yes">Yes — PAN Available</option>
-            <option value="no">No PAN — Higher TDS</option>
-          </select>
-        </div>
-        <div class="tds-field" style="margin-bottom:0">
-          <label>Number of Sellers</label>
-          <input class="tds-input" type="number" value="1" min="1" max="5" id="ia_sellers" oninput="calcIA()">
-        </div>
-      </div>
-      <button class="tds-calc-btn" onclick="calcIA()">Calculate TDS — Section 194-IA</button>
-      <div class="tds-result" id="ia_result">
-        <div class="tds-result-label">TDS to Deduct</div>
-        <div class="tds-result-main" id="ia_tds_amt">₹1,00,000</div>
-        <div class="tds-breakdown">
-          <div class="tds-bd-row"><span>Higher of Sale/Stamp Value</span><span class="amt" id="ia_base">₹1,00,00,000</span></div>
-          <div class="tds-bd-row"><span>TDS Rate</span><span class="amt" id="ia_rate">1%</span></div>
-          <div class="tds-bd-row total"><span>TDS Amount</span><span class="amt" id="ia_tds2">₹1,00,000</span></div>
-          <div class="tds-bd-row total"><span>Net Amount to Seller</span><span class="amt" id="ia_net">₹99,00,000</span></div>
-        </div>
-      </div>
-      <div class="form-steps" style="margin-top:20px">
-        <div style="font-size:13px;font-weight:700;color:var(--text);margin-bottom:6px">📋 How to Deposit TDS:</div>
-        <div class="form-step"><span class="step-dot">1</span><span>Login to <strong>incometaxindiaefiling.gov.in</strong></span></div>
-        <div class="form-step"><span class="step-dot">2</span><span>Go to e-File → e-Pay Tax → Form 26QB</span></div>
-        <div class="form-step"><span class="step-dot">3</span><span>Fill buyer & seller PAN, property details, TDS amount</span></div>
-        <div class="form-step"><span class="step-dot">4</span><span>Pay online via net banking / debit card</span></div>
-        <div class="form-step"><span class="step-dot">5</span><span>Download Form 16B (TDS Certificate) and give to seller</span></div>
-        <div class="form-step"><span class="step-dot">6</span><span><strong>Deadline:</strong> Within 30 days from end of month of deduction</span></div>
-      </div>
-    </div>
-    <div class="tds-info-card reveal">
-      <h4>📌 Section 194-IA Rules</h4>
-      <div class="tds-rule"><div class="rule-label">Applicable When</div><div class="rule-val">Sale ≥ ₹50 Lakhs</div><div class="rule-desc">Aggregate value of immovable property from same seller in same year</div></div>
-      <div class="tds-rule"><div class="rule-label">TDS Rate (with PAN)</div><div class="rule-val">1% of higher of Sale Price or Stamp Duty Value</div></div>
-      <div class="tds-rule"><div class="rule-label">TDS Rate (without PAN)</div><div class="rule-val">20% (under Section 206AA)</div></div>
-      <div class="tds-rule"><div class="rule-label">Property Type</div><div class="rule-val">All immovable property except Agricultural Land</div></div>
-      <div class="tds-rule"><div class="rule-label">Who Deducts</div><div class="rule-val">Buyer (No TAN required)</div></div>
-      <div class="tds-rule"><div class="rule-label">Form to File</div><div class="rule-val">Form 26QB (online only)</div></div>
-      <div class="tds-rule"><div class="rule-label">Due Date</div><div class="rule-val">30 days from end of month of deduction</div></div>
-      <div class="tds-rule"><div class="rule-label">TDS Certificate</div><div class="rule-val">Form 16B (download from TRACES)</div></div>
-      <div class="tds-rule"><div class="rule-label">Joint Purchase</div><div class="rule-val">Each buyer files separate 26QB for their share</div></div>
-      <div class="alert-warn" style="margin-top:16px">⚠️ Interest for late deposit: 1.5% per month or part thereof. Penalty: Equal to TDS amount.</div>
-    </div>
-  </div>
+      <p class="desc">Applicable when purchasing immovable property (other than agricultural land) from a resident Indian for ₹50 Lakhs or more. Tax is deducted on the higher of the agreed sale consideration or the Ready Reckoner circle valuation.</p>
 
-  <!-- ── SECTION 195 NRI ── -->
-  <div class="tds-panel" id="panel-nri">
-    <div class="tds-form-card reveal">
-      <span class="section-num">Section 195</span>
-      <h3>TDS on Purchase of Immovable Property from NRI</h3>
-      <p class="desc">When buying property from an NRI, TDS must be deducted on the entire sale price (not just gains). The buyer needs a TAN. TDS rates vary based on holding period and gains, with applicable surcharge and health & education cess of 4%.</p>
+      <div class="regime-info-notice" id="iaRegimeNotice">
+        <strong>New Unified Regime Active:</strong> Filing is done through <strong>Form 141 Schedule B</strong> on the Income Tax Portal. Once processed, the seller generates a unified <strong>Form 132 TDS Certificate</strong> on TRACES (replacing legacy Form 16B). Joint sellers are consolidated in a single schedule.
+      </div>
+
+      <div class="tds-field">
+        <label>Agreed Sale Consideration (₹) <span id="ia_val_lbl">₹1,00,00,000</span></label>
+        <input type="range" class="tds-input" style="padding:4px 0" min="1000000" max="100000000" step="100000" value="10000000" id="ia_value" oninput="document.getElementById('ia_val_lbl').textContent=fmt(this.value);calcIA()">
+      </div>
+
+      <div class="tds-field">
+        <label>Stamp Duty Ready Reckoner Value (₹) <span id="ia_sd_lbl">₹1,00,00,000</span></label>
+        <input type="range" class="tds-input" style="padding:4px 0" min="1000000" max="100000000" step="100000" value="10000000" id="ia_stamp" oninput="document.getElementById('ia_sd_lbl').textContent=fmt(this.value);calcIA()">
+      </div>
+      <p style="font-size:12px;color:var(--text-muted);margin:-10px 0 16px;">TDS is calculated on the higher of Sale Consideration or Ready Reckoner Stamp Duty Value.</p>
+
+      <!-- Ancillary Charges -->
+      <div class="tds-input-row-3 mb-3">
+        <div class="tds-field">
+          <label>Car Parking / Club (₹)</label>
+          <input class="tds-input" type="number" id="ia_parking" value="0" min="0" step="25000" oninput="calcIA()">
+        </div>
+        <div class="tds-field">
+          <label>Maintenance Advance (₹)</label>
+          <input class="tds-input" type="number" id="ia_maint" value="0" min="0" step="10000" oninput="calcIA()">
+        </div>
+        <div class="tds-field">
+          <label>Meter / Other Charges (₹)</label>
+          <input class="tds-input" type="number" id="ia_other" value="0" min="0" step="5000" oninput="calcIA()">
+        </div>
+      </div>
+
       <div class="tds-input-row">
         <div class="tds-field">
-          <label>Sale Price (₹)</label>
+          <label>Seller PAN Status</label>
+          <select class="tds-input" id="ia_pan" onchange="calcIA()">
+            <option value="yes">Operative PAN Linked (1% Rate)</option>
+            <option value="no">No PAN / Inoperative (20% Higher Rate)</option>
+          </select>
+        </div>
+        <div class="tds-field">
+          <label>Number of Co-Sellers</label>
+          <input class="tds-input" type="number" value="1" min="1" max="10" id="ia_sellers" oninput="calcIA()">
+        </div>
+      </div>
+
+      <button class="tds-calc-btn" onclick="calcIA()">Calculate Section 194-IA TDS</button>
+
+      <div class="tds-result" id="ia_result">
+        <div class="tds-result-label" id="ia_result_label">TDS to Remit (Form 141 Schedule B)</div>
+        <div class="tds-result-main" id="ia_tds_amt">₹1,00,000</div>
+        <div class="tds-breakdown">
+          <div class="tds-bd-row"><span>Taxable Base (Max of Sale/Stamp + Extras)</span><span class="amt" id="ia_base">₹1,00,00,000</span></div>
+          <div class="tds-bd-row"><span>Statutory Deduction Rate</span><span class="amt" id="ia_rate">1%</span></div>
+          <div class="tds-bd-row"><span>Total TDS Amount</span><span class="amt" id="ia_tds2">₹1,00,000</span></div>
+          <div class="tds-bd-row"><span>Share Per Seller (<span id="ia_sellers_count">1</span> Seller)</span><span class="amt" id="ia_per_seller">₹1,00,000</span></div>
+          <div class="tds-bd-row total"><span>Net Disbursement to Seller(s)</span><span class="amt" id="ia_net">₹99,00,000</span></div>
+          <div class="tds-bd-row"><span>Certificate to Provide Seller</span><span class="amt" id="ia_cert_type">Form 132 (TRACES)</span></div>
+        </div>
+      </div>
+
+      <!-- Procedural Steps -->
+      <div class="form-steps">
+        <div style="font-size:13px;font-weight:700;color:var(--text);margin-bottom:6px" id="iaStepsHeader">📋 Procedural Filing Steps (Form 141):</div>
+        <div class="form-step"><span class="step-dot">1</span><span id="iaStep1">Log in to <strong>incometax.gov.in</strong> using Buyer PAN credentials (no TAN needed).</span></div>
+        <div class="form-step"><span class="step-dot">2</span><span id="iaStep2">Go to <strong>e-File → e-Pay Tax → New Payment</strong> and select <strong>Form 141 (Schedule B - Property Transfer)</strong>.</span></div>
+        <div class="form-step"><span class="step-dot">3</span><span id="iaStep3">Provide complete property address, agreement value, stamp valuation, and seller PAN details.</span></div>
+        <div class="form-step"><span class="step-dot">4</span><span>Pay online via Net Banking, NEFT/RTGS, or debit card.</span></div>
+        <div class="form-step"><span class="step-dot">5</span><span id="iaStep5">Download <strong>Form 132 Certificate</strong> from TRACES portal after 4-5 days and furnish to seller.</span></div>
+        <div class="form-step"><span class="step-dot">6</span><span><strong>Filing Deadline:</strong> Within 30 days from the end of the month in which deduction was made.</span></div>
+      </div>
+    </div>
+
+    <!-- Rule Sidebar -->
+    <div class="tds-info-card">
+      <h4 id="iaSidebarTitle">📌 Section 194-IA Governance</h4>
+      <div class="tds-rule"><div class="rule-label">Statutory Threshold</div><div class="rule-val">₹50,00,000</div><div class="rule-desc">Higher of Agreement Value or Circle Ready Reckoner</div></div>
+      <div class="tds-rule"><div class="rule-label">Standard Rate</div><div class="rule-val">1.0%</div><div class="rule-desc">With operative, verified PAN</div></div>
+      <div class="tds-rule"><div class="rule-label">Penal Rate (Sec 206AA)</div><div class="rule-val">20.0%</div><div class="rule-desc">If seller PAN is invalid or missing</div></div>
+      <div class="tds-rule"><div class="rule-label">Reporting Challan</div><div class="rule-val" id="iaRuleChallan">Form 141 Schedule B</div><div class="rule-desc" id="iaRuleChallanDesc">Unified single statement for all sellers</div></div>
+      <div class="tds-rule"><div class="rule-label">TDS Certificate</div><div class="rule-val" id="iaRuleCert">Form 132</div><div class="rule-desc" id="iaRuleCertDesc">Unified certificate downloaded via TRACES</div></div>
+      <div class="tds-rule"><div class="rule-label">TAN Requirement</div><div class="rule-val">Not Required</div><div class="rule-desc">Buyer files using individual PAN</div></div>
+      <div class="alert-warn">⚠️ Section 234E levies a mandatory fee of ₹200/day for delayed statement filing until it is submitted.</div>
+    </div>
+  </div>
+
+  <!-- ══════════════ TAB 2: SECTION 195 NRI ══════════════ -->
+  <div class="tds-panel" id="panel-nri">
+    <div class="tds-form-card">
+      <span class="section-badge" id="nriBadge">Section 195 • NRI Property Sale</span>
+      <h3>TDS on Purchase of Immovable Property from NRI Seller</h3>
+      <p class="desc">When purchasing property from a Non-Resident Indian, TDS is levied on the entire gross consideration (unless a Lower Deduction Certificate is obtained). Applicable surcharge and 4% Health &amp; Education Cess must be factored in.</p>
+
+      <div class="regime-info-notice" id="nriRegimeNotice">
+        <strong>New Unified Framework:</strong> Form 141 Schedule E facilitates PAN-based remittance without requiring a prior TAN for qualifying residential acquisitions. The seller obtains a consolidated <strong>Form 132 Certificate</strong> upon processing. Under legacy rules, a TAN and quarterly Form 27Q filing are required.
+      </div>
+
+      <div class="tds-input-row">
+        <div class="tds-field">
+          <label>Gross Sale Price (₹)</label>
           <input class="tds-input" type="number" id="nri_sale" value="10000000" oninput="calcNRI()">
         </div>
         <div class="tds-field">
-          <label>Purchase Price (₹)</label>
+          <label>Original Purchase Cost (₹)</label>
           <input class="tds-input" type="number" id="nri_purchase" value="5000000" oninput="calcNRI()">
         </div>
       </div>
+
       <div class="tds-input-row">
         <div class="tds-field">
-          <label>Year of Purchase</label>
-          <input class="tds-input" type="number" id="nri_yr_buy" value="2020" min="1990" max="2025" oninput="calcNRI()">
+          <label>Holding Duration Type</label>
+          <select class="tds-input" id="nri_type" onchange="calcNRI()">
+            <option value="ltcg">Long-Term (Held > 24 Months) — Base Rate 20%</option>
+            <option value="stcg">Short-Term (Held ≤ 24 Months) — Base Rate 30%</option>
+          </select>
         </div>
         <div class="tds-field">
-          <label>Year of Sale</label>
-          <input class="tds-input" type="number" id="nri_yr_sell" value="2025" min="1990" max="2030" oninput="calcNRI()">
+          <label>NRI Seller Surcharge Bracket</label>
+          <select class="tds-input" id="nri_surcharge" onchange="calcNRI()">
+            <option value="0">Up to ₹50 Lakhs — 0% Surcharge</option>
+            <option value="0.10" selected>₹50 Lakhs to ₹1 Crore — 10% Surcharge</option>
+            <option value="0.15">₹1 Crore to ₹2 Crores — 15% Surcharge</option>
+            <option value="0.25">₹2 Crores to ₹5 Crores — 25% Surcharge</option>
+            <option value="0.37">Above ₹5 Crores — 37% Surcharge</option>
+          </select>
         </div>
       </div>
+
       <div class="tds-field">
-        <label>Capital Gains Type</label>
-        <select class="tds-input" id="nri_type" onchange="calcNRI()">
-          <option value="ltcg">Long-Term Capital Gains (LTCG — held > 24 months) — 20%</option>
-          <option value="stcg">Short-Term Capital Gains (STCG — held ≤ 24 months) — 30%</option>
-        </select>
-      </div>
-      <div class="tds-field">
-        <label>NRI Seller's Income Level (for Surcharge)</label>
-        <select class="tds-input" id="nri_surcharge" onchange="calcNRI()">
-          <option value="0">Up to ₹50 Lakhs — No Surcharge</option>
-          <option value="0.10" selected>₹50L to ₹1 Crore — 10% Surcharge</option>
-          <option value="0.15">₹1 Cr to ₹2 Cr — 15% Surcharge</option>
-          <option value="0.25">₹2 Cr to ₹5 Cr — 25% Surcharge</option>
-          <option value="0.37">Above ₹5 Crore — 37% Surcharge</option>
-        </select>
-      </div>
-      <div class="tds-field">
-        <label>Lower Deduction Certificate?</label>
+        <label>Section 197 Lower Deduction Certificate</label>
         <select class="tds-input" id="nri_cert" onchange="calcNRI()">
-          <option value="no">No — Full TDS Applicable</option>
-          <option value="yes">Yes — NRI has Form 13 Certificate</option>
+          <option value="no">No Certificate — Full Statutory Rate on Sale Price</option>
+          <option value="yes">Yes — NRI has Nil/Lower Deduction Certificate (Form 13)</option>
         </select>
       </div>
-      <button class="tds-calc-btn" onclick="calcNRI()">Calculate TDS — Section 195</button>
+
+      <button class="tds-calc-btn" onclick="calcNRI()">Calculate Section 195 NRI TDS</button>
+
       <div class="tds-result" id="nri_result">
-        <div class="tds-result-label">TDS to Deduct on Full Sale Price</div>
+        <div class="tds-result-label" id="nri_result_label">TDS to Deduct on Full Sale Consideration</div>
         <div class="tds-result-main" id="nri_tds_amt">₹0</div>
         <div class="tds-breakdown">
-          <div class="tds-bd-row"><span>Capital Gains (Approx.)</span><span class="amt" id="nri_gains">₹0</span></div>
-          <div class="tds-bd-row"><span>Gains Type</span><span class="amt" id="nri_gtype">LTCG</span></div>
-          <div class="tds-bd-row"><span>Base TDS Rate</span><span class="amt" id="nri_base_rate">20%</span></div>
-          <div class="tds-bd-row"><span>Surcharge</span><span class="amt" id="nri_sur">10%</span></div>
-          <div class="tds-bd-row"><span>Health & Education Cess</span><span class="amt">4%</span></div>
-          <div class="tds-bd-row"><span>Effective TDS Rate</span><span class="amt" id="nri_eff_rate">22.88%</span></div>
-          <div class="tds-bd-row total"><span>TDS on Sale Price</span><span class="amt" id="nri_tds2">₹0</span></div>
-          <div class="tds-bd-row total"><span>Net to NRI Seller</span><span class="amt" id="nri_net">₹0</span></div>
+          <div class="tds-bd-row"><span>Estimated Capital Gains</span><span class="amt" id="nri_gains">₹0</span></div>
+          <div class="tds-bd-row"><span>Base Rate</span><span class="amt" id="nri_base_rate">20%</span></div>
+          <div class="tds-bd-row"><span>Applicable Surcharge</span><span class="amt" id="nri_sur">10%</span></div>
+          <div class="tds-bd-row"><span>Health &amp; Education Cess</span><span class="amt">4%</span></div>
+          <div class="tds-bd-row"><span>Effective Combined TDS Rate</span><span class="amt" id="nri_eff_rate">22.88%</span></div>
+          <div class="tds-bd-row total"><span>Total TDS Deduction</span><span class="amt" id="nri_tds2">₹0</span></div>
+          <div class="tds-bd-row total"><span>Net Disbursement to NRI Seller</span><span class="amt" id="nri_net">₹0</span></div>
+          <div class="tds-bd-row"><span>Certificate Issued</span><span class="amt" id="nri_cert_type">Form 132 (New) / Form 16A (Legacy)</span></div>
         </div>
       </div>
+
+      <div class="form-steps">
+        <div style="font-size:13px;font-weight:700;color:var(--text);margin-bottom:6px">📋 NRI Compliance Checklist:</div>
+        <div class="form-step"><span class="step-dot">1</span><span>Verify seller residential status and overseas banking documentation.</span></div>
+        <div class="form-step"><span class="step-dot">2</span><span>If NRI applies for Lower Deduction (Form 13), deduct only the specified reduced percentage on capital gains.</span></div>
+        <div class="form-step"><span class="step-dot">3</span><span>In the absence of a certificate, tax must be withheld on the <strong>gross sale price</strong>.</span></div>
+        <div class="form-step"><span class="step-dot">4</span><span>Deposit via e-Pay Tax within statutory deadlines to ensure smooth sale deed registration.</span></div>
+      </div>
     </div>
-    <div class="tds-info-card reveal">
-      <h4>📌 Section 195 — NRI Rules</h4>
-      <div class="tds-rule"><div class="rule-label">Who Deducts</div><div class="rule-val">Buyer (Needs TAN)</div><div class="rule-desc">TAN must be obtained before deduction</div></div>
-      <div class="tds-rule"><div class="rule-label">TDS on</div><div class="rule-val">Entire Sale Price (not just gains)</div><div class="rule-desc">Unless NRI has Lower Deduction Certificate (Form 13)</div></div>
-      <div class="tds-rule"><div class="rule-label">LTCG Rate (> 24 months)</div><div class="rule-val">20% + Surcharge + 4% Cess</div></div>
-      <div class="tds-rule"><div class="rule-label">STCG Rate (≤ 24 months)</div><div class="rule-val">30% + Surcharge + 4% Cess</div></div>
-      <div class="tds-rule"><div class="rule-label">Form to File</div><div class="rule-val">Form 27Q (Quarterly)</div></div>
-      <div class="tds-rule"><div class="rule-label">Due Date</div><div class="rule-val">7th of month following deduction (or 31 March for March)</div></div>
-      <div class="tds-rule"><div class="rule-label">TDS Certificate</div><div class="rule-val">Form 16A from TRACES</div></div>
-      <div style="margin-top:14px;font-size:13px;font-weight:700;color:var(--text);margin-bottom:8px">Surcharge Rates:</div>
+
+    <!-- Rule Sidebar -->
+    <div class="tds-info-card">
+      <h4>📌 Section 195 Rules</h4>
+      <div class="tds-rule"><div class="rule-label">Threshold</div><div class="rule-val">No Minimum Limit</div><div class="rule-desc">Applies to all property amounts</div></div>
+      <div class="tds-rule"><div class="rule-label">LTCG Base Rate (> 24 Mos)</div><div class="rule-val">20% + Surcharge + Cess</div></div>
+      <div class="tds-rule"><div class="rule-label">STCG Base Rate (≤ 24 Mos)</div><div class="rule-val">30% + Surcharge + Cess</div></div>
+      <div class="tds-rule"><div class="rule-label">Filing Form</div><div class="rule-val" id="nriRuleChallan">Form 141 Schedule E / Form 27Q</div></div>
+      <div class="tds-rule"><div class="rule-label">TDS Certificate</div><div class="rule-val" id="nriRuleCert">Form 132 (New) / Form 16A</div></div>
+      <div style="margin-top:14px;font-size:13px;font-weight:700;color:var(--text);margin-bottom:6px">Surcharge Slabs:</div>
       <table class="surcharge-table">
-        <tr><th>Income Level</th><th>Surcharge</th></tr>
-        <tr><td>Up to ₹50L</td><td>Nil</td></tr>
-        <tr><td>₹50L – ₹1Cr</td><td>10%</td></tr>
-        <tr><td>₹1Cr – ₹2Cr</td><td>15%</td></tr>
-        <tr><td>₹2Cr – ₹5Cr</td><td>25%</td></tr>
-        <tr><td>Above ₹5Cr</td><td>37%</td></tr>
+        <tr><th>Total Consideration</th><th>Surcharge</th></tr>
+        <tr><td>Up to ₹50 Lakhs</td><td>0%</td></tr>
+        <tr><td>₹50L to ₹1 Crore</td><td>10%</td></tr>
+        <tr><td>₹1 Cr to ₹2 Crores</td><td>15%</td></tr>
+        <tr><td>₹2 Cr to ₹5 Crores</td><td>25%</td></tr>
+        <tr><td>Above ₹5 Crores</td><td>37%</td></tr>
       </table>
-      <div class="alert-warn" style="margin-top:12px">⚠️ NRI can apply for Lower/Nil Deduction Certificate (Form 13) from their Assessing Officer before sale to reduce TDS burden.</div>
+      <div class="alert-warn">⚠️ The buyer is treated as an "assessee-in-default" if tax is under-withheld on an NRI deal.</div>
     </div>
   </div>
 
-  <!-- ── SECTION 194-IB ── -->
+  <!-- ══════════════ TAB 3: SECTION 194-IB ══════════════ -->
   <div class="tds-panel" id="panel-ib">
-    <div class="tds-form-card reveal">
-      <span class="section-num">Section 194-IB</span>
-      <h3>TDS on Rent — Individual/HUF Tenant</h3>
-      <p class="desc">An Individual or HUF (not liable for tax audit) must deduct TDS @ 2% when monthly rent exceeds ₹50,000. TDS is deducted once a year in the last month of the financial year or the last month of tenancy. No TAN required — use PAN. File Form 26QC.</p>
+    <div class="tds-form-card">
+      <span class="section-badge" id="ibBadge">Section 194-IB • Form 141 Schedule A</span>
+      <h3>TDS on Residential Rent (Individual / HUF Tenants)</h3>
+      <p class="desc">Individuals and Hindu Undivided Families not subject to tax audit who pay monthly rent exceeding ₹50,000 must deduct TDS at 2%. Deduction is executed once per financial year in the last month of the tenancy or FY.</p>
+
+      <div class="regime-info-notice" id="ibRegimeNotice">
+        <strong>New Unified Framework:</strong> Challan <strong>Form 141 Schedule A</strong> replaces legacy Form 26QC. Landlords receive a unified <strong>Form 132 Certificate</strong> (replacing Form 16C). Tenant TAN is not required.
+      </div>
+
       <div class="tds-input-row">
         <div class="tds-field">
-          <label>Monthly Rent (₹)</label>
-          <input class="tds-input" type="number" id="ib_monthly" value="60000" oninput="calcIB()">
+          <label>Monthly Rent in ₹</label>
+          <input class="tds-input" type="number" id="ib_monthly" value="65000" min="1000" step="2500" oninput="calcIB()">
         </div>
         <div class="tds-field">
-          <label>Months in Financial Year</label>
+          <label>Tenure Months in FY</label>
           <input class="tds-input" type="number" id="ib_months" value="12" min="1" max="12" oninput="calcIB()">
         </div>
       </div>
+
       <div class="tds-input-row">
         <div class="tds-field">
-          <label>Property Type</label>
-          <select class="tds-input" id="ib_type" onchange="calcIB()">
-            <option value="residential">Residential Property</option>
-            <option value="commercial">Commercial Property</option>
+          <label>Landlord PAN Status</label>
+          <select class="tds-input" id="ib_pan" onchange="calcIB()">
+            <option value="yes">Operative PAN Available (2% Rate)</option>
+            <option value="no">No PAN Provided (20% Higher Rate)</option>
           </select>
         </div>
         <div class="tds-field">
-          <label>Landlord PAN Available?</label>
-          <select class="tds-input" id="ib_pan" onchange="calcIB()">
-            <option value="yes">Yes — PAN Available (2%)</option>
-            <option value="no">No PAN — 20% TDS (Sec 206AA)</option>
+          <label>Deduction Frequency</label>
+          <select class="tds-input" id="ib_timing">
+            <option value="last">Last Month of Financial Year (March)</option>
+            <option value="vacate">Month of Vacating / Lease Termination</option>
           </select>
         </div>
       </div>
-      <div class="tds-field">
-        <label>TDS Deduction Timing</label>
-        <select class="tds-input" id="ib_timing">
-          <option value="last">Last Month of Financial Year (March)</option>
-          <option value="vacate">Last Month of Tenancy (if vacating mid-year)</option>
-        </select>
-      </div>
-      <button class="tds-calc-btn" onclick="calcIB()">Calculate TDS — Section 194-IB</button>
+
+      <button class="tds-calc-btn" onclick="calcIB()">Calculate Section 194-IB TDS</button>
+
       <div class="tds-result" id="ib_result">
-        <div class="tds-result-label">TDS to Deduct (Annually)</div>
+        <div class="tds-result-label" id="ib_result_label">Annual TDS to Deduct (Form 141 Schedule A)</div>
         <div class="tds-result-main" id="ib_tds_amt">₹0</div>
         <div class="tds-breakdown">
-          <div class="tds-bd-row"><span>Annual Rent</span><span class="amt" id="ib_annual">₹0</span></div>
-          <div class="tds-bd-row"><span>TDS Rate</span><span class="amt" id="ib_rate">2%</span></div>
-          <div class="tds-bd-row total"><span>TDS (Deducted Once Annually)</span><span class="amt" id="ib_tds2">₹0</span></div>
+          <div class="tds-bd-row"><span>Total Rent for Financial Year</span><span class="amt" id="ib_annual">₹0</span></div>
+          <div class="tds-bd-row"><span>Statutory Rate</span><span class="amt" id="ib_rate">2%</span></div>
+          <div class="tds-bd-row total"><span>Annual TDS (Deducted Once)</span><span class="amt" id="ib_tds2">₹0</span></div>
           <div class="tds-bd-row total"><span>Net Annual Rent to Landlord</span><span class="amt" id="ib_net">₹0</span></div>
+          <div class="tds-bd-row"><span>Certificate to Provide Landlord</span><span class="amt" id="ib_cert_type">Form 132 (TRACES)</span></div>
         </div>
       </div>
-      <div class="form-steps" style="margin-top:20px">
-        <div style="font-size:13px;font-weight:700;color:var(--text);margin-bottom:6px">📋 How to Deposit TDS 194-IB:</div>
-        <div class="form-step"><span class="step-dot">1</span><span>No TAN needed — use your PAN as tenant</span></div>
-        <div class="form-step"><span class="step-dot">2</span><span>Go to TIN-NSDL / incometax.gov.in → Form 26QC</span></div>
-        <div class="form-step"><span class="step-dot">3</span><span>Fill tenant & landlord PAN, rent details</span></div>
-        <div class="form-step"><span class="step-dot">4</span><span>Pay via challan online</span></div>
-        <div class="form-step"><span class="step-dot">5</span><span>Issue Form 16C to landlord within 15 days</span></div>
-        <div class="form-step"><span class="step-dot">6</span><span><strong>Deadline:</strong> 30 days from end of month of deduction</span></div>
+
+      <div class="form-steps">
+        <div style="font-size:13px;font-weight:700;color:var(--text);margin-bottom:6px">📋 Deposit Steps:</div>
+        <div class="form-step"><span class="step-dot">1</span><span>Tenant logs into e-Filing portal using personal PAN.</span></div>
+        <div class="form-step"><span class="step-dot">2</span><span id="ibStepForm">Select Form 141 Schedule A (or legacy Form 26QC).</span></div>
+        <div class="form-step"><span class="step-dot">3</span><span>Enter landlord PAN, leased residential address, and total rent paid.</span></div>
+        <div class="form-step"><span class="step-dot">4</span><span id="ibStepCert">Furnish Form 132 (or legacy Form 16C) to landlord within 15 days of challan date.</span></div>
       </div>
     </div>
-    <div class="tds-info-card reveal">
-      <h4>📌 Section 194-IB — Key Rules</h4>
-      <div class="tds-rule"><div class="rule-label">Applicable When</div><div class="rule-val">Monthly Rent > ₹50,000</div></div>
-      <div class="tds-rule"><div class="rule-label">Who Deducts</div><div class="rule-val">Individual/HUF Tenant (No TAN needed)</div></div>
-      <div class="tds-rule"><div class="rule-label">TDS Rate (with PAN)</div><div class="rule-val">2% p.a. on annual rent</div><div class="rule-desc">Reduced from 5% to 2% by Finance Act 2024</div></div>
-      <div class="tds-rule"><div class="rule-label">TDS Rate (without PAN)</div><div class="rule-val">20% (Section 206AA)</div></div>
-      <div class="tds-rule"><div class="rule-label">Deduction Frequency</div><div class="rule-val">Once a year — last month of FY or last month of tenancy</div></div>
-      <div class="tds-rule"><div class="rule-label">Form to File</div><div class="rule-val">Form 26QC (online)</div></div>
-      <div class="tds-rule"><div class="rule-label">TDS Certificate</div><div class="rule-val">Form 16C</div></div>
-      <div class="tds-rule"><div class="rule-label">Applies To</div><div class="rule-val">Land, Building, Furniture, Fittings — all property types</div></div>
-      <div class="alert-warn" style="margin-top:12px">⚠️ TDS cannot exceed the last month's rent. If TDS exceeds last month rent, deduct balance from earlier months.</div>
+
+    <!-- Rule Sidebar -->
+    <div class="tds-info-card">
+      <h4>📌 Section 194-IB Rules</h4>
+      <div class="tds-rule"><div class="rule-label">Threshold Limit</div><div class="rule-val">Rent > ₹50,000 / month</div></div>
+      <div class="tds-rule"><div class="rule-label">Standard Rate</div><div class="rule-val">2.0%</div><div class="rule-desc">Reduced from 5% by Finance Act 2024</div></div>
+      <div class="tds-rule"><div class="rule-label">Penal Rate (Sec 206AA)</div><div class="rule-val">20.0%</div><div class="rule-desc">Capped at last month's rent amount</div></div>
+      <div class="tds-rule"><div class="rule-label">Deduction Frequency</div><div class="rule-val">Once Annually</div><div class="rule-desc">In March or final month of tenancy</div></div>
+      <div class="tds-rule"><div class="rule-label">Filing Form</div><div class="rule-val" id="ibRuleChallan">Form 141 Schedule A</div></div>
+      <div class="tds-rule"><div class="rule-label">TDS Certificate</div><div class="rule-val" id="ibRuleCert">Form 132</div></div>
+      <div class="alert-warn">⚠️ The total tax deducted cannot exceed the rent payable for the last month of the tenancy.</div>
     </div>
   </div>
 
-  <!-- ── SECTION 194-I ── -->
+  <!-- ══════════════ TAB 4: SECTION 194-I ══════════════ -->
   <div class="tds-panel" id="panel-i">
-    <div class="tds-form-card reveal">
-      <span class="section-num">Section 194-I</span>
-      <h3>TDS on Rent — Businesses, Companies & Professionals</h3>
-      <p class="desc">Any person (other than Individual/HUF not liable for tax audit) must deduct TDS on rent if annual payment exceeds ₹2,40,000. Applicable to companies, firms, LLPs, and professionals. Monthly deduction. TAN required.</p>
+    <div class="tds-form-card">
+      <span class="section-badge">Section 194-I • Corporate &amp; Audited Entities</span>
+      <h3>TDS on Commercial / Entity Rent (Businesses, LLPs, Companies)</h3>
+      <p class="desc">Applicable to corporate entities, LLPs, and audited business proprietorships paying rent exceeding ₹2,40,000 per financial year. Deduction is executed monthly. A Tax Deduction Account Number (TAN) is required.</p>
+
+      <div class="regime-info-notice">
+        <strong>Filing Architecture:</strong> Business entities remit monthly withholding under standard challans and file quarterly returns. Landlords receive Form 132 / Form 16A from TRACES for their annual income tax filings.
+      </div>
+
       <div class="tds-input-row">
         <div class="tds-field">
-          <label>Monthly Rent (₹)</label>
+          <label>Monthly Rent in ₹</label>
           <input class="tds-input" type="number" id="i_monthly" value="50000" oninput="calcI()">
         </div>
         <div class="tds-field">
-          <label>Advance Rent / Security Deposit (₹)</label>
+          <label>Advance Rent / Security in ₹</label>
           <input class="tds-input" type="number" id="i_advance" value="0" oninput="calcI()">
         </div>
       </div>
+
       <div class="tds-input-row">
         <div class="tds-field">
-          <label>Property Type</label>
+          <label>Asset Category</label>
           <select class="tds-input" id="i_type" onchange="calcI()">
-            <option value="building">Land / Building / Furniture / Fittings (2%)</option>
-            <option value="plant">Plant & Machinery / Equipment (2%)</option>
+            <option value="building">Land / Building / Furniture (2% Rate)</option>
+            <option value="plant">Plant &amp; Machinery (2% Rate)</option>
           </select>
         </div>
         <div class="tds-field">
-          <label>Landlord PAN Available?</label>
+          <label>Landlord PAN Status</label>
           <select class="tds-input" id="i_pan" onchange="calcI()">
-            <option value="yes">Yes — PAN Available</option>
-            <option value="no">No PAN — 20% TDS</option>
+            <option value="yes">PAN Available (2% Standard Rate)</option>
+            <option value="no">No PAN (20% Higher Rate)</option>
           </select>
         </div>
       </div>
-      <button class="tds-calc-btn" onclick="calcI()">Calculate TDS — Section 194-I</button>
+
+      <button class="tds-calc-btn" onclick="calcI()">Calculate Section 194-I TDS</button>
+
       <div class="tds-result" id="i_result">
-        <div class="tds-result-label">Monthly TDS to Deduct</div>
+        <div class="tds-result-label">Monthly Withholding Amount</div>
         <div class="tds-result-main" id="i_tds_monthly">₹0</div>
         <div class="tds-breakdown">
-          <div class="tds-bd-row"><span>Monthly Rent</span><span class="amt" id="i_rent">₹0</span></div>
-          <div class="tds-bd-row"><span>Annual Rent</span><span class="amt" id="i_annual">₹0</span></div>
-          <div class="tds-bd-row"><span>Threshold (₹2,40,000)</span><span class="amt" id="i_thresh">Exceeded ✅</span></div>
-          <div class="tds-bd-row"><span>TDS Rate</span><span class="amt" id="i_rate">2%</span></div>
-          <div class="tds-bd-row total"><span>Monthly TDS</span><span class="amt" id="i_tds2">₹0</span></div>
-          <div class="tds-bd-row total"><span>Annual TDS</span><span class="amt" id="i_annual_tds">₹0</span></div>
-          <div class="tds-bd-row total"><span>TDS on Advance/Deposit</span><span class="amt" id="i_adv_tds">₹0</span></div>
+          <div class="tds-bd-row"><span>Annual Cumulative Rent</span><span class="amt" id="i_annual">₹0</span></div>
+          <div class="tds-bd-row"><span>Threshold Check (₹2,40,000)</span><span class="amt" id="i_thresh">Exceeded ✅</span></div>
+          <div class="tds-bd-row"><span>Monthly TDS Deduction</span><span class="amt" id="i_tds2">₹0</span></div>
+          <div class="tds-bd-row total"><span>Annualized Total TDS</span><span class="amt" id="i_annual_tds">₹0</span></div>
+          <div class="tds-bd-row total"><span>TDS on Advance Rent</span><span class="amt" id="i_adv_tds">₹0</span></div>
         </div>
       </div>
     </div>
-    <div class="tds-info-card reveal">
-      <h4>📌 Section 194-I — Key Rules</h4>
-      <div class="tds-rule"><div class="rule-label">Threshold</div><div class="rule-val">Annual Rent > ₹2,40,000</div><div class="rule-desc">Per payee per financial year</div></div>
-      <div class="tds-rule"><div class="rule-label">Who Deducts</div><div class="rule-val">All except Individual/HUF (below audit threshold)</div></div>
-      <div class="tds-rule"><div class="rule-label">TAN Required</div><div class="rule-val">Yes — Mandatory</div></div>
-      <div class="tds-rule"><div class="rule-label">TDS Rate — Building/Land/Furniture</div><div class="rule-val">2% p.a.</div></div>
-      <div class="tds-rule"><div class="rule-label">TDS Rate — Plant & Machinery</div><div class="rule-val">2% p.a.</div></div>
-      <div class="tds-rule"><div class="rule-label">TDS Rate (without PAN)</div><div class="rule-val">20% (Section 206AA)</div></div>
-      <div class="tds-rule"><div class="rule-label">Deduction Frequency</div><div class="rule-val">Monthly (at time of credit/payment)</div></div>
-      <div class="tds-rule"><div class="rule-label">Form to File</div><div class="rule-val">Form 26Q (Quarterly)</div></div>
-      <div class="tds-rule"><div class="rule-label">TDS Certificate</div><div class="rule-val">Form 16A</div></div>
-      <div class="tds-rule"><div class="rule-label">Due Date for Deposit</div><div class="rule-val">7th of following month (31 March for March quarter)</div></div>
+
+    <!-- Rule Sidebar -->
+    <div class="tds-info-card">
+      <h4>📌 Section 194-I Rules</h4>
+      <div class="tds-rule"><div class="rule-label">Annual Threshold</div><div class="rule-val">₹2,40,000 / year</div></div>
+      <div class="tds-rule"><div class="rule-label">Rate (Land/Building)</div><div class="rule-val">2.0%</div><div class="rule-desc">Harmonized under amended provisions</div></div>
+      <div class="tds-rule"><div class="rule-label">TAN Requirement</div><div class="rule-val">Mandatory</div></div>
+      <div class="tds-rule"><div class="rule-label">Deposit Frequency</div><div class="rule-val">7th of Next Month</div><div class="rule-desc">30th April for March deduction</div></div>
+      <div class="tds-rule"><div class="rule-label">Quarterly Return</div><div class="rule-val">Form 26Q</div></div>
+      <div class="tds-rule"><div class="rule-label">TDS Certificate</div><div class="rule-val">Form 16A / Form 132</div></div>
     </div>
   </div>
 
+  <!-- Statutory Timeline / Due Date Calculator -->
+  <div class="comparison-table-wrap p-4" style="margin-top: 36px;">
+    <h3 class="text-sm fw-bold mb-2">🗓️ Statutory Due Date &amp; Certificate Issuance Timeline</h3>
+    <p class="text-xs text-muted mb-4">Calculate exact statutory challan deposit dates and certificate generation deadlines based on transaction month.</p>
+    
+    <div class="d-grid grid-cols-2 gap-4">
+      <div>
+        <label class="form-label text-xs fw-bold text-muted text-uppercase" for="taxEventDate">Date of Payment / Credit:</label>
+        <input type="date" id="taxEventDate" class="tds-input" onchange="calcDeadlines()">
+      </div>
+      <div class="p-3 bg-secondary rounded text-xs">
+        <div class="d-flex justify-between py-1">
+          <span class="text-muted">Challan Deposit Deadline (Form 141 / 26QB):</span>
+          <strong class="text-blue" id="lblChallanDue">Select Date</strong>
+        </div>
+        <div class="d-flex justify-between py-1 border-top mt-1 pt-1">
+          <span class="text-muted">Certificate Download Deadline (<span id="lblCertName">Form 132</span>):</span>
+          <strong class="text-green" id="lblCertDue">Select Date</strong>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Detailed Statutory Comparison Table -->
+  <div class="comparison-table-wrap">
+    <div style="padding: 20px 24px; border-bottom: 1.5px solid var(--border, #E2E8F0);">
+      <h3 style="font-size: 16px; font-weight: 700; margin: 0 0 4px;">Detailed Framework Comparison: New Form 141 &amp; Form 132 vs Legacy Regime</h3>
+      <p style="font-size: 12.5px; color: var(--text-muted, #64748B); margin: 0;">Comprehensive statutory mapping across schedules, forms, certificates, and procedural rules.</p>
+    </div>
+    <div style="overflow-x: auto;">
+      <table class="comparison-table">
+        <thead>
+          <tr>
+            <th>Transaction Nature</th>
+            <th>New Unified Regime (Reformed)</th>
+            <th>Legacy Framework</th>
+            <th>Generated TDS Certificate</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><strong>Property Purchase from Resident (&ge; ₹50L)</strong></td>
+            <td><span class="badge badge-blue">Form 141 Schedule B</span></td>
+            <td>Form 26QB</td>
+            <td><strong class="text-green">Form 132</strong> (Replaces Form 16B)</td>
+          </tr>
+          <tr>
+            <td><strong>Property Purchase from NRI</strong></td>
+            <td><span class="badge badge-blue">Form 141 Schedule E</span> (PAN-based)</td>
+            <td>Form 27Q (Requires TAN)</td>
+            <td><strong class="text-green">Form 132</strong> (Replaces Form 16A)</td>
+          </tr>
+          <tr>
+            <td><strong>High Value Rent by Individual (&gt; ₹50k/mo)</strong></td>
+            <td><span class="badge badge-blue">Form 141 Schedule A</span></td>
+            <td>Form 26QC</td>
+            <td><strong class="text-green">Form 132</strong> (Replaces Form 16C)</td>
+          </tr>
+          <tr>
+            <td><strong>Commercial Rent by Companies (&gt; ₹2.4L/yr)</strong></td>
+            <td>Form 141 Schedule A / Form 26Q</td>
+            <td>Form 26Q (Quarterly)</td>
+            <td><strong class="text-green">Form 132</strong> / Form 16A</td>
+          </tr>
+          <tr>
+            <td><strong>Joint Seller / Multi-Owner Deeds</strong></td>
+            <td>Single consolidated Form 141 return</td>
+            <td>Multiple Form 26QB per buyer-seller pair</td>
+            <td>Individual Form 132 generated per owner</td>
+          </tr>
+          <tr>
+            <td><strong>Correction &amp; Rectification Window</strong></td>
+            <td>Direct online correction via TRACES</td>
+            <td>Challan correction on TRACES</td>
+            <td>Re-issued updated certificate</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
 </div>
 
+<!-- CTA Section -->
 <section class="cta-section">
-  <h2 class="section-title reveal">Need Help with <em>TDS Compliance?</em></h2>
-  <p class="reveal">Our team works with certified CAs to ensure your property transaction is fully TDS-compliant. Contact us for a free consultation.</p>
-  <div class="cta-btns reveal">
-    <a href="contact.html" class="btn btn-white btn-lg">📋 Get Free Advice</a>
-    <a href="https://wa.me/919326990050?utm_source=whatsapp&utm_medium=chat&utm_campaign=tds_calc" class="btn-outline-white btn-lg" target="_blank" rel="noopener noreferrer">💬 WhatsApp Us</a>
+  <div class="container">
+    <h2>Need Assistance with <em>Property TDS &amp; Registration</em> in Mumbai?</h2>
+    <p>Our dedicated regulatory desk assists buyers and sellers with title searches, Leave &amp; License agreements, Form 141 filing, and TRACES Form 132 certificate generation.</p>
+    <div class="cta-btns">
+      <a href="contact.html" class="btn btn-white btn-lg">Book Consultation</a>
+      <a href="https://wa.me/919326990050?text=Hello%20PFRE,%20I%20need%20assistance%20with%20Property%20TDS%20compliance." class="btn btn-outline-white btn-lg" target="_blank" rel="noopener noreferrer">💬 WhatsApp Compliance Desk</a>
+    </div>
   </div>
 </section>
 
+<!-- Footer Mount Point -->
 <footer class="footer">
   <div class="footer-grid">
     <div class="footer-brand">
-      <div class="footer-logo"><svg width="36" height="36" viewBox="0 0 40 40" fill="none"><circle cx="17" cy="17" r="13" stroke="#2563EB" stroke-width="2.8"/><path d="M17 22V18" stroke="#2563EB" stroke-width="2.2" stroke-linecap="round"/><rect x="14" y="18" width="6" height="4" rx="0.5" stroke="#2563EB" stroke-width="2.2"/><path d="M12 18L17 13L22 18" stroke="#2563EB" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/><path d="M27 27L33 33" stroke="#2563EB" stroke-width="2.8" stroke-linecap="round"/></svg><div class="footer-logo-text"><div class="brand">Property Finder Real Estate</div><div class="sub">Mumbai, Maharashtra</div></div></div>
+      <div class="footer-logo">
+        <div class="brand">Property Finder Real Estate</div>
+        <div class="sub">Malad West, Mumbai</div>
+      </div>
       <p class="tagline">"Your Search Ends Here."</p>
-      <div class="social-row">
-        <a href="https://www.instagram.com/propertyfinderrealestate" class="social-btn" target="_blank" rel="noopener noreferrer" aria-label="Instagram"><svg width="16" height="16" fill="none" stroke="white" stroke-width="2" viewBox="0 0 24 24"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1112.63 8 4 4 0 0116 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg></a>
-        <a href="https://www.facebook.com/PropertyFinderRealEstate/reviews" class="social-btn" target="_blank" rel="noopener noreferrer" aria-label="Facebook Reviews"><svg width="16" height="16" fill="white" viewBox="0 0 24 24"><path d="M18 2h-3a5 5 0 00-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 011-1h3z"/></svg></a>
-        <a href="https://www.linkedin.com/company/propertyfinderrealestate" class="social-btn" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn"><svg width="16" height="16" fill="white" viewBox="0 0 24 24"><path d="M16 8a6 6 0 016 6v7h-4v-7a2 2 0 00-2-2 2 2 0 00-2 2v7h-4v-7a6 6 0 016-6zM2 9h4v12H2z"/><circle cx="4" cy="4" r="2"/></svg></a>
-        <a href="https://www.youtube.com/@PropertyFinderRealEstate" class="social-btn" target="_blank" rel="noopener noreferrer" aria-label="YouTube"><svg width="16" height="16" viewBox="0 0 24 24" fill="white"><path d="M23.498 6.186a3.016 3.016 0 00-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 00.502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 002.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 002.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/></svg></a>
-        <a href="https://x.com/PropertyFinderA" class="social-btn" target="_blank" rel="noopener noreferrer" aria-label="X / Twitter"><svg width="16" height="16" fill="white" viewBox="0 0 24 24"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg></a>
-        <a href="https://in.pinterest.com/propertyfinderrealestate/" class="social-btn" target="_blank" rel="noopener noreferrer" aria-label="Pinterest"><svg width="16" height="16" viewBox="0 0 24 24" fill="white"><path d="M12 0C5.373 0 0 5.373 0 12c0 5.084 3.163 9.426 7.627 11.174-.105-.949-.2-2.405.042-3.441.218-.937 1.407-5.965 1.407-5.965s-.359-.719-.359-1.782c0-1.668.967-2.914 2.171-2.914 1.023 0 1.518.769 1.518 1.69 0 1.029-.655 2.568-.994 3.995-.283 1.194.599 2.169 1.777 2.169 2.133 0 3.772-2.249 3.772-5.495 0-2.873-2.064-4.882-5.012-4.882-3.414 0-5.418 2.561-5.418 5.207 0 1.031.397 2.138.893 2.738a.36.36 0 01.083.345l-.333 1.36c-.053.22-.174.267-.402.161-1.499-.698-2.436-2.889-2.436-4.649 0-3.785 2.75-7.262 7.929-7.262 4.163 0 7.398 2.967 7.398 6.931 0 4.136-2.607 7.464-6.227 7.464-1.216 0-2.359-.632-2.75-1.378l-.748 2.853c-.271 1.043-1.002 2.35-1.492 3.146C9.57 23.812 10.763 24 12 24c6.627 0 12-5.373 12-12S18.627 0 12 0z"/></svg></a>
-        <a href="https://jsdl.in/RSL-XGK1779888146" class="social-btn" target="_blank" rel="noopener noreferrer" aria-label="JustDial"><svg width="16" height="16" viewBox="0 0 24 24"><rect width="24" height="24" rx="5" fill="#FF6B35"/><text x="12" y="17" font-family="Arial,sans-serif" font-size="10" font-weight="900" text-anchor="middle" fill="white">JD</text></svg></a>
+      <div class="text-xs text-muted" style="margin-top: 10px;">
+        MahaRERA: A51800000412 • Proprietor: Saurav Ganesh Chowdhury
       </div>
     </div>
-    <div class="footer-col"><h4>TDS Calculators</h4><a href="tds-calculators.html">Sec 194-IA — Resident Seller</a><a href="tds-calculators.html">Sec 195 — NRI Seller</a><a href="tds-calculators.html">Sec 194-IB — Rent (Individual)</a><a href="tds-calculators.html">Sec 194-I — Rent (Others)</a></div>
-    <div class="footer-col"><h4>Quick Links</h4><a href="calculators.html">EMI Calculator</a><a href="calculators.html">Stamp Duty</a><a href="insurance.html">Property Insurance</a><a href="faq.html">FAQ</a><a href="contact.html">Contact</a></div>
-    <div class="footer-col"><h4>Contact</h4>
+    <div class="footer-col">
+      <h4>TDS Calculators</h4>
+      <a href="tds-calculators.html">Sec 194-IA (Resident)</a>
+      <a href="tds-calculators.html">Sec 195 (NRI Seller)</a>
+      <a href="tds-calculators.html">Sec 194-IB (Tenant Rent)</a>
+      <a href="tds-calculators.html">Sec 194-I (Entity Rent)</a>
+    </div>
+    <div class="footer-col">
+      <h4>Quick Links</h4>
+      <a href="calculators.html">EMI Calculator</a>
+      <a href="agreement-registration.html">Agreement Registration</a>
+      <a href="services.html">Services</a>
+      <a href="contact.html">Contact Us</a>
+    </div>
+    <div class="footer-col">
+      <h4>Direct Contact</h4>
       <div class="footer-contact-row"><span>📞</span><a href="tel:+919326990050">+91 93269 90050</a></div>
       <div class="footer-contact-row"><span>✉️</span><a href="mailto:propertyfinderre@gmail.com">propertyfinderre@gmail.com</a></div>
+      <div class="text-xs text-muted" style="margin-top: 8px;">
+        Shop No. 2, Ground Floor, Baf-Hira Nagar, Jankalyan Nagar Road, Malad West, Mumbai 400095
+      </div>
     </div>
   </div>
-  <div class="footer-bottom"><span>© 2026 Property Finder Real Estate. All rights reserved.</span></div>
+  <div class="footer-bottom">
+    <span>© 2026 Property Finder Real Estate. All rights reserved.</span>
+  </div>
 </footer>
-<script src="js/widgets.js"></script>
-<script src="js/i18n.js"></script>
-<script>
-function openTDSTab(id, btn) {
-  document.querySelectorAll('.tds-panel').forEach(p => p.classList.remove('active'));
-  document.querySelectorAll('.tds-tab').forEach(b => b.classList.remove('active'));
-  document.getElementById('panel-' + id)?.classList.add('active');
-  btn.classList.add('active');
-}
-function fmt(n) { return '₹' + Math.abs(Math.round(n)).toLocaleString('en-IN'); }
 
-// 194-IA
-function calcIA() {
-  const sale = parseFloat(document.getElementById('ia_value').value) || 0;
-  const stamp = parseFloat(document.getElementById('ia_stamp').value) || 0;
-  const pan = document.getElementById('ia_pan').value;
-  const sellers = parseInt(document.getElementById('ia_sellers').value) || 1;
-  if (sale < 5000000 && stamp < 5000000) {
-    showResult('ia_result', false);
-    document.getElementById('ia_tds_amt').textContent = 'Below ₹50L Threshold — No TDS';
-    showResult('ia_result', true);
-    return;
-  }
-  const base = Math.max(sale, stamp);
-  const rate = pan === 'yes' ? 0.01 : 0.20;
-  const tds = base * rate;
-  const net = sale - tds;
-  document.getElementById('ia_base').textContent = fmt(base);
-  document.getElementById('ia_rate').textContent = (rate * 100) + '%';
-  document.getElementById('ia_tds2').textContent = fmt(tds);
-  document.getElementById('ia_net').textContent = fmt(net);
-  document.getElementById('ia_tds_amt').textContent = fmt(tds);
-  showResult('ia_result', true);
-}
-// 195 NRI
-function calcNRI() {
-  const sale = parseFloat(document.getElementById('nri_sale').value) || 0;
-  const purchase = parseFloat(document.getElementById('nri_purchase').value) || 0;
-  const yrBuy = parseInt(document.getElementById('nri_yr_buy').value) || 2020;
-  const yrSell = parseInt(document.getElementById('nri_yr_sell').value) || 2025;
-  const type = document.getElementById('nri_type').value;
-  const sur = parseFloat(document.getElementById('nri_surcharge').value) || 0;
-  const cert = document.getElementById('nri_cert').value;
-  if (cert === 'yes') {
-    document.getElementById('nri_tds_amt').textContent = 'Reduced Rate as per Form 13 Certificate';
-    showResult('nri_result', true);
-    return;
-  }
-  const gains = sale - purchase;
-  const holdYears = yrSell - yrBuy;
-  const isLTCG = holdYears > 2;
-  const baseRate = isLTCG ? 0.20 : 0.30;
-  const effRate = baseRate * (1 + sur) * 1.04;
-  const tds = sale * effRate; // TDS on full sale price
-  const net = sale - tds;
-  document.getElementById('nri_gains').textContent = fmt(gains);
-  document.getElementById('nri_gtype').textContent = isLTCG ? 'LTCG (' + holdYears + ' yrs)' : 'STCG (' + holdYears + ' yrs)';
-  document.getElementById('nri_base_rate').textContent = (baseRate * 100) + '%';
-  document.getElementById('nri_sur').textContent = (sur * 100) + '%';
-  document.getElementById('nri_eff_rate').textContent = (effRate * 100).toFixed(2) + '%';
-  document.getElementById('nri_tds2').textContent = fmt(tds);
-  document.getElementById('nri_net').textContent = fmt(net);
-  document.getElementById('nri_tds_amt').textContent = fmt(tds);
-  showResult('nri_result', true);
-}
-// 194-IB
-function calcIB() {
-  const monthly = parseFloat(document.getElementById('ib_monthly').value) || 0;
-  const months = parseInt(document.getElementById('ib_months').value) || 12;
-  const pan = document.getElementById('ib_pan').value;
-  if (monthly <= 50000) {
-    document.getElementById('ib_tds_amt').textContent = 'Monthly Rent ≤ ₹50,000 — No TDS';
-    showResult('ib_result', true); return;
-  }
-  const annual = monthly * months;
-  const rate = pan === 'yes' ? 0.02 : 0.20;
-  const tds = annual * rate;
-  const net = annual - tds;
-  document.getElementById('ib_annual').textContent = fmt(annual);
-  document.getElementById('ib_rate').textContent = (rate * 100) + '%';
-  document.getElementById('ib_tds2').textContent = fmt(tds);
-  document.getElementById('ib_net').textContent = fmt(net);
-  document.getElementById('ib_tds_amt').textContent = fmt(tds);
-  showResult('ib_result', true);
-}
-// 194-I
-function calcI() {
-  const monthly = parseFloat(document.getElementById('i_monthly').value) || 0;
-  const advance = parseFloat(document.getElementById('i_advance').value) || 0;
-  const pan = document.getElementById('i_pan').value;
-  const annual = monthly * 12;
-  if (annual <= 240000) {
-    document.getElementById('i_tds_monthly').textContent = 'Annual Rent ≤ ₹2,40,000 — No TDS';
-    document.getElementById('i_thresh').textContent = 'Below Threshold ❌';
-    showResult('i_result', true); return;
-  }
-  const rate = pan === 'yes' ? 0.02 : 0.20;
-  const monthlyTDS = monthly * rate;
-  const annualTDS = annual * rate;
-  const advTDS = advance * rate;
-  document.getElementById('i_rent').textContent = fmt(monthly);
-  document.getElementById('i_annual').textContent = fmt(annual);
-  document.getElementById('i_thresh').textContent = 'Exceeded ✅';
-  document.getElementById('i_rate').textContent = (rate * 100) + '%';
-  document.getElementById('i_tds2').textContent = fmt(monthlyTDS);
-  document.getElementById('i_annual_tds').textContent = fmt(annualTDS);
-  document.getElementById('i_adv_tds').textContent = fmt(advTDS);
-  document.getElementById('i_tds_monthly').textContent = fmt(monthlyTDS);
-  showResult('i_result', true);
-}
-function showResult(id, show) { document.getElementById(id)?.classList.toggle('show', show); }
-window.addEventListener('load', () => { calcIA(); calcNRI(); calcIB(); calcI(); });
-</script>
+<!-- Scripts -->
 <script src="js/config.js"></script>
-<script src="js/api.js" defer></script>
 <script src="js/security.js"></script>
-<script src="js/tracker.js" defer></script>
 <script src="js/theme.js"></script>
 <script>
-if ("serviceWorker" in navigator) {
-  window.addEventListener("load", () => {
-    navigator.serviceWorker.register("./sw.js").catch(() => {});
+  let currentRegime = 'new'; // 'new' (Form 141 & 132) or 'legacy' (Form 26QB & 16B)
+
+  function fmt(n) { 
+    return '₹' + Math.abs(Math.round(n)).toLocaleString('en-IN'); 
+  }
+
+  function setRegime(regime) {
+    currentRegime = regime;
+    const btnNew = document.getElementById('btnRegimeNew');
+    const btnLegacy = document.getElementById('btnRegimeLegacy');
+    const badge = document.getElementById('activeRegimeBadge');
+    const sub = document.getElementById('activeRegimeSub');
+    const certLbl = document.getElementById('lblCertName');
+
+    if (regime === 'new') {
+      btnNew.classList.add('active');
+      btnLegacy.classList.remove('active');
+      badge.textContent = 'New Regime Active: Form 141 (Unified Statements)';
+      badge.className = 'badge badge-green';
+      sub.textContent = 'Reformed Challan-cum-Statement Architecture with Form 132';
+      certLbl.textContent = 'Form 132';
+
+      // Tab 1 UI
+      document.getElementById('iaBadge').textContent = 'Section 194-IA • Form 141 Schedule B';
+      document.getElementById('iaRegimeNotice').innerHTML = '<strong>New Unified Regime Active:</strong> Filing is done through <strong>Form 141 Schedule B</strong> on the Income Tax Portal. Once processed, the seller generates a unified <strong>Form 132 TDS Certificate</strong> on TRACES (replacing legacy Form 16B). Joint sellers are consolidated in a single schedule.';
+      document.getElementById('ia_result_label').textContent = 'TDS to Remit (Form 141 Schedule B)';
+      document.getElementById('ia_cert_type').textContent = 'Form 132 (TRACES Certificate)';
+      document.getElementById('iaStepsHeader').textContent = '📋 Procedural Filing Steps (Form 141):';
+      document.getElementById('iaStep2').innerHTML = 'Go to <strong>e-File → e-Pay Tax → New Payment</strong> and select <strong>Form 141 (Schedule B - Property Transfer)</strong>.';
+      document.getElementById('iaStep5').innerHTML = 'Download <strong>Form 132 Certificate</strong> from TRACES portal and furnish to seller.';
+      document.getElementById('iaRuleChallan').textContent = 'Form 141 Schedule B';
+      document.getElementById('iaRuleChallanDesc').textContent = 'Unified single statement for all sellers';
+      document.getElementById('iaRuleCert').textContent = 'Form 132';
+      document.getElementById('iaRuleCertDesc').textContent = 'Unified certificate downloaded via TRACES';
+
+      // Tab 2 UI
+      document.getElementById('nriBadge').textContent = 'Section 195 • Form 141 Schedule E';
+      document.getElementById('nriRegimeNotice').innerHTML = '<strong>New Unified Framework:</strong> Form 141 Schedule E facilitates PAN-based remittance without requiring a prior TAN for qualifying residential acquisitions. The seller obtains a consolidated <strong>Form 132 Certificate</strong> upon processing.';
+      document.getElementById('nri_cert_type').textContent = 'Form 132 (TRACES Certificate)';
+      document.getElementById('nriRuleChallan').textContent = 'Form 141 Schedule E';
+      document.getElementById('nriRuleCert').textContent = 'Form 132';
+
+      // Tab 3 UI
+      document.getElementById('ibBadge').textContent = 'Section 194-IB • Form 141 Schedule A';
+      document.getElementById('ibRegimeNotice').innerHTML = '<strong>New Unified Framework:</strong> Challan <strong>Form 141 Schedule A</strong> replaces legacy Form 26QC. Landlords receive a unified <strong>Form 132 Certificate</strong> (replacing Form 16C). Tenant TAN is not required.';
+      document.getElementById('ib_result_label').textContent = 'Annual TDS to Deduct (Form 141 Schedule A)';
+      document.getElementById('ib_cert_type').textContent = 'Form 132 (TRACES Certificate)';
+      document.getElementById('ibStepForm').textContent = 'Select Form 141 Schedule A (Rent Payment).';
+      document.getElementById('ibStepCert').textContent = 'Furnish Form 132 to landlord within 15 days of challan date.';
+      document.getElementById('ibRuleChallan').textContent = 'Form 141 Schedule A';
+      document.getElementById('ibRuleCert').textContent = 'Form 132';
+
+    } else {
+      btnLegacy.classList.add('active');
+      btnNew.classList.remove('active');
+      badge.textContent = 'Legacy Regime Active: Individual Forms (26QB / 26QC)';
+      badge.className = 'badge badge-blue';
+      sub.textContent = 'Individual Challan-cum-Statements & Form 16B/16C Certificates';
+      certLbl.textContent = 'Form 16B / 16C';
+
+      // Tab 1 UI
+      document.getElementById('iaBadge').textContent = 'Section 194-IA • Form 26QB';
+      document.getElementById('iaRegimeNotice').innerHTML = '<strong>Legacy Regime Active:</strong> Filing is done through individual <strong>Form 26QB</strong> statements. Separate statements must be filed for each buyer-seller combination. Upon TRACES processing, <strong>Form 16B Certificate</strong> is issued.';
+      document.getElementById('ia_result_label').textContent = 'TDS to Remit (Form 26QB)';
+      document.getElementById('ia_cert_type').textContent = 'Form 16B (TRACES Certificate)';
+      document.getElementById('iaStepsHeader').textContent = '📋 Procedural Filing Steps (Form 26QB):';
+      document.getElementById('iaStep2').innerHTML = 'Go to <strong>e-File → e-Pay Tax → New Payment</strong> and select <strong>Form 26QB (TDS on Property)</strong>.';
+      document.getElementById('iaStep5').innerHTML = 'Download <strong>Form 16B Certificate</strong> from TRACES portal after 4-5 working days.';
+      document.getElementById('iaRuleChallan').textContent = 'Form 26QB';
+      document.getElementById('iaRuleChallanDesc').textContent = 'Individual form per buyer-seller pair';
+      document.getElementById('iaRuleCert').textContent = 'Form 16B';
+      document.getElementById('iaRuleCertDesc').textContent = 'Individual certificate per Form 26QB';
+
+      // Tab 2 UI
+      document.getElementById('nriBadge').textContent = 'Section 195 • Form 27Q (Requires TAN)';
+      document.getElementById('nriRegimeNotice').innerHTML = '<strong>Legacy Framework:</strong> Buyer must obtain a Tax Deduction Account Number (TAN) and remit tax quarterly via <strong>Form 27Q</strong>. Landlords receive Form 16A.';
+      document.getElementById('nri_cert_type').textContent = 'Form 16A (TRACES Certificate)';
+      document.getElementById('nriRuleChallan').textContent = 'Form 27Q (Quarterly Return)';
+      document.getElementById('nriRuleCert').textContent = 'Form 16A';
+
+      // Tab 3 UI
+      document.getElementById('ibBadge').textContent = 'Section 194-IB • Form 26QC';
+      document.getElementById('ibRegimeNotice').innerHTML = '<strong>Legacy Framework:</strong> Challan <strong>Form 26QC</strong> is filed annually. Landlord is issued <strong>Form 16C Certificate</strong> from TRACES.';
+      document.getElementById('ib_result_label').textContent = 'Annual TDS to Deduct (Form 26QC)';
+      document.getElementById('ib_cert_type').textContent = 'Form 16C (TRACES Certificate)';
+      document.getElementById('ibStepForm').textContent = 'Select Form 26QC (TDS on Rent).';
+      document.getElementById('ibStepCert').textContent = 'Furnish Form 16C to landlord within 15 days of challan date.';
+      document.getElementById('ibRuleChallan').textContent = 'Form 26QC';
+      document.getElementById('ibRuleCert').textContent = 'Form 16C';
+    }
+
+    calcIA();
+    calcNRI();
+    calcIB();
+    calcI();
+    calcDeadlines();
+  }
+
+  function openTDSTab(id, btn) {
+    document.querySelectorAll('.tds-panel').forEach(p => p.classList.remove('active'));
+    document.querySelectorAll('.tds-tab').forEach(b => b.classList.remove('active'));
+    document.getElementById('panel-' + id)?.classList.add('active');
+    btn.classList.add('active');
+  }
+
+  // 194-IA Computation
+  function calcIA() {
+    const sale = parseFloat(document.getElementById('ia_value').value) || 0;
+    const stamp = parseFloat(document.getElementById('ia_stamp').value) || 0;
+    const parking = parseFloat(document.getElementById('ia_parking').value) || 0;
+    const maint = parseFloat(document.getElementById('ia_maint').value) || 0;
+    const other = parseFloat(document.getElementById('ia_other').value) || 0;
+    const pan = document.getElementById('ia_pan').value;
+    const sellers = Math.max(1, parseInt(document.getElementById('ia_sellers').value) || 1);
+
+    const baseVal = Math.max(sale, stamp);
+    const taxableBase = baseVal + parking + maint + other;
+
+    const res = document.getElementById('ia_result');
+    if (taxableBase < 5000000) {
+      document.getElementById('ia_tds_amt').textContent = 'Below ₹50L Threshold — No TDS';
+      document.getElementById('ia_base').textContent = fmt(taxableBase);
+      document.getElementById('ia_rate').textContent = '0%';
+      document.getElementById('ia_tds2').textContent = '₹0';
+      document.getElementById('ia_per_seller').textContent = '₹0';
+      document.getElementById('ia_net').textContent = fmt(sale + parking + maint + other);
+      res.classList.add('show');
+      return;
+    }
+
+    const rate = pan === 'yes' ? 0.01 : 0.20;
+    const tds = taxableBase * rate;
+    const perSellerTDS = tds / sellers;
+    const net = (sale + parking + maint + other) - tds;
+
+    document.getElementById('ia_base').textContent = fmt(taxableBase);
+    document.getElementById('ia_rate').textContent = (rate * 100).toFixed(1) + '%';
+    document.getElementById('ia_tds2').textContent = fmt(tds);
+    document.getElementById('ia_sellers_count').textContent = sellers;
+    document.getElementById('ia_per_seller').textContent = fmt(perSellerTDS);
+    document.getElementById('ia_net').textContent = fmt(net);
+    document.getElementById('ia_tds_amt').textContent = fmt(tds);
+    res.classList.add('show');
+  }
+
+  // 195 NRI Computation
+  function calcNRI() {
+    const sale = parseFloat(document.getElementById('nri_sale').value) || 0;
+    const purchase = parseFloat(document.getElementById('nri_purchase').value) || 0;
+    const type = document.getElementById('nri_type').value;
+    const sur = parseFloat(document.getElementById('nri_surcharge').value) || 0;
+    const cert = document.getElementById('nri_cert').value;
+
+    const res = document.getElementById('nri_result');
+    if (cert === 'yes') {
+      document.getElementById('nri_tds_amt').textContent = 'Specified Certificate Rate Applies';
+      document.getElementById('nri_gains').textContent = fmt(Math.max(0, sale - purchase));
+      document.getElementById('nri_base_rate').textContent = 'Form 13 Lower Rate';
+      document.getElementById('nri_sur').textContent = 'Per Order';
+      document.getElementById('nri_eff_rate').textContent = 'Reduced';
+      document.getElementById('nri_tds2').textContent = 'As per Assessing Officer Order';
+      document.getElementById('nri_net').textContent = 'Subject to Order Terms';
+      res.classList.add('show');
+      return;
+    }
+
+    const gains = Math.max(0, sale - purchase);
+    const baseRate = type === 'ltcg' ? 0.20 : 0.30;
+    const effRate = baseRate * (1 + sur) * 1.04;
+    const tds = sale * effRate;
+    const net = sale - tds;
+
+    document.getElementById('nri_gains').textContent = fmt(gains);
+    document.getElementById('nri_base_rate').textContent = (baseRate * 100) + '%';
+    document.getElementById('nri_sur').textContent = (sur * 100) + '%';
+    document.getElementById('nri_eff_rate').textContent = (effRate * 100).toFixed(2) + '%';
+    document.getElementById('nri_tds2').textContent = fmt(tds);
+    document.getElementById('nri_net').textContent = fmt(net);
+    document.getElementById('nri_tds_amt').textContent = fmt(tds);
+    res.classList.add('show');
+  }
+
+  // 194-IB Computation
+  function calcIB() {
+    const monthly = parseFloat(document.getElementById('ib_monthly').value) || 0;
+    const months = parseInt(document.getElementById('ib_months').value) || 12;
+    const pan = document.getElementById('ib_pan').value;
+
+    const res = document.getElementById('ib_result');
+    if (monthly <= 50000) {
+      document.getElementById('ib_tds_amt').textContent = 'Rent ≤ ₹50,000/mo — No TDS';
+      document.getElementById('ib_annual').textContent = fmt(monthly * months);
+      document.getElementById('ib_rate').textContent = '0%';
+      document.getElementById('ib_tds2').textContent = '₹0';
+      document.getElementById('ib_net').textContent = fmt(monthly * months);
+      res.classList.add('show');
+      return;
+    }
+
+    const annual = monthly * months;
+    let rate = pan === 'yes' ? 0.02 : 0.20;
+    let tds = annual * rate;
+
+    // Without PAN, TDS cannot exceed rent for the last month
+    if (pan === 'no' && tds > monthly) {
+      tds = monthly;
+    }
+
+    const net = annual - tds;
+    document.getElementById('ib_annual').textContent = fmt(annual);
+    document.getElementById('ib_rate').textContent = (rate * 100) + '%';
+    document.getElementById('ib_tds2').textContent = fmt(tds);
+    document.getElementById('ib_net').textContent = fmt(net);
+    document.getElementById('ib_tds_amt').textContent = fmt(tds);
+    res.classList.add('show');
+  }
+
+  // 194-I Entity Computation
+  function calcI() {
+    const monthly = parseFloat(document.getElementById('i_monthly').value) || 0;
+    const advance = parseFloat(document.getElementById('i_advance').value) || 0;
+    const pan = document.getElementById('i_pan').value;
+    const annual = monthly * 12;
+
+    const res = document.getElementById('i_result');
+    if (annual <= 240000) {
+      document.getElementById('i_tds_monthly').textContent = 'Rent ≤ ₹2.4L/yr — No TDS';
+      document.getElementById('i_annual').textContent = fmt(annual);
+      document.getElementById('i_thresh').textContent = 'Below Threshold ❌';
+      document.getElementById('i_tds2').textContent = '₹0';
+      document.getElementById('i_annual_tds').textContent = '₹0';
+      document.getElementById('i_adv_tds').textContent = '₹0';
+      res.classList.add('show');
+      return;
+    }
+
+    const rate = pan === 'yes' ? 0.02 : 0.20;
+    const monthlyTDS = monthly * rate;
+    const annualTDS = annual * rate;
+    const advTDS = advance * rate;
+
+    document.getElementById('i_annual').textContent = fmt(annual);
+    document.getElementById('i_thresh').textContent = 'Exceeded ✅';
+    document.getElementById('i_tds2').textContent = fmt(monthlyTDS);
+    document.getElementById('i_annual_tds').textContent = fmt(annualTDS);
+    document.getElementById('i_adv_tds').textContent = fmt(advTDS);
+    document.getElementById('i_tds_monthly').textContent = fmt(monthlyTDS);
+    res.classList.add('show');
+  }
+
+  // Deadline Calculations
+  function calcDeadlines() {
+    const inDate = document.getElementById('taxEventDate').value;
+    if (!inDate) return;
+
+    const d = new Date(inDate);
+    if (isNaN(d.getTime())) return;
+
+    // Month end + 30 days
+    const year = d.getFullYear();
+    const month = d.getMonth();
+    const lastDayOfMonth = new Date(year, month + 1, 0);
+
+    const challanDate = new Date(lastDayOfMonth);
+    challanDate.setDate(challanDate.getDate() + 30);
+
+    const certDate = new Date(challanDate);
+    certDate.setDate(certDate.getDate() + 15);
+
+    const opt = { day: '2-digit', month: 'short', year: 'numeric' };
+    document.getElementById('lblChallanDue').textContent = challanDate.toLocaleDateString('en-IN', opt);
+    document.getElementById('lblCertDue').textContent = certDate.toLocaleDateString('en-IN', opt);
+  }
+
+  // On page load
+  window.addEventListener('load', () => {
+    document.getElementById('taxEventDate').value = new Date().toISOString().split('T')[0];
+    setRegime('new');
   });
-}
 </script>
 </body>
 </html>
