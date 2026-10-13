@@ -1,330 +1,139 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" data-theme="light">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>404 — Page Not Found | Property Finder Real Estate Mumbai</title>
-  <meta name="description" content="The page you are looking for could not be found. Browse verified residential and commercial properties across Mumbai with Property Finder Real Estate.">
+  <title>page not found 404 | Property Finder Real Estate Mumbai</title>
+  <meta name="description" content="The requested page on Property Finder Real Estate could not be located. Explore verified property listings, rental apartments, and registration services across Mumbai.">
   <meta name="robots" content="noindex, follow">
-  <link rel="canonical" href="https://www.propertyfinderrealestate.com/404.html">
+  <meta name="theme-color" content="#FFFFFF">
 
-  <!-- Security & Content Security Policy (Valid in <meta>) -->
-  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' https://cdnjs.cloudflare.com https://challenges.cloudflare.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' data: https:; connect-src 'self' https://api.propertyfinderrealestate.com http://localhost:8000 https://formspree.io; frame-src https://www.google.com https://challenges.cloudflare.com; form-action 'self' https://formspree.io; object-src 'none'; base-uri 'self'">
-  <meta http-equiv="X-Content-Type-Options" content="nosniff">
-  <meta http-equiv="Referrer-Policy" content="strict-origin-when-cross-origin">
+  <!-- Open Graph -->
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="page not found | Property Finder Real Estate">
+  <meta property="og:description" content="Explore verified residential apartments and commercial properties in Mumbai Western Suburbs.">
+  <meta property="og:url" content="https://propertyfinderrealestate.com/404.html">
+  <meta property="og:image" content="/images/og-banner.jpg">
 
-  <!-- Geolocation -->
-  <meta name="geo.region" content="IN-MH">
-  <meta name="geo.placename" content="Mumbai">
-  <meta name="geo.position" content="19.1886;72.8485">
-  <meta name="ICBM" content="19.1886, 72.8485">
-
-  <!-- Favicons & Manifest (Strictly Root-Relative for Nested 404 Routes) -->
-  <link rel="icon" type="image/png" sizes="192x192" href="/icons/icon-192.png">
-  <link rel="icon" type="image/svg+xml" href="/icons/favicon.svg">
+  <link rel="icon" type="image/png" href="/images/logo.png">
   <link rel="manifest" href="/manifest.json">
-  <meta name="theme-color" content="#2563EB">
 
-  <!-- Early Theme Boot (Prevents FOUC) -->
-  <script>
-    !function(){var t=localStorage.getItem("pfre_theme")||(window.matchMedia("(prefers-color-scheme:dark)").matches?"dark":"light");document.documentElement.setAttribute("data-theme",t);document.documentElement.classList.add("theme-"+t)}();
-  </script>
-
-  <!-- Web Fonts -->
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;0,900;1,700&family=DM+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-
-  <!-- Stylesheets (Root-Relative) -->
+  <!-- Stylesheets -->
   <link rel="stylesheet" href="/css/styles.css">
+  <link rel="stylesheet" href="/css/theme.css">
   <link rel="stylesheet" href="/css/widgets.css">
   <link rel="stylesheet" href="/css/mobile.css">
-  <link rel="stylesheet" href="/css/theme.css">
   <link rel="stylesheet" href="/css/overrides.css">
   <link rel="stylesheet" href="/css/utils.css">
-
-  <style>
-    .error-wrapper {
-      min-height: calc(100vh - 180px);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      padding: 60px 5% 80px;
-    }
-
-    .error-card {
-      background: var(--card, #FFFFFF);
-      border-radius: var(--radius-xl, 24px);
-      padding: 56px 48px;
-      max-width: 680px;
-      width: 100%;
-      text-align: center;
-      box-shadow: var(--shadow-lg, 0 20px 60px rgba(0, 0, 0, 0.08));
-      border: 1.5px solid var(--border);
-      transition: background 0.2s, border-color 0.2s;
-    }
-
-    .error-num {
-      font-family: 'Playfair Display', serif;
-      font-size: clamp(80px, 14vw, 120px);
-      font-weight: 900;
-      line-height: 1;
-      color: var(--blue);
-      opacity: 0.15;
-      position: relative;
-      z-index: 0;
-      user-select: none;
-    }
-
-    .error-icon {
-      font-size: 58px;
-      margin-top: -50px;
-      position: relative;
-      z-index: 1;
-      display: block;
-    }
-
-    .error-card h1 {
-      font-family: 'Playfair Display', serif;
-      font-size: clamp(26px, 4vw, 34px);
-      font-weight: 900;
-      margin: 16px 0 10px;
-      color: var(--text);
-    }
-
-    .error-card h1 em {
-      font-style: italic;
-      color: var(--blue);
-    }
-
-    .subtitle {
-      font-size: 15px;
-      color: var(--text-muted);
-      line-height: 1.7;
-      margin-bottom: 28px;
-      max-width: 500px;
-      margin-inline: auto;
-    }
-
-    /* Search Box */
-    .search-wrap {
-      display: flex;
-      margin-bottom: 30px;
-      border: 2px solid var(--border);
-      border-radius: 12px;
-      overflow: hidden;
-      background: var(--card, #FFFFFF);
-      transition: border-color 0.2s;
-    }
-
-    .search-wrap:focus-within {
-      border-color: var(--blue);
-    }
-
-    .search-wrap input {
-      flex: 1;
-      padding: 14px 18px;
-      border: none;
-      outline: none;
-      font-size: 14.5px;
-      font-family: inherit;
-      color: var(--text);
-      background: transparent;
-    }
-
-    .search-wrap button {
-      background: var(--blue);
-      color: #FFFFFF;
-      border: none;
-      padding: 14px 24px;
-      font-size: 14.5px;
-      font-weight: 600;
-      cursor: pointer;
-      transition: background 0.2s;
-      font-family: inherit;
-      white-space: nowrap;
-    }
-
-    .search-wrap button:hover {
-      background: var(--blue-dark);
-    }
-
-    /* Quick Links Grid */
-    .quick-title {
-      font-size: 11.5px;
-      font-weight: 700;
-      letter-spacing: 1.5px;
-      text-transform: uppercase;
-      color: var(--text-muted);
-      margin-bottom: 14px;
-    }
-
-    .quick-grid {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 10px;
-      margin-bottom: 28px;
-    }
-
-    .quick-link {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      padding: 12px 8px;
-      background: var(--bg-secondary);
-      border: 1px solid var(--border);
-      border-radius: 12px;
-      text-decoration: none;
-      font-size: 13px;
-      font-weight: 600;
-      color: var(--text);
-      transition: all 0.2s;
-    }
-
-    .quick-link:hover {
-      border-color: var(--blue);
-      color: var(--blue);
-      transform: translateY(-2px);
-    }
-
-    .quick-link .ql-icon {
-      font-size: 20px;
-      margin-bottom: 4px;
-    }
-
-    /* Action Buttons */
-    .btn-group {
-      display: flex;
-      justify-content: center;
-      gap: 12px;
-      flex-wrap: wrap;
-    }
-
-    .divider {
-      height: 1px;
-      background: var(--border);
-      margin: 26px 0;
-    }
-
-    .help-box {
-      font-size: 14px;
-      color: var(--text-muted);
-      line-height: 1.6;
-      margin: 0;
-    }
-
-    .office-info {
-      font-size: 12.5px;
-      color: var(--text-muted);
-      line-height: 1.6;
-      margin-top: 16px;
-      padding-top: 16px;
-      border-top: 1px dashed var(--border);
-      text-align: left;
-    }
-
-    @media (max-width: 640px) {
-      .error-card {
-        padding: 40px 20px;
-      }
-      .error-num {
-        font-size: 80px;
-      }
-      .error-icon {
-        font-size: 48px;
-        margin-top: -38px;
-      }
-      .quick-grid {
-        grid-template-columns: repeat(2, 1fr);
-      }
-      .search-wrap button {
-        padding: 14px 16px;
-      }
-    }
-  </style>
 </head>
 <body>
+  <a href="#mainContent" class="skip-link">skip to main content</a>
 
-  <!-- MASTER NAVBAR (Single Source from js/layout.js) -->
-  <site-navbar></site-navbar>
+  <!-- Header Mount Point -->
+  <header id="mainHeader"></header>
 
-  <!-- MAIN ERROR VIEW -->
-  <main class="error-wrapper" id="main-content">
-    <div class="error-card">
-      <div class="error-num" aria-hidden="true">404</div>
-      <span class="error-icon" aria-hidden="true">🔍</span>
-      <h1>Page <em>Not Found</em></h1>
-      <p class="subtitle">The property listing, project brochure, or page you are looking for has moved, expired, or is unavailable. Search our current Mumbai listings below:</p>
+  <main id="mainContent">
+    <!-- Hero Error Section -->
+    <section class="page-hero text-center py-10">
+      <div class="container max-w-xl mx-auto">
+        <span class="badge badge-amber mb-3">error 404</span>
+        <h1 style="font-size: 3.5rem; line-height: 1.1; margin-bottom: 0.5rem; color: var(--blue);">404</h1>
+        <h2 class="text-lg fw-bold mb-3">the requested property or page cannot be found</h2>
+        <p class="text-sm text-muted mb-6">The listing may have been sold, the lease completed, or the web address updated. Use the quick links below to resume your property search across Mumbai Western Suburbs.</p>
 
-      <!-- Instant Inventory Search -->
-      <form class="search-wrap" onsubmit="event.preventDefault(); doSearch();">
-        <input type="text" id="searchInp" placeholder="Search by locality, e.g. Malad, Andheri, Goregaon…" aria-label="Search properties">
-        <button type="submit">🔍 Search</button>
-      </form>
+        <div class="d-flex justify-center gap-3 flex-wrap">
+          <a href="/index.html" class="btn btn-primary">return to homepage</a>
+          <a href="/properties.html" class="btn btn-outline">browse property catalog</a>
+          <a href="/contact.html" class="btn btn-outline">speak with our advisory desk</a>
+        </div>
+      </div>
+    </section>
 
-      <!-- Quick Navigation -->
-      <div class="quick-title">Explore Verified Portals</div>
-      <div class="quick-grid">
-        <a href="/" class="quick-link"><span class="ql-icon">🏠</span>Home</a>
-        <a href="/properties.html" class="quick-link"><span class="ql-icon">🏘️</span>Properties</a>
-        <a href="/projects.html" class="quick-link"><span class="ql-icon">🏗️</span>Projects</a>
-        <a href="/calculators.html" class="quick-link"><span class="ql-icon">🧮</span>Calculators</a>
-        <a href="/tds-calculators.html" class="quick-link"><span class="ql-icon">📋</span>TDS Calc</a>
-        <a href="/contact.html" class="quick-link"><span class="ql-icon">📞</span>Contact</a>
-        <a href="/about.html" class="quick-link"><span class="ql-icon">🏢</span>About Us</a>
-        <a href="/team.html" class="quick-link"><span class="ql-icon">👥</span>Our Team</a>
-        <a href="/post-property.html" class="quick-link"><span class="ql-icon">➕</span>Post Property</a>
+    <!-- Quick Navigation Hubs -->
+    <section class="container my-8">
+      <div class="text-center max-w-xl mx-auto mb-6">
+        <span class="section-label">popular destinations</span>
+        <h2 class="text-md fw-bold">explore active sections across our portal</h2>
+        <p class="text-xs text-muted">Direct links to our verified listings, specialized micro-markets, and financial calculators.</p>
       </div>
 
-      <div class="btn-group">
-        <button type="button" onclick="history.back()" class="btn btn-outline btn-sm">← Go Back</button>
-        <a href="/" class="btn btn-primary btn-sm">🏠 Return to Homepage</a>
+      <div class="d-grid grid-cols-4 gap-4 mb-8">
+        <!-- Hub 1 -->
+        <div class="calc-widget text-center">
+          <div class="text-lg mb-2">&#127968;</div>
+          <h3 class="text-sm fw-bold mb-1"><a href="/properties.html?type=buy" class="text-blue">properties for sale</a></h3>
+          <p class="text-xs text-muted mb-3">Ready possession and under construction 1, 2, and 3 BHK flats.</p>
+          <a href="/properties.html?type=buy" class="text-xs fw-bold text-blue">view sale listings &rarr;</a>
+        </div>
+
+        <!-- Hub 2 -->
+        <div class="calc-widget text-center">
+          <div class="text-lg mb-2">&#128273;</div>
+          <h3 class="text-sm fw-bold mb-1"><a href="/properties.html?type=rent" class="text-blue">flats on rent</a></h3>
+          <p class="text-xs text-muted mb-3">Verified family and executive rental homes with digital agreements.</p>
+          <a href="/properties.html?type=rent" class="text-xs fw-bold text-blue">view rental inventory &rarr;</a>
+        </div>
+
+        <!-- Hub 3 -->
+        <div class="calc-widget text-center">
+          <div class="text-lg mb-2">&#128221;</div>
+          <h3 class="text-sm fw-bold mb-1"><a href="/agreement-registration.html" class="text-blue">leave and license</a></h3>
+          <p class="text-xs text-muted mb-3">Doorstep biometric agreement registration across Mumbai.</p>
+          <a href="/agreement-registration.html" class="text-xs fw-bold text-blue">calculate stamp duty &rarr;</a>
+        </div>
+
+        <!-- Hub 4 -->
+        <div class="calc-widget text-center">
+          <div class="text-lg mb-2">&#128178;</div>
+          <h3 class="text-sm fw-bold mb-1"><a href="/calculators.html" class="text-blue">financial calculators</a></h3>
+          <p class="text-xs text-muted mb-3">Home loan EMI, stamp duty estimates, and carpet area conversions.</p>
+          <a href="/calculators.html" class="text-xs fw-bold text-blue">open calculators &rarr;</a>
+        </div>
       </div>
 
-      <div class="divider" aria-hidden="true"></div>
-
-      <p class="help-box">
-        Looking for a specific property? Call our advisory desk directly: 
-        <a href="tel:+919326990050" style="color:var(--blue);font-weight:700;text-decoration:none;">+919326990050</a> or 
-        <a href="https://wa.me/919326990050?text=Hello%20Property%20Finder%20Real%20Estate,%20I%20am%20looking%20for%20a%20property%20in%20Mumbai" target="_blank" rel="noopener noreferrer" style="color:#25D366;font-weight:700;text-decoration:none;">💬 WhatsApp Us</a>
-      </p>
-
-      <div class="office-info">
-        <strong>Office Desk:</strong> Shop No. 9, Ground Floor, Building No. 3, Deepanjali Co-operative Housing Society Limited, Baf-Hira Nagar, Lower Kharodi, Jankalyan Nagar Road, Malad West, Mumbai, Maharashtra, 400095, India
+      <!-- Micro-Market Direct Links -->
+      <div class="calc-widget p-6">
+        <h2 class="text-sm fw-bold mb-3 text-center">browse by western suburbs micro-market</h2>
+        <div class="d-flex justify-center gap-3 flex-wrap">
+          <a href="/properties/flats-in-malad-west.html" class="tab-pill">flats in Malad West</a>
+          <a href="/properties/flats-in-goregaon-east.html" class="tab-pill">flats in Goregaon East</a>
+          <a href="/properties/flats-in-andheri-west.html" class="tab-pill">flats in Andheri West</a>
+          <a href="/properties/flats-in-kandivali-west.html" class="tab-pill">flats in Kandivali West</a>
+          <a href="/properties/flats-in-borivali-west.html" class="tab-pill">flats in Borivali West</a>
+          <a href="/properties/rental-flats-malad.html" class="tab-pill">rental flats in Malad</a>
+        </div>
       </div>
-    </div>
+    </section>
+
+    <!-- Direct Assistance Bar -->
+    <section class="container mb-8">
+      <div class="p-6 bg-secondary rounded d-flex justify-between items-center flex-wrap gap-4">
+        <div>
+          <h2 class="text-sm fw-bold mb-1">looking for a specific property or society</h2>
+          <p class="text-xs text-muted mb-0">Our Malad West advisory desk can locate off-market resale inventory or schedule a private walkthrough.</p>
+        </div>
+        <div class="d-flex gap-2">
+          <a href="tel:+919326990050" class="btn btn-outline btn-sm">&#128222; call +91 93269 90050</a>
+          <a href="https://wa.me/919326990050?text=Hello%20PFRE,%20I%20am%20looking%20for%20assistance%20finding%20a%20property%20on%20your%20website." target="_blank" rel="noopener" class="btn btn-green-inline btn-sm">&#128172; WhatsApp advisory desk</a>
+        </div>
+      </div>
+    </section>
   </main>
 
-  <!-- MASTER FOOTER & GLOBAL WIDGETS (Single Source from js/layout.js) -->
-  <site-footer></site-footer>
+  <!-- Footer Mount Point -->
+  <footer id="mainFooter"></footer>
 
-  <!-- Client Search Redirection & Service Worker Registration -->
-  <script>
-    function doSearch() {
-      const inp = document.getElementById('searchInp');
-      const q = inp ? inp.value.trim() : '';
-      if (q) {
-        window.location.href = '/properties.html?q=' + encodeURIComponent(q);
-      } else {
-        window.location.href = '/properties.html';
-      }
-    }
-
-    if ('serviceWorker' in navigator) {
-      window.addEventListener('load', () => {
-        navigator.serviceWorker.register('/sw.js').catch(() => {});
-      });
-    }
-  </script>
-
-  <!-- Centralized Script Engines in Order of Dependency -->
+  <!-- Scripts -->
   <script src="/js/config.js"></script>
-  <script src="/js/layout.js"></script>
+  <script src="/js/auth-guard.js"></script>
+  <script src="/js/api.js"></script>
   <script src="/js/security.js"></script>
-  <script src="/js/tracker.js" defer></script>
   <script src="/js/theme.js"></script>
-  <script src="/js/i18n.js"></script>
+  <script src="/js/tracker.js"></script>
   <script src="/js/widgets.js"></script>
+  <script src="/js/i18n.js"></script>
+  <script src="/js/app.js"></script>
+  <script src="/js/app-shell.js"></script>
+  <script src="/js/layout.js"></script>
 </body>
 </html>
