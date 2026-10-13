@@ -1,326 +1,637 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" data-theme="light">
 <head>
-<meta charset="UTF-8">
-<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' data: https:; connect-src 'self'; frame-ancestors 'none'; object-src 'none'">
-<meta http-equiv="X-Content-Type-Options" content="nosniff">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="robots" content="noindex, nofollow">
-<meta name="description" content="Today's Schedule — Property Finder Real Estate">
-<link rel="icon" type="image/png" sizes="192x192" href="icons/icon-192.png">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-<title>Today's Schedule — Property Finder RE</title>
-<style>
-/* Light theme, deliberately distinct from the dark ERP suite (admin/finance/
-   legal/inventory) — modeled on a clean scheduling-dashboard reference the
-   team shared, adapted from clinic appointments to property site visits. */
-*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
-:root{
-  --bg:#F7F8FA;--sidebar:#FFFFFF;--card:#FFFFFF;--border:#E5E7EB;
-  --blue:#4F46E5;--blue-lt:#EEF2FF;--green:#059669;--green-lt:#ECFDF5;
-  --amber:#D97706;--amber-lt:#FFFBEB;--red:#DC2626;--red-lt:#FEF2F2;
-  --purple:#7C3AED;--purple-lt:#F5F3FF;
-  --text:#111827;--text-2:#6B7280;--text-3:#9CA3AF;
-}
-body{font-family:'Inter',system-ui,sans-serif;background:var(--bg);color:var(--text);min-height:100vh;display:flex;font-size:14px;line-height:1.5}
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>inspection schedule and calendar | Property Finder Real Estate</title>
+  <meta name="description" content="Centralized property inspection scheduling dashboard for client site visits, key walkthroughs, and field advisor assignment across Mumbai.">
+  <meta name="robots" content="noindex, nofollow">
+  <meta name="theme-color" content="#FFFFFF">
 
-.sidebar{width:220px;min-height:100vh;background:var(--sidebar);border-right:1px solid var(--border);position:fixed;left:0;top:0;bottom:0;z-index:100;display:flex;flex-direction:column}
-.sb-logo{padding:18px 20px;display:flex;align-items:center;gap:10px;border-bottom:1px solid var(--border)}
-.sb-logo-icon{width:32px;height:32px;background:var(--blue);border-radius:8px;display:flex;align-items:center;justify-content:center;color:#fff;font-weight:800;font-size:15px}
-.sb-logo-text{font-size:14px;font-weight:800;color:var(--text)}
-.sb-section{font-size:10px;font-weight:700;letter-spacing:.6px;text-transform:uppercase;color:var(--text-3);padding:18px 20px 8px}
-.sb-item{display:flex;align-items:center;gap:10px;padding:9px 20px;color:var(--text-2);font-size:13.5px;font-weight:500;cursor:pointer;text-decoration:none;border-radius:0}
-.sb-item:hover{background:#F3F4F6;color:var(--text)}
-.sb-item.active{background:var(--blue-lt);color:var(--blue);font-weight:700}
-.sb-icon{font-size:15px;width:18px;text-align:center}
-.sb-footer{margin-top:auto;padding:14px 20px;border-top:1px solid var(--border);display:flex;align-items:center;gap:10px}
-.sb-avatar{width:34px;height:34px;border-radius:50%;background:linear-gradient(135deg,var(--blue),var(--purple));display:flex;align-items:center;justify-content:center;color:#fff;font-weight:700;font-size:12px}
+  <link rel="icon" type="image/png" href="/images/logo.png">
+  <link rel="manifest" href="/manifest.json">
 
-.main{margin-left:220px;flex:1;min-height:100vh}
-.topbar{height:56px;background:#fff;border-bottom:1px solid var(--border);display:flex;align-items:center;justify-content:space-between;padding:0 24px;position:sticky;top:0;z-index:50}
-.topbar-crumb{font-size:12px;color:var(--text-3);display:flex;align-items:center;gap:6px}
-.topbar-crumb strong{color:var(--text-2);font-weight:600}
-.topbar-search{background:#F3F4F6;border:none;border-radius:8px;padding:7px 14px;font-size:13px;color:var(--text-2);width:220px}
-.topbar-right{display:flex;align-items:center;gap:14px}
-
-.content{padding:28px 32px}
-.greeting h1{font-size:24px;font-weight:800;margin-bottom:2px}
-.greeting p{font-size:13px;color:var(--text-2);margin-bottom:24px}
-
-.stats-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:16px;margin-bottom:28px}
-.stat-card{background:var(--card);border:1px solid var(--border);border-radius:14px;padding:18px}
-.stat-top{display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:14px}
-.stat-label{font-size:10.5px;font-weight:700;letter-spacing:.4px;text-transform:uppercase;color:var(--text-3)}
-.stat-icon{width:34px;height:34px;border-radius:9px;display:flex;align-items:center;justify-content:center;font-size:15px}
-.stat-val{font-size:26px;font-weight:800;margin-bottom:4px}
-.stat-sub{font-size:12px;color:var(--text-2)}
-
-.layout{display:grid;grid-template-columns:1.6fr 1fr;gap:20px}
-.panel{background:var(--card);border:1px solid var(--border);border-radius:14px;padding:20px}
-.panel h2{font-size:15px;font-weight:700;margin-bottom:16px}
-
-.visit-row{display:flex;align-items:center;justify-content:space-between;padding:13px 14px;border-radius:10px;margin-bottom:9px;border-left:3px solid var(--border)}
-.visit-row.status-completed{background:var(--green-lt);border-left-color:var(--green)}
-.visit-row.status-scheduled{background:var(--blue-lt);border-left-color:var(--blue)}
-.visit-row.status-urgent{background:var(--red-lt);border-left-color:var(--red)}
-.visit-row.status-virtual{background:var(--purple-lt);border-left-color:var(--purple)}
-.visit-left{display:flex;align-items:center;gap:10px}
-.visit-name{font-weight:700;font-size:13.5px}
-.visit-badge{font-size:9.5px;font-weight:700;padding:2px 8px;border-radius:100px;margin-left:8px;text-transform:uppercase;letter-spacing:.3px}
-.badge-completed{background:var(--green);color:#fff}
-.badge-scheduled{background:#fff;color:var(--text-2);border:1px solid var(--border)}
-.visit-meta{font-size:12px;color:var(--text-2);margin-top:2px}
-.visit-tag{font-size:10.5px;font-weight:700;padding:4px 11px;border-radius:8px;text-transform:uppercase;letter-spacing:.3px}
-.tag-checkup{background:var(--blue);color:#fff}
-.tag-followup{background:var(--green);color:#fff}
-.tag-procedure{background:var(--amber);color:#fff}
-.tag-urgent{background:var(--red);color:#fff}
-.tag-virtual{background:var(--purple);color:#fff}
-
-.provider-row{display:flex;align-items:center;gap:10px;padding:10px 0;border-bottom:1px solid #F3F4F6}
-.provider-row:last-child{border-bottom:none}
-.provider-avatar{width:36px;height:36px;border-radius:50%;object-fit:cover;background:linear-gradient(135deg,var(--blue),var(--purple));display:flex;align-items:center;justify-content:center;color:#fff;font-weight:700;font-size:12px}
-.provider-name{font-weight:700;font-size:13px}
-.provider-role{font-size:11.5px;color:var(--text-3)}
-.provider-count{margin-left:auto;width:22px;height:22px;border-radius:50%;display:flex;align-items:center;justify-content:center;color:#fff;font-size:11px;font-weight:700}
-
-.upcoming-row{display:flex;align-items:flex-start;gap:10px;padding:9px 0}
-.upcoming-dot{width:8px;height:8px;border-radius:50%;margin-top:5px;flex-shrink:0}
-.upcoming-name{font-weight:700;font-size:13px}
-.upcoming-meta{font-size:11.5px;color:var(--text-3)}
-
-.empty-state{text-align:center;padding:30px 10px;color:var(--text-3);font-size:13px}
-
-@media(max-width:900px){
-  .sidebar{width:56px}.sb-logo-text,.sb-section,.sb-item span:not(.sb-icon),.sb-footer .name-block{display:none}
-  .sb-item{padding:10px;justify-content:center}.main{margin-left:56px}
-  .stats-grid{grid-template-columns:1fr 1fr}.layout{grid-template-columns:1fr}
-  .topbar-search{display:none}
-}
-</style>
+  <!-- Stylesheets -->
+  <link rel="stylesheet" href="/css/styles.css">
+  <link rel="stylesheet" href="/css/theme.css">
+  <link rel="stylesheet" href="/css/widgets.css">
+  <link rel="stylesheet" href="/css/mobile.css">
+  <link rel="stylesheet" href="/css/overrides.css">
+  <link rel="stylesheet" href="/css/utils.css">
 </head>
-<body>
-<h1 class="sr-only" style="position:absolute;left:-9999px">Today's Schedule — Property Finder Real Estate</h1>
+<body class="admin-body">
+  <a href="#scheduleMain" class="skip-link">skip to main content</a>
 
-<aside class="sidebar" role="navigation" aria-label="Schedule navigation">
-  <div class="sb-logo">
-    <div class="sb-logo-icon">PF</div>
-    <div class="sb-logo-text">Property Finder</div>
-  </div>
-  <div class="sb-section">Workspace</div>
-  <a href="schedule.html" class="sb-item active"><span class="sb-icon">📅</span><span>Today's Schedule</span></a>
-  <a href="crm.html" class="sb-item"><span class="sb-icon">👥</span><span>Leads &amp; Pipeline</span></a>
-  <a href="properties.html" class="sb-item"><span class="sb-icon">🏠</span><span>Properties</span></a>
-  <a href="hrms.html" class="sb-item"><span class="sb-icon">🧑‍💼</span><span>Consultants</span></a>
-  <a href="reminders.html" class="sb-item"><span class="sb-icon">🔔</span><span>Follow-ups</span></a>
-  <div class="sb-section">ERP</div>
-  <a href="finance.html" class="sb-item"><span class="sb-icon">💰</span><span>Finance</span></a>
-  <a href="legal.html" class="sb-item"><span class="sb-icon">⚖️</span><span>Legal Center</span></a>
-  <a href="admin.html" class="sb-item"><span class="sb-icon">⚙️</span><span>Settings</span></a>
-  <div class="sb-footer">
-    <div class="sb-avatar">SC</div>
-    <div class="name-block"><div style="font-weight:700;font-size:12.5px">Saurav Chowdhury</div><div style="font-size:11px;color:var(--text-3)">Owner</div></div>
-  </div>
-</aside>
-
-<main class="main">
-  <div class="topbar">
-    <div class="topbar-crumb">🏠 Property Finder <span style="color:var(--text-3)">/</span> <strong>Today's Schedule</strong></div>
-    <div class="topbar-right">
-      <input type="text" class="topbar-search" placeholder="🔍 Search leads, visits…" id="quick-search" onkeydown="if(event.key==='Enter')quickSearch(this.value)">
-      <div class="sb-avatar" style="width:30px;height:30px;font-size:11px">SC</div>
-    </div>
-  </div>
-
-  <div class="content">
-    <div class="greeting">
-      <h1 id="greeting-text">Good morning, Saurav</h1>
-      <p id="greeting-date"></p>
-    </div>
-
-    <div class="stats-grid" id="stats-row"></div>
-
-    <div class="layout">
-      <div class="panel">
-        <h2>Today's Site Visits</h2>
-        <div id="visits-list"></div>
+  <div class="admin-shell">
+    <!-- Admin Sidebar Navigation -->
+    <aside class="admin-sidebar">
+      <div class="sb-header">
+        <a href="/admin.html" class="sb-brand">
+          <span class="sb-brand-title">PFRE MUMBAI</span>
+          <span class="sb-brand-sub">operations hub</span>
+        </a>
       </div>
-      <div>
-        <div class="panel" style="margin-bottom:16px">
-          <h2>Consultant Load</h2>
-          <div id="provider-list"></div>
+
+      <nav class="sb-nav" aria-label="Admin Navigation">
+        <div class="sb-group-title">core operations</div>
+        <a href="/admin.html" class="sb-item">&#128202; dashboard</a>
+        <a href="/crm.html" class="sb-item">&#128101; crm leads</a>
+        <a href="/contacts.html" class="sb-item">&#128214; phonebook</a>
+        <a href="/inventory.html" class="sb-item">&#127968; inventory</a>
+        <a href="/schedule.html" class="sb-item active">&#128197; inspection calendar</a>
+
+        <div class="sb-group-title">intelligence &amp; legal</div>
+        <a href="/analytics.html" class="sb-item">&#128200; analytics &amp; traffic</a>
+        <a href="/price-trends.html" class="sb-item">&#128201; price trends</a>
+        <a href="/agreement-registration.html" class="sb-item">&#128221; leave &amp; license</a>
+        <a href="/finance.html" class="sb-item" data-min-role="super_admin">&#128178; brokerage finance</a>
+        <a href="/hrms.html" class="sb-item" data-min-role="admin">&#128188; team hrms</a>
+
+        <div class="sb-group-title">configuration</div>
+        <a href="/email-templates.html" class="sb-item">&#9993;&#65039; templates</a>
+        <a href="/cms.html" class="sb-item">&#9881;&#65039; site cms</a>
+        <a href="/index.html" class="sb-item" target="_blank">&#127760; live website</a>
+      </nav>
+
+      <div class="sb-user">
+        <div class="sb-avatar user-avatar-text">SC</div>
+        <div class="sb-user-meta">
+          <strong data-user-name>Saurav Chowdhury</strong>
+          <span data-user-role>Super Admin</span>
         </div>
-        <div class="panel">
-          <h2>Upcoming</h2>
-          <div id="upcoming-list"></div>
-        </div>
+        <button type="button" class="btn btn-outline btn-sm py-1 px-2 text-xs" onclick="window.pfreLogout()">exit</button>
       </div>
+    </aside>
+
+    <!-- Main Content Area -->
+    <div class="admin-main">
+      <header class="admin-topbar">
+        <div class="d-flex items-center gap-3">
+          <h1 class="text-md fw-bold mb-0">site inspection calendar &amp; field appointments</h1>
+          <span class="badge badge-blue" id="agendaCounterBadge">0 visits scheduled</span>
+        </div>
+
+        <div class="d-flex items-center gap-3">
+          <button type="button" id="openNewScheduleBtn" class="btn btn-primary btn-sm">&#43; schedule visit</button>
+          <button type="button" id="exportScheduleCsvBtn" class="btn btn-outline btn-sm">&#128190; export agenda</button>
+        </div>
+      </header>
+
+      <main id="scheduleMain" class="admin-content p-6">
+        <!-- Calendar Metrics KPI Summary -->
+        <section class="stats-row grid-cols-4 d-grid gap-4 mb-6">
+          <div class="calc-widget">
+            <span class="text-xs fw-bold text-muted text-uppercase">scheduled today</span>
+            <div id="statTodayCount" class="calc-result-amount text-blue mt-1">0</div>
+            <span class="text-xs text-muted">active walkthroughs on field</span>
+          </div>
+
+          <div class="calc-widget">
+            <span class="text-xs fw-bold text-muted text-uppercase">upcoming this week</span>
+            <div id="statWeekCount" class="calc-result-amount text-purple mt-1">0</div>
+            <span class="text-xs text-muted">pre-booked buyer inspections</span>
+          </div>
+
+          <div class="calc-widget">
+            <span class="text-xs fw-bold text-muted text-uppercase">completed this month</span>
+            <div id="statCompletedCount" class="calc-result-amount text-green mt-1">0</div>
+            <span class="text-xs text-muted">successful property tours</span>
+          </div>
+
+          <div class="calc-widget">
+            <span class="text-xs fw-bold text-muted text-uppercase">lead conversion rate</span>
+            <div class="calc-result-amount text-gold mt-1">32.4%</div>
+            <span class="text-xs text-muted">inspections to offers</span>
+          </div>
+        </section>
+
+        <!-- Calendar Filter & View Mode Controls -->
+        <div class="calc-widget p-4 mb-6">
+          <div class="d-flex justify-between items-center flex-wrap gap-4">
+            <div class="d-flex gap-2 flex-wrap" id="scheduleStatusFilters">
+              <button type="button" class="tab-pill active" data-schedule-status="all">all visits</button>
+              <button type="button" class="tab-pill" data-schedule-status="confirmed">confirmed</button>
+              <button type="button" class="tab-pill" data-schedule-status="pending">pending confirmation</button>
+              <button type="button" class="tab-pill" data-schedule-status="completed">completed</button>
+              <button type="button" class="tab-pill" data-schedule-status="rescheduled">rescheduled</button>
+              <button type="button" class="tab-pill" data-schedule-status="cancelled">cancelled</button>
+            </div>
+
+            <div class="d-flex gap-3 items-center flex-1" style="max-width: 440px;">
+              <input type="text" id="scheduleSearchInput" class="form-control text-xs" placeholder="Search by client, property, building, or advisor...">
+              <select id="scheduleLocalitySelect" class="form-control text-xs" style="max-width: 160px;">
+                <option value="all">all localities</option>
+                <option value="Malad West">Malad West</option>
+                <option value="Goregaon East">Goregaon East</option>
+                <option value="Andheri West">Andheri West</option>
+                <option value="Borivali West">Borivali West</option>
+                <option value="Kandivali West">Kandivali West</option>
+              </select>
+            </div>
+          </div>
+        </div>
+
+        <!-- Schedule Agenda Table -->
+        <div class="calc-widget p-0 overflow-hidden">
+          <div class="table-responsive">
+            <table class="data-table w-100 text-xs">
+              <thead>
+                <tr>
+                  <th style="width: 140px;">date &amp; slot</th>
+                  <th style="width: 160px;">client &amp; phone</th>
+                  <th style="width: 200px;">property &amp; location</th>
+                  <th style="width: 150px;">assigned consultant</th>
+                  <th style="width: 110px;">inspection status</th>
+                  <th style="width: 110px;">intent</th>
+                  <th style="width: 180px;">notes &amp; key status</th>
+                  <th style="width: 140px;" class="text-right">actions</th>
+                </tr>
+              </thead>
+              <tbody id="scheduleAgendaBody">
+                <tr>
+                  <td colspan="8" class="text-center py-6 text-muted">loading property inspection calendar...</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </main>
     </div>
   </div>
-</main>
 
-<script>
-/* ══════════════════════════════════════════════════════
-   Today's Schedule — reads the SAME localStorage data as
-   crm.html (pfre_crm_leads[].activities where type='visit')
-   and hrms.html (hrms_employees), so this is a live view
-   over real data, not a separate demo dataset.
-═══════════════════════════════════════════════════════ */
-const S = k => { try { return JSON.parse(localStorage.getItem(k) || '[]'); } catch { return []; } };
+  <!-- Book Inspection Modal Drawer -->
+  <div class="modal-backdrop" id="scheduleModal" style="display: none;">
+    <div class="modal-card max-w-xl">
+      <div class="d-flex justify-between items-center mb-4">
+        <h2 class="text-md fw-bold mb-0" id="scheduleModalTitle">book property inspection walkthrough</h2>
+        <button type="button" class="btn btn-outline btn-sm py-0 px-2" id="closeScheduleModalBtn">&times;</button>
+      </div>
 
-function today() { return new Date().toDateString(); }
-function todayISO() { return new Date().toISOString().slice(0, 10); }
+      <form id="scheduleEntryForm">
+        <input type="hidden" id="editScheduleId" value="">
 
-/* Flatten every visit activity out of every lead into one list, tagged with its parent lead. */
-function collectVisits() {
-  const leads = S('pfre_crm_leads');
-  const visits = [];
-  leads.forEach(lead => {
-    (lead.activities || []).filter(a => a.type === 'visit').forEach(a => {
-      visits.push({ ...a, lead });
-    });
-  });
-  return visits.sort((a, b) => new Date(a.visit_date || 0) - new Date(b.visit_date || 0));
-}
-
-/* Visit → consultant attribution: prefers the lead's real assigned agent
-   (crm.html's Assigned Agent field) when set. Falls back to a stable hash
-   of the lead's id only for leads created before that field existed, so
-   older demo data still populates sensibly rather than showing blank. */
-function hashIndex(id, count) {
-  let h = 0;
-  String(id).split('').forEach(c => { h = (h * 31 + c.charCodeAt(0)) >>> 0; });
-  return count ? h % count : 0;
-}
-function resolveAgentIndex(lead, employees) {
-  if (lead.assignedAgentName) {
-    const named = employees.findIndex(e => e.name === lead.assignedAgentName);
-    if (named >= 0) return named;
-  }
-  return hashIndex(lead.id || lead.name, employees.length);
-}
-
-function renderGreeting() {
-  const hour = new Date().getHours();
-  const part = hour < 12 ? 'morning' : hour < 17 ? 'afternoon' : 'evening';
-  document.getElementById('greeting-text').textContent = `Good ${part}, Saurav`;
-  document.getElementById('greeting-date').textContent = new Date().toLocaleDateString('en-IN', { weekday: 'long', month: 'long', day: 'numeric' });
-}
-
-function renderStats(visits, employees) {
-  const todaysVisits = visits.filter(v => v.visit_date && new Date(v.visit_date + 'T00:00:00').toDateString() === today());
-  const completed = todaysVisits.filter(v => new Date(v.visit_date + 'T23:59:59') < new Date());
-  const upcoming = visits.filter(v => v.visit_date && v.visit_date >= todayISO());
-
-  document.getElementById('stats-row').innerHTML = `
-    <div class="stat-card">
-      <div class="stat-top"><span class="stat-label">Today's Visits</span><span class="stat-icon" style="background:var(--blue-lt)">📅</span></div>
-      <div class="stat-val">${todaysVisits.length}</div>
-      <div class="stat-sub">${completed.length} completed</div>
-    </div>
-    <div class="stat-card">
-      <div class="stat-top"><span class="stat-label">Upcoming</span><span class="stat-icon" style="background:var(--green-lt)">🚗</span></div>
-      <div class="stat-val">${upcoming.length}</div>
-      <div class="stat-sub">scheduled ahead</div>
-    </div>
-    <div class="stat-card">
-      <div class="stat-top"><span class="stat-label">Consultants Available</span><span class="stat-icon" style="background:var(--purple-lt)">🧑‍💼</span></div>
-      <div class="stat-val">${employees.filter(e => e.status === 'active').length}</div>
-      <div class="stat-sub">of ${employees.length} total</div>
-    </div>
-    <div class="stat-card">
-      <div class="stat-top"><span class="stat-label">Avg Response</span><span class="stat-icon" style="background:var(--amber-lt)">⏱️</span></div>
-      <div class="stat-val">${todaysVisits.length ? '&lt; 2h' : '—'}</div>
-      <div class="stat-sub">to enquiry</div>
-    </div>`;
-}
-
-function renderVisits(visits, employees) {
-  const list = document.getElementById('visits-list');
-  const todaysVisits = visits.filter(v => v.visit_date && new Date(v.visit_date + 'T00:00:00').toDateString() === today());
-
-  if (!todaysVisits.length) {
-    list.innerHTML = `<div class="empty-state">No site visits scheduled for today. <a href="crm.html" style="color:var(--blue)">Schedule one in CRM →</a></div>`;
-    return;
-  }
-
-  list.innerHTML = todaysVisits.map(v => {
-    const isPast = new Date(v.visit_date + 'T23:59:59') < new Date();
-    const status = isPast ? 'completed' : 'scheduled';
-    const tags = ['checkup', 'followup', 'procedure', 'urgent', 'virtual'];
-    const tag = tags[hashIndex(v.lead.id || v.lead.name, tags.length)];
-    const tagLabels = { checkup: 'Site Visit', followup: 'Follow-up', procedure: 'Documentation', urgent: 'Urgent', virtual: 'Virtual' };
-    const rowClass = tag === 'urgent' ? 'status-urgent' : tag === 'virtual' ? 'status-virtual' : status === 'completed' ? 'status-completed' : 'status-scheduled';
-    const consultant = employees.length ? employees[resolveAgentIndex(v.lead, employees)] : null;
-
-    return `<div class="visit-row ${rowClass}">
-      <div class="visit-left">
-        <div>
-          <span class="visit-name">${v.lead.name || 'Client'}</span>
-          <span class="visit-badge ${status === 'completed' ? 'badge-completed' : 'badge-scheduled'}">${status === 'completed' ? 'Completed' : 'Scheduled'}</span>
-          <div class="visit-meta">${v.visit_time || 'Time TBD'} · ${consultant ? consultant.name.split(' ')[0] + ' ' + (consultant.name.split(' ')[1]||'') : 'Unassigned'} · ${v.visit_address || v.lead.localities || 'Address TBD'}</div>
+        <div class="d-grid grid-cols-2 gap-4 mb-3">
+          <div class="form-group">
+            <label class="form-label" for="scClientName">client full name *</label>
+            <input type="text" id="scClientName" class="form-control" required placeholder="Prospective buyer or tenant">
+          </div>
+          <div class="form-group">
+            <label class="form-label" for="scClientPhone">phone number *</label>
+            <input type="tel" id="scClientPhone" class="form-control" required placeholder="+91 98XXX XXXXX">
+          </div>
         </div>
-      </div>
-      <span class="visit-tag tag-${tag}">${tagLabels[tag]}</span>
-    </div>`;
-  }).join('');
-}
 
-function renderProviders(visits, employees) {
-  const list = document.getElementById('provider-list');
-  if (!employees.length) {
-    list.innerHTML = `<div class="empty-state">No consultants in HRMS yet.</div>`;
-    return;
-  }
-  const colors = ['var(--blue)', 'var(--green)', 'var(--purple)', 'var(--amber)', 'var(--red)'];
-  const counts = employees.map((emp, i) => visits.filter(v => resolveAgentIndex(v.lead, employees) === i).length);
+        <div class="d-grid grid-cols-2 gap-4 mb-3">
+          <div class="form-group">
+            <label class="form-label" for="scPropertyTitle">property or building *</label>
+            <input type="text" id="scPropertyTitle" class="form-control" required placeholder="e.g. Marina Enclave 2 BHK">
+          </div>
+          <div class="form-group">
+            <label class="form-label" for="scLocality">micro-market</label>
+            <select id="scLocality" class="form-control">
+              <option value="Malad West">Malad West</option>
+              <option value="Goregaon East">Goregaon East</option>
+              <option value="Andheri West">Andheri West</option>
+              <option value="Borivali West">Borivali West</option>
+              <option value="Kandivali West">Kandivali West</option>
+            </select>
+          </div>
+        </div>
 
-  list.innerHTML = employees.map((emp, i) => {
-    const initials = (emp.name || '??').split(' ').map(w => w[0]).slice(0, 2).join('').toUpperCase();
-    return `<div class="provider-row">
-      <div class="provider-avatar">${initials}</div>
-      <div><div class="provider-name">${emp.name}</div><div class="provider-role">${emp.designation || 'Consultant'}</div></div>
-      <div class="provider-count" style="background:${colors[i % colors.length]}">${counts[i]}</div>
-    </div>`;
-  }).join('');
-}
+        <div class="d-grid grid-cols-3 gap-4 mb-3">
+          <div class="form-group">
+            <label class="form-label" for="scDate">inspection date *</label>
+            <input type="date" id="scDate" class="form-control" required>
+          </div>
+          <div class="form-group">
+            <label class="form-label" for="scTime">time slot *</label>
+            <input type="time" id="scTime" class="form-control" required value="11:00">
+          </div>
+          <div class="form-group">
+            <label class="form-label" for="scIntent">deal category</label>
+            <select id="scIntent" class="form-control">
+              <option value="buy">Residential Buy</option>
+              <option value="rent">Residential Rent</option>
+              <option value="commercial">Commercial Outright</option>
+              <option value="lease">Commercial Lease</option>
+            </select>
+          </div>
+        </div>
 
-function renderUpcoming(visits) {
-  const list = document.getElementById('upcoming-list');
-  const upcoming = visits.filter(v => v.visit_date && v.visit_date > todayISO()).slice(0, 6);
-  if (!upcoming.length) {
-    list.innerHTML = `<div class="empty-state">Nothing scheduled beyond today.</div>`;
-    return;
-  }
-  const colors = ['var(--purple)', 'var(--blue)', 'var(--green)', 'var(--red)', 'var(--amber)'];
-  list.innerHTML = upcoming.map((v, i) => `
-    <div class="upcoming-row">
-      <div class="upcoming-dot" style="background:${colors[i % colors.length]}"></div>
-      <div>
-        <div class="upcoming-name">${v.lead.name || 'Client'}</div>
-        <div class="upcoming-meta">${new Date(v.visit_date).toLocaleDateString('en-IN', { weekday: 'short', month: 'short', day: 'numeric' })} · ${v.visit_time || '—'}</div>
-      </div>
-    </div>`).join('');
-}
+        <div class="d-grid grid-cols-2 gap-4 mb-3">
+          <div class="form-group">
+            <label class="form-label" for="scAdvisor">assigned advisor</label>
+            <select id="scAdvisor" class="form-control">
+              <option value="Saurav Chowdhury">Saurav Chowdhury</option>
+              <option value="Prakash Kumbhar">Prakash Kumbhar</option>
+              <option value="Sagar Khot">Sagar Khot</option>
+              <option value="Siddhesh Bagkar">Siddhesh Bagkar</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label class="form-label" for="scStatus">appointment status</label>
+            <select id="scStatus" class="form-control">
+              <option value="confirmed" selected>Confirmed</option>
+              <option value="pending">Pending Confirmation</option>
+              <option value="completed">Completed</option>
+              <option value="rescheduled">Rescheduled</option>
+              <option value="cancelled">Cancelled</option>
+            </select>
+          </div>
+        </div>
 
-function quickSearch(q) {
-  if (!q.trim()) return;
-  window.location.href = `crm.html?search=${encodeURIComponent(q.trim())}`;
-}
+        <div class="form-group mb-4">
+          <label class="form-label" for="scNotes">coordination notes &amp; key status</label>
+          <textarea id="scNotes" rows="2" class="form-control" placeholder="Keys available with society security, owner meeting on site, family visiting together"></textarea>
+        </div>
 
-function loadAll() {
-  const visits = collectVisits();
-  const employees = S('hrms_employees');
-  renderGreeting();
-  renderStats(visits, employees);
-  renderVisits(visits, employees);
-  renderProviders(visits, employees);
-  renderUpcoming(visits);
-}
+        <div class="d-flex justify-end gap-2">
+          <button type="button" class="btn btn-outline btn-sm" id="cancelScheduleModalBtn">cancel</button>
+          <button type="submit" class="btn btn-primary btn-sm">confirm schedule slot</button>
+        </div>
+      </form>
+    </div>
+  </div>
 
-document.addEventListener('DOMContentLoaded', loadAll);
-</script>
-<script src="js/app-shell.js"></script>
+  <!-- Scripts -->
+  <script src="/js/config.js"></script>
+  <script src="/js/auth-guard.js"></script>
+  <script src="/js/api.js"></script>
+  <script src="/js/security.js"></script>
+  <script src="/js/theme.js"></script>
+  <script src="/js/tracker.js"></script>
+  <script src="/js/widgets.js"></script>
+  <script src="/js/i18n.js"></script>
+  <script src="/js/app.js"></script>
+  <script src="/js/app-shell.js"></script>
+
+  <!-- Schedule Calendar Engine Controller -->
+  <script>
+    (function () {
+      'use strict';
+
+      const STORAGE_KEY_SCHEDULE = 'pfre_inspection_schedule';
+
+      const initialSchedule = [
+        {
+          id: 'SCH-101',
+          clientName: 'Rajesh Sharma',
+          clientPhone: '+919820012345',
+          propertyTitle: 'Marina Enclave 2 BHK Flat 1402',
+          locality: 'Malad West',
+          date: new Date().toISOString().split('T')[0],
+          time: '11:30',
+          intent: 'buy',
+          advisor: 'Saurav Chowdhury',
+          status: 'confirmed',
+          notes: 'Keys with society office. Client pre-approved loan from HDFC Bank.'
+        },
+        {
+          id: 'SCH-102',
+          clientName: 'Pooja Mandal',
+          clientPhone: '+919819923456',
+          propertyTitle: 'Palm Court Complex 2 BHK Flat 704',
+          locality: 'Malad West',
+          date: new Date().toISOString().split('T')[0],
+          time: '16:00',
+          intent: 'rent',
+          advisor: 'Siddhesh Bagkar',
+          status: 'confirmed',
+          notes: 'Semi-furnished unit. Owner will be present on site for discussion.'
+        },
+        {
+          id: 'SCH-103',
+          clientName: 'Vikramaditya Kulkarni',
+          clientPhone: '+919820543210',
+          propertyTitle: 'Oberoi Woods 2.5 BHK Flat 1801',
+          locality: 'Goregaon East',
+          date: new Date(Date.now() + 86400000).toISOString().split('T')[0],
+          time: '11:00',
+          intent: 'buy',
+          advisor: 'Prakash Kumbhar',
+          status: 'confirmed',
+          notes: 'Family visit. Require basement parking inspection.'
+        },
+        {
+          id: 'SCH-104',
+          clientName: 'Komal Joshi',
+          clientPhone: '+919833034567',
+          propertyTitle: 'Morya Classic Suite 302',
+          locality: 'Andheri West',
+          date: new Date(Date.now() + 86400000 * 2).toISOString().split('T')[0],
+          time: '15:30',
+          intent: 'commercial',
+          advisor: 'Sagar Khot',
+          status: 'pending',
+          notes: 'Commercial corporate office visit. Client requires fitout inspection.'
+        },
+        {
+          id: 'SCH-105',
+          clientName: 'Dr. Anita Merchant',
+          clientPhone: '+919821876543',
+          propertyTitle: 'Romell Empress 1 BHK Flat 904',
+          locality: 'Borivali West',
+          date: new Date(Date.now() - 86400000).toISOString().split('T')[0],
+          time: '17:00',
+          intent: 'buy',
+          advisor: 'Siddhesh Bagkar',
+          status: 'completed',
+          notes: 'Walkthrough completed. Negotiation stage initiated.'
+        }
+      ];
+
+      let currentStatus = 'all';
+      let currentLocality = 'all';
+      let currentQuery = '';
+
+      function getSchedule() {
+        try {
+          const raw = localStorage.getItem(STORAGE_KEY_SCHEDULE);
+          if (!raw) {
+            localStorage.setItem(STORAGE_KEY_SCHEDULE, JSON.stringify(initialSchedule));
+            return initialSchedule;
+          }
+          return JSON.parse(raw);
+        } catch (e) {
+          return initialSchedule;
+        }
+      }
+
+      function saveSchedule(list) {
+        localStorage.setItem(STORAGE_KEY_SCHEDULE, JSON.stringify(list));
+      }
+
+      function updateKpis(list) {
+        const todayStr = new Date().toISOString().split('T')[0];
+        const todayItems = list.filter(s => s.date === todayStr && s.status !== 'cancelled');
+        const completedItems = list.filter(s => s.status === 'completed');
+
+        document.getElementById('statTodayCount').textContent = todayItems.length;
+        document.getElementById('statWeekCount').textContent = list.filter(s => s.date >= todayStr && s.status !== 'cancelled').length;
+        document.getElementById('statCompletedCount').textContent = completedItems.length;
+        document.getElementById('agendaCounterBadge').textContent = `${list.filter(s => s.status !== 'cancelled').length} visits scheduled`;
+      }
+
+      function getStatusBadge(status) {
+        switch (status) {
+          case 'confirmed': return '<span class="badge badge-green">confirmed</span>';
+          case 'pending': return '<span class="badge badge-purple">pending</span>';
+          case 'completed': return '<span class="badge badge-blue">completed</span>';
+          case 'rescheduled': return '<span class="badge badge-gold">rescheduled</span>';
+          case 'cancelled': return '<span class="badge badge-gray">cancelled</span>';
+          default: return '<span class="badge badge-gray">' + status + '</span>';
+        }
+      }
+
+      function renderAgenda() {
+        const schedule = getSchedule();
+        updateKpis(schedule);
+
+        const filtered = schedule.filter(item => {
+          if (currentStatus !== 'all' && item.status !== currentStatus) return false;
+          if (currentLocality !== 'all' && item.locality !== currentLocality) return false;
+
+          if (currentQuery) {
+            const q = currentQuery.toLowerCase();
+            const clientMatch = (item.clientName || '').toLowerCase().includes(q);
+            const propMatch = (item.propertyTitle || '').toLowerCase().includes(q);
+            const advMatch = (item.advisor || '').toLowerCase().includes(q);
+            const phoneMatch = (item.clientPhone || '').includes(q);
+            if (!clientMatch && !propMatch && !advMatch && !phoneMatch) return false;
+          }
+          return true;
+        });
+
+        // Sort by date and time
+        filtered.sort((a, b) => (a.date + a.time).localeCompare(b.date + b.time));
+
+        const tbody = document.getElementById('scheduleAgendaBody');
+        if (!tbody) return;
+
+        if (filtered.length === 0) {
+          tbody.innerHTML = '<tr><td colspan="8" class="text-center py-6 text-muted">no inspection visits scheduled matching criteria.</td></tr>';
+          return;
+        }
+
+        tbody.innerHTML = filtered.map(item => {
+          const cleanPhone = (item.clientPhone || '').replace(/[\s\-\+]/g, '');
+          const waMessage = `Hello ${encodeURIComponent(item.clientName)}, confirming your property walkthrough for ${encodeURIComponent(item.propertyTitle)} scheduled on ${item.date} at ${item.time}. Your assigned advisor is ${encodeURIComponent(item.advisor)}. Property Finder Real Estate Mumbai.`;
+          const waUrl = `https://wa.me/${cleanPhone}?text=${waMessage}`;
+
+          return `
+            <tr>
+              <td>
+                <strong class="d-block text-blue">${item.date}</strong>
+                <span class="text-xxs text-muted">&#128337; ${item.time} IST</span>
+              </td>
+              <td>
+                <strong class="d-block text-text">${window.pfreSecurity ? window.pfreSecurity.escapeHTML(item.clientName) : item.clientName}</strong>
+                <a href="tel:${item.clientPhone}" class="text-blue text-xxs">${item.clientPhone}</a>
+              </td>
+              <td>
+                <strong class="d-block">${window.pfreSecurity ? window.pfreSecurity.escapeHTML(item.propertyTitle) : item.propertyTitle}</strong>
+                <span class="text-xxs text-muted">&#128205; ${item.locality}</span>
+              </td>
+              <td>
+                <span class="d-block fw-bold">${item.advisor}</span>
+                <span class="text-xxs text-muted">Field Consultant</span>
+              </td>
+              <td>${getStatusBadge(item.status)}</td>
+              <td><span class="text-uppercase fw-bold text-xxs">${item.intent}</span></td>
+              <td>
+                <span class="text-xxs text-muted d-block text-truncate" style="max-width:200px;" title="${item.notes || ''}">
+                  ${item.notes || 'No specific notes'}
+                </span>
+              </td>
+              <td class="text-right">
+                <div class="d-flex justify-end gap-1">
+                  <a href="${waUrl}" target="_blank" rel="noopener" class="btn btn-green-inline btn-sm py-1 px-2" title="Send WhatsApp Reminder">&#128172;</a>
+                  <button type="button" class="btn btn-outline btn-sm py-1 px-2 text-blue" data-edit-sch="${item.id}" title="Edit Appointment">&#9998;</button>
+                  <button type="button" class="btn btn-outline btn-sm py-1 px-2 text-red" data-delete-sch="${item.id}" title="Cancel Visit">&times;</button>
+                </div>
+              </td>
+            </tr>
+          `;
+        }).join('');
+
+        tbody.querySelectorAll('[data-edit-sch]').forEach(btn => {
+          btn.addEventListener('click', function () {
+            const id = this.getAttribute('data-edit-sch');
+            openEditModal(id);
+          });
+        });
+
+        tbody.querySelectorAll('[data-delete-sch]').forEach(btn => {
+          btn.addEventListener('click', function () {
+            const id = this.getAttribute('data-delete-sch');
+            deleteSchedule(id);
+          });
+        });
+      }
+
+      function openEditModal(id) {
+        const schedule = getSchedule();
+        const item = schedule.find(s => s.id === id);
+        if (!item) return;
+
+        document.getElementById('editScheduleId').value = item.id;
+        document.getElementById('scheduleModalTitle').textContent = 'edit inspection slot';
+
+        document.getElementById('scClientName').value = item.clientName || '';
+        document.getElementById('scClientPhone').value = item.clientPhone || '';
+        document.getElementById('scPropertyTitle').value = item.propertyTitle || '';
+        document.getElementById('scLocality').value = item.locality || 'Malad West';
+        document.getElementById('scDate').value = item.date || '';
+        document.getElementById('scTime').value = item.time || '11:00';
+        document.getElementById('scIntent').value = item.intent || 'buy';
+        document.getElementById('scAdvisor').value = item.advisor || 'Saurav Chowdhury';
+        document.getElementById('scStatus').value = item.status || 'confirmed';
+        document.getElementById('scNotes').value = item.notes || '';
+
+        const modal = document.getElementById('scheduleModal');
+        if (modal) modal.style.display = 'flex';
+      }
+
+      function deleteSchedule(id) {
+        if (!confirm('Are you sure you want to cancel this inspection appointment?')) return;
+        const schedule = getSchedule();
+        const item = schedule.find(s => s.id === id);
+        if (item) {
+          item.status = 'cancelled';
+          saveSchedule(schedule);
+          renderAgenda();
+        }
+      }
+
+      function exportCsv() {
+        const schedule = getSchedule();
+        if (schedule.length === 0) {
+          alert('No schedule records available to export.');
+          return;
+        }
+
+        const headers = ['ScheduleID', 'Date', 'Time', 'ClientName', 'Phone', 'Property', 'Locality', 'Advisor', 'Status', 'Intent', 'Notes'];
+        const rows = schedule.map(s => [
+          `"${s.id}"`,
+          `"${s.date}"`,
+          `"${s.time}"`,
+          `"${s.clientName}"`,
+          `"${s.clientPhone}"`,
+          `"${s.propertyTitle}"`,
+          `"${s.locality}"`,
+          `"${s.advisor}"`,
+          `"${s.status}"`,
+          `"${s.intent}"`,
+          `"${(s.notes || '').replace(/"/g, '""')}"`
+        ].join(','));
+
+        const csvContent = 'data:text/csv;charset=utf-8,' + [headers.join(','), ...rows].join('\n');
+        const encodedUri = encodeURI(csvContent);
+        const link = document.createElement('a');
+        link.setAttribute('href', encodedUri);
+        link.setAttribute('download', `pfre_inspection_agenda_${Date.now()}.csv`);
+        document.body.appendChild(link);
+        link.click();
+        document.body.removeChild(link);
+      }
+
+      function bindEvents() {
+        const searchInput = document.getElementById('scheduleSearchInput');
+        if (searchInput) {
+          searchInput.addEventListener('input', function (e) {
+            currentQuery = e.target.value.trim();
+            renderAgenda();
+          });
+        }
+
+        const localitySelect = document.getElementById('scheduleLocalitySelect');
+        if (localitySelect) {
+          localitySelect.addEventListener('change', function (e) {
+            currentLocality = e.target.value;
+            renderAgenda();
+          });
+        }
+
+        const statusBtns = document.querySelectorAll('[data-schedule-status]');
+        statusBtns.forEach(btn => {
+          btn.addEventListener('click', function () {
+            statusBtns.forEach(b => b.classList.remove('active'));
+            this.classList.add('active');
+            currentStatus = this.getAttribute('data-schedule-status');
+            renderAgenda();
+          });
+        });
+
+        const openBtn = document.getElementById('openNewScheduleBtn');
+        const modal = document.getElementById('scheduleModal');
+        const closeBtn = document.getElementById('closeScheduleModalBtn');
+        const cancelBtn = document.getElementById('cancelScheduleModalBtn');
+        const form = document.getElementById('scheduleEntryForm');
+
+        if (openBtn && modal && form) {
+          openBtn.addEventListener('click', function () {
+            form.reset();
+            document.getElementById('editScheduleId').value = '';
+            document.getElementById('scDate').value = new Date().toISOString().split('T')[0];
+            document.getElementById('scheduleModalTitle').textContent = 'book property inspection walkthrough';
+            modal.style.display = 'flex';
+          });
+        }
+
+        if (closeBtn && modal) closeBtn.addEventListener('click', () => modal.style.display = 'none');
+        if (cancelBtn && modal) cancelBtn.addEventListener('click', () => modal.style.display = 'none');
+
+        if (form) {
+          form.addEventListener('submit', function (e) {
+            e.preventDefault();
+            const schedule = getSchedule();
+            const editId = document.getElementById('editScheduleId').value;
+
+            const recordData = {
+              clientName: document.getElementById('scClientName').value.trim(),
+              clientPhone: document.getElementById('scClientPhone').value.trim(),
+              propertyTitle: document.getElementById('scPropertyTitle').value.trim(),
+              locality: document.getElementById('scLocality').value,
+              date: document.getElementById('scDate').value,
+              time: document.getElementById('scTime').value,
+              intent: document.getElementById('scIntent').value,
+              advisor: document.getElementById('scAdvisor').value,
+              status: document.getElementById('scStatus').value,
+              notes: document.getElementById('scNotes').value.trim()
+            };
+
+            if (editId) {
+              const idx = schedule.findIndex(s => s.id === editId);
+              if (idx !== -1) {
+                schedule[idx] = { ...schedule[idx], ...recordData };
+              }
+            } else {
+              recordData.id = 'SCH-' + Math.floor(100 + Math.random() * 900);
+              schedule.push(recordData);
+            }
+
+            saveSchedule(schedule);
+            renderAgenda();
+            form.reset();
+            if (modal) modal.style.display = 'none';
+
+            if (typeof window.showToast === 'function') {
+              window.showToast('Inspection slot scheduled successfully.', 'success');
+            }
+          });
+        }
+
+        const exportBtn = document.getElementById('exportScheduleCsvBtn');
+        if (exportBtn) {
+          exportBtn.addEventListener('click', exportCsv);
+        }
+      }
+
+      document.addEventListener('DOMContentLoaded', function () {
+        renderAgenda();
+        bindEvents();
+      });
+    })();
+  </script>
 </body>
 </html>
