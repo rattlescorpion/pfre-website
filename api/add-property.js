@@ -4,7 +4,7 @@ import { Pool } from 'pg';
 
 const COOKIE_NAME = '__Host-pfre_session';
 const MAX_BODY_BYTES = 100_000;
-const ALLOWED_ROLES = new Set(['super_admin', 'admin']);
+const ALLOWED_ROLES = new Set(['super_admin', 'admin', 'owner']);
 
 let pool;
 
