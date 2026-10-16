@@ -1,13 +1,19 @@
+
 /**
  * js/auth-guard.js
- * Property Finder Real Estate - Mumbai
- * Role-Based Access Control & Session Guard
+ * Property Finder Real Estate — Server-Verified Access Control
+ *
+ * Browser storage is used only for display metadata.
+ * Authorization is verified by /api/auth/session.
  */
 
 (function (window, document) {
   'use strict';
 
-  const LOGIN_ROUTE = 'login.html';
+  const LOGIN_ROUTE = '/login.html';
+  const SESSION_ENDPOINT = '/api/auth/session';
+  const LOGOUT_ENDPOINT = '/api/auth/logout';
+  const SESSION_KEY = 'pfre_session';
 
   const ROUTE_PERMISSIONS = {
     'admin.html': ['super_admin', 'admin'],
@@ -25,68 +31,48 @@
     'cms.html': ['super_admin', 'admin']
   };
 
-  function getNormalizedPageName() {
-    const rawPath = window.location.pathname;
-    let fileName = rawPath.split('/').pop().split('?')[0].split('#')[0] || 'index.html';
-    if (!fileName.includes('.')) {
-      fileName = fileName + '.html';
+  function getPageName() {
+    const path = window.location.pathname;
+    let name = path.split('/').pop() || 'index.html';
+
+    if (!name.includes('.')) {
+      name += '.html';
     }
-    return fileName;
+
+    return name;
   }
 
-  function getActiveSession() {
-    try {
-      const raw = localStorage.getItem('pfre_session');
-      if (!raw) return null;
-      const session = JSON.parse(raw);
-      if (!session || !session.expiresAt) return null;
-      if (Date.now() > session.expiresAt) {
-        localStorage.removeItem('pfre_session');
-        sessionStorage.removeItem('pfre_auth_token');
-        return null;
-      }
-      return session;
-    } catch (e) {
-      return null;
-    }
+  function clearLocalSession() {
+    localStorage.removeItem(SESSION_KEY);
+    sessionStorage.removeItem('pfre_auth_token');
+    sessionStorage.removeItem('pfre_admin_authenticated');
   }
 
   function redirectToLogin(reason) {
-    const currentPage = encodeURIComponent(getNormalizedPageName());
-    window.location.replace(`${LOGIN_ROUTE}?redirect=${currentPage}&reason=${reason}`);
+    const page = getPageName();
+    const query = new URLSearchParams({
+      redirect: page,
+      reason: reason
+    });
+
+    window.location.replace(`${LOGIN_ROUTE}?${query.toString()}`);
   }
 
-  function enforceRouteGuard() {
-    const currentPage = getNormalizedPageName();
-    const requiredRoles = ROUTE_PERMISSIONS[currentPage];
+  function saveDisplayMetadata(user) {
+    const session = {
+      name: String(user.name || user.email || 'Staff User'),
+      email: String(user.email || ''),
+      role: user.role,
+      permissions: Array.isArray(user.permissions)
+        ? user.permissions
+        : [],
+      expiresAt: Date.now() + (12 * 60 * 60 * 1000)
+    };
 
-    if (!requiredRoles) {
-      return;
-    }
+    // Display information only. This is not proof of authorization.
+    localStorage.setItem(SESSION_KEY, JSON.stringify(session));
 
-    const session = getActiveSession();
-
-    if (!session) {
-      redirectToLogin('unauthenticated');
-      return;
-    }
-
-    if (!requiredRoles.includes(session.role)) {
-      if (session.role === 'agent') {
-        window.location.replace('crm.html');
-      } else {
-        redirectToLogin('unauthorized');
-      }
-      return;
-    }
-
-    if (document.readyState === 'loading') {
-      document.addEventListener('DOMContentLoaded', function () {
-        applyUiDecorations(session);
-      });
-    } else {
-      applyUiDecorations(session);
-    }
+    return session;
   }
 
   function applyUiDecorations(session) {
@@ -99,47 +85,148 @@
     });
 
     document.querySelectorAll('[data-user-role]').forEach(function (el) {
-      let roleLabel = 'Consultant';
-      if (session.role === 'super_admin') roleLabel = 'Super Admin / Owner';
-      if (session.role === 'admin') roleLabel = 'Operations Admin';
-      el.textContent = roleLabel;
+      const labels = {
+        super_admin: 'Super Admin / Owner',
+        admin: 'Operations Admin',
+        agent: 'Consultant'
+      };
+
+      el.textContent = labels[session.role] || 'Staff User';
     });
 
     document.querySelectorAll('[data-min-role]').forEach(function (el) {
       const minRole = el.getAttribute('data-min-role');
+
       if (minRole === 'super_admin' && session.role !== 'super_admin') {
         el.style.display = 'none';
       }
+
       if (minRole === 'admin' && session.role === 'agent') {
         el.style.display = 'none';
       }
     });
 
-    const avatarEls = document.querySelectorAll('#agentAvatar, .sb-avatar, .user-avatar-text');
+    const avatarEls = document.querySelectorAll(
+      '#agentAvatar, .sb-avatar, .user-avatar-text'
+    );
+
     if (session.name) {
       const parts = session.name.trim().split(/\s+/);
       const initials = parts.length > 1
-        ? (parts[0][0] + parts[parts.length - 1][0]).toUpperCase()
-        : parts[0].slice(0, 2).toUpperCase();
+        ? parts[0][0] + parts[parts.length - 1][0]
+        : parts[0].slice(0, 2);
 
       avatarEls.forEach(function (el) {
-        el.textContent = initials;
+        el.textContent = initials.toUpperCase();
       });
     }
   }
 
-  window.pfreLogout = function () {
-    localStorage.removeItem('pfre_session');
-    sessionStorage.removeItem('pfre_auth_token');
-    window.location.replace(LOGIN_ROUTE);
+  async function verifyServerSession() {
+    const response = await fetch(SESSION_ENDPOINT, {
+      method: 'GET',
+      credentials: 'same-origin',
+      cache: 'no-store',
+      headers: {
+        Accept: 'application/json'
+      }
+    });
+
+    if (!response.ok) {
+      throw new Error('Session verification failed.');
+    }
+
+    const result = await response.json();
+
+    if (
+      result.success !== true ||
+      !result.user ||
+      !['super_admin', 'admin', 'agent'].includes(result.user.role) ||
+      !result.user.email
+    ) {
+      throw new Error('Invalid session response.');
+    }
+
+    return result.user;
+  }
+
+  async function enforceRouteGuard() {
+    const page = getPageName();
+    const requiredRoles = ROUTE_PERMISSIONS[page];
+
+    // Pages not listed here are not restricted by this client-side guard.
+    if (!requiredRoles) return;
+
+    // Avoid briefly displaying a protected page while checking the session.
+    document.documentElement.style.visibility = 'hidden';
+
+    try {
+      const user = await verifyServerSession();
+      const session = saveDisplayMetadata(user);
+
+      if (!requiredRoles.includes(session.role)) {
+        clearLocalSession();
+
+        if (session.role === 'agent') {
+          window.location.replace('/crm.html');
+        } else {
+          redirectToLogin('unauthorized');
+        }
+
+        return;
+      }
+
+      function showProtectedPage() {
+        applyUiDecorations(session);
+        document.documentElement.style.visibility = '';
+      }
+
+      if (document.readyState === 'loading') {
+        document.addEventListener(
+          'DOMContentLoaded',
+          showProtectedPage,
+          { once: true }
+        );
+      } else {
+        showProtectedPage();
+      }
+    } catch (error) {
+      clearLocalSession();
+      redirectToLogin('unauthenticated');
+    }
+  }
+
+  window.pfreLogout = async function () {
+    try {
+      await fetch(LOGOUT_ENDPOINT, {
+        method: 'POST',
+        credentials: 'same-origin',
+        cache: 'no-store',
+        headers: {
+          Accept: 'application/json'
+        }
+      });
+    } catch (error) {
+      // Always clear local display data and leave the protected page.
+    } finally {
+      clearLocalSession();
+      window.location.replace(LOGIN_ROUTE);
+    }
   };
 
   window.pfreAuth = {
-    getUser: getActiveSession,
+    getUser: function () {
+      try {
+        const raw = localStorage.getItem(SESSION_KEY);
+        return raw ? JSON.parse(raw) : null;
+      } catch (error) {
+        return null;
+      }
+    },
     logout: window.pfreLogout,
     hasRole: function (role) {
-      const session = getActiveSession();
-      return Boolean(session && session.role === role);
+      const user = window.pfreAuth.getUser();
+      return Boolean(user && user.role === role);
     }
   };
 
