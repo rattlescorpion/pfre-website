@@ -44,12 +44,6 @@ function getCookie(req, name) {
   return '';
 }
 
-/*
- * Expected cookie format:
- * base64url(JSON payload).base64url(HMAC-SHA256(payload))
- *
- * The authentication endpoints must use this same format.
- */
 function verifySession(req) {
   const secret = process.env.SESSION_SECRET;
 
@@ -140,11 +134,10 @@ function verifySession(req) {
 function checkSameOrigin(req) {
   const origin = req.headers.origin;
 
-  // Allow non-browser clients only when they have a valid session.
   if (!origin) return true;
 
   try {
-    const originHost = new URL(origin).host.toLowerCase();
+    const originUrl = new URL(origin);
     const requestHost = String(
       req.headers['x-forwarded-host'] || req.headers.host || ''
     )
@@ -152,7 +145,11 @@ function checkSameOrigin(req) {
       .trim()
       .toLowerCase();
 
-    return Boolean(requestHost) && originHost === requestHost;
+    return (
+      originUrl.protocol === 'https:' &&
+      Boolean(requestHost) &&
+      originUrl.host.toLowerCase() === requestHost
+    );
   } catch {
     return false;
   }
@@ -323,7 +320,9 @@ function normalizeProperty(input) {
 }
 
 async function saveToDatabase(property) {
-  if (!pool) return false;
+  if (!pool) {
+    throw new Error('PostgreSQL is not configured.');
+  }
 
   const client = await pool.connect();
 
@@ -404,7 +403,9 @@ async function saveToGitHub(property) {
   const owner = process.env.REPO_OWNER;
   const repo = process.env.REPO_NAME;
 
-  if (!token || !owner || !repo) return false;
+  if (!token || !owner || !repo) {
+    throw new Error('GitHub backup is not configured.');
+  }
 
   const fileUrl =
     `https://api.github.com/repos/${encodeURIComponent(owner)}/` +
@@ -430,9 +431,13 @@ async function saveToGitHub(property) {
       throw new Error('Property catalog could not be read.');
     }
 
-    properties = JSON.parse(
-      Buffer.from(data.content, 'base64').toString('utf8')
-    );
+    try {
+      properties = JSON.parse(
+        Buffer.from(data.content, 'base64').toString('utf8')
+      );
+    } catch {
+      throw new Error('Property catalog contains invalid JSON.');
+    }
 
     if (!Array.isArray(properties)) {
       throw new Error('Property catalog has an invalid format.');
@@ -453,7 +458,7 @@ async function saveToGitHub(property) {
       'Content-Type': 'application/json'
     },
     body: JSON.stringify({
-      message: `Publish property ${property.id}`,
+      message: `Back up property ${property.id}`,
       content: Buffer.from(
         JSON.stringify(properties, null, 2),
         'utf8'
@@ -463,8 +468,8 @@ async function saveToGitHub(property) {
   });
 
   if (!update.ok) {
-    console.error('GitHub property update failed:', update.status);
-    throw new Error('GitHub could not save the property.');
+    console.error('GitHub property backup failed with HTTP', update.status);
+    throw new Error('GitHub could not back up the property.');
   }
 
   return true;
@@ -498,24 +503,59 @@ export default async function handler(req, res) {
     });
   }
 
-  const contentLength = Number(req.headers['content-length'] || 0);
+  const contentLengthHeader = req.headers['content-length'];
+  const contentLength = contentLengthHeader === undefined
+    ? 0
+    : Number(contentLengthHeader);
 
-  if (contentLength > MAX_BODY_BYTES) {
+  if (
+    !Number.isFinite(contentLength) ||
+    contentLength < 0 ||
+    contentLength > MAX_BODY_BYTES
+  ) {
     return respond(res, 413, {
       success: false,
-      message: 'Request body is too large.'
+      message: 'Request body is too large or invalid.'
     });
   }
 
   let body = req.body;
 
   if (typeof body === 'string') {
+    if (Buffer.byteLength(body, 'utf8') > MAX_BODY_BYTES) {
+      return respond(res, 413, {
+        success: false,
+        message: 'Request body is too large.'
+      });
+    }
+
     try {
       body = JSON.parse(body);
     } catch {
       return respond(res, 400, {
         success: false,
         message: 'Request body must be valid JSON.'
+      });
+    }
+  } else if (body !== undefined && body !== null) {
+    let serialized;
+
+    try {
+      serialized = JSON.stringify(body);
+    } catch {
+      return respond(res, 400, {
+        success: false,
+        message: 'Request body is invalid.'
+      });
+    }
+
+    if (
+      typeof serialized !== 'string' ||
+      Buffer.byteLength(serialized, 'utf8') > MAX_BODY_BYTES
+    ) {
+      return respond(res, 413, {
+        success: false,
+        message: 'Request body is too large.'
       });
     }
   }
@@ -530,59 +570,50 @@ export default async function handler(req, res) {
   try {
     const property = normalizeProperty(body.property);
 
-    const results = await Promise.allSettled([
-      saveToDatabase(property),
-      saveToGitHub(property)
-    ]);
-
-    const databaseSaved =
-      results[0].status === 'fulfilled' && results[0].value === true;
-
-    const githubSaved =
-      results[1].status === 'fulfilled' && results[1].value === true;
-
-    for (const result of results) {
-      if (result.status === 'rejected') {
-        console.error(
-          'Property storage failed:',
-          result.reason?.message || 'Unknown error'
-        );
-      }
-    }
-
-    if (!databaseSaved && !githubSaved) {
-      const databaseConfigured = Boolean(
-        process.env.POSTGRES_URL || process.env.DATABASE_URL
+    // PostgreSQL is authoritative: do not attempt GitHub if this save fails.
+    try {
+      await saveToDatabase(property);
+    } catch (error) {
+      console.error(
+        'PostgreSQL property save failed:',
+        error?.message || 'Unknown error'
       );
-
-      const githubConfigured = Boolean(
-        process.env.GITHUB_TOKEN &&
-        process.env.REPO_OWNER &&
-        process.env.REPO_NAME
-      );
-
-      if (!databaseConfigured && !githubConfigured) {
-        return respond(res, 503, {
-          success: false,
-          message: 'Property storage is not configured.'
-        });
-      }
 
       return respond(res, 500, {
         success: false,
-        message: 'Property could not be saved.'
+        message: 'Property could not be saved to PostgreSQL.'
       });
     }
 
-    return respond(res, 200, {
-      success: true,
-      message: 'Property saved successfully.',
-      property,
-      storage: {
-        database: databaseSaved,
-        github: githubSaved
-      }
-    });
+    // GitHub is attempted only after PostgreSQL confirms the save.
+    try {
+      await saveToGitHub(property);
+
+      return respond(res, 200, {
+        success: true,
+        message: 'Property saved to PostgreSQL and backed up to GitHub.',
+        property,
+        storage: {
+          database: true,
+          github: true
+        }
+      });
+    } catch (error) {
+      console.error(
+        'GitHub property backup failed:',
+        error?.message || 'Unknown error'
+      );
+
+      return respond(res, 200, {
+        success: true,
+        message: 'Property saved to PostgreSQL, but the GitHub backup failed. Please check backup configuration.',
+        property,
+        storage: {
+          database: true,
+          github: false
+        }
+      });
+    }
   } catch (error) {
     if (
       error instanceof Error &&
