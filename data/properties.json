@@ -1,5 +1,29 @@
 [
   {
+    "id": "pfre-mvgsdmwt",
+    "title": "PFRE BACKUP TEST 19 OCT 2026",
+    "intent": "buy",
+    "bhk": 2,
+    "locality": "Malad West",
+    "address": "Baf-Hira Nagar, Off. Marve Road",
+    "priceDisplay": "₹1.25 Cr.",
+    "priceNumeric": 12500000,
+    "carpetArea": 725,
+    "bathrooms": 2,
+    "floor": "Not specified",
+    "reraId": "Received",
+    "featured": true,
+    "images": [
+      "/images/properties/pfre-m"
+    ],
+    "amenities": [
+      "High-Speed Elevators",
+      "Covered Podium Parking",
+      "24/7 Security & CCTV"
+    ],
+    "createdAt": "2026-10-20T14:36:26.815Z"
+  },
+  {
     "id": "pfre-mld-001",
     "title": "Marina Enclave 2 BHK High Rise Flat",
     "intent": "buy",
