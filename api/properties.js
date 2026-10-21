@@ -23,6 +23,7 @@ function respond(res, status, data) {
   res.setHeader('Cache-Control', 'no-store, max-age=0');
   res.setHeader('Pragma', 'no-cache');
   res.setHeader('X-Content-Type-Options', 'nosniff');
+
   return res.status(status).json(data);
 }
 
@@ -91,10 +92,6 @@ async function readFromGitHub(limit) {
     cache: 'no-store'
   });
 
-  if (response.status === 404) {
-    return [];
-  }
-
   if (!response.ok) {
     throw new Error(`GitHub returned HTTP ${response.status}.`);
   }
@@ -123,6 +120,41 @@ async function readFromGitHub(limit) {
   }
 
   return properties.slice(0, limit);
+}
+
+function mergeProperties(githubProperties, databaseProperties, limit) {
+  const byId = new Map();
+
+  // Add JSON records first, preserving their existing IDs.
+  for (const property of githubProperties) {
+    if (property && typeof property.id === 'string' && property.id) {
+      byId.set(property.id, property);
+    }
+  }
+
+  // Database records take priority for matching IDs.
+  // Unique database records, including the test listing, are retained.
+  for (const property of databaseProperties) {
+    if (property && typeof property.id === 'string' && property.id) {
+      byId.set(property.id, property);
+    }
+  }
+
+  return Array.from(byId.values())
+    .sort((a, b) => {
+      const dateA = Date.parse(a.createdAt || '');
+      const dateB = Date.parse(b.createdAt || '');
+
+      const validA = Number.isFinite(dateA);
+      const validB = Number.isFinite(dateB);
+
+      if (validA && validB) return dateB - dateA;
+      if (validA) return -1;
+      if (validB) return 1;
+
+      return 0;
+    })
+    .slice(0, limit);
 }
 
 export default async function handler(req, res) {
@@ -157,9 +189,24 @@ export default async function handler(req, res) {
   }
 
   try {
-    const properties = pool
-      ? await readFromPostgres(limit)
-      : await readFromGitHub(limit);
+    let githubProperties;
+    let databaseProperties = [];
+
+    if (pool) {
+      // Read both sources before returning results.
+      [githubProperties, databaseProperties] = await Promise.all([
+        readFromGitHub(MAX_LIMIT),
+        readFromPostgres(MAX_LIMIT)
+      ]);
+    } else {
+      githubProperties = await readFromGitHub(MAX_LIMIT);
+    }
+
+    const properties = mergeProperties(
+      githubProperties,
+      databaseProperties,
+      limit
+    );
 
     return respond(res, 200, {
       success: true,
