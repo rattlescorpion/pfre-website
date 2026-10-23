@@ -1,5 +1,4 @@
-
-import { createHmac, timingSafeEqual } from 'node:crypto';
+import { createHmac, timingSafeEqual, randomUUID } from 'node:crypto';
 import { Pool } from 'pg';
 
 const COOKIE_NAME = '__Host-pfre_session';
