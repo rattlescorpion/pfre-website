@@ -86,7 +86,7 @@ function verifySession(req) {
 
 function sameOrigin(req) {
   const origin = req.headers.origin;
-  if (!origin) return true;
+  if (!origin) return false;
 
   try {
     const parsed = new URL(origin);
