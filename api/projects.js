@@ -170,6 +170,28 @@ function validateProject(input, partial = false) {
     }
   }
 
+  // Database-required defaults for new projects.
+  if (!partial) {
+    result.project_status = result.project_status || 'unknown';
+    result.city = result.city || 'Mumbai';
+    result.state = result.state || 'Maharashtra';
+    result.country = result.country || 'India';
+  }
+
+  // These database columns cannot be blank during an update.
+  if (partial) {
+    for (const [column, key] of [
+      ['project_status', 'projectStatus'],
+      ['city', 'city'],
+      ['state', 'state'],
+      ['country', 'country']
+    ]) {
+      if (key in input && result[column] === null) {
+        throw new Error(`${key} cannot be blank.`);
+      }
+    }
+  }
+
   if (!partial || 'projectType' in input) {
     const type = input.projectType;
     if (!['residential', 'commercial', 'mixed'].includes(type)) {
